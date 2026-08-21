@@ -8,17 +8,19 @@ import {
   Send,
   Sparkles,
   MapPin,
-  ShieldCheck,
-  Languages,
-  CheckCheck,
   Bot,
   Zap,
   Star,
   CheckCircle2,
+  Calendar,
+  Navigation,
+  Clock,
+  Bell,
 } from 'lucide-react';
-import { SupportedLanguage } from '@/types/kmarket';
+import { SupportedLanguage, AppointmentData } from '@/types/kmarket';
 import KMarketUserProfileModal from './KMarketUserProfileModal';
 import KMarketReviewModal from './KMarketReviewModal';
+import KMarketAppointmentModal from './KMarketAppointmentModal';
 import CountryFlag from './CountryFlag';
 
 export default function KMarketChatDrawer() {
@@ -28,6 +30,18 @@ export default function KMarketChatDrawer() {
   const [inputText, setInputText] = useState('');
   const [showProfileModal, setShowProfileModal] = useState(false);
   const [showReviewModal, setShowReviewModal] = useState(false);
+  const [showAppointmentModal, setShowAppointmentModal] = useState(false);
+  const [activeAppointment, setActiveAppointment] = useState<AppointmentData | null>({
+    id: 'apt-default-demo',
+    place_name: '포승공단 GS25 편의점 앞',
+    landmark_detail: '기숙사 2동 맞은편 가로등 앞',
+    address: '경기 평택시 포승읍 포승공단로 117',
+    lat: 36.9852,
+    lng: 126.8571,
+    meet_time: '오늘 (Today) 19:00',
+    remind_1hour_before: true,
+    status: 'confirmed',
+  });
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -47,6 +61,13 @@ export default function KMarketChatDrawer() {
 
   const handleQuickPhrase = (phrase: string) => {
     sendMessage(phrase);
+  };
+
+  const handleConfirmAppointment = (appointment: AppointmentData) => {
+    setActiveAppointment(appointment);
+    sendMessage(
+      `📍 [직거래 약속] ${appointment.meet_time}에 "${appointment.place_name}"에서 봬요! (지도 핀 위치 공유됨)`
+    );
   };
 
   // 자주 쓰는 퀵 메시지 템플릿
@@ -146,6 +167,13 @@ export default function KMarketChatDrawer() {
 
               {/* 채팅창 내 원클릭 거래 액션 버튼 */}
               <div className="flex items-center gap-1.5 shrink-0">
+                <button
+                  onClick={() => setShowAppointmentModal(true)}
+                  className="px-2.5 py-1 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white text-[10px] font-bold rounded-lg shadow-xs transition-all flex items-center gap-1 cursor-pointer"
+                >
+                  <MapPin className="w-3 h-3 text-yellow-300" />
+                  <span>약속잡기</span>
+                </button>
                 {activeChat.item.status !== 'reserved' && activeChat.item.status !== 'sold' && (
                   <button
                     onClick={() => {
@@ -170,13 +198,36 @@ export default function KMarketChatDrawer() {
           </div>
         )}
 
-        {/* 3. AI 실시간 번역 안내 배너 */}
-        <div className="bg-linear-to-r from-blue-50 to-indigo-50 px-4 py-2 text-[11px] text-blue-900 border-b border-blue-100 flex items-center space-x-2 shrink-0">
+        {/* 3. 직거래 확정 약속 리마인더 배너 (1시간 전 자동 알림) */}
+        {activeAppointment && (
+          <div className="bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 px-4 py-2 text-white text-xs font-bold flex items-center justify-between shadow-sm shrink-0">
+            <div className="flex items-center space-x-2 truncate">
+              <div className="w-6 h-6 rounded-full bg-white/20 flex items-center justify-center shrink-0">
+                <Clock className="w-3.5 h-3.5 text-yellow-200" />
+              </div>
+              <div className="truncate">
+                <span className="text-yellow-200 font-extrabold mr-1">[직거래 약속]</span>
+                <span>{activeAppointment.meet_time}</span>
+                <span className="text-amber-100 font-medium ml-1">({activeAppointment.place_name})</span>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-1 shrink-0 ml-2">
+              <span className="bg-black/20 px-2 py-0.5 rounded-full text-[10px] text-amber-200 font-bold flex items-center gap-0.5">
+                <Bell className="w-2.5 h-2.5" />
+                1시간 전 알림
+              </span>
+            </div>
+          </div>
+        )}
+
+        {/* 4. AI 실시간 번역 안내 배너 */}
+        <div className="bg-gradient-to-r from-blue-50 to-indigo-50 px-4 py-2 text-[11px] text-blue-900 border-b border-blue-100 flex items-center space-x-2 shrink-0">
           <Zap className="w-3.5 h-3.5 text-blue-600 shrink-0" />
           <span>{t('chat_translation_hint')}</span>
         </div>
 
-        {/* 4. 메시지 목록 스크롤 영역 */}
+        {/* 5. 메시지 목록 스크롤 영역 */}
         <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-slate-50/50">
           {/* 환영 안내 */}
           <div className="text-center my-2">
@@ -187,6 +238,7 @@ export default function KMarketChatDrawer() {
 
           {chatMessages.map((msg) => {
             const isMe = msg.sender_type === 'buyer';
+            const isAppointmentMessage = msg.original_text.includes('[직거래 약속]');
 
             return (
               <div
@@ -205,42 +257,102 @@ export default function KMarketChatDrawer() {
                   </span>
                 </div>
 
-                {/* 메시지 말풍선 */}
-                <div
-                  className={`max-w-[85%] rounded-2xl p-3.5 shadow-xs space-y-1.5 ${
-                    isMe
-                      ? 'bg-linear-to-r from-blue-600 to-indigo-600 text-white rounded-br-xs'
-                      : 'bg-white text-slate-900 border border-slate-200 rounded-bl-xs'
-                  }`}
-                >
-                  {/* 원문 텍스트 */}
-                  <p className="text-xs sm:text-sm font-medium leading-relaxed">
-                    {msg.original_text}
-                  </p>
-
-                  {/* 상대방 언어로 자동 번역된 텍스트 뱃지 */}
-                  {msg.translated_text && (
-                    <div
-                      className={`pt-1.5 border-t text-[11px] leading-relaxed flex items-start space-x-1.5 ${
-                        isMe
-                          ? 'border-white/20 text-sky-100'
-                          : 'border-slate-100 text-indigo-700 bg-indigo-50/60 p-2 rounded-xl'
-                      }`}
-                    >
-                      <Sparkles
-                        className={`w-3.5 h-3.5 shrink-0 mt-0.5 ${
-                          isMe ? 'text-yellow-300' : 'text-indigo-600'
-                        }`}
-                      />
-                      <div>
-                        <span className="block font-semibold opacity-90 text-[10px]">
-                          {isMe ? '🌐 자동 번역 전송문 (To Seller):' : '🌐 한국어 실시간 번역:'}
+                {/* 약속 카드 메시지일 때 인터랙티브 지도 핀 카드 렌더링 */}
+                {isAppointmentMessage && activeAppointment ? (
+                  <div className="w-full max-w-sm rounded-3xl overflow-hidden shadow-lg border-2 border-blue-500/80 bg-white">
+                    {/* 미니 맵 핀 그래픽 헤더 */}
+                    <div className="relative h-28 bg-gradient-to-br from-blue-100 via-indigo-50 to-sky-100 p-3 flex flex-col justify-between">
+                      <div className="flex justify-between items-center z-10">
+                        <span className="bg-blue-600 text-white text-[10px] font-black px-2.5 py-0.5 rounded-full shadow-xs flex items-center gap-1">
+                          <MapPin className="w-3 h-3 text-yellow-300" />
+                          <span>직거래 만남 장소 핀</span>
                         </span>
-                        <span className="font-medium">{msg.translated_text}</span>
+                        <span className="bg-black/60 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">
+                          ⏰ {activeAppointment.meet_time}
+                        </span>
+                      </div>
+
+                      {/* 지도 중앙 펄스 핀 마커 */}
+                      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                        <div className="relative flex items-center justify-center">
+                          <div className="w-10 h-10 rounded-full bg-red-500/20 animate-ping absolute" />
+                          <MapPin className="w-8 h-8 text-red-600 drop-shadow-md fill-red-500" />
+                        </div>
+                      </div>
+
+                      <div className="z-10 bg-white/90 backdrop-blur-xs rounded-xl p-1.5 px-2 text-[10px] font-bold text-slate-800 self-start shadow-xs">
+                        📍 {activeAppointment.place_name}
                       </div>
                     </div>
-                  )}
-                </div>
+
+                    {/* 카드 본문 상세 정보 */}
+                    <div className="p-3.5 space-y-2 bg-white text-xs">
+                      <div>
+                        <h4 className="font-extrabold text-slate-900 text-sm">
+                          {activeAppointment.place_name}
+                        </h4>
+                        <p className="text-slate-500 text-[11px] mt-0.5">
+                          {activeAppointment.address} ({activeAppointment.landmark_detail})
+                        </p>
+                      </div>
+
+                      <div className="p-2 rounded-xl bg-amber-50 border border-amber-200/80 flex items-center justify-between text-[11px]">
+                        <span className="font-bold text-amber-900 flex items-center gap-1">
+                          <Clock className="w-3 h-3 text-amber-600" />
+                          <span>약속 시간: {activeAppointment.meet_time}</span>
+                        </span>
+                        <span className="text-[10px] text-amber-700 font-semibold">1시간 전 리마인더</span>
+                      </div>
+
+                      <button
+                        onClick={() => {
+                          alert(`카카오맵/네이버지도로 "${activeAppointment.place_name}" 길찾기 안내를 실행합니다.`);
+                        }}
+                        className="w-full py-2 bg-blue-50 hover:bg-blue-100 text-blue-700 font-bold rounded-xl transition-colors flex items-center justify-center gap-1.5 cursor-pointer text-xs"
+                      >
+                        <Navigation className="w-3.5 h-3.5" />
+                        <span>지도 앱에서 길찾기 (Route Guide)</span>
+                      </button>
+                    </div>
+                  </div>
+                ) : (
+                  /* 일반 메시지 말풍선 */
+                  <div
+                    className={`max-w-[85%] rounded-2xl p-3.5 shadow-xs space-y-1.5 ${
+                      isMe
+                        ? 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-br-xs'
+                        : 'bg-white text-slate-900 border border-slate-200 rounded-bl-xs'
+                    }`}
+                  >
+                    {/* 원문 텍스트 */}
+                    <p className="text-xs sm:text-sm font-medium leading-relaxed">
+                      {msg.original_text}
+                    </p>
+
+                    {/* 상대방 언어로 자동 번역된 텍스트 뱃지 */}
+                    {msg.translated_text && (
+                      <div
+                        className={`pt-1.5 border-t text-[11px] leading-relaxed flex items-start space-x-1.5 ${
+                          isMe
+                            ? 'border-white/20 text-sky-100'
+                            : 'border-slate-100 text-indigo-700 bg-indigo-50/60 p-2 rounded-xl'
+                        }`}
+                      >
+                        <Sparkles
+                          className={`w-3.5 h-3.5 shrink-0 mt-0.5 ${
+                            isMe ? 'text-yellow-300' : 'text-indigo-600'
+                          }`}
+                        />
+                        <div>
+                          <span className="block font-semibold opacity-90 text-[10px]">
+                            {isMe ? '🌐 자동 번역 전송문 (To Seller):' : '🌐 한국어 실시간 번역:'}
+                          </span>
+                          <span className="font-medium">{msg.translated_text}</span>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                )}
               </div>
             );
           })}
@@ -256,8 +368,15 @@ export default function KMarketChatDrawer() {
           <div ref={messagesEndRef} />
         </div>
 
-        {/* 5. 단골 중고거래 퀵 응답 버튼 바 */}
+        {/* 6. 단골 중고거래 퀵 응답 버튼 바 */}
         <div className="p-2 bg-white border-t border-slate-100 flex items-center space-x-1.5 overflow-x-auto no-scrollbar shrink-0">
+          <button
+            onClick={() => setShowAppointmentModal(true)}
+            className="flex items-center space-x-1 px-3 py-1.5 rounded-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-bold text-xs shrink-0 shadow-xs hover:shadow-md transition-all cursor-pointer"
+          >
+            <MapPin className="w-3.5 h-3.5 text-yellow-300" />
+            <span>📍 만남 장소 핀 잡기</span>
+          </button>
           {quickPhrases.map((q, idx) => (
             <button
               key={idx}
@@ -269,7 +388,7 @@ export default function KMarketChatDrawer() {
           ))}
         </div>
 
-        {/* 6. 메시지 입력창 */}
+        {/* 7. 메시지 입력창 */}
         <form onSubmit={handleSend} className="p-3 bg-white border-t border-slate-200 shrink-0">
           <div className="flex items-center space-x-2">
             <input
@@ -311,6 +430,15 @@ export default function KMarketChatDrawer() {
       targetUserCountry={activeChat.seller_country}
       itemId={activeChat.item_id}
       itemTitle={activeChat.item?.title || 'K-Market 거래 상품'}
+    />
+
+    {/* 직거래 만남 약속 & 지도 핀 모달 */}
+    <KMarketAppointmentModal
+      isOpen={showAppointmentModal}
+      onClose={() => setShowAppointmentModal(false)}
+      targetUserName={activeChat.seller_name}
+      itemTitle={activeChat.item?.title}
+      onConfirmAppointment={handleConfirmAppointment}
     />
   </>
   );

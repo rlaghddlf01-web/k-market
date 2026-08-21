@@ -100,6 +100,18 @@ export interface KMarketChat {
   created_at: string;
 }
 
+export interface AppointmentData {
+  id: string;
+  place_name: string; // 랜드마크명 (예: 포승공단 GS25 앞)
+  landmark_detail: string; // 상세 위치 (예: 기숙사 2동 맞은편 편의점)
+  address: string; // 도로명/지번 주소
+  lat: number;
+  lng: number;
+  meet_time: string; // 약속 일시 (ISO String)
+  remind_1hour_before: boolean;
+  status: 'confirmed' | 'pending' | 'cancelled' | 'completed';
+}
+
 export interface KMarketMessage {
   id: string;
   chat_id: string;
@@ -110,6 +122,7 @@ export interface KMarketMessage {
   source_lang: SupportedLanguage;
   target_lang: SupportedLanguage;
   is_read: boolean;
+  appointment_data?: AppointmentData; // 직거래 지도 핀 약속 데이터
   created_at: string;
 }
 

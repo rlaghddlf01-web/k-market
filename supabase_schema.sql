@@ -172,9 +172,39 @@ CREATE TABLE IF NOT EXISTS public.kmarket_reviews (
 CREATE INDEX IF NOT EXISTS idx_kmarket_reviews_target ON public.kmarket_reviews(target_user_id);
 CREATE INDEX IF NOT EXISTS idx_kmarket_reviews_item ON public.kmarket_reviews(item_id);
 
+-- ==============================================================================
+-- ⭐ 9. 직거래 만남 약속 & 지도 핀 공유 테이블 (kmarket_appointments)
+-- ==============================================================================
+CREATE TABLE IF NOT EXISTS public.kmarket_appointments (
+    id TEXT PRIMARY KEY DEFAULT ('apt-' || gen_random_uuid()::text),
+    chat_id TEXT REFERENCES public.kmarket_chats(id) ON DELETE CASCADE,
+    item_id TEXT REFERENCES public.kmarket_items(id) ON DELETE CASCADE,
+    creator_id TEXT NOT NULL,
+    creator_name TEXT NOT NULL,
+    partner_id TEXT NOT NULL,
+    partner_name TEXT NOT NULL,
+    place_name TEXT NOT NULL,          -- 예: "포승공단 GS25 편의점 앞"
+    landmark_detail TEXT,              -- 예: "기숙사 2동 맞은편, 24시간 가로등 밝은 곳"
+    address TEXT NOT NULL,             -- 예: "경기 평택시 포승읍 포승공단로 117"
+    lat DOUBLE PRECISION NOT NULL,     -- 위도 (Latitude)
+    lng DOUBLE PRECISION NOT NULL,     -- 경도 (Longitude)
+    meet_time TIMESTAMP WITH TIME ZONE NOT NULL, -- 약속 일시
+    remind_1hour_before BOOLEAN DEFAULT true,     -- 1시간 전 모국어 푸시 알림 여부
+    status TEXT NOT NULL DEFAULT 'confirmed' CHECK (status IN ('pending', 'confirmed', 'cancelled', 'completed')),
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL,
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL
+);
+
+-- 메시지 테이블에 약속 데이터 JSONB 컬럼 추가 (존재하지 않을 경우)
+ALTER TABLE public.kmarket_messages ADD COLUMN IF NOT EXISTS appointment_data JSONB;
+
+CREATE INDEX IF NOT EXISTS idx_kmarket_appointments_chat ON public.kmarket_appointments(chat_id);
+CREATE INDEX IF NOT EXISTS idx_kmarket_appointments_meet_time ON public.kmarket_appointments(meet_time);
+
 -- RLS 활성화
 ALTER TABLE public.kmarket_user_profiles ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.kmarket_reviews ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.kmarket_appointments ENABLE ROW LEVEL SECURITY;
 
 CREATE POLICY "Public user profiles are viewable by everyone" 
 ON public.kmarket_user_profiles FOR SELECT USING (true);
@@ -188,9 +218,16 @@ ON public.kmarket_reviews FOR SELECT USING (true);
 CREATE POLICY "Anyone can insert reviews" 
 ON public.kmarket_reviews FOR INSERT WITH CHECK (true);
 
+CREATE POLICY "Public appointments are viewable by chat participants" 
+ON public.kmarket_appointments FOR SELECT USING (true);
+
+CREATE POLICY "Anyone can create or update appointments" 
+ON public.kmarket_appointments FOR ALL USING (true);
+
 -- Realtime 활성화
 ALTER PUBLICATION supabase_realtime ADD TABLE public.kmarket_user_profiles;
 ALTER PUBLICATION supabase_realtime ADD TABLE public.kmarket_reviews;
+ALTER PUBLICATION supabase_realtime ADD TABLE public.kmarket_appointments;
 
 -- 스토리지 공용 읽기/업로드 정책
 CREATE POLICY "Public Access for K-Market Images" 
