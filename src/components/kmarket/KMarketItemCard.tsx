@@ -4,8 +4,14 @@ import React, { useState } from 'react';
 import { KMarketItem } from '@/types/kmarket';
 import { useKMarket } from '@/context/KMarketContext';
 import { useLanguage } from '@/context/LanguageContext';
-import { Heart, MapPin, MessageCircle, Clock, Eye, Sparkles, CheckCircle2 } from 'lucide-react';
-import KMarketTrustBadge from './KMarketTrustBadge';
+import {
+  Heart,
+  MapPin,
+  MessageCircle,
+  Clock,
+  Eye,
+  Sparkles,
+} from 'lucide-react';
 import KMarketUserProfileModal from './KMarketUserProfileModal';
 import KMarketStatusBadge from './KMarketStatusBadge';
 import CountryFlag from './CountryFlag';
@@ -14,9 +20,20 @@ interface KMarketItemCardProps {
   item: KMarketItem;
 }
 
+/** 등록 시간 → "n분 전 / n시간 전 / n일 전" 포맷 */
+function timeAgo(dateString: string): string {
+  const diff = Date.now() - new Date(dateString).getTime();
+  const minutes = Math.floor(diff / 60_000);
+  if (minutes < 60) return `${minutes}분 전`;
+  const hours = Math.floor(minutes / 60);
+  if (hours < 24) return `${hours}시간 전`;
+  return `${Math.floor(hours / 24)}일 전`;
+}
+
 export default function KMarketItemCard({ item }: KMarketItemCardProps) {
-  const { setSelectedItem, openChatForItem, toggleLike, likedItemIds } = useKMarket();
-  const { t, formatWon, currentLang } = useLanguage();
+  const { setSelectedItem, openChatForItem, toggleLike, likedItemIds } =
+    useKMarket();
+  const { formatWon, currentLang } = useLanguage();
   const [showProfileModal, setShowProfileModal] = useState(false);
 
   const isLiked = likedItemIds.has(item.id);
@@ -25,38 +42,36 @@ export default function KMarketItemCard({ item }: KMarketItemCardProps) {
   const isReserved = item.status === 'reserved';
 
   // 다국어 제목
-  const displayTitle = item.translations?.[currentLang]?.title || item.title;
+  const displayTitle =
+    item.translations?.[currentLang]?.title || item.title;
 
   return (
     <>
       <div
         onClick={() => setSelectedItem(item)}
-        className={`group bg-white rounded-2xl border transition-all duration-300 overflow-hidden flex flex-col cursor-pointer ${
-          isSold
-            ? 'opacity-70 border-slate-200 bg-slate-50/60'
-            : isReserved
-            ? 'border-amber-300 shadow-xs hover:shadow-xl'
-            : 'border-slate-200 hover:border-emerald-400 shadow-xs hover:shadow-xl'
+        className={`group card-premium overflow-hidden flex flex-col cursor-pointer ${
+          isSold ? 'opacity-55' : ''
         }`}
       >
-        {/* 썸네일 영역 */}
-        <div className="relative aspect-4/3 w-full bg-slate-100 overflow-hidden">
+        {/* ── 썸네일 영역 ───────────────────────────────── */}
+        <div className="relative aspect-[4/3] w-full bg-slate-100 overflow-hidden rounded-t-[20px]">
           <img
             src={item.images[0]}
             alt={item.title}
             className={`w-full h-full object-cover transition-transform duration-500 ${
-              isSold ? 'grayscale-50' : 'group-hover:scale-105'
+              isSold ? 'grayscale-[40%]' : 'group-hover:scale-106'
             }`}
             loading="lazy"
           />
 
-          {/* 판매자 국가 국기 & 국가코드(MN/VN) & 닉네임 + 매너온도 클릭 */}
-          <div
+          {/* 판매자 배지 (좌상단) */}
+          <button
             onClick={(e) => {
               e.stopPropagation();
               setShowProfileModal(true);
             }}
-            className="absolute top-2.5 left-2.5 bg-black/80 backdrop-blur-md text-white text-xs font-bold px-2.5 py-1 rounded-full shadow-md flex items-center space-x-1.5 hover:bg-black/90 transition-colors"
+            className="absolute top-2.5 left-2.5 bg-black/75 backdrop-blur-md text-white text-[11px] font-bold px-2.5 py-1 rounded-full shadow-md flex items-center gap-1.5 hover:bg-black/90 transition-colors"
+            title="판매자 프로필 보기"
           >
             <CountryFlag
               countryCode={item.seller_country}
@@ -64,14 +79,18 @@ export default function KMarketItemCard({ item }: KMarketItemCardProps) {
               size="xs"
               shape="circle"
             />
-            <span className="text-[11px] font-black text-amber-300 uppercase tracking-tight">
+            <span className="font-black text-amber-300 uppercase tracking-tight">
               {item.seller_country}
             </span>
-            <span className="text-[11px] font-medium text-slate-100">{item.seller_name.split(' ')[0]}</span>
-            <span className="text-[10px] text-emerald-300 font-extrabold ml-0.5">36.5℃</span>
-          </div>
+            <span className="text-slate-100">
+              {item.seller_name.split(' ')[0]}
+            </span>
+            <span className="text-emerald-300 font-extrabold ml-0.5">
+              36.5℃
+            </span>
+          </button>
 
-          {/* 우측 상단 뱃지: 거래완료 / 예약중 / 무빙세일 / 무료나눔 / 가격인하 */}
+          {/* 우측 상단 뱃지 그룹 */}
           <div className="absolute top-2.5 right-2.5 flex flex-col items-end gap-1">
             {isSold ? (
               <KMarketStatusBadge status="sold" />
@@ -83,7 +102,7 @@ export default function KMarketItemCard({ item }: KMarketItemCardProps) {
               </div>
             ) : item.is_moving_sale ? (
               <div
-                className={`text-[10px] font-black px-2 py-0.5 rounded-full shadow-md ${
+                className={`text-[10px] font-black px-2.5 py-1 rounded-full shadow-md ${
                   (item.moving_d_day || 5) <= 3
                     ? 'bg-rose-600 text-white animate-pulse'
                     : (item.moving_d_day || 5) <= 7
@@ -99,7 +118,7 @@ export default function KMarketItemCard({ item }: KMarketItemCardProps) {
               </div>
             ) : null}
 
-            {/* 가격 인하 또는 끌올 뱃지 */}
+            {/* 가격 인하 / 끌올 뱃지 */}
             {item.is_price_dropped && !isSold && !isReserved && (
               <KMarketStatusBadge
                 status="selling"
@@ -107,96 +126,127 @@ export default function KMarketItemCard({ item }: KMarketItemCardProps) {
                 dropDiscountRate={item.drop_discount_rate}
               />
             )}
-            {item.boosted_at && !item.is_price_dropped && !isSold && !isReserved && (
-              <KMarketStatusBadge status="selling" boostedAt={item.boosted_at} />
-            )}
+            {item.boosted_at &&
+              !item.is_price_dropped &&
+              !isSold &&
+              !isReserved && (
+                <KMarketStatusBadge
+                  status="selling"
+                  boostedAt={item.boosted_at}
+                />
+              )}
           </div>
 
-        {/* 다중 사진 인디케이터 */}
-        {item.images.length > 1 && (
-          <div className="absolute bottom-2.5 left-2.5 bg-black/50 backdrop-blur-xs text-white text-[10px] px-2 py-0.5 rounded-md font-semibold">
-            📷 1/{item.images.length}
-          </div>
-        )}
+          {/* 다중 사진 인디케이터 */}
+          {item.images.length > 1 && (
+            <div className="absolute bottom-2.5 left-2.5 bg-black/50 backdrop-blur-sm text-white text-[10px] px-2 py-0.5 rounded-md font-semibold">
+              📷 1/{item.images.length}
+            </div>
+          )}
 
-        {/* 찜하기 버튼 */}
-        <button
-          onClick={(e) => {
-            e.stopPropagation();
-            toggleLike(item.id);
-          }}
-          className={`absolute bottom-2.5 right-2.5 p-2 rounded-full backdrop-blur-md transition-transform active:scale-75 ${
-            isLiked
-              ? 'bg-red-500 text-white shadow-md shadow-red-500/30'
-              : 'bg-black/30 text-white hover:bg-black/50'
-          }`}
-          aria-label="Like item"
-        >
-          <Heart className={`w-4 h-4 ${isLiked ? 'fill-current' : ''}`} />
-        </button>
-      </div>
-
-      {/* 본문 정보 */}
-      <div className="p-3.5 flex-1 flex flex-col justify-between space-y-2.5">
-        <div className="space-y-1">
-          {/* 15개국어 AI 자동번역 뱃지 */}
-          <div className="flex items-center space-x-1 text-[10px] font-semibold text-blue-600">
-            <Sparkles className="w-3 h-3 text-blue-500" />
-            <span>15개국어 자동번역 지원</span>
-          </div>
-
-          <h3 className="font-bold text-sm text-slate-900 line-clamp-2 leading-snug group-hover:text-blue-600 transition-colors">
-            {displayTitle}
-          </h3>
-
-          <div className="flex items-baseline space-x-2 pt-0.5">
-            <span
-              className={`text-base sm:text-lg font-black ${
-                isFree ? 'text-emerald-600' : 'text-slate-950'
-              }`}
-            >
-              {formatWon(item.price)}
-            </span>
-            {item.original_price && item.original_price > item.price && (
-              <span className="text-xs text-slate-400 line-through">
-                {item.original_price.toLocaleString()}원
-              </span>
-            )}
-          </div>
-        </div>
-
-        {/* 하단 위치 및 1:1 번역 채팅 CTA */}
-        <div className="pt-2 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
-          <div className="flex items-center space-x-1 truncate max-w-[150px]">
-            <MapPin className="w-3.5 h-3.5 text-blue-600 shrink-0" />
-            <span className="truncate">{item.region}</span>
-          </div>
-
+          {/* 찜하기 버튼 */}
           <button
             onClick={(e) => {
               e.stopPropagation();
-              openChatForItem(item);
+              toggleLike(item.id);
             }}
-            className="flex items-center space-x-1 text-xs font-bold text-blue-600 bg-blue-50 hover:bg-blue-100 px-2.5 py-1 rounded-lg transition-colors cursor-pointer"
+            className={`absolute bottom-2.5 right-2.5 p-2 rounded-full backdrop-blur-md transition-all active:scale-75 ${
+              isLiked
+                ? 'bg-red-500 text-white shadow-md shadow-red-500/40'
+                : 'bg-black/30 text-white hover:bg-black/50'
+            }`}
+            aria-label="찜하기"
           >
-            <MessageCircle className="w-3.5 h-3.5" />
-            <span>1:1 번역챗</span>
+            <Heart className={`w-4 h-4 ${isLiked ? 'fill-current' : ''}`} />
           </button>
         </div>
-      </div>
-    </div>
 
-    {/* 판매자 신뢰 프로필 모달 */}
-    <KMarketUserProfileModal
-      isOpen={showProfileModal}
-      onClose={() => setShowProfileModal(false)}
-      userId={item.seller_id}
-      userName={item.seller_name}
-      userCountry={item.seller_country}
-      userFlag={item.seller_country_flag}
-    />
-  </>
+        {/* ── 본문 정보 ─────────────────────────────────── */}
+        <div className="p-3.5 flex-1 flex flex-col justify-between gap-2">
+          <div className="space-y-1.5">
+            {/* 15개국어 자동번역 뱃지 */}
+            <div
+              className="flex items-center gap-1 text-[10px] font-semibold"
+              style={{ color: '#2563eb' }}
+            >
+              <Sparkles className="w-3 h-3" />
+              <span>15개국어 자동번역</span>
+            </div>
+
+            {/* 제목 */}
+            <h3 className="font-bold text-sm text-slate-900 line-clamp-2 leading-snug group-hover:text-blue-600 transition-colors">
+              {displayTitle}
+            </h3>
+
+            {/* 가격 */}
+            <div className="flex items-baseline gap-2">
+              <span
+                className={`text-base font-black ${
+                  isFree ? 'text-emerald-600' : 'text-slate-950'
+                }`}
+              >
+                {formatWon(item.price)}
+              </span>
+              {item.original_price && item.original_price > item.price && (
+                <span className="text-xs text-slate-400 line-through">
+                  {item.original_price.toLocaleString()}원
+                </span>
+              )}
+            </div>
+          </div>
+
+          {/* ── 하단 메타 정보 + 채팅 CTA ─────────────── */}
+          <div className="pt-2.5 border-t border-slate-100 space-y-2">
+            {/* 위치 + 조회수 + 시간 */}
+            <div className="flex items-center justify-between text-[11px] text-slate-400 font-medium">
+              <div className="flex items-center gap-1 truncate max-w-[110px]">
+                <MapPin className="w-3 h-3 text-blue-400 shrink-0" />
+                <span className="truncate">{item.region}</span>
+              </div>
+              <div className="flex items-center gap-2 shrink-0">
+                {item.views !== undefined && (
+                  <span className="flex items-center gap-0.5">
+                    <Eye className="w-3 h-3" />
+                    {item.views}
+                  </span>
+                )}
+                {item.created_at && (
+                  <span className="flex items-center gap-0.5">
+                    <Clock className="w-3 h-3" />
+                    {timeAgo(item.created_at)}
+                  </span>
+                )}
+              </div>
+            </div>
+
+            {/* 번역 채팅 CTA */}
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                openChatForItem(item);
+              }}
+              className="w-full flex items-center justify-center gap-1.5 text-[12px] font-bold text-white py-1.5 rounded-xl transition-all active:scale-95 cursor-pointer"
+              style={{
+                background:
+                  'linear-gradient(135deg, #2563eb 0%, #4f46e5 100%)',
+              }}
+            >
+              <MessageCircle className="w-3.5 h-3.5" />
+              <span>1:1 번역 채팅 시작</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* 판매자 신뢰 프로필 모달 */}
+      <KMarketUserProfileModal
+        isOpen={showProfileModal}
+        onClose={() => setShowProfileModal(false)}
+        userId={item.seller_id}
+        userName={item.seller_name}
+        userCountry={item.seller_country}
+        userFlag={item.seller_country_flag}
+      />
+    </>
   );
 }
-
-

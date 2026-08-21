@@ -26,7 +26,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <body className="antialiased bg-slate-100 text-slate-900 selection:bg-blue-500 selection:text-white">
+      <head>
+        <link
+          rel="stylesheet"
+          href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css"
+        />
+      </head>
+      <body className="antialiased text-slate-900 selection:bg-blue-500 selection:text-white" style={{ background: 'var(--surface-bg)' }}>
         {children}
       </body>
     </html>

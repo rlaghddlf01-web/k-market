@@ -74,12 +74,12 @@ export default function KMarketMainFeed() {
   });
 
   return (
-    <div className="min-h-screen bg-slate-100/60 text-slate-900 flex flex-col font-sans">
+    <div className="min-h-screen text-slate-900 flex flex-col" style={{ background: 'var(--surface-bg)' }}>
       {/* 상단 통합 헤더 */}
       <KMarketHeader />
 
       {/* 메인 콘텐츠 컨테이너 */}
-      <main className="flex-1 max-w-6xl w-full mx-auto px-4 py-4 sm:py-6">
+      <main className="flex-1 max-w-6xl w-full mx-auto px-4 py-5 sm:py-8 space-y-6">
         {/* 1. KTRS 킬러 세무 환급 184만원 배너 */}
         <KMarketTaxBanner />
 
@@ -95,18 +95,19 @@ export default function KMarketMainFeed() {
         <KMarketRegionFilter />
 
         {/* 4. 매물 리스트 헤더 */}
-        <div className="flex items-center justify-between my-3 px-1">
-          <div className="flex items-center space-x-2">
-            <h2 className="text-base sm:text-lg font-black text-slate-900 tracking-tight">
-              실시간 중고 매물
-            </h2>
-            <span className="bg-blue-100 text-blue-800 text-xs font-bold px-2 py-0.5 rounded-full">
+        <div className="flex items-center justify-between mt-6 mb-4 px-1">
+          <div className="flex items-center gap-2.5">
+            <h2 className="text-lg font-black text-slate-900 tracking-tight">실시간 중고 매물</h2>
+            <span
+              className="text-xs font-bold px-2.5 py-1 rounded-full text-blue-700"
+              style={{ background: 'linear-gradient(135deg, #dbeafe 0%, #ede9fe 100%)' }}
+            >
               {filteredItems.length}개
             </span>
           </div>
-
-          <div className="text-xs text-slate-500 font-medium">
-            ⚡ 15개국어 0.3초 번역 지원
+          <div className="flex items-center gap-1.5 text-[11px] text-slate-400 font-semibold bg-white/80 px-3 py-1.5 rounded-full border border-slate-100">
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+            15개국어 실시간 번역
           </div>
         </div>
 
@@ -118,21 +119,19 @@ export default function KMarketMainFeed() {
             ))}
           </div>
         ) : (
-          <div className="bg-white rounded-3xl p-10 text-center border border-slate-200 shadow-xs my-8 space-y-4">
-            <div className="w-16 h-16 bg-slate-100 rounded-full flex items-center justify-center mx-auto text-slate-400">
-              <PackageOpen className="w-8 h-8" />
+          <div className="card-premium p-12 text-center my-8 space-y-5">
+            <div className="w-20 h-20 rounded-3xl flex items-center justify-center mx-auto" style={{ background: 'linear-gradient(135deg, #eff6ff 0%, #eef2ff 100%)' }}>
+              <PackageOpen className="w-9 h-9 text-blue-400" />
             </div>
-            <div className="space-y-1">
-              <h3 className="text-base font-bold text-slate-800">
-                조건에 맞는 매물이 없습니다
-              </h3>
-              <p className="text-xs text-slate-500 max-w-sm mx-auto">
+            <div className="space-y-1.5">
+              <h3 className="text-base font-bold text-slate-800">조건에 맞는 매물이 없습니다</h3>
+              <p className="text-xs text-slate-500 max-w-sm mx-auto leading-relaxed">
                 필터를 전체로 변경하거나, 첫 번째로 내 중고 물건을 1분 만에 등록해 보세요!
               </p>
             </div>
             <button
               onClick={() => setIsCreateModalOpen(true)}
-              className="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs rounded-xl shadow-md cursor-pointer transition-all"
+              className="btn-primary px-6 py-2.5 text-xs cursor-pointer"
             >
               ✏️ 1분 간편 매물 등록하기
             </button>
@@ -143,51 +142,54 @@ export default function KMarketMainFeed() {
       {/* 모바일 플로팅 매물 등록 CTA 버튼 */}
       <button
         onClick={() => setIsCreateModalOpen(true)}
-        className="md:hidden fixed bottom-6 right-5 z-40 bg-linear-to-r from-blue-600 to-indigo-600 text-white p-3.5 rounded-full shadow-2xl shadow-blue-600/50 flex items-center justify-center active:scale-90 transition-transform cursor-pointer"
+        className="md:hidden fixed bottom-6 right-5 z-40 text-white p-4 rounded-full flex items-center justify-center active:scale-90 transition-transform cursor-pointer shadow-lg"
+        style={{ background: 'linear-gradient(135deg, #2563eb 0%, #4f46e5 100%)' }}
         aria-label="Post Item"
       >
         <Plus className="w-6 h-6" />
       </button>
 
       {/* 푸터 영역 */}
-      <footer className="bg-slate-900 text-slate-400 py-8 px-4 text-xs mt-12 border-t border-slate-800">
-        <div className="max-w-6xl mx-auto space-y-4">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-            <div>
-              <div className="flex items-center space-x-2 text-white font-black text-base">
-                <span>KTRS K-Market</span>
-                <span className="bg-blue-600 text-[10px] px-2 py-0.5 rounded-md font-bold">
-                  Zero Fee C2C
-                </span>
+      <footer className="mt-16 border-t border-slate-200 bg-white/50" style={{ backdropFilter: 'blur(10px)' }}>
+        <div className="max-w-6xl mx-auto px-4 py-10 space-y-5">
+          <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-6">
+            <div className="space-y-2">
+              <div className="flex items-center gap-2">
+                <div
+                  className="w-8 h-8 rounded-xl flex items-center justify-center text-white font-black text-sm"
+                  style={{ background: 'linear-gradient(135deg, #2563eb 0%, #4f46e5 100%)' }}
+                >
+                  K
+                </div>
+                <span className="text-slate-900 font-black text-base tracking-tight">KTRS K-Market</span>
+                <span className="text-[9px] font-bold bg-blue-600 text-white px-2 py-0.5 rounded-full">Zero Fee C2C</span>
               </div>
-              <p className="text-slate-400 text-xs mt-1">
-                대한민국 No.1 외국인 종합 슈퍼앱 KTRS 연계 외국인 전용 중고거래 & 무빙세일 플랫폼
+              <p className="text-slate-400 text-xs leading-relaxed max-w-xs">
+                대한민국 No.1 외국인 종합 슈퍼앱 KTRS 연계<br />외국인 전용 중고거래 &amp; 무빙세일 플랫폼
               </p>
             </div>
 
-            <div className="flex items-center space-x-3 text-slate-300">
-              <span className="flex items-center space-x-1">
-                <ShieldCheck className="w-4 h-4 text-emerald-400" />
-                <span>수수료 0원 100% 무료</span>
-              </span>
-              <span>•</span>
-              <span className="flex items-center space-x-1">
-                <Sparkles className="w-4 h-4 text-yellow-400" />
-                <span>15개국어 실시간 Gemini 번역</span>
-              </span>
+            <div className="flex flex-col gap-2 text-xs text-slate-500">
+              <div className="flex items-center gap-1.5">
+                <ShieldCheck className="w-3.5 h-3.5 text-emerald-500" />
+                <span>수수료 0원 100% 무료 거래</span>
+              </div>
+              <div className="flex items-center gap-1.5">
+                <Sparkles className="w-3.5 h-3.5 text-amber-500" />
+                <span>15개국어 실시간 Gemini AI 번역</span>
+              </div>
             </div>
           </div>
 
-          <div className="pt-4 border-t border-slate-800 text-[11px] text-slate-400 flex flex-col sm:flex-row justify-between items-center gap-2">
-            <p>© 2026 KTRS (Korea Tax & Foreign Resident Service). All rights reserved.</p>
+          <div className="pt-5 border-t border-slate-100 text-[11px] text-slate-400 flex flex-col sm:flex-row justify-between items-center gap-3">
+            <p>© 2026 KTRS (Korea Tax &amp; Foreign Resident Service). All rights reserved.</p>
             <div className="flex items-center gap-3">
-              <p>공단 직거래 안심 가이드 | 고객센터 1588-0000</p>
+              <span>공단 직거래 안심 가이드 | 고객센터 1588-0000</span>
               <Link
                 href="/admin"
-                className="px-2.5 py-1 bg-red-950/80 hover:bg-red-900 border border-red-500/40 text-red-300 font-bold rounded-lg text-[10px] transition-all flex items-center gap-1 cursor-pointer"
+                className="px-2.5 py-1 bg-slate-900 hover:bg-red-950 border border-slate-700 text-slate-400 hover:text-red-300 hover:border-red-500/40 font-bold rounded-lg text-[10px] transition-all flex items-center gap-1 cursor-pointer"
                 title="KTRS 관리자 전용 관제 콘솔 페이지"
               >
-                <ShieldAlert className="w-3 h-3 text-red-400" />
                 <span>관리자 관제 콘솔 (/admin)</span>
               </Link>
             </div>
