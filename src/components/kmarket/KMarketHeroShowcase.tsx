@@ -54,87 +54,50 @@ export default function KMarketHeroShowcase() {
             </div>
           </div>
 
-          {/* 우측: 원룸 풀옵션 무빙세일 묶음 패키지 쇼케이스 (소파 + 세탁기 + 냉장고) */}
-          <div className="w-full md:w-1/2 max-w-lg shrink-0">
-            <div className="bg-[#fcfaf7] p-3 sm:p-4 rounded-3xl border-2 border-[#d4af37]/60 shadow-xl space-y-2.5">
-              {/* 상단 묶음 뱃지 */}
-              <div className="flex items-center justify-between px-1">
-                <div className="flex items-center gap-1.5">
-                  <span className="text-[10px] font-black uppercase tracking-wider bg-rose-600 text-white px-2 py-0.5 rounded-full animate-pulse">
-                    🔥 D-3 귀국 헐값 급처분
-                  </span>
-                  <span className="text-xs font-black text-[#1f1914]">
-                    원룸 풀옵션 가전·가구 3종 묶음
-                  </span>
-                </div>
-                <span className="text-xs font-black text-rose-600 bg-rose-50 px-2 py-0.5 rounded-lg border border-rose-200">
+          {/* 우측: 레퍼런스 스타일 가전·가구 통합 광고 쇼케이스 단일 이미지 */}
+          <div className="w-full md:w-5/12 max-w-md shrink-0">
+            <div className="relative aspect-4/3 rounded-3xl overflow-hidden shadow-2xl border-2 border-white bg-white group">
+              <img
+                src="/images/hero-appliances-bundle.jpg"
+                alt="원룸 풀옵션 가전 가구 묶음 쇼케이스"
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+              />
+
+              {/* 스크린샷 스타일 우측 상단 이벤트 원형 배지 */}
+              <div 
+                style={{
+                  background: 'linear-gradient(135deg, #09101f 0%, #1e3a8a 100%)',
+                  border: '2px solid #f3ba2f',
+                  boxShadow: '0 4px 14px rgba(243, 186, 47, 0.35)',
+                }}
+                className="absolute top-3.5 right-3.5 w-20 h-20 sm:w-22 sm:h-22 rounded-full text-white flex flex-col items-center justify-center text-center p-1.5 shadow-xl animate-pulse pointer-events-none"
+              >
+                <span className="text-[9px] sm:text-[10px] font-bold text-slate-200 leading-tight">
+                  귀국 근로자
+                </span>
+                <span className="text-xs sm:text-sm font-black text-[#f3ba2f] leading-tight">
+                  무빙세일
+                </span>
+                <span className="text-[9px] font-extrabold bg-rose-600 px-1.5 py-0.2 rounded-full mt-0.5">
                   75% OFF
                 </span>
               </div>
 
-              {/* 3단 묶음 사진 콜라주 그리드 */}
-              <div className="grid grid-cols-12 gap-2 h-56 sm:h-64">
-                {/* 1. 소파 & 가구 (대형 메인 카드) */}
-                <div className="col-span-7 relative rounded-2xl overflow-hidden shadow-sm border border-white/80 group">
-                  <img
-                    src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=600&q=80"
-                    alt="패브릭 소파 & 가구"
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
-                  <div className="absolute bottom-2 left-2 right-2 text-white">
-                    <span className="text-[9px] font-bold bg-[#845b37] px-1.5 py-0.5 rounded-md">
-                      🛋️ 2인 소파·테이블
+              {/* 하단 타이틀 바 */}
+              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-4 text-white">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <span className="text-[10px] font-black uppercase tracking-wider text-[#f3ba2f]">
+                      Full-Package Bundle
                     </span>
-                    <p className="text-xs font-black mt-0.5 truncate drop-shadow-xs">
-                      상태 A급 원룸 가구
+                    <p className="text-sm font-black drop-shadow-sm truncate">
+                      냉장고·세탁기·소파·노트북 풀패키지 묶음
                     </p>
                   </div>
+                  <span className="text-xs font-black text-rose-400 bg-black/50 px-2 py-1 rounded-lg border border-rose-400/40">
+                    일괄 급처
+                  </span>
                 </div>
-
-                {/* 2. 세탁기 & 냉장고 (우측 2단 서브 카드) */}
-                <div className="col-span-5 flex flex-col gap-2 h-full">
-                  {/* 세탁기 */}
-                  <div className="flex-1 relative rounded-2xl overflow-hidden shadow-sm border border-white/80 group">
-                    <img
-                      src="https://images.unsplash.com/photo-1626806787461-102c1bfaaea1?auto=format&fit=crop&w=400&q=80"
-                      alt="통돌이 세탁기"
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
-                    <div className="absolute bottom-1.5 left-2 right-2 text-white">
-                      <span className="text-[9px] font-bold bg-blue-600 px-1.5 py-0.2 rounded-md">
-                        🧺 통돌이 10kg
-                      </span>
-                    </div>
-                  </div>
-
-                  {/* 소형 냉장고 */}
-                  <div className="flex-1 relative rounded-2xl overflow-hidden shadow-sm border border-white/80 group">
-                    <img
-                      src="https://images.unsplash.com/photo-1571175443880-49e1d25b2bc5?auto=format&fit=crop&w=400&q=80"
-                      alt="원룸 소형 냉장고"
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
-                    <div className="absolute bottom-1.5 left-2 right-2 text-white">
-                      <span className="text-[9px] font-bold bg-emerald-700 px-1.5 py-0.2 rounded-md">
-                        🧊 2단 냉장고
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* 하단 패키지 가격 바 */}
-              <div className="flex items-center justify-between pt-1 border-t border-[#ded1c4] text-xs">
-                <div className="flex items-baseline gap-1.5">
-                  <span className="text-slate-400 text-[11px] line-through">정가 480,000원</span>
-                  <span className="text-base font-black text-rose-600">묶음가 120,000원</span>
-                </div>
-                <span className="text-[10px] font-bold text-[#845b37] bg-[#ede2d6] px-2 py-0.5 rounded-full">
-                  일괄 직거래 우선
-                </span>
               </div>
             </div>
           </div>
