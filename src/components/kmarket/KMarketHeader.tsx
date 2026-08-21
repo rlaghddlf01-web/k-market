@@ -177,7 +177,7 @@ export default function KMarketHeader() {
                 className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#ede2d6] hover:bg-[#e2d4c5] border border-[#ded1c4] text-[#3d2817] text-xs font-bold cursor-pointer transition-all"
               >
                 <UserCheck className="w-3.5 h-3.5 text-[#5c3818]" />
-                <span className="truncate max-w-[80px]">{authedUser.userName}</span>
+                <span className="truncate max-w-[80px]">{authedUser.nickname || authedUser.userName}</span>
                 <span className="text-[10px] bg-[#5c3818] text-[#fbf9f6] px-1.5 py-0.5 rounded-full font-black">43.5℃</span>
               </div>
             ) : (

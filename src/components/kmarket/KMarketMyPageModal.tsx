@@ -47,7 +47,9 @@ export default function KMarketMyPageModal({ isOpen, onClose }: KMarketMyPageMod
   // 유저 기본 프로필 (OCR 인증 여부에 따라 매너온도 계산)
   const isOcr = authedUser?.isOcrVerified ?? true;
   const userMannerTemp = isOcr ? 43.5 : 36.5;
-  const userName = authedUser?.userName || 'NGUYEN VAN DUC (쩐반득)';
+  const userName = authedUser?.userName || 'NGUYEN VAN DUC';
+  const userNickname = authedUser?.nickname || '안산호랑이';
+  const userDisplayName = authedUser?.nickname ? `${authedUser.nickname} (${authedUser.userName})` : userName;
   const userCountry = authedUser?.country || 'VN';
   const userVisa = authedUser?.visaType || 'E-9 (비전문취업)';
   const userDormitory = authedUser?.dormitory || '평택 포승공단 기숙사 2동';
@@ -91,7 +93,7 @@ export default function KMarketMyPageModal({ isOpen, onClose }: KMarketMyPageMod
             </div>
             <div>
               <div className="flex items-center space-x-2">
-                <h2 className="text-lg sm:text-xl font-black text-white tracking-tight">{userName}</h2>
+                <h2 className="text-lg sm:text-xl font-black text-white tracking-tight">{userDisplayName}</h2>
                 <span className="bg-[#f3ba2f] text-[#09101f] font-black text-[10px] px-2.5 py-0.5 rounded-full shadow-xs">
                   {userVisa}
                 </span>

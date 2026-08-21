@@ -229,5 +229,20 @@ export interface AppNotification {
   created_at: string;
 }
 
+export interface AuthedUserData {
+  userId: string;
+  userName: string;
+  nickname?: string;
+  phone: string;
+  telecom?: string;
+  country: string;
+  visaType?: string;
+  stayExpiryDate?: string;
+  dormitory?: string;
+  authMethod: 'ocr' | 'manual';
+  isOcrVerified: boolean;
+  isPhoneVerified: boolean;
+}
+
 
 

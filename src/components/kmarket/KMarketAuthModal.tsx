@@ -38,6 +38,7 @@ export default function KMarketAuthModal({
 
   // 폼 필드 상태
   const [userName, setUserName] = useState('');
+  const [nickname, setNickname] = useState('');
   const [arcNumber, setArcNumber] = useState('');
   const [country, setCountry] = useState('VN');
   const [visaType, setVisaType] = useState('E-9 (비전문취업)');
@@ -55,6 +56,16 @@ export default function KMarketAuthModal({
 
   if (!isOpen) return null;
 
+  // 랜덤 닉네임 생성기
+  const generateRandomNickname = (name?: string) => {
+    const adjectives = ['친절한', '따뜻한', '행복한', '스마일', '안심', '긍정', '희망', '동네'];
+    const nouns = ['호랑이', '친구', '이웃', '라이더', '마켓러', '토끼', '곰돌이', '판다', '메이트'];
+    const randomAdj = adjectives[Math.floor(Math.random() * adjectives.length)];
+    const randomNoun = nouns[Math.floor(Math.random() * nouns.length)];
+    const num = Math.floor(100 + Math.random() * 900);
+    return `${randomAdj}${randomNoun}_${num}`;
+  };
+
   // 1. 카메라 촬영 / 파일 업로드 시 OCR 자동 인식
   const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -64,6 +75,9 @@ export default function KMarketAuthModal({
     try {
       const result: OcrResultData = await scanAlienCardImage(file);
       setUserName(result.userName);
+      if (!nickname) {
+        setNickname(result.userName.split(' ')[0] + '_' + Math.floor(100 + Math.random() * 900));
+      }
       setArcNumber(result.arcNumber);
       setCountry(result.country);
       setVisaType(result.visaType);
@@ -128,9 +142,11 @@ export default function KMarketAuthModal({
 
   // 최종 가입 완료
   const handleFinish = () => {
+    const finalNickname = (nickname.trim() || userName.trim() || 'K-이웃').slice(0, 15);
     const finalUserData = {
       userId: 'user-' + Date.now(),
       userName,
+      nickname: finalNickname,
       phone,
       telecom,
       country,
@@ -293,11 +309,41 @@ export default function KMarketAuthModal({
                 </div>
               )}
 
+              {/* 활동 닉네임 / 별명 입력란 (중고거래 & 동네생활 표시용) */}
+              <div className="p-3.5 rounded-2xl bg-amber-50/70 dark:bg-amber-950/30 border border-amber-200/80 dark:border-amber-800/60 space-y-2">
+                <div className="flex items-center justify-between">
+                  <label className="text-xs font-black text-[#5c3818] dark:text-amber-300 flex items-center gap-1.5">
+                    <span>🌟 활동 닉네임 / 별명 (Nickname)</span>
+                    <span className="text-[10px] text-amber-700 dark:text-amber-400 font-bold bg-amber-100 dark:bg-amber-900/60 px-1.5 py-0.5 rounded-md">필수</span>
+                  </label>
+                  <button
+                    type="button"
+                    onClick={() => setNickname(generateRandomNickname(userName))}
+                    className="text-[11px] font-bold text-amber-900 dark:text-amber-200 hover:text-amber-700 bg-amber-200/70 hover:bg-amber-300/80 px-2 py-1 rounded-lg transition-all flex items-center gap-1 cursor-pointer"
+                    title="센스 있는 별명 자동 추천"
+                  >
+                    <span>🎲 랜덤 별명 추천</span>
+                  </button>
+                </div>
+                <input
+                  type="text"
+                  required
+                  value={nickname}
+                  onChange={(e) => setNickname(e.target.value)}
+                  placeholder="예: 안산호랑이, 베트남마켓, 평택친구 (2~15자)"
+                  maxLength={15}
+                  className="w-full px-3.5 py-2.5 bg-white dark:bg-gray-900 rounded-xl border border-amber-300 dark:border-amber-700 text-xs sm:text-sm font-black text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-amber-500 shadow-2xs"
+                />
+                <p className="text-[10px] text-amber-800/80 dark:text-amber-300/70">
+                  💡 중고거래 채팅과 동네생활 커뮤니티에서 이웃들에게 보여질 친근한 별명을 지어보세요!
+                </p>
+              </div>
+
               {/* 기본 정보 입력창 (OCR 시 자동 채워짐) */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div className="space-y-1">
                   <label className="text-xs font-bold text-slate-700 dark:text-slate-300">
-                    영문 이름 (Name)
+                    영문 실명 (Passport Name)
                   </label>
                   <input
                     type="text"
@@ -472,7 +518,7 @@ export default function KMarketAuthModal({
                   KTRS K-Market 신원 인증 완료!
                 </span>
                 <h3 className="text-lg font-black text-slate-900 dark:text-white">
-                  {userName} 님, 환영합니다!
+                  {nickname ? `${nickname} (${userName})` : userName} 님, 환영합니다!
                 </h3>
                 <p className="text-xs text-slate-500 max-w-sm mx-auto">
                   {authTab === 'ocr' ? '실물 신분증 OCR 검증' : '수기 인증'} 및 휴대폰 본인인증이 완료되어 <strong>골드 신뢰 뱃지(매너온도 36.5℃)</strong>가 발급되었습니다.
