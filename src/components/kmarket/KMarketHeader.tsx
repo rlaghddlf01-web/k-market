@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { useLanguage } from '@/context/LanguageContext';
 import { useKMarket } from '@/context/KMarketContext';
-import { Globe, PlusCircle, Search, Sparkles, ShieldCheck, Heart, UserCheck, Bell, MapPin, ChevronDown } from 'lucide-react';
+import { Globe, PlusCircle, Search, Sparkles, ShieldCheck, Heart, UserCheck, UserPlus, Bell, MapPin, ChevronDown } from 'lucide-react';
 import { SupportedLanguage } from '@/types/kmarket';
 
 export default function KMarketHeader() {
@@ -169,7 +169,7 @@ export default function KMarketHeader() {
 
           {/* 우측 액션 그룹 */}
           <div className="flex items-center gap-1.5">
-            {/* 신원인증 / 마이페이지 */}
+            {/* 회원가입 / 마이페이지 */}
             {authedUser ? (
               <div
                 onClick={() => setIsMyPageOpen(true)}
@@ -185,9 +185,9 @@ export default function KMarketHeader() {
                 className="flex items-center gap-1 px-3 py-1.5 rounded-full hover:bg-[#ede2d6] text-[#5c4a39] text-xs font-bold transition-all border border-[#ded1c4] cursor-pointer"
                 style={{ background: '#f4ede6' }}
               >
-                <ShieldCheck className="w-3.5 h-3.5 text-[#845b37]" />
-                <span className="hidden sm:inline">신원인증</span>
-                <span className="sm:hidden">인증</span>
+                <UserPlus className="w-3.5 h-3.5 text-[#845b37]" />
+                <span className="hidden sm:inline">회원가입</span>
+                <span className="sm:hidden">가입</span>
               </button>
             )}
 
