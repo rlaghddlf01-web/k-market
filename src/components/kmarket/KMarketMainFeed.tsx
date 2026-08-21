@@ -158,11 +158,17 @@ export default function KMarketMainFeed() {
         <Plus className="w-6 h-6" />
       </button>
 
-      {/* 푸터 영역 - 딥 에스프레소 쇼핑몰 스타일 마감 */}
-      <footer className="mt-20 border-t border-[#3d2817] bg-[#150d0a] text-white">
+      {/* 푸터 영역 - 진한 남색 & 1.5px 럭셔리 골드 테두리 */}
+      <footer 
+        className="mt-20 text-white shadow-2xl"
+        style={{
+          background: 'linear-gradient(180deg, #09101f 0%, #060b17 100%)',
+          borderTop: '1.5px solid rgba(243, 186, 47, 0.7)',
+        }}
+      >
         <div className="max-w-6xl mx-auto px-4 py-12 space-y-7">
           {/* 상단 브랜드 & 혜택 요약 */}
-          <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-6 pb-6 border-b border-[#2d1a12]">
+          <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-6 pb-6 border-b border-white/10">
             <div className="space-y-2">
               <div className="flex items-center gap-2.5">
                 <div className="relative w-9 h-9 rounded-xl overflow-hidden shadow-md shrink-0 border border-[#845b37]/60 bg-[#09101f] flex items-center justify-center">

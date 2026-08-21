@@ -29,10 +29,13 @@ export default function KMarketHeader() {
 
   return (
     <header className="sticky top-0 z-40 glass border-b border-white/60 shadow-sm">
-      {/* 상단: KTRS 패밀리 바 */}
+      {/* 상단: KTRS 패밀리 바 (진한 남색 + 1.5px 골드 테두리) */}
       <div
-        style={{ background: 'linear-gradient(135deg, #150d0a 0%, #20140f 50%, #2b1b17 100%)' }}
-        className="text-white px-4 py-2"
+        style={{ 
+          background: 'linear-gradient(135deg, #09101f 0%, #111d38 50%, #162447 100%)',
+          borderBottom: '1.5px solid rgba(243, 186, 47, 0.7)',
+        }}
+        className="text-white px-4 py-2 shadow-xs"
       >
         <div className="max-w-6xl mx-auto flex items-center justify-between text-xs sm:text-sm">
           <div className="flex items-center gap-2.5">
@@ -49,7 +52,7 @@ export default function KMarketHeader() {
             <div className="relative">
               <button
                 onClick={() => setIsLangDropdownOpen(!isLangDropdownOpen)}
-                className="flex items-center gap-1.5 bg-white/15 hover:bg-white/25 transition-all px-3 py-1.5 rounded-full text-white font-bold border border-white/25 text-xs cursor-pointer shadow-2xs"
+                className="flex items-center gap-1.5 bg-black/40 hover:bg-black/60 transition-all px-3 py-1.5 rounded-full text-white font-bold border border-[#f3ba2f]/50 text-xs cursor-pointer shadow-2xs"
                 title="Change Language (15 Languages)"
               >
                 <Globe className="w-3.5 h-3.5 text-[#f3ba2f]" />
@@ -84,7 +87,7 @@ export default function KMarketHeader() {
                         </div>
                       </div>
                       {currentLang === lang.code && (
-                        <span className="w-4 h-4 rounded-full bg-[#3d2817] text-[#fbf9f6] text-[9px] flex items-center justify-center font-black">✓</span>
+                        <span className="w-4 h-4 rounded-full bg-[#09101f] text-[#f3ba2f] text-[9px] flex items-center justify-center font-black border border-[#f3ba2f]">✓</span>
                       )}
                     </button>
                   ))}
@@ -93,7 +96,7 @@ export default function KMarketHeader() {
             </div>
 
             {/* 수수료 0원 뱃지 */}
-            <div className="flex items-center gap-1.5 bg-black/40 text-[#fef08a] px-3 py-1 rounded-full text-[11px] font-extrabold border border-[#f3ba2f]/50 shadow-2xs">
+            <div className="flex items-center gap-1.5 bg-black/40 text-[#fef08a] px-3 py-1 rounded-full text-[11px] font-extrabold border border-[#f3ba2f]/60 shadow-2xs">
               <ShieldCheck className="w-3.5 h-3.5 text-[#f3ba2f]" />
               <span className="text-white font-bold">{t('zero_fee_badge')}</span>
             </div>
