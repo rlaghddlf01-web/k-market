@@ -72,21 +72,32 @@ export default function KMarketMyPageModal({ isOpen, onClose }: KMarketMyPageMod
   return (
     <div className="fixed inset-0 z-50 overflow-y-auto bg-black/75 backdrop-blur-xs animate-fadeIn flex items-center justify-center p-3 sm:p-4">
       <div className="relative w-full max-w-2xl bg-white dark:bg-gray-900 rounded-3xl shadow-2xl overflow-hidden border border-slate-200 dark:border-gray-800 flex flex-col max-h-[90vh] my-auto">
-        {/* 모달 상단 헤더 */}
-        <div className="bg-gradient-to-r from-blue-700 via-indigo-700 to-sky-700 p-5 text-white flex items-center justify-between shrink-0">
-          <div className="flex items-center space-x-3">
-            <div className="w-12 h-12 rounded-2xl bg-white/15 flex items-center justify-center text-white text-xl shadow-inner border border-white/20">
+        {/* 모달 상단 프로필 헤더 - 앱 시그니처 딥 네이비 & 2px 골드 라인 */}
+        <div 
+          style={{
+            background: 'linear-gradient(135deg, #09101f 0%, #111d38 50%, #162447 100%)',
+            borderBottom: '2px solid #f3ba2f',
+            boxShadow: '0 4px 20px rgba(9, 16, 31, 0.40)',
+          }}
+          className="p-5 text-white flex items-center justify-between shrink-0 relative overflow-hidden"
+        >
+          {/* 미세한 골드 앰비언트 글로우 */}
+          <div className="absolute -top-12 -right-12 w-40 h-40 bg-[#f3ba2f]/10 rounded-full blur-2xl pointer-events-none" />
+
+          <div className="flex items-center space-x-3.5 relative z-10">
+            {/* 프로필 국기 아바타 박스 (골드 테두리 & 딥 네이비) */}
+            <div className="w-12 h-12 rounded-2xl bg-[#09101f] flex items-center justify-center text-white text-xl shadow-lg border-2 border-[#f3ba2f]/80 shrink-0">
               <CountryFlag countryCode={userCountry} size="lg" />
             </div>
             <div>
               <div className="flex items-center space-x-2">
-                <h2 className="text-lg sm:text-xl font-black">{userName}</h2>
-                <span className="bg-amber-400 text-slate-950 font-black text-[10px] px-2 py-0.5 rounded-full shadow-xs">
+                <h2 className="text-lg sm:text-xl font-black text-white tracking-tight">{userName}</h2>
+                <span className="bg-[#f3ba2f] text-[#09101f] font-black text-[10px] px-2.5 py-0.5 rounded-full shadow-xs">
                   {userVisa}
                 </span>
               </div>
-              <p className="text-xs text-sky-100 flex items-center gap-1 mt-0.5">
-                <MapPin className="w-3.5 h-3.5 text-sky-300" />
+              <p className="text-xs text-slate-300 font-medium flex items-center gap-1 mt-0.5">
+                <MapPin className="w-3.5 h-3.5 text-[#f3ba2f]" />
                 <span>{userDormitory}</span>
               </p>
             </div>
@@ -94,7 +105,7 @@ export default function KMarketMyPageModal({ isOpen, onClose }: KMarketMyPageMod
 
           <button
             onClick={onClose}
-            className="p-2 rounded-full bg-black/20 hover:bg-black/40 text-white transition-colors cursor-pointer"
+            className="p-2 rounded-full bg-white/10 hover:bg-[#f3ba2f] hover:text-[#09101f] text-white transition-all cursor-pointer border border-white/20 hover:border-[#f3ba2f] relative z-10 shadow-sm"
           >
             <X className="w-5 h-5" />
           </button>
