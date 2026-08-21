@@ -44,7 +44,7 @@ export default function KMarketAuthModal({
   const [stayExpiryDate, setStayExpiryDate] = useState('2026-11-30');
   const [telecom, setTelecom] = useState('SKT_MVNO');
   const [phone, setPhone] = useState('010-8492-3184');
-  const [dormitory, setDormitory] = useState('평택 포승공단 기숙사 2동');
+  const [dormitory, setDormitory] = useState('경기 안산시 단원구 원곡동 795 (다문화거리 앞)');
 
   // 알리고 SMS 인증 상태
   const [sentAuthCode, setSentAuthCode] = useState('');
@@ -149,26 +149,36 @@ export default function KMarketAuthModal({
   return (
     <div className="fixed inset-0 z-50 overflow-y-auto bg-black/75 backdrop-blur-xs animate-fadeIn flex items-center justify-center p-4">
       <div className="relative w-full max-w-lg bg-white dark:bg-gray-900 rounded-3xl shadow-2xl overflow-hidden border border-slate-200 dark:border-gray-800 flex flex-col max-h-[88vh] my-auto">
-        {/* 모달 헤더 (이지텍스 룩앤필) */}
-        <div className="bg-gradient-to-r from-blue-600 via-indigo-600 to-sky-600 p-5 text-white flex items-center justify-between shrink-0">
-          <div className="flex items-center space-x-3">
-            <div className="w-11 h-11 rounded-2xl bg-white/20 flex items-center justify-center text-white shadow-inner">
-              <ShieldCheck className="w-6 h-6 text-yellow-300" />
+        {/* 모달 헤더 - 딥 네이비 & 2px 골드 라인 */}
+        <div 
+          style={{
+            background: 'linear-gradient(135deg, #09101f 0%, #111d38 50%, #162447 100%)',
+            borderBottom: '2px solid #f3ba2f',
+            boxShadow: '0 4px 20px rgba(9, 16, 31, 0.35)',
+          }}
+          className="p-5 text-white flex items-center justify-between shrink-0 relative overflow-hidden"
+        >
+          {/* 미세한 골드 앰비언트 글로우 */}
+          <div className="absolute -top-10 -right-10 w-36 h-36 bg-[#f3ba2f]/10 rounded-full blur-2xl pointer-events-none" />
+
+          <div className="flex items-center space-x-3.5 relative z-10">
+            <div className="w-11 h-11 rounded-2xl bg-[#09101f] border-2 border-[#f3ba2f] flex items-center justify-center text-white shadow-lg">
+              <ShieldCheck className="w-6 h-6 text-[#f3ba2f]" />
             </div>
             <div>
-              <div className="inline-flex items-center space-x-1.5 bg-black/20 px-2.5 py-0.5 rounded-full text-xs font-bold text-sky-200 mb-0.5">
-                <Sparkles className="w-3 h-3 text-yellow-300" />
-                <span>15개국어 외국인 신원인증 & 가입</span>
+              <div className="inline-flex items-center space-x-1.5 bg-black/40 px-2.5 py-0.5 rounded-full text-xs font-bold text-slate-200 border border-[#f3ba2f]/40 mb-0.5">
+                <Sparkles className="w-3 h-3 text-[#f3ba2f]" />
+                <span>15개국어 외국인 신원인증 &amp; 가입</span>
               </div>
-              <h2 className="text-xl font-black tracking-tight">
-                외국인 간편 회원가입
+              <h2 className="text-xl font-black text-white tracking-tight">
+                외국인 안심 간편가입
               </h2>
             </div>
           </div>
 
           <button
             onClick={onClose}
-            className="p-2 rounded-full bg-black/20 hover:bg-black/40 text-white transition-colors cursor-pointer"
+            className="p-2 rounded-full bg-white/10 hover:bg-[#f3ba2f] hover:text-[#09101f] text-white transition-all cursor-pointer border border-white/20 hover:border-[#f3ba2f] relative z-10"
           >
             <X className="w-5 h-5" />
           </button>
@@ -380,17 +390,19 @@ export default function KMarketAuthModal({
                 </div>
               </div>
 
-              {/* 공단 기숙사 위치 */}
-              <div className="space-y-1">
-                <label className="text-xs font-bold text-slate-700 dark:text-slate-300">
-                  거주 공단 / 기숙사 (Dormitory)
+              {/* 실제 거주 주소 (동네 / 도로명 주소) */}
+              <div className="space-y-1.5">
+                <label className="text-xs font-black text-slate-800 dark:text-slate-200 flex items-center justify-between">
+                  <span>📍 실제 거주 주소 (동네 / 도로명 주소)</span>
+                  <span className="text-[11px] font-bold text-emerald-600">내 동네 직거래 반경 기준</span>
                 </label>
                 <input
                   type="text"
+                  required
                   value={dormitory}
                   onChange={(e) => setDormitory(e.target.value)}
-                  placeholder="예: 평택 포승공단 기숙사 2동, 안산 원곡동 원룸"
-                  className="w-full px-3 py-2.5 bg-slate-50 dark:bg-gray-800 rounded-xl border border-slate-200 dark:border-gray-700 text-xs font-bold text-slate-900 dark:text-white"
+                  placeholder="예: 경기 안산시 단원구 원곡동 795 / 서울 광진구 화양동 / 평택시 포승읍 원룸"
+                  className="w-full px-3.5 py-3 bg-slate-50 dark:bg-gray-800 rounded-xl border border-slate-200 dark:border-gray-700 text-xs font-bold text-slate-900 dark:text-white focus:bg-white focus:border-[#f3ba2f] focus:outline-none"
                 />
               </div>
             </div>
