@@ -474,7 +474,7 @@ export default function KMarketAuthModal({
                   <span>KTRS 이지텍스 특별 연계 혜택</span>
                 </span>
                 <p className="text-xs text-amber-900/80 dark:text-amber-300/80">
-                  인증하신 외국인등록번호로 <strong>예상 세금 환급액 184만원</strong>을 선결제 0원 후불제(22%)로 즉시 신청하실 수 있습니다.
+                  인증하신 외국인등록번호로 <strong>예상 세금 환급액 184만원</strong>을 선결제 0원 (후불결제)로 즉시 신청하실 수 있습니다.
                 </p>
               </div>
 

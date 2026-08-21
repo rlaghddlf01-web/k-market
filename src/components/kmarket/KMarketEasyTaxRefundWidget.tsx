@@ -186,14 +186,14 @@ export default function KMarketEasyTaxRefundWidget({
           ₩ {estimatedRefund.toLocaleString()}
         </div>
 
-        {/* 🛡️ 선결제 0원! 100% 환급 성공 시에만 수수료 정산 안심 뱃지 */}
+        {/* 🛡️ 선결제 0원 (후불결제) 안심 뱃지 */}
         <div className="flex flex-col sm:flex-row items-center justify-center gap-1.5 pt-1">
           <span className="text-[11px] bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 px-3 py-1 rounded-full font-black flex items-center gap-1 shadow-xs">
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping" />
-            <span>선결제 0원! 100% 환급 성공 시 수수료 정산 (후불 22%)</span>
+            <span>선결제 0원 (후불결제)</span>
           </span>
           <span className="text-[11px] text-slate-300">
-            내 통장 실수령: <strong>₩ {actualTakeHome.toLocaleString()}</strong>
+            100% 환급 성공 시 후불결제
           </span>
         </div>
 
@@ -215,7 +215,7 @@ export default function KMarketEasyTaxRefundWidget({
           <ArrowRight className="w-5 h-5 text-slate-950" />
         </button>
         <p className="text-[11px] text-amber-200/90 text-center mt-2 font-medium">
-          🛡️ 선결제 0원 · 100% 환급 입금 완료 후 수수료 정산 · 서류 제출 없이 1초 접수
+          🛡️ 선결제 0원 (후불결제) · 서류 제출 없이 1초 접수
         </p>
       </div>
     </div>
