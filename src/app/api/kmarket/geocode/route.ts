@@ -19,6 +19,7 @@ export async function POST(req: NextRequest) {
           headers: {
             Authorization: `KakaoAK ${kakaoKey}`,
           },
+          cache: 'no-store',
         }
       );
 
@@ -32,7 +33,7 @@ export async function POST(req: NextRequest) {
         }
       }
     } catch (e) {
-      console.warn('Kakao geocoding failed, trying Nominatim fallback:', e);
+      console.warn('Kakao geocoding error:', e);
     }
 
     // 2. OpenStreetMap Nominatim 글로벌 역지오코딩 폴백 (무료 공공 API)
@@ -42,19 +43,22 @@ export async function POST(req: NextRequest) {
           `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}&zoom=18&addressdetails=1`,
           {
             headers: {
-              'User-Agent': 'KMarket-App/1.0',
-              'Accept-Language': 'ko-KR,ko;q=0.9',
+              'User-Agent': 'KMarket-App-Geocode/1.0',
+              'Accept-Language': 'ko-KR,ko;q=0.9,en;q=0.8',
             },
+            cache: 'no-store',
           }
         );
         if (osmRes.ok) {
           const osmData = await osmRes.json();
           if (osmData.display_name) {
             const addr = osmData.address || {};
-            const province = addr.province || addr.state || '';
-            const city = addr.city || addr.county || addr.district || '';
-            const road = addr.road || addr.suburb || addr.neighbourhood || '';
-            detectedAddress = [province, city, road].filter(Boolean).join(' ') || osmData.display_name;
+            const province = addr.province || addr.state || addr.city || '';
+            const district = addr.county || addr.district || addr.borough || addr.suburb || '';
+            const town = addr.town || addr.village || addr.neighbourhood || addr.quarter || '';
+            const road = addr.road || addr.street || '';
+            const parts = [province, district, town, road].filter(Boolean);
+            detectedAddress = parts.length >= 2 ? parts.join(' ') : osmData.display_name.split(',').slice(0, 3).reverse().join(' ').trim();
           }
         }
       } catch (e) {

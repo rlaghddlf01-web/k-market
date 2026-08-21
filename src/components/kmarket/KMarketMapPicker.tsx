@@ -30,6 +30,15 @@ export default function KMarketMapPicker({
   const [landmarkDetail, setLandmarkDetail] = useState('');
   const [isLocating, setIsLocating] = useState(false);
 
+  const landmarkDetailRef = useRef(landmarkDetail);
+  landmarkDetailRef.current = landmarkDetail;
+
+  const onChangeRegionTextRef = useRef(onChangeRegionText);
+  onChangeRegionTextRef.current = onChangeRegionText;
+
+  const onChangeCoordinatesRef = useRef(onChangeCoordinates);
+  onChangeCoordinatesRef.current = onChangeCoordinates;
+
   const mapContainerRef = useRef<HTMLDivElement>(null);
   const leafletMapRef = useRef<any>(null);
   const markerRef = useRef<any>(null);
@@ -39,7 +48,7 @@ export default function KMarketMapPicker({
     const trimmedBase = baseAddr.trim();
     const trimmedDetail = detail.trim();
     const fullText = trimmedDetail ? `${trimmedBase} (${trimmedDetail})` : trimmedBase;
-    onChangeRegionText(fullText);
+    onChangeRegionTextRef.current(fullText);
   };
 
   // 좌표를 기반으로 서버 API를 통해 실제 한국 도로명 주소 실시간 가져오기
@@ -54,8 +63,8 @@ export default function KMarketMapPicker({
         const data = await res.json();
         if (data.success && data.address) {
           setBaseAddress(data.address);
-          updateFullLocation(data.address, landmarkDetail);
-          onChangeCoordinates(lat, lng, data.address);
+          updateFullLocation(data.address, landmarkDetailRef.current);
+          onChangeCoordinatesRef.current(lat, lng, data.address);
           return;
         }
       }
@@ -64,8 +73,8 @@ export default function KMarketMapPicker({
     }
     const fallback = `위치 지정됨 (위도: ${lat.toFixed(4)}, 경도: ${lng.toFixed(4)})`;
     setBaseAddress(fallback);
-    updateFullLocation(fallback, landmarkDetail);
-    onChangeCoordinates(lat, lng, fallback);
+    updateFullLocation(fallback, landmarkDetailRef.current);
+    onChangeCoordinatesRef.current(lat, lng, fallback);
   };
 
   // 1. 도메인 키 제한 없는 Leaflet 인터랙티브 맵 로드 & 초기화
@@ -101,7 +110,7 @@ export default function KMarketMapPicker({
       const customPinIcon = window.L.divIcon({
         className: 'custom-map-pin',
         html: `
-          <div style="position: relative; display: flex; align-items: center; justify-content: center; width: 40px; height: 40px;">
+          <div style="position: relative; display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; cursor: pointer;">
             <div style="position: absolute; width: 36px; height: 36px; border-radius: 50%; background: rgba(243, 186, 47, 0.4); animation: ping 1.5s cubic-bezier(0, 0, 0.2, 1) infinite;"></div>
             <div style="position: relative; width: 32px; height: 32px; background: #09101f; border: 2.5px solid #f3ba2f; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0,0,0,0.4);">
               <span style="font-size: 16px;">📍</span>
@@ -139,7 +148,7 @@ export default function KMarketMapPicker({
       // 지도 리사이즈 보정
       setTimeout(() => {
         map.invalidateSize();
-      }, 200);
+      }, 300);
     };
 
     const scriptId = 'leaflet-js';
