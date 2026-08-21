@@ -200,21 +200,21 @@ export default function KMarketAuthModal({
           </button>
         </div>
 
-        {/* 1. OCR vs 직접입력 탭 바 */}
-        <div className="flex border-b border-slate-200 dark:border-gray-800 bg-slate-50 dark:bg-gray-800/60 p-1.5 gap-1.5 shrink-0">
+        {/* 1. OCR vs 직접입력 탭 바 (앱 시그니처 웜톤 라떼 & 에스프레소) */}
+        <div className="flex border-b border-[#ded1c4] bg-[#f7f2eb] p-1.5 gap-1.5 shrink-0">
           <button
             onClick={() => {
               setAuthTab('ocr');
               setStep('form');
             }}
-            className={`flex-1 py-2.5 rounded-2xl text-xs sm:text-sm font-black flex items-center justify-center space-x-1.5 transition-all cursor-pointer ${
+            className={`flex-1 py-2.5 rounded-2xl text-xs sm:text-sm font-black flex items-center justify-center space-x-1.5 transition-all cursor-pointer shadow-2xs ${
               authTab === 'ocr'
-                ? 'bg-gradient-to-r from-amber-500 via-orange-500 to-rose-500 text-white shadow-md shadow-orange-500/25 ring-2 ring-amber-300'
-                : 'text-slate-600 dark:text-slate-400 hover:bg-slate-200/60'
+                ? 'bg-[#3d2817] text-[#fbf9f6] border border-[#3d2817]'
+                : 'text-[#705e4f] hover:text-[#1f1914] hover:bg-[#ede2d6] bg-transparent'
             }`}
           >
-            <Camera className="w-4 h-4" />
-            <span>📸 등록증 OCR (+7.0℃ & 상단노출 🚀)</span>
+            <Camera className="w-4 h-4 text-[#f3ba2f]" />
+            <span>등록증 OCR (+7.0℃ &amp; 상단노출 🚀)</span>
           </button>
 
           <button
@@ -224,51 +224,51 @@ export default function KMarketAuthModal({
             }}
             className={`flex-1 py-2.5 rounded-2xl text-xs sm:text-sm font-black flex items-center justify-center space-x-1.5 transition-all cursor-pointer ${
               authTab === 'manual'
-                ? 'bg-blue-600 text-white shadow-md shadow-blue-600/25'
-                : 'text-slate-600 dark:text-slate-400 hover:bg-slate-200/60'
+                ? 'bg-[#3d2817] text-[#fbf9f6] border border-[#3d2817]'
+                : 'text-[#705e4f] hover:text-[#1f1914] hover:bg-[#ede2d6] bg-transparent'
             }`}
           >
-            <User className="w-4 h-4" />
+            <User className="w-4 h-4 text-[#845b37]" />
             <span>수기 입력 (기본 36.5℃)</span>
           </button>
         </div>
 
         {/* 모달 본문 영역 */}
-        <div className="p-5 overflow-y-auto space-y-4 flex-1 text-xs sm:text-sm">
+        <div className="p-5 overflow-y-auto space-y-4 flex-1 text-xs sm:text-sm bg-[#fdfbf9]">
           {/* STEP 1: 폼 입력 단계 */}
           {step === 'form' && (
             <div className="space-y-4">
               {/* OCR 탭일 때: 매너온도 +7.0℃ & 최상단 노출 혜택 강조 배너 + 촬영 박스 */}
               {authTab === 'ocr' && (
                 <div className="space-y-3">
-                  {/* 🔥 매너온도 43.5℃ & 앱 최상단 우선 노출 파격 혜택 하이라이트 카드 */}
-                  <div className="p-4 rounded-3xl bg-gradient-to-br from-amber-500/15 via-orange-500/10 to-rose-500/15 border-2 border-amber-400/80 shadow-md space-y-2.5">
+                  {/* 🔥 매너온도 43.5℃ & 앱 최상단 우선 노출 파격 혜택 하이라이트 카드 (품격있는 웜톤 골드) */}
+                  <div className="p-4 rounded-3xl bg-[#f5ede2] border border-[#d9c5b0] shadow-xs space-y-2.5">
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-1.5">
-                        <span className="text-base animate-bounce">🔥</span>
-                        <h4 className="font-black text-xs sm:text-sm text-[#7a3e0a] dark:text-amber-300">
+                        <Sparkles className="w-4 h-4 text-[#845b37]" />
+                        <h4 className="font-black text-xs sm:text-sm text-[#3d2817]">
                           실물 신분증 OCR 촬영 시 3대 특별 혜택
                         </h4>
                       </div>
-                      <span className="bg-gradient-to-r from-amber-500 to-rose-500 text-white font-black text-[10px] px-2.5 py-0.5 rounded-full shadow-xs animate-pulse">
-                        +7.0℃ 보너스
+                      <span className="bg-[#3d2817] text-[#f3ba2f] font-black text-[10px] px-2.5 py-0.5 rounded-full border border-[#5c3818] shadow-2xs">
+                        +7.0℃ 즉시 가산
                       </span>
                     </div>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-[11px]">
-                      <div className="p-2.5 rounded-2xl bg-white/90 dark:bg-gray-800/90 border border-amber-200 dark:border-amber-900/60 flex items-start gap-2 shadow-2xs">
+                      <div className="p-2.5 rounded-2xl bg-white/95 border border-[#e6dacd] flex items-start gap-2 shadow-2xs">
                         <span className="text-base">🌡️</span>
                         <div>
-                          <p className="font-black text-slate-900 dark:text-white">매너온도 43.5℃ 골드 등급</p>
-                          <p className="text-slate-500 text-[10px] mt-0.5">가입 즉시 +7.0℃ 상승하여 최우수 안심 회원 뱃지 부여</p>
+                          <p className="font-black text-[#3d2817]">매너온도 43.5℃ 골드 등급</p>
+                          <p className="text-[#705e4f] text-[10px] mt-0.5">가입 즉시 +7.0℃ 상승하여 최우수 안심 회원 뱃지 부여</p>
                         </div>
                       </div>
 
-                      <div className="p-2.5 rounded-2xl bg-white/90 dark:bg-gray-800/90 border border-amber-200 dark:border-amber-900/60 flex items-start gap-2 shadow-2xs">
+                      <div className="p-2.5 rounded-2xl bg-white/95 border border-[#e6dacd] flex items-start gap-2 shadow-2xs">
                         <span className="text-base">🚀</span>
                         <div>
-                          <p className="font-black text-orange-600 dark:text-orange-400">내 매물 앱 최상단 우선 노출</p>
-                          <p className="text-slate-500 text-[10px] mt-0.5">신뢰도가 높아 구매자에게 먼저 추천되어 3배 빠른 판매 성사!</p>
+                          <p className="font-black text-[#845b37]">내 매물 앱 최상단 우선 노출</p>
+                          <p className="text-[#705e4f] text-[10px] mt-0.5">신뢰도가 높아 구매자에게 먼저 추천되어 3배 빠른 판매 성사!</p>
                         </div>
                       </div>
                     </div>
@@ -282,65 +282,65 @@ export default function KMarketAuthModal({
                     className="hidden"
                   />
 
-                  {/* 카메라 촬영 / 업로드 드롭존 */}
+                  {/* 카메라 촬영 / 업로드 드롭존 (에스프레소 & 웜 모카) */}
                   <div
                     onClick={() => fileInputRef.current?.click()}
                     className={`border-2 border-dashed rounded-3xl p-5 text-center transition-all cursor-pointer flex flex-col items-center justify-center gap-2.5 ${
                       ocrCompleted
-                        ? 'border-emerald-500 bg-emerald-50/70 dark:bg-emerald-950/30'
-                        : 'border-orange-400 dark:border-orange-600 bg-gradient-to-b from-orange-50/50 to-amber-50/30 hover:border-orange-500 hover:shadow-lg shadow-xs'
+                        ? 'border-emerald-500 bg-emerald-50/70'
+                        : 'border-[#cbb7a3] bg-[#faf6f1] hover:border-[#845b37] hover:bg-[#f4ede6] shadow-xs'
                     }`}
                   >
                     {isScanning ? (
                       <div className="flex flex-col items-center py-4 space-y-2">
-                        <RefreshCw className="w-8 h-8 text-orange-600 animate-spin" />
-                        <span className="font-black text-slate-900 dark:text-white text-sm">
+                        <RefreshCw className="w-8 h-8 text-[#845b37] animate-spin" />
+                        <span className="font-black text-[#1f1914] text-sm">
                           Gemini Vision AI가 신분증 판독 중 (0.5초)...
                         </span>
-                        <span className="text-[11px] text-orange-700">
+                        <span className="text-[11px] text-[#705e4f]">
                           이름, 외국인등록번호, 비자, 만료일을 자동 추출하고 있습니다.
                         </span>
                       </div>
                     ) : ocrCompleted ? (
                       <div className="flex items-center space-x-3 text-left w-full">
-                        <div className="w-12 h-12 rounded-2xl bg-emerald-500 text-white flex items-center justify-center shrink-0 shadow-md">
+                        <div className="w-12 h-12 rounded-2xl bg-emerald-600 text-white flex items-center justify-center shrink-0 shadow-md">
                           <CheckCircle2 className="w-7 h-7" />
                         </div>
                         <div className="flex-1 min-w-0">
                           <div className="flex items-center gap-1.5 flex-wrap">
-                            <span className="text-xs font-black text-emerald-800 dark:text-emerald-300">
+                            <span className="text-xs font-black text-emerald-800">
                               ✅ 실물 등록증 OCR 인증 성공!
                             </span>
-                            <span className="bg-gradient-to-r from-amber-500 to-orange-500 text-white text-[10px] font-black px-2 py-0.5 rounded-full">
+                            <span className="bg-[#3d2817] text-[#f3ba2f] text-[10px] font-black px-2 py-0.5 rounded-full border border-[#5c3818]">
                               매너온도 43.5℃ &amp; 상단노출 확정 👑
                             </span>
                           </div>
-                          <p className="text-[11px] text-slate-600 dark:text-slate-300 mt-1 truncate font-medium">
+                          <p className="text-[11px] text-[#5c4a39] mt-1 truncate font-medium">
                             {userName} | {arcNumber} | {visaType}
                           </p>
                         </div>
-                        <span className="text-xs text-orange-600 font-bold hover:underline shrink-0">
+                        <span className="text-xs text-[#845b37] font-bold hover:underline shrink-0">
                           다시 촬영
                         </span>
                       </div>
                     ) : (
                       <>
-                        <div className="w-13 h-13 rounded-2xl bg-gradient-to-br from-amber-500 to-orange-600 text-white flex items-center justify-center shadow-lg shadow-orange-500/30 ring-4 ring-orange-200 dark:ring-orange-950">
-                          <Camera className="w-7 h-7" />
+                        <div className="w-12 h-12 rounded-2xl bg-[#3d2817] text-[#f3ba2f] border border-[#5c3818] flex items-center justify-center shadow-md">
+                          <Camera className="w-6 h-6" />
                         </div>
                         <div className="space-y-0.5">
-                          <h4 className="font-black text-sm sm:text-base text-slate-900 dark:text-white">
+                          <h4 className="font-black text-sm sm:text-base text-[#1f1914]">
                             외국인등록증 앞면 사진 촬영하기
                           </h4>
-                          <p className="text-[11px] text-slate-600 dark:text-slate-400">
-                            카메라로 0.5초 비추면 자동 입력 &amp; <strong>매너온도 즉시 43.5℃(골드)</strong> 획득!
+                          <p className="text-[11px] text-[#705e4f]">
+                            카메라로 0.5초 비추면 자동 입력 &amp; <strong className="text-[#3d2817]">매너온도 즉시 43.5℃(골드)</strong> 획득!
                           </p>
                         </div>
                         <button
                           type="button"
-                          className="px-5 py-2.5 rounded-2xl bg-gradient-to-r from-amber-500 via-orange-500 to-rose-500 text-white font-black text-xs shadow-md shadow-orange-500/30 hover:scale-103 active:scale-97 transition-all cursor-pointer flex items-center gap-1.5"
+                          className="px-5 py-2.5 rounded-2xl bg-[#3d2817] hover:bg-[#2b1c10] text-[#fbf9f6] border border-[#5c3818] font-black text-xs shadow-md active:scale-97 transition-all cursor-pointer flex items-center gap-1.5"
                         >
-                          <Camera className="w-4 h-4" />
+                          <Camera className="w-4 h-4 text-[#f3ba2f]" />
                           <span>카메라 열기 / 신분증 촬영하고 43.5℃ 받기 ⚡</span>
                         </button>
                       </>
@@ -350,16 +350,16 @@ export default function KMarketAuthModal({
               )}
 
               {/* 활동 닉네임 / 별명 입력란 (중고거래 & 동네생활 표시용) */}
-              <div className="p-3.5 rounded-2xl bg-amber-50/70 dark:bg-amber-950/30 border border-amber-200/80 dark:border-amber-800/60 space-y-2">
+              <div className="p-3.5 rounded-2xl bg-[#f4ede6] border border-[#ded1c4] space-y-2">
                 <div className="flex items-center justify-between">
-                  <label className="text-xs font-black text-[#5c3818] dark:text-amber-300 flex items-center gap-1.5">
+                  <label className="text-xs font-black text-[#3d2817] flex items-center gap-1.5">
                     <span>🌟 활동 닉네임 / 별명 (Nickname)</span>
-                    <span className="text-[10px] text-amber-700 dark:text-amber-400 font-bold bg-amber-100 dark:bg-amber-900/60 px-1.5 py-0.5 rounded-md">필수</span>
+                    <span className="text-[10px] text-[#845b37] font-bold bg-[#ede2d6] px-1.5 py-0.5 rounded-md">필수</span>
                   </label>
                   <button
                     type="button"
                     onClick={() => setNickname(generateRandomNickname(userName))}
-                    className="text-[11px] font-bold text-amber-900 dark:text-amber-200 hover:text-amber-700 bg-amber-200/70 hover:bg-amber-300/80 px-2 py-1 rounded-lg transition-all flex items-center gap-1 cursor-pointer"
+                    className="text-[11px] font-bold text-[#5c3818] hover:text-[#1f1914] bg-[#ede2d6] hover:bg-[#e2d4c5] px-2.5 py-1 rounded-lg transition-all flex items-center gap-1 cursor-pointer border border-[#ded1c4]"
                     title="센스 있는 별명 자동 추천"
                   >
                     <span>🎲 랜덤 별명 추천</span>
@@ -372,9 +372,9 @@ export default function KMarketAuthModal({
                   onChange={(e) => setNickname(e.target.value)}
                   placeholder="예: 안산호랑이, 베트남마켓, 평택친구 (2~15자)"
                   maxLength={15}
-                  className="w-full px-3.5 py-2.5 bg-white dark:bg-gray-900 rounded-xl border border-amber-300 dark:border-amber-700 text-xs sm:text-sm font-black text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-amber-500 shadow-2xs"
+                  className="w-full px-3.5 py-2.5 bg-white rounded-xl border border-[#ded1c4] text-xs sm:text-sm font-black text-[#1f1914] focus:outline-none focus:border-[#845b37] focus:ring-1 focus:ring-[#845b37] shadow-2xs"
                 />
-                <p className="text-[10px] text-amber-800/80 dark:text-amber-300/70">
+                <p className="text-[10px] text-[#705e4f]">
                   💡 중고거래 채팅과 동네생활 커뮤니티에서 이웃들에게 보여질 친근한 별명을 지어보세요!
                 </p>
               </div>
@@ -382,7 +382,7 @@ export default function KMarketAuthModal({
               {/* 기본 정보 입력창 (OCR 시 자동 채워짐) */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div className="space-y-1">
-                  <label className="text-xs font-bold text-slate-700 dark:text-slate-300">
+                  <label className="text-xs font-bold text-[#5c4a39]">
                     영문 실명 (Passport Name)
                   </label>
                   <input
@@ -390,12 +390,12 @@ export default function KMarketAuthModal({
                     value={userName}
                     onChange={(e) => setUserName(e.target.value)}
                     placeholder="예: NGUYEN VAN DUC"
-                    className="w-full px-3 py-2.5 bg-slate-50 dark:bg-gray-800 rounded-xl border border-slate-200 dark:border-gray-700 text-xs font-bold text-slate-900 dark:text-white"
+                    className="w-full px-3 py-2.5 bg-white rounded-xl border border-[#ded1c4] text-xs font-bold text-[#1f1914] focus:outline-none focus:border-[#845b37]"
                   />
                 </div>
 
                 <div className="space-y-1">
-                  <label className="text-xs font-bold text-slate-700 dark:text-slate-300">
+                  <label className="text-xs font-bold text-[#5c4a39]">
                     외국인등록번호 (13자리)
                   </label>
                   <input
@@ -403,12 +403,12 @@ export default function KMarketAuthModal({
                     value={arcNumber}
                     onChange={(e) => setArcNumber(e.target.value)}
                     placeholder="예: 950821-5184920"
-                    className="w-full px-3 py-2.5 bg-slate-50 dark:bg-gray-800 rounded-xl border border-slate-200 dark:border-gray-700 text-xs font-bold text-slate-900 dark:text-white"
+                    className="w-full px-3 py-2.5 bg-white rounded-xl border border-[#ded1c4] text-xs font-bold text-[#1f1914] focus:outline-none focus:border-[#845b37]"
                   />
                 </div>
 
                 <div className="space-y-1">
-                  <label className="text-xs font-bold text-slate-700 dark:text-slate-300">
+                  <label className="text-xs font-bold text-[#5c4a39]">
                     비자 종류 (Visa Status)
                   </label>
                   <input
@@ -416,27 +416,27 @@ export default function KMarketAuthModal({
                     value={visaType}
                     onChange={(e) => setVisaType(e.target.value)}
                     placeholder="예: E-9 (비전문취업)"
-                    className="w-full px-3 py-2.5 bg-slate-50 dark:bg-gray-800 rounded-xl border border-slate-200 dark:border-gray-700 text-xs font-bold text-slate-900 dark:text-white"
+                    className="w-full px-3 py-2.5 bg-white rounded-xl border border-[#ded1c4] text-xs font-bold text-[#1f1914] focus:outline-none focus:border-[#845b37]"
                   />
                 </div>
 
                 <div className="space-y-1">
-                  <label className="text-xs font-bold text-slate-700 dark:text-slate-300">
+                  <label className="text-xs font-bold text-[#5c4a39]">
                     체류 만료일 (Expiry Date)
                   </label>
                   <input
                     type="date"
                     value={stayExpiryDate}
                     onChange={(e) => setStayExpiryDate(e.target.value)}
-                    className="w-full px-3 py-2.5 bg-slate-50 dark:bg-gray-800 rounded-xl border border-slate-200 dark:border-gray-700 text-xs font-bold text-slate-900 dark:text-white"
+                    className="w-full px-3 py-2.5 bg-white rounded-xl border border-[#ded1c4] text-xs font-bold text-[#1f1914] focus:outline-none focus:border-[#845b37]"
                   />
                 </div>
               </div>
 
               {/* 통신사 드롭다운 및 휴대폰 번호 입력 (알리고 SMS 본인확인용) */}
-              <div className="p-4 rounded-3xl bg-slate-50 dark:bg-gray-800/80 border border-slate-200/80 dark:border-gray-700 space-y-3">
-                <span className="text-xs font-black text-slate-900 dark:text-white flex items-center gap-1.5">
-                  <Smartphone className="w-4 h-4 text-blue-600" />
+              <div className="p-4 rounded-3xl bg-[#f7f2eb] border border-[#ded1c4] space-y-3">
+                <span className="text-xs font-black text-[#1f1914] flex items-center gap-1.5">
+                  <Smartphone className="w-4 h-4 text-[#845b37]" />
                   <span>통신사 선택 및 휴대폰 번호 (알리고 SMS 본인인증)</span>
                 </span>
 
@@ -445,7 +445,7 @@ export default function KMarketAuthModal({
                   <select
                     value={telecom}
                     onChange={(e) => setTelecom(e.target.value)}
-                    className="w-full appearance-none px-4 py-2.5 bg-white dark:bg-gray-900 rounded-xl border border-slate-200 dark:border-gray-700 text-xs font-bold text-slate-900 dark:text-white focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 cursor-pointer pr-10"
+                    className="w-full appearance-none px-4 py-2.5 bg-white rounded-xl border border-[#ded1c4] text-xs font-bold text-[#1f1914] focus:outline-none focus:border-[#845b37] cursor-pointer pr-10"
                   >
                     <option value="SKT_MVNO">📱 SKT 알뜰폰 (선불폰 / 후불폰)</option>
                     <option value="KT_MVNO">📱 KT 알뜰폰 (선불폰 / 후불폰)</option>
@@ -454,7 +454,7 @@ export default function KMarketAuthModal({
                     <option value="KT">🏢 KT (케이티 공식)</option>
                     <option value="LGU">🏢 LG유플러스 (LGU+ 공식)</option>
                   </select>
-                  <ChevronDown className="w-4 h-4 text-slate-400 absolute right-3 top-3 pointer-events-none" />
+                  <ChevronDown className="w-4 h-4 text-[#8c7866] absolute right-3 top-3 pointer-events-none" />
                 </div>
 
                 <div className="flex items-center gap-2">
@@ -463,13 +463,13 @@ export default function KMarketAuthModal({
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
                     placeholder="010-XXXX-XXXX"
-                    className="flex-1 px-3.5 py-2.5 bg-white dark:bg-gray-900 rounded-xl border border-slate-200 dark:border-gray-700 text-xs font-bold text-slate-900 dark:text-white focus:outline-none focus:border-blue-500"
+                    className="flex-1 px-3.5 py-2.5 bg-white rounded-xl border border-[#ded1c4] text-xs font-bold text-[#1f1914] focus:outline-none focus:border-[#845b37]"
                   />
                   <button
                     type="button"
                     onClick={handleSendSms}
                     disabled={isSmsSending}
-                    className="px-4 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs rounded-xl shadow-xs transition-all shrink-0 cursor-pointer"
+                    className="px-4 py-2.5 bg-[#3d2817] hover:bg-[#2b1c10] text-[#fbf9f6] font-bold text-xs rounded-xl shadow-xs transition-all shrink-0 cursor-pointer border border-[#5c3818]"
                   >
                     {isSmsSending ? '발송중...' : '인증번호 받기'}
                   </button>
@@ -478,9 +478,9 @@ export default function KMarketAuthModal({
 
               {/* 실제 거주 주소 (동네 / 도로명 주소) */}
               <div className="space-y-1.5">
-                <label className="text-xs font-black text-slate-800 dark:text-slate-200 flex items-center justify-between">
+                <label className="text-xs font-black text-[#3d2817] flex items-center justify-between">
                   <span>📍 실제 거주 주소 (동네 / 도로명 주소)</span>
-                  <span className="text-[11px] font-bold text-emerald-600">내 동네 직거래 반경 기준</span>
+                  <span className="text-[11px] font-bold text-emerald-700">내 동네 직거래 반경 기준</span>
                 </label>
                 <input
                   type="text"
@@ -488,7 +488,7 @@ export default function KMarketAuthModal({
                   value={dormitory}
                   onChange={(e) => setDormitory(e.target.value)}
                   placeholder="예: 경기 안산시 단원구 원곡동 795 / 서울 광진구 화양동 / 평택시 포승읍 원룸"
-                  className="w-full px-3.5 py-3 bg-slate-50 dark:bg-gray-800 rounded-xl border border-slate-200 dark:border-gray-700 text-xs font-bold text-slate-900 dark:text-white focus:bg-white focus:border-[#f3ba2f] focus:outline-none"
+                  className="w-full px-3.5 py-3 bg-white rounded-xl border border-[#ded1c4] text-xs font-bold text-[#1f1914] focus:border-[#845b37] focus:outline-none shadow-2xs"
                 />
               </div>
             </div>
@@ -497,15 +497,15 @@ export default function KMarketAuthModal({
           {/* STEP 2: 알리고 SMS 6자리 인증번호 입력 단계 */}
           {step === 'sms' && (
             <form onSubmit={handleVerifySms} className="py-6 space-y-4 text-center">
-              <div className="w-14 h-14 rounded-3xl bg-blue-50 dark:bg-blue-950 text-blue-600 mx-auto flex items-center justify-center shadow-inner">
+              <div className="w-14 h-14 rounded-3xl bg-[#f4ede6] text-[#845b37] border border-[#ded1c4] mx-auto flex items-center justify-center shadow-xs">
                 <Smartphone className="w-7 h-7" />
               </div>
 
               <div className="space-y-1">
-                <h3 className="text-base font-black text-slate-900 dark:text-white">
+                <h3 className="text-base font-black text-[#1f1914]">
                   알리고 SMS 6자리 인증번호 입력
                 </h3>
-                <p className="text-xs text-slate-500">
+                <p className="text-xs text-[#705e4f]">
                   <strong>{phone}</strong> 번호로 발송된 6자리 번호를 입력해 주세요.
                 </p>
               </div>
@@ -517,11 +517,11 @@ export default function KMarketAuthModal({
                   value={inputAuthCode}
                   onChange={(e) => setInputAuthCode(e.target.value)}
                   placeholder="인증번호 6자리"
-                  className="w-full text-center text-xl font-mono font-black tracking-widest py-3 bg-slate-50 dark:bg-gray-800 rounded-2xl border-2 border-blue-500 focus:outline-none"
+                  className="w-full text-center text-xl font-mono font-black tracking-widest py-3 bg-white rounded-2xl border-2 border-[#845b37] focus:outline-none shadow-xs"
                 />
 
                 {smsError && (
-                  <p className="text-xs text-red-500 font-bold flex items-center justify-center gap-1">
+                  <p className="text-xs text-rose-600 font-bold flex items-center justify-center gap-1">
                     <AlertCircle className="w-3.5 h-3.5" />
                     <span>{smsError}</span>
                   </p>
@@ -532,13 +532,13 @@ export default function KMarketAuthModal({
                 <button
                   type="button"
                   onClick={() => setStep('form')}
-                  className="px-4 py-2.5 bg-slate-100 dark:bg-gray-800 text-slate-700 dark:text-slate-300 font-bold text-xs rounded-xl"
+                  className="px-4 py-2.5 bg-[#f4ede6] hover:bg-[#ede2d6] text-[#5c4a39] font-bold text-xs rounded-xl border border-[#ded1c4] cursor-pointer"
                 >
                   이전 단계
                 </button>
                 <button
                   type="submit"
-                  className="px-6 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-black text-xs rounded-xl shadow-md shadow-blue-600/25"
+                  className="px-6 py-2.5 bg-[#3d2817] hover:bg-[#2b1c10] text-[#fbf9f6] font-black text-xs rounded-xl shadow-md border border-[#5c3818] cursor-pointer"
                 >
                   인증 확인 완료
                 </button>
@@ -549,37 +549,37 @@ export default function KMarketAuthModal({
           {/* STEP 3: 가입 및 신원인증 완료 단계 */}
           {step === 'complete' && (
             <div className="py-6 space-y-4 text-center">
-              <div className="w-16 h-16 rounded-full bg-emerald-500 text-white mx-auto flex items-center justify-center shadow-lg shadow-emerald-500/30 animate-bounce">
+              <div className="w-16 h-16 rounded-full bg-emerald-600 text-white mx-auto flex items-center justify-center shadow-lg shadow-emerald-600/30 animate-bounce">
                 <CheckCircle2 className="w-10 h-10" />
               </div>
 
               <div className="space-y-1">
-                <span className="text-xs font-black text-emerald-600 uppercase tracking-wider">
+                <span className="text-xs font-black text-emerald-800 uppercase tracking-wider">
                   KTRS K-Market 신원 인증 완료!
                 </span>
-                <h3 className="text-lg font-black text-slate-900 dark:text-white">
+                <h3 className="text-lg font-black text-[#1f1914]">
                   {nickname || userName} 님, 환영합니다!
                 </h3>
-                <p className="text-xs text-slate-500 max-w-sm mx-auto">
-                  {authTab === 'ocr' ? '실물 신분증 OCR 검증' : '수기 인증'} 및 휴대폰 본인인증이 완료되어 <strong>골드 신뢰 뱃지(매너온도 36.5℃)</strong>가 발급되었습니다.
+                <p className="text-xs text-[#705e4f] max-w-sm mx-auto">
+                  {authTab === 'ocr' ? '실물 신분증 OCR 검증' : '수기 인증'} 및 휴대폰 본인인증이 완료되어 <strong className="text-[#3d2817]">골드 신뢰 뱃지(매너온도 43.5℃)</strong>가 발급되었습니다.
                 </p>
               </div>
 
               {/* KTRS 184만원 세금 환급 연계 혜택 알림 */}
-              <div className="p-4 rounded-2xl bg-amber-50 dark:bg-amber-950/30 border border-amber-200/80 text-left space-y-1">
-                <span className="text-xs font-black text-amber-950 dark:text-amber-200 flex items-center gap-1">
-                  <Sparkles className="w-3.5 h-3.5 text-amber-600" />
+              <div className="p-4 rounded-2xl bg-[#f4ede6] border border-[#ded1c4] text-left space-y-1">
+                <span className="text-xs font-black text-[#3d2817] flex items-center gap-1">
+                  <Sparkles className="w-3.5 h-3.5 text-[#845b37]" />
                   <span>KTRS 이지텍스 특별 연계 혜택</span>
                 </span>
-                <p className="text-xs text-amber-900/80 dark:text-amber-300/80">
-                  인증하신 외국인등록번호로 <strong>예상 세금 환급액 184만원</strong>을 선결제 0원 (후불결제)로 즉시 신청하실 수 있습니다.
+                <p className="text-xs text-[#705e4f]">
+                  인증하신 외국인등록번호로 <strong className="text-[#3d2817]">예상 세금 환급액 184만원</strong>을 선결제 0원 (후불결제)로 즉시 신청하실 수 있습니다.
                 </p>
               </div>
 
               <button
                 type="button"
                 onClick={handleFinish}
-                className="w-full py-4 bg-gradient-to-r from-blue-600 via-indigo-600 to-sky-600 text-white font-black text-sm rounded-2xl shadow-xl shadow-blue-600/30 cursor-pointer"
+                className="w-full py-4 bg-[#3d2817] hover:bg-[#2b1c10] text-[#fbf9f6] font-black text-sm rounded-2xl shadow-xl border border-[#5c3818] cursor-pointer"
               >
                 K-Market 중고거래 시작하기
               </button>
