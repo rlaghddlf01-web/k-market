@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { useLanguage } from '@/context/LanguageContext';
 import { useKMarket } from '@/context/KMarketContext';
-import { Globe, PlusCircle, Search, Sparkles, MessageCircle, ShieldCheck, Heart, UserCheck, Bell } from 'lucide-react';
+import { Globe, PlusCircle, Search, Sparkles, MessageCircle, ShieldCheck, Heart, UserCheck, Bell, MapPin, ChevronDown } from 'lucide-react';
 import { SupportedLanguage } from '@/types/kmarket';
 
 export default function KMarketHeader() {
@@ -11,6 +11,7 @@ export default function KMarketHeader() {
   const {
     searchQuery,
     setSearchQuery,
+    selectedRegion,
     setIsCreateModalOpen,
     setIsTaxModalOpen,
     setIsFavoritesModalOpen,
@@ -18,6 +19,7 @@ export default function KMarketHeader() {
     setIsAuthModalOpen,
     setIsMyPageOpen,
     setIsKeywordModalOpen,
+    setIsLocationRadiusModalOpen,
     keywordAlerts,
     authedUser,
     likedItemIds,
@@ -99,24 +101,50 @@ export default function KMarketHeader() {
       {/* 중간: 로고, 검색, 1분 등록 버튼 */}
       <div className="max-w-6xl mx-auto px-4 py-3">
         <div className="flex items-center justify-between gap-3">
-          {/* K-Market 브랜드 로고 */}
-          <div className="flex items-center space-x-2.5">
-            <div className="w-10 h-10 rounded-xl bg-linear-to-tr from-blue-600 to-cyan-500 flex items-center justify-center text-white font-black text-xl shadow-md shadow-blue-500/20">
-              K
-            </div>
-            <div>
-              <div className="flex items-center space-x-1.5">
-                <span className="text-xl font-black tracking-tight text-slate-900">
-                  K-Market
-                </span>
-                <span className="text-[10px] font-bold bg-amber-100 text-amber-800 px-1.5 py-0.5 rounded-sm">
-                  C2C Free
-                </span>
+          {/* K-Market 브랜드 로고 & 내 공단/반경 변경 칩 */}
+          <div className="flex items-center space-x-3">
+            <div className="flex items-center space-x-2.5">
+              <div className="w-10 h-10 rounded-xl bg-linear-to-tr from-blue-600 to-cyan-500 flex items-center justify-center text-white font-black text-xl shadow-md shadow-blue-500/20">
+                K
               </div>
-              <p className="text-[11px] text-slate-500 hidden sm:block">
-                {t('app_slogan')}
-              </p>
+              <div>
+                <div className="flex items-center space-x-1.5">
+                  <span className="text-xl font-black tracking-tight text-slate-900">
+                    K-Market
+                  </span>
+                  <span className="text-[10px] font-bold bg-amber-100 text-amber-800 px-1.5 py-0.5 rounded-sm">
+                    C2C Free
+                  </span>
+                </div>
+                <p className="text-[11px] text-slate-500 hidden sm:block">
+                  {t('app_slogan')}
+                </p>
+              </div>
             </div>
+
+            {/* 당근마켓 스타일: 내 공단 및 직거래 반경 원클릭 변경 칩 */}
+            <button
+              onClick={() => setIsLocationRadiusModalOpen(true)}
+              className="flex items-center space-x-1 px-2.5 py-1.5 rounded-2xl bg-blue-50 hover:bg-blue-100 text-blue-800 border border-blue-200 text-xs font-black transition-all cursor-pointer shadow-xs active:scale-95"
+              title="내 거주 공단 및 직거래 반경(1km/3km/10km) 설정"
+            >
+              <MapPin className="w-3.5 h-3.5 text-blue-600 animate-bounce" />
+              <span className="truncate max-w-[110px]">
+                {selectedRegion === 'all'
+                  ? '전체 공단'
+                  : selectedRegion === 'pyeongtaek'
+                  ? '평택 포승'
+                  : selectedRegion === 'ansan'
+                  ? '안산 원곡'
+                  : selectedRegion === 'hwaseong'
+                  ? '화성 향남'
+                  : selectedRegion}
+              </span>
+              <span className="text-[10px] bg-blue-200 text-blue-900 px-1 py-0.2 rounded-md font-extrabold">
+                3km
+              </span>
+              <ChevronDown className="w-3 h-3 text-blue-600" />
+            </button>
           </div>
 
           {/* 검색창 */}

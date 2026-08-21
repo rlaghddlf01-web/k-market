@@ -19,6 +19,7 @@ import KMarketAdminReportModal from './KMarketAdminReportModal';
 import KMarketAuthModal from './KMarketAuthModal';
 import KMarketMyPageModal from './KMarketMyPageModal';
 import KMarketKeywordAlertModal from './KMarketKeywordAlertModal';
+import KMarketLocationRadiusModal from './KMarketLocationRadiusModal';
 import { ShoppingBag, Sparkles, ShieldCheck, Plus, PackageOpen, ShieldAlert } from 'lucide-react';
 
 export default function KMarketMainFeed() {
@@ -37,6 +38,8 @@ export default function KMarketMainFeed() {
     setIsMyPageOpen,
     isKeywordModalOpen,
     setIsKeywordModalOpen,
+    isLocationRadiusModalOpen,
+    setIsLocationRadiusModalOpen,
     setAuthedUser,
   } = useKMarket();
   const { t } = useLanguage();
@@ -217,6 +220,10 @@ export default function KMarketMainFeed() {
       <KMarketKeywordAlertModal
         isOpen={isKeywordModalOpen}
         onClose={() => setIsKeywordModalOpen(false)}
+      />
+      <KMarketLocationRadiusModal
+        isOpen={isLocationRadiusModalOpen}
+        onClose={() => setIsLocationRadiusModalOpen(false)}
       />
     </div>
   );

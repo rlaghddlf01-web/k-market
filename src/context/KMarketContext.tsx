@@ -41,6 +41,8 @@ interface KMarketContextType {
   setIsMyPageOpen: (open: boolean) => void;
   isKeywordModalOpen: boolean;
   setIsKeywordModalOpen: (open: boolean) => void;
+  isLocationRadiusModalOpen: boolean;
+  setIsLocationRadiusModalOpen: (open: boolean) => void;
   authedUser: any;
   setAuthedUser: (user: any) => void;
   
@@ -95,6 +97,7 @@ export function KMarketProvider({ children }: { children: React.ReactNode }) {
   const [isAuthModalOpen, setIsAuthModalOpen] = useState<boolean>(false);
   const [isMyPageOpen, setIsMyPageOpen] = useState<boolean>(false);
   const [isKeywordModalOpen, setIsKeywordModalOpen] = useState<boolean>(false);
+  const [isLocationRadiusModalOpen, setIsLocationRadiusModalOpen] = useState<boolean>(false);
   const [authedUser, setAuthedUser] = useState<any>(null);
 
   // 키워드 알림 상태 (외국인 기숙사 인기 기본값 3개 제공)
@@ -514,6 +517,8 @@ export function KMarketProvider({ children }: { children: React.ReactNode }) {
         setIsMyPageOpen,
         isKeywordModalOpen,
         setIsKeywordModalOpen,
+        isLocationRadiusModalOpen,
+        setIsLocationRadiusModalOpen,
         keywordAlerts,
         addKeywordAlert,
         removeKeywordAlert,
