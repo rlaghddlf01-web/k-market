@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { KMarketItem } from '@/types/kmarket';
 import { useKMarket } from '@/context/KMarketContext';
 import { useLanguage } from '@/context/LanguageContext';
@@ -20,8 +20,8 @@ interface KMarketItemCardProps {
   item: KMarketItem;
 }
 
-/** 등록 시간 → "n분 전 / n시간 전 / n일 전" 포맷 */
-function timeAgo(dateString: string): string {
+/** 등록 시간 → "n분 전 / n시간 전 / n일 전" 포맷 (클라이언트 전용) */
+function calcTimeAgo(dateString: string): string {
   const diff = Date.now() - new Date(dateString).getTime();
   const minutes = Math.floor(diff / 60_000);
   if (minutes < 60) return `${minutes}분 전`;
@@ -35,6 +35,14 @@ export default function KMarketItemCard({ item }: KMarketItemCardProps) {
     useKMarket();
   const { formatWon, currentLang } = useLanguage();
   const [showProfileModal, setShowProfileModal] = useState(false);
+
+  // SSR 시 서버/클라이언트 시간 불일치 방지 — 마운트 후에만 계산
+  const [timeAgoText, setTimeAgoText] = useState('');
+  useEffect(() => {
+    if (item.created_at) {
+      setTimeAgoText(calcTimeAgo(item.created_at));
+    }
+  }, [item.created_at]);
 
   const isLiked = likedItemIds.has(item.id);
   const isFree = item.price === 0;
@@ -210,10 +218,10 @@ export default function KMarketItemCard({ item }: KMarketItemCardProps) {
                     {item.views}
                   </span>
                 )}
-                {item.created_at && (
+                {timeAgoText && (
                   <span className="flex items-center gap-0.5">
                     <Clock className="w-3 h-3" />
-                    {timeAgo(item.created_at)}
+                    {timeAgoText}
                   </span>
                 )}
               </div>
