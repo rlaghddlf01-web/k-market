@@ -8,6 +8,7 @@ import KMarketHeader from './KMarketHeader';
 import KMarketHeroShowcase from './KMarketHeroShowcase';
 import KMarketCategoryNav from './KMarketCategoryNav';
 import KMarketMovingSaleSection from './KMarketMovingSaleSection';
+import KMarketTaxBanner from './KMarketTaxBanner';
 import KMarketRegionFilter from './KMarketRegionFilter';
 import KMarketItemCard from './KMarketItemCard';
 import KMarketItemDetail from './KMarketItemDetail';
@@ -93,6 +94,9 @@ export default function KMarketMainFeed() {
         {!isMovingSaleOnly && selectedCategory === 'all' && !searchQuery && (
           <KMarketMovingSaleSection />
         )}
+
+        {/* 5. KTRS 184만원 세무 환급 감성 배너 */}
+        <KMarketTaxBanner />
 
         {/* 5. 매물 리스트 헤더 */}
         <div className="flex items-center justify-between pt-4 mb-2 px-1">
