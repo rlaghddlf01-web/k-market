@@ -49,7 +49,7 @@ export default function KMarketMyPageModal({ isOpen, onClose }: KMarketMyPageMod
   const userMannerTemp = isOcr ? 43.5 : 36.5;
   const userName = authedUser?.userName || 'NGUYEN VAN DUC';
   const userNickname = authedUser?.nickname || '안산호랑이';
-  const userDisplayName = authedUser?.nickname ? `${authedUser.nickname} (${authedUser.userName})` : userName;
+  const userDisplayName = authedUser?.nickname || authedUser?.userName || '안산호랑이';
   const userCountry = authedUser?.country || 'VN';
   const userVisa = authedUser?.visaType || 'E-9 (비전문취업)';
   const userDormitory = authedUser?.dormitory || '평택 포승공단 기숙사 2동';

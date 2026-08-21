@@ -91,7 +91,7 @@ export default function KMarketItemCard({ item }: KMarketItemCardProps) {
               {item.seller_country}
             </span>
             <span className="text-slate-100">
-              {item.seller_name.split(' ')[0]}
+              {item.seller_name}
             </span>
             <span className="text-emerald-300 font-extrabold ml-0.5">
               36.5℃

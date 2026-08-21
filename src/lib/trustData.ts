@@ -250,7 +250,7 @@ export function getMannerTempDetails(temp: number) {
 const USER_PROFILES: Record<string, UserTrustProfile> = {
   'user-vn-1': {
     user_id: 'user-vn-1',
-    user_name: 'Nguyen Van A (응우옌)',
+    user_name: '호치민호랑이',
     country: 'VN',
     flag: '🇻🇳',
     manner_temp: 41.2,
@@ -271,7 +271,7 @@ const USER_PROFILES: Record<string, UserTrustProfile> = {
         item_id: 'item-1',
         item_title: '[귀국 D-5] 풀세트 세탁기+밥솥+전자레인지',
         reviewer_id: 'user-kr-1',
-        reviewer_name: '김민수',
+        reviewer_name: '평택이웃',
         reviewer_country: 'KR',
         reviewer_flag: '🇰🇷',
         target_user_id: 'user-vn-1',
@@ -285,7 +285,7 @@ const USER_PROFILES: Record<string, UserTrustProfile> = {
         item_id: 'item-demo-2',
         item_title: '삼성 32인치 스마트 모니터/TV',
         reviewer_id: 'user-np-1',
-        reviewer_name: 'Ram Shrestha',
+        reviewer_name: '네팔미소',
         reviewer_country: 'NP',
         reviewer_flag: '🇳🇵',
         target_user_id: 'user-vn-1',
@@ -298,7 +298,7 @@ const USER_PROFILES: Record<string, UserTrustProfile> = {
   },
   'user-np-1': {
     user_id: 'user-np-1',
-    user_name: 'Ram (람)',
+    user_name: '포카라친구',
     country: 'NP',
     flag: '🇳🇵',
     manner_temp: 39.0,
@@ -315,7 +315,7 @@ const USER_PROFILES: Record<string, UserTrustProfile> = {
   },
   'user-current': {
     user_id: 'user-current',
-    user_name: 'Me (나)',
+    user_name: '안산호랑이',
     country: 'KR',
     flag: '🇰🇷',
     manner_temp: 36.5,

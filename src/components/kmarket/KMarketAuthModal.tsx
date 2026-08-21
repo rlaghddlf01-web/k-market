@@ -518,7 +518,7 @@ export default function KMarketAuthModal({
                   KTRS K-Market 신원 인증 완료!
                 </span>
                 <h3 className="text-lg font-black text-slate-900 dark:text-white">
-                  {nickname ? `${nickname} (${userName})` : userName} 님, 환영합니다!
+                  {nickname || userName} 님, 환영합니다!
                 </h3>
                 <p className="text-xs text-slate-500 max-w-sm mx-auto">
                   {authTab === 'ocr' ? '실물 신분증 OCR 검증' : '수기 인증'} 및 휴대폰 본인인증이 완료되어 <strong>골드 신뢰 뱃지(매너온도 36.5℃)</strong>가 발급되었습니다.

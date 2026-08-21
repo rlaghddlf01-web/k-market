@@ -4,7 +4,7 @@ export const INITIAL_ITEMS: KMarketItem[] = [
   {
     id: 'item-1',
     seller_id: 'user-vn-1',
-    seller_name: 'Nguyễn Văn Hùng (응우옌)',
+    seller_name: '호치민호랑이',
     seller_phone: '010-3849-1123',
     seller_country: 'VN',
     seller_country_flag: '🇻🇳',
@@ -46,7 +46,7 @@ export const INITIAL_ITEMS: KMarketItem[] = [
   {
     id: 'item-2',
     seller_id: 'user-np-1',
-    seller_name: 'Ram Lama (라 Lam)',
+    seller_name: '포카라친구',
     seller_phone: '010-8273-9941',
     seller_country: 'NP',
     seller_country_flag: '🇳🇵',
@@ -87,7 +87,7 @@ export const INITIAL_ITEMS: KMarketItem[] = [
   {
     id: 'item-3',
     seller_id: 'user-th-1',
-    seller_name: 'Somchai (솜차이)',
+    seller_name: '방콕라이더',
     seller_phone: '010-5591-3310',
     seller_country: 'TH',
     seller_country_flag: '🇹🇭',
@@ -114,7 +114,7 @@ export const INITIAL_ITEMS: KMarketItem[] = [
   {
     id: 'item-4',
     seller_id: 'user-uz-1',
-    seller_name: 'Azamat (아자마트)',
+    seller_name: '타슈켄트따뜻',
     seller_phone: '010-9912-4456',
     seller_country: 'UZ',
     seller_country_flag: '🇺🇿',
@@ -140,7 +140,7 @@ export const INITIAL_ITEMS: KMarketItem[] = [
   {
     id: 'item-5',
     seller_id: 'user-vn-2',
-    seller_name: 'Trần Văn Đức (쩐반득)',
+    seller_name: '다낭마켓러',
     seller_phone: '010-7711-2099',
     seller_country: 'VN',
     seller_country_flag: '🇻🇳',
@@ -166,7 +166,7 @@ export const INITIAL_ITEMS: KMarketItem[] = [
   {
     id: 'item-6',
     seller_id: 'user-kh-1',
-    seller_name: 'Sophea (소피아)',
+    seller_name: '프놈펜스마일',
     seller_phone: '010-4491-6672',
     seller_country: 'KH',
     seller_country_flag: '🇰🇭',
@@ -193,7 +193,7 @@ export const INITIAL_ITEMS: KMarketItem[] = [
   {
     id: 'item-7',
     seller_id: 'user-lk-1',
-    seller_name: 'Sanjeewa (산지와)',
+    seller_name: '콜롬보이웃',
     seller_phone: '010-6622-9011',
     seller_country: 'LK',
     seller_country_flag: '🇱🇰',
@@ -218,7 +218,7 @@ export const INITIAL_ITEMS: KMarketItem[] = [
   {
     id: 'item-8',
     seller_id: 'user-mn-1',
-    seller_name: 'Bat-Erdene (바트)',
+    seller_name: '울란바토르곰',
     seller_phone: '010-3312-8821',
     seller_country: 'MN',
     seller_country_flag: '🇲🇳',
@@ -248,12 +248,12 @@ export const INITIAL_CHATS: KMarketChat[] = [
     item_id: 'item-1',
     item: INITIAL_ITEMS[0],
     buyer_id: 'user-current',
-    buyer_name: 'Me (나)',
+    buyer_name: '나(K-이웃)',
     buyer_country: 'KR',
     buyer_flag: '🇰🇷',
     buyer_lang: 'ko',
     seller_id: 'user-vn-1',
-    seller_name: 'Nguyễn Văn Hùng',
+    seller_name: '호치민호랑이',
     seller_country: 'VN',
     seller_flag: '🇻🇳',
     seller_lang: 'vi',
