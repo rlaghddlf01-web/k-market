@@ -289,12 +289,17 @@ export default function KMarketCreatePost() {
                       }}
                       className={`relative p-2.5 rounded-2xl border text-left transition-all duration-200 cursor-pointer flex items-center gap-2 ${
                         isSelected
-                          ? 'border-[#c89d6e] bg-linear-to-r from-[#8c5e3c] to-[#704423] text-white shadow-md shadow-[#8c5e3c]/25'
-                          : 'border-slate-200 bg-slate-50 hover:bg-[#f5ede4] text-slate-700'
+                          ? 'text-white shadow-md scale-[1.02]'
+                          : 'border-slate-200 bg-slate-50 hover:bg-slate-100 text-slate-700'
                       }`}
+                      style={isSelected ? {
+                        background: 'linear-gradient(135deg, #162447 0%, #1e3a8a 100%)',
+                        border: '2px solid #f3ba2f',
+                        boxShadow: '0 3px 12px rgba(243, 186, 47, 0.25)',
+                      } : undefined}
                     >
                       <span className="text-base">{cat.icon}</span>
-                      <span className={`text-xs ${isSelected ? 'font-bold text-white' : 'font-medium'}`}>
+                      <span className={`text-xs ${isSelected ? 'font-black text-[#f3ba2f]' : 'font-medium'}`}>
                         {cat.label}
                       </span>
                       {cat.badge && (
