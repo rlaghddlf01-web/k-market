@@ -1,8 +1,7 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
-import { MapPin, Search, Navigation, ExternalLink, ShieldCheck, CheckCircle2 } from 'lucide-react';
-import { POPULAR_LANDMARKS, LandmarkPin } from '@/lib/locationData';
+import React, { useState } from 'react';
+import { MapPin, Search, Navigation, ExternalLink } from 'lucide-react';
 
 interface KMarketMapPickerProps {
   regionText: string;
@@ -19,24 +18,71 @@ export default function KMarketMapPicker({
   longitude = 126.7924,
   onChangeCoordinates,
 }: KMarketMapPickerProps) {
-  const defaultAddress = regionText || '경기 안산시 단원구 원곡동 795';
+  const defaultAddress = regionText || '';
   const [searchText, setSearchText] = useState(defaultAddress);
-  const [mapQuery, setMapQuery] = useState(defaultAddress);
-  const [selectedPlaceName, setSelectedPlaceName] = useState(defaultAddress);
+  const [mapQuery, setMapQuery] = useState(defaultAddress || '경기 안산시 단원구 원곡동 795');
+  const [selectedPlaceName, setSelectedPlaceName] = useState(defaultAddress || '경기 안산시 단원구 원곡동 795');
   const [isMapLoading, setIsMapLoading] = useState(false);
+  const [isLocating, setIsLocating] = useState(false);
 
-  // 약속 잡기 모달과 동일한 추천 랜드마크 필터링
-  const filteredLandmarks = searchText.trim()
-    ? POPULAR_LANDMARKS.filter(
-        (lm) =>
-          lm.name.toLowerCase().includes(searchText.toLowerCase()) ||
-          lm.detail.toLowerCase().includes(searchText.toLowerCase()) ||
-          lm.address.toLowerCase().includes(searchText.toLowerCase()) ||
-          lm.zoneName.toLowerCase().includes(searchText.toLowerCase())
-      )
-    : POPULAR_LANDMARKS;
+  // GPS 내 위치 동의 및 주소 & 지도 핀 실시간 자동 동기화
+  const handleGetGpsLocation = () => {
+    if (!navigator.geolocation) {
+      alert('사용 중인 브라우저에서 위치 정보(GPS)를 지원하지 않습니다. 수기로 입력해 주세요.');
+      return;
+    }
 
-  // 1. 주소/사거리/편의점 검색 실행 시 구글 맵 즉시 이동
+    setIsLocating(true);
+    navigator.geolocation.getCurrentPosition(
+      async (position) => {
+        const { latitude, longitude } = position.coords;
+        try {
+          // 서버 사이드 역지오코딩 API 호출
+          const res = await fetch('/api/kmarket/geocode', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ latitude, longitude }),
+          });
+
+          if (res.ok) {
+            const data = await res.json();
+            if (data.success && data.address) {
+              const detectedAddr = data.address;
+              setSearchText(detectedAddr);
+              setMapQuery(detectedAddr);
+              setSelectedPlaceName(detectedAddr);
+              onChangeRegionText(detectedAddr);
+              onChangeCoordinates(latitude, longitude, detectedAddr);
+              setIsLocating(false);
+              return;
+            }
+          }
+        } catch (err) {
+          console.error('Geocode error:', err);
+        }
+
+        const fallbackAddr = `위치 확인됨 (위도: ${latitude.toFixed(3)}, 경도: ${longitude.toFixed(3)})`;
+        setSearchText(fallbackAddr);
+        setMapQuery(fallbackAddr);
+        setSelectedPlaceName(fallbackAddr);
+        onChangeRegionText(fallbackAddr);
+        onChangeCoordinates(latitude, longitude, fallbackAddr);
+        setIsLocating(false);
+      },
+      (error) => {
+        setIsLocating(false);
+        console.warn('Geolocation error:', error);
+        if (error.code === error.PERMISSION_DENIED) {
+          alert('브라우저 위치 권한을 허용해 주시거나 주소를 직접 입력해 주세요.');
+        } else {
+          alert('GPS 위치를 수신할 수 없습니다. 주소를 직접 검색해 주세요.');
+        }
+      },
+      { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
+    );
+  };
+
+  // 1. 주소/사거리/장소 검색 실행 시 구글 맵 즉시 이동
   const handleSearchSubmit = (e?: React.FormEvent) => {
     if (e) e.preventDefault();
     if (!searchText.trim()) return;
@@ -50,19 +96,7 @@ export default function KMarketMapPicker({
     setTimeout(() => setIsMapLoading(false), 400);
   };
 
-  // 2. 랜드마크 칩 클릭 시 즉시 구글 맵 이동 & 주소 동기화
-  const handleSelectLandmark = (lm: LandmarkPin) => {
-    setIsMapLoading(true);
-    const placeName = `${lm.zoneName} ${lm.name}`;
-    setSearchText(placeName);
-    setMapQuery(lm.address || lm.name);
-    setSelectedPlaceName(placeName);
-    onChangeRegionText(placeName);
-    onChangeCoordinates(lm.lat, lm.lng, lm.address);
-    setTimeout(() => setIsMapLoading(false), 400);
-  };
-
-  // 3. 구글 맵 앱 새 창 열기
+  // 2. 구글 맵 앱 새 창 열기
   const handleOpenGoogleMaps = () => {
     const targetUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(mapQuery)}`;
     window.open(targetUrl, '_blank');
@@ -75,15 +109,34 @@ export default function KMarketMapPicker({
 
   return (
     <div className="space-y-3">
-      {/* 1. 주소/사거리/편의점 텍스트 검색 및 직접 입력창 */}
-      <div className="space-y-1.5">
-        <label className="text-xs font-extrabold text-slate-900 flex items-center justify-between">
-          <span className="flex items-center gap-1.5">
-            <MapPin className="w-4 h-4 text-[#f3ba2f]" />
-            <span>📍 직거래 주소 &amp; 만남 장소 입력 (사거리, 편의점, 도로명 주소)</span>
-          </span>
-          <span className="text-[11px] font-bold text-[#845b37]">엔터 또는 [지도 검색] 클릭</span>
-        </label>
+      {/* 1. 직거래 주소 텍스트 검색 및 GPS 내 위치 자동입력 */}
+      <div className="space-y-2.5 p-3.5 rounded-2xl bg-[#f7f2eb] border border-[#ded1c4]">
+        <div className="flex items-center justify-between">
+          <label className="text-xs font-black text-[#3d2817] flex items-center gap-1.5">
+            <MapPin className="w-4 h-4 text-[#845b37]" />
+            <span>📍 직거래 주소 &amp; 만남 장소 입력</span>
+          </label>
+
+          {/* GPS 내 위치 자동완성 버튼 */}
+          <button
+            type="button"
+            onClick={handleGetGpsLocation}
+            disabled={isLocating}
+            className="text-[11px] font-bold text-[#5c3818] hover:text-[#1f1914] bg-[#ede2d6] hover:bg-[#e2d4c5] px-2.5 py-1 rounded-lg transition-all flex items-center gap-1 cursor-pointer border border-[#ded1c4] shadow-2xs"
+            title="현재 내 위치로 주소 & 핀 자동 세팅"
+          >
+            {isLocating ? (
+              <>
+                <span className="animate-spin">📍</span>
+                <span>위치 확인중...</span>
+              </>
+            ) : (
+              <>
+                <span>📍 내 위치 동의하고 자동입력</span>
+              </>
+            )}
+          </button>
+        </div>
 
         <div className="flex items-center gap-2">
           <div className="relative flex-1">
@@ -98,50 +151,21 @@ export default function KMarketMapPicker({
                   handleSearchSubmit(e);
                 }
               }}
-              placeholder="예: 안산 원곡동 시계탑 앞 / 평택 포승공단 GS25 / 강남대로 396"
-              className="w-full pl-10 pr-3 py-3 bg-slate-50 rounded-2xl border-2 border-slate-200 focus:bg-white focus:border-[#f3ba2f] text-xs sm:text-sm font-black text-slate-950 focus:outline-none shadow-xs transition-colors"
+              placeholder="[📍 내 위치 자동입력] 또는 원하는 만남 장소/도로명 검색"
+              className="w-full pl-9 pr-3 py-2.5 bg-white rounded-xl border border-[#ded1c4] text-xs sm:text-sm font-bold text-[#1f1914] focus:outline-none focus:border-[#845b37] shadow-2xs transition-colors"
             />
-            <MapPin className="w-5 h-5 text-[#f3ba2f] absolute left-3.5 top-3.5" />
+            <MapPin className="w-4 h-4 text-[#845b37] absolute left-3 top-3" />
           </div>
 
           <button
             type="button"
             onClick={handleSearchSubmit}
-            style={{
-              background: 'linear-gradient(135deg, #09101f 0%, #111d38 100%)',
-              border: '2px solid #f3ba2f',
-            }}
-            className="px-4 py-3 text-[#f3ba2f] font-black text-xs rounded-2xl transition-all shadow-md active:scale-95 shrink-0 cursor-pointer flex items-center gap-1.5 hover:brightness-110"
+            className="px-3.5 py-2.5 bg-[#3d2817] hover:bg-[#2b1c10] text-[#fbf9f6] font-bold text-xs rounded-xl transition-all shadow-xs shrink-0 cursor-pointer flex items-center gap-1 border border-[#5c3818]"
           >
-            <Search className="w-4 h-4" />
+            <Search className="w-3.5 h-3.5 text-[#f3ba2f]" />
             <span>지도 검색</span>
           </button>
         </div>
-
-        {/* 퀵 랜드마크 칩 리스트 */}
-        {filteredLandmarks.length > 0 && (
-          <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar pt-1">
-            <span className="text-[11px] font-bold text-slate-500 shrink-0">추천 핀:</span>
-            {filteredLandmarks.slice(0, 5).map((lm) => (
-              <button
-                key={lm.id}
-                type="button"
-                onClick={() => handleSelectLandmark(lm)}
-                className={`px-2.5 py-1 rounded-xl text-[11px] font-bold shrink-0 border transition-all cursor-pointer flex items-center gap-1 ${
-                  searchText.includes(lm.name) || mapQuery.includes(lm.address)
-                    ? 'bg-[#09101f] text-[#f3ba2f] border-[#f3ba2f] shadow-xs'
-                    : 'bg-white hover:bg-amber-50 text-slate-700 border-slate-200 hover:border-[#f3ba2f]'
-                }`}
-              >
-                <span>{lm.icon}</span>
-                <span>{lm.name}</span>
-                {(searchText.includes(lm.name) || mapQuery.includes(lm.address)) && (
-                  <CheckCircle2 className="w-3 h-3 text-[#f3ba2f]" />
-                )}
-              </button>
-            ))}
-          </div>
-        )}
       </div>
 
       {/* 2. 실제 구글 맵 (Google Maps) 실시간 인터랙티브 뷰어 */}
