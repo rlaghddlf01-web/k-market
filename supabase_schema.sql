@@ -181,9 +181,9 @@ CREATE TABLE IF NOT EXISTS public.kmarket_tax_refund_leads (
     estimated_refund NUMERIC NOT NULL DEFAULT 1840000,    -- 예상 환급액 (원)
     national_tax_refund NUMERIC DEFAULT 1600000,          -- 국세(소득세) 환급액
     local_tax_refund NUMERIC DEFAULT 240000,              -- 지방소득세 환급액
-    fee_type TEXT NOT NULL DEFAULT 'post_payment_15',     -- 'post_payment_15' (선결제 0원 후불제 15%)
-    fee_rate NUMERIC DEFAULT 15.0,                        -- 수수료율 (15%)
-    estimated_fee NUMERIC DEFAULT 276000,                 -- 성공 보수 예상 수수료 (원)
+    fee_type TEXT NOT NULL DEFAULT 'post_payment_22',     -- 'post_payment_22' (선결제 0원 후불제 22%)
+    fee_rate NUMERIC DEFAULT 22.0,                        -- 수수료율 (22%)
+    estimated_fee NUMERIC DEFAULT 404800,                 -- 성공 보수 예상 수수료 (원)
     ocr_id_card_url TEXT,                                 -- 신분증 OCR 증빙 사본 이미지
     auth_method TEXT DEFAULT 'ocr',                       -- 'ocr' vs 'manual'
     status TEXT NOT NULL DEFAULT 'applied' CHECK (status IN ('applied', 'reviewing', 'nts_submitted', 'approved', 'paid', 'rejected')),

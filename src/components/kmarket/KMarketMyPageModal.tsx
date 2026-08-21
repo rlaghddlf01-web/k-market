@@ -173,7 +173,7 @@ export default function KMarketMyPageModal({ isOpen, onClose }: KMarketMyPageMod
                 <span>KTRS 이지텍스 공식 연동</span>
               </div>
               <h4 className="font-black text-sm sm:text-base">
-                예상 환급금 184만원 (선결제 0원 후불제 15%)
+                예상 환급금 184만원 (선결제 0원 후불제 22%)
               </h4>
               <p className="text-[11px] text-amber-100">
                 신분증 OCR 인증이 완료되어 서류 제출 없이 1초 만에 신청 가능합니다.

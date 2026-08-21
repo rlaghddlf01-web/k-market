@@ -57,7 +57,7 @@ export interface TaxCalculationResult {
   estimatedTotalRefund: number; // 총 환급금
   nationalTaxRefund: number;    // 국세 (소득세)
   localTaxRefund: number;       // 지방소득세 (10%)
-  successFeePercent: number;    // 후불 성공 수수료율 (기본 15%)
+  successFeePercent: number;    // 후불 성공 수수료율 (기본 22%)
   postPayFeeAmount: number;     // 환급 완료 후 지불할 수수료
   actualTakeHomeAmount: number; // 고객 실수령액
   appliedReductionRate: number; // 적용된 감면율
@@ -95,8 +95,8 @@ export function calculateTaxRefund(
   const nationalTaxRefund = Math.round(estimatedTotalRefund * 0.9);
   const localTaxRefund = estimatedTotalRefund - nationalTaxRefund;
 
-  // 후불 수수료 정책: 선결제 0원, 환급 통장 입금 성공 시에만 15% 수수료
-  const successFeePercent = 15;
+  // 후불 수수료 정책: 선결제 0원, 환급 통장 입금 성공 시에만 22% 수수료
+  const successFeePercent = 22;
   const postPayFeeAmount = Math.round((estimatedTotalRefund * (successFeePercent / 100)) / 1000) * 1000;
   const actualTakeHomeAmount = estimatedTotalRefund - postPayFeeAmount;
 

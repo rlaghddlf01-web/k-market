@@ -83,7 +83,7 @@ export default function KMarketAdminPage() {
       workPeriod: '3년 (E-9)',
       salary: '280만원',
       estimatedRefund: '184만원',
-      feeType: '선결제 0원 후불제(15%)',
+      feeType: '선결제 0원 후불제(22%)',
       status: '서류 검토중',
       appliedAt: '2026-08-21 11:20',
     },
@@ -94,7 +94,7 @@ export default function KMarketAdminPage() {
       workPeriod: '4년 (E-9)',
       salary: '320만원',
       estimatedRefund: '210만원',
-      feeType: '선결제 0원 후불제(15%)',
+      feeType: '선결제 0원 후불제(22%)',
       status: '환급 승인 대기',
       appliedAt: '2026-08-21 09:45',
     },
@@ -105,7 +105,7 @@ export default function KMarketAdminPage() {
       workPeriod: '2년 (E-9)',
       salary: '250만원',
       estimatedRefund: '145만원',
-      feeType: '선결제 0원 후불제(15%)',
+      feeType: '선결제 0원 후불제(22%)',
       status: '환급금 입금완료',
       appliedAt: '2026-08-20 16:30',
     },
@@ -632,7 +632,7 @@ export default function KMarketAdminPage() {
                   KTRS 184만원 세금 환급 연계 신청 현황
                 </h3>
                 <p className="text-xs text-slate-500 mt-0.5">
-                  선결제 0원 후불제(15%) 수수료 모델로 접수된 외국인 근로자 리드 목록
+                  선결제 0원 후불제(22%) 수수료 모델로 접수된 외국인 근로자 리드 목록
                 </p>
               </div>
 
