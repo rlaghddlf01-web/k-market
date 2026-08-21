@@ -18,23 +18,27 @@ export default function KMarketSafetyBanner() {
       <div className="w-full my-3">
         <div
           onClick={() => setShowDetailModal(true)}
-          className="group bg-gradient-to-r from-emerald-950/90 via-slate-900 to-indigo-950 p-3.5 sm:p-4 rounded-2xl border border-emerald-500/30 text-white shadow-md hover:border-emerald-400/60 transition-all cursor-pointer flex flex-col sm:flex-row sm:items-center justify-between gap-3"
+          className="group p-4 rounded-2xl border cursor-pointer flex flex-col sm:flex-row sm:items-center justify-between gap-3 transition-all duration-300 shadow-2xs hover:shadow-xs"
+          style={{
+            background: '#f4ede6',
+            borderColor: '#ded1c4',
+          }}
         >
           {/* 좌측 아이콘 & 헤드라인 */}
           <div className="flex items-center space-x-3">
-            <div className="w-9 h-9 rounded-xl bg-emerald-500/20 border border-emerald-400/40 flex items-center justify-center text-emerald-400 shrink-0">
-              <ShieldCheck className="w-5 h-5 text-emerald-400" />
+            <div className="w-9 h-9 rounded-xl bg-[#dfd3c7] border border-[#cfc1b3] flex items-center justify-center text-[#5c4a39] shrink-0">
+              <ShieldCheck className="w-5 h-5 text-[#845b37]" />
             </div>
             <div>
               <div className="flex items-center space-x-2">
-                <span className="text-xs font-black text-emerald-300 uppercase tracking-wider bg-emerald-950/80 px-2 py-0.5 rounded-full border border-emerald-400/30">
+                <span className="text-xs font-bold text-[#5c4a39] uppercase tracking-wider bg-[#e5dad0] px-2 py-0.5 rounded-full border border-[#ded1c4]">
                   🛡️ 외국인 안심 거래 쉴드
                 </span>
-                <span className="text-[10px] text-slate-400 hidden sm:inline">
+                <span className="text-[10px] text-[#8c7866] hidden sm:inline font-medium">
                   Anti-Scam Safety Shield
                 </span>
               </div>
-              <p className="text-xs font-bold text-slate-100 mt-0.5">
+              <p className="text-xs font-bold text-[#1f1914] mt-1">
                 선입금 요구는 99% 사기! 반드시 현장에서 물건 확인 후 결제하세요.
               </p>
             </div>
@@ -42,7 +46,7 @@ export default function KMarketSafetyBanner() {
 
           {/* 우측 3대 수칙 퀵 요약 & 화살표 */}
           <div className="flex items-center space-x-2 self-end sm:self-auto shrink-0">
-            <span className="text-[11px] font-bold text-emerald-300 group-hover:underline flex items-center gap-0.5">
+            <span className="text-xs font-bold text-[#845b37] group-hover:underline flex items-center gap-0.5">
               <span>3대 안심 수칙 보기</span>
               <ChevronRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
             </span>

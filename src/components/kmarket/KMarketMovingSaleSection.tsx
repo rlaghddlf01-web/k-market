@@ -28,30 +28,36 @@ export default function KMarketMovingSaleSection() {
   });
 
   return (
-    <section className="my-6 bg-gradient-to-b from-rose-50/80 via-orange-50/50 to-amber-50/30 dark:from-slate-900 dark:via-slate-900/80 dark:to-slate-900/60 p-4 sm:p-6 rounded-3xl border border-rose-200/80 dark:border-slate-800 shadow-sm">
+    <section 
+      className="my-6 p-5 sm:p-7 rounded-3xl border transition-all"
+      style={{
+        background: '#f7f2ed',
+        borderColor: '#ded1c4',
+      }}
+    >
       {/* 섹션 헤더 */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
         <div className="flex items-center space-x-3">
-          <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-rose-500 via-orange-500 to-amber-500 flex items-center justify-center text-white shadow-md shadow-rose-500/20">
-            <Plane className="w-5 h-5 animate-pulse" />
+          <div className="w-10 h-10 rounded-2xl bg-[#1f1914] flex items-center justify-center text-[#fbf9f6] shadow-sm">
+            <Plane className="w-5 h-5 text-amber-300" />
           </div>
           <div>
             <div className="flex items-center space-x-2">
-              <h2 className="text-base sm:text-lg font-black text-slate-900 dark:text-white tracking-tight">
+              <h2 className="text-base sm:text-lg font-extrabold text-[#1f1914] tracking-tight">
                 ✈️ 귀국 D-Day 무빙세일 (Moving Sale)
               </h2>
-              <span className="bg-rose-600 text-white text-[10px] font-black px-2 py-0.5 rounded-full uppercase tracking-wider animate-bounce">
+              <span className="bg-[#845b37] text-white text-[10px] font-black px-2 py-0.5 rounded-full uppercase tracking-wider">
                 HOT
               </span>
             </div>
-            <p className="text-xs text-slate-500 dark:text-slate-400">
+            <p className="text-xs text-[#705e4f]">
               비자 만료 귀국 외국인 근로자들의 생활 가전·가구 묶음 헐값 급처분관
             </p>
           </div>
         </div>
 
-        <div className="inline-flex items-center space-x-1.5 self-start sm:self-auto bg-amber-100 dark:bg-amber-950/60 text-amber-900 dark:text-amber-300 text-xs font-bold px-3 py-1 rounded-full border border-amber-300 dark:border-amber-700/50">
-          <Tag className="w-3.5 h-3.5 text-amber-700 dark:text-amber-400" />
+        <div className="inline-flex items-center space-x-1.5 self-start sm:self-auto bg-white/80 text-[#5c4a39] text-xs font-bold px-3 py-1 rounded-full border border-[#ded1c4]">
+          <Tag className="w-3.5 h-3.5 text-[#845b37]" />
           <span>최대 85% 묶음 할인</span>
         </div>
       </div>
@@ -60,10 +66,10 @@ export default function KMarketMovingSaleSection() {
       <div className="flex items-center space-x-2 overflow-x-auto no-scrollbar pb-3 pt-1">
         <button
           onClick={() => setDDayFilter('all')}
-          className={`px-3.5 py-1.5 rounded-xl text-xs font-bold shrink-0 transition-all cursor-pointer border ${
+          className={`px-3.5 py-1.5 rounded-full text-xs font-semibold shrink-0 transition-all cursor-pointer border ${
             dDayFilter === 'all'
-              ? 'bg-slate-900 dark:bg-white text-white dark:text-slate-900 border-slate-900 dark:border-white shadow-xs'
-              : 'bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-700 hover:bg-slate-50'
+              ? 'bg-[#1f1914] text-[#fbf9f6] border-[#1f1914] shadow-xs'
+              : 'bg-white text-[#5c4a39] border-[#ded1c4] hover:bg-[#eae3dc]'
           }`}
         >
           전체 매물 ({movingSaleItems.length})
@@ -71,10 +77,10 @@ export default function KMarketMovingSaleSection() {
 
         <button
           onClick={() => setDDayFilter('d3')}
-          className={`flex items-center space-x-1 px-3.5 py-1.5 rounded-xl text-xs font-black shrink-0 transition-all cursor-pointer border ${
+          className={`flex items-center space-x-1 px-3.5 py-1.5 rounded-full text-xs font-bold shrink-0 transition-all cursor-pointer border ${
             dDayFilter === 'd3'
-              ? 'bg-rose-600 text-white border-rose-600 shadow-md shadow-rose-600/30 animate-pulse'
-              : 'bg-rose-50 dark:bg-rose-950/40 text-rose-700 dark:text-rose-300 border-rose-200 dark:border-rose-900/50 hover:bg-rose-100'
+              ? 'bg-[#845b37] text-white border-[#845b37] shadow-xs'
+              : 'bg-white text-[#845b37] border-[#ded1c4] hover:bg-[#eae3dc]'
           }`}
         >
           <AlertCircle className="w-3.5 h-3.5" />
@@ -83,10 +89,10 @@ export default function KMarketMovingSaleSection() {
 
         <button
           onClick={() => setDDayFilter('d7')}
-          className={`flex items-center space-x-1 px-3.5 py-1.5 rounded-xl text-xs font-black shrink-0 transition-all cursor-pointer border ${
+          className={`flex items-center space-x-1 px-3.5 py-1.5 rounded-full text-xs font-bold shrink-0 transition-all cursor-pointer border ${
             dDayFilter === 'd7'
-              ? 'bg-orange-600 text-white border-orange-600 shadow-md shadow-orange-600/25'
-              : 'bg-orange-50 dark:bg-orange-950/40 text-orange-700 dark:text-orange-300 border-orange-200 dark:border-orange-900/50 hover:bg-orange-100'
+              ? 'bg-[#845b37] text-white border-[#845b37] shadow-xs'
+              : 'bg-white text-[#5c4a39] border-[#ded1c4] hover:bg-[#eae3dc]'
           }`}
         >
           <Flame className="w-3.5 h-3.5" />
@@ -95,10 +101,10 @@ export default function KMarketMovingSaleSection() {
 
         <button
           onClick={() => setDDayFilter('d14')}
-          className={`flex items-center space-x-1 px-3.5 py-1.5 rounded-xl text-xs font-bold shrink-0 transition-all cursor-pointer border ${
+          className={`flex items-center space-x-1 px-3.5 py-1.5 rounded-full text-xs font-medium shrink-0 transition-all cursor-pointer border ${
             dDayFilter === 'd14'
-              ? 'bg-blue-600 text-white border-blue-600 shadow-md shadow-blue-600/20'
-              : 'bg-blue-50 dark:bg-blue-950/40 text-blue-700 dark:text-blue-300 border-blue-200 dark:border-blue-900/50 hover:bg-blue-100'
+              ? 'bg-[#845b37] text-white border-[#845b37] shadow-xs'
+              : 'bg-white text-[#5c4a39] border-[#ded1c4] hover:bg-[#eae3dc]'
           }`}
         >
           <Plane className="w-3.5 h-3.5" />
