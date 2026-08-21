@@ -85,11 +85,31 @@ export default function KMarketItemDetail() {
                 <span>🚫 신고</span>
               </button>
               <button
-                onClick={() => {
-                  navigator.clipboard?.writeText(window.location.href);
-                  alert('매물 링크가 복사되었습니다!');
+                onClick={async () => {
+                  const shareUrl = `${window.location.origin}/?item=${selectedItem.id}`;
+                  const shareTitle = `[K-Market] ${selectedItem.title} - ${selectedItem.price.toLocaleString()}원`;
+                  const shareText = `K-Market 외국인 안심 직거래 매물: ${selectedItem.title} (${selectedItem.region})`;
+
+                  if (navigator.share) {
+                    try {
+                      await navigator.share({
+                        title: shareTitle,
+                        text: shareText,
+                        url: shareUrl,
+                      });
+                      return;
+                    } catch (e) {
+                      // 취소하거나 미지원 시 클립보드 복사로 폴백
+                    }
+                  }
+
+                  if (navigator.clipboard) {
+                    await navigator.clipboard.writeText(shareUrl);
+                    alert(`🔗 매물 공유 링크가 복사되었습니다!\n\n카카오톡, 페이스북, 인스타그램, 텔레그램 등에 붙여넣어 공유하세요.\n\n${shareUrl}`);
+                  }
                 }}
-                className="bg-black/40 hover:bg-black/60 text-white p-2.5 rounded-full backdrop-blur-md transition-colors cursor-pointer"
+                className="bg-black/40 hover:bg-[#f3ba2f] hover:text-[#09101f] text-white p-2.5 rounded-full backdrop-blur-md transition-all cursor-pointer shadow-md hover:scale-105 active:scale-95"
+                title="매물 링크 공유하기 (카카오톡, 페이스북 등)"
               >
                 <Share2 className="w-5 h-5" />
               </button>

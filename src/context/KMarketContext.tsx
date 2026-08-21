@@ -157,19 +157,33 @@ export function KMarketProvider({ children }: { children: React.ReactNode }) {
   const [isChatLoading, setIsChatLoading] = useState<boolean>(false);
   const [isTranslating, setIsTranslating] = useState<boolean>(false);
 
-  // 초기 로컬 스토리지 불러오기
+  // 초기 로컬 스토리지 불러오기 및 ?item= 딥링크 자동 모달 오픈
   useEffect(() => {
     try {
+      let currentItems = INITIAL_ITEMS;
       const savedItems = localStorage.getItem('kmarket_local_items');
       if (savedItems) {
         const parsed = JSON.parse(savedItems);
         if (Array.isArray(parsed) && parsed.length > 0) {
+          currentItems = parsed;
           setItems(parsed);
         }
       }
       const savedLikes = localStorage.getItem('kmarket_liked_items');
       if (savedLikes) {
         setLikedItemIds(new Set(JSON.parse(savedLikes)));
+      }
+
+      // URL 쿼리 파라미터 ?item= 확인하여 해당 매물 상세 모달 즉시 오픈
+      if (typeof window !== 'undefined') {
+        const urlParams = new URLSearchParams(window.location.search);
+        const targetItemId = urlParams.get('item');
+        if (targetItemId) {
+          const matched = currentItems.find((i) => i.id === targetItemId);
+          if (matched) {
+            setSelectedItem(matched);
+          }
+        }
       }
     } catch (e) {
       console.warn('Error loading localStorage:', e);
