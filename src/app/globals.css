@@ -7,20 +7,22 @@
   --brand-indigo:     #4f46e5;
   --brand-accent:     #06b6d4;
 
-  /* Neutrals */
-  --surface-bg:       #f0f4f8;
-  --surface-card:     #ffffff;
+  /* Neutrals — Warm Beige / Off-White hybrid */
+  --surface-bg:       #f2ede8;   /* 따뜻한 베이지 배경 */
+  --surface-bg2:      #ede8e2;   /* 약간 더 진한 섹션 배경 */
+  --surface-card:     #fefcf9;   /* 카드: 크림 화이트 */
   --surface-elevated: #ffffff;
-  --border-soft:      rgba(15, 23, 42, 0.07);
+  --border-soft:      rgba(120, 90, 60, 0.10);  /* warm 보더 */
+  --border-warm:      rgba(180, 150, 120, 0.20);
 
   /* Text */
-  --text-primary:     #0f172a;
-  --text-secondary:   #475569;
-  --text-muted:       #94a3b8;
+  --text-primary:     #1a1209;
+  --text-secondary:   #5a4a38;
+  --text-muted:       #9c8a78;
 
-  /* Shadows */
-  --shadow-card:  0 2px 12px rgba(15, 23, 42, 0.06), 0 1px 3px rgba(15, 23, 42, 0.04);
-  --shadow-hover: 0 8px 32px rgba(15, 23, 42, 0.12), 0 2px 8px rgba(15, 23, 42, 0.06);
+  /* Shadows — warm-toned */
+  --shadow-card:  0 2px 12px rgba(100, 70, 40, 0.07), 0 1px 3px rgba(100, 70, 40, 0.04);
+  --shadow-hover: 0 8px 32px rgba(100, 70, 40, 0.13), 0 2px 8px rgba(100, 70, 40, 0.07);
   --shadow-float: 0 20px 60px rgba(37, 99, 235, 0.35);
 }
 
@@ -85,10 +87,10 @@ body {
 
 /* ─── Glass Morphism ────────────────────────────────────────── */
 .glass {
-  background: rgba(255, 255, 255, 0.85);
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.6);
+  background: rgba(254, 252, 249, 0.90);  /* warm cream glass */
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  border: 1px solid rgba(200, 175, 150, 0.35);
 }
 
 .glass-dark {
@@ -101,16 +103,16 @@ body {
 /* ─── Premium Card ──────────────────────────────────────────── */
 .card-premium {
   background: var(--surface-card);
-  border: 1px solid var(--border-soft);
-  border-radius: 20px;
+  border: 1px solid var(--border-warm);
+  border-radius: 16px;   /* 조금 덜 둥글게 — 세련된 느낌 */
   box-shadow: var(--shadow-card);
-  transition: box-shadow 0.25s ease, transform 0.25s ease, border-color 0.25s ease;
+  transition: box-shadow 0.3s ease, transform 0.3s ease, border-color 0.3s ease;
 }
 
 .card-premium:hover {
   box-shadow: var(--shadow-hover);
-  transform: translateY(-2px);
-  border-color: rgba(37, 99, 235, 0.15);
+  transform: translateY(-3px);
+  border-color: rgba(180, 150, 100, 0.35);
 }
 
 /* ─── Gradient Text ─────────────────────────────────────────── */
@@ -142,22 +144,22 @@ body {
 
 /* ─── Input ─────────────────────────────────────────────────── */
 .input-premium {
-  background: #f8fafc;
-  border: 1.5px solid #e2e8f0;
+  background: #faf7f3;  /* warm off-white */
+  border: 1.5px solid #ddd0c4;
   border-radius: 50px;
   transition: all 0.2s ease;
 }
 
 .input-premium:focus {
-  background: white;
+  background: #fffef9;
   border-color: #2563eb;
-  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.10);
   outline: none;
 }
 
 /* ─── Skeleton Loading ──────────────────────────────────────── */
 .skeleton {
-  background: linear-gradient(90deg, #f1f5f9 25%, #e2e8f0 50%, #f1f5f9 75%);
+  background: linear-gradient(90deg, #ede8e2 25%, #ddd5ca 50%, #ede8e2 75%);
   background-size: 200% 100%;
   animation: shimmer 1.5s infinite;
   border-radius: 8px;

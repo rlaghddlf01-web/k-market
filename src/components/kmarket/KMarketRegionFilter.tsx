@@ -21,7 +21,7 @@ export default function KMarketRegionFilter() {
   return (
     <div className="my-4 space-y-3">
       {/* 1. 외국인 밀집 주요 공단 직거래 필터 바 */}
-      <div className="bg-white p-3 rounded-2xl border border-slate-100 shadow-xs">
+      <div className="p-3 rounded-2xl border" style={{ background: 'var(--surface-card)', borderColor: 'var(--border-warm)' }}>
         <div className="flex items-center space-x-1.5 text-xs font-bold text-slate-700 mb-2 px-1">
           <MapPin className="w-3.5 h-3.5 text-blue-600" />
           <span>공단별 도보 직거래 필터 (Industrial Zone Meetup)</span>

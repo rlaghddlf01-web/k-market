@@ -32,7 +32,7 @@ export default function RootLayout({
           href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css"
         />
       </head>
-      <body className="antialiased text-slate-900 selection:bg-blue-500 selection:text-white" style={{ background: 'var(--surface-bg)' }}>
+      <body className="antialiased selection:bg-blue-500 selection:text-white" style={{ background: 'var(--surface-bg)', color: 'var(--text-primary)' }}>
         {children}
       </body>
     </html>

@@ -127,7 +127,8 @@ export default function KMarketHeader() {
             {/* 위치 칩 */}
             <button
               onClick={() => setIsLocationRadiusModalOpen(true)}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-blue-50 hover:bg-blue-100 text-blue-700 border border-blue-100 text-xs font-bold transition-all cursor-pointer active:scale-95"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full hover:opacity-80 text-amber-800 border border-amber-200/60 text-xs font-bold transition-all cursor-pointer active:scale-95"
+              style={{ background: '#fef3e2' }}
               title="내 실제 위치 및 직거래 반경 설정"
             >
               <MapPin className="w-3.5 h-3.5 text-blue-500 shrink-0" />
@@ -176,7 +177,8 @@ export default function KMarketHeader() {
             ) : (
               <button
                 onClick={() => setIsAuthModalOpen(true)}
-                className="flex items-center gap-1 px-3 py-1.5 rounded-full bg-slate-50 hover:bg-slate-100 text-slate-700 text-xs font-bold transition-all border border-slate-200 cursor-pointer"
+                className="flex items-center gap-1 px-3 py-1.5 rounded-full hover:opacity-80 text-slate-700 text-xs font-bold transition-all border cursor-pointer"
+                style={{ background: '#faf7f3', borderColor: '#ddd0c4' }}
               >
                 <ShieldCheck className="w-3.5 h-3.5 text-blue-600" />
                 <span className="hidden sm:inline">신원인증</span>
@@ -245,7 +247,7 @@ export default function KMarketHeader() {
       </div>
 
       {/* 하단: 탭 바 */}
-      <div className="border-t border-slate-100 px-4 bg-white/60">
+      <div className="border-t px-4" style={{ borderColor: 'rgba(180,150,120,0.20)', background: 'rgba(254,252,249,0.80)' }}>
         <div className="max-w-6xl mx-auto flex items-center gap-1 overflow-x-auto no-scrollbar py-2 text-xs">
           <button
             onClick={() => setIsTaxModalOpen(true)}

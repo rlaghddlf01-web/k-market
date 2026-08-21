@@ -196,9 +196,9 @@ export default function KMarketItemCard({ item }: KMarketItemCardProps) {
           </div>
 
           {/* ── 하단 메타 정보 + 채팅 CTA ─────────────── */}
-          <div className="pt-2.5 border-t border-slate-100 space-y-2">
+          <div className="pt-2.5 border-t space-y-2" style={{ borderColor: 'rgba(180,150,120,0.18)' }}>
             {/* 위치 + 조회수 + 시간 */}
-            <div className="flex items-center justify-between text-[11px] text-slate-400 font-medium">
+            <div className="flex items-center justify-between text-[11px] text-stone-500 font-medium">
               <div className="flex items-center gap-1 truncate max-w-[110px]">
                 <MapPin className="w-3 h-3 text-blue-400 shrink-0" />
                 <span className="truncate">{item.region}</span>

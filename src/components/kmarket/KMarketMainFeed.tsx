@@ -74,12 +74,12 @@ export default function KMarketMainFeed() {
   });
 
   return (
-    <div className="min-h-screen text-slate-900 flex flex-col" style={{ background: 'var(--surface-bg)' }}>
+    <div className="min-h-screen flex flex-col" style={{ background: 'var(--surface-bg)', color: 'var(--text-primary)' }}>
       {/* 상단 통합 헤더 */}
       <KMarketHeader />
 
       {/* 메인 콘텐츠 컨테이너 */}
-      <main className="flex-1 max-w-6xl w-full mx-auto px-4 py-5 sm:py-8 space-y-6">
+      <main className="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 py-8 sm:py-12 space-y-8">
         {/* 1. KTRS 킬러 세무 환급 184만원 배너 */}
         <KMarketTaxBanner />
 
@@ -113,13 +113,13 @@ export default function KMarketMainFeed() {
 
         {/* 5. 매물 그리드 */}
         {filteredItems.length > 0 ? (
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-5 sm:gap-6">
             {filteredItems.map((item) => (
               <KMarketItemCard key={item.id} item={item} />
             ))}
           </div>
         ) : (
-          <div className="card-premium p-12 text-center my-8 space-y-5">
+          <div className="card-premium p-14 text-center my-8 space-y-5">
             <div className="w-20 h-20 rounded-3xl flex items-center justify-center mx-auto" style={{ background: 'linear-gradient(135deg, #eff6ff 0%, #eef2ff 100%)' }}>
               <PackageOpen className="w-9 h-9 text-blue-400" />
             </div>
@@ -150,7 +150,7 @@ export default function KMarketMainFeed() {
       </button>
 
       {/* 푸터 영역 */}
-      <footer className="mt-16 border-t border-slate-200 bg-white/50" style={{ backdropFilter: 'blur(10px)' }}>
+      <footer className="mt-20 border-t" style={{ borderColor: 'var(--border-warm)', background: 'rgba(242,237,232,0.7)', backdropFilter: 'blur(10px)' }}>
         <div className="max-w-6xl mx-auto px-4 py-10 space-y-5">
           <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-6">
             <div className="space-y-2">
