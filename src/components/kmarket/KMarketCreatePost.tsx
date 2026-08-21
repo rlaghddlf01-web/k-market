@@ -11,7 +11,8 @@ import {
   CheckCircle2,
 } from 'lucide-react';
 import { ItemCategory, IndustrialRegion } from '@/types/kmarket';
-import { REGIONS_DATA, CATEGORIES_DATA } from '@/lib/languages';
+import { CATEGORIES_DATA } from '@/lib/languages';
+import KMarketMapPicker from './KMarketMapPicker';
 
 const SAMPLE_IMAGE_PRESETS = [
   'https://images.unsplash.com/photo-1584269600464-37b1b58a9fe7?w=800&auto=format&fit=crop&q=80', // 밥솥
@@ -31,8 +32,10 @@ export default function KMarketCreatePost() {
   const [price, setPrice] = useState<string>('30000');
   const [originalPrice, setOriginalPrice] = useState<string>('150000');
   const [category, setCategory] = useState<ItemCategory>('appliances');
-  const [industrialZone, setIndustrialZone] = useState<IndustrialRegion>('pyeongtaek');
-  const [regionDetail, setRegionDetail] = useState('평택 포승공단 기숙사 2동 앞');
+  const [regionDetail, setRegionDetail] = useState('안산시 단원구 원곡동 다문화거리 입구');
+  const [lat, setLat] = useState<number>(37.3275);
+  const [lng, setLng] = useState<number>(126.7924);
+  const [address, setAddress] = useState<string>('경기 안산시 단원구 원곡동 795');
   const [isMovingSale, setIsMovingSale] = useState(false);
   const [movingDDay, setMovingDDay] = useState(5);
   const [images, setImages] = useState<string[]>([SAMPLE_IMAGE_PRESETS[0]]);
@@ -66,8 +69,11 @@ export default function KMarketCreatePost() {
       price: Number(price) || 0,
       original_price: isMovingSale && originalPrice ? Number(originalPrice) : undefined,
       category,
-      industrial_zone: industrialZone,
+      industrial_zone: 'other',
       region: regionDetail,
+      address: address || regionDetail,
+      latitude: lat,
+      longitude: lng,
       is_moving_sale: isMovingSale,
       moving_d_day: isMovingSale ? movingDDay : undefined,
       images: images.length > 0 ? images : [SAMPLE_IMAGE_PRESETS[0]],
@@ -348,33 +354,19 @@ export default function KMarketCreatePost() {
             </div>
           </div>
 
-          {/* 4. 공단 직거래 지역 선택 */}
-          <div className="space-y-2">
-            <label className="block font-bold text-slate-800">
-              📍 공단 및 직거래 상세 위치
-            </label>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-              <select
-                value={industrialZone}
-                onChange={(e) => setIndustrialZone(e.target.value as IndustrialRegion)}
-                className="px-3 py-2 bg-slate-50 rounded-xl border border-slate-200 text-xs font-medium"
-              >
-                {REGIONS_DATA.filter((r) => r.id !== 'all').map((r) => (
-                  <option key={r.id} value={r.id}>
-                    {r.nameKo}
-                  </option>
-                ))}
-              </select>
-
-              <input
-                type="text"
-                required
-                value={regionDetail}
-                onChange={(e) => setRegionDetail(e.target.value)}
-                placeholder="예: 포승공단 기숙사 앞 도보 5분"
-                className="px-3 py-2 bg-slate-50 rounded-xl border border-slate-200 text-xs font-medium"
-              />
-            </div>
+          {/* 4. 당근마켓 스타일 직거래 지도 핀 & 상세 주소 글씨 입력기 */}
+          <div className="pt-1">
+            <KMarketMapPicker
+              regionText={regionDetail}
+              onChangeRegionText={(text) => setRegionDetail(text)}
+              latitude={lat}
+              longitude={lng}
+              onChangeCoordinates={(newLat, newLng, newAddr) => {
+                setLat(newLat);
+                setLng(newLng);
+                if (newAddr) setAddress(newAddr);
+              }}
+            />
           </div>
 
           {/* 5. 판매자 정보 및 국기 */}

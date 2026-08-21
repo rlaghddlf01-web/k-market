@@ -61,8 +61,12 @@ export interface KMarketItem {
   original_price?: number; // 정가 (무빙세일 등 할인율 표시용)
   category: ItemCategory;
   images: string[];
-  region: string; // 표시용 지역명
+  region: string; // 표시용 지역명 (예: 평택 포승공단 기숙사 2동 앞)
   industrial_zone: IndustrialRegion; // 공단 필터용
+  latitude?: number; // 위도 (지도 핀 위치)
+  longitude?: number; // 경도 (지도 핀 위치)
+  address?: string; // 도로명/지번 상세 주소
+  location_detail?: string; // 직거래 만남 장소 랜드마크 설명
   status: ItemStatus;
   reserved_to_user_id?: string; // 예약된 구매자 ID
   reserved_to_user_name?: string; // 예약된 구매자 이름

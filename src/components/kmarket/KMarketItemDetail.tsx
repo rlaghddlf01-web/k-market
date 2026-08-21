@@ -24,6 +24,7 @@ import KMarketStatusBadge from './KMarketStatusBadge';
 import KMarketStatusActionModal from './KMarketStatusActionModal';
 import KMarketReportBlockModal from './KMarketReportBlockModal';
 import CountryFlag from './CountryFlag';
+import KMarketMapView from './KMarketMapView';
 
 export default function KMarketItemDetail() {
   const {
@@ -253,18 +254,9 @@ export default function KMarketItemDetail() {
               </button>
             </div>
 
-            {/* 직거래 위치 */}
-            <div className="p-4 bg-slate-50 rounded-2xl border border-slate-100 space-y-1.5 text-xs text-slate-600">
-              <div className="flex items-center space-x-1.5 font-bold text-slate-900">
-                <MapPin className="w-4 h-4 text-blue-600" />
-                <span>도보 직거래 희망 장소</span>
-              </div>
-              <p className="text-sm text-slate-800 font-semibold pl-5">
-                {selectedItem.region}
-              </p>
-              <p className="text-slate-500 pl-5">
-                💡 기숙사 입구 또는 공단 정문에서 안전하게 직접 만나서 물건 확인 후 거래하세요.
-              </p>
+            {/* 🗺️ 당근마켓 스타일 직거래 만남 장소 지도 뷰 & 상세 주소 폰트 */}
+            <div className="space-y-1">
+              <KMarketMapView item={selectedItem} />
             </div>
 
             {/* 상품 상세 설명 */}

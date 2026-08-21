@@ -107,11 +107,8 @@ export default function KMarketMainFeed() {
           <KMarketMovingSaleSection />
         )}
 
-        {/* 6. 주요 공단 도보 직거래 필터 */}
-        <KMarketRegionFilter />
-
-        {/* 5. 매물 리스트 헤더 */}
-        <div className="flex items-center justify-between pt-4 mb-2 px-1">
+        {/* 5. 실시간 매물 리스트 헤더 */}
+        <div className="flex items-center justify-between pt-2 mb-2 px-1">
           <div className="flex items-center gap-2.5">
             <h2 className="text-base sm:text-lg font-extrabold text-[#1f1914] tracking-tight">
               실시간 등록 매물
