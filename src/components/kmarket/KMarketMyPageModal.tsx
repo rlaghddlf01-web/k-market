@@ -100,154 +100,156 @@ export default function KMarketMyPageModal({ isOpen, onClose }: KMarketMyPageMod
           </button>
         </div>
 
-        {/* 🌡️ K-Trust 매너온도 & 실물 신분증 OCR 인증 현황 카드 */}
-        <div className="p-4 bg-slate-50 dark:bg-gray-800/80 border-b border-slate-200 dark:border-gray-800 shrink-0 space-y-2.5">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-2">
-              <span className="text-xs font-black text-slate-900 dark:text-white flex items-center gap-1">
-                <Flame className="w-4 h-4 text-orange-500 fill-orange-500 animate-pulse" />
-                <span>K-Trust 매너온도</span>
-              </span>
-              <button
-                onClick={() => setShowMannerGuide(!showMannerGuide)}
-                className="inline-flex items-center space-x-0.5 text-[11px] font-bold text-blue-600 dark:text-blue-400 hover:underline cursor-pointer"
-              >
-                <HelpCircle className="w-3.5 h-3.5" />
-                <span>매너온도란?</span>
-              </button>
+        {/* 📜 모달 바디 스크롤 영역 (매너온도 + 환급 계산기 + 키워드알림 + 3대 상품 탭 목록 끝까지 원활한 스크롤) */}
+        <div className="overflow-y-auto flex-1">
+          {/* 🌡️ K-Trust 매너온도 & 실물 신분증 OCR 인증 현황 카드 */}
+          <div className="p-4 bg-slate-50 dark:bg-gray-800/80 border-b border-slate-200 dark:border-gray-800 space-y-2.5">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center space-x-2">
+                <span className="text-xs font-black text-slate-900 dark:text-white flex items-center gap-1">
+                  <Flame className="w-4 h-4 text-orange-500 fill-orange-500 animate-pulse" />
+                  <span>K-Trust 매너온도</span>
+                </span>
+                <button
+                  onClick={() => setShowMannerGuide(!showMannerGuide)}
+                  className="inline-flex items-center space-x-0.5 text-[11px] font-bold text-blue-600 dark:text-blue-400 hover:underline cursor-pointer"
+                >
+                  <HelpCircle className="w-3.5 h-3.5" />
+                  <span>매너온도란?</span>
+                </button>
+              </div>
+
+              <div className="flex items-center space-x-1.5">
+                <span className="text-lg font-black text-orange-600 dark:text-orange-400">
+                  {userMannerTemp}℃
+                </span>
+                <span className="text-xs">🔥</span>
+              </div>
             </div>
 
-            <div className="flex items-center space-x-1.5">
-              <span className="text-lg font-black text-orange-600 dark:text-orange-400">
-                {userMannerTemp}℃
-              </span>
-              <span className="text-xs">🔥</span>
+            {/* 비주얼 온도 게이지 바 */}
+            <div className="relative w-full h-3 bg-slate-200 dark:bg-gray-700 rounded-full overflow-hidden">
+              <div
+                className="h-full bg-gradient-to-r from-amber-400 via-orange-500 to-rose-500 rounded-full transition-all duration-1000 shadow-xs"
+                style={{ width: `${Math.min(userMannerTemp * 1.3, 100)}%` }}
+              />
             </div>
+
+            {/* OCR 가산점 안내 & 신뢰 뱃지 */}
+            <div className="flex flex-wrap items-center justify-between text-xs gap-2 pt-0.5">
+              <div className="flex items-center space-x-1.5">
+                <span className="inline-flex items-center space-x-1 px-2.5 py-0.5 rounded-full bg-emerald-100 dark:bg-emerald-950/40 text-emerald-800 dark:text-emerald-300 font-bold text-[11px]">
+                  <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
+                  <span>법무부 실물 신분증 OCR 검증 (+7.0℃ 보너스 반영)</span>
+                </span>
+              </div>
+              <span className="text-[11px] text-slate-500 font-medium">
+                신뢰도 상위 12% 최우수 회원 🛡️
+              </span>
+            </div>
+
+            {/* ❓ 매너온도란? 설명 아코디언/안내 박스 */}
+            {showMannerGuide && (
+              <div className="p-3.5 bg-blue-50 dark:bg-blue-950/40 rounded-2xl border border-blue-200 dark:border-blue-800 text-xs space-y-2 animate-fadeIn">
+                <h4 className="font-black text-blue-950 dark:text-blue-200 flex items-center gap-1.5">
+                  <Sparkles className="w-4 h-4 text-amber-500" />
+                  <span>💡 K-Trust 매너온도 시스템 안내</span>
+                </h4>
+                <ul className="space-y-1 text-slate-600 dark:text-slate-300 text-[11px] leading-relaxed">
+                  <li>• <strong>36.5℃</strong>는 사람의 따뜻한 체온처럼 가입 시 주어지는 기본 신뢰 점수입니다.</li>
+                  <li>• <strong>📸 실물 신분증 OCR 사진 촬영</strong> 시 즉시 <strong>+7.0℃</strong>가 올라가 <strong>43.5℃(골드 등급)</strong>가 됩니다.</li>
+                  <li>• <strong>43.5℃ 이상</strong>이면 구매자들이 100% 신뢰하여 내 매물이 <strong>3배 더 빠르게 판매</strong>됩니다!</li>
+                  <li>• 직거래 후 시간 약속과 친절 칭찬 후기를 받으면 온도가 계속 상승합니다. (노쇼/사기 신고 시 하강)</li>
+                </ul>
+              </div>
+            )}
           </div>
 
-          {/* 비주얼 온도 게이지 바 */}
-          <div className="relative w-full h-3 bg-slate-200 dark:bg-gray-700 rounded-full overflow-hidden">
-            <div
-              className="h-full bg-gradient-to-r from-amber-400 via-orange-500 to-rose-500 rounded-full transition-all duration-1000 shadow-xs"
-              style={{ width: `${Math.min(userMannerTemp * 1.3, 100)}%` }}
+          {/* 💰 KTRS 이지텍스 실시간 10초 환급 계산기 & 즉시 신청 위젯 */}
+          <div className="p-3 sm:p-4 bg-slate-900 border-b border-slate-200 dark:border-gray-800">
+            <KMarketEasyTaxRefundWidget
+              onApplyClick={() => {
+                onClose();
+                setIsTaxModalOpen(true);
+              }}
             />
           </div>
 
-          {/* OCR 가산점 안내 & 신뢰 뱃지 */}
-          <div className="flex flex-wrap items-center justify-between text-xs gap-2 pt-0.5">
-            <div className="flex items-center space-x-1.5">
-              <span className="inline-flex items-center space-x-1 px-2.5 py-0.5 rounded-full bg-emerald-100 dark:bg-emerald-950/40 text-emerald-800 dark:text-emerald-300 font-bold text-[11px]">
-                <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
-                <span>법무부 실물 신분증 OCR 검증 (+7.0℃ 보너스 반영)</span>
-              </span>
-            </div>
-            <span className="text-[11px] text-slate-500 font-medium">
-              신뢰도 상위 12% 최우수 회원 🛡️
-            </span>
-          </div>
-
-          {/* ❓ 매너온도란? 설명 아코디언/안내 박스 */}
-          {showMannerGuide && (
-            <div className="p-3.5 bg-blue-50 dark:bg-blue-950/40 rounded-2xl border border-blue-200 dark:border-blue-800 text-xs space-y-2 animate-fadeIn">
-              <h4 className="font-black text-blue-950 dark:text-blue-200 flex items-center gap-1.5">
-                <Sparkles className="w-4 h-4 text-amber-500" />
-                <span>💡 K-Trust 매너온도 시스템 안내</span>
-              </h4>
-              <ul className="space-y-1 text-slate-600 dark:text-slate-300 text-[11px] leading-relaxed">
-                <li>• <strong>36.5℃</strong>는 사람의 따뜻한 체온처럼 가입 시 주어지는 기본 신뢰 점수입니다.</li>
-                <li>• <strong>📸 실물 신분증 OCR 사진 촬영</strong> 시 즉시 <strong>+7.0℃</strong>가 올라가 <strong>43.5℃(골드 등급)</strong>가 됩니다.</li>
-                <li>• <strong>43.5℃ 이상</strong>이면 구매자들이 100% 신뢰하여 내 매물이 <strong>3배 더 빠르게 판매</strong>됩니다!</li>
-                <li>• 직거래 후 시간 약속과 친절 칭찬 후기를 받으면 온도가 계속 상승합니다. (노쇼/사기 신고 시 하강)</li>
-              </ul>
-            </div>
-          )}
-        </div>
-
-        {/* 💰 KTRS 이지텍스 실시간 10초 환급 계산기 & 즉시 신청 위젯 */}
-        <div className="p-3 sm:p-4 bg-slate-900 border-b border-slate-200 dark:border-gray-800 shrink-0">
-          <KMarketEasyTaxRefundWidget
-            onApplyClick={() => {
-              onClose();
-              setIsTaxModalOpen(true);
-            }}
-          />
-        </div>
-
-        {/* 🔔 키워드 실시간 알림 관리 섹션 */}
-        <div className="px-4 py-3 bg-blue-50/70 dark:bg-blue-950/30 border-b border-slate-200 dark:border-gray-800 flex items-center justify-between shrink-0">
-          <div className="flex items-center space-x-2 min-w-0">
-            <div className="p-2 rounded-xl bg-blue-600 text-white shrink-0 shadow-xs">
-              <Bell className="w-4 h-4" />
-            </div>
-            <div className="min-w-0">
-              <h5 className="text-xs font-black text-slate-900 dark:text-white flex items-center gap-1.5 truncate">
-                <span>🔔 키워드 실시간 알림 ({keywordAlerts.length}개 등록중)</span>
-              </h5>
-              <div className="flex items-center gap-1 mt-0.5 overflow-x-auto no-scrollbar">
-                {keywordAlerts.slice(0, 3).map((kw) => (
-                  <span
-                    key={kw.id}
-                    className="text-[10px] bg-white dark:bg-gray-800 text-blue-700 dark:text-blue-300 px-1.5 py-0.2 rounded-md font-bold border border-blue-200/80 shrink-0"
-                  >
-                    #{kw.keyword}
-                  </span>
-                ))}
+          {/* 🔔 키워드 실시간 알림 관리 섹션 */}
+          <div className="px-4 py-3 bg-blue-50/70 dark:bg-blue-950/30 border-b border-slate-200 dark:border-gray-800 flex items-center justify-between">
+            <div className="flex items-center space-x-2 min-w-0">
+              <div className="p-2 rounded-xl bg-blue-600 text-white shrink-0 shadow-xs">
+                <Bell className="w-4 h-4" />
+              </div>
+              <div className="min-w-0">
+                <h5 className="text-xs font-black text-slate-900 dark:text-white flex items-center gap-1.5 truncate">
+                  <span>🔔 키워드 실시간 알림 ({keywordAlerts.length}개 등록중)</span>
+                </h5>
+                <div className="flex items-center gap-1 mt-0.5 overflow-x-auto no-scrollbar">
+                  {keywordAlerts.slice(0, 3).map((kw) => (
+                    <span
+                      key={kw.id}
+                      className="text-[10px] bg-white dark:bg-gray-800 text-blue-700 dark:text-blue-300 px-1.5 py-0.2 rounded-md font-bold border border-blue-200/80 shrink-0"
+                    >
+                      #{kw.keyword}
+                    </span>
+                  ))}
+                </div>
               </div>
             </div>
+
+            <button
+              onClick={() => {
+                onClose();
+                setIsKeywordModalOpen(true);
+              }}
+              className="px-3 py-1.5 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs rounded-xl shadow-xs transition-all shrink-0 cursor-pointer"
+            >
+              알림 설정
+            </button>
           </div>
 
-          <button
-            onClick={() => {
-              onClose();
-              setIsKeywordModalOpen(true);
-            }}
-            className="px-3 py-1.5 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs rounded-xl shadow-xs transition-all shrink-0 cursor-pointer"
-          >
-            알림 설정
-          </button>
-        </div>
+          {/* 📦 3대 거래 관리 탭 바: [내가 파는 물건] [내가 산 물건] [내가 찜한 물건] (스크롤 시 상단 고정 sticky) */}
+          <div className="sticky top-0 z-20 flex border-b border-slate-200 dark:border-gray-800 bg-white/95 dark:bg-gray-900/95 backdrop-blur-md p-1.5 gap-1.5 shadow-xs">
+            <button
+              onClick={() => setActiveTab('selling')}
+              className={`flex-1 py-2.5 rounded-2xl text-xs sm:text-sm font-black flex items-center justify-center space-x-1.5 transition-all cursor-pointer ${
+                activeTab === 'selling'
+                  ? 'bg-blue-600 text-white shadow-md shadow-blue-600/25'
+                  : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-gray-800'
+              }`}
+            >
+              <Package className="w-4 h-4" />
+              <span>내가 파는 물건 ({mySellingItems.length})</span>
+            </button>
 
-        {/* 📦 3대 거래 관리 탭 바: [내가 파는 물건] [내가 산 물건] [내가 찜한 물건] */}
-        <div className="flex border-b border-slate-200 dark:border-gray-800 bg-slate-100/60 dark:bg-gray-800/40 p-1.5 gap-1.5 shrink-0">
-          <button
-            onClick={() => setActiveTab('selling')}
-            className={`flex-1 py-2.5 rounded-2xl text-xs sm:text-sm font-black flex items-center justify-center space-x-1.5 transition-all cursor-pointer ${
-              activeTab === 'selling'
-                ? 'bg-blue-600 text-white shadow-md shadow-blue-600/25'
-                : 'text-slate-600 dark:text-slate-400 hover:bg-slate-200/60'
-            }`}
-          >
-            <Package className="w-4 h-4" />
-            <span>내가 파는 물건 ({mySellingItems.length})</span>
-          </button>
+            <button
+              onClick={() => setActiveTab('buying')}
+              className={`flex-1 py-2.5 rounded-2xl text-xs sm:text-sm font-black flex items-center justify-center space-x-1.5 transition-all cursor-pointer ${
+                activeTab === 'buying'
+                  ? 'bg-blue-600 text-white shadow-md shadow-blue-600/25'
+                  : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-gray-800'
+              }`}
+            >
+              <ShoppingBag className="w-4 h-4" />
+              <span>내가 산 물건 ({myPurchasedItems.length})</span>
+            </button>
 
-          <button
-            onClick={() => setActiveTab('buying')}
-            className={`flex-1 py-2.5 rounded-2xl text-xs sm:text-sm font-black flex items-center justify-center space-x-1.5 transition-all cursor-pointer ${
-              activeTab === 'buying'
-                ? 'bg-blue-600 text-white shadow-md shadow-blue-600/25'
-                : 'text-slate-600 dark:text-slate-400 hover:bg-slate-200/60'
-            }`}
-          >
-            <ShoppingBag className="w-4 h-4" />
-            <span>내가 산 물건 ({myPurchasedItems.length})</span>
-          </button>
+            <button
+              onClick={() => setActiveTab('favorites')}
+              className={`flex-1 py-2.5 rounded-2xl text-xs sm:text-sm font-black flex items-center justify-center space-x-1.5 transition-all cursor-pointer ${
+                activeTab === 'favorites'
+                  ? 'bg-red-500 text-white shadow-md shadow-red-500/25'
+                  : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-gray-800'
+              }`}
+            >
+              <Heart className="w-4 h-4 fill-current" />
+              <span>내가 찜한 물건 ({favoriteItems.length})</span>
+            </button>
+          </div>
 
-          <button
-            onClick={() => setActiveTab('favorites')}
-            className={`flex-1 py-2.5 rounded-2xl text-xs sm:text-sm font-black flex items-center justify-center space-x-1.5 transition-all cursor-pointer ${
-              activeTab === 'favorites'
-                ? 'bg-red-500 text-white shadow-md shadow-red-500/25'
-                : 'text-slate-600 dark:text-slate-400 hover:bg-slate-200/60'
-            }`}
-          >
-            <Heart className="w-4 h-4 fill-current" />
-            <span>내가 찜한 물건 ({favoriteItems.length})</span>
-          </button>
-        </div>
-
-        {/* 탭 컨텐츠 영역 */}
-        <div className="p-4 overflow-y-auto space-y-3 flex-1">
+          {/* 탭 컨텐츠 상품 목록 영역 */}
+          <div className="p-4 space-y-3 pb-8">
           {/* 1. 내가 파는 물건 탭 */}
           {activeTab === 'selling' && (
             <div className="space-y-3">
@@ -470,6 +472,7 @@ export default function KMarketMyPageModal({ isOpen, onClose }: KMarketMyPageMod
               )}
             </div>
           )}
+        </div>
         </div>
       </div>
     </div>
