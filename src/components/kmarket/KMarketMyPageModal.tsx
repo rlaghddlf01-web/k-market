@@ -100,10 +100,20 @@ export default function KMarketMyPageModal({ isOpen, onClose }: KMarketMyPageMod
           </button>
         </div>
 
-        {/* 📜 모달 바디 스크롤 영역 (매너온도 + 환급 계산기 + 키워드알림 + 3대 상품 탭 목록 끝까지 원활한 스크롤) */}
-        <div className="overflow-y-auto flex-1">
-          {/* 🌡️ K-Trust 매너온도 & 실물 신분증 OCR 인증 현황 카드 */}
-          <div className="p-4 bg-slate-50 dark:bg-gray-800/80 border-b border-slate-200 dark:border-gray-800 space-y-2.5">
+        {/* 📜 모달 바디 스크롤 영역 (세금 환급 계산기 + 매너온도 + 키워드알림 + 3대 상품 탭 목록) */}
+        <div className="overflow-y-auto flex-1 p-4 sm:p-5 space-y-4 bg-slate-50/50 dark:bg-gray-900">
+          {/* 💰 1. KTRS 이지텍스 실시간 10초 환급 계산기 & 즉시 신청 위젯 */}
+          <div>
+            <KMarketEasyTaxRefundWidget
+              onApplyClick={() => {
+                onClose();
+                setIsTaxModalOpen(true);
+              }}
+            />
+          </div>
+
+          {/* 🌡️ 2. K-Trust 매너온도 & 실물 신분증 OCR 인증 현황 카드 (독립 라운드 카드 & 시원한 여백) */}
+          <div className="p-4 bg-white dark:bg-gray-800 rounded-2xl border border-slate-200/80 dark:border-gray-700 shadow-sm space-y-2.5">
             <div className="flex items-center justify-between">
               <div className="flex items-center space-x-2">
                 <span className="text-xs font-black text-slate-900 dark:text-white flex items-center gap-1">
@@ -128,7 +138,7 @@ export default function KMarketMyPageModal({ isOpen, onClose }: KMarketMyPageMod
             </div>
 
             {/* 비주얼 온도 게이지 바 */}
-            <div className="relative w-full h-3 bg-slate-200 dark:bg-gray-700 rounded-full overflow-hidden">
+            <div className="relative w-full h-2.5 bg-slate-100 dark:bg-gray-700 rounded-full overflow-hidden">
               <div
                 className="h-full bg-gradient-to-r from-amber-400 via-orange-500 to-rose-500 rounded-full transition-all duration-1000 shadow-xs"
                 style={{ width: `${Math.min(userMannerTemp * 1.3, 100)}%` }}
@@ -138,7 +148,7 @@ export default function KMarketMyPageModal({ isOpen, onClose }: KMarketMyPageMod
             {/* OCR 가산점 안내 & 신뢰 뱃지 */}
             <div className="flex flex-wrap items-center justify-between text-xs gap-2 pt-0.5">
               <div className="flex items-center space-x-1.5">
-                <span className="inline-flex items-center space-x-1 px-2.5 py-0.5 rounded-full bg-emerald-100 dark:bg-emerald-950/40 text-emerald-800 dark:text-emerald-300 font-bold text-[11px]">
+                <span className="inline-flex items-center space-x-1 px-2.5 py-0.5 rounded-full bg-emerald-50 dark:bg-emerald-950/40 text-emerald-800 dark:text-emerald-300 font-bold text-[11px] border border-emerald-200/60 dark:border-emerald-800/40">
                   <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
                   <span>법무부 실물 신분증 OCR 검증 (+7.0℃ 보너스 반영)</span>
                 </span>
@@ -165,18 +175,8 @@ export default function KMarketMyPageModal({ isOpen, onClose }: KMarketMyPageMod
             )}
           </div>
 
-          {/* 💰 KTRS 이지텍스 실시간 10초 환급 계산기 & 즉시 신청 위젯 */}
-          <div className="p-3 sm:p-4 bg-slate-900 border-b border-slate-200 dark:border-gray-800">
-            <KMarketEasyTaxRefundWidget
-              onApplyClick={() => {
-                onClose();
-                setIsTaxModalOpen(true);
-              }}
-            />
-          </div>
-
-          {/* 🔔 키워드 실시간 알림 관리 섹션 */}
-          <div className="px-4 py-3 bg-blue-50/70 dark:bg-blue-950/30 border-b border-slate-200 dark:border-gray-800 flex items-center justify-between">
+          {/* 🔔 키워드 실시간 알림 관리 섹션 (독립 카드) */}
+          <div className="px-4 py-3 bg-white dark:bg-gray-800 rounded-2xl border border-slate-200/80 dark:border-gray-700 shadow-sm flex items-center justify-between">
             <div className="flex items-center space-x-2 min-w-0">
               <div className="p-2 rounded-xl bg-blue-600 text-white shrink-0 shadow-xs">
                 <Bell className="w-4 h-4" />
