@@ -5,7 +5,6 @@ import { useLanguage } from '@/context/LanguageContext';
 import { useKMarket } from '@/context/KMarketContext';
 import { Globe, PlusCircle, Search, Sparkles, MessageCircle, ShieldCheck, Heart, UserCheck } from 'lucide-react';
 import { SupportedLanguage } from '@/types/kmarket';
-import KMarketAuthModal from './KMarketAuthModal';
 
 export default function KMarketHeader() {
   const { currentLang, setLanguage, currentLangOption, languages, t } = useLanguage();
@@ -15,12 +14,13 @@ export default function KMarketHeader() {
     setIsCreateModalOpen,
     setIsTaxModalOpen,
     setIsFavoritesModalOpen,
+    isAuthModalOpen,
+    setIsAuthModalOpen,
+    authedUser,
     likedItemIds,
   } = useKMarket();
 
   const [isLangDropdownOpen, setIsLangDropdownOpen] = useState(false);
-  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
-  const [authedUser, setAuthedUser] = useState<any>(null);
 
   return (
     <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-100 shadow-xs">
@@ -229,16 +229,6 @@ export default function KMarketHeader() {
           </button>
         </div>
       </div>
-
-      {/* 🔐 외국인등록증 OCR & 알리고 SMS 본인인증 모달 */}
-      <KMarketAuthModal
-        isOpen={isAuthModalOpen}
-        onClose={() => setIsAuthModalOpen(false)}
-        onSuccessAuth={(userData) => {
-          setAuthedUser(userData);
-          alert(`[신원인증 완료] ${userData.userName} 님의 ${userData.authMethod === 'ocr' ? '실물 신분증 OCR 검증' : '수기 인증'}이 완료되었습니다.`);
-        }}
-      />
     </header>
   );
 }
