@@ -16,6 +16,8 @@ import {
   PhoneCall,
   Languages,
   Star,
+  ChevronLeft,
+  ChevronRight,
 } from 'lucide-react';
 import KMarketTrustBadge from './KMarketTrustBadge';
 import KMarketUserProfileModal from './KMarketUserProfileModal';
@@ -104,25 +106,68 @@ export default function KMarketItemDetail() {
 
           {/* 본문 스크롤 영역 */}
           <div className="overflow-y-auto flex-1 pb-20">
-            {/* 이미지 갤러리 */}
-            <div className="relative h-72 sm:h-96 w-full bg-slate-900">
+            {/* 이미지 갤러리 (좌우 < , > 슬라이드 버튼 탑재) */}
+            <div className="relative h-72 sm:h-96 w-full bg-slate-900 overflow-hidden group">
               <img
                 src={selectedItem.images[activeImageIndex] || selectedItem.images[0]}
                 alt={selectedItem.title}
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover transition-all duration-300"
               />
+
+              {/* 사진 번호 뱃지 (예: 1 / 3) */}
+              {selectedItem.images.length > 1 && (
+                <div className="absolute top-4 right-4 bg-black/60 backdrop-blur-md text-white text-xs font-black px-3 py-1 rounded-full pointer-events-none shadow-md border border-white/20">
+                  <span>{activeImageIndex + 1}</span>
+                  <span className="text-white/60 mx-1">/</span>
+                  <span>{selectedItem.images.length}</span>
+                </div>
+              )}
+
+              {/* 👈 좌측 이전 사진 (<) 버튼 */}
+              {selectedItem.images.length > 1 && (
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setActiveImageIndex((prev) =>
+                      (prev - 1 + selectedItem.images.length) % selectedItem.images.length
+                    );
+                  }}
+                  className="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/50 hover:bg-black/80 text-white flex items-center justify-center backdrop-blur-md border border-white/30 shadow-xl transition-all cursor-pointer hover:scale-110 active:scale-95"
+                  title="이전 사진 보기"
+                >
+                  <ChevronLeft className="w-6 h-6 text-white" />
+                </button>
+              )}
+
+              {/* 👉 우측 다음 사진 (>) 버튼 */}
+              {selectedItem.images.length > 1 && (
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setActiveImageIndex((prev) =>
+                      (prev + 1) % selectedItem.images.length
+                    );
+                  }}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/50 hover:bg-black/80 text-white flex items-center justify-center backdrop-blur-md border border-white/30 shadow-xl transition-all cursor-pointer hover:scale-110 active:scale-95"
+                  title="다음 사진 보기"
+                >
+                  <ChevronRight className="w-6 h-6 text-white" />
+                </button>
+              )}
 
               {/* 다중 사진 썸네일 네비게이션 */}
               {selectedItem.images.length > 1 && (
-                <div className="absolute bottom-4 left-0 right-0 flex justify-center space-x-2 px-4">
+                <div className="absolute bottom-3 left-0 right-0 flex justify-center space-x-2 px-4 z-10">
                   {selectedItem.images.map((img, idx) => (
                     <button
                       key={idx}
                       onClick={() => setActiveImageIndex(idx)}
-                      className={`w-12 h-12 rounded-xl overflow-hidden border-2 transition-all cursor-pointer ${
+                      className={`w-11 h-11 rounded-xl overflow-hidden border-2 transition-all cursor-pointer ${
                         activeImageIndex === idx
-                          ? 'border-white scale-110 shadow-lg'
-                          : 'border-white/50 opacity-70'
+                          ? 'border-[#f3ba2f] scale-110 shadow-lg'
+                          : 'border-white/50 opacity-70 hover:opacity-100'
                       }`}
                     >
                       <img src={img} alt="thumb" className="w-full h-full object-cover" />
