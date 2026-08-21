@@ -20,10 +20,20 @@ export default function KMarketMapPicker({
 }: KMarketMapPickerProps) {
   const defaultAddress = regionText || '';
   const [searchText, setSearchText] = useState(defaultAddress);
+  const [landmarkDetail, setLandmarkDetail] = useState('');
   const [mapQuery, setMapQuery] = useState(defaultAddress || '경기 안산시 단원구 원곡동 795');
   const [selectedPlaceName, setSelectedPlaceName] = useState(defaultAddress || '경기 안산시 단원구 원곡동 795');
   const [isMapLoading, setIsMapLoading] = useState(false);
   const [isLocating, setIsLocating] = useState(false);
+
+  // 최종 조합된 직거래 장소 텍스트 전달 함수
+  const updateFullLocation = (baseAddr: string, detail: string) => {
+    const trimmedBase = baseAddr.trim();
+    const trimmedDetail = detail.trim();
+    const fullText = trimmedDetail ? `${trimmedBase} (${trimmedDetail})` : trimmedBase;
+    setSelectedPlaceName(fullText);
+    onChangeRegionText(fullText);
+  };
 
   // GPS 내 위치 동의 및 주소 & 지도 핀 실시간 자동 동기화
   const handleGetGpsLocation = () => {
@@ -50,8 +60,7 @@ export default function KMarketMapPicker({
               const detectedAddr = data.address;
               setSearchText(detectedAddr);
               setMapQuery(detectedAddr);
-              setSelectedPlaceName(detectedAddr);
-              onChangeRegionText(detectedAddr);
+              updateFullLocation(detectedAddr, landmarkDetail);
               onChangeCoordinates(latitude, longitude, detectedAddr);
               setIsLocating(false);
               return;
@@ -64,8 +73,7 @@ export default function KMarketMapPicker({
         const fallbackAddr = `위치 확인됨 (위도: ${latitude.toFixed(3)}, 경도: ${longitude.toFixed(3)})`;
         setSearchText(fallbackAddr);
         setMapQuery(fallbackAddr);
-        setSelectedPlaceName(fallbackAddr);
-        onChangeRegionText(fallbackAddr);
+        updateFullLocation(fallbackAddr, landmarkDetail);
         onChangeCoordinates(latitude, longitude, fallbackAddr);
         setIsLocating(false);
       },
@@ -90,8 +98,7 @@ export default function KMarketMapPicker({
     setIsMapLoading(true);
     const query = searchText.trim();
     setMapQuery(query);
-    setSelectedPlaceName(query);
-    onChangeRegionText(query);
+    updateFullLocation(query, landmarkDetail);
     onChangeCoordinates(37.3275, 126.7924, query);
     setTimeout(() => setIsMapLoading(false), 400);
   };
@@ -109,62 +116,86 @@ export default function KMarketMapPicker({
 
   return (
     <div className="space-y-3">
-      {/* 1. 직거래 주소 텍스트 검색 및 GPS 내 위치 자동입력 */}
-      <div className="space-y-2.5 p-3.5 rounded-2xl bg-[#f7f2eb] border border-[#ded1c4]">
-        <div className="flex items-center justify-between">
-          <label className="text-xs font-black text-[#3d2817] flex items-center gap-1.5">
-            <MapPin className="w-4 h-4 text-[#845b37]" />
-            <span>📍 직거래 주소 &amp; 만남 장소 입력</span>
-          </label>
+      {/* 1. 직거래 기본 주소 & 상세 만남 장소 입력 카드 */}
+      <div className="space-y-3 p-3.5 rounded-2xl bg-[#f7f2eb] border border-[#ded1c4]">
+        {/* 기본 주소 + GPS 자동입력 */}
+        <div className="space-y-1.5">
+          <div className="flex items-center justify-between">
+            <label className="text-xs font-black text-[#3d2817] flex items-center gap-1.5">
+              <MapPin className="w-4 h-4 text-[#845b37]" />
+              <span>1. 기본 도로명 / 동네 주소</span>
+            </label>
 
-          {/* GPS 내 위치 자동완성 버튼 */}
-          <button
-            type="button"
-            onClick={handleGetGpsLocation}
-            disabled={isLocating}
-            className="text-[11px] font-bold text-[#5c3818] hover:text-[#1f1914] bg-[#ede2d6] hover:bg-[#e2d4c5] px-2.5 py-1 rounded-lg transition-all flex items-center gap-1 cursor-pointer border border-[#ded1c4] shadow-2xs"
-            title="현재 내 위치로 주소 & 핀 자동 세팅"
-          >
-            {isLocating ? (
-              <>
-                <span className="animate-spin">📍</span>
-                <span>위치 확인중...</span>
-              </>
-            ) : (
-              <>
-                <span>📍 내 위치 동의하고 자동입력</span>
-              </>
-            )}
-          </button>
-        </div>
-
-        <div className="flex items-center gap-2">
-          <div className="relative flex-1">
-            <input
-              type="text"
-              required
-              value={searchText}
-              onChange={(e) => setSearchText(e.target.value)}
-              onKeyDown={(e) => {
-                if (e.key === 'Enter') {
-                  e.preventDefault();
-                  handleSearchSubmit(e);
-                }
-              }}
-              placeholder="[📍 내 위치 자동입력] 또는 원하는 만남 장소/도로명 검색"
-              className="w-full pl-9 pr-3 py-2.5 bg-white rounded-xl border border-[#ded1c4] text-xs sm:text-sm font-bold text-[#1f1914] focus:outline-none focus:border-[#845b37] shadow-2xs transition-colors"
-            />
-            <MapPin className="w-4 h-4 text-[#845b37] absolute left-3 top-3" />
+            {/* GPS 내 위치 자동완성 버튼 */}
+            <button
+              type="button"
+              onClick={handleGetGpsLocation}
+              disabled={isLocating}
+              className="text-[11px] font-bold text-[#5c3818] hover:text-[#1f1914] bg-[#ede2d6] hover:bg-[#e2d4c5] px-2.5 py-1 rounded-lg transition-all flex items-center gap-1 cursor-pointer border border-[#ded1c4] shadow-2xs"
+              title="현재 내 위치로 주소 & 핀 자동 세팅"
+            >
+              {isLocating ? (
+                <>
+                  <span className="animate-spin">📍</span>
+                  <span>위치 확인중...</span>
+                </>
+              ) : (
+                <>
+                  <span>📍 내 위치 동의하고 자동입력</span>
+                </>
+              )}
+            </button>
           </div>
 
-          <button
-            type="button"
-            onClick={handleSearchSubmit}
-            className="px-3.5 py-2.5 bg-[#3d2817] hover:bg-[#2b1c10] text-[#fbf9f6] font-bold text-xs rounded-xl transition-all shadow-xs shrink-0 cursor-pointer flex items-center gap-1 border border-[#5c3818]"
-          >
-            <Search className="w-3.5 h-3.5 text-[#f3ba2f]" />
-            <span>지도 검색</span>
-          </button>
+          <div className="flex items-center gap-2">
+            <div className="relative flex-1">
+              <input
+                type="text"
+                required
+                value={searchText}
+                onChange={(e) => {
+                  setSearchText(e.target.value);
+                  updateFullLocation(e.target.value, landmarkDetail);
+                }}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter') {
+                    e.preventDefault();
+                    handleSearchSubmit(e);
+                  }
+                }}
+                placeholder="[📍 내 위치 자동입력] 또는 도로명/동네 검색 (예: 원곡동 795)"
+                className="w-full pl-9 pr-3 py-2.5 bg-white rounded-xl border border-[#ded1c4] text-xs sm:text-sm font-bold text-[#1f1914] focus:outline-none focus:border-[#845b37] shadow-2xs transition-colors"
+              />
+              <MapPin className="w-4 h-4 text-[#845b37] absolute left-3 top-3" />
+            </div>
+
+            <button
+              type="button"
+              onClick={handleSearchSubmit}
+              className="px-3.5 py-2.5 bg-[#3d2817] hover:bg-[#2b1c10] text-[#fbf9f6] font-bold text-xs rounded-xl transition-all shadow-xs shrink-0 cursor-pointer flex items-center gap-1 border border-[#5c3818]"
+            >
+              <Search className="w-3.5 h-3.5 text-[#f3ba2f]" />
+              <span>지도 검색</span>
+            </button>
+          </div>
+        </div>
+
+        {/* 2. 고객이 직접 입력하는 상세 만남 장소명 (자유 텍스트) */}
+        <div className="space-y-1.5 pt-2 border-t border-[#ded1c4]/70">
+          <label className="text-xs font-black text-[#3d2817] flex items-center justify-between">
+            <span>2. 상세 만남 장소명 (고객 직접 입력)</span>
+            <span className="text-[10px] text-[#845b37] font-bold">편의점 앞, 기숙사 정문, 3번 출구 등</span>
+          </label>
+          <input
+            type="text"
+            value={landmarkDetail}
+            onChange={(e) => {
+              setLandmarkDetail(e.target.value);
+              updateFullLocation(searchText, e.target.value);
+            }}
+            placeholder="예: GS25 편의점 앞 / 기숙사 2동 경비실 앞 / 정문 시계탑"
+            className="w-full px-3.5 py-2.5 bg-white rounded-xl border border-[#ded1c4] text-xs sm:text-sm font-bold text-[#1f1914] focus:outline-none focus:border-[#845b37] shadow-2xs"
+          />
         </div>
       </div>
 
