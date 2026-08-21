@@ -16,6 +16,7 @@ export default function KMarketHeader() {
     setIsFavoritesModalOpen,
     isAuthModalOpen,
     setIsAuthModalOpen,
+    setIsMyPageOpen,
     authedUser,
     likedItemIds,
   } = useKMarket();
@@ -132,17 +133,17 @@ export default function KMarketHeader() {
 
           {/* 액션 버튼 그룹 */}
           <div className="flex items-center space-x-2">
-            {/* 외국인 신원인증 / 가입 버튼 */}
+            {/* 외국인 신원인증 / 마이페이지 버튼 */}
             {authedUser ? (
               <div
-                onClick={() => setIsAuthModalOpen(true)}
-                className="flex items-center space-x-1 px-3 py-1.5 rounded-full bg-emerald-50 border border-emerald-300 text-emerald-800 text-xs font-black cursor-pointer shadow-xs"
-                title="인증 완료된 회원 프로필"
+                onClick={() => setIsMyPageOpen(true)}
+                className="flex items-center space-x-1.5 px-3 py-1.5 rounded-full bg-emerald-50 hover:bg-emerald-100 border border-emerald-300 text-emerald-800 text-xs font-black cursor-pointer shadow-xs transition-all"
+                title="내 마이페이지 & 매너온도 43.5℃ 확인"
               >
                 <UserCheck className="w-3.5 h-3.5 text-emerald-600" />
                 <span className="truncate max-w-[90px]">{authedUser.userName}</span>
-                <span className="text-[10px] bg-emerald-200 text-emerald-900 px-1 rounded-sm">
-                  {authedUser.isOcrVerified ? 'OCR 🛡️' : '인증'}
+                <span className="text-[10px] bg-emerald-200 text-emerald-900 px-1.5 py-0.5 rounded-full font-black">
+                  43.5℃ 🔥
                 </span>
               </div>
             ) : (
@@ -157,6 +158,15 @@ export default function KMarketHeader() {
               </button>
             )}
 
+            {/* 마이페이지 바로가기 버튼 */}
+            <button
+              onClick={() => setIsMyPageOpen(true)}
+              className="flex items-center space-x-1 px-2.5 py-1.5 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold transition-all cursor-pointer"
+              title="마이페이지 (판매/구매/찜/매너온도)"
+            >
+              <span>마이</span>
+            </button>
+
             {/* 1분 간편 등록 버튼 */}
             <button
               onClick={() => setIsCreateModalOpen(true)}
@@ -166,11 +176,11 @@ export default function KMarketHeader() {
               <span>{t('post_item_btn')}</span>
             </button>
 
-            {/* 찜한 목록 & 마이페이지 버튼 */}
+            {/* 찜한 목록 버튼 */}
             <div
-              onClick={() => setIsFavoritesModalOpen(true)}
+              onClick={() => setIsMyPageOpen(true)}
               className="relative p-2 text-slate-600 hover:text-red-500 cursor-pointer transition-colors"
-              title="찜한 매물 및 마이페이지"
+              title="내가 찜한 매물 및 마이페이지"
             >
               <Heart className="w-5 h-5" />
               {likedItemIds.size > 0 && (

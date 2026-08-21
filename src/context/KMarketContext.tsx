@@ -36,6 +36,8 @@ interface KMarketContextType {
   setIsFavoritesModalOpen: (open: boolean) => void;
   isAuthModalOpen: boolean;
   setIsAuthModalOpen: (open: boolean) => void;
+  isMyPageOpen: boolean;
+  setIsMyPageOpen: (open: boolean) => void;
   authedUser: any;
   setAuthedUser: (user: any) => void;
   
@@ -82,6 +84,7 @@ export function KMarketProvider({ children }: { children: React.ReactNode }) {
   const [isTaxModalOpen, setIsTaxModalOpen] = useState<boolean>(false);
   const [isFavoritesModalOpen, setIsFavoritesModalOpen] = useState<boolean>(false);
   const [isAuthModalOpen, setIsAuthModalOpen] = useState<boolean>(false);
+  const [isMyPageOpen, setIsMyPageOpen] = useState<boolean>(false);
   const [authedUser, setAuthedUser] = useState<any>(null);
 
   // 채팅
@@ -446,6 +449,8 @@ export function KMarketProvider({ children }: { children: React.ReactNode }) {
         setIsFavoritesModalOpen,
         isAuthModalOpen,
         setIsAuthModalOpen,
+        isMyPageOpen,
+        setIsMyPageOpen,
         authedUser,
         setAuthedUser,
         activeChat,

@@ -17,6 +17,7 @@ import KMarketTaxModal from './KMarketTaxModal';
 import KMarketFavoritesModal from './KMarketFavoritesModal';
 import KMarketAdminReportModal from './KMarketAdminReportModal';
 import KMarketAuthModal from './KMarketAuthModal';
+import KMarketMyPageModal from './KMarketMyPageModal';
 import { ShoppingBag, Sparkles, ShieldCheck, Plus, PackageOpen, ShieldAlert } from 'lucide-react';
 
 export default function KMarketMainFeed() {
@@ -31,6 +32,8 @@ export default function KMarketMainFeed() {
     setIsCreateModalOpen,
     isAuthModalOpen,
     setIsAuthModalOpen,
+    isMyPageOpen,
+    setIsMyPageOpen,
     setAuthedUser,
   } = useKMarket();
   const { t } = useLanguage();
@@ -203,6 +206,10 @@ export default function KMarketMainFeed() {
           setAuthedUser(userData);
           alert(`[신원인증 완료] ${userData.userName} 님의 ${userData.authMethod === 'ocr' ? '실물 신분증 OCR 검증' : '수기 인증'}이 완료되었습니다.`);
         }}
+      />
+      <KMarketMyPageModal
+        isOpen={isMyPageOpen}
+        onClose={() => setIsMyPageOpen(false)}
       />
     </div>
   );
