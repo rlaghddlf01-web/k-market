@@ -174,15 +174,14 @@ export default function KMarketItemCard({ item }: KMarketItemCardProps) {
           <div className="space-y-1.5">
             {/* 15개국어 자동번역 뱃지 */}
             <div
-              className="flex items-center gap-1 text-[10px] font-semibold"
-              style={{ color: '#2563eb' }}
+              className="flex items-center gap-1 text-[10px] font-semibold text-[#845b37]"
             >
-              <Sparkles className="w-3 h-3" />
+              <Sparkles className="w-3 h-3 text-[#b07d56]" />
               <span>15개국어 자동번역</span>
             </div>
 
             {/* 제목 */}
-            <h3 className="font-bold text-sm text-slate-900 line-clamp-2 leading-snug group-hover:text-blue-600 transition-colors">
+            <h3 className="font-bold text-sm text-[#1f1914] line-clamp-2 leading-snug group-hover:text-[#5c3818] transition-colors">
               {displayTitle}
             </h3>
 
@@ -190,13 +189,13 @@ export default function KMarketItemCard({ item }: KMarketItemCardProps) {
             <div className="flex items-baseline gap-2">
               <span
                 className={`text-base font-black ${
-                  isFree ? 'text-emerald-600' : 'text-slate-950'
+                  isFree ? 'text-emerald-700' : 'text-[#1f1914]'
                 }`}
               >
                 {formatWon(item.price)}
               </span>
               {item.original_price && item.original_price > item.price && (
-                <span className="text-xs text-slate-400 line-through">
+                <span className="text-xs text-[#9c8a78] line-through">
                   {item.original_price.toLocaleString()}원
                 </span>
               )}
@@ -206,9 +205,9 @@ export default function KMarketItemCard({ item }: KMarketItemCardProps) {
           {/* ── 하단 메타 정보 + 채팅 CTA ─────────────── */}
           <div className="pt-2.5 border-t space-y-2" style={{ borderColor: 'rgba(180,150,120,0.18)' }}>
             {/* 위치 + 조회수 + 시간 */}
-            <div className="flex items-center justify-between text-[11px] text-stone-500 font-medium">
+            <div className="flex items-center justify-between text-[11px] text-[#705e4f] font-medium">
               <div className="flex items-center gap-1 truncate max-w-[110px]">
-                <MapPin className="w-3 h-3 text-blue-400 shrink-0" />
+                <MapPin className="w-3 h-3 text-[#845b37] shrink-0" />
                 <span className="truncate">{item.region}</span>
               </div>
               <div className="flex items-center gap-2 shrink-0">
@@ -227,19 +226,19 @@ export default function KMarketItemCard({ item }: KMarketItemCardProps) {
               </div>
             </div>
 
-            {/* 번역 채팅 CTA */}
+            {/* 번역 채팅 CTA - 딥 에스프레소 & 모카 브라운 */}
             <button
               onClick={(e) => {
                 e.stopPropagation();
                 openChatForItem(item);
               }}
-              className="w-full flex items-center justify-center gap-1.5 text-[12px] font-bold text-white py-1.5 rounded-xl transition-all active:scale-95 cursor-pointer"
+              className="w-full flex items-center justify-center gap-1.5 text-[12px] font-bold text-[#fbf9f6] py-2 rounded-xl transition-all active:scale-95 cursor-pointer shadow-2xs hover:opacity-95"
               style={{
                 background:
-                  'linear-gradient(135deg, #2563eb 0%, #4f46e5 100%)',
+                  'linear-gradient(135deg, #2b1b17 0%, #4a2c11 100%)',
               }}
             >
-              <MessageCircle className="w-3.5 h-3.5" />
+              <MessageCircle className="w-3.5 h-3.5 text-amber-200" />
               <span>1:1 번역 채팅 시작</span>
             </button>
           </div>

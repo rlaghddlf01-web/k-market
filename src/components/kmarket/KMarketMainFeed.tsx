@@ -151,52 +151,52 @@ export default function KMarketMainFeed() {
       {/* 모바일 플로팅 매물 등록 CTA 버튼 */}
       <button
         onClick={() => setIsCreateModalOpen(true)}
-        className="md:hidden fixed bottom-6 right-5 z-40 text-white p-4 rounded-full flex items-center justify-center active:scale-90 transition-transform cursor-pointer shadow-lg"
-        style={{ background: 'linear-gradient(135deg, #2563eb 0%, #4f46e5 100%)' }}
+        className="md:hidden fixed bottom-6 right-5 z-40 text-[#fbf9f6] p-4 rounded-full flex items-center justify-center active:scale-90 transition-transform cursor-pointer shadow-lg"
+        style={{ background: 'linear-gradient(135deg, #2b1b17 0%, #4a2c11 100%)' }}
         aria-label="Post Item"
       >
         <Plus className="w-6 h-6" />
       </button>
 
-      {/* 푸터 영역 */}
-      <footer className="mt-20 border-t" style={{ borderColor: 'var(--border-warm)', background: 'rgba(242,237,232,0.7)', backdropFilter: 'blur(10px)' }}>
-        <div className="max-w-6xl mx-auto px-4 py-10 space-y-5">
+      {/* 푸터 영역 - 딥 에스프레소 쇼핑몰 스타일 마감 */}
+      <footer className="mt-20 border-t border-[#3d2817] bg-[#1e130f] text-[#d8c8b8]">
+        <div className="max-w-6xl mx-auto px-4 py-12 space-y-6">
           <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-6">
             <div className="space-y-2">
               <div className="flex items-center gap-2">
                 <div
-                  className="w-8 h-8 rounded-xl flex items-center justify-center text-white font-black text-sm"
-                  style={{ background: 'linear-gradient(135deg, #2563eb 0%, #4f46e5 100%)' }}
+                  className="w-8 h-8 rounded-xl flex items-center justify-center text-[#fbf9f6] font-black text-sm"
+                  style={{ background: 'linear-gradient(135deg, #5c3818 0%, #845b37 100%)' }}
                 >
                   K
                 </div>
-                <span className="text-slate-900 font-black text-base tracking-tight">KTRS K-Market</span>
-                <span className="text-[9px] font-bold bg-blue-600 text-white px-2 py-0.5 rounded-full">Zero Fee C2C</span>
+                <span className="text-[#fbf9f6] font-extrabold text-base tracking-tight">KTRS K-Market</span>
+                <span className="text-[9px] font-bold bg-[#845b37] text-white px-2 py-0.5 rounded-full">Zero Fee C2C</span>
               </div>
-              <p className="text-slate-400 text-xs leading-relaxed max-w-xs">
+              <p className="text-[#8c7866] text-xs leading-relaxed max-w-xs">
                 대한민국 No.1 외국인 종합 슈퍼앱 KTRS 연계<br />외국인 전용 중고거래 &amp; 무빙세일 플랫폼
               </p>
             </div>
 
-            <div className="flex flex-col gap-2 text-xs text-slate-500">
+            <div className="flex flex-col gap-2 text-xs text-[#a89888]">
               <div className="flex items-center gap-1.5">
-                <ShieldCheck className="w-3.5 h-3.5 text-emerald-500" />
-                <span>수수료 0원 100% 무료 거래</span>
+                <ShieldCheck className="w-3.5 h-3.5 text-amber-400" />
+                <span>수수료 0원 100% 무료 안심 직거래</span>
               </div>
               <div className="flex items-center gap-1.5">
-                <Sparkles className="w-3.5 h-3.5 text-amber-500" />
-                <span>15개국어 실시간 Gemini AI 번역</span>
+                <Sparkles className="w-3.5 h-3.5 text-amber-400" />
+                <span>15개국어 실시간 Gemini AI 양방향 번역</span>
               </div>
             </div>
           </div>
 
-          <div className="pt-5 border-t border-slate-100 text-[11px] text-slate-400 flex flex-col sm:flex-row justify-between items-center gap-3">
+          <div className="pt-6 border-t border-[#332219] text-[11px] text-[#705e4f] flex flex-col sm:flex-row justify-between items-center gap-3">
             <p>© 2026 KTRS (Korea Tax &amp; Foreign Resident Service). All rights reserved.</p>
             <div className="flex items-center gap-3">
               <span>공단 직거래 안심 가이드 | 고객센터 1588-0000</span>
               <Link
                 href="/admin"
-                className="px-2.5 py-1 bg-slate-900 hover:bg-red-950 border border-slate-700 text-slate-400 hover:text-red-300 hover:border-red-500/40 font-bold rounded-lg text-[10px] transition-all flex items-center gap-1 cursor-pointer"
+                className="px-2.5 py-1 bg-[#2b1b17] hover:bg-[#3d2817] border border-[#5c3818]/60 text-[#d8c8b8] font-bold rounded-lg text-[10px] transition-all flex items-center gap-1 cursor-pointer"
                 title="KTRS 관리자 전용 관제 콘솔 페이지"
               >
                 <span>관리자 관제 콘솔 (/admin)</span>

@@ -31,15 +31,15 @@ export default function KMarketHeader() {
     <header className="sticky top-0 z-40 glass border-b border-white/60 shadow-sm">
       {/* 상단: KTRS 패밀리 바 */}
       <div
-        style={{ background: 'linear-gradient(135deg, #1e40af 0%, #3730a3 50%, #0369a1 100%)' }}
-        className="text-white px-4 py-2"
+        style={{ background: 'linear-gradient(135deg, #1e130f 0%, #2b1b17 50%, #3d2817 100%)' }}
+        className="text-[#fbf9f6] px-4 py-2"
       >
         <div className="max-w-6xl mx-auto flex items-center justify-between text-xs sm:text-sm">
           <div className="flex items-center gap-2.5">
-            <span className="bg-amber-400 text-slate-900 font-extrabold px-2 py-0.5 rounded-md text-[10px] uppercase tracking-widest shadow-sm">
+            <span className="bg-[#b8860b] text-[#1f1914] font-extrabold px-2 py-0.5 rounded-md text-[10px] uppercase tracking-widest shadow-xs">
               KTRS
             </span>
-            <span className="hidden sm:inline font-medium text-blue-200 text-[12px]">
+            <span className="hidden sm:inline font-medium text-[#d8c8b8] text-[12px]">
               대한민국 No.1 외국인 근로자 종합 플랫폼
             </span>
           </div>
@@ -49,10 +49,10 @@ export default function KMarketHeader() {
             <div className="relative">
               <button
                 onClick={() => setIsLangDropdownOpen(!isLangDropdownOpen)}
-                className="flex items-center gap-1.5 bg-white/10 hover:bg-white/20 transition-all px-3 py-1.5 rounded-full text-white font-semibold border border-white/15 text-xs"
+                className="flex items-center gap-1.5 bg-white/10 hover:bg-white/20 transition-all px-3 py-1.5 rounded-full text-[#fbf9f6] font-semibold border border-white/15 text-xs cursor-pointer"
                 title="Change Language (15 Languages)"
               >
-                <Globe className="w-3.5 h-3.5 text-blue-200" />
+                <Globe className="w-3.5 h-3.5 text-[#d8c8b8]" />
                 <span>{currentLangOption.flag}</span>
                 <span className="hidden md:inline text-[11px]">{currentLangOption.nativeName}</span>
                 <ChevronDown className="w-3 h-3 opacity-60" />
@@ -60,31 +60,31 @@ export default function KMarketHeader() {
 
               {isLangDropdownOpen && (
                 <div
-                  className="absolute right-0 mt-2 w-64 bg-white rounded-2xl shadow-2xl border border-slate-100/80 py-1.5 z-50 max-h-80 overflow-y-auto"
+                  className="absolute right-0 mt-2 w-64 bg-[#fefcf9] rounded-2xl shadow-2xl border border-[#ded1c4] py-1.5 z-50 max-h-80 overflow-y-auto"
                   onClick={() => setIsLangDropdownOpen(false)}
                 >
-                  <div className="px-3 py-2 text-[11px] font-semibold text-slate-400 border-b border-slate-100">
+                  <div className="px-3 py-2 text-[11px] font-semibold text-[#8c7866] border-b border-[#ded1c4]">
                     🌍 Select Language / 언어 선택 (15개국어)
                   </div>
                   {languages.map((lang) => (
                     <button
                       key={lang.code}
                       onClick={() => setLanguage(lang.code)}
-                      className={`w-full px-3 py-2 text-left flex items-center justify-between text-xs hover:bg-slate-50 transition-colors ${
+                      className={`w-full px-3 py-2 text-left flex items-center justify-between text-xs hover:bg-[#f4ede6] transition-colors cursor-pointer ${
                         currentLang === lang.code
-                          ? 'bg-blue-50 text-blue-700 font-bold'
-                          : 'text-slate-700'
+                          ? 'bg-[#ede2d6] text-[#3d2817] font-bold'
+                          : 'text-[#5c4a39]'
                       }`}
                     >
                       <div className="flex items-center gap-2.5">
                         <span className="text-base">{lang.flag}</span>
                         <div>
-                          <p className="font-semibold text-slate-900">{lang.nativeName}</p>
-                          <p className="text-[10px] text-slate-400">{lang.name}</p>
+                          <p className="font-semibold text-[#1f1914]">{lang.nativeName}</p>
+                          <p className="text-[10px] text-[#8c7866]">{lang.name}</p>
                         </div>
                       </div>
                       {currentLang === lang.code && (
-                        <span className="w-4 h-4 rounded-full bg-blue-600 text-white text-[9px] flex items-center justify-center font-black">✓</span>
+                        <span className="w-4 h-4 rounded-full bg-[#3d2817] text-[#fbf9f6] text-[9px] flex items-center justify-center font-black">✓</span>
                       )}
                     </button>
                   ))}
@@ -93,8 +93,8 @@ export default function KMarketHeader() {
             </div>
 
             {/* 수수료 0원 뱃지 */}
-            <div className="flex items-center gap-1 bg-emerald-500/20 text-emerald-300 px-2.5 py-1 rounded-full text-[11px] font-semibold border border-emerald-400/25">
-              <ShieldCheck className="w-3 h-3" />
+            <div className="flex items-center gap-1 bg-[#4a3424]/60 text-[#dfd3c7] px-2.5 py-1 rounded-full text-[11px] font-semibold border border-[#845b37]/40">
+              <ShieldCheck className="w-3.5 h-3.5 text-amber-400" />
               <span>{t('zero_fee_badge')}</span>
             </div>
           </div>
@@ -108,30 +108,30 @@ export default function KMarketHeader() {
           {/* 로고 & 위치 칩 */}
           <div className="flex items-center gap-3">
             <div className="flex items-center gap-2.5">
-              {/* 로고 아이콘 */}
+              {/* 로고 아이콘 - 모카 커피 브라운 */}
               <div
-                className="w-10 h-10 rounded-2xl flex items-center justify-center text-white font-black text-lg shadow-md shrink-0"
-                style={{ background: 'linear-gradient(135deg, #2563eb 0%, #4f46e5 100%)' }}
+                className="w-10 h-10 rounded-2xl flex items-center justify-center text-[#fbf9f6] font-black text-lg shadow-sm shrink-0"
+                style={{ background: 'linear-gradient(135deg, #3d2817 0%, #5c3818 100%)' }}
               >
                 K
               </div>
               <div>
                 <div className="flex items-center gap-1.5">
-                  <span className="text-[20px] font-black tracking-tight text-slate-900 leading-none">K-Market</span>
-                  <span className="text-[9px] font-black bg-amber-100 text-amber-700 px-1.5 py-0.5 rounded-md tracking-wider">FREE</span>
+                  <span className="text-[20px] font-extrabold tracking-tight text-[#1f1914] leading-none">K-Market</span>
+                  <span className="text-[9px] font-black bg-[#ede2d6] text-[#5c4a39] px-1.5 py-0.5 rounded-md tracking-wider">FREE</span>
                 </div>
-                <p className="text-[11px] text-slate-400 hidden sm:block mt-0.5 font-medium">{t('app_slogan')}</p>
+                <p className="text-[11px] text-[#8c7866] hidden sm:block mt-0.5 font-medium">{t('app_slogan')}</p>
               </div>
             </div>
 
             {/* 위치 칩 */}
             <button
               onClick={() => setIsLocationRadiusModalOpen(true)}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full hover:opacity-80 text-amber-800 border border-amber-200/60 text-xs font-bold transition-all cursor-pointer active:scale-95"
-              style={{ background: '#fef3e2' }}
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full hover:opacity-80 text-[#5c4a39] border border-[#ded1c4] text-xs font-bold transition-all cursor-pointer active:scale-95"
+              style={{ background: '#f4ede6' }}
               title="내 실제 위치 및 직거래 반경 설정"
             >
-              <MapPin className="w-3.5 h-3.5 text-blue-500 shrink-0" />
+              <MapPin className="w-3.5 h-3.5 text-[#845b37] shrink-0" />
               <span className="truncate max-w-[100px]">
                 {selectedRegion === 'all'
                   ? '내 위치'
@@ -143,7 +143,7 @@ export default function KMarketHeader() {
                   ? '화성 향남'
                   : selectedRegion}
               </span>
-              <span className="text-[9px] bg-blue-600 text-white px-1.5 py-0.5 rounded-full font-extrabold">3km</span>
+              <span className="text-[9px] bg-[#3d2817] text-[#fbf9f6] px-1.5 py-0.5 rounded-full font-extrabold">3km</span>
               <ChevronDown className="w-3 h-3 opacity-50" />
             </button>
           </div>
@@ -156,9 +156,9 @@ export default function KMarketHeader() {
                 placeholder="매물 검색 (세탁기, 냉장고, 아이폰 등)..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-10 pr-4 py-2.5 input-premium text-sm font-medium"
+                className="w-full pl-10 pr-4 py-2.5 input-premium text-sm font-medium text-[#1f1914]"
               />
-              <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-3" />
+              <Search className="w-4 h-4 text-[#8c7866] absolute left-3.5 top-3" />
             </div>
           </div>
 
@@ -168,19 +168,19 @@ export default function KMarketHeader() {
             {authedUser ? (
               <div
                 onClick={() => setIsMyPageOpen(true)}
-                className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 text-emerald-800 text-xs font-bold cursor-pointer transition-all"
+                className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#ede2d6] hover:bg-[#e2d4c5] border border-[#ded1c4] text-[#3d2817] text-xs font-bold cursor-pointer transition-all"
               >
-                <UserCheck className="w-3.5 h-3.5 text-emerald-600" />
+                <UserCheck className="w-3.5 h-3.5 text-[#5c3818]" />
                 <span className="truncate max-w-[80px]">{authedUser.userName}</span>
-                <span className="text-[10px] bg-emerald-500 text-white px-1.5 py-0.5 rounded-full font-black">43.5℃</span>
+                <span className="text-[10px] bg-[#5c3818] text-[#fbf9f6] px-1.5 py-0.5 rounded-full font-black">43.5℃</span>
               </div>
             ) : (
               <button
                 onClick={() => setIsAuthModalOpen(true)}
-                className="flex items-center gap-1 px-3 py-1.5 rounded-full hover:opacity-80 text-slate-700 text-xs font-bold transition-all border cursor-pointer"
-                style={{ background: '#faf7f3', borderColor: '#ddd0c4' }}
+                className="flex items-center gap-1 px-3 py-1.5 rounded-full hover:bg-[#ede2d6] text-[#5c4a39] text-xs font-bold transition-all border border-[#ded1c4] cursor-pointer"
+                style={{ background: '#f4ede6' }}
               >
-                <ShieldCheck className="w-3.5 h-3.5 text-blue-600" />
+                <ShieldCheck className="w-3.5 h-3.5 text-[#845b37]" />
                 <span className="hidden sm:inline">신원인증</span>
                 <span className="sm:hidden">인증</span>
               </button>
@@ -189,12 +189,12 @@ export default function KMarketHeader() {
             {/* 마이 */}
             <button
               onClick={() => setIsMyPageOpen(true)}
-              className="px-2.5 py-1.5 rounded-full bg-slate-50 hover:bg-slate-100 text-slate-600 text-xs font-bold transition-all cursor-pointer border border-slate-200"
+              className="px-2.5 py-1.5 rounded-full bg-[#f4ede6] hover:bg-[#ede2d6] text-[#5c4a39] text-xs font-bold transition-all cursor-pointer border border-[#ded1c4]"
             >
               마이
             </button>
 
-            {/* 등록 버튼 */}
+            {/* 1분 매물 등록 버튼 - 딥 에스프레소 & 모카 */}
             <button
               onClick={() => setIsCreateModalOpen(true)}
               className="btn-primary flex items-center gap-1.5 text-xs sm:text-sm px-4 py-2 cursor-pointer"
@@ -206,11 +206,11 @@ export default function KMarketHeader() {
             {/* 알림 */}
             <div
               onClick={() => setIsKeywordModalOpen(true)}
-              className="relative p-2 text-slate-500 hover:text-blue-600 hover:bg-blue-50 rounded-full cursor-pointer transition-colors"
+              className="relative p-2 text-[#6b5847] hover:text-[#1f1914] hover:bg-[#f4ede6] rounded-full cursor-pointer transition-colors"
             >
               <Bell className="w-5 h-5" />
               {keywordAlerts.length > 0 && (
-                <span className="absolute top-1 right-1 bg-amber-500 text-white text-[9px] font-black w-3.5 h-3.5 rounded-full flex items-center justify-center">
+                <span className="absolute top-1 right-1 bg-[#845b37] text-white text-[9px] font-black w-3.5 h-3.5 rounded-full flex items-center justify-center">
                   {keywordAlerts.length}
                 </span>
               )}
@@ -219,11 +219,11 @@ export default function KMarketHeader() {
             {/* 찜 */}
             <div
               onClick={() => setIsMyPageOpen(true)}
-              className="relative p-2 text-slate-500 hover:text-red-500 hover:bg-red-50 rounded-full cursor-pointer transition-colors"
+              className="relative p-2 text-[#6b5847] hover:text-[#845b37] hover:bg-[#f4ede6] rounded-full cursor-pointer transition-colors"
             >
               <Heart className="w-5 h-5" />
               {likedItemIds.size > 0 && (
-                <span className="absolute top-0.5 right-0.5 bg-red-500 text-white text-[9px] font-bold w-3.5 h-3.5 rounded-full flex items-center justify-center">
+                <span className="absolute top-0.5 right-0.5 bg-[#845b37] text-white text-[9px] font-bold w-3.5 h-3.5 rounded-full flex items-center justify-center">
                   {likedItemIds.size}
                 </span>
               )}
@@ -239,40 +239,40 @@ export default function KMarketHeader() {
               placeholder="매물 검색 (세탁기, 냉장고 등)..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-10 pr-4 py-2 input-premium text-xs font-medium"
+              className="w-full pl-10 pr-4 py-2 input-premium text-xs font-medium text-[#1f1914]"
             />
-            <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-2.5" />
+            <Search className="w-4 h-4 text-[#8c7866] absolute left-3.5 top-2.5" />
           </div>
         </div>
       </div>
 
       {/* 하단: 탭 바 */}
       <div className="border-t px-4" style={{ borderColor: 'rgba(180,150,120,0.20)', background: 'rgba(254,252,249,0.80)' }}>
-        <div className="max-w-6xl mx-auto flex items-center gap-1 overflow-x-auto no-scrollbar py-2 text-xs">
+        <div className="max-w-6xl mx-auto flex items-center gap-1.5 overflow-x-auto no-scrollbar py-2 text-xs">
           <button
             onClick={() => setIsTaxModalOpen(true)}
-            className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full font-bold text-amber-700 bg-gradient-to-r from-amber-50 to-orange-50 hover:from-amber-100 hover:to-orange-100 border border-amber-200 transition-all shrink-0 cursor-pointer"
+            className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full font-bold text-[#5c4a39] bg-[#ede2d6] hover:bg-[#e2d4c5] border border-[#ded1c4] transition-all shrink-0 cursor-pointer"
           >
-            <Sparkles className="w-3.5 h-3.5 text-amber-500" />
+            <Sparkles className="w-3.5 h-3.5 text-[#845b37]" />
             <span>{t('ktrs_tab_tax')}</span>
           </button>
 
           <button
             onClick={() => alert('KTRS 비상금 대출: 외국인 근로자 전용 최대 500만원 긴급 대출 서비스 연동 중')}
-            className="px-3.5 py-1.5 rounded-full text-slate-500 hover:text-blue-600 hover:bg-blue-50 font-medium transition-all shrink-0 cursor-pointer"
+            className="px-3.5 py-1.5 rounded-full text-[#705e4f] hover:text-[#1f1914] hover:bg-[#f4ede6] font-medium transition-all shrink-0 cursor-pointer"
           >
             {t('ktrs_tab_loan')}
           </button>
 
           <button
             onClick={() => alert('KTRS 안심 원룸: 공단 반경 보증금 안심 직방 매물 서비스 연동 중')}
-            className="px-3.5 py-1.5 rounded-full text-slate-500 hover:text-blue-600 hover:bg-blue-50 font-medium transition-all shrink-0 cursor-pointer"
+            className="px-3.5 py-1.5 rounded-full text-[#705e4f] hover:text-[#1f1914] hover:bg-[#f4ede6] font-medium transition-all shrink-0 cursor-pointer"
           >
             {t('ktrs_tab_housing')}
           </button>
 
           <button
-            className="px-3.5 py-1.5 rounded-full font-bold text-blue-700 bg-blue-50 border border-blue-200 shrink-0 cursor-pointer"
+            className="px-3.5 py-1.5 rounded-full font-bold text-[#fbf9f6] bg-[#3d2817] border border-[#3d2817] shrink-0 cursor-pointer shadow-2xs"
           >
             {t('ktrs_tab_market')}
           </button>

@@ -2,10 +2,10 @@
 
 /* ─── Design Tokens ─────────────────────────────────────────── */
 :root {
-  /* Brand palette */
-  --brand-primary:    #2563eb;
-  --brand-indigo:     #4f46e5;
-  --brand-accent:     #06b6d4;
+  /* Brand palette — Premium Coffee & Mocha */
+  --brand-primary:    #3d2817;   /* 다크 로스티드 커피 */
+  --brand-indigo:     #2b1b17;   /* 딥 에스프레소 */
+  --brand-accent:     #845b37;   /* 리치 모카 / 카라멜 */
 
   /* Neutrals — Warm Beige / Off-White hybrid */
   --surface-bg:       #f2ede8;   /* 따뜻한 베이지 배경 */
@@ -23,7 +23,7 @@
   /* Shadows — warm-toned */
   --shadow-card:  0 2px 12px rgba(100, 70, 40, 0.07), 0 1px 3px rgba(100, 70, 40, 0.04);
   --shadow-hover: 0 8px 32px rgba(100, 70, 40, 0.13), 0 2px 8px rgba(100, 70, 40, 0.07);
-  --shadow-float: 0 20px 60px rgba(37, 99, 235, 0.35);
+  --shadow-float: 0 20px 60px rgba(61, 40, 23, 0.35);
 }
 
 /* ─── Base Reset ────────────────────────────────────────────── */
@@ -117,7 +117,7 @@ body {
 
 /* ─── Gradient Text ─────────────────────────────────────────── */
 .gradient-text {
-  background: linear-gradient(135deg, #2563eb 0%, #4f46e5 50%, #06b6d4 100%);
+  background: linear-gradient(135deg, #2b1b17 0%, #5c3818 50%, #845b37 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -125,17 +125,17 @@ body {
 
 /* ─── Premium Button ────────────────────────────────────────── */
 .btn-primary {
-  background: linear-gradient(135deg, #2563eb 0%, #4f46e5 100%);
-  color: white;
+  background: linear-gradient(135deg, #2b1b17 0%, #4a2c11 100%);
+  color: #fbf9f6;
   font-weight: 700;
   border-radius: 50px;
   transition: opacity 0.2s, transform 0.15s, box-shadow 0.2s;
-  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.35);
+  box-shadow: 0 4px 14px rgba(43, 27, 23, 0.35);
 }
 
 .btn-primary:hover {
   opacity: 0.92;
-  box-shadow: 0 6px 20px rgba(37, 99, 235, 0.45);
+  box-shadow: 0 6px 20px rgba(43, 27, 23, 0.45);
 }
 
 .btn-primary:active {
@@ -152,8 +152,8 @@ body {
 
 .input-premium:focus {
   background: #fffef9;
-  border-color: #2563eb;
-  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.10);
+  border-color: #5c3818;
+  box-shadow: 0 0 0 3px rgba(92, 56, 24, 0.12);
   outline: none;
 }
 
