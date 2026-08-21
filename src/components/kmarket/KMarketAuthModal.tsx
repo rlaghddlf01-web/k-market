@@ -46,7 +46,7 @@ export default function KMarketAuthModal({
   const [stayExpiryDate, setStayExpiryDate] = useState('2026-11-30');
   const [telecom, setTelecom] = useState('SKT_MVNO');
   const [phone, setPhone] = useState('010-8492-3184');
-  const [dormitory, setDormitory] = useState('경기 안산시 단원구 원곡동 795 (다문화거리 앞)');
+  const [dormitory, setDormitory] = useState('');
 
   // 알리고 SMS 인증 상태
   const [sentAuthCode, setSentAuthCode] = useState('');
@@ -58,7 +58,7 @@ export default function KMarketAuthModal({
   // GPS 위치 자동 인식 상태
   const [isLocating, setIsLocating] = useState(false);
 
-  // GPS 내 위치 동의 및 주소 자동 변환
+  // GPS 내 위치 동의 및 주소 자동 변환 (서버 지오코딩 API 연동)
   const handleGetGpsLocation = () => {
     if (!navigator.geolocation) {
       alert('사용 중인 브라우저에서 위치 정보(GPS)를 지원하지 않습니다. 수기로 입력해 주세요.');
@@ -70,58 +70,39 @@ export default function KMarketAuthModal({
       async (position) => {
         const { latitude, longitude } = position.coords;
         try {
-          // 카카오 로컬 REST API 또는 오픈 역지오코딩 시도
-          const res = await fetch(
-            `https://dapi.kakao.com/v2/local/geo/coord2address.json?x=${longitude}&y=${latitude}`,
-            {
-              headers: {
-                Authorization: `KakaoAK ${process.env.NEXT_PUBLIC_KAKAO_REST_API_KEY || '8e4337ba76935409cbca08d66e74b34b'}`,
-              },
-            }
-          );
+          // 서버 사이드 역지오코딩 API 호출 (CORS 원천 해결)
+          const res = await fetch('/api/kmarket/geocode', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ latitude, longitude }),
+          });
+
           if (res.ok) {
             const data = await res.json();
-            if (data.documents && data.documents.length > 0) {
-              const doc = data.documents[0];
-              const roadAddr = doc.road_address?.address_name;
-              const jibunAddr = doc.address?.address_name;
-              const finalAddr = roadAddr || jibunAddr;
-              if (finalAddr) {
-                setDormitory(finalAddr);
-                alert(`📍 [GPS 위치 확인 완료]\n현재 위치 "${finalAddr}"가 자동으로 입력되었습니다!`);
-                setIsLocating(false);
-                return;
-              }
+            if (data.success && data.address) {
+              setDormitory(data.address);
+              setIsLocating(false);
+              return;
             }
           }
-        } catch {
-          // 카카오 API 호출 제한 시 폴백
+        } catch (err) {
+          console.error('Geocode fetch error:', err);
         }
 
-        // 위경도 기반 대표 외국인 공단/거주지 자동 보정 매핑
-        let detectedAddress = '경기 안산시 단원구 원곡동 (다문화거리 인근)';
-        if (latitude > 37.0 && latitude < 37.1) {
-          detectedAddress = '경기 평택시 포승읍 포승공단로 (기숙사 앞)';
-        } else if (latitude >= 37.1 && latitude < 37.3) {
-          detectedAddress = '경기 화성시 향남읍 발안공단로 (원룸단지)';
-        } else if (latitude >= 37.3 && latitude < 37.4) {
-          detectedAddress = '경기 안산시 단원구 원곡동 795';
-        } else if (latitude >= 37.4 && latitude < 37.6) {
-          detectedAddress = '인천 남동구 남동서로 (남동공단 인근)';
-        } else if (latitude >= 37.5 && latitude < 37.7) {
-          detectedAddress = '서울 광진구 화양동 (건대입구 인근)';
-        }
-
-        setDormitory(detectedAddress);
-        alert(`📍 [GPS 위치 확인 완료]\n현재 계신 위치 "${detectedAddress}"가 자동 입력되었습니다!`);
+        // 브라우저 직접 Fallback
+        setDormitory(`위치 확인됨 (위도: ${latitude.toFixed(3)}, 경도: ${longitude.toFixed(3)})`);
         setIsLocating(false);
       },
       (error) => {
         setIsLocating(false);
         console.warn('Geolocation error:', error);
-        alert('위치 권한이 허용되지 않았습니다. 브라우저 위치 권한을 허용하시거나 직접 주소를 입력해 주세요.');
+        if (error.code === error.PERMISSION_DENIED) {
+          alert('브라우저 상단 주소창에서 [위치 정보 권한]을 [허용]해 주시거나 주소를 직접 입력해 주세요.');
+        } else {
+          alert('GPS 위치를 수신할 수 없습니다. 주소를 직접 입력해 주세요.');
+        }
       },
-      { enableHighAccuracy: true, timeout: 8000, maximumAge: 0 }
+      { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
     );
   };
 
