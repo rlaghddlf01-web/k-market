@@ -18,9 +18,11 @@ import {
   Bell,
 } from 'lucide-react';
 import { SupportedLanguage, AppointmentData } from '@/types/kmarket';
+import { detectScamPattern, ScamWarningInfo } from '@/lib/antiScamDetector';
 import KMarketUserProfileModal from './KMarketUserProfileModal';
 import KMarketReviewModal from './KMarketReviewModal';
 import KMarketAppointmentModal from './KMarketAppointmentModal';
+import KMarketScamWarningModal from './KMarketScamWarningModal';
 import CountryFlag from './CountryFlag';
 
 export default function KMarketChatDrawer() {
@@ -31,6 +33,8 @@ export default function KMarketChatDrawer() {
   const [showProfileModal, setShowProfileModal] = useState(false);
   const [showReviewModal, setShowReviewModal] = useState(false);
   const [showAppointmentModal, setShowAppointmentModal] = useState(false);
+  const [showScamModal, setShowScamModal] = useState(false);
+  const [detectedScamInfo, setDetectedScamInfo] = useState<ScamWarningInfo | null>(null);
   const [activeAppointment, setActiveAppointment] = useState<AppointmentData | null>({
     id: 'apt-default-demo',
     place_name: '포승공단 GS25 편의점 앞',
@@ -53,6 +57,13 @@ export default function KMarketChatDrawer() {
   const handleSend = async (e?: React.FormEvent) => {
     if (e) e.preventDefault();
     if (!inputText.trim() || isTranslating) return;
+
+    // 사기 키워드 (카톡/라인/선입금 등) 실시간 감지
+    const scamCheck = detectScamPattern(inputText);
+    if (scamCheck) {
+      setDetectedScamInfo(scamCheck);
+      setShowScamModal(true);
+    }
 
     const textToSend = inputText;
     setInputText('');
@@ -336,6 +347,13 @@ export default function KMarketChatDrawer() {
                         : 'bg-white text-slate-900 border border-slate-200 rounded-bl-xs'
                     }`}
                   >
+                    {/* 사기 주의 뱃지 (외부 메신저 / 선입금 유도 감지 시) */}
+                    {detectScamPattern(msg.original_text) && (
+                      <div className="bg-red-500 text-white text-[10px] font-black px-2 py-0.5 rounded-md flex items-center gap-1 shadow-xs animate-pulse">
+                        <span>🚨 사기 주의! 외부 메신저/선입금 요구 의심</span>
+                      </div>
+                    )}
+
                     {/* 원문 텍스트 */}
                     <p className="text-xs sm:text-sm font-medium leading-relaxed">
                       {msg.original_text}
@@ -452,7 +470,13 @@ export default function KMarketChatDrawer() {
       itemTitle={activeChat.item?.title}
       onConfirmAppointment={handleConfirmAppointment}
     />
+
+    {/* 🛡️ 사기 방지 안심 쉴드 경고 모달 */}
+    <KMarketScamWarningModal
+      isOpen={showScamModal}
+      onClose={() => setShowScamModal(false)}
+      scamInfo={detectedScamInfo}
+    />
   </>
   );
 }
-

@@ -5,6 +5,7 @@ import { useKMarket } from '@/context/KMarketContext';
 import { useLanguage } from '@/context/LanguageContext';
 import KMarketHeader from './KMarketHeader';
 import KMarketTaxBanner from './KMarketTaxBanner';
+import KMarketSafetyBanner from './KMarketSafetyBanner';
 import KMarketMovingSaleSection from './KMarketMovingSaleSection';
 import KMarketRegionFilter from './KMarketRegionFilter';
 import KMarketItemCard from './KMarketItemCard';
@@ -59,6 +60,9 @@ export default function KMarketMainFeed() {
       <main className="flex-1 max-w-6xl w-full mx-auto px-4 py-4 sm:py-6">
         {/* 1. KTRS 킬러 세무 환급 184만원 배너 */}
         <KMarketTaxBanner />
+
+        {/* 1-2. 🛡️ 외국인 안심 거래 3대 수칙 (사기 방지 쉴드) 배너 */}
+        <KMarketSafetyBanner />
 
         {/* 2. 귀국자 헐값 급처분 [무빙 세일(Moving Sale)] 전용관 */}
         {!isMovingSaleOnly && selectedCategory === 'all' && !searchQuery && (
