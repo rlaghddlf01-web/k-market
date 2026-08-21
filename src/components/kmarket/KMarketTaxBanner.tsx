@@ -11,9 +11,10 @@ export default function KMarketTaxBanner() {
     <div className="w-full my-5">
       <div
         onClick={() => setIsTaxModalOpen(true)}
-        className="group relative overflow-hidden rounded-3xl p-6 sm:p-8 text-white border border-[#c5a059]/40 cursor-pointer transition-all duration-300 shadow-2xl shadow-slate-950/20 hover:border-[#f3ba2f] hover:scale-[1.005] active:scale-[0.995]"
+        className="group relative overflow-hidden rounded-3xl p-6 sm:p-8 text-white border-2 border-[#f3ba2f] cursor-pointer transition-all duration-300 shadow-2xl shadow-amber-950/25 hover:border-[#fde047] hover:scale-[1.005] active:scale-[0.995]"
         style={{
           background: 'linear-gradient(135deg, #09101f 0%, #111d38 50%, #162447 100%)',
+          boxShadow: '0 8px 30px rgba(243, 186, 47, 0.18)',
         }}
       >
         {/* 우측 감성적인 고화질 세무 상담 사진 (미드나잇 오버레이 블렌딩) */}

@@ -29,13 +29,14 @@ export default function KMarketHeader() {
 
   return (
     <header className="sticky top-0 z-40 glass border-b border-white/60 shadow-sm">
-      {/* 상단: KTRS 패밀리 바 (진한 남색 + 1.5px 골드 테두리) */}
+      {/* 상단: KTRS 패밀리 바 (진한 남색 + 3px 선명한 골드 테두리) */}
       <div
         style={{ 
           background: 'linear-gradient(135deg, #09101f 0%, #111d38 50%, #162447 100%)',
-          borderBottom: '1.5px solid rgba(243, 186, 47, 0.7)',
+          borderBottom: '3px solid #f3ba2f',
+          boxShadow: '0 3px 12px rgba(243, 186, 47, 0.30)',
         }}
-        className="text-white px-4 py-2 shadow-xs"
+        className="text-white px-4 py-2 relative z-10"
       >
         <div className="max-w-6xl mx-auto flex items-center justify-between text-xs sm:text-sm">
           <div className="flex items-center gap-2.5">

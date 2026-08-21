@@ -158,12 +158,13 @@ export default function KMarketMainFeed() {
         <Plus className="w-6 h-6" />
       </button>
 
-      {/* 푸터 영역 - 진한 남색 & 1.5px 럭셔리 골드 테두리 */}
+      {/* 푸터 영역 - 진한 남색 & 3px 선명한 럭셔리 골드 테두리 */}
       <footer 
-        className="mt-20 text-white shadow-2xl"
+        className="mt-20 text-white relative z-10"
         style={{
           background: 'linear-gradient(180deg, #09101f 0%, #060b17 100%)',
-          borderTop: '1.5px solid rgba(243, 186, 47, 0.7)',
+          borderTop: '3px solid #f3ba2f',
+          boxShadow: '0 -4px 20px rgba(243, 186, 47, 0.25)',
         }}
       >
         <div className="max-w-6xl mx-auto px-4 py-12 space-y-7">

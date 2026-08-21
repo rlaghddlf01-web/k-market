@@ -226,20 +226,21 @@ export default function KMarketItemCard({ item }: KMarketItemCardProps) {
               </div>
             </div>
 
-            {/* 번역 채팅 CTA - 스크린샷 스타일: 딥 네이비 + 1.5px 골드 테두리 */}
+            {/* 번역 채팅 CTA - 스크린샷 스타일: 딥 네이비 + 2px 선명한 골드 테두리 */}
             <button
               onClick={(e) => {
                 e.stopPropagation();
                 openChatForItem(item);
               }}
-              className="w-full flex items-center justify-center gap-1.5 text-[12px] py-2 rounded-xl transition-all duration-200 active:scale-95 cursor-pointer shadow-sm hover:shadow-md hover:bg-[#111d38] hover:border-[#fde047] group/btn"
+              className="w-full flex items-center justify-center gap-1.5 text-[12px] py-2 rounded-xl transition-all duration-200 active:scale-95 cursor-pointer shadow-md hover:shadow-lg hover:bg-[#111d38] group/btn"
               style={{
                 background: '#09101f',
-                border: '1.5px solid #f3ba2f',
+                border: '2px solid #f3ba2f',
+                boxShadow: '0 2px 10px rgba(243, 186, 47, 0.20)',
               }}
             >
               <MessageCircle className="w-3.5 h-3.5 text-[#f3ba2f] group-hover/btn:scale-110 transition-transform" />
-              <span className="text-[#f3ba2f] font-extrabold">1:1 안심 번역 채팅</span>
+              <span className="text-[#f3ba2f] font-black">1:1 안심 번역 채팅</span>
               <span className="text-white font-bold">시작 →</span>
             </button>
           </div>
