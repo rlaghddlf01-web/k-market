@@ -16,6 +16,7 @@ import {
   Bell,
 } from 'lucide-react';
 import CountryFlag from './CountryFlag';
+import KMarketEasyTaxRefundWidget from './KMarketEasyTaxRefundWidget';
 
 interface KMarketMyPageModalProps {
   isOpen: boolean;
@@ -162,35 +163,14 @@ export default function KMarketMyPageModal({ isOpen, onClose }: KMarketMyPageMod
           )}
         </div>
 
-        {/* 💰 KTRS 이지텍스 184만원 세금 환급 연계 원클릭 배너 */}
-        <div className="p-4 bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 text-white flex items-center justify-between shrink-0 shadow-xs">
-          <div className="flex items-center space-x-3">
-            <div className="w-10 h-10 rounded-2xl bg-white/20 flex items-center justify-center text-white shrink-0">
-              <Sparkles className="w-6 h-6 text-yellow-200 animate-spin" />
-            </div>
-            <div>
-              <div className="inline-flex items-center space-x-1 bg-black/20 px-2 py-0.5 rounded-full text-[10px] font-black text-amber-100">
-                <span>KTRS 이지텍스 공식 연동</span>
-              </div>
-              <h4 className="font-black text-sm sm:text-base">
-                예상 환급금 184만원 (선결제 0원 후불제 22%)
-              </h4>
-              <p className="text-[11px] text-amber-100">
-                신분증 OCR 인증이 완료되어 서류 제출 없이 1초 만에 신청 가능합니다.
-              </p>
-            </div>
-          </div>
-
-          <button
-            onClick={() => {
+        {/* 💰 KTRS 이지텍스 실시간 10초 환급 계산기 & 즉시 신청 위젯 */}
+        <div className="p-3 sm:p-4 bg-slate-900 border-b border-slate-200 dark:border-gray-800 shrink-0">
+          <KMarketEasyTaxRefundWidget
+            onApplyClick={() => {
               onClose();
               setIsTaxModalOpen(true);
             }}
-            className="px-4 py-2.5 bg-slate-950 hover:bg-black text-white font-black text-xs rounded-2xl shadow-lg transition-all active:scale-95 shrink-0 cursor-pointer flex items-center space-x-1"
-          >
-            <span>환급 신청</span>
-            <ArrowRight className="w-3.5 h-3.5" />
-          </button>
+          />
         </div>
 
         {/* 🔔 키워드 실시간 알림 관리 섹션 */}
