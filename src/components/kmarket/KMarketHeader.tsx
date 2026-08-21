@@ -13,6 +13,7 @@ export default function KMarketHeader() {
     setSearchQuery,
     setIsCreateModalOpen,
     setIsTaxModalOpen,
+    setIsFavoritesModalOpen,
     likedItemIds,
   } = useKMarket();
 
@@ -137,11 +138,15 @@ export default function KMarketHeader() {
               <span>{t('post_item_btn')}</span>
             </button>
 
-            {/* 찜한 목록 */}
-            <div className="relative p-2 text-slate-600 hover:text-red-500 cursor-pointer transition-colors">
+            {/* 찜한 목록 & 마이페이지 버튼 */}
+            <div
+              onClick={() => setIsFavoritesModalOpen(true)}
+              className="relative p-2 text-slate-600 hover:text-red-500 cursor-pointer transition-colors"
+              title="찜한 매물 및 마이페이지"
+            >
               <Heart className="w-5 h-5" />
               {likedItemIds.size > 0 && (
-                <span className="absolute top-0 right-0 bg-red-500 text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center">
+                <span className="absolute top-0 right-0 bg-red-500 text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center animate-pulse">
                   {likedItemIds.size}
                 </span>
               )}

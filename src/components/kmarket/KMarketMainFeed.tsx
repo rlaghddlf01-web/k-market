@@ -13,6 +13,7 @@ import KMarketItemDetail from './KMarketItemDetail';
 import KMarketCreatePost from './KMarketCreatePost';
 import KMarketChatDrawer from './KMarketChatDrawer';
 import KMarketTaxModal from './KMarketTaxModal';
+import KMarketFavoritesModal from './KMarketFavoritesModal';
 import { ShoppingBag, Sparkles, ShieldCheck, Plus, PackageOpen } from 'lucide-react';
 
 export default function KMarketMainFeed() {
@@ -168,6 +169,7 @@ export default function KMarketMainFeed() {
       <KMarketCreatePost />
       <KMarketChatDrawer />
       <KMarketTaxModal />
+      <KMarketFavoritesModal />
     </div>
   );
 }

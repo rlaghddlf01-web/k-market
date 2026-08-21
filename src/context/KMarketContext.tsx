@@ -31,6 +31,8 @@ interface KMarketContextType {
   setIsCreateModalOpen: (open: boolean) => void;
   isTaxModalOpen: boolean;
   setIsTaxModalOpen: (open: boolean) => void;
+  isFavoritesModalOpen: boolean;
+  setIsFavoritesModalOpen: (open: boolean) => void;
   
   // 채팅 상태
   activeChat: KMarketChat | null;
@@ -70,6 +72,7 @@ export function KMarketProvider({ children }: { children: React.ReactNode }) {
   const [selectedItem, setSelectedItem] = useState<KMarketItem | null>(null);
   const [isCreateModalOpen, setIsCreateModalOpen] = useState<boolean>(false);
   const [isTaxModalOpen, setIsTaxModalOpen] = useState<boolean>(false);
+  const [isFavoritesModalOpen, setIsFavoritesModalOpen] = useState<boolean>(false);
 
   // 채팅
   const [activeChat, setActiveChat] = useState<KMarketChat | null>(null);
@@ -409,6 +412,8 @@ export function KMarketProvider({ children }: { children: React.ReactNode }) {
         setIsCreateModalOpen,
         isTaxModalOpen,
         setIsTaxModalOpen,
+        isFavoritesModalOpen,
+        setIsFavoritesModalOpen,
         activeChat,
         chatMessages,
         isChatLoading,
