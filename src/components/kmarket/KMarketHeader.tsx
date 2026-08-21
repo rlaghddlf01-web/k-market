@@ -31,15 +31,15 @@ export default function KMarketHeader() {
     <header className="sticky top-0 z-40 glass border-b border-white/60 shadow-sm">
       {/* 상단: KTRS 패밀리 바 */}
       <div
-        style={{ background: 'linear-gradient(135deg, #1e130f 0%, #2b1b17 50%, #3d2817 100%)' }}
-        className="text-[#fbf9f6] px-4 py-2"
+        style={{ background: 'linear-gradient(135deg, #150d0a 0%, #20140f 50%, #2b1b17 100%)' }}
+        className="text-white px-4 py-2"
       >
         <div className="max-w-6xl mx-auto flex items-center justify-between text-xs sm:text-sm">
           <div className="flex items-center gap-2.5">
-            <span className="bg-[#b8860b] text-[#1f1914] font-extrabold px-2 py-0.5 rounded-md text-[10px] uppercase tracking-widest shadow-xs">
+            <span className="bg-[#f3ba2f] text-[#09101f] font-black px-2.5 py-0.5 rounded-md text-[10px] uppercase tracking-widest shadow-sm">
               KTRS
             </span>
-            <span className="hidden sm:inline font-medium text-[#d8c8b8] text-[12px]">
+            <span className="hidden sm:inline font-bold text-white text-[13px] tracking-tight">
               대한민국 No.1 외국인 근로자 종합 플랫폼
             </span>
           </div>
@@ -49,13 +49,13 @@ export default function KMarketHeader() {
             <div className="relative">
               <button
                 onClick={() => setIsLangDropdownOpen(!isLangDropdownOpen)}
-                className="flex items-center gap-1.5 bg-white/10 hover:bg-white/20 transition-all px-3 py-1.5 rounded-full text-[#fbf9f6] font-semibold border border-white/15 text-xs cursor-pointer"
+                className="flex items-center gap-1.5 bg-white/15 hover:bg-white/25 transition-all px-3 py-1.5 rounded-full text-white font-bold border border-white/25 text-xs cursor-pointer shadow-2xs"
                 title="Change Language (15 Languages)"
               >
-                <Globe className="w-3.5 h-3.5 text-[#d8c8b8]" />
+                <Globe className="w-3.5 h-3.5 text-[#f3ba2f]" />
                 <span>{currentLangOption.flag}</span>
-                <span className="hidden md:inline text-[11px]">{currentLangOption.nativeName}</span>
-                <ChevronDown className="w-3 h-3 opacity-60" />
+                <span className="hidden md:inline text-[11px] font-bold text-white">{currentLangOption.nativeName}</span>
+                <ChevronDown className="w-3 h-3 text-white/80" />
               </button>
 
               {isLangDropdownOpen && (
@@ -93,9 +93,9 @@ export default function KMarketHeader() {
             </div>
 
             {/* 수수료 0원 뱃지 */}
-            <div className="flex items-center gap-1 bg-[#4a3424]/60 text-[#dfd3c7] px-2.5 py-1 rounded-full text-[11px] font-semibold border border-[#845b37]/40">
-              <ShieldCheck className="w-3.5 h-3.5 text-amber-400" />
-              <span>{t('zero_fee_badge')}</span>
+            <div className="flex items-center gap-1.5 bg-black/40 text-[#fef08a] px-3 py-1 rounded-full text-[11px] font-extrabold border border-[#f3ba2f]/50 shadow-2xs">
+              <ShieldCheck className="w-3.5 h-3.5 text-[#f3ba2f]" />
+              <span className="text-white font-bold">{t('zero_fee_badge')}</span>
             </div>
           </div>
         </div>

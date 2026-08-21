@@ -159,73 +159,73 @@ export default function KMarketMainFeed() {
       </button>
 
       {/* 푸터 영역 - 딥 에스프레소 쇼핑몰 스타일 마감 */}
-      <footer className="mt-20 border-t border-[#3d2817] bg-[#1e130f] text-[#d8c8b8]">
+      <footer className="mt-20 border-t border-[#3d2817] bg-[#150d0a] text-white">
         <div className="max-w-6xl mx-auto px-4 py-12 space-y-7">
           {/* 상단 브랜드 & 혜택 요약 */}
-          <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-6 pb-6 border-b border-[#332219]">
+          <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-6 pb-6 border-b border-[#2d1a12]">
             <div className="space-y-2">
               <div className="flex items-center gap-2.5">
-                <div className="relative w-8 h-8 rounded-lg overflow-hidden shadow-sm shrink-0 border border-[#5c3818]/60 bg-[#09101f] flex items-center justify-center">
+                <div className="relative w-9 h-9 rounded-xl overflow-hidden shadow-md shrink-0 border border-[#845b37]/60 bg-[#09101f] flex items-center justify-center">
                   <img
                     src="/images/kmarket-logo.jpg"
                     alt="K-Market Logo"
                     className="w-full h-full object-cover scale-110"
                   />
                 </div>
-                <span className="text-[#fbf9f6] font-extrabold text-base tracking-tight">KTRS K-Market</span>
-                <span className="text-[9px] font-bold bg-[#845b37] text-white px-2 py-0.5 rounded-full">Zero Fee C2C</span>
+                <span className="text-white font-black text-lg tracking-tight">KTRS K-Market</span>
+                <span className="text-[10px] font-black bg-[#f3ba2f] text-[#09101f] px-2 py-0.5 rounded-full uppercase tracking-wider">Zero Fee C2C</span>
               </div>
-              <p className="text-[#8c7866] text-xs leading-relaxed max-w-xs">
-                대한민국 No.1 외국인 종합 슈퍼앱 KTRS 연계<br />외국인 전용 중고거래 &amp; 무빙세일 플랫폼
+              <p className="text-[#f1f5f9] text-xs font-semibold leading-relaxed max-w-sm">
+                대한민국 No.1 외국인 종합 슈퍼앱 KTRS 연계<br />외국인 전용 0원 안심 중고거래 &amp; 귀국 무빙세일 플랫폼
               </p>
             </div>
 
-            <div className="flex flex-col gap-2 text-xs text-[#a89888]">
-              <div className="flex items-center gap-1.5">
-                <ShieldCheck className="w-3.5 h-3.5 text-amber-400" />
-                <span>수수료 0원 100% 무료 안심 직거래</span>
+            <div className="flex flex-col gap-2 text-xs font-bold text-[#f8fafc]">
+              <div className="flex items-center gap-2">
+                <ShieldCheck className="w-4 h-4 text-[#f3ba2f]" />
+                <span className="text-white font-bold">수수료 0원 100% 무료 안심 직거래</span>
               </div>
-              <div className="flex items-center gap-1.5">
-                <Sparkles className="w-3.5 h-3.5 text-amber-400" />
-                <span>15개국어 실시간 Gemini AI 양방향 번역</span>
+              <div className="flex items-center gap-2">
+                <Sparkles className="w-4 h-4 text-[#f3ba2f]" />
+                <span className="text-white font-bold">15개국어 실시간 Gemini AI 양방향 번역</span>
               </div>
             </div>
           </div>
 
-          {/* 공식 사업자등록 정보 (스크린샷 일치) */}
-          <div className="space-y-2 text-xs text-[#a89888] leading-relaxed">
-            <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
-              <span><strong>사업자명:</strong> 주식회사 펫에이앤씨</span>
-              <span className="text-[#5c4a39]">|</span>
-              <span><strong>대표자:</strong> 전기창</span>
-              <span className="text-[#5c4a39]">|</span>
-              <span><strong>사업자 등록번호:</strong> 229-86-03034</span>
-              <span className="text-[#5c4a39]">|</span>
-              <span><strong>통신판매업 번호:</strong> 제 2023-진접오남-0680호</span>
+          {/* 공식 사업자등록 정보 (선명한 화이트 & 볼드 폰트) */}
+          <div className="space-y-2.5 text-xs text-white leading-relaxed font-medium">
+            <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-white">
+              <span><strong className="text-[#f3ba2f] font-extrabold">사업자명:</strong> 주식회사 펫에이앤씨</span>
+              <span className="text-white/40">|</span>
+              <span><strong className="text-[#f3ba2f] font-extrabold">대표자:</strong> 전기창</span>
+              <span className="text-white/40">|</span>
+              <span><strong className="text-[#f3ba2f] font-extrabold">사업자 등록번호:</strong> 229-86-03034</span>
+              <span className="text-white/40">|</span>
+              <span><strong className="text-[#f3ba2f] font-extrabold">통신판매업 번호:</strong> 제 2023-진접오남-0680호</span>
             </div>
 
-            <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
-              <span><strong>주소:</strong> 서울특별시 광진구 광나루로 436, 5층(화양동, 에듀킨빌딩)</span>
-              <span className="text-[#5c4a39]">|</span>
-              <span><strong>연락처:</strong> 010-5964-5340</span>
-              <span className="text-[#5c4a39]">|</span>
-              <span><strong>이메일:</strong> zkfnth021@gmail.com</span>
+            <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-white">
+              <span><strong className="text-[#f3ba2f] font-extrabold">주소:</strong> 서울특별시 광진구 광나루로 436, 5층(화양동, 에듀킨빌딩)</span>
+              <span className="text-white/40">|</span>
+              <span><strong className="text-[#f3ba2f] font-extrabold">연락처:</strong> 010-5964-5340</span>
+              <span className="text-white/40">|</span>
+              <span><strong className="text-[#f3ba2f] font-extrabold">이메일:</strong> zkfnth021@gmail.com</span>
             </div>
 
-            {/* 공식 세무대리 면책 고지 문구 */}
-            <p className="pt-2 text-[11px] text-[#786657] leading-relaxed">
+            {/* 공식 세무대리 면책 고지 문구 (가독성 높은 화이트/아이보리) */}
+            <p className="pt-2 text-[11px] text-[#cbd5e1] font-normal leading-relaxed">
               Korea Tax Refund Service(Korea Tax Refund Service)은 세무대리 신고를 직접 수행하지 않으며, 본 플랫폼에서 작성된 신청 서류는 제휴된 대한민국 국가공인 전문 세무법인 및 협력 세무사를 통해 최종 검토 및 제출됩니다.
             </p>
           </div>
 
           {/* 하단 카피라이트 & 관리자 링크 */}
-          <div className="pt-5 border-t border-[#332219] text-[11px] text-[#705e4f] flex flex-col sm:flex-row justify-between items-center gap-3">
+          <div className="pt-5 border-t border-[#2d1a12] text-[11px] text-[#94a3b8] font-semibold flex flex-col sm:flex-row justify-between items-center gap-3">
             <p>© 2026 KTRS (Korea Tax &amp; Foreign Resident Service). All rights reserved.</p>
             <div className="flex items-center gap-3">
-              <span>공단 직거래 안심 가이드 | 고객센터 1588-0000</span>
+              <span className="text-[#cbd5e1]">공단 직거래 안심 가이드 | 고객센터 1588-0000</span>
               <Link
                 href="/admin"
-                className="px-2.5 py-1 bg-[#2b1b17] hover:bg-[#3d2817] border border-[#5c3818]/60 text-[#d8c8b8] font-bold rounded-lg text-[10px] transition-all flex items-center gap-1 cursor-pointer"
+                className="px-2.5 py-1 bg-[#20140f] hover:bg-[#3d2817] border border-[#845b37]/80 text-[#f3ba2f] font-extrabold rounded-lg text-[10px] transition-all flex items-center gap-1 cursor-pointer"
                 title="KTRS 관리자 전용 관제 콘솔 페이지"
               >
                 <span>관리자 관제 콘솔 (/admin)</span>
