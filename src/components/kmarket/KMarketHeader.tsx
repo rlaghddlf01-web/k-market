@@ -108,16 +108,17 @@ export default function KMarketHeader() {
           {/* 로고 & 위치 칩 */}
           <div className="flex items-center gap-3">
             <div className="flex items-center gap-2.5">
-              {/* 로고 아이콘 - 모카 커피 브라운 */}
-              <div
-                className="w-10 h-10 rounded-2xl flex items-center justify-center text-[#fbf9f6] font-black text-lg shadow-sm shrink-0"
-                style={{ background: 'linear-gradient(135deg, #3d2817 0%, #5c3818 100%)' }}
-              >
-                K
+              {/* 로고 아이콘 - 1안 골드 쉴드 쇼핑백 엠블럼 */}
+              <div className="relative w-10 h-10 sm:w-11 sm:h-11 rounded-xl overflow-hidden shadow-sm shrink-0 border border-[#ded1c4] bg-[#09101f] flex items-center justify-center">
+                <img
+                  src="/images/kmarket-logo.jpg"
+                  alt="K-Market Logo"
+                  className="w-full h-full object-cover scale-110"
+                />
               </div>
               <div>
                 <div className="flex items-center gap-1.5">
-                  <span className="text-[20px] font-extrabold tracking-tight text-[#1f1914] leading-none">K-Market</span>
+                  <span className="text-[20px] sm:text-[22px] font-black tracking-tight text-[#1f1914] leading-none">K-Market</span>
                   <span className="text-[9px] font-black bg-[#ede2d6] text-[#5c4a39] px-1.5 py-0.5 rounded-md tracking-wider">FREE</span>
                 </div>
                 <p className="text-[11px] text-[#8c7866] hidden sm:block mt-0.5 font-medium">{t('app_slogan')}</p>

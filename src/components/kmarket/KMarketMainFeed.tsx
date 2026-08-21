@@ -163,12 +163,13 @@ export default function KMarketMainFeed() {
         <div className="max-w-6xl mx-auto px-4 py-12 space-y-6">
           <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-6">
             <div className="space-y-2">
-              <div className="flex items-center gap-2">
-                <div
-                  className="w-8 h-8 rounded-xl flex items-center justify-center text-[#fbf9f6] font-black text-sm"
-                  style={{ background: 'linear-gradient(135deg, #5c3818 0%, #845b37 100%)' }}
-                >
-                  K
+              <div className="flex items-center gap-2.5">
+                <div className="relative w-8 h-8 rounded-lg overflow-hidden shadow-sm shrink-0 border border-[#5c3818]/60 bg-[#09101f] flex items-center justify-center">
+                  <img
+                    src="/images/kmarket-logo.jpg"
+                    alt="K-Market Logo"
+                    className="w-full h-full object-cover scale-110"
+                  />
                 </div>
                 <span className="text-[#fbf9f6] font-extrabold text-base tracking-tight">KTRS K-Market</span>
                 <span className="text-[9px] font-bold bg-[#845b37] text-white px-2 py-0.5 rounded-full">Zero Fee C2C</span>
