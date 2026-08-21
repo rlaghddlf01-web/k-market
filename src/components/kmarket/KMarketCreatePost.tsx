@@ -289,8 +289,8 @@ export default function KMarketCreatePost() {
                       }}
                       className={`relative p-2.5 rounded-2xl border text-left transition-all duration-200 cursor-pointer flex items-center gap-2 ${
                         isSelected
-                          ? 'border-[#f3ba2f] bg-[#09101f] text-white shadow-md'
-                          : 'border-slate-200 bg-slate-50 hover:bg-slate-100 text-slate-700'
+                          ? 'border-[#c89d6e] bg-linear-to-r from-[#8c5e3c] to-[#704423] text-white shadow-md shadow-[#8c5e3c]/25'
+                          : 'border-slate-200 bg-slate-50 hover:bg-[#f5ede4] text-slate-700'
                       }`}
                     >
                       <span className="text-base">{cat.icon}</span>

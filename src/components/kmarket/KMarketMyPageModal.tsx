@@ -209,14 +209,14 @@ export default function KMarketMyPageModal({ isOpen, onClose }: KMarketMyPageMod
             </button>
           </div>
 
-          {/* 📦 3대 거래 관리 탭 바: [내가 파는 물건] [내가 산 물건] [내가 찜한 물건] (스크롤 시 상단 고정 sticky) */}
-          <div className="sticky top-0 z-20 flex border-b border-slate-200 dark:border-gray-800 bg-white/95 dark:bg-gray-900/95 backdrop-blur-md p-1.5 gap-1.5 shadow-xs">
+          {/* 📦 3대 거래 관리 탭 바: [내가 파는 물건] [내가 산 물건] [내가 찜한 물건] (연한 커피/카푸치노 스타일) */}
+          <div className="sticky top-0 z-20 flex border-b border-[#e8ded3] bg-[#fdfbf9]/95 backdrop-blur-md p-1.5 gap-1.5 shadow-xs">
             <button
               onClick={() => setActiveTab('selling')}
-              className={`flex-1 py-2.5 rounded-2xl text-xs sm:text-sm font-black flex items-center justify-center space-x-1.5 transition-all cursor-pointer ${
+              className={`flex-1 py-2.5 rounded-2xl text-xs sm:text-sm font-bold flex items-center justify-center space-x-1.5 transition-all cursor-pointer ${
                 activeTab === 'selling'
-                  ? 'bg-blue-600 text-white shadow-md shadow-blue-600/25'
-                  : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-gray-800'
+                  ? 'bg-linear-to-r from-[#9c6644] to-[#7f4f24] text-white shadow-md shadow-[#9c6644]/25 ring-1 ring-[#d4a373]'
+                  : 'text-[#7d6b5c] hover:bg-[#f4ece4]'
               }`}
             >
               <Package className="w-4 h-4" />
@@ -225,10 +225,10 @@ export default function KMarketMyPageModal({ isOpen, onClose }: KMarketMyPageMod
 
             <button
               onClick={() => setActiveTab('buying')}
-              className={`flex-1 py-2.5 rounded-2xl text-xs sm:text-sm font-black flex items-center justify-center space-x-1.5 transition-all cursor-pointer ${
+              className={`flex-1 py-2.5 rounded-2xl text-xs sm:text-sm font-bold flex items-center justify-center space-x-1.5 transition-all cursor-pointer ${
                 activeTab === 'buying'
-                  ? 'bg-blue-600 text-white shadow-md shadow-blue-600/25'
-                  : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-gray-800'
+                  ? 'bg-linear-to-r from-[#9c6644] to-[#7f4f24] text-white shadow-md shadow-[#9c6644]/25 ring-1 ring-[#d4a373]'
+                  : 'text-[#7d6b5c] hover:bg-[#f4ece4]'
               }`}
             >
               <ShoppingBag className="w-4 h-4" />
@@ -237,10 +237,10 @@ export default function KMarketMyPageModal({ isOpen, onClose }: KMarketMyPageMod
 
             <button
               onClick={() => setActiveTab('favorites')}
-              className={`flex-1 py-2.5 rounded-2xl text-xs sm:text-sm font-black flex items-center justify-center space-x-1.5 transition-all cursor-pointer ${
+              className={`flex-1 py-2.5 rounded-2xl text-xs sm:text-sm font-bold flex items-center justify-center space-x-1.5 transition-all cursor-pointer ${
                 activeTab === 'favorites'
-                  ? 'bg-red-500 text-white shadow-md shadow-red-500/25'
-                  : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-gray-800'
+                  ? 'bg-linear-to-r from-[#b05d5d] to-[#8c4343] text-white shadow-md shadow-[#b05d5d]/25 ring-1 ring-[#e09f9f]'
+                  : 'text-[#7d6b5c] hover:bg-[#f4ece4]'
               }`}
             >
               <Heart className="w-4 h-4 fill-current" />
@@ -249,11 +249,11 @@ export default function KMarketMyPageModal({ isOpen, onClose }: KMarketMyPageMod
           </div>
 
           {/* 탭 컨텐츠 상품 목록 영역 */}
-          <div className="p-4 space-y-3 pb-8">
+          <div className="p-4 space-y-3 pb-8 bg-[#fdfbf9]">
           {/* 1. 내가 파는 물건 탭 */}
           {activeTab === 'selling' && (
             <div className="space-y-3">
-              {/* 서브 필터: 전체 / 판매중 / 거래완료 */}
+              {/* 서브 필터: 전체 / 판매중 / 거래완료 (연한 커피 라떼 & 카라멜 모카) */}
               <div className="flex items-center gap-1.5 text-xs">
                 {(['all', 'selling', 'sold'] as const).map((filter) => (
                   <button
@@ -261,8 +261,8 @@ export default function KMarketMyPageModal({ isOpen, onClose }: KMarketMyPageMod
                     onClick={() => setSellingSubFilter(filter)}
                     className={`px-3 py-1.5 rounded-xl font-bold transition-all cursor-pointer ${
                       sellingSubFilter === filter
-                        ? 'bg-slate-900 text-white dark:bg-white dark:text-slate-900'
-                        : 'bg-slate-100 text-slate-600 dark:bg-gray-800 dark:text-slate-400'
+                        ? 'bg-[#8c5e3c] text-white shadow-xs'
+                        : 'bg-[#f4ece4] text-[#7d6b5c] hover:bg-[#eae0d5] border border-[#e8ded3]'
                     }`}
                   >
                     {filter === 'all' && `전체 (${mySellingItems.length})`}

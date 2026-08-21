@@ -69,13 +69,18 @@ export default function KMarketCategoryNav() {
               onClick={() => handleCategoryClick(cat.id)}
               className="flex flex-col items-center gap-2 shrink-0 group cursor-pointer transition-all duration-200"
             >
-              {/* 원형 아이콘 버블 */}
+              {/* 원형 아이콘 버블 (스크린샷 스타일: 진한 남색 + 2px 골드 테두리) */}
               <div 
                 className={`relative w-14 h-14 sm:w-16 sm:h-16 rounded-full flex items-center justify-center transition-all duration-200 ${
                   isSelected
-                    ? 'bg-[#1f1914] text-[#fbf9f6] shadow-md scale-105'
-                    : 'bg-[#f4efe9] hover:bg-[#eae3dc] text-[#5c4f42] border border-[#dfd7ce]'
+                    ? 'text-[#f3ba2f] scale-105'
+                    : 'bg-[#fbf7f2] hover:bg-[#f3ebe1] text-[#7d6b5c] border border-[#e8ded3]'
                 }`}
+                style={isSelected ? {
+                  background: 'linear-gradient(135deg, #09101f 0%, #111d38 100%)',
+                  border: '2px solid #f3ba2f',
+                  boxShadow: '0 4px 14px rgba(243, 186, 47, 0.30)',
+                } : undefined}
               >
                 {cat.icon}
 
@@ -94,8 +99,8 @@ export default function KMarketCategoryNav() {
               {/* 카테고리 명 */}
               <span className={`text-xs tracking-tight transition-colors ${
                 isSelected 
-                  ? 'font-bold text-[#1f1914]' 
-                  : 'font-medium text-[#705e4f] group-hover:text-[#1f1914]'
+                  ? 'font-black text-[#09101f] scale-105' 
+                  : 'font-medium text-[#8c7a6b] group-hover:text-[#09101f]'
               }`}>
                 {cat.nameKo}
               </span>
