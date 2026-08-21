@@ -26,6 +26,7 @@ export default function KMarketMainFeed() {
     searchQuery,
     isMovingSaleOnly,
     blockedUserIds,
+    setIsCreateModalOpen,
   } = useKMarket();
   const { t } = useLanguage();
 

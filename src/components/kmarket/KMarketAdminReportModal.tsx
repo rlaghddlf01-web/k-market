@@ -20,12 +20,11 @@ export default function KMarketAdminReportModal({
   isOpen,
   onClose,
 }: KMarketAdminReportModalProps) {
-  const { items } = useKMarket();
   const [filterStatus, setFilterStatus] = useState<'all' | 'pending' | 'resolved'>('all');
 
   // 관리자 샘플 신고 큐 데이터
   const [reports, setReports] = useState<
-    (UserReportData & { status: 'pending' | 'banned' | 'suspended' | 'dismissed' })[]
+    (UserReportData & { status: 'pending' | 'banned' | 'suspended' | 'dismissed' | 'resolved' })[]
   >([
     {
       id: 'rep-101',

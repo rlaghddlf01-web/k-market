@@ -6,6 +6,7 @@ import {
   KMarketChat,
   KMarketMessage,
   ItemCategory,
+  ItemStatus,
   IndustrialRegion,
   SupportedLanguage,
 } from '@/types/kmarket';
