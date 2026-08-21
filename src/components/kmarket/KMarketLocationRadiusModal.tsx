@@ -106,7 +106,7 @@ export default function KMarketLocationRadiusModal({
     }
     alert(
       `[실제 내 위치 기준 동네 인증 완료]\n\n📍 내 기준 위치: ${locationName}\n📏 거래 반경: 내 위치 반경 ${radiusKm}km 이내 (${
-        radiusKm === 1 ? '도보 10분 🚶‍♂️' : radiusKm === 3 ? '자전거/킥보드 10분 🚲' : '공단/도시 전체 🚗'
+        radiusKm === 1 ? '도보 10분 🚶‍♂️' : radiusKm === 3 ? '자전거/킥보드 10분 🚲' : '내 주변 10km 전체 🚗'
       })\n\n내 실제 위치를 중심으로 ${radiusKm}km 내의 직거래 매물이 우선 표시됩니다!`
     );
     onClose();
@@ -261,14 +261,14 @@ export default function KMarketLocationRadiusModal({
               >
                 <Car className="w-5 h-5" />
                 <span className="text-xs font-black">10km 이내</span>
-                <span className="text-[10px] opacity-80">공단 전체 🚗</span>
+                <span className="text-[10px] opacity-80">내 주변 10km 전체 🚗</span>
               </button>
             </div>
 
             <p className="text-[11px] text-slate-500 dark:text-slate-400 text-center">
-              {radiusKm === 1 && '🔍 내 기숙사/원룸 바로 앞 도보 10분 초밀착 직거래 매물만 봅니다.'}
+              {radiusKm === 1 && '🔍 내 집/기숙사 바로 앞 걸어서 10분 초밀착 직거래 매물만 봅니다.'}
               {radiusKm === 3 && '🚲 자전거, 전동킥보드로 10분 내 왕복 가능한 실속 반경 매물을 봅니다.'}
-              {radiusKm === 10 && '🚗 내 위치를 중심으로 공단 및 시내 전역의 모든 매물을 넓게 봅니다.'}
+              {radiusKm === 10 && '🚗 내 위치를 중심으로 반경 10km 내의 모든 직거래 매물을 넓게 봅니다.'}
             </p>
           </div>
 
