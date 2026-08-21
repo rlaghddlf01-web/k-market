@@ -17,11 +17,15 @@ import {
   Building2,
 } from 'lucide-react';
 import { INITIAL_ITEMS } from '@/lib/mockData';
+import { INITIAL_COMMUNITY_POSTS } from '@/lib/communityMockData';
 import { KMarketItem, UserReportData } from '@/types/kmarket';
+import { CommunityPost } from '@/types/community';
+import { MessageSquareHeart, EyeOff } from 'lucide-react';
 
 export default function KMarketAdminPage() {
-  const [activeTab, setActiveTab] = useState<'overview' | 'reports' | 'items' | 'users' | 'taxes'>('overview');
+  const [activeTab, setActiveTab] = useState<'overview' | 'reports' | 'community' | 'items' | 'users' | 'taxes'>('overview');
   const [reportFilter, setReportFilter] = useState<'all' | 'pending' | 'resolved'>('all');
+  const [communityPosts, setCommunityPosts] = useState<CommunityPost[]>(INITIAL_COMMUNITY_POSTS);
 
   // 관리자 신고 리스트 상태
   const [reports, setReports] = useState<
@@ -150,6 +154,22 @@ export default function KMarketAdminPage() {
     }
   };
 
+  // 커뮤니티 글 블라인드 (숨김) 처리
+  const handleHideCommunityPost = (postId: string, title: string) => {
+    if (confirm(`게시글 "${title}"을(를) 커뮤니티 피드에서 [블라인드(숨김)] 처리하시겠습니까?`)) {
+      setCommunityPosts((prev) => prev.filter((p) => p.id !== postId));
+      alert('게시글이 즉시 블라인드 처리되었습니다.');
+    }
+  };
+
+  // 커뮤니티 악성 유저 영구 퇴출
+  const handleBanCommunityUser = (userId: string, userName: string) => {
+    if (confirm(`악성 회원 "${userName}"을(를) [플랫폼 영구 퇴출 및 작성글 전체 삭제] 처리하시겠습니까?`)) {
+      setCommunityPosts((prev) => prev.filter((p) => p.user_id !== userId));
+      alert(`[관리자 집행] "${userName}" 회원이 영구 퇴출되었습니다.`);
+    }
+  };
+
   const pendingReportsCount = reports.filter((r) => r.status === 'pending').length;
 
   return (
@@ -234,11 +254,29 @@ export default function KMarketAdminPage() {
               )}
             </button>
 
+            {/* 🗣️ 동네생활 커뮤니티 관제 탭 */}
+            <button
+              onClick={() => setActiveTab('community')}
+              className={`w-full flex items-center justify-between px-3.5 py-3 rounded-2xl text-xs sm:text-sm font-extrabold transition-all cursor-pointer ${
+                activeTab === 'community'
+                  ? 'bg-indigo-600 text-white shadow-md shadow-indigo-600/25'
+                  : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900'
+              }`}
+            >
+              <div className="flex items-center space-x-2.5">
+                <MessageSquareHeart className="w-4 h-4" />
+                <span>동네생활 관제</span>
+              </div>
+              <span className="text-[10px] bg-indigo-50 text-indigo-700 font-bold px-2 py-0.5 rounded-full">
+                {communityPosts.length}개
+              </span>
+            </button>
+
             <button
               onClick={() => setActiveTab('items')}
               className={`w-full flex items-center justify-between px-3.5 py-3 rounded-2xl text-xs sm:text-sm font-extrabold transition-all cursor-pointer ${
                 activeTab === 'items'
-                  ? 'bg-indigo-600 text-white shadow-md shadow-indigo-600/25'
+                  ? 'bg-slate-900 text-white shadow-md'
                   : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900'
               }`}
             >
@@ -309,6 +347,7 @@ export default function KMarketAdminPage() {
             {[
               { id: 'overview', label: '📊 종합' },
               { id: 'reports', label: `🚨 신고 (${pendingReportsCount})` },
+              { id: 'community', label: `🗣️ 커뮤니티 (${communityPosts.length})` },
               { id: 'items', label: '📦 매물' },
               { id: 'taxes', label: '💰 세금환급' },
               { id: 'users', label: '👥 회원' },
@@ -563,7 +602,85 @@ export default function KMarketAdminPage() {
             </div>
           )}
 
-          {/* 3. 전체 중고 매물 관리 탭 (Items) */}
+          {/* 3. 동네생활 커뮤니티 관제 탭 (Community) */}
+          {activeTab === 'community' && (
+            <div className="space-y-4">
+              <div className="flex items-center justify-between">
+                <div>
+                  <h3 className="font-black text-sm text-slate-900 flex items-center gap-1.5">
+                    <MessageSquareHeart className="w-4 h-4 text-indigo-600" />
+                    <span>동네생활 등록 게시글 실시간 관제 ({communityPosts.length}개)</span>
+                  </h3>
+                  <p className="text-xs text-slate-500 mt-0.5">
+                    불법 홍보, 악플, 사기 의심 글을 원클릭으로 즉시 블라인드 처리하거나 작성자를 영구 퇴출할 수 있습니다.
+                  </p>
+                </div>
+              </div>
+
+              <div className="overflow-x-auto rounded-3xl border border-slate-200/80 bg-white shadow-xs">
+                <table className="w-full text-left text-xs">
+                  <thead className="bg-slate-50 text-slate-500 uppercase text-[10px] font-bold border-b border-slate-200">
+                    <tr>
+                      <th className="p-3.5">카테고리 / 제목</th>
+                      <th className="p-3.5">작성자 / 국적</th>
+                      <th className="p-3.5">지역</th>
+                      <th className="p-3.5">공감 / 댓글</th>
+                      <th className="p-3.5">등록일시</th>
+                      <th className="p-3.5 text-right">관리 조치</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-slate-100 text-slate-700">
+                    {communityPosts.map((post) => (
+                      <tr key={post.id} className="hover:bg-slate-50 transition-colors">
+                        <td className="p-3.5">
+                          <div className="space-y-0.5">
+                            <span className="text-[10px] font-bold text-indigo-600 bg-indigo-50 px-2 py-0.5 rounded-md">
+                              {post.category}
+                            </span>
+                            <p className="font-bold text-slate-900 truncate max-w-[240px]">
+                              {post.title}
+                            </p>
+                          </div>
+                        </td>
+                        <td className="p-3.5 font-medium">
+                          {post.user_name} ({post.user_flag})
+                        </td>
+                        <td className="p-3.5 text-slate-500">{post.region}</td>
+                        <td className="p-3.5">
+                          <span className="text-slate-600 font-bold">
+                            ❤️ {post.like_count} • 💬 {post.comment_count}
+                          </span>
+                        </td>
+                        <td className="p-3.5 text-slate-400 text-[11px]">
+                          {new Date(post.created_at).toLocaleDateString()}
+                        </td>
+                        <td className="p-3.5 text-right space-x-1">
+                          <button
+                            onClick={() => handleHideCommunityPost(post.id, post.title)}
+                            className="px-2.5 py-1 bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-200 rounded-lg font-bold text-[10px] transition-colors cursor-pointer inline-flex items-center gap-1"
+                            title="커뮤니티에서 숨김 처리"
+                          >
+                            <EyeOff className="w-3 h-3 text-amber-600" />
+                            <span>블라인드</span>
+                          </button>
+                          <button
+                            onClick={() => handleBanCommunityUser(post.user_id, post.user_name)}
+                            className="px-2.5 py-1 bg-rose-50 hover:bg-rose-100 text-rose-700 border border-rose-200 rounded-lg font-bold text-[10px] transition-colors cursor-pointer inline-flex items-center gap-1"
+                            title="유저 영구 퇴출"
+                          >
+                            <Ban className="w-3 h-3 text-rose-600" />
+                            <span>퇴출</span>
+                          </button>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          )}
+
+          {/* 4. 전체 중고 매물 관리 탭 (Items) */}
           {activeTab === 'items' && (
             <div className="space-y-4">
               <div className="flex items-center justify-between">

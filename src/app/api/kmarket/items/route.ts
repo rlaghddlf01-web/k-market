@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { INITIAL_ITEMS } from '@/lib/mockData';
 import { supabase, isSupabaseConfigured } from '@/lib/supabaseClient';
 import { KMarketItem } from '@/types/kmarket';
+import { translateItemToAllLanguages } from '@/lib/itemTranslationService';
 
 // 서버 인메모리 스토리지 (로컬 개발 및 Supabase 미설정 시 안전 fallback)
 let inMemoryItems: KMarketItem[] = [...INITIAL_ITEMS];
@@ -68,6 +69,20 @@ export async function GET(req: NextRequest) {
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
+    const sourceLang = body.source_lang || 'ko';
+
+    // 15개 언어 일괄 자동 번역 실행 (Gemini Flash 기반)
+    let itemTranslations = body.translations || {};
+    try {
+      const generated = await translateItemToAllLanguages(
+        body.title || '',
+        body.description || '',
+        sourceLang
+      );
+      itemTranslations = { ...itemTranslations, ...generated };
+    } catch (transErr) {
+      console.warn('Auto translation warning:', transErr);
+    }
     
     const newItem: KMarketItem = {
       id: `item-${Date.now()}`,
@@ -91,16 +106,19 @@ export async function POST(req: NextRequest) {
       like_count: 0,
       is_moving_sale: Boolean(body.is_moving_sale),
       moving_d_day: body.moving_d_day ? Number(body.moving_d_day) : undefined,
-      source_lang: body.source_lang || 'ko',
+      source_lang: sourceLang,
+      translations: itemTranslations,
       created_at: new Date().toISOString(),
       updated_at: new Date().toISOString(),
     };
 
     if (isSupabaseConfigured && supabase) {
       const { data, error } = await supabase.from('kmarket_items').insert([newItem]).select();
-      if (!error && data) {
-        inMemoryItems.unshift(newItem);
+      if (!error && data && data.length > 0) {
+        inMemoryItems.unshift(data[0]);
         return NextResponse.json({ item: data[0], source: 'supabase' }, { status: 201 });
+      } else if (error) {
+        console.warn('Supabase insert warning:', error.message);
       }
     }
 

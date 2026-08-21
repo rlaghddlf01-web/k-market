@@ -22,6 +22,9 @@ import KMarketAuthModal from './KMarketAuthModal';
 import KMarketMyPageModal from './KMarketMyPageModal';
 import KMarketKeywordAlertModal from './KMarketKeywordAlertModal';
 import KMarketLocationRadiusModal from './KMarketLocationRadiusModal';
+import KMarketNotificationDrawer from './KMarketNotificationDrawer';
+import { CommunityProvider } from '@/context/CommunityContext';
+import KMarketCommunityMain from '../community/KMarketCommunityMain';
 import { ShoppingBag, Sparkles, ShieldCheck, Plus, PackageOpen, ShieldAlert } from 'lucide-react';
 
 export default function KMarketMainFeed() {
@@ -32,6 +35,7 @@ export default function KMarketMainFeed() {
     selectedRegion,
     searchQuery,
     isMovingSaleOnly,
+    activeMainTab,
     blockedUserIds,
     setIsCreateModalOpen,
     isAuthModalOpen,
@@ -84,194 +88,207 @@ export default function KMarketMainFeed() {
   });
 
   return (
-    <div className="min-h-screen flex flex-col" style={{ background: 'var(--surface-bg)', color: 'var(--text-primary)' }}>
-      {/* 상단 통합 헤더 */}
-      <KMarketHeader />
+    <CommunityProvider>
+      <div className="min-h-screen flex flex-col" style={{ background: 'var(--surface-bg)', color: 'var(--text-primary)' }}>
+        {/* 상단 통합 헤더 */}
+        <KMarketHeader />
 
-      {/* 1. 최상단 풀와이드 웅장한 감성 히어로 쇼케이스 (화면 전체 면적) */}
-      <KMarketHeroShowcase />
+        {/* 1. 최상단 풀와이드 웅장한 감성 히어로 쇼케이스 (중고마켓 탭일 때 노출) */}
+        {activeMainTab === 'market' && <KMarketHeroShowcase />}
 
-      {/* 메인 콘텐츠 컨테이너 */}
-      <main className="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 py-6 sm:py-10 space-y-7">
-        {/* 2. KTRS 184만원 세무 환급 감성 사진 배너 */}
-        <KMarketTaxBanner />
+        {/* 메인 콘텐츠 컨테이너 */}
+        <main className="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 py-6 sm:py-10 space-y-7">
+          {activeMainTab === 'community' ? (
+            /* 🗣️ 동네생활 & 쉼터 커뮤니티 메인 */
+            <KMarketCommunityMain />
+          ) : (
+            /* 🛒 중고 / 무빙마켓 메인 */
+            <>
+              {/* 2. KTRS 184만원 세무 환급 감성 사진 배너 */}
+              <KMarketTaxBanner />
 
-        {/* 3. 🛡️ 외국인 안심 거래 3대 수칙 (사기 방지 쉴드) 웜톤 배너 */}
-        <KMarketSafetyBanner />
+              {/* 3. 🛡️ 외국인 안심 거래 3대 수칙 (사기 방지 쉴드) 웜톤 배너 */}
+              <KMarketSafetyBanner />
 
-        {/* 4. 쇼핑몰 스타일 원형 아이콘 카테고리 네비게이션 */}
-        <KMarketCategoryNav />
+              {/* 4. 쇼핑몰 스타일 원형 아이콘 카테고리 네비게이션 */}
+              <KMarketCategoryNav />
 
-        {/* 5. 귀국자 헐값 급처분 [무빙 세일(Moving Sale)] 전용관 */}
-        {!isMovingSaleOnly && selectedCategory === 'all' && !searchQuery && (
-          <KMarketMovingSaleSection />
-        )}
+              {/* 5. 귀국자 헐값 급처분 [무빙 세일(Moving Sale)] 전용관 */}
+              {!isMovingSaleOnly && selectedCategory === 'all' && !searchQuery && (
+                <KMarketMovingSaleSection />
+              )}
 
-        {/* 5. 실시간 매물 리스트 헤더 */}
-        <div className="flex items-center justify-between pt-2 mb-2 px-1">
-          <div className="flex items-center gap-2.5">
-            <h2 className="text-base sm:text-lg font-extrabold text-[#1f1914] tracking-tight">
-              실시간 등록 매물
-            </h2>
-            <span
-              className="text-xs font-bold px-2.5 py-0.5 rounded-full bg-[#dfd7ce] text-[#5c4f42]"
-            >
-              {filteredItems.length}개
-            </span>
-          </div>
-          <div className="flex items-center gap-1.5 text-xs text-[#705e4f] font-medium bg-[#f4efe9] px-3 py-1.5 rounded-full border border-[#dfd7ce]">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-            15개국어 실시간 번역
-          </div>
-        </div>
-
-        {/* 5. 매물 그리드 */}
-        {filteredItems.length > 0 ? (
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-5 sm:gap-6">
-            {filteredItems.map((item) => (
-              <KMarketItemCard key={item.id} item={item} />
-            ))}
-          </div>
-        ) : (
-          <div className="card-premium p-14 text-center my-8 space-y-5">
-            <div className="w-20 h-20 rounded-3xl flex items-center justify-center mx-auto" style={{ background: 'linear-gradient(135deg, #eff6ff 0%, #eef2ff 100%)' }}>
-              <PackageOpen className="w-9 h-9 text-blue-400" />
-            </div>
-            <div className="space-y-1.5">
-              <h3 className="text-base font-bold text-slate-800">조건에 맞는 매물이 없습니다</h3>
-              <p className="text-xs text-slate-500 max-w-sm mx-auto leading-relaxed">
-                필터를 전체로 변경하거나, 첫 번째로 내 중고 물건을 1분 만에 등록해 보세요!
-              </p>
-            </div>
-            <button
-              onClick={() => setIsCreateModalOpen(true)}
-              className="btn-primary px-6 py-2.5 text-xs cursor-pointer"
-            >
-              ✏️ 1분 간편 매물 등록하기
-            </button>
-          </div>
-        )}
-      </main>
-
-      {/* 모바일 플로팅 매물 등록 CTA 버튼 */}
-      <button
-        onClick={() => setIsCreateModalOpen(true)}
-        className="md:hidden fixed bottom-6 right-5 z-40 text-[#fbf9f6] p-4 rounded-full flex items-center justify-center active:scale-90 transition-transform cursor-pointer shadow-lg"
-        style={{ background: 'linear-gradient(135deg, #2b1b17 0%, #4a2c11 100%)' }}
-        aria-label="Post Item"
-      >
-        <Plus className="w-6 h-6" />
-      </button>
-
-      {/* 푸터 영역 - 진한 남색 & 3px 선명한 럭셔리 골드 테두리 */}
-      <footer 
-        className="mt-20 text-white relative z-10"
-        style={{
-          background: 'linear-gradient(180deg, #09101f 0%, #060b17 100%)',
-          borderTop: '3px solid #f3ba2f',
-          boxShadow: '0 -4px 20px rgba(243, 186, 47, 0.25)',
-        }}
-      >
-        <div className="max-w-6xl mx-auto px-4 py-12 space-y-7">
-          {/* 상단 브랜드 & 혜택 요약 */}
-          <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-6 pb-6 border-b border-white/10">
-            <div className="space-y-2">
-              <div className="flex items-center gap-2.5">
-                <div className="relative w-9 h-9 rounded-xl overflow-hidden shadow-md shrink-0 border border-[#845b37]/60 bg-[#09101f] flex items-center justify-center">
-                  <img
-                    src="/images/kmarket-logo.jpg"
-                    alt="K-Market Logo"
-                    className="w-full h-full object-cover scale-110"
-                  />
+              {/* 5. 실시간 매물 리스트 헤더 */}
+              <div className="flex items-center justify-between pt-2 mb-2 px-1">
+                <div className="flex items-center gap-2.5">
+                  <h2 className="text-base sm:text-lg font-extrabold text-[#1f1914] tracking-tight">
+                    실시간 등록 매물
+                  </h2>
+                  <span
+                    className="text-xs font-bold px-2.5 py-0.5 rounded-full bg-[#dfd7ce] text-[#5c4f42]"
+                  >
+                    {filteredItems.length}개
+                  </span>
                 </div>
-                <span className="text-white font-black text-lg tracking-tight">KTRS K-Market</span>
-                <span className="text-[10px] font-black bg-[#f3ba2f] text-[#09101f] px-2 py-0.5 rounded-full uppercase tracking-wider">Zero Fee C2C</span>
+                <div className="flex items-center gap-1.5 text-xs text-[#705e4f] font-medium bg-[#f4efe9] px-3 py-1.5 rounded-full border border-[#dfd7ce]">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                  15개국어 실시간 번역
+                </div>
               </div>
-              <p className="text-[#f1f5f9] text-xs font-semibold leading-relaxed max-w-sm">
-                대한민국 No.1 외국인 종합 슈퍼앱 KTRS 연계<br />외국인 전용 0원 안심 중고거래 &amp; 귀국 무빙세일 플랫폼
-              </p>
+
+              {/* 5. 매물 그리드 */}
+              {filteredItems.length > 0 ? (
+                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-5 sm:gap-6">
+                  {filteredItems.map((item) => (
+                    <KMarketItemCard key={item.id} item={item} />
+                  ))}
+                </div>
+              ) : (
+                <div className="card-premium p-14 text-center my-8 space-y-5">
+                  <div className="w-20 h-20 rounded-3xl flex items-center justify-center mx-auto" style={{ background: 'linear-gradient(135deg, #eff6ff 0%, #eef2ff 100%)' }}>
+                    <PackageOpen className="w-9 h-9 text-blue-400" />
+                  </div>
+                  <div className="space-y-1.5">
+                    <h3 className="text-base font-bold text-slate-800">조건에 맞는 매물이 없습니다</h3>
+                    <p className="text-xs text-slate-500 max-w-sm mx-auto leading-relaxed">
+                      필터를 전체로 변경하거나, 첫 번째로 내 중고 물건을 1분 만에 등록해 보세요!
+                    </p>
+                  </div>
+                  <button
+                    onClick={() => setIsCreateModalOpen(true)}
+                    className="btn-primary px-6 py-2.5 text-xs cursor-pointer"
+                  >
+                    ✏️ 1분 간편 매물 등록하기
+                  </button>
+                </div>
+              )}
+            </>
+          )}
+        </main>
+
+        {/* 모바일 플로팅 매물 등록 CTA 버튼 (중고마켓 탭일 때) */}
+        {activeMainTab === 'market' && (
+          <button
+            onClick={() => setIsCreateModalOpen(true)}
+            className="md:hidden fixed bottom-6 right-5 z-40 text-[#fbf9f6] p-4 rounded-full flex items-center justify-center active:scale-90 transition-transform cursor-pointer shadow-lg"
+            style={{ background: 'linear-gradient(135deg, #2b1b17 0%, #4a2c11 100%)' }}
+            aria-label="Post Item"
+          >
+            <Plus className="w-6 h-6" />
+          </button>
+        )}
+
+        {/* 푸터 영역 - 진한 남색 & 3px 선명한 럭셔리 골드 테두리 */}
+        <footer 
+          className="mt-20 text-white relative z-10"
+          style={{
+            background: 'linear-gradient(180deg, #09101f 0%, #060b17 100%)',
+            borderTop: '3px solid #f3ba2f',
+            boxShadow: '0 -4px 20px rgba(243, 186, 47, 0.25)',
+          }}
+        >
+          <div className="max-w-6xl mx-auto px-4 py-12 space-y-7">
+            {/* 상단 브랜드 & 혜택 요약 */}
+            <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-6 pb-6 border-b border-white/10">
+              <div className="space-y-2">
+                <div className="flex items-center gap-2.5">
+                  <div className="relative w-9 h-9 rounded-xl overflow-hidden shadow-md shrink-0 border border-[#845b37]/60 bg-[#09101f] flex items-center justify-center">
+                    <img
+                      src="/images/kmarket-logo.jpg"
+                      alt="K-Market Logo"
+                      className="w-full h-full object-cover scale-110"
+                    />
+                  </div>
+                  <span className="text-white font-black text-lg tracking-tight">KTRS K-Market</span>
+                  <span className="text-[10px] font-black bg-[#f3ba2f] text-[#09101f] px-2 py-0.5 rounded-full uppercase tracking-wider">Zero Fee C2C</span>
+                </div>
+                <p className="text-[#f1f5f9] text-xs font-semibold leading-relaxed max-w-sm">
+                  대한민국 No.1 외국인 종합 슈퍼앱 KTRS 연계<br />외국인 전용 0원 안심 중고거래 &amp; 귀국 무빙세일 &amp; 동네생활 커뮤니티
+                </p>
+              </div>
+
+              <div className="flex flex-col gap-2 text-xs font-bold text-[#f8fafc]">
+                <div className="flex items-center gap-2">
+                  <ShieldCheck className="w-4 h-4 text-[#f3ba2f]" />
+                  <span className="text-white font-bold">수수료 0원 100% 무료 안심 직거래</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Sparkles className="w-4 h-4 text-[#f3ba2f]" />
+                  <span className="text-white font-bold">15개국어 실시간 Gemini AI 양방향 번역</span>
+                </div>
+              </div>
             </div>
 
-            <div className="flex flex-col gap-2 text-xs font-bold text-[#f8fafc]">
-              <div className="flex items-center gap-2">
-                <ShieldCheck className="w-4 h-4 text-[#f3ba2f]" />
-                <span className="text-white font-bold">수수료 0원 100% 무료 안심 직거래</span>
+            {/* 공식 사업자등록 정보 */}
+            <div className="space-y-2.5 text-xs text-white leading-relaxed font-medium">
+              <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-white">
+                <span><strong className="text-[#f3ba2f] font-extrabold">사업자명:</strong> 주식회사 펫에이앤씨</span>
+                <span className="text-white/40">|</span>
+                <span><strong className="text-[#f3ba2f] font-extrabold">대표자:</strong> 전기창</span>
+                <span className="text-white/40">|</span>
+                <span><strong className="text-[#f3ba2f] font-extrabold">사업자 등록번호:</strong> 229-86-03034</span>
+                <span className="text-white/40">|</span>
+                <span><strong className="text-[#f3ba2f] font-extrabold">통신판매업 번호:</strong> 제 2023-진접오남-0680호</span>
               </div>
-              <div className="flex items-center gap-2">
-                <Sparkles className="w-4 h-4 text-[#f3ba2f]" />
-                <span className="text-white font-bold">15개국어 실시간 Gemini AI 양방향 번역</span>
+
+              <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-white">
+                <span><strong className="text-[#f3ba2f] font-extrabold">주소:</strong> 서울특별시 광진구 광나루로 436, 5층(화양동, 에듀킨빌딩)</span>
+                <span className="text-white/40">|</span>
+                <span><strong className="text-[#f3ba2f] font-extrabold">연락처:</strong> 010-5964-5340</span>
+                <span className="text-white/40">|</span>
+                <span><strong className="text-[#f3ba2f] font-extrabold">이메일:</strong> zkfnth021@gmail.com</span>
+              </div>
+            </div>
+
+            {/* 하단 카피라이트 & 관리자 링크 */}
+            <div className="pt-5 border-t border-[#2d1a12] text-[11px] text-[#94a3b8] font-semibold flex flex-col sm:flex-row justify-between items-center gap-3">
+              <p>© 2026 KTRS (Korea Tax &amp; Foreign Resident Service). All rights reserved.</p>
+              <div className="flex items-center gap-3">
+                <span className="text-[#cbd5e1]">안심 가이드 | 고객센터 1588-0000</span>
+                <Link
+                  href="/admin"
+                  className="px-2.5 py-1 bg-[#20140f] hover:bg-[#3d2817] border border-[#845b37]/80 text-[#f3ba2f] font-extrabold rounded-lg text-[10px] transition-all flex items-center gap-1 cursor-pointer"
+                  title="KTRS 관리자 전용 관제 콘솔 페이지"
+                >
+                  <span>관리자 관제 콘솔 (/admin)</span>
+                </Link>
               </div>
             </div>
           </div>
+        </footer>
 
-          {/* 공식 사업자등록 정보 (선명한 화이트 & 볼드 폰트) */}
-          <div className="space-y-2.5 text-xs text-white leading-relaxed font-medium">
-            <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-white">
-              <span><strong className="text-[#f3ba2f] font-extrabold">사업자명:</strong> 주식회사 펫에이앤씨</span>
-              <span className="text-white/40">|</span>
-              <span><strong className="text-[#f3ba2f] font-extrabold">대표자:</strong> 전기창</span>
-              <span className="text-white/40">|</span>
-              <span><strong className="text-[#f3ba2f] font-extrabold">사업자 등록번호:</strong> 229-86-03034</span>
-              <span className="text-white/40">|</span>
-              <span><strong className="text-[#f3ba2f] font-extrabold">통신판매업 번호:</strong> 제 2023-진접오남-0680호</span>
-            </div>
-
-            <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-white">
-              <span><strong className="text-[#f3ba2f] font-extrabold">주소:</strong> 서울특별시 광진구 광나루로 436, 5층(화양동, 에듀킨빌딩)</span>
-              <span className="text-white/40">|</span>
-              <span><strong className="text-[#f3ba2f] font-extrabold">연락처:</strong> 010-5964-5340</span>
-              <span className="text-white/40">|</span>
-              <span><strong className="text-[#f3ba2f] font-extrabold">이메일:</strong> zkfnth021@gmail.com</span>
-            </div>
-          </div>
-
-          {/* 하단 카피라이트 & 관리자 링크 */}
-          <div className="pt-5 border-t border-[#2d1a12] text-[11px] text-[#94a3b8] font-semibold flex flex-col sm:flex-row justify-between items-center gap-3">
-            <p>© 2026 KTRS (Korea Tax &amp; Foreign Resident Service). All rights reserved.</p>
-            <div className="flex items-center gap-3">
-              <span className="text-[#cbd5e1]">공단 직거래 안심 가이드 | 고객센터 1588-0000</span>
-              <Link
-                href="/admin"
-                className="px-2.5 py-1 bg-[#20140f] hover:bg-[#3d2817] border border-[#845b37]/80 text-[#f3ba2f] font-extrabold rounded-lg text-[10px] transition-all flex items-center gap-1 cursor-pointer"
-                title="KTRS 관리자 전용 관제 콘솔 페이지"
-              >
-                <span>관리자 관제 콘솔 (/admin)</span>
-              </Link>
-            </div>
-          </div>
-        </div>
-      </footer>
-
-      {/* 모달 & 드로어 컴포넌트들 */}
-      <KMarketItemDetail />
-      <KMarketCreatePost />
-      <KMarketChatDrawer />
-      <KMarketTaxModal />
-      <KMarketFavoritesModal />
-      <KMarketAdminReportModal
-        isOpen={isAdminModalOpen}
-        onClose={() => setIsAdminModalOpen(false)}
-      />
-      <KMarketAuthModal
-        isOpen={isAuthModalOpen}
-        onClose={() => setIsAuthModalOpen(false)}
-        onSuccessAuth={(userData) => {
-          setAuthedUser(userData);
-          alert(`[신원인증 완료] ${userData.userName} 님의 ${userData.authMethod === 'ocr' ? '실물 신분증 OCR 검증' : '수기 인증'}이 완료되었습니다.`);
-        }}
-      />
-      <KMarketMyPageModal
-        isOpen={isMyPageOpen}
-        onClose={() => setIsMyPageOpen(false)}
-      />
-      <KMarketKeywordAlertModal
-        isOpen={isKeywordModalOpen}
-        onClose={() => setIsKeywordModalOpen(false)}
-      />
-      <KMarketLocationRadiusModal
-        isOpen={isLocationRadiusModalOpen}
-        onClose={() => setIsLocationRadiusModalOpen(false)}
-      />
-    </div>
+        {/* 모달 & 드로어 컴포넌트들 */}
+        <KMarketItemDetail />
+        <KMarketCreatePost />
+        <KMarketChatDrawer />
+        <KMarketTaxModal />
+        <KMarketFavoritesModal />
+        <KMarketAdminReportModal
+          isOpen={isAdminModalOpen}
+          onClose={() => setIsAdminModalOpen(false)}
+        />
+        <KMarketAuthModal
+          isOpen={isAuthModalOpen}
+          onClose={() => setIsAuthModalOpen(false)}
+          onSuccessAuth={(userData) => {
+            setAuthedUser(userData);
+            alert(`[신원인증 완료] ${userData.userName} 님의 인증이 완료되었습니다.`);
+          }}
+        />
+        <KMarketMyPageModal
+          isOpen={isMyPageOpen}
+          onClose={() => setIsMyPageOpen(false)}
+        />
+        <KMarketKeywordAlertModal
+          isOpen={isKeywordModalOpen}
+          onClose={() => setIsKeywordModalOpen(false)}
+        />
+        <KMarketLocationRadiusModal
+          isOpen={isLocationRadiusModalOpen}
+          onClose={() => setIsLocationRadiusModalOpen(false)}
+        />
+        <KMarketNotificationDrawer />
+      </div>
+    </CommunityProvider>
   );
 }

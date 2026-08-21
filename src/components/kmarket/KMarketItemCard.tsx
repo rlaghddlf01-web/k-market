@@ -211,10 +211,10 @@ export default function KMarketItemCard({ item }: KMarketItemCardProps) {
                 <span className="truncate">{item.region}</span>
               </div>
               <div className="flex items-center gap-2 shrink-0">
-                {item.views !== undefined && (
+                {item.view_count !== undefined && (
                   <span className="flex items-center gap-0.5">
                     <Eye className="w-3 h-3" />
-                    {item.views}
+                    {item.view_count}
                   </span>
                 )}
                 {timeAgoText && (

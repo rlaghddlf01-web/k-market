@@ -20,6 +20,10 @@ export default function KMarketHeader() {
     setIsMyPageOpen,
     setIsKeywordModalOpen,
     setIsLocationRadiusModalOpen,
+    setIsNotificationCenterOpen,
+    unreadNotificationCount,
+    activeMainTab,
+    setActiveMainTab,
     keywordAlerts,
     authedUser,
     likedItemIds,
@@ -105,14 +109,11 @@ export default function KMarketHeader() {
         </div>
       </div>
 
-      {/* 중간: 로고 & 검색 & 액션 */}
-      <div className="max-w-6xl mx-auto px-4 py-3">
-        <div className="flex items-center justify-between gap-4">
-
-          {/* 로고 & 위치 칩 */}
-          <div className="flex items-center gap-3">
-            <div className="flex items-center gap-2.5">
-              {/* 로고 아이콘 - 1안 골드 쉴드 쇼핑백 엠블럼 */}
+      <div className="max-w-6xl mx-auto px-4">
+        <div className="flex items-center justify-between gap-2 sm:gap-4 py-2 sm:py-2.5">
+          {/* 좌측: 로고 + 위치 셀렉터 */}
+          <div className="flex items-center gap-2 sm:gap-3">
+            <div className="flex items-center gap-2.5 cursor-pointer">
               <div className="relative w-10 h-10 sm:w-11 sm:h-11 rounded-xl overflow-hidden shadow-sm shrink-0 border border-[#ded1c4] bg-[#09101f] flex items-center justify-center">
                 <img
                   src="/images/kmarket-logo.jpg"
@@ -209,18 +210,20 @@ export default function KMarketHeader() {
               <span className="xs:hidden sm:hidden">등록</span>
             </button>
 
-            {/* 알림 */}
-            <div
-              onClick={() => setIsKeywordModalOpen(true)}
+            {/* 알림 센터 */}
+            <button
+              type="button"
+              onClick={() => setIsNotificationCenterOpen(true)}
               className="relative p-2 text-[#6b5847] hover:text-[#1f1914] hover:bg-[#f4ede6] rounded-full cursor-pointer transition-colors"
+              title="통합 알림 센터 (키워드/채팅/가격인하)"
             >
               <Bell className="w-5 h-5" />
-              {keywordAlerts.length > 0 && (
-                <span className="absolute top-1 right-1 bg-[#845b37] text-white text-[9px] font-black w-3.5 h-3.5 rounded-full flex items-center justify-center">
-                  {keywordAlerts.length}
+              {unreadNotificationCount > 0 && (
+                <span className="absolute top-0.5 right-0.5 bg-rose-600 text-white text-[9px] font-black w-4 h-4 rounded-full flex items-center justify-center animate-pulse shadow-xs">
+                  {unreadNotificationCount}
                 </span>
               )}
-            </div>
+            </button>
 
             {/* 찜 */}
             <div
@@ -253,35 +256,60 @@ export default function KMarketHeader() {
       </div>
 
       {/* 하단: 탭 바 */}
-      <div className="border-t px-4" style={{ borderColor: 'rgba(180,150,120,0.20)', background: 'rgba(254,252,249,0.80)' }}>
-        <div className="max-w-6xl mx-auto flex items-center gap-1.5 overflow-x-auto no-scrollbar py-2 text-xs">
-          <button
-            onClick={() => setIsTaxModalOpen(true)}
-            className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full font-bold text-[#5c4a39] bg-[#ede2d6] hover:bg-[#e2d4c5] border border-[#ded1c4] transition-all shrink-0 cursor-pointer"
-          >
-            <Sparkles className="w-3.5 h-3.5 text-[#845b37]" />
-            <span>{t('ktrs_tab_tax')}</span>
-          </button>
+      <div className="border-t px-4" style={{ borderColor: 'rgba(180,150,120,0.20)', background: 'rgba(254,252,249,0.90)' }}>
+        <div className="max-w-6xl mx-auto flex items-center justify-between gap-1.5 overflow-x-auto no-scrollbar py-2 text-xs">
+          <div className="flex items-center gap-1.5 shrink-0">
+            {/* 1. 중고 / 무빙 거래 탭 */}
+            <button
+              onClick={() => setActiveMainTab('market')}
+              className={`px-4 py-1.5 rounded-full font-black transition-all shrink-0 cursor-pointer shadow-2xs flex items-center gap-1.5 ${
+                activeMainTab === 'market'
+                  ? 'bg-[#3d2817] text-[#fbf9f6] border border-[#3d2817]'
+                  : 'text-[#705e4f] hover:text-[#1f1914] hover:bg-[#f4ede6] bg-transparent'
+              }`}
+            >
+              <span>🛒</span>
+              <span>{t('ktrs_tab_market')}</span>
+            </button>
 
-          <button
-            onClick={() => alert('KTRS 비상금 대출: 외국인 근로자 전용 최대 500만원 긴급 대출 서비스 연동 중')}
-            className="px-3.5 py-1.5 rounded-full text-[#705e4f] hover:text-[#1f1914] hover:bg-[#f4ede6] font-medium transition-all shrink-0 cursor-pointer"
-          >
-            {t('ktrs_tab_loan')}
-          </button>
+            {/* 2. 동네생활 & 쉼터 탭 (15개국어 Q&A 및 친구 사귀기) */}
+            <button
+              onClick={() => setActiveMainTab('community')}
+              className={`px-4 py-1.5 rounded-full font-black transition-all shrink-0 cursor-pointer shadow-2xs flex items-center gap-1.5 relative ${
+                activeMainTab === 'community'
+                  ? 'bg-gradient-to-r from-indigo-900 to-purple-900 text-white border border-indigo-700'
+                  : 'text-[#705e4f] hover:text-[#1f1914] hover:bg-[#f4ede6] bg-transparent'
+              }`}
+            >
+              <span>🗣️</span>
+              <span>동네생활 &amp; 쉼터</span>
+              <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" />
+            </button>
+          </div>
 
-          <button
-            onClick={() => alert('KTRS 안심 원룸: 공단 반경 보증금 안심 직방 매물 서비스 연동 중')}
-            className="px-3.5 py-1.5 rounded-full text-[#705e4f] hover:text-[#1f1914] hover:bg-[#f4ede6] font-medium transition-all shrink-0 cursor-pointer"
-          >
-            {t('ktrs_tab_housing')}
-          </button>
+          <div className="flex items-center gap-1.5 shrink-0">
+            <button
+              onClick={() => setIsTaxModalOpen(true)}
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full font-bold text-[#5c4a39] bg-[#ede2d6] hover:bg-[#e2d4c5] border border-[#ded1c4] transition-all shrink-0 cursor-pointer text-[11px]"
+            >
+              <Sparkles className="w-3.5 h-3.5 text-[#845b37]" />
+              <span>{t('ktrs_tab_tax')}</span>
+            </button>
 
-          <button
-            className="px-3.5 py-1.5 rounded-full font-bold text-[#fbf9f6] bg-[#3d2817] border border-[#3d2817] shrink-0 cursor-pointer shadow-2xs"
-          >
-            {t('ktrs_tab_market')}
-          </button>
+            <button
+              onClick={() => alert('KTRS 비상금 대출: 외국인 근로자 전용 최대 500만원 긴급 대출 서비스 연동 중')}
+              className="px-3 py-1.5 rounded-full text-[#705e4f] hover:text-[#1f1914] hover:bg-[#f4ede6] font-medium transition-all shrink-0 cursor-pointer text-[11px]"
+            >
+              {t('ktrs_tab_loan')}
+            </button>
+
+            <button
+              onClick={() => alert('KTRS 안심 원룸: 공단 반경 보증금 안심 직방 매물 서비스 연동 중')}
+              className="px-3 py-1.5 rounded-full text-[#705e4f] hover:text-[#1f1914] hover:bg-[#f4ede6] font-medium transition-all shrink-0 cursor-pointer text-[11px]"
+            >
+              {t('ktrs_tab_housing')}
+            </button>
+          </div>
         </div>
       </div>
     </header>

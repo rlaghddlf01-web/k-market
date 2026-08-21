@@ -210,4 +210,24 @@ export interface KeywordAlert {
   created_at: string;
 }
 
+export type NotificationType =
+  | 'keyword'      // 키워드 등록 매칭
+  | 'chat'         // 1:1 번역 채팅 도착
+  | 'price_drop'   // 찜한 상품 가격 인하
+  | 'appointment'  // 직거래 약속 리마인더
+  | 'system';      // 시스템/세무 공지
+
+export interface AppNotification {
+  id: string;
+  type: NotificationType;
+  title: string;
+  message: string;
+  item_id?: string;
+  item_image?: string;
+  chat_id?: string;
+  is_read: boolean;
+  created_at: string;
+}
+
+
 
