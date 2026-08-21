@@ -217,10 +217,14 @@ export default function KMarketMovingSaleSection() {
                       e.stopPropagation();
                       openChatForItem(item);
                     }}
-                    className="flex items-center space-x-1 text-xs font-bold text-blue-600 bg-blue-50 hover:bg-blue-100 dark:bg-blue-950/60 dark:text-blue-300 px-2.5 py-1 rounded-lg transition-colors cursor-pointer"
+                    className="flex items-center space-x-1.5 text-xs font-bold px-3 py-1.5 rounded-xl transition-all duration-200 cursor-pointer shadow-2xs hover:scale-105 active:scale-95"
+                    style={{
+                      background: '#09101f',
+                      border: '1.5px solid #f3ba2f',
+                    }}
                   >
-                    <MessageCircle className="w-3.5 h-3.5" />
-                    <span>1:1 번역챗</span>
+                    <MessageCircle className="w-3.5 h-3.5 text-[#f3ba2f]" />
+                    <span className="text-[#f3ba2f] font-extrabold">1:1 번역챗</span>
                   </button>
                 </div>
               </div>
