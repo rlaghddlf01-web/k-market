@@ -170,3 +170,26 @@ export interface UserTrustProfile {
   positive_tags_summary: { tag_id: string; count: number }[];
   recent_reviews: TransactionReview[];
 }
+
+export type ReportReasonType =
+  | 'scam_fraud'         // 사기 의심 (선입금 / 외부 메신저 유도)
+  | 'bad_manner_abuse'   // 비매너 / 욕설 / 성희롱
+  | 'fake_item_photos'   // 허위 매물 / 가짜 사진
+  | 'prohibited_items'   // 판매 금지 품목 (주류, 담배, 불법 알선 등)
+  | 'no_show_flake'      // 직거래 약속 노쇼
+  | 'other';             // 기타 사유
+
+export interface UserReportData {
+  id: string;
+  reporter_id: string;
+  reporter_name: string;
+  target_user_id: string;
+  target_user_name: string;
+  item_id?: string;
+  item_title?: string;
+  reason_type: ReportReasonType;
+  details: string;
+  block_user: boolean;
+  created_at: string;
+}
+

@@ -54,6 +54,9 @@ interface KMarketContextType {
   boostItem: (itemId: string, newPrice?: number) => void;
   toggleLike: (itemId: string) => void;
   likedItemIds: Set<string>;
+  blockedUserIds: Set<string>;
+  blockUser: (userId: string) => void;
+  reportUser: (report: any) => void;
 }
 
 const KMarketContext = createContext<KMarketContextType | undefined>(undefined);
@@ -127,6 +130,26 @@ export function KMarketProvider({ children }: { children: React.ReactNode }) {
           : item
       )
     );
+  };
+
+  const [blockedUserIds, setBlockedUserIds] = useState<Set<string>>(new Set());
+
+  const blockUser = (userId: string) => {
+    setBlockedUserIds((prev) => {
+      const next = new Set(prev);
+      next.add(userId);
+      return next;
+    });
+    // 차단된 유저의 채팅방이 열려있으면 즉시 닫기
+    if (activeChat && activeChat.seller_id === userId) {
+      setActiveChat(null);
+    }
+  };
+
+  const reportUser = (reportData: any) => {
+    if (reportData.block_user && reportData.target_user_id) {
+      blockUser(reportData.target_user_id);
+    }
   };
 
   const addItem = async (itemData: Partial<KMarketItem>) => {
@@ -426,6 +449,9 @@ export function KMarketProvider({ children }: { children: React.ReactNode }) {
         boostItem,
         toggleLike,
         likedItemIds,
+        blockedUserIds,
+        blockUser,
+        reportUser,
       }}
     >
       {children}

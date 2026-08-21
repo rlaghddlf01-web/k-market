@@ -23,12 +23,16 @@ export default function KMarketMainFeed() {
     selectedRegion,
     searchQuery,
     isMovingSaleOnly,
-    setIsCreateModalOpen,
+    blockedUserIds,
   } = useKMarket();
   const { t } = useLanguage();
 
   // 검색 및 필터링 적용된 매물 목록
   const filteredItems = items.filter((item) => {
+    // 0. 차단된 사용자 매물 자동 숨김
+    if (blockedUserIds.has(item.seller_id)) {
+      return false;
+    }
     // 1. 카테고리 필터
     if (selectedCategory !== 'all' && item.category !== selectedCategory) {
       return false;

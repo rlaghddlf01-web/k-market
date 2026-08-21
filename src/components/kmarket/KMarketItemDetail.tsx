@@ -22,6 +22,7 @@ import KMarketUserProfileModal from './KMarketUserProfileModal';
 import KMarketReviewModal from './KMarketReviewModal';
 import KMarketStatusBadge from './KMarketStatusBadge';
 import KMarketStatusActionModal from './KMarketStatusActionModal';
+import KMarketReportBlockModal from './KMarketReportBlockModal';
 import CountryFlag from './CountryFlag';
 
 export default function KMarketItemDetail() {
@@ -33,6 +34,7 @@ export default function KMarketItemDetail() {
     likedItemIds,
     updateItemStatus,
     boostItem,
+    reportUser,
   } = useKMarket();
   const { t, formatWon, currentLang, currentLangOption } = useLanguage();
   const [activeImageIndex, setActiveImageIndex] = useState(0);
@@ -40,6 +42,7 @@ export default function KMarketItemDetail() {
   const [showProfileModal, setShowProfileModal] = useState(false);
   const [showReviewModal, setShowReviewModal] = useState(false);
   const [showStatusModal, setShowStatusModal] = useState(false);
+  const [showReportModal, setShowReportModal] = useState(false);
   const [reviewTargetUser, setReviewTargetUser] = useState({ id: '', name: '' });
 
   if (!selectedItem) return null;
@@ -71,6 +74,13 @@ export default function KMarketItemDetail() {
             </button>
 
             <div className="pointer-events-auto flex items-center space-x-2">
+              <button
+                onClick={() => setShowReportModal(true)}
+                className="bg-black/40 hover:bg-red-600/80 text-white px-2.5 py-1.5 rounded-full backdrop-blur-md transition-colors cursor-pointer text-xs font-bold flex items-center gap-1"
+                title="불량 매물/사용자 신고 및 차단"
+              >
+                <span>🚫 신고</span>
+              </button>
               <button
                 onClick={() => {
                   navigator.clipboard?.writeText(window.location.href);
@@ -334,6 +344,21 @@ export default function KMarketItemDetail() {
       }}
       onOpenReviewModal={(targetId, targetName) => {
         handleOpenReviewModal(targetId, targetName);
+      }}
+    />
+
+    {/* 🚫 불량 매물/사용자 차단 및 신고 모달 */}
+    <KMarketReportBlockModal
+      isOpen={showReportModal}
+      onClose={() => setShowReportModal(false)}
+      targetUserId={selectedItem.seller_id}
+      targetUserName={selectedItem.seller_name}
+      itemId={selectedItem.id}
+      itemTitle={selectedItem.title}
+      onConfirmReport={(report) => {
+        reportUser(report);
+        alert(`[신고 접수 완료] "${selectedItem.seller_name}" 회원이 차단 및 신고 처리되었습니다.`);
+        setSelectedItem(null);
       }}
     />
   </>

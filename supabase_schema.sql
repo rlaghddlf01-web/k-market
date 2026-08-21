@@ -229,6 +229,41 @@ ALTER PUBLICATION supabase_realtime ADD TABLE public.kmarket_user_profiles;
 ALTER PUBLICATION supabase_realtime ADD TABLE public.kmarket_reviews;
 ALTER PUBLICATION supabase_realtime ADD TABLE public.kmarket_appointments;
 
+-- 7. 신고 내역 관리 테이블 (Reports)
+CREATE TABLE IF NOT EXISTS public.kmarket_reports (
+  id TEXT PRIMARY KEY,
+  reporter_id TEXT NOT NULL,
+  reporter_name TEXT NOT NULL,
+  target_user_id TEXT NOT NULL,
+  target_user_name TEXT NOT NULL,
+  item_id TEXT,
+  item_title TEXT,
+  reason_type TEXT NOT NULL,
+  details TEXT,
+  block_user BOOLEAN DEFAULT TRUE,
+  status TEXT DEFAULT 'pending', -- pending, investigated, resolved, dismissed
+  created_at TIMESTAMPTZ DEFAULT TIMEZONE('utc', NOW())
+);
+
+-- 8. 사용자 차단 테이블 (Blocks)
+CREATE TABLE IF NOT EXISTS public.kmarket_blocks (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  blocker_id TEXT NOT NULL,
+  blocked_user_id TEXT NOT NULL,
+  created_at TIMESTAMPTZ DEFAULT TIMEZONE('utc', NOW()),
+  UNIQUE(blocker_id, blocked_user_id)
+);
+
+CREATE INDEX IF NOT EXISTS idx_kmarket_reports_target ON public.kmarket_reports(target_user_id);
+CREATE INDEX IF NOT EXISTS idx_kmarket_blocks_blocker ON public.kmarket_blocks(blocker_id);
+
+-- RLS 활성화
+ALTER TABLE public.kmarket_reports ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.kmarket_blocks ENABLE ROW LEVEL SECURITY;
+
+CREATE POLICY "Anyone can create reports" ON public.kmarket_reports FOR INSERT WITH CHECK (true);
+CREATE POLICY "Users can manage their blocks" ON public.kmarket_blocks FOR ALL USING (true);
+
 -- 스토리지 공용 읽기/업로드 정책
 CREATE POLICY "Public Access for K-Market Images" 
 ON storage.objects FOR SELECT 

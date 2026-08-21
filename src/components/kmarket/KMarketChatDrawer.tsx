@@ -17,16 +17,17 @@ import {
   Clock,
   Bell,
 } from 'lucide-react';
-import { SupportedLanguage, AppointmentData } from '@/types/kmarket';
+import { SupportedLanguage, AppointmentData, UserReportData } from '@/types/kmarket';
 import { detectScamPattern, ScamWarningInfo } from '@/lib/antiScamDetector';
 import KMarketUserProfileModal from './KMarketUserProfileModal';
 import KMarketReviewModal from './KMarketReviewModal';
 import KMarketAppointmentModal from './KMarketAppointmentModal';
 import KMarketScamWarningModal from './KMarketScamWarningModal';
+import KMarketReportBlockModal from './KMarketReportBlockModal';
 import CountryFlag from './CountryFlag';
 
 export default function KMarketChatDrawer() {
-  const { activeChat, closeChat, chatMessages, isChatLoading, isTranslating, sendMessage } =
+  const { activeChat, closeChat, chatMessages, isChatLoading, isTranslating, sendMessage, reportUser } =
     useKMarket();
   const { t, formatWon, currentLang, currentLangOption } = useLanguage();
   const [inputText, setInputText] = useState('');
@@ -34,6 +35,7 @@ export default function KMarketChatDrawer() {
   const [showReviewModal, setShowReviewModal] = useState(false);
   const [showAppointmentModal, setShowAppointmentModal] = useState(false);
   const [showScamModal, setShowScamModal] = useState(false);
+  const [showReportModal, setShowReportModal] = useState(false);
   const [detectedScamInfo, setDetectedScamInfo] = useState<ScamWarningInfo | null>(null);
   const [activeAppointment, setActiveAppointment] = useState<AppointmentData | null>({
     id: 'apt-default-demo',
@@ -121,19 +123,27 @@ export default function KMarketChatDrawer() {
               </div>
             </div>
 
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-1.5">
+              <button
+                onClick={() => setShowReportModal(true)}
+                className="px-2.5 py-1 rounded-full bg-rose-500/30 hover:bg-rose-500/50 text-rose-100 text-xs font-bold transition-all flex items-center gap-1 cursor-pointer border border-rose-400/30"
+                title="비매너/사기 신고 및 차단"
+              >
+                <span>🚫 차단/신고</span>
+              </button>
+
               <button
                 onClick={() => setShowReviewModal(true)}
                 className="px-2.5 py-1 rounded-full bg-white/20 hover:bg-white/30 text-white text-xs font-bold transition-all flex items-center gap-1 cursor-pointer"
                 title="거래 완료 및 매너 평가"
               >
                 <Star className="w-3.5 h-3.5 fill-yellow-300 text-yellow-300" />
-                <span>후기 남기기</span>
+                <span>후기</span>
               </button>
 
               <button
                 onClick={closeChat}
-                className="p-2 rounded-full bg-white/15 hover:bg-white/25 text-white transition-colors cursor-pointer"
+                className="p-1.5 rounded-full bg-white/15 hover:bg-white/25 text-white transition-colors cursor-pointer"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -476,6 +486,21 @@ export default function KMarketChatDrawer() {
       isOpen={showScamModal}
       onClose={() => setShowScamModal(false)}
       scamInfo={detectedScamInfo}
+    />
+
+    {/* 🚫 사용자 차단 및 불량 신고 모달 */}
+    <KMarketReportBlockModal
+      isOpen={showReportModal}
+      onClose={() => setShowReportModal(false)}
+      targetUserId={activeChat.seller_id}
+      targetUserName={activeChat.seller_name}
+      itemId={activeChat.item_id}
+      itemTitle={activeChat.item?.title}
+      onConfirmReport={(report) => {
+        reportUser(report);
+        alert(`[신고 접수 완료] "${activeChat.seller_name}" 회원이 차단 및 신고되었습니다.`);
+        closeChat();
+      }}
     />
   </>
   );
