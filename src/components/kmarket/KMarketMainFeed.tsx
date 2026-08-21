@@ -160,8 +160,9 @@ export default function KMarketMainFeed() {
 
       {/* 푸터 영역 - 딥 에스프레소 쇼핑몰 스타일 마감 */}
       <footer className="mt-20 border-t border-[#3d2817] bg-[#1e130f] text-[#d8c8b8]">
-        <div className="max-w-6xl mx-auto px-4 py-12 space-y-6">
-          <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-6">
+        <div className="max-w-6xl mx-auto px-4 py-12 space-y-7">
+          {/* 상단 브랜드 & 혜택 요약 */}
+          <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-6 pb-6 border-b border-[#332219]">
             <div className="space-y-2">
               <div className="flex items-center gap-2.5">
                 <div className="relative w-8 h-8 rounded-lg overflow-hidden shadow-sm shrink-0 border border-[#5c3818]/60 bg-[#09101f] flex items-center justify-center">
@@ -191,7 +192,34 @@ export default function KMarketMainFeed() {
             </div>
           </div>
 
-          <div className="pt-6 border-t border-[#332219] text-[11px] text-[#705e4f] flex flex-col sm:flex-row justify-between items-center gap-3">
+          {/* 공식 사업자등록 정보 (스크린샷 일치) */}
+          <div className="space-y-2 text-xs text-[#a89888] leading-relaxed">
+            <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
+              <span><strong>사업자명:</strong> 주식회사 펫에이앤씨</span>
+              <span className="text-[#5c4a39]">|</span>
+              <span><strong>대표자:</strong> 전기창</span>
+              <span className="text-[#5c4a39]">|</span>
+              <span><strong>사업자 등록번호:</strong> 229-86-03034</span>
+              <span className="text-[#5c4a39]">|</span>
+              <span><strong>통신판매업 번호:</strong> 제 2023-진접오남-0680호</span>
+            </div>
+
+            <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
+              <span><strong>주소:</strong> 서울특별시 광진구 광나루로 436, 5층(화양동, 에듀킨빌딩)</span>
+              <span className="text-[#5c4a39]">|</span>
+              <span><strong>연락처:</strong> 010-5964-5340</span>
+              <span className="text-[#5c4a39]">|</span>
+              <span><strong>이메일:</strong> zkfnth021@gmail.com</span>
+            </div>
+
+            {/* 공식 세무대리 면책 고지 문구 */}
+            <p className="pt-2 text-[11px] text-[#786657] leading-relaxed">
+              Korea Tax Refund Service(Korea Tax Refund Service)은 세무대리 신고를 직접 수행하지 않으며, 본 플랫폼에서 작성된 신청 서류는 제휴된 대한민국 국가공인 전문 세무법인 및 협력 세무사를 통해 최종 검토 및 제출됩니다.
+            </p>
+          </div>
+
+          {/* 하단 카피라이트 & 관리자 링크 */}
+          <div className="pt-5 border-t border-[#332219] text-[11px] text-[#705e4f] flex flex-col sm:flex-row justify-between items-center gap-3">
             <p>© 2026 KTRS (Korea Tax &amp; Foreign Resident Service). All rights reserved.</p>
             <div className="flex items-center gap-3">
               <span>공단 직거래 안심 가이드 | 고객센터 1588-0000</span>
