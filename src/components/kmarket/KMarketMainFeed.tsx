@@ -6,6 +6,7 @@ import { useKMarket } from '@/context/KMarketContext';
 import { useLanguage } from '@/context/LanguageContext';
 import KMarketHeader from './KMarketHeader';
 import KMarketTaxBanner from './KMarketTaxBanner';
+import KMarketHeroShowcase from './KMarketHeroShowcase';
 import KMarketSafetyBanner from './KMarketSafetyBanner';
 import KMarketCategoryNav from './KMarketCategoryNav';
 import KMarketMovingSaleSection from './KMarketMovingSaleSection';
@@ -84,10 +85,13 @@ export default function KMarketMainFeed() {
         {/* 1. KTRS 184만원 세무 환급 감성 사진 배너 */}
         <KMarketTaxBanner />
 
-        {/* 2. 🛡️ 외국인 안심 거래 3대 수칙 (사기 방지 쉴드) 웜톤 배너 */}
+        {/* 2. 감성적인 샌드 베이지 히어로 쇼케이스 (외국인 안심 직거래 & 무빙세일) */}
+        <KMarketHeroShowcase />
+
+        {/* 3. 🛡️ 외국인 안심 거래 3대 수칙 (사기 방지 쉴드) 웜톤 배너 */}
         <KMarketSafetyBanner />
 
-        {/* 3. 쇼핑몰 스타일 원형 아이콘 카테고리 네비게이션 */}
+        {/* 4. 쇼핑몰 스타일 원형 아이콘 카테고리 네비게이션 */}
         <KMarketCategoryNav />
 
         {/* 4. 귀국자 헐값 급처분 [무빙 세일(Moving Sale)] 전용관 */}
