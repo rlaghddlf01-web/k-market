@@ -207,14 +207,14 @@ export default function KMarketAuthModal({
               setAuthTab('ocr');
               setStep('form');
             }}
-            className={`flex-1 py-2.5 rounded-2xl text-xs sm:text-sm font-black flex items-center justify-center space-x-2 transition-all cursor-pointer ${
+            className={`flex-1 py-2.5 rounded-2xl text-xs sm:text-sm font-black flex items-center justify-center space-x-1.5 transition-all cursor-pointer ${
               authTab === 'ocr'
-                ? 'bg-blue-600 text-white shadow-md shadow-blue-600/25'
+                ? 'bg-gradient-to-r from-amber-500 via-orange-500 to-rose-500 text-white shadow-md shadow-orange-500/25 ring-2 ring-amber-300'
                 : 'text-slate-600 dark:text-slate-400 hover:bg-slate-200/60'
             }`}
           >
             <Camera className="w-4 h-4" />
-            <span>외국인등록증 OCR 자동완성 (추천 ⚡)</span>
+            <span>📸 등록증 OCR (+7.0℃ & 상단노출 🚀)</span>
           </button>
 
           <button
@@ -222,14 +222,14 @@ export default function KMarketAuthModal({
               setAuthTab('manual');
               setStep('form');
             }}
-            className={`flex-1 py-2.5 rounded-2xl text-xs sm:text-sm font-black flex items-center justify-center space-x-2 transition-all cursor-pointer ${
+            className={`flex-1 py-2.5 rounded-2xl text-xs sm:text-sm font-black flex items-center justify-center space-x-1.5 transition-all cursor-pointer ${
               authTab === 'manual'
                 ? 'bg-blue-600 text-white shadow-md shadow-blue-600/25'
                 : 'text-slate-600 dark:text-slate-400 hover:bg-slate-200/60'
             }`}
           >
             <User className="w-4 h-4" />
-            <span>직접 수기 입력 (Manual)</span>
+            <span>수기 입력 (기본 36.5℃)</span>
           </button>
         </div>
 
@@ -238,9 +238,42 @@ export default function KMarketAuthModal({
           {/* STEP 1: 폼 입력 단계 */}
           {step === 'form' && (
             <div className="space-y-4">
-              {/* OCR 탭일 때: 카메라 촬영 업로더 */}
+              {/* OCR 탭일 때: 매너온도 +7.0℃ & 최상단 노출 혜택 강조 배너 + 촬영 박스 */}
               {authTab === 'ocr' && (
-                <div className="space-y-2">
+                <div className="space-y-3">
+                  {/* 🔥 매너온도 43.5℃ & 앱 최상단 우선 노출 파격 혜택 하이라이트 카드 */}
+                  <div className="p-4 rounded-3xl bg-gradient-to-br from-amber-500/15 via-orange-500/10 to-rose-500/15 border-2 border-amber-400/80 shadow-md space-y-2.5">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-1.5">
+                        <span className="text-base animate-bounce">🔥</span>
+                        <h4 className="font-black text-xs sm:text-sm text-[#7a3e0a] dark:text-amber-300">
+                          실물 신분증 OCR 촬영 시 3대 특별 혜택
+                        </h4>
+                      </div>
+                      <span className="bg-gradient-to-r from-amber-500 to-rose-500 text-white font-black text-[10px] px-2.5 py-0.5 rounded-full shadow-xs animate-pulse">
+                        +7.0℃ 보너스
+                      </span>
+                    </div>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-[11px]">
+                      <div className="p-2.5 rounded-2xl bg-white/90 dark:bg-gray-800/90 border border-amber-200 dark:border-amber-900/60 flex items-start gap-2 shadow-2xs">
+                        <span className="text-base">🌡️</span>
+                        <div>
+                          <p className="font-black text-slate-900 dark:text-white">매너온도 43.5℃ 골드 등급</p>
+                          <p className="text-slate-500 text-[10px] mt-0.5">가입 즉시 +7.0℃ 상승하여 최우수 안심 회원 뱃지 부여</p>
+                        </div>
+                      </div>
+
+                      <div className="p-2.5 rounded-2xl bg-white/90 dark:bg-gray-800/90 border border-amber-200 dark:border-amber-900/60 flex items-start gap-2 shadow-2xs">
+                        <span className="text-base">🚀</span>
+                        <div>
+                          <p className="font-black text-orange-600 dark:text-orange-400">내 매물 앱 최상단 우선 노출</p>
+                          <p className="text-slate-500 text-[10px] mt-0.5">신뢰도가 높아 구매자에게 먼저 추천되어 3배 빠른 판매 성사!</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
                   <input
                     type="file"
                     ref={fileInputRef}
@@ -249,60 +282,67 @@ export default function KMarketAuthModal({
                     className="hidden"
                   />
 
+                  {/* 카메라 촬영 / 업로드 드롭존 */}
                   <div
                     onClick={() => fileInputRef.current?.click()}
-                    className={`border-2 border-dashed rounded-3xl p-5 text-center transition-all cursor-pointer flex flex-col items-center justify-center gap-2 ${
+                    className={`border-2 border-dashed rounded-3xl p-5 text-center transition-all cursor-pointer flex flex-col items-center justify-center gap-2.5 ${
                       ocrCompleted
-                        ? 'border-emerald-500 bg-emerald-50/50 dark:bg-emerald-950/20'
-                        : 'border-blue-300 dark:border-blue-800 bg-blue-50/50 dark:bg-blue-950/20 hover:border-blue-500'
+                        ? 'border-emerald-500 bg-emerald-50/70 dark:bg-emerald-950/30'
+                        : 'border-orange-400 dark:border-orange-600 bg-gradient-to-b from-orange-50/50 to-amber-50/30 hover:border-orange-500 hover:shadow-lg shadow-xs'
                     }`}
                   >
                     {isScanning ? (
                       <div className="flex flex-col items-center py-4 space-y-2">
-                        <RefreshCw className="w-8 h-8 text-blue-600 animate-spin" />
-                        <span className="font-black text-blue-950 dark:text-blue-200 text-sm">
-                          Gemini Vision OCR 판독 중 (0.5초)...
+                        <RefreshCw className="w-8 h-8 text-orange-600 animate-spin" />
+                        <span className="font-black text-slate-900 dark:text-white text-sm">
+                          Gemini Vision AI가 신분증 판독 중 (0.5초)...
                         </span>
-                        <span className="text-[11px] text-blue-700">
+                        <span className="text-[11px] text-orange-700">
                           이름, 외국인등록번호, 비자, 만료일을 자동 추출하고 있습니다.
                         </span>
                       </div>
                     ) : ocrCompleted ? (
                       <div className="flex items-center space-x-3 text-left w-full">
-                        <div className="w-12 h-12 rounded-2xl bg-emerald-500 text-white flex items-center justify-center shrink-0">
+                        <div className="w-12 h-12 rounded-2xl bg-emerald-500 text-white flex items-center justify-center shrink-0 shadow-md">
                           <CheckCircle2 className="w-7 h-7" />
                         </div>
                         <div className="flex-1 min-w-0">
-                          <span className="text-xs font-black text-emerald-800 dark:text-emerald-300 flex items-center gap-1">
-                            <span>✅ 실물 등록증 OCR 인식 완료!</span>
-                            <span className="bg-emerald-200 text-emerald-900 text-[10px] px-2 py-0.5 rounded-full">
-                              골드 신뢰 뱃지 부여
+                          <div className="flex items-center gap-1.5 flex-wrap">
+                            <span className="text-xs font-black text-emerald-800 dark:text-emerald-300">
+                              ✅ 실물 등록증 OCR 인증 성공!
                             </span>
-                          </span>
-                          <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5 truncate">
+                            <span className="bg-gradient-to-r from-amber-500 to-orange-500 text-white text-[10px] font-black px-2 py-0.5 rounded-full">
+                              매너온도 43.5℃ &amp; 상단노출 확정 👑
+                            </span>
+                          </div>
+                          <p className="text-[11px] text-slate-600 dark:text-slate-300 mt-1 truncate font-medium">
                             {userName} | {arcNumber} | {visaType}
                           </p>
                         </div>
-                        <span className="text-xs text-blue-600 font-bold hover:underline">
+                        <span className="text-xs text-orange-600 font-bold hover:underline shrink-0">
                           다시 촬영
                         </span>
                       </div>
                     ) : (
                       <>
-                        <div className="w-12 h-12 rounded-2xl bg-blue-600 text-white flex items-center justify-center shadow-md shadow-blue-500/30">
-                          <Camera className="w-6 h-6" />
+                        <div className="w-13 h-13 rounded-2xl bg-gradient-to-br from-amber-500 to-orange-600 text-white flex items-center justify-center shadow-lg shadow-orange-500/30 ring-4 ring-orange-200 dark:ring-orange-950">
+                          <Camera className="w-7 h-7" />
                         </div>
-                        <div>
-                          <h4 className="font-black text-sm text-slate-900 dark:text-white">
+                        <div className="space-y-0.5">
+                          <h4 className="font-black text-sm sm:text-base text-slate-900 dark:text-white">
                             외국인등록증 앞면 사진 촬영하기
                           </h4>
-                          <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">
-                            스마트폰 카메라로 비추면 0.5초 만에 자동으로 입력됩니다.
+                          <p className="text-[11px] text-slate-600 dark:text-slate-400">
+                            카메라로 0.5초 비추면 자동 입력 &amp; <strong>매너온도 즉시 43.5℃(골드)</strong> 획득!
                           </p>
                         </div>
-                        <span className="px-3.5 py-1.5 rounded-xl bg-blue-600 text-white font-bold text-xs shadow-xs mt-1">
-                          카메라 열기 / 사진 선택
-                        </span>
+                        <button
+                          type="button"
+                          className="px-5 py-2.5 rounded-2xl bg-gradient-to-r from-amber-500 via-orange-500 to-rose-500 text-white font-black text-xs shadow-md shadow-orange-500/30 hover:scale-103 active:scale-97 transition-all cursor-pointer flex items-center gap-1.5"
+                        >
+                          <Camera className="w-4 h-4" />
+                          <span>카메라 열기 / 신분증 촬영하고 43.5℃ 받기 ⚡</span>
+                        </button>
                       </>
                     )}
                   </div>
