@@ -226,21 +226,21 @@ export default function KMarketItemCard({ item }: KMarketItemCardProps) {
               </div>
             </div>
 
-            {/* 번역 채팅 CTA - 연한 커피(마일드 모카 & 카라멜) 스타일 */}
+            {/* 번역 채팅 CTA - 진한 남색 + 2px 골드 테두리 */}
             <button
               onClick={(e) => {
                 e.stopPropagation();
                 openChatForItem(item);
               }}
-              className="w-full flex items-center justify-center gap-1.5 text-[12px] py-2 rounded-xl transition-all duration-200 active:scale-95 cursor-pointer shadow-sm hover:shadow-md group/btn hover:brightness-105"
+              className="w-full flex items-center justify-center gap-1.5 text-[12px] py-2 rounded-xl transition-all duration-200 active:scale-95 cursor-pointer shadow-md hover:shadow-lg hover:bg-[#111d38] group/btn"
               style={{
-                background: 'linear-gradient(135deg, #4e2f18 0%, #704423 100%)',
-                border: '1.5px solid #d4a373',
-                boxShadow: '0 2px 8px rgba(78, 47, 24, 0.18)',
+                background: '#09101f',
+                border: '2px solid #f3ba2f',
+                boxShadow: '0 2px 10px rgba(243, 186, 47, 0.22)',
               }}
             >
-              <MessageCircle className="w-3.5 h-3.5 text-[#fed7aa] group-hover/btn:scale-110 transition-transform" />
-              <span className="text-[#fef3c7] font-bold">1:1 안심 번역 채팅</span>
+              <MessageCircle className="w-3.5 h-3.5 text-[#f3ba2f] group-hover/btn:scale-110 transition-transform" />
+              <span className="text-[#f3ba2f] font-black">1:1 안심 번역 채팅</span>
               <span className="text-white font-bold">시작 →</span>
             </button>
           </div>

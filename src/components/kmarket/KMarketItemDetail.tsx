@@ -300,10 +300,16 @@ export default function KMarketItemDetail() {
               setSelectedItem(null);
               openChatForItem(itemToChat);
             }}
-            className="flex-1 py-3.5 bg-gradient-to-r from-emerald-600 via-teal-600 to-sky-600 hover:from-emerald-700 hover:to-teal-700 text-white font-extrabold text-sm sm:text-base rounded-2xl shadow-xl shadow-emerald-600/25 active:scale-98 transition-all flex items-center justify-center space-x-2 cursor-pointer"
+            style={{
+              background: '#09101f',
+              border: '2px solid #f3ba2f',
+              boxShadow: '0 4px 16px rgba(243, 186, 47, 0.25)',
+            }}
+            className="flex-1 py-3.5 text-white font-black text-sm sm:text-base rounded-2xl shadow-xl active:scale-98 transition-all flex items-center justify-center space-x-2 cursor-pointer hover:bg-[#111d38]"
           >
-            <MessageCircle className="w-5 h-5" />
-            <span>{t('chat_btn')}</span>
+            <MessageCircle className="w-5 h-5 text-[#f3ba2f]" />
+            <span className="text-[#f3ba2f] font-black">1:1 안심 번역 채팅</span>
+            <span className="text-white font-bold">시작 →</span>
           </button>
         </div>
       </div>
