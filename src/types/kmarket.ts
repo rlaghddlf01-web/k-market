@@ -29,7 +29,8 @@ export type ItemCategory =
   | 'appliances'  // 가전제품 (세탁기, 냉장고, 밥솥 등)
   | 'furniture'   // 가구 (침대, 서랍장, 매트리스 등)
   | 'digital'     // 전자기기 (스마트폰, 노트북, 와이파이공유기)
-  | 'clothes'     // 의류/생활잡화
+  | 'clothes'     // 의류/패션
+  | 'daily'       // 생활/주방용품
   | 'vehicles'    // 자전거/전동킥보드/오토바이
   | 'free_give';  // 무료 나눔 (0원)
 

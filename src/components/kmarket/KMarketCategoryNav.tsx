@@ -29,7 +29,7 @@ const CATEGORIES: CategoryItem[] = [
   { id: 'digital', nameKo: '스마트폰·IT', nameEn: 'Digital', icon: <Smartphone className="w-5 h-5" /> },
   { id: 'moving_sale', nameKo: '무빙세일', nameEn: 'Moving Sale', icon: <Plane className="w-5 h-5" />, badge: 'HOT' },
   { id: 'free_give', nameKo: '무료나눔', nameEn: 'Free Sharing', icon: <Gift className="w-5 h-5" />, badge: '0원' },
-  { id: 'fashion', nameKo: '의류·잡화', nameEn: 'Fashion', icon: <Shirt className="w-5 h-5" /> },
+  { id: 'clothes', nameKo: '의류·잡화', nameEn: 'Fashion', icon: <Shirt className="w-5 h-5" /> },
   { id: 'daily', nameKo: '생활·주방', nameEn: 'Life & Kitchen', icon: <Sparkles className="w-5 h-5" /> },
 ];
 

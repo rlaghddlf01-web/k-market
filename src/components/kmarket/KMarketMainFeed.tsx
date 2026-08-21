@@ -53,8 +53,16 @@ export default function KMarketMainFeed() {
       return false;
     }
     // 1. 카테고리 필터
-    if (selectedCategory !== 'all' && item.category !== selectedCategory) {
-      return false;
+    if (selectedCategory !== 'all') {
+      if (selectedCategory === 'free_give') {
+        if (item.price !== 0 && item.category !== 'free_give') return false;
+      } else if (selectedCategory === 'moving_sale') {
+        if (!item.is_moving_sale && item.category !== 'moving_sale') return false;
+      } else if (selectedCategory === 'clothes') {
+        if (item.category !== 'clothes' && (item.category as string) !== 'fashion') return false;
+      } else {
+        if (item.category !== selectedCategory) return false;
+      }
     }
     // 2. 공단 지역 필터
     if (selectedRegion !== 'all' && item.industrial_zone !== selectedRegion) {
