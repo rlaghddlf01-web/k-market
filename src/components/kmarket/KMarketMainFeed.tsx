@@ -5,8 +5,8 @@ import Link from 'next/link';
 import { useKMarket } from '@/context/KMarketContext';
 import { useLanguage } from '@/context/LanguageContext';
 import KMarketHeader from './KMarketHeader';
-import KMarketTaxBanner from './KMarketTaxBanner';
-import KMarketSafetyBanner from './KMarketSafetyBanner';
+import KMarketHeroShowcase from './KMarketHeroShowcase';
+import KMarketCategoryNav from './KMarketCategoryNav';
 import KMarketMovingSaleSection from './KMarketMovingSaleSection';
 import KMarketRegionFilter from './KMarketRegionFilter';
 import KMarketItemCard from './KMarketItemCard';
@@ -79,34 +79,35 @@ export default function KMarketMainFeed() {
       <KMarketHeader />
 
       {/* 메인 콘텐츠 컨테이너 */}
-      <main className="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 py-8 sm:py-12 space-y-8">
-        {/* 1. KTRS 킬러 세무 환급 184만원 배너 */}
-        <KMarketTaxBanner />
+      <main className="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 py-6 sm:py-10 space-y-8">
+        {/* 1. 감성적인 샌드 베이지 히어로 쇼케이스 (세무환급 & 1분등록 CTA 일체화) */}
+        <KMarketHeroShowcase />
 
-        {/* 1-2. 🛡️ 외국인 안심 거래 3대 수칙 (사기 방지 쉴드) 배너 */}
-        <KMarketSafetyBanner />
+        {/* 2. 쇼핑몰 스타일 원형 아이콘 카테고리 네비게이션 */}
+        <KMarketCategoryNav />
 
-        {/* 2. 귀국자 헐값 급처분 [무빙 세일(Moving Sale)] 전용관 */}
+        {/* 3. 공단별 도보 직거래 필터 */}
+        <KMarketRegionFilter />
+
+        {/* 4. 귀국자 헐값 급처분 [무빙 세일(Moving Sale)] 전용관 */}
         {!isMovingSaleOnly && selectedCategory === 'all' && !searchQuery && (
           <KMarketMovingSaleSection />
         )}
 
-        {/* 3. 공단별 도보 직거래 필터 & 카테고리 칩 바 */}
-        <KMarketRegionFilter />
-
-        {/* 4. 매물 리스트 헤더 */}
-        <div className="flex items-center justify-between mt-6 mb-4 px-1">
+        {/* 5. 매물 리스트 헤더 */}
+        <div className="flex items-center justify-between pt-4 mb-2 px-1">
           <div className="flex items-center gap-2.5">
-            <h2 className="text-lg font-black text-slate-900 tracking-tight">실시간 중고 매물</h2>
+            <h2 className="text-base sm:text-lg font-extrabold text-[#1f1914] tracking-tight">
+              실시간 등록 매물
+            </h2>
             <span
-              className="text-xs font-bold px-2.5 py-1 rounded-full text-blue-700"
-              style={{ background: 'linear-gradient(135deg, #dbeafe 0%, #ede9fe 100%)' }}
+              className="text-xs font-bold px-2.5 py-0.5 rounded-full bg-[#dfd7ce] text-[#5c4f42]"
             >
               {filteredItems.length}개
             </span>
           </div>
-          <div className="flex items-center gap-1.5 text-[11px] text-slate-400 font-semibold bg-white/80 px-3 py-1.5 rounded-full border border-slate-100">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+          <div className="flex items-center gap-1.5 text-xs text-[#705e4f] font-medium bg-[#f4efe9] px-3 py-1.5 rounded-full border border-[#dfd7ce]">
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
             15개국어 실시간 번역
           </div>
         </div>
