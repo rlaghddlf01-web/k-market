@@ -193,3 +193,16 @@ export interface UserReportData {
   created_at: string;
 }
 
+export interface KeywordAlert {
+  id: string;
+  keyword: string;                  // 알림 받을 단어 (예: "세탁기", "아이폰", "0원", "밥솥")
+  industrial_zone: IndustrialRegion; // 알림 받을 공단 필터 ('all', 'pyeongtaek', 'ansan' 등)
+  min_price?: number;               // 최소 가격 필터
+  max_price?: number;               // 최대 가격 필터
+  is_active: boolean;               // 알림 활성화 여부
+  notify_by_sms: boolean;           // 알리고 SMS / 알림톡 알림 여부
+  matched_count: number;            // 매칭된 매물 개수
+  created_at: string;
+}
+
+

@@ -9,6 +9,7 @@ import {
   ItemStatus,
   IndustrialRegion,
   SupportedLanguage,
+  KeywordAlert,
 } from '@/types/kmarket';
 import { INITIAL_ITEMS, INITIAL_CHATS } from '@/lib/mockData';
 import { useLanguage } from './LanguageContext';
@@ -38,8 +39,16 @@ interface KMarketContextType {
   setIsAuthModalOpen: (open: boolean) => void;
   isMyPageOpen: boolean;
   setIsMyPageOpen: (open: boolean) => void;
+  isKeywordModalOpen: boolean;
+  setIsKeywordModalOpen: (open: boolean) => void;
   authedUser: any;
   setAuthedUser: (user: any) => void;
+  
+  // 키워드 실시간 알림 상태
+  keywordAlerts: KeywordAlert[];
+  addKeywordAlert: (alert: Omit<KeywordAlert, 'id' | 'created_at' | 'matched_count'>) => void;
+  removeKeywordAlert: (id: string) => void;
+  toggleKeywordAlert: (id: string) => void;
   
   // 채팅 상태
   activeChat: KMarketChat | null;
@@ -85,7 +94,59 @@ export function KMarketProvider({ children }: { children: React.ReactNode }) {
   const [isFavoritesModalOpen, setIsFavoritesModalOpen] = useState<boolean>(false);
   const [isAuthModalOpen, setIsAuthModalOpen] = useState<boolean>(false);
   const [isMyPageOpen, setIsMyPageOpen] = useState<boolean>(false);
+  const [isKeywordModalOpen, setIsKeywordModalOpen] = useState<boolean>(false);
   const [authedUser, setAuthedUser] = useState<any>(null);
+
+  // 키워드 알림 상태 (외국인 기숙사 인기 기본값 3개 제공)
+  const [keywordAlerts, setKeywordAlerts] = useState<KeywordAlert[]>([
+    {
+      id: 'kw-1',
+      keyword: '세탁기',
+      industrial_zone: 'all',
+      is_active: true,
+      notify_by_sms: true,
+      matched_count: 2,
+      created_at: new Date().toISOString(),
+    },
+    {
+      id: 'kw-2',
+      keyword: '0원',
+      industrial_zone: 'all',
+      is_active: true,
+      notify_by_sms: true,
+      matched_count: 1,
+      created_at: new Date().toISOString(),
+    },
+    {
+      id: 'kw-3',
+      keyword: '냉장고',
+      industrial_zone: 'pyeongtaek',
+      is_active: true,
+      notify_by_sms: true,
+      matched_count: 3,
+      created_at: new Date().toISOString(),
+    },
+  ]);
+
+  const addKeywordAlert = (newKw: Omit<KeywordAlert, 'id' | 'created_at' | 'matched_count'>) => {
+    const newAlert: KeywordAlert = {
+      ...newKw,
+      id: 'kw-' + Date.now(),
+      matched_count: 0,
+      created_at: new Date().toISOString(),
+    };
+    setKeywordAlerts((prev) => [newAlert, ...prev]);
+  };
+
+  const removeKeywordAlert = (id: string) => {
+    setKeywordAlerts((prev) => prev.filter((k) => k.id !== id));
+  };
+
+  const toggleKeywordAlert = (id: string) => {
+    setKeywordAlerts((prev) =>
+      prev.map((k) => (k.id === id ? { ...k, is_active: !k.is_active } : k))
+    );
+  };
 
   // 채팅
   const [activeChat, setActiveChat] = useState<KMarketChat | null>(null);
@@ -451,6 +512,12 @@ export function KMarketProvider({ children }: { children: React.ReactNode }) {
         setIsAuthModalOpen,
         isMyPageOpen,
         setIsMyPageOpen,
+        isKeywordModalOpen,
+        setIsKeywordModalOpen,
+        keywordAlerts,
+        addKeywordAlert,
+        removeKeywordAlert,
+        toggleKeywordAlert,
         authedUser,
         setAuthedUser,
         activeChat,

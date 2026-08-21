@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { useLanguage } from '@/context/LanguageContext';
 import { useKMarket } from '@/context/KMarketContext';
-import { Globe, PlusCircle, Search, Sparkles, MessageCircle, ShieldCheck, Heart, UserCheck } from 'lucide-react';
+import { Globe, PlusCircle, Search, Sparkles, MessageCircle, ShieldCheck, Heart, UserCheck, Bell } from 'lucide-react';
 import { SupportedLanguage } from '@/types/kmarket';
 
 export default function KMarketHeader() {
@@ -17,6 +17,8 @@ export default function KMarketHeader() {
     isAuthModalOpen,
     setIsAuthModalOpen,
     setIsMyPageOpen,
+    setIsKeywordModalOpen,
+    keywordAlerts,
     authedUser,
     likedItemIds,
   } = useKMarket();
@@ -176,10 +178,24 @@ export default function KMarketHeader() {
               <span>{t('post_item_btn')}</span>
             </button>
 
+            {/* 🔔 키워드 실시간 알림 버튼 */}
+            <div
+              onClick={() => setIsKeywordModalOpen(true)}
+              className="relative p-2 text-slate-600 hover:text-blue-600 hover:bg-slate-100 rounded-full cursor-pointer transition-colors"
+              title="키워드 실시간 알림 설정 (세탁기/아이폰/0원 등)"
+            >
+              <Bell className="w-5 h-5 text-slate-700" />
+              {keywordAlerts.length > 0 && (
+                <span className="absolute top-1 right-1 bg-amber-500 text-white text-[10px] font-black w-4 h-4 rounded-full flex items-center justify-center animate-bounce shadow-xs">
+                  {keywordAlerts.length}
+                </span>
+              )}
+            </div>
+
             {/* 찜한 목록 버튼 */}
             <div
               onClick={() => setIsMyPageOpen(true)}
-              className="relative p-2 text-slate-600 hover:text-red-500 cursor-pointer transition-colors"
+              className="relative p-2 text-slate-600 hover:text-red-500 hover:bg-slate-100 rounded-full cursor-pointer transition-colors"
               title="내가 찜한 매물 및 마이페이지"
             >
               <Heart className="w-5 h-5" />

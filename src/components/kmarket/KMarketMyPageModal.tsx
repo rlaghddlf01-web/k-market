@@ -13,6 +13,7 @@ import {
   Sparkles,
   ArrowRight,
   MapPin,
+  Bell,
 } from 'lucide-react';
 import CountryFlag from './CountryFlag';
 
@@ -28,6 +29,8 @@ export default function KMarketMyPageModal({ isOpen, onClose }: KMarketMyPageMod
     toggleLike,
     authedUser,
     setIsTaxModalOpen,
+    setIsKeywordModalOpen,
+    keywordAlerts,
     openChatForItem,
     setSelectedItem,
     updateItemStatus,
@@ -187,6 +190,40 @@ export default function KMarketMyPageModal({ isOpen, onClose }: KMarketMyPageMod
           >
             <span>환급 신청</span>
             <ArrowRight className="w-3.5 h-3.5" />
+          </button>
+        </div>
+
+        {/* 🔔 키워드 실시간 알림 관리 섹션 */}
+        <div className="px-4 py-3 bg-blue-50/70 dark:bg-blue-950/30 border-b border-slate-200 dark:border-gray-800 flex items-center justify-between shrink-0">
+          <div className="flex items-center space-x-2 min-w-0">
+            <div className="p-2 rounded-xl bg-blue-600 text-white shrink-0 shadow-xs">
+              <Bell className="w-4 h-4" />
+            </div>
+            <div className="min-w-0">
+              <h5 className="text-xs font-black text-slate-900 dark:text-white flex items-center gap-1.5 truncate">
+                <span>🔔 키워드 실시간 알림 ({keywordAlerts.length}개 등록중)</span>
+              </h5>
+              <div className="flex items-center gap-1 mt-0.5 overflow-x-auto no-scrollbar">
+                {keywordAlerts.slice(0, 3).map((kw) => (
+                  <span
+                    key={kw.id}
+                    className="text-[10px] bg-white dark:bg-gray-800 text-blue-700 dark:text-blue-300 px-1.5 py-0.2 rounded-md font-bold border border-blue-200/80 shrink-0"
+                  >
+                    #{kw.keyword}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <button
+            onClick={() => {
+              onClose();
+              setIsKeywordModalOpen(true);
+            }}
+            className="px-3 py-1.5 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs rounded-xl shadow-xs transition-all shrink-0 cursor-pointer"
+          >
+            알림 설정
           </button>
         </div>
 
