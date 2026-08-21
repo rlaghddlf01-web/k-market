@@ -304,15 +304,27 @@ export default function KMarketChatDrawer() {
                         <span className="text-[10px] text-amber-700 font-semibold">1시간 전 리마인더</span>
                       </div>
 
-                      <button
-                        onClick={() => {
-                          alert(`카카오맵/네이버지도로 "${activeAppointment.place_name}" 길찾기 안내를 실행합니다.`);
-                        }}
-                        className="w-full py-2 bg-blue-50 hover:bg-blue-100 text-blue-700 font-bold rounded-xl transition-colors flex items-center justify-center gap-1.5 cursor-pointer text-xs"
-                      >
-                        <Navigation className="w-3.5 h-3.5" />
-                        <span>지도 앱에서 길찾기 (Route Guide)</span>
-                      </button>
+                      <div className="grid grid-cols-2 gap-2">
+                        <button
+                          onClick={() => {
+                            const query = encodeURIComponent(`${activeAppointment.place_name} ${activeAppointment.address}`);
+                            window.open(`https://www.google.com/maps/search/?api=1&query=${query}`, '_blank');
+                          }}
+                          className="py-2 px-2 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl transition-all flex items-center justify-center gap-1.5 cursor-pointer text-[11px] shadow-xs"
+                        >
+                          <Navigation className="w-3.5 h-3.5" />
+                          <span>구글 맵 길찾기</span>
+                        </button>
+                        <button
+                          onClick={() => {
+                            const query = encodeURIComponent(`${activeAppointment.place_name} ${activeAppointment.address}`);
+                            window.open(`https://map.kakao.com/link/search/${query}`, '_blank');
+                          }}
+                          className="py-2 px-2 bg-yellow-400 hover:bg-yellow-500 text-slate-950 font-bold rounded-xl transition-all flex items-center justify-center gap-1.5 cursor-pointer text-[11px] shadow-xs"
+                        >
+                          <span>카카오맵 보기</span>
+                        </button>
+                      </div>
                     </div>
                   </div>
                 ) : (
