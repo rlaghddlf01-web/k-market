@@ -7,12 +7,6 @@ import {
   X,
   Camera,
   Sparkles,
-  DollarSign,
-  MapPin,
-  Tag,
-  Plane,
-  Clock,
-  Plus,
   Trash2,
   CheckCircle2,
 } from 'lucide-react';
@@ -196,33 +190,45 @@ export default function KMarketCreatePost() {
             </div>
 
             {isMovingSale && (
-              <div className="grid grid-cols-2 gap-2 pt-1">
+              <div className="space-y-2 pt-2 border-t border-amber-200/60">
                 <div>
-                  <span className="text-[11px] text-orange-800 font-semibold block mb-1">
-                    귀국까지 남은 일수 (D-day)
+                  <span className="text-[11px] text-orange-900 font-bold block mb-1.5">
+                    귀국 예정 D-Day 선택 (남은 기간에 따라 긴박감 뱃지 자동 부착)
                   </span>
-                  <select
-                    value={movingDDay}
-                    onChange={(e) => setMovingDDay(Number(e.target.value))}
-                    className="w-full px-2.5 py-1.5 bg-white rounded-xl border border-orange-300 text-xs font-bold text-orange-900"
-                  >
-                    <option value={1}>D-1 (내일 귀국 급처!)</option>
-                    <option value={3}>D-3 (3일 후 귀국)</option>
-                    <option value={5}>D-5 (5일 후 귀국)</option>
-                    <option value={7}>D-7 (1주일 후 귀국)</option>
-                  </select>
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-1.5">
+                    {[
+                      { days: 3, label: '🚨 D-3 오늘마감', sub: '헐값 급처분' },
+                      { days: 7, label: '🔥 D-7 초특가', sub: '일주일 임박' },
+                      { days: 14, label: '⚡ D-14 묶음할인', sub: '2주 전 예약' },
+                      { days: 30, label: '✈️ D-30 사전예약', sub: '1달 전 등록' },
+                    ].map((opt) => (
+                      <button
+                        key={opt.days}
+                        type="button"
+                        onClick={() => setMovingDDay(opt.days)}
+                        className={`p-2 rounded-xl border text-center transition-all cursor-pointer ${
+                          movingDDay === opt.days
+                            ? 'border-orange-500 bg-orange-500 text-white font-bold shadow-xs'
+                            : 'border-orange-200 bg-white text-orange-950 hover:bg-orange-100/60'
+                        }`}
+                      >
+                        <span className="block text-xs font-black">{opt.label}</span>
+                        <span className="block text-[9px] opacity-80">{opt.sub}</span>
+                      </button>
+                    ))}
+                  </div>
                 </div>
 
                 <div>
-                  <span className="text-[11px] text-orange-800 font-semibold block mb-1">
-                    원래 구입 가격 (정가)
+                  <span className="text-[11px] text-orange-900 font-bold block mb-1">
+                    원래 구입 가격 / 정가 (할인율 뱃지 표시용)
                   </span>
                   <input
                     type="number"
                     value={originalPrice}
                     onChange={(e) => setOriginalPrice(e.target.value)}
                     placeholder="예: 450000"
-                    className="w-full px-2.5 py-1.5 bg-white rounded-xl border border-orange-300 text-xs font-bold text-orange-900"
+                    className="w-full px-3 py-2 bg-white rounded-xl border border-orange-300 text-xs font-bold text-orange-950 focus:outline-none"
                   />
                 </div>
               </div>

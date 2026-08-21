@@ -82,8 +82,20 @@ export default function KMarketItemCard({ item }: KMarketItemCardProps) {
                 🎁 무료나눔
               </div>
             ) : item.is_moving_sale ? (
-              <div className="bg-rose-600 text-white text-[11px] font-black px-2 py-0.5 rounded-full shadow-md">
-                D-{item.moving_d_day || 5} 급처
+              <div
+                className={`text-[10px] font-black px-2 py-0.5 rounded-full shadow-md ${
+                  (item.moving_d_day || 5) <= 3
+                    ? 'bg-rose-600 text-white animate-pulse'
+                    : (item.moving_d_day || 5) <= 7
+                    ? 'bg-orange-600 text-white'
+                    : 'bg-blue-600 text-white'
+                }`}
+              >
+                {(item.moving_d_day || 5) <= 3
+                  ? `🚨 D-${item.moving_d_day || 3} 마감`
+                  : (item.moving_d_day || 5) <= 7
+                  ? `🔥 D-${item.moving_d_day || 5} 초특가`
+                  : `✈️ D-${item.moving_d_day || 14} 묶음`}
               </div>
             ) : null}
 

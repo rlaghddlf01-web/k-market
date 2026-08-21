@@ -170,11 +170,11 @@ export const INITIAL_ITEMS: KMarketItem[] = [
     seller_phone: '010-4491-6672',
     seller_country: 'KH',
     seller_country_flag: '🇰🇭',
-    title: '✈️ [귀국 D-7 무빙세일] 접이식 싱글 침대 매트리스 + 책상 + 행거 세트',
-    description: '화성 향남 제약공단 기숙사 퇴실로 가구 세트 35,000원에 처분합니다. 매트리스 쿠션감 좋고 오염 없습니다. 방 정리 중이라 빠른 거래 환영합니다.',
+    title: '✈️ [귀국 D-14 무빙세일] 접이식 싱글 침대 매트리스 + 책상 + 행거 세트 (2주 전 예약)',
+    description: '화성 향남 제약공단 기숙사 2주 뒤 퇴실 예정이라 가구 세트 35,000원에 미리 예약 처분합니다. 매트리스 쿠션감 좋고 오염 없습니다. 미리 날짜 맞춰 거래 가능합니다.',
     price: 35000,
     original_price: 260000,
-    category: 'furniture',
+    category: 'moving_sale',
     images: [
       'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=800&auto=format&fit=crop&q=80',
       'https://images.unsplash.com/photo-1518455027359-f3f8164ba6bd?w=800&auto=format&fit=crop&q=80'
@@ -185,7 +185,7 @@ export const INITIAL_ITEMS: KMarketItem[] = [
     view_count: 88,
     like_count: 14,
     is_moving_sale: true,
-    moving_d_day: 7,
+    moving_d_day: 14,
     source_lang: 'km',
     created_at: new Date(Date.now() - 1000 * 60 * 420).toISOString(),
     updated_at: new Date(Date.now() - 1000 * 60 * 420).toISOString(),

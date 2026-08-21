@@ -157,13 +157,30 @@ export default function KMarketItemDetail() {
             {/* 매물 기본 정보 & 가격 */}
             <div className="space-y-2">
               {/* 상태 뱃지 및 끌올/가격인하 표시 */}
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2 flex-wrap">
                 <KMarketStatusBadge
                   status={selectedItem.status}
                   isPriceDropped={selectedItem.is_price_dropped}
                   dropDiscountRate={selectedItem.drop_discount_rate}
                   boostedAt={selectedItem.boosted_at}
                 />
+                {selectedItem.is_moving_sale && (
+                  <span
+                    className={`text-xs font-black px-2.5 py-0.5 rounded-full shadow-xs ${
+                      (selectedItem.moving_d_day || 5) <= 3
+                        ? 'bg-rose-600 text-white animate-pulse'
+                        : (selectedItem.moving_d_day || 5) <= 7
+                        ? 'bg-orange-600 text-white'
+                        : 'bg-blue-600 text-white'
+                    }`}
+                  >
+                    {(selectedItem.moving_d_day || 5) <= 3
+                      ? `🚨 귀국 D-${selectedItem.moving_d_day || 3} 오늘마감 헐값`
+                      : (selectedItem.moving_d_day || 5) <= 7
+                      ? `🔥 귀국 D-${selectedItem.moving_d_day || 5} 마감임박 초특가`
+                      : `✈️ 귀국 D-${selectedItem.moving_d_day || 14} 묶음할인`}
+                  </span>
+                )}
                 {selectedItem.status === 'reserved' && selectedItem.reserved_to_user_name && (
                   <span className="text-xs text-amber-700 bg-amber-50 px-2 py-0.5 rounded-md font-semibold">
                     {selectedItem.reserved_to_user_name} 님과 거래 예약중
