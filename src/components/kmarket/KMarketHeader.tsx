@@ -3,8 +3,9 @@
 import React, { useState } from 'react';
 import { useLanguage } from '@/context/LanguageContext';
 import { useKMarket } from '@/context/KMarketContext';
-import { Globe, PlusCircle, Search, Sparkles, MessageCircle, ShieldCheck, Heart } from 'lucide-react';
+import { Globe, PlusCircle, Search, Sparkles, MessageCircle, ShieldCheck, Heart, UserCheck } from 'lucide-react';
 import { SupportedLanguage } from '@/types/kmarket';
+import KMarketAuthModal from './KMarketAuthModal';
 
 export default function KMarketHeader() {
   const { currentLang, setLanguage, currentLangOption, languages, t } = useLanguage();
@@ -18,6 +19,8 @@ export default function KMarketHeader() {
   } = useKMarket();
 
   const [isLangDropdownOpen, setIsLangDropdownOpen] = useState(false);
+  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
+  const [authedUser, setAuthedUser] = useState<any>(null);
 
   return (
     <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-100 shadow-xs">
@@ -129,6 +132,31 @@ export default function KMarketHeader() {
 
           {/* 액션 버튼 그룹 */}
           <div className="flex items-center space-x-2">
+            {/* 외국인 신원인증 / 가입 버튼 */}
+            {authedUser ? (
+              <div
+                onClick={() => setIsAuthModalOpen(true)}
+                className="flex items-center space-x-1 px-3 py-1.5 rounded-full bg-emerald-50 border border-emerald-300 text-emerald-800 text-xs font-black cursor-pointer shadow-xs"
+                title="인증 완료된 회원 프로필"
+              >
+                <UserCheck className="w-3.5 h-3.5 text-emerald-600" />
+                <span className="truncate max-w-[90px]">{authedUser.userName}</span>
+                <span className="text-[10px] bg-emerald-200 text-emerald-900 px-1 rounded-sm">
+                  {authedUser.isOcrVerified ? 'OCR 🛡️' : '인증'}
+                </span>
+              </div>
+            ) : (
+              <button
+                onClick={() => setIsAuthModalOpen(true)}
+                className="flex items-center space-x-1 px-3 py-1.5 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-bold transition-all border border-slate-300 cursor-pointer"
+                title="외국인등록증 OCR 및 알리고 SMS 본인인증"
+              >
+                <ShieldCheck className="w-3.5 h-3.5 text-blue-600" />
+                <span className="hidden sm:inline">신원인증 / 가입</span>
+                <span className="sm:hidden">인증</span>
+              </button>
+            )}
+
             {/* 1분 간편 등록 버튼 */}
             <button
               onClick={() => setIsCreateModalOpen(true)}
@@ -201,6 +229,16 @@ export default function KMarketHeader() {
           </button>
         </div>
       </div>
+
+      {/* 🔐 외국인등록증 OCR & 알리고 SMS 본인인증 모달 */}
+      <KMarketAuthModal
+        isOpen={isAuthModalOpen}
+        onClose={() => setIsAuthModalOpen(false)}
+        onSuccessAuth={(userData) => {
+          setAuthedUser(userData);
+          alert(`[신원인증 완료] ${userData.userName} 님의 ${userData.authMethod === 'ocr' ? '실물 신분증 OCR 검증' : '수기 인증'}이 완료되었습니다.`);
+        }}
+      />
     </header>
   );
 }
