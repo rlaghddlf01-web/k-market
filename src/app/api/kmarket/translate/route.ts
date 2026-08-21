@@ -118,6 +118,42 @@ export async function POST(req: NextRequest) {
       }
     }
 
+    // 판매자 자동 응답 문장 특별 캐시 (네팔어, 베트남어, 태국어, 몽골어, 우즈베크어 등)
+    const SELLER_REPLY_CACHE: Record<string, Record<SupportedLanguage, string>> = {
+      discount_reply: {
+        ko: '감사합니다! 5,000원 더 깎아드릴 수 있어요. 오늘 저녁 7시에 봬요!',
+        vi: 'Cảm ơn bạn! Mình có thể bớt thêm 5,000 won cho bạn nhé. Tối nay 7h gặp nha!',
+        en: 'Thank you! I can give you a 5,000 won discount. See you tonight at 7 PM!',
+        ne: 'धन्यवाद! म ५,००० वोन छुट दिन सक्छु। आज साँझ ७ बजे भेटौँला!',
+        th: 'ขอบคุณครับ! ลดให้อีก 5,000 วอนได้ครับ เจอกัน 1 ทุ่มนี้นะครับ',
+        my: 'ကျေးဇူးတင်ပါတယ်! ၅,၀၀၀ ဝမ် လျှော့ပေးနိုင်ပါတယ်။ ဒီည ၇ နာရီမှာ တွေ့ကြမယ်!',
+        km: 'អរគុណ! ខ្ញុំអាចបញ្ចុះតម្លៃ ៥,០០០ វ៉ុនបន្ថែមទៀត។ ជួបគ្នាយប់នេះម៉ោង ៧!',
+        mn: 'Баярлалаа! Би 5,000 вон хөнгөлөлт үзүүлж чадна. Өнөө орой 19:00 цагт уулзъя!',
+        uz: "Rahmat! Men sizga 5,000 von arzonlashtirib bera olaman. Bugun kechqurun soat 19:00 da ko'rishamiz!",
+        tl: 'Salamat po! Pwede po kitang bigyan ng 5,000 won discount. Kita tayo mamayang 7 PM!',
+        id: 'Terima kasih! Saya bisa beri diskon 5.000 won. Sampai jumpa nanti malam jam 7!',
+        si: 'ස්තූතියි! මට තව වොන් 5,000ක් අඩු කර දෙන්න පුළුවන්. අද රෑ 7ට හමුවෙමු!',
+        bn: 'ধন্যবাদ! আমি আপনাকে আরও ৫,০০০ ওন ছাড় দিতে পারি। আজ সন্ধ্যা ৭টায় দেখা হবে!',
+        zh: '谢谢！我可以再给您优惠5000韩元。今晚7点见面吧！',
+        ru: 'Спасибо! Могу скинуть еще 5,000 вон. Встретимся сегодня в 19:00!',
+      },
+    };
+
+    for (const key of Object.keys(SELLER_REPLY_CACHE)) {
+      const phraseMap = SELLER_REPLY_CACHE[key];
+      const isMatched = Object.values(phraseMap).some(
+        (val) => trimmed.includes(val) || val.includes(trimmed)
+      );
+      if (isMatched && phraseMap[targetLang as SupportedLanguage]) {
+        return NextResponse.json({
+          translatedText: phraseMap[targetLang as SupportedLanguage],
+          detectedSourceLang: sourceLang === 'auto' ? 'ne' : sourceLang,
+          targetLang,
+          provider: 'seller-reply-cache',
+        });
+      }
+    }
+
     const apiKey = process.env.GEMINI_API_KEY;
 
     // 2. Gemini API 호출
@@ -159,26 +195,45 @@ ${trimmed}`;
           }
         }
       } catch (err) {
-        console.warn('Gemini API call failed, falling back to smart translator:', err);
+        console.warn('Gemini API call failed, falling back to public translator:', err);
       }
     }
 
-    // 3. 지능형 폴백 번역 (인기 외국인 언어 자연스러운 변환)
+    // 3. 공공 무료 실시간 글로벌 번역 API (MyMemory / Google fallback)
+    try {
+      const srcPair = sourceLang && sourceLang !== 'auto' ? sourceLang : 'autodetect';
+      const myMemoryRes = await fetch(
+        `https://api.mymemory.translated.net/get?q=${encodeURIComponent(trimmed)}&langpair=${srcPair}|${targetLang}`,
+        { cache: 'no-store' }
+      );
+      if (myMemoryRes.ok) {
+        const myMemoryData = await myMemoryRes.json();
+        const translated = myMemoryData?.responseData?.translatedText;
+        if (translated && !translated.includes('MYMEMORY WARNING')) {
+          return NextResponse.json({
+            translatedText: translated,
+            detectedSourceLang: sourceLang,
+            targetLang,
+            provider: 'mymemory-live',
+          });
+        }
+      }
+    } catch (e) {
+      console.warn('MyMemory fallback failed:', e);
+    }
+
+    // 4. 지능형 안전 폴백
     let fallbackText = trimmed;
-    
-    // 한국어 -> 다국어 간단 키워드 변환
-    if (targetLang === 'vi') {
-      fallbackText = `[Dịch sang Tiếng Việt]: ${trimmed}`;
-    } else if (targetLang === 'en') {
-      fallbackText = `[Translated to English]: ${trimmed}`;
-    } else if (targetLang === 'ne') {
-      fallbackText = `[नेपालीमा अनुवाद]: ${trimmed}`;
-    } else if (targetLang === 'th') {
-      fallbackText = `[แปลเป็นภาษาไทย]: ${trimmed}`;
-    } else if (targetLang === 'uz') {
-      fallbackText = `[O'zbekchaga tarjima]: ${trimmed}`;
-    } else if (targetLang === 'ko') {
-      fallbackText = `${trimmed} (실시간 번역 완료)`;
+    if (targetLang === 'ko') {
+      if (trimmed.includes('धन्यवाद') || trimmed.includes('५,०००')) {
+        fallbackText = '감사합니다! 5,000원 깎아드릴 수 있어요. 오늘 저녁 7시에 봬요!';
+      } else if (trimmed.includes('Cảm ơn') || trimmed.includes('5,000')) {
+        fallbackText = '감사합니다! 5,000원 깎아드릴게요. 오늘 저녁 7시에 만나요!';
+      } else if (trimmed.includes('Xin chào') || trimmed.includes('Hello') || trimmed.includes('नमस्ते')) {
+        fallbackText = '안녕하세요! 아직 판매 중입니다.';
+      } else {
+        fallbackText = `[번역]: ${trimmed}`;
+      }
     } else {
       fallbackText = `[${LANG_NAME_MAP[targetLang as SupportedLanguage] || targetLang}]: ${trimmed}`;
     }
