@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import { useKMarket } from '@/context/KMarketContext';
 import { useLanguage } from '@/context/LanguageContext';
 import KMarketHeader from './KMarketHeader';
@@ -14,9 +14,11 @@ import KMarketCreatePost from './KMarketCreatePost';
 import KMarketChatDrawer from './KMarketChatDrawer';
 import KMarketTaxModal from './KMarketTaxModal';
 import KMarketFavoritesModal from './KMarketFavoritesModal';
-import { ShoppingBag, Sparkles, ShieldCheck, Plus, PackageOpen } from 'lucide-react';
+import KMarketAdminReportModal from './KMarketAdminReportModal';
+import { ShoppingBag, Sparkles, ShieldCheck, Plus, PackageOpen, ShieldAlert } from 'lucide-react';
 
 export default function KMarketMainFeed() {
+  const [isAdminModalOpen, setIsAdminModalOpen] = useState(false);
   const {
     items,
     selectedCategory,
@@ -161,9 +163,19 @@ export default function KMarketMainFeed() {
             </div>
           </div>
 
-          <div className="pt-4 border-t border-slate-800 text-[11px] text-slate-400 flex flex-col sm:flex-row justify-between gap-2">
+          <div className="pt-4 border-t border-slate-800 text-[11px] text-slate-400 flex flex-col sm:flex-row justify-between items-center gap-2">
             <p>© 2026 KTRS (Korea Tax & Foreign Resident Service). All rights reserved.</p>
-            <p>공단 직거래 안심 가이드 | 세무 환급 고객센터 1588-0000</p>
+            <div className="flex items-center gap-3">
+              <p>공단 직거래 안심 가이드 | 고객센터 1588-0000</p>
+              <button
+                onClick={() => setIsAdminModalOpen(true)}
+                className="px-2.5 py-1 bg-red-950/80 hover:bg-red-900 border border-red-500/40 text-red-300 font-bold rounded-lg text-[10px] transition-all flex items-center gap-1 cursor-pointer"
+                title="KTRS 관리자 전용 신고 관제"
+              >
+                <ShieldAlert className="w-3 h-3 text-red-400" />
+                <span>관리자 신고 센터 (2)</span>
+              </button>
+            </div>
           </div>
         </div>
       </footer>
@@ -174,6 +186,10 @@ export default function KMarketMainFeed() {
       <KMarketChatDrawer />
       <KMarketTaxModal />
       <KMarketFavoritesModal />
+      <KMarketAdminReportModal
+        isOpen={isAdminModalOpen}
+        onClose={() => setIsAdminModalOpen(false)}
+      />
     </div>
   );
 }
