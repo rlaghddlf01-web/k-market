@@ -7,6 +7,7 @@ import {
   X,
   MapPin,
   Calendar,
+  Clock,
   Bell,
   Navigation,
   CheckCircle2,
@@ -37,8 +38,7 @@ export default function KMarketAppointmentModal({
   const [customPlaceName, setCustomPlaceName] = useState(defaultLm.name);
   const [customDetail, setCustomDetail] = useState(defaultLm.detail);
   const [customAddress, setCustomAddress] = useState(defaultLm.address);
-  const [selectedDate, setSelectedDate] = useState<string>('오늘 (Today)');
-  const [selectedTime, setSelectedTime] = useState<string>('19:00');
+  const [customTimeText, setCustomTimeText] = useState<string>('오늘 저녁 19:00');
   const [remind1Hour, setRemind1Hour] = useState<boolean>(true);
 
   // 지도 핀 위치 (X, Y 비율 0~100)
@@ -108,7 +108,7 @@ export default function KMarketAppointmentModal({
       address: customAddress || '공단 인근 직거래 위치',
       lat: 36.9852 + (pinPos.x - 50) * 0.005,
       lng: 126.8571 + (pinPos.y - 50) * 0.005,
-      meet_time: `${selectedDate} ${selectedTime}`,
+      meet_time: customTimeText.trim() || '오늘 저녁 19:00',
       remind_1hour_before: remind1Hour,
       status: 'confirmed',
     };
@@ -280,30 +280,39 @@ export default function KMarketAppointmentModal({
             </div>
           </div>
 
-          {/* 3. 만남 날짜 & 시간 선택 */}
+          {/* 3. 만남 날짜 & 시간 텍스트 직접 입력 및 퀵 선택 */}
           <div className="space-y-2">
             <label className="text-xs font-bold text-slate-800 dark:text-slate-200 flex items-center justify-between">
               <span className="flex items-center gap-1">
                 <Calendar className="w-3.5 h-3.5 text-blue-600" />
-                <span>3. 만남 시간 정하기 (Meetup Time)</span>
+                <span>3. 만남 시간 직접 입력 (Meetup Time)</span>
               </span>
-              <span className="text-[11px] text-blue-600 font-bold">
-                {selectedDate} {selectedTime}
+              <span className="text-[10px] text-blue-600 font-semibold">
+                자유롭게 직접 텍스트 입력 가능
               </span>
             </label>
 
-            {/* 빠른 퀵 시간 버튼 */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-1.5">
+            {/* 시간 직접 텍스트 입력창 */}
+            <div className="relative">
+              <input
+                type="text"
+                value={customTimeText}
+                onChange={(e) => setCustomTimeText(e.target.value)}
+                placeholder="예: 오늘 저녁 19:30, 내일 토요일 오후 2시, 일요일 점심 등"
+                className="w-full pl-9 pr-3 py-2.5 bg-slate-50 dark:bg-gray-800 rounded-xl border border-slate-200 dark:border-gray-700 text-xs font-bold text-slate-900 dark:text-white focus:bg-white focus:border-blue-500 focus:outline-none"
+              />
+              <Clock className="w-4 h-4 text-slate-400 absolute left-3 top-3" />
+            </div>
+
+            {/* 빠른 추천 시간 퀵 칩 */}
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-1.5 pt-0.5">
               {quickTimes.map((qt, idx) => (
                 <button
                   key={idx}
                   type="button"
-                  onClick={() => {
-                    setSelectedDate(qt.date);
-                    setSelectedTime(qt.time);
-                  }}
-                  className={`py-2 px-1.5 rounded-xl border text-center transition-all cursor-pointer text-xs ${
-                    selectedDate === qt.date && selectedTime === qt.time
+                  onClick={() => setCustomTimeText(qt.label)}
+                  className={`py-1.5 px-1.5 rounded-xl border text-center transition-all cursor-pointer text-xs ${
+                    customTimeText === qt.label
                       ? 'border-blue-600 bg-blue-600 text-white font-bold shadow-xs'
                       : 'border-slate-200 dark:border-gray-700 bg-slate-50 dark:bg-gray-800 text-slate-700 dark:text-slate-300 hover:bg-slate-100'
                   }`}
