@@ -202,10 +202,11 @@ export default function KMarketHeader() {
             {/* 1분 매물 등록 버튼 - 딥 에스프레소 & 모카 */}
             <button
               onClick={() => setIsCreateModalOpen(true)}
-              className="btn-primary flex items-center gap-1.5 text-xs sm:text-sm px-4 py-2 cursor-pointer"
+              className="btn-primary flex items-center gap-1 text-xs sm:text-sm px-3 sm:px-4 py-1.5 sm:py-2 cursor-pointer shrink-0"
             >
               <PlusCircle className="w-4 h-4" />
-              <span>{t('post_item_btn')}</span>
+              <span className="hidden xs:inline sm:inline">{t('post_item_btn')}</span>
+              <span className="xs:hidden sm:hidden">등록</span>
             </button>
 
             {/* 알림 */}
