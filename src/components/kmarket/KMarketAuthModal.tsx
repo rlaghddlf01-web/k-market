@@ -13,6 +13,7 @@ import {
   RefreshCw,
   User,
   AlertCircle,
+  ChevronDown,
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
@@ -336,33 +337,28 @@ export default function KMarketAuthModal({
                 </div>
               </div>
 
-              {/* 통신사 및 휴대폰 번호 입력 (알리고 SMS 본인확인용) */}
+              {/* 통신사 드롭다운 및 휴대폰 번호 입력 (알리고 SMS 본인확인용) */}
               <div className="p-4 rounded-3xl bg-slate-50 dark:bg-gray-800/80 border border-slate-200/80 dark:border-gray-700 space-y-3">
                 <span className="text-xs font-black text-slate-900 dark:text-white flex items-center gap-1.5">
                   <Smartphone className="w-4 h-4 text-blue-600" />
                   <span>통신사 선택 및 휴대폰 번호 (알리고 SMS 본인인증)</span>
                 </span>
 
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-1.5">
-                  {[
-                    { id: 'SKT_MVNO', label: 'SKT 알뜰폰' },
-                    { id: 'KT_MVNO', label: 'KT 알뜰폰' },
-                    { id: 'LGU_MVNO', label: 'LGU+ 알뜰폰' },
-                    { id: 'SKT', label: 'SKT / KT / LGU+' },
-                  ].map((tel) => (
-                    <button
-                      key={tel.id}
-                      type="button"
-                      onClick={() => setTelecom(tel.id)}
-                      className={`py-2 px-1 rounded-xl text-center text-xs font-bold border transition-all cursor-pointer ${
-                        telecom === tel.id
-                          ? 'border-blue-600 bg-blue-600 text-white shadow-xs'
-                          : 'border-slate-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-slate-700 dark:text-slate-300'
-                      }`}
-                    >
-                      {tel.label}
-                    </button>
-                  ))}
+                {/* 통신사 드롭다운 셀렉트 */}
+                <div className="relative">
+                  <select
+                    value={telecom}
+                    onChange={(e) => setTelecom(e.target.value)}
+                    className="w-full appearance-none px-4 py-2.5 bg-white dark:bg-gray-900 rounded-xl border border-slate-200 dark:border-gray-700 text-xs font-bold text-slate-900 dark:text-white focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 cursor-pointer pr-10"
+                  >
+                    <option value="SKT_MVNO">📱 SKT 알뜰폰 (선불폰 / 후불폰)</option>
+                    <option value="KT_MVNO">📱 KT 알뜰폰 (선불폰 / 후불폰)</option>
+                    <option value="LGU_MVNO">📱 LGU+ 알뜰폰 (선불폰 / 후불폰)</option>
+                    <option value="SKT">🏢 SK텔레콤 (SKT 공식)</option>
+                    <option value="KT">🏢 KT (케이티 공식)</option>
+                    <option value="LGU">🏢 LG유플러스 (LGU+ 공식)</option>
+                  </select>
+                  <ChevronDown className="w-4 h-4 text-slate-400 absolute right-3 top-3 pointer-events-none" />
                 </div>
 
                 <div className="flex items-center gap-2">
