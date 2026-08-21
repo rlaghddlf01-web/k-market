@@ -1,7 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
-import { POPULAR_LANDMARKS, LandmarkPin } from '@/lib/locationData';
+import React, { useState, useEffect, useRef } from 'react';
 import { AppointmentData } from '@/types/kmarket';
 import {
   X,
@@ -11,10 +10,9 @@ import {
   Bell,
   Navigation,
   CheckCircle2,
-  Sparkles,
   Search,
-  Check,
-  ExternalLink,
+  Crosshair,
+  RefreshCw,
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
@@ -30,83 +28,218 @@ interface KMarketAppointmentModalProps {
 export default function KMarketAppointmentModal({
   isOpen,
   onClose,
+  defaultRegion,
   onConfirmAppointment,
 }: KMarketAppointmentModalProps) {
-  // 기본 랜드마크
-  const defaultLm = POPULAR_LANDMARKS[0];
-  const [searchText, setSearchText] = useState(defaultLm.name);
-  const [mapQuery, setMapQuery] = useState(defaultLm.address);
-  const [customPlaceName, setCustomPlaceName] = useState(defaultLm.name);
-  const [customDetail, setCustomDetail] = useState(defaultLm.detail);
-  const [customAddress, setCustomAddress] = useState(defaultLm.address);
+  const [currentLat, setCurrentLat] = useState(37.3275);
+  const [currentLng, setCurrentLng] = useState(126.7924);
+  const [baseAddress, setBaseAddress] = useState(defaultRegion || '경기 안산시 단원구 원곡동 795');
+  const [landmarkDetail, setLandmarkDetail] = useState('');
   const [customTimeText, setCustomTimeText] = useState<string>('오늘 저녁 19:00');
   const [remind1Hour, setRemind1Hour] = useState<boolean>(true);
-  const [isMapLoading, setIsMapLoading] = useState(false);
+  const [isLocating, setIsLocating] = useState(false);
 
-  useEffect(() => {
-    if (isOpen) {
-      setSearchText(defaultLm.name);
-      setMapQuery(defaultLm.address);
-      setCustomPlaceName(defaultLm.name);
-      setCustomAddress(defaultLm.address);
+  const landmarkDetailRef = useRef(landmarkDetail);
+  landmarkDetailRef.current = landmarkDetail;
+
+  const mapContainerRef = useRef<HTMLDivElement>(null);
+  const leafletMapRef = useRef<any>(null);
+  const markerRef = useRef<any>(null);
+
+  // 좌표를 기반으로 서버 API를 통해 실제 한국 도로명 주소 실시간 가져오기
+  const fetchAddressFromCoords = async (lat: number, lng: number) => {
+    try {
+      const res = await fetch('/api/kmarket/geocode', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ latitude: lat, longitude: lng }),
+      });
+      if (res.ok) {
+        const data = await res.json();
+        if (data.success && data.address) {
+          setBaseAddress(data.address);
+          return;
+        }
+      }
+    } catch (e) {
+      console.warn('Failed to fetch address:', e);
     }
+    const fallback = `위치 지정됨 (위도: ${lat.toFixed(4)}, 경도: ${lng.toFixed(4)})`;
+    setBaseAddress(fallback);
+  };
+
+  // 1. Leaflet 지도 동적 로드 & 초기화
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const cssId = 'leaflet-css';
+    if (!document.getElementById(cssId)) {
+      const link = document.createElement('link');
+      link.id = cssId;
+      link.rel = 'stylesheet';
+      link.href = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css';
+      document.head.appendChild(link);
+    }
+
+    const initLeaflet = () => {
+      if (!window.L || !mapContainerRef.current || leafletMapRef.current) return;
+
+      const map = window.L.map(mapContainerRef.current, {
+        center: [currentLat, currentLng],
+        zoom: 16,
+        zoomControl: true,
+      });
+      leafletMapRef.current = map;
+
+      window.L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '&copy; OpenStreetMap contributors',
+      }).addTo(map);
+
+      const customPinIcon = window.L.divIcon({
+        className: 'custom-map-pin',
+        html: `
+          <div style="position: relative; display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; cursor: pointer;">
+            <div style="position: absolute; width: 36px; height: 36px; border-radius: 50%; background: rgba(243, 186, 47, 0.4); animation: ping 1.5s cubic-bezier(0, 0, 0.2, 1) infinite;"></div>
+            <div style="position: relative; width: 32px; height: 32px; background: #09101f; border: 2.5px solid #f3ba2f; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0,0,0,0.4);">
+              <span style="font-size: 16px;">📍</span>
+            </div>
+          </div>
+        `,
+        iconSize: [40, 40],
+        iconAnchor: [20, 20],
+      });
+
+      const marker = window.L.marker([currentLat, currentLng], {
+        draggable: true,
+        icon: customPinIcon,
+      }).addTo(map);
+      markerRef.current = marker;
+
+      marker.on('dragend', () => {
+        const pos = marker.getLatLng();
+        setCurrentLat(pos.lat);
+        setCurrentLng(pos.lng);
+        fetchAddressFromCoords(pos.lat, pos.lng);
+      });
+
+      map.on('click', (e: any) => {
+        const { lat, lng } = e.latlng;
+        marker.setLatLng([lat, lng]);
+        setCurrentLat(lat);
+        setCurrentLng(lng);
+        fetchAddressFromCoords(lat, lng);
+      });
+
+      setTimeout(() => {
+        map.invalidateSize();
+      }, 300);
+    };
+
+    const scriptId = 'leaflet-js';
+    if (!document.getElementById(scriptId)) {
+      const script = document.createElement('script');
+      script.id = scriptId;
+      script.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
+      script.onload = initLeaflet;
+      document.head.appendChild(script);
+    } else if (window.L) {
+      setTimeout(initLeaflet, 100);
+    }
+
+    return () => {
+      if (leafletMapRef.current) {
+        leafletMapRef.current.remove();
+        leafletMapRef.current = null;
+      }
+    };
   }, [isOpen]);
 
   if (!isOpen) return null;
 
-  // 추천 랜드마크 필터링
-  const filteredLandmarks = searchText.trim()
-    ? POPULAR_LANDMARKS.filter(
-        (lm) =>
-          lm.name.toLowerCase().includes(searchText.toLowerCase()) ||
-          lm.detail.toLowerCase().includes(searchText.toLowerCase()) ||
-          lm.address.toLowerCase().includes(searchText.toLowerCase()) ||
-          lm.zoneName.toLowerCase().includes(searchText.toLowerCase())
-      )
-    : POPULAR_LANDMARKS;
+  // 2. GPS 내 위치 버튼 클릭
+  const handleGetGpsLocation = () => {
+    if (!navigator.geolocation) {
+      alert('위치 정보(GPS)를 지원하지 않는 브라우저입니다.');
+      return;
+    }
 
-  // 랜드마크 칩 선택 시 구글 맵 즉시 이동
-  const handleSelectLandmark = (lm: LandmarkPin) => {
-    setIsMapLoading(true);
-    setSearchText(lm.name);
-    setMapQuery(lm.address || lm.name);
-    setCustomPlaceName(lm.name);
-    setCustomDetail(lm.detail);
-    setCustomAddress(lm.address);
-    setTimeout(() => setIsMapLoading(false), 500);
+    setIsLocating(true);
+    navigator.geolocation.getCurrentPosition(
+      async (pos) => {
+        const { latitude: lat, longitude: lng } = pos.coords;
+        setCurrentLat(lat);
+        setCurrentLng(lng);
+
+        if (leafletMapRef.current && markerRef.current) {
+          leafletMapRef.current.setView([lat, lng], 16);
+          markerRef.current.setLatLng([lat, lng]);
+        }
+
+        await fetchAddressFromCoords(lat, lng);
+        setIsLocating(false);
+      },
+      (err) => {
+        setIsLocating(false);
+        console.warn(err);
+        alert('위치 권한을 허용해 주시거나 지도 위를 직접 클릭하여 핀을 이동해 주세요.');
+      },
+      { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
+    );
   };
 
-  // 외국인이 검색창에 직접 텍스트 입력 후 [지도 검색 & 핀 연동] 실행
-  const handleSearchSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!searchText.trim()) return;
+  // 3. 주소 텍스트 검색 시 좌표 변환 후 지도 이동
+  const handleSearchSubmit = async (e?: React.FormEvent) => {
+    if (e) e.preventDefault();
+    if (!baseAddress.trim()) return;
 
-    setIsMapLoading(true);
-    const query = searchText.trim();
-    setMapQuery(query);
-    setCustomPlaceName(query);
-    setCustomDetail('지정 직거래 만남 장소');
-    setCustomAddress(query.includes('시') || query.includes('로') || query.includes('길') ? query : `대한민국 (${query})`);
-    setTimeout(() => setIsMapLoading(false), 500);
-  };
+    try {
+      const osmRes = await fetch(
+        `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(
+          baseAddress
+        )}&countrycodes=kr&limit=1`,
+        {
+          headers: {
+            'User-Agent': 'KMarket-App/1.0',
+            'Accept-Language': 'ko-KR,ko;q=0.9',
+          },
+        }
+      );
+      if (osmRes.ok) {
+        const osmData = await osmRes.json();
+        if (osmData && osmData.length > 0) {
+          const lat = parseFloat(osmData[0].lat);
+          const lng = parseFloat(osmData[0].lon);
+          setCurrentLat(lat);
+          setCurrentLng(lng);
 
-  // 구글 맵 외부 새 창 열기
-  const handleOpenGoogleMapsApp = () => {
-    const targetUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(mapQuery)}`;
-    window.open(targetUrl, '_blank');
+          if (leafletMapRef.current && markerRef.current) {
+            leafletMapRef.current.setView([lat, lng], 16);
+            markerRef.current.setLatLng([lat, lng]);
+          }
+          return;
+        }
+      }
+    } catch (err) {
+      console.warn('Address search error:', err);
+    }
   };
 
   // 최종 약속 및 핀 전송
   const handleSendAppointment = (e: React.FormEvent) => {
     e.preventDefault();
 
+    const fullPlaceName = landmarkDetail.trim()
+      ? `${baseAddress} (${landmarkDetail.trim()})`
+      : baseAddress;
+
     const appointment: AppointmentData = {
       id: 'apt-' + Date.now(),
-      place_name: customPlaceName || searchText || '지정 직거래 장소',
-      landmark_detail: customDetail || '외국인 회원 약속 핀',
-      address: customAddress || mapQuery,
-      lat: 36.9852,
-      lng: 126.8571,
+      place_name: landmarkDetail.trim() || baseAddress,
+      landmark_detail: landmarkDetail.trim() || '지정 직거래 만남 장소',
+      address: fullPlaceName,
+      lat: currentLat,
+      lng: currentLng,
       meet_time: customTimeText.trim() || '오늘 저녁 19:00',
       remind_1hour_before: remind1Hour,
       status: 'confirmed',
@@ -126,7 +259,6 @@ export default function KMarketAppointmentModal({
     onClose();
   };
 
-  // 빠른 시간 템플릿
   const quickTimes = [
     { label: '오늘 저녁 19:00' },
     { label: '오늘 밤 20:30' },
@@ -134,166 +266,146 @@ export default function KMarketAppointmentModal({
     { label: '내일 저녁 19:00' },
   ];
 
-  // 실제 구글 맵 Embed URL
-  const googleMapEmbedUrl = `https://maps.google.com/maps?q=${encodeURIComponent(
-    mapQuery
-  )}&t=&z=15&ie=UTF8&iwloc=&output=embed`;
-
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/70 backdrop-blur-xs animate-fadeIn">
-      <div className="relative w-full max-w-lg bg-white dark:bg-gray-900 rounded-3xl shadow-2xl overflow-hidden border border-slate-100 dark:border-gray-800 flex flex-col max-h-[94vh]">
-        {/* 모달 상단 헤더 */}
-        <div className="bg-gradient-to-r from-blue-600 via-indigo-600 to-sky-600 p-5 text-white relative shrink-0">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/75 backdrop-blur-xs animate-fadeIn">
+      <div className="relative w-full max-w-lg bg-white rounded-3xl shadow-2xl overflow-hidden border border-[#ded1c4] flex flex-col max-h-[94vh]">
+        {/* 모달 상단 헤더 (시그니처 딥 에스프레소 & 골드) */}
+        <div className="bg-gradient-to-r from-[#09101f] via-[#111d38] to-[#09101f] border-b-2 border-[#f3ba2f] p-5 text-white relative shrink-0">
           <button
             onClick={onClose}
-            className="absolute top-4 right-4 bg-black/20 hover:bg-black/40 text-white p-2 rounded-full transition-colors cursor-pointer"
+            className="absolute top-4 right-4 bg-white/10 hover:bg-white/20 text-white p-2 rounded-full transition-colors cursor-pointer"
           >
             <X className="w-5 h-5" />
           </button>
 
-          <div className="inline-flex items-center space-x-1.5 bg-black/20 px-2.5 py-0.5 rounded-full text-xs font-bold text-sky-200 mb-1">
-            <Sparkles className="w-3.5 h-3.5 text-yellow-300" />
-            <span>실시간 구글 맵 (Google Maps) 연동</span>
+          <div className="inline-flex items-center space-x-1.5 bg-[#f3ba2f]/20 px-2.5 py-0.5 rounded-full text-xs font-bold text-[#f3ba2f] mb-1">
+            <span>📍 1:1 안심 직거래 약속</span>
           </div>
-          <h2 className="text-xl font-black tracking-tight flex items-center gap-1.5">
-            <MapPin className="w-5 h-5 text-yellow-300" />
-            <span>만날 장소 직접 검색 & 구글 맵 핀 저장</span>
+          <h2 className="text-xl font-black tracking-tight flex items-center gap-1.5 text-[#fbf9f6]">
+            <MapPin className="w-5 h-5 text-[#f3ba2f]" />
+            <span>만남 장소 핀 잡기 &amp; 시간 정하기</span>
           </h2>
-          <p className="text-xs text-sky-100 mt-1">
-            주소나 장소를 입력하면 실제 구글 지도가 즉시 해당 위치로 이동하여 핀을 고정합니다.
+          <p className="text-xs text-slate-300 mt-1">
+            지도를 클릭하거나 핀을 끌어 만날 위치를 콕 찍고 상세 장소를 적어주세요.
           </p>
         </div>
 
         {/* 폼 본문 영역 */}
-        <form onSubmit={handleSendAppointment} className="p-5 overflow-y-auto space-y-5 flex-1 text-xs sm:text-sm">
-          {/* 1. 장소/주소 텍스트 검색 및 직접 입력창 */}
-          <div className="space-y-1.5">
-            <label className="text-xs font-bold text-slate-800 dark:text-slate-200 flex items-center justify-between">
-              <span className="flex items-center gap-1">
-                <Search className="w-3.5 h-3.5 text-blue-600" />
-                <span>1. 만날 장소/주소 직접 입력 (편의점, 기숙사, 역, 도로명)</span>
-              </span>
-              <span className="text-[10px] text-blue-600 font-semibold">입력 후 [지도 검색] 클릭</span>
-            </label>
+        <form onSubmit={handleSendAppointment} className="p-5 overflow-y-auto space-y-4 flex-1 text-xs sm:text-sm">
+          {/* 1. 주소 및 만남 장소 입력 바 */}
+          <div className="space-y-2.5 p-3.5 rounded-2xl bg-[#f7f2eb] border border-[#ded1c4]">
+            <div className="flex items-center justify-between">
+              <label className="text-xs font-black text-[#3d2817] flex items-center gap-1.5">
+                <MapPin className="w-4 h-4 text-[#845b37]" />
+                <span>1. 기본 도로명 / 동네 주소</span>
+              </label>
 
+              {/* GPS 내 위치 자동완성 버튼 */}
+              <button
+                type="button"
+                onClick={handleGetGpsLocation}
+                disabled={isLocating}
+                className="text-[11px] font-bold text-[#5c3818] hover:text-[#1f1914] bg-[#ede2d6] hover:bg-[#e2d4c5] px-2.5 py-1 rounded-lg transition-all flex items-center gap-1 cursor-pointer border border-[#ded1c4] shadow-2xs"
+                title="현재 내 위치로 주소 & 핀 자동 세팅"
+              >
+                {isLocating ? (
+                  <>
+                    <RefreshCw className="w-3 h-3 animate-spin text-[#845b37]" />
+                    <span>위치 확인중...</span>
+                  </>
+                ) : (
+                  <>
+                    <Crosshair className="w-3.5 h-3.5 text-[#845b37]" />
+                    <span>📍 내 위치로 핀 이동</span>
+                  </>
+                )}
+              </button>
+            </div>
+
+            {/* 도로명 주소 검색창 */}
             <div className="flex items-center gap-2">
               <div className="relative flex-1">
                 <input
                   type="text"
-                  value={searchText}
-                  onChange={(e) => setSearchText(e.target.value)}
+                  required
+                  value={baseAddress}
+                  onChange={(e) => setBaseAddress(e.target.value)}
                   onKeyDown={(e) => {
                     if (e.key === 'Enter') {
                       e.preventDefault();
                       handleSearchSubmit(e);
                     }
                   }}
-                  placeholder="예: 평택 포승공단 GS25, 안산 원곡동 시계탑, 정왕역 등"
-                  className="w-full pl-9 pr-3 py-2.5 bg-slate-50 dark:bg-gray-800 rounded-xl border border-slate-200 dark:border-gray-700 text-xs font-bold text-slate-900 dark:text-white focus:bg-white focus:border-blue-500 focus:outline-none"
+                  placeholder="도로명/동네 주소 검색 또는 지도에서 핀을 직접 클릭하세요"
+                  className="w-full pl-9 pr-3 py-2.5 bg-white rounded-xl border border-[#ded1c4] text-xs sm:text-sm font-bold text-[#1f1914] focus:outline-none focus:border-[#845b37] shadow-2xs"
                 />
-                <MapPin className="w-4 h-4 text-blue-600 absolute left-3 top-3" />
+                <MapPin className="w-4 h-4 text-[#845b37] absolute left-3 top-3" />
               </div>
+
               <button
                 type="button"
                 onClick={handleSearchSubmit}
-                className="px-4 py-2.5 bg-blue-600 hover:bg-blue-700 active:scale-95 text-white font-bold text-xs rounded-xl transition-all shadow-md shadow-blue-500/20 shrink-0 cursor-pointer flex items-center gap-1"
+                className="px-3.5 py-2.5 bg-[#3d2817] hover:bg-[#2b1c10] text-[#fbf9f6] font-bold text-xs rounded-xl transition-all shadow-xs shrink-0 cursor-pointer flex items-center gap-1 border border-[#5c3818]"
               >
-                <Search className="w-3.5 h-3.5" />
-                <span>지도 검색</span>
+                <Search className="w-3.5 h-3.5 text-[#f3ba2f]" />
+                <span>주소 검색</span>
               </button>
             </div>
 
-            {/* 추천 랜드마크 퀵 칩 리스트 */}
-            {filteredLandmarks.length > 0 && (
-              <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar pt-1">
-                <span className="text-[10px] text-slate-400 shrink-0">추천 랜드마크:</span>
-                {filteredLandmarks.slice(0, 4).map((lm) => (
-                  <button
-                    key={lm.id}
-                    type="button"
-                    onClick={() => handleSelectLandmark(lm)}
-                    className="px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-gray-800 hover:bg-blue-50 dark:hover:bg-blue-950 text-slate-700 dark:text-slate-300 text-[11px] font-semibold shrink-0 border border-slate-200/80 transition-colors cursor-pointer flex items-center gap-1"
-                  >
-                    <span>{lm.icon}</span>
-                    <span>{lm.name}</span>
-                  </button>
-                ))}
-              </div>
-            )}
+            {/* 고객 직접 입력 상세 장소명 */}
+            <div className="space-y-1 pt-2 border-t border-[#ded1c4]/70">
+              <label className="text-xs font-black text-[#3d2817] flex items-center justify-between">
+                <span>2. 상세 만남 장소명 (고객 직접 입력)</span>
+                <span className="text-[10px] text-[#845b37] font-bold">편의점 앞, 기숙사 정문, 3번 출구 등</span>
+              </label>
+              <input
+                type="text"
+                value={landmarkDetail}
+                onChange={(e) => setLandmarkDetail(e.target.value)}
+                placeholder="예: GS25 편의점 앞 / 기숙사 2동 경비실 앞 / 정문 시계탑"
+                className="w-full px-3.5 py-2 bg-white rounded-xl border border-[#ded1c4] text-xs font-bold text-[#1f1914] focus:outline-none focus:border-[#845b37] shadow-2xs"
+              />
+            </div>
           </div>
 
-          {/* 2. 실제 구글 맵 (Google Maps) 실시간 인터랙티브 뷰어 */}
+          {/* 2. 실제 인터랙티브 지도 (클릭/드래그로 핀 직접 이동) */}
           <div className="space-y-1.5">
-            <div className="flex justify-between items-center text-xs font-bold text-slate-800 dark:text-slate-200">
-              <span className="flex items-center gap-1">
-                <Navigation className="w-3.5 h-3.5 text-blue-600" />
-                <span>2. 실시간 구글 지도 뷰어 (Google Maps Live)</span>
+            <div className="flex justify-between items-center text-xs font-bold text-slate-800">
+              <span className="flex items-center gap-1 text-[#3d2817] font-black">
+                <Navigation className="w-3.5 h-3.5 text-[#f3ba2f]" />
+                <span>👇 지도를 클릭하거나 핀을 끌어당겨 원하는 만남 장소에 콕 찍으세요!</span>
               </span>
-              <button
-                type="button"
-                onClick={handleOpenGoogleMapsApp}
-                className="text-[11px] text-blue-600 hover:text-blue-800 font-bold flex items-center gap-0.5 cursor-pointer"
-              >
-                <span>구글 맵 앱으로 열기</span>
-                <ExternalLink className="w-3 h-3" />
-              </button>
             </div>
 
-            {/* 실제 Google Maps Embed iframe 뷰어 */}
-            <div className="relative h-56 w-full rounded-2xl overflow-hidden border-2 border-blue-500 shadow-md bg-slate-100">
-              {isMapLoading && (
-                <div className="absolute inset-0 bg-white/80 z-20 flex items-center justify-center">
-                  <div className="flex items-center space-x-2 text-xs font-bold text-blue-600 animate-pulse">
-                    <MapPin className="w-4 h-4 text-blue-600" />
-                    <span>구글 지도를 이동하는 중...</span>
-                  </div>
+            <div className="relative h-56 w-full rounded-3xl overflow-hidden border-2 border-[#f3ba2f] shadow-md bg-slate-100">
+              <div ref={mapContainerRef} className="w-full h-full z-0" />
+
+              {/* 좌측 상단: 실시간 핀 주소 배지 */}
+              <div className="absolute top-3 left-3 bg-[#09101f]/90 backdrop-blur-md text-white px-3.5 py-1.5 rounded-2xl border border-[#f3ba2f]/70 text-xs shadow-lg max-w-[85%] pointer-events-none z-10">
+                <div className="flex items-center gap-1 font-bold text-[#f3ba2f]">
+                  <MapPin className="w-3.5 h-3.5 fill-[#f3ba2f]" />
+                  <span>만남 지정 핀 위치</span>
                 </div>
-              )}
-
-              <iframe
-                title="Google Maps Location"
-                src={googleMapEmbedUrl}
-                width="100%"
-                height="100%"
-                style={{ border: 0 }}
-                loading="lazy"
-                allowFullScreen
-                referrerPolicy="no-referrer-when-downgrade"
-                className="w-full h-full"
-              />
-
-              {/* 핀 위치 오버레이 뱃지 */}
-              <div className="absolute top-2.5 left-2.5 z-10 bg-slate-950/90 text-white text-[11px] font-black px-3 py-1.5 rounded-full shadow-lg flex items-center gap-1.5 border border-amber-300">
-                <MapPin className="w-3.5 h-3.5 text-yellow-300 fill-yellow-300" />
-                <span className="truncate max-w-[240px]">{customPlaceName}</span>
+                <p className="text-[11px] text-slate-100 font-medium truncate mt-0.5">
+                  {landmarkDetail ? `${baseAddress} (${landmarkDetail})` : baseAddress}
+                </p>
               </div>
-            </div>
 
-            {/* 확정된 장소 정보 박스 */}
-            <div className="p-2.5 rounded-xl bg-blue-50/80 dark:bg-blue-950/40 border border-blue-200 dark:border-blue-900 flex items-center justify-between">
-              <div className="truncate mr-2">
-                <span className="font-extrabold text-blue-950 dark:text-blue-200 text-xs block truncate">
-                  📍 선택된 위치: {customPlaceName}
-                </span>
-                <span className="text-[10px] text-blue-800 dark:text-blue-300 truncate block">
-                  {customAddress}
-                </span>
+              {/* 우측 하단 안내 툴팁 */}
+              <div className="absolute bottom-3 right-3 bg-white/90 backdrop-blur-xs text-[#3d2817] px-2.5 py-1 rounded-xl text-[10px] font-black shadow-md border border-[#ded1c4] pointer-events-none z-10">
+                🖱️ 지도 클릭 / 핀 드래그로 이동
               </div>
-              <span className="text-[10px] font-bold bg-emerald-600 text-white px-2 py-0.5 rounded-md shrink-0 flex items-center gap-1">
-                <Check className="w-3 h-3" />
-                <span>핀 연결됨</span>
-              </span>
             </div>
           </div>
 
           {/* 3. 만남 날짜 & 시간 텍스트 직접 입력 */}
           <div className="space-y-2">
-            <label className="text-xs font-bold text-slate-800 dark:text-slate-200 flex items-center justify-between">
+            <label className="text-xs font-black text-[#3d2817] flex items-center justify-between">
               <span className="flex items-center gap-1">
-                <Calendar className="w-3.5 h-3.5 text-blue-600" />
+                <Calendar className="w-3.5 h-3.5 text-[#845b37]" />
                 <span>3. 만남 시간 직접 입력 (Meetup Time)</span>
               </span>
-              <span className="text-[10px] text-blue-600 font-semibold">
+              <span className="text-[10px] text-[#845b37] font-bold">
                 자유롭게 직접 텍스트 입력 가능
               </span>
             </label>
@@ -304,7 +416,7 @@ export default function KMarketAppointmentModal({
                 value={customTimeText}
                 onChange={(e) => setCustomTimeText(e.target.value)}
                 placeholder="예: 오늘 저녁 19:30, 내일 토요일 오후 2시, 일요일 점심 등"
-                className="w-full pl-9 pr-3 py-2.5 bg-slate-50 dark:bg-gray-800 rounded-xl border border-slate-200 dark:border-gray-700 text-xs font-bold text-slate-900 dark:text-white focus:bg-white focus:border-blue-500 focus:outline-none"
+                className="w-full pl-9 pr-3 py-2.5 bg-white rounded-xl border border-[#ded1c4] text-xs font-bold text-[#1f1914] focus:outline-none focus:border-[#845b37] shadow-2xs"
               />
               <Clock className="w-4 h-4 text-slate-400 absolute left-3 top-3" />
             </div>
@@ -316,10 +428,10 @@ export default function KMarketAppointmentModal({
                   key={idx}
                   type="button"
                   onClick={() => setCustomTimeText(qt.label)}
-                  className={`py-1.5 px-1.5 rounded-xl border text-center transition-all cursor-pointer text-xs ${
+                  className={`py-1.5 px-1.5 rounded-xl border text-center transition-all cursor-pointer text-xs font-bold ${
                     customTimeText === qt.label
-                      ? 'border-blue-600 bg-blue-600 text-white font-bold shadow-xs'
-                      : 'border-slate-200 dark:border-gray-700 bg-slate-50 dark:bg-gray-800 text-slate-700 dark:text-slate-300 hover:bg-slate-100'
+                      ? 'border-[#3d2817] bg-[#3d2817] text-[#fbf9f6] shadow-xs'
+                      : 'border-[#ded1c4] bg-[#f7f2eb] text-[#5c4a39] hover:bg-[#ede2d6]'
                   }`}
                 >
                   {qt.label}
@@ -329,16 +441,16 @@ export default function KMarketAppointmentModal({
           </div>
 
           {/* 4. 1시간 전 모국어 자동 알림 리마인더 */}
-          <div className="p-3.5 rounded-2xl bg-amber-50 dark:bg-amber-950/30 border border-amber-200/80 dark:border-amber-900/40 flex items-center justify-between">
+          <div className="p-3.5 rounded-2xl bg-[#f7f2eb] border border-[#ded1c4] flex items-center justify-between">
             <div className="flex items-center space-x-2.5">
-              <div className="w-8 h-8 rounded-full bg-amber-500/20 flex items-center justify-center text-amber-600 shrink-0">
+              <div className="w-8 h-8 rounded-full bg-[#f3ba2f]/20 flex items-center justify-center text-[#845b37] shrink-0">
                 <Bell className="w-4 h-4" />
               </div>
               <div>
-                <span className="text-xs font-bold text-amber-950 dark:text-amber-200 block">
+                <span className="text-xs font-bold text-[#3d2817] block">
                   ⏰ 약속 1시간 전 모국어 자동 푸시 알림
                 </span>
-                <span className="text-[10px] text-amber-800/80 dark:text-amber-300/80">
+                <span className="text-[10px] text-[#705e4f]">
                   약속을 잊지 않도록 상대방과 나에게 각자의 언어로 1시간 전에 알려드립니다.
                 </span>
               </div>
@@ -348,17 +460,17 @@ export default function KMarketAppointmentModal({
               type="checkbox"
               checked={remind1Hour}
               onChange={(e) => setRemind1Hour(e.target.checked)}
-              className="w-4 h-4 text-amber-600 rounded-md focus:ring-amber-500 cursor-pointer shrink-0"
+              className="w-4 h-4 text-[#845b37] rounded-md cursor-pointer shrink-0 accent-[#3d2817]"
             />
           </div>
 
           {/* 제출 버튼 */}
           <button
             type="submit"
-            className="w-full py-4 bg-gradient-to-r from-blue-600 via-indigo-600 to-sky-600 hover:from-blue-700 hover:to-indigo-700 text-white font-black text-sm sm:text-base rounded-2xl shadow-xl shadow-blue-600/25 active:scale-[0.98] transition-all flex items-center justify-center space-x-2 cursor-pointer"
+            className="w-full py-4 bg-[#3d2817] hover:bg-[#2b1c10] text-[#fbf9f6] font-black text-sm sm:text-base rounded-2xl shadow-xl shadow-[#3d2817]/25 active:scale-[0.98] transition-all flex items-center justify-center space-x-2 cursor-pointer border border-[#5c3818]"
           >
-            <CheckCircle2 className="w-5 h-5" />
-            <span>구글 맵 핀 저장하고 약속 전송하기</span>
+            <CheckCircle2 className="w-5 h-5 text-[#f3ba2f]" />
+            <span>약속 핀 저장하고 상대방에게 전송하기</span>
           </button>
         </form>
       </div>
