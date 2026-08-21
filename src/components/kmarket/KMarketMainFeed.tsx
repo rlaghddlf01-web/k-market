@@ -223,11 +223,6 @@ export default function KMarketMainFeed() {
               <span className="text-white/40">|</span>
               <span><strong className="text-[#f3ba2f] font-extrabold">이메일:</strong> zkfnth021@gmail.com</span>
             </div>
-
-            {/* 공식 세무대리 면책 고지 문구 (가독성 높은 화이트/아이보리) */}
-            <p className="pt-2 text-[11px] text-[#cbd5e1] font-normal leading-relaxed">
-              Korea Tax Refund Service(Korea Tax Refund Service)은 세무대리 신고를 직접 수행하지 않으며, 본 플랫폼에서 작성된 신청 서류는 제휴된 대한민국 국가공인 전문 세무법인 및 협력 세무사를 통해 최종 검토 및 제출됩니다.
-            </p>
           </div>
 
           {/* 하단 카피라이트 & 관리자 링크 */}
