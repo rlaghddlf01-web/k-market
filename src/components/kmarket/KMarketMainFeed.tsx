@@ -80,13 +80,13 @@ export default function KMarketMainFeed() {
       {/* 상단 통합 헤더 */}
       <KMarketHeader />
 
+      {/* 1. 최상단 풀와이드 웅장한 감성 히어로 쇼케이스 (화면 전체 면적) */}
+      <KMarketHeroShowcase />
+
       {/* 메인 콘텐츠 컨테이너 */}
       <main className="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 py-6 sm:py-10 space-y-7">
-        {/* 1. KTRS 184만원 세무 환급 감성 사진 배너 */}
+        {/* 2. KTRS 184만원 세무 환급 감성 사진 배너 */}
         <KMarketTaxBanner />
-
-        {/* 2. 감성적인 샌드 베이지 히어로 쇼케이스 (외국인 안심 직거래 & 무빙세일) */}
-        <KMarketHeroShowcase />
 
         {/* 3. 🛡️ 외국인 안심 거래 3대 수칙 (사기 방지 쉴드) 웜톤 배너 */}
         <KMarketSafetyBanner />
@@ -94,12 +94,12 @@ export default function KMarketMainFeed() {
         {/* 4. 쇼핑몰 스타일 원형 아이콘 카테고리 네비게이션 */}
         <KMarketCategoryNav />
 
-        {/* 4. 귀국자 헐값 급처분 [무빙 세일(Moving Sale)] 전용관 */}
+        {/* 5. 귀국자 헐값 급처분 [무빙 세일(Moving Sale)] 전용관 */}
         {!isMovingSaleOnly && selectedCategory === 'all' && !searchQuery && (
           <KMarketMovingSaleSection />
         )}
 
-        {/* 5. 공단별 도보 직거래 필터 */}
+        {/* 6. 주요 공단 도보 직거래 필터 */}
         <KMarketRegionFilter />
 
         {/* 5. 매물 리스트 헤더 */}
