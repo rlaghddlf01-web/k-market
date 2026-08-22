@@ -251,14 +251,14 @@ export default function KMarketCreatePost() {
           <div className="space-y-3">
             <div>
               <label className="block font-bold text-slate-800 mb-1">
-                매물 제목 (Item Title)
+                {t('post_item_title_label')}
               </label>
               <input
                 type="text"
                 required
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
-                placeholder={t('auto_ui_113')}
+                placeholder={t('post_title_placeholder')}
                 className="w-full px-3.5 py-2.5 bg-slate-50 rounded-xl border border-slate-200 focus:bg-white focus:border-blue-500 focus:outline-none text-xs sm:text-sm font-medium"
               />
             </div>
@@ -266,18 +266,18 @@ export default function KMarketCreatePost() {
             {/* 3-1. 카테고리 원터치 선택 칩 그리드 */}
             <div>
               <label className="block font-bold text-slate-900 mb-2">
-                🏷️ 카테고리 선택 (Category)
+                🏷️ {t('post_category_select_label')}
               </label>
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
                 {[
-                  { id: 'appliances', label: '원룸 가전', icon: '🔌' },
-                  { id: 'furniture', label: '가구·수납', icon: '🛏️' },
-                  { id: 'digital', label: '스마트폰·IT', icon: '📱' },
-                  { id: 'moving_sale', label: '무빙세일', icon: '✈️', badge: 'HOT' },
-                  { id: 'free_give', label: '무료나눔', icon: '🎁', badge: '0원' },
-                  { id: 'clothes', label: '의류·잡화', icon: '👕' },
-                  { id: 'daily', label: '생활·주방', icon: '🍳' },
-                  { id: 'vehicles', label: '자전거·탈것', icon: '🚲' },
+                  { id: 'appliances', label: t('cat_appliances'), icon: '🔌' },
+                  { id: 'furniture', label: t('cat_furniture'), icon: '🛏️' },
+                  { id: 'digital', label: t('cat_digital'), icon: '📱' },
+                  { id: 'moving_sale', label: t('cat_moving_bundle'), icon: '✈️', badge: 'HOT' },
+                  { id: 'free_give', label: t('cat_free_share'), icon: '🎁', badge: '0' },
+                  { id: 'clothes', label: t('cat_fashion'), icon: '👕' },
+                  { id: 'daily', label: t('cat_living'), icon: '🍳' },
+                  { id: 'vehicles', label: t('cat_vehicles'), icon: '🚲' },
                 ].map((cat) => {
                   const isSelected = category === cat.id;
                   return (
@@ -325,11 +325,11 @@ export default function KMarketCreatePost() {
             <div>
               <div className="flex items-center justify-between mb-1">
                 <label className="block font-bold text-slate-900">
-                  💰 판매 가격 (0원 입력 시 무료나눔 자동 적용)
+                  💰 {t('post_price_label')}
                 </label>
                 {price === '0' && (
                   <span className="text-[11px] font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full">
-                    🎁 무료 나눔
+                    🎁 {t('cat_free_share')}
                   </span>
                 )}
               </div>

@@ -87,17 +87,17 @@ export default function KMarketTaxModal() {
           <div className="flex items-center gap-2 mb-2">
             <div className="inline-flex items-center space-x-1.5 bg-black/30 backdrop-blur-md px-3 py-1 rounded-full text-xs font-bold text-amber-200 border border-white/20">
               <Sparkles className="w-3.5 h-3.5 text-yellow-300 animate-spin" />
-              <span>KTRS × Easy Tax Refund</span>
+              <span>{t('tax_modal_link_badge')}</span>
             </div>
             <span className="bg-emerald-950/60 text-emerald-300 text-[11px] px-2.5 py-0.5 rounded-full font-black border border-emerald-400/30">
-              선결제 0원 후불제
+              {t('tax_modal_zero_prepay')}
             </span>
           </div>
 
           <h2 className="text-xl sm:text-2xl font-black tracking-tight leading-snug">
             {step === 3
-              ? '🎉 세금 환급 신청이 접수되었습니다!'
-              : '외국인 근로자 숨은 세금 30초 무료 환급'}
+              ? '🎉 ' + t('tax_modal_headline')
+              : t('tax_modal_headline')}
           </h2>
           <p className="text-xs text-orange-100 mt-1">
             한국에서 일하며 낸 소득세, 조특법 법정 감면 혜택으로 평균 184만원을 안전하게 돌려받으세요.

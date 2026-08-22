@@ -158,7 +158,7 @@ export default function KMarketHeader() {
               title={t('auto_ui_143')}
             >
               <Smartphone className="w-3.5 h-3.5 stroke-[2.5]" />
-              <span>{t('auto_ui_144')}</span>
+              <span>{t('header_pwa_install_btn')}</span>
             </button>
           </div>
         </div>

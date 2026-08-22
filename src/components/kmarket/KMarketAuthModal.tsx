@@ -239,10 +239,10 @@ export default function KMarketAuthModal({
             <div>
               <div className="inline-flex items-center space-x-1.5 bg-black/40 px-2.5 py-0.5 rounded-full text-xs font-bold text-slate-200 border border-[#f3ba2f]/40 mb-0.5">
                 <Sparkles className="w-3 h-3 text-[#f3ba2f]" />
-                <span>{t('auto_ui_60')}</span>
+                <span>{t('auth_badge_17lang')}</span>
               </div>
               <h2 className="text-xl font-black text-white tracking-tight">
-                외국인 안심 간편가입
+                {t('auth_modal_headline')}
               </h2>
             </div>
           </div>
@@ -269,7 +269,7 @@ export default function KMarketAuthModal({
             }`}
           >
             <Camera className="w-4 h-4 text-[#f3ba2f]" />
-            <span>{t('auto_ui_61')}</span>
+            <span>{t('auth_tab_ocr')}</span>
           </button>
 
           <button
@@ -284,7 +284,7 @@ export default function KMarketAuthModal({
             }`}
           >
             <User className="w-4 h-4 text-[#845b37]" />
-            <span>{t('auto_ui_62')}</span>
+            <span>{t('auth_tab_manual')}</span>
           </button>
         </div>
 
@@ -302,11 +302,11 @@ export default function KMarketAuthModal({
                       <div className="flex items-center gap-1.5">
                         <Sparkles className="w-4 h-4 text-[#845b37]" />
                         <h4 className="font-black text-xs sm:text-sm text-[#3d2817]">
-                          실물 신분증 OCR 촬영 시 3대 특별 혜택
+                          {t('auth_ocr_benefits_title')}
                         </h4>
                       </div>
                       <span className="bg-[#3d2817] text-[#f3ba2f] font-black text-[10px] px-2.5 py-0.5 rounded-full border border-[#5c3818] shadow-2xs">
-                        +7.0℃ 즉시 가산
+                        {t('auth_ocr_bonus_badge')}
                       </span>
                     </div>
 
@@ -314,16 +314,16 @@ export default function KMarketAuthModal({
                       <div className="p-2.5 rounded-2xl bg-white/95 border border-[#e6dacd] flex items-start gap-2 shadow-2xs">
                         <span className="text-base">🌡️</span>
                         <div>
-                          <p className="font-black text-[#3d2817]">{t('auto_ui_63')}</p>
-                          <p className="text-[#705e4f] text-[10px] mt-0.5">{t('auto_ui_64')}</p>
+                          <p className="font-black text-[#3d2817]">{t('auth_manner_gold_title')}</p>
+                          <p className="text-[#705e4f] text-[10px] mt-0.5">{t('auth_manner_gold_desc')}</p>
                         </div>
                       </div>
 
                       <div className="p-2.5 rounded-2xl bg-white/95 border border-[#e6dacd] flex items-start gap-2 shadow-2xs">
                         <span className="text-base">🚀</span>
                         <div>
-                          <p className="font-black text-[#845b37]">{t('auto_ui_65')}</p>
-                          <p className="text-[#705e4f] text-[10px] mt-0.5">{t('auto_ui_66')}</p>
+                          <p className="font-black text-[#845b37]">{t('auth_top_exposure_title')}</p>
+                          <p className="text-[#705e4f] text-[10px] mt-0.5">{t('auth_top_exposure_desc')}</p>
                         </div>
                       </div>
                     </div>
@@ -350,10 +350,7 @@ export default function KMarketAuthModal({
                       <div className="flex flex-col items-center py-4 space-y-2">
                         <RefreshCw className="w-8 h-8 text-[#845b37] animate-spin" />
                         <span className="font-black text-[#1f1914] text-sm">
-                          Gemini Vision AI가 신분증 판독 중 (0.5초)...
-                        </span>
-                        <span className="text-[11px] text-[#705e4f]">
-                          이름, 외국인등록번호, 비자, 만료일을 자동 추출하고 있습니다.
+                          Gemini Vision AI OCR (0.5s)...
                         </span>
                       </div>
                     ) : ocrCompleted ? (
@@ -364,19 +361,13 @@ export default function KMarketAuthModal({
                         <div className="flex-1 min-w-0">
                           <div className="flex items-center gap-1.5 flex-wrap">
                             <span className="text-xs font-black text-emerald-800">
-                              ✅ 실물 등록증 OCR 인증 성공!
-                            </span>
-                            <span className="bg-[#3d2817] text-[#f3ba2f] text-[10px] font-black px-2 py-0.5 rounded-full border border-[#5c3818]">
-                              매너온도 43.5℃ &amp; 상단노출 확정 👑
+                              ✅ OCR OK!
                             </span>
                           </div>
                           <p className="text-[11px] text-[#5c4a39] mt-1 truncate font-medium">
                             {userName} | {arcNumber} | {visaType}
                           </p>
                         </div>
-                        <span className="text-xs text-[#845b37] font-bold hover:underline shrink-0">
-                          다시 촬영
-                        </span>
                       </div>
                     ) : (
                       <>
@@ -385,10 +376,10 @@ export default function KMarketAuthModal({
                         </div>
                         <div className="space-y-0.5">
                           <h4 className="font-black text-sm sm:text-base text-[#1f1914]">
-                            외국인등록증 앞면 사진 촬영하기
+                            {t('auth_scan_front_title')}
                           </h4>
                           <p className="text-[11px] text-[#705e4f]">
-                            카메라로 0.5초 비추면 자동 입력 &amp; <strong className="text-[#3d2817]">{t('auto_ui_67')}</strong> 획득!
+                            {t('auth_scan_front_sub')}
                           </p>
                         </div>
                         <button
@@ -396,7 +387,7 @@ export default function KMarketAuthModal({
                           className="px-5 py-2.5 rounded-2xl bg-[#3d2817] hover:bg-[#2b1c10] text-[#fbf9f6] border border-[#5c3818] font-black text-xs shadow-md active:scale-97 transition-all cursor-pointer flex items-center gap-1.5"
                         >
                           <Camera className="w-4 h-4 text-[#f3ba2f]" />
-                          <span>{t('auto_ui_68')}</span>
+                          <span>{t('auth_open_camera_btn')}</span>
                         </button>
                       </>
                     )}
@@ -408,16 +399,14 @@ export default function KMarketAuthModal({
               <div className="p-3.5 rounded-2xl bg-[#f4ede6] border border-[#ded1c4] space-y-2">
                 <div className="flex items-center justify-between">
                   <label className="text-xs font-black text-[#3d2817] flex items-center gap-1.5">
-                    <span>{t('auto_ui_69')}</span>
-                    <span className="text-[10px] text-[#845b37] font-bold bg-[#ede2d6] px-1.5 py-0.5 rounded-md">{t('auto_ui_70')}</span>
+                    <span>{t('auth_field_nickname')}</span>
                   </label>
                   <button
                     type="button"
                     onClick={() => setNickname(generateRandomNickname(userName))}
                     className="text-[11px] font-bold text-[#5c3818] hover:text-[#1f1914] bg-[#ede2d6] hover:bg-[#e2d4c5] px-2.5 py-1 rounded-lg transition-all flex items-center gap-1 cursor-pointer border border-[#ded1c4]"
-                    title={t('auto_ui_71')}
                   >
-                    <span>{t('auto_ui_72')}</span>
+                    <span>{t('auth_random_nickname_btn')}</span>
                   </button>
                 </div>
                 <input
@@ -425,59 +414,56 @@ export default function KMarketAuthModal({
                   required
                   value={nickname}
                   onChange={(e) => setNickname(e.target.value)}
-                  placeholder={t('auto_ui_73')}
+                  placeholder={t('auth_nickname_placeholder')}
                   maxLength={15}
                   className="w-full px-3.5 py-2.5 bg-white rounded-xl border border-[#ded1c4] text-xs sm:text-sm font-black text-[#1f1914] focus:outline-none focus:border-[#845b37] focus:ring-1 focus:ring-[#845b37] shadow-2xs"
                 />
-                <p className="text-[10px] text-[#705e4f]">
-                  💡 중고거래 채팅과 동네생활 커뮤니티에서 이웃들에게 보여질 친근한 별명을 지어보세요!
-                </p>
               </div>
 
               {/* 기본 정보 입력창 (OCR 시 자동 채워짐) */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div className="space-y-1">
                   <label className="text-xs font-bold text-[#5c4a39]">
-                    영문 실명 (Passport Name)
+                    {t('auth_passport_name')}
                   </label>
                   <input
                     type="text"
                     value={userName}
                     onChange={(e) => setUserName(e.target.value)}
-                    placeholder={t('auto_ui_74')}
+                    placeholder="e.g. NGUYEN VAN DUC"
                     className="w-full px-3 py-2.5 bg-white rounded-xl border border-[#ded1c4] text-xs font-bold text-[#1f1914] focus:outline-none focus:border-[#845b37]"
                   />
                 </div>
 
                 <div className="space-y-1">
                   <label className="text-xs font-bold text-[#5c4a39]">
-                    외국인등록번호 (13자리)
+                    {t('auth_arc_number')}
                   </label>
                   <input
                     type="text"
                     value={arcNumber}
                     onChange={(e) => setArcNumber(e.target.value)}
-                    placeholder={t('auto_ui_75')}
+                    placeholder="e.g. 950821-5184920"
                     className="w-full px-3 py-2.5 bg-white rounded-xl border border-[#ded1c4] text-xs font-bold text-[#1f1914] focus:outline-none focus:border-[#845b37]"
                   />
                 </div>
 
                 <div className="space-y-1">
                   <label className="text-xs font-bold text-[#5c4a39]">
-                    비자 종류 (Visa Status)
+                    {t('auth_visa_type')}
                   </label>
                   <input
                     type="text"
                     value={visaType}
                     onChange={(e) => setVisaType(e.target.value)}
-                    placeholder={t('auto_ui_76')}
+                    placeholder="E-9"
                     className="w-full px-3 py-2.5 bg-white rounded-xl border border-[#ded1c4] text-xs font-bold text-[#1f1914] focus:outline-none focus:border-[#845b37]"
                   />
                 </div>
 
                 <div className="space-y-1">
                   <label className="text-xs font-bold text-[#5c4a39]">
-                    체류 만료일 (Expiry Date)
+                    {t('auth_stay_expiry')}
                   </label>
                   <input
                     type="date"
