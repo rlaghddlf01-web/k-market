@@ -162,7 +162,7 @@ export default function KMarketAppointmentModal({
   // 2. GPS 내 위치 버튼 클릭
   const handleGetGpsLocation = () => {
     if (!navigator.geolocation) {
-      alert('위치 정보(GPS)를 지원하지 않는 브라우저입니다.');
+      alert(t('auto_loop_718'));
       return;
     }
 
@@ -184,7 +184,7 @@ export default function KMarketAppointmentModal({
       (err) => {
         setIsLocating(false);
         console.warn(err);
-        alert('위치 권한을 허용해 주시거나 지도 위를 직접 클릭하여 핀을 이동해 주세요.');
+        alert(t('auto_loop_719'));
       },
       { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
     );

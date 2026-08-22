@@ -48,7 +48,7 @@ export default function KMarketCategoryNav() {
     <section className="w-full mb-8">
       <div className="flex items-center justify-between mb-3 px-1">
         <h2 className="text-xs sm:text-sm font-bold uppercase tracking-wider text-[#705e4f]">
-          Shop by Category
+          {t('cat_section_title')}
         </h2>
       </div>
 

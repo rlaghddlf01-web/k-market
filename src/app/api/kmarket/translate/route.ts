@@ -20,6 +20,7 @@ const LANG_NAME_MAP: Record<SupportedLanguage, string> = {
   kk: 'Kazakh',
   bn: 'Bengali',
   ur: 'Urdu',
+  tl: 'Tagalog (Filipino)',
 };
 
 // 중고거래 빈출 문장 즉시 번역 사전 (초고속 0.01초 캐시)
@@ -42,6 +43,7 @@ const COMMON_PHRASES: Record<string, Partial<Record<SupportedLanguage, string>>>
     bn: 'কিছুটা ডিসকাউন্ট দেওয়া যাবে কি?',
     kk: 'Бағасын сәл түсіріп бере аласыз ба?',
     ur: 'کیا تھوڑی رعایت مل سکتی ہے؟',
+  tl: 'Tagalog (Filipino)',
   },
   location_meet: {
     ko: '오늘 저녁 기숙사 앞이나 공단 정문에서 직거래 가능할까요?',
@@ -61,6 +63,7 @@ const COMMON_PHRASES: Record<string, Partial<Record<SupportedLanguage, string>>>
     bn: 'আজ সন্ধ্যায় ডরমিটরি বা শিল্পাঞ্চলের গেটের সামনে দেখা করা যাবে?',
     kk: 'Бүгін кешке жатақхана маңында кездесе аламыз ба?',
     ur: 'کیا آج شام ہاسٹل کے سامنے مل سکتے ہیں؟',
+  tl: 'Tagalog (Filipino)',
   },
   accept_deal: {
     ko: '네, 좋습니다! 그때 뵐게요.',
@@ -80,6 +83,7 @@ const COMMON_PHRASES: Record<string, Partial<Record<SupportedLanguage, string>>>
     bn: 'হ্যাঁ, ঠিক আছে! তখন দেখা হবে।',
     kk: 'Иә, жақсы! Сол кезде кездесейік.',
     ur: 'جی ٹھیک ہے! اس وقت ملتے ہیں۔',
+  tl: 'Tagalog (Filipino)',
   },
 };
 
@@ -103,6 +107,7 @@ const SELLER_REPLY_CACHE: Record<string, Partial<Record<SupportedLanguage, strin
     bn: 'ধন্যবাদ! আমি আপনাকে আরও ৫,০০০ ওন ছাড় দিতে পারি। আজ সন্ধ্যা ৭টায় দেখা হবে!',
     kk: 'Рақмет! Сізге 5,000 вон жеңілдік бере аламын. Бүгін кешкі 19:00-де кездесейік!',
     ur: 'شکریہ! میں آپ کو 5000 وون کی رعایت دے سکتا ہوں۔ آج شام 7 بجے ملتے ہیں!',
+  tl: 'Tagalog (Filipino)',
   },
 };
 

@@ -3,24 +3,17 @@
 import React from 'react';
 import { useKMarket } from '@/context/KMarketContext';
 import { useLanguage } from '@/context/LanguageContext';
-import { REGIONS_DATA, CATEGORIES_DATA } from '@/lib/languages';
-import { IndustrialRegion, ItemCategory } from '@/types/kmarket';
-import { MapPin, Sparkles, Filter } from 'lucide-react';
+import { REGIONS_DATA } from '@/lib/languages';
+import { IndustrialRegion } from '@/types/kmarket';
+import { MapPin } from 'lucide-react';
 
 export default function KMarketRegionFilter() {
-  const {
-    selectedRegion,
-    setSelectedRegion,
-    selectedCategory,
-    setSelectedCategory,
-    isMovingSaleOnly,
-    setIsMovingSaleOnly,
-  } = useKMarket();
+  const { selectedRegion, setSelectedRegion } = useKMarket();
   const { t } = useLanguage();
 
   return (
     <div className="w-full my-2">
-      {/* 외국인 밀집 주요 공단 직거래 필터 바 */}
+      {/* 지역 직거래 필터 바 */}
       <div 
         className="p-3.5 rounded-2xl border" 
         style={{ 

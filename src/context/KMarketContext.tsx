@@ -13,6 +13,7 @@ import {
   AppNotification,
   AuthedUserData,
   FeedbackItem,
+  UserLocationSettings,
 } from '@/types/kmarket';
 import { INITIAL_ITEMS, INITIAL_CHATS } from '@/lib/mockData';
 import { useLanguage } from './LanguageContext';
@@ -58,6 +59,10 @@ interface KMarketContextType {
   submitFeedback: (feedback: FeedbackItem) => void;
   authedUser: any;
   setAuthedUser: (user: any) => void;
+  userLocation: UserLocationSettings;
+  setUserLocation: (loc: UserLocationSettings) => void;
+  syncCurrentGpsLocation: () => Promise<void>;
+  isGpsSyncing: boolean;
   
   // 통합 알림 센터 상태
   notifications: AppNotification[];
@@ -126,6 +131,104 @@ export function KMarketProvider({ children }: { children: React.ReactNode }) {
   const [feedbacks, setFeedbacks] = useState<FeedbackItem[]>([]);
   const [authedUser, setAuthedUser] = useState<any>(null);
 
+  // 내 위치 및 반경 설정 (기본값: 내 주변, 3km)
+  const [userLocation, setUserLocationState] = useState<UserLocationSettings>({
+    locationName: '내 주변',
+    radiusKm: 3,
+    coords: {
+      lat: 37.5665,
+      lng: 126.9780,
+    },
+    isGpsVerified: false,
+  });
+
+  const [isGpsSyncing, setIsGpsSyncing] = useState<boolean>(false);
+
+  const setUserLocation = (newLoc: UserLocationSettings) => {
+    setUserLocationState(newLoc);
+    if (typeof window !== 'undefined') {
+      try {
+        localStorage.setItem('kmarket_user_location', JSON.stringify(newLoc));
+      } catch (err) {
+        console.warn('Failed to save user location:', err);
+      }
+    }
+  };
+
+  // 실시간 접속자 실제 위치 자동 동기화 (HTML5 GPS + IP 스마트 폴백)
+  const syncCurrentGpsLocation = async () => {
+    if (typeof window === 'undefined') return;
+
+    setIsGpsSyncing(true);
+
+    const updateLocationState = (locName: string, lat: number, lng: number) => {
+      const newLoc: UserLocationSettings = {
+        locationName: locName,
+        radiusKm: userLocation?.radiusKm || 3,
+        coords: { lat, lng },
+        isGpsVerified: true,
+        updatedAt: new Date().toISOString(),
+      };
+      setUserLocationState(newLoc);
+      try {
+        localStorage.setItem('kmarket_user_location', JSON.stringify(newLoc));
+      } catch (err) {
+        console.warn(err);
+      }
+      setIsGpsSyncing(false);
+    };
+
+    // 1차 시도: 브라우저 고정밀 HTML5 Geolocation
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        async (position) => {
+          const { latitude, longitude } = position.coords;
+          let resolvedAddress = '';
+
+          try {
+            const res = await fetch('/api/kmarket/geocode', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ latitude, longitude }),
+            });
+            if (res.ok) {
+              const data = await res.json();
+              if (data.address) {
+                resolvedAddress = data.address;
+              }
+            }
+          } catch (err) {
+            console.warn('Geocoding call error:', err);
+          }
+
+          updateLocationState(resolvedAddress || '내 주변 (GPS 인증됨)', latitude, longitude);
+        },
+        async (error) => {
+          console.warn('GPS permission denied or timeout, fallback to IP location:', error.message);
+          // 2차 시도: IP 기반 실시간 접속자 도시/위치 자동 탐색
+          try {
+            const ipRes = await fetch('https://ipapi.co/json/');
+            if (ipRes.ok) {
+              const ipData = await ipRes.json();
+              if (ipData.city || ipData.region) {
+                const ipLat = ipData.latitude || 37.5665;
+                const ipLng = ipData.longitude || 126.9780;
+                const ipCity = ipData.city || ipData.region || '내 주변';
+                updateLocationState(`${ipCity} (내 위치)`, ipLat, ipLng);
+                return;
+              }
+            }
+          } catch (e) {
+            console.warn('IP location fallback failed:', e);
+          }
+
+          setIsGpsSyncing(false);
+        },
+        { enableHighAccuracy: true, timeout: 8000, maximumAge: 0 }
+      );
+    }
+  };
+
   // 피드백 건의 제출 함수
   const submitFeedback = (newFeedback: FeedbackItem) => {
     setFeedbacks((prev) => [newFeedback, ...prev]);
@@ -146,7 +249,7 @@ export function KMarketProvider({ children }: { children: React.ReactNode }) {
       id: 'notif-1',
       type: 'keyword',
       title: '🔔 키워드 알림: [세탁기]',
-      message: '평택 포승공단에 "통돌이 세탁기 10kg + 쿠쿠 밥솥" 매물이 새로 등록되었습니다.',
+      message: '내 주변에 "통돌이 세탁기 10kg + 쿠쿠 밥솥" 매물이 새로 등록되었습니다.',
       item_id: 'item-1',
       item_image: 'https://images.unsplash.com/photo-1626806787461-102c1bfaaea1?w=800&auto=format&fit=crop&q=80',
       is_read: false,
@@ -176,7 +279,7 @@ export function KMarketProvider({ children }: { children: React.ReactNode }) {
       id: 'notif-4',
       type: 'appointment',
       title: '📍 직거래 약속 1시간 전 리마인더',
-      message: '오늘 19:00 "포승공단 GS25 편의점 앞" 직거래 약속 1시간 전입니다.',
+      message: '오늘 19:00 "근처 편의점 앞" 직거래 약속 1시간 전입니다.',
       item_id: 'item-1',
       is_read: true,
       created_at: '2시간 전',
@@ -208,7 +311,7 @@ export function KMarketProvider({ children }: { children: React.ReactNode }) {
     setNotifications((prev) => [item, ...prev]);
   };
 
-  // 키워드 알림 상태 (외국인 기숙사 인기 기본값 3개 제공)
+  // 키워드 알림 상태 (인기 기본값 3개 제공)
   const [keywordAlerts, setKeywordAlerts] = useState<KeywordAlert[]>([
     {
       id: 'kw-1',
@@ -231,7 +334,7 @@ export function KMarketProvider({ children }: { children: React.ReactNode }) {
     {
       id: 'kw-3',
       keyword: '냉장고',
-      industrial_zone: 'pyeongtaek',
+      industrial_zone: 'all',
       is_active: true,
       notify_by_sms: true,
       matched_count: 3,
@@ -278,6 +381,30 @@ export function KMarketProvider({ children }: { children: React.ReactNode }) {
       const savedLikes = localStorage.getItem('kmarket_liked_items');
       if (savedLikes) {
         setLikedItemIds(new Set(JSON.parse(savedLikes)));
+      }
+
+      // 과거 구버전 평택/포승 캐시 데이터 자동 삭제 및 실시간 현재 접속자 위치(남양주 등) 최우선 감지
+      const savedUserLoc = localStorage.getItem('kmarket_user_location');
+      if (savedUserLoc) {
+        try {
+          const parsed = JSON.parse(savedUserLoc);
+          if (parsed && (parsed.locationName?.includes('평택') || parsed.locationName?.includes('포승'))) {
+            localStorage.removeItem('kmarket_user_location');
+            syncCurrentGpsLocation();
+          } else if (parsed && parsed.locationName && parsed.radiusKm) {
+            setUserLocationState(parsed);
+            // 백그라운드에서 최신 GPS 위치 갱신
+            syncCurrentGpsLocation();
+          } else {
+            syncCurrentGpsLocation();
+          }
+        } catch (e) {
+          console.warn('Failed to parse saved user location', e);
+          syncCurrentGpsLocation();
+        }
+      } else {
+        // 저장된 위치가 없으면 실제 현재 접속자 GPS 위치(남양주 등)로 1초 자동 감지
+        syncCurrentGpsLocation();
       }
 
       // URL 쿼리 파라미터 ?item= 확인하여 해당 매물 상세 모달 즉시 오픈
@@ -717,6 +844,10 @@ export function KMarketProvider({ children }: { children: React.ReactNode }) {
         toggleKeywordAlert,
         authedUser,
         setAuthedUser,
+        userLocation,
+        setUserLocation,
+        syncCurrentGpsLocation,
+        isGpsSyncing,
         activeChat,
         chatMessages,
         isChatLoading,

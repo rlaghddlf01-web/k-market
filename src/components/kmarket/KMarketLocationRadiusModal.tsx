@@ -15,6 +15,7 @@ import {
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { useLanguage } from '@/context/LanguageContext';
+import { useKMarket } from '@/context/KMarketContext';
 
 interface KMarketLocationRadiusModalProps {
   isOpen: boolean;
@@ -26,44 +27,81 @@ export default function KMarketLocationRadiusModal({
   onClose,
 }: KMarketLocationRadiusModalProps) {
   const { t } = useLanguage();
+  const { userLocation, setUserLocation } = useKMarket();
 
-  // 반경 설정 (1km: 도보 10분, 3km: 자전거 10분, 10km: 공단/도시 전체)
-  const [radiusKm, setRadiusKm] = useState<1 | 3 | 10>(3);
+  // 반경 설정 (1km: 도보 10분, 3km: 자전거 10분, 10km: 내 주변 광역 10km)
+  const [radiusKm, setRadiusKm] = useState<1 | 3 | 10>(userLocation?.radiusKm || 3);
 
-  // 실제 내 GPS 좌표 상태 (기본값: 대한민국 중심 또는 평택 포승)
-  const [currentCoords, setCurrentCoords] = useState<{ lat: number; lng: number }>({
-    lat: 36.9892,
-    lng: 126.8524,
-  });
+  // 실제 내 GPS 좌표 상태 (기본값: 내 주변 또는 대한민국 중심)
+  const [currentCoords, setCurrentCoords] = useState<{ lat: number; lng: number }>(
+    userLocation?.coords || {
+      lat: 37.5665,
+      lng: 126.9780,
+    }
+  );
 
-  const [locationName, setLocationName] = useState('경기 평택시 포승읍 포승공단 기숙사 2동');
+  const [locationName, setLocationName] = useState(
+    userLocation?.locationName || '내 주변'
+  );
   const [isGpsLoading, setIsGpsLoading] = useState(false);
   const [searchInput, setSearchInput] = useState('');
-  const [isGpsVerified, setIsGpsVerified] = useState(true);
+  const [isGpsVerified, setIsGpsVerified] = useState(userLocation?.isGpsVerified ?? false);
+
+  // 모달이 열릴 때 context의 현재 위치/반경으로 동기화
+  React.useEffect(() => {
+    if (isOpen && userLocation) {
+      setRadiusKm(userLocation.radiusKm || 3);
+      setLocationName(userLocation.locationName || '내 주변');
+      if (userLocation.coords) {
+        setCurrentCoords(userLocation.coords);
+      }
+      setIsGpsVerified(userLocation.isGpsVerified ?? false);
+    }
+  }, [isOpen, userLocation]);
 
   // 1. 브라우저/스마트폰 HTML5 Geolocation 실제 GPS 현재 위치 획득
   const handleGetCurrentGpsLocation = () => {
     if (!navigator.geolocation) {
-      alert('브라우저가 GPS 위치 서비스를 지원하지 않습니다.');
+      alert(t('auto_loop_837'));
       return;
     }
 
     setIsGpsLoading(true);
     navigator.geolocation.getCurrentPosition(
-      (position) => {
+      async (position) => {
         const { latitude, longitude } = position.coords;
         setCurrentCoords({ lat: latitude, lng: longitude });
-        setLocationName(`내 GPS 현재 위치 (위도 ${latitude.toFixed(4)}, 경도 ${longitude.toFixed(4)})`);
+
+        // 역지오코딩 API 호출하여 실제 동네/주소명 획득
+        try {
+          const res = await fetch('/api/kmarket/geocode', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ latitude, longitude }),
+          });
+          if (res.ok) {
+            const data = await res.json();
+            if (data.address) {
+              setLocationName(data.address);
+              setIsGpsVerified(true);
+              setIsGpsLoading(false);
+              return;
+            }
+          }
+        } catch (err) {
+          console.warn('Geocoding error:', err);
+        }
+
+        setLocationName('내 주변 (GPS 위치 확인됨)');
         setIsGpsVerified(true);
         setIsGpsLoading(false);
       },
       (error) => {
         console.warn('GPS Error or Permission Denied:', error.message);
-        // 기본 평택 포승 기숙사 좌표 fallback
-        setCurrentCoords({ lat: 36.9892, lng: 126.8524 });
-        setLocationName('내 GPS 현재 위치 (경기 평택시 포승읍 포승공단로)');
-        setIsGpsVerified(true);
+        setLocationName('내 주변');
+        setIsGpsVerified(false);
         setIsGpsLoading(false);
+        alert(t('auto_ui_2001'));
       },
       { enableHighAccuracy: true, timeout: 8000, maximumAge: 0 }
     );
@@ -106,19 +144,16 @@ export default function KMarketLocationRadiusModal({
       console.log(e);
     }
 
-    try {
-      localStorage.setItem(
-        'kmarket_user_location',
-        JSON.stringify({
-          locationName,
-          radiusKm,
-          coords: currentCoords,
-          updatedAt: new Date().toISOString(),
-        })
-      );
-    } catch (e) {
-      console.warn(e);
-    }
+    const newLocationData = {
+      locationName,
+      radiusKm,
+      coords: currentCoords,
+      isGpsVerified,
+      updatedAt: new Date().toISOString(),
+    };
+
+    // 전역 Context 및 localStorage 동기화
+    setUserLocation(newLocationData);
 
     alert(t('loc_saved_alert'));
     onClose();
@@ -195,7 +230,7 @@ export default function KMarketLocationRadiusModal({
             </div>
           </div>
 
-          {/* 2. 주소 / 기숙사 직접 검색 폼 */}
+          {/* 2. 내 동네 / 주소 직접 검색 폼 */}
           <form onSubmit={handleSearchLocation} className="space-y-1.5">
             <label className="text-xs font-bold text-slate-700 dark:text-slate-300">
               {t('loc_manual_search_label')}
@@ -296,6 +331,7 @@ export default function KMarketLocationRadiusModal({
 
             <div className="relative w-full h-44 sm:h-52 rounded-2xl overflow-hidden border border-slate-300 dark:border-gray-700 shadow-inner bg-slate-100 dark:bg-gray-800">
               <iframe
+                key={mapEmbedUrl}
                 title="Google Map Live Location"
                 width="100%"
                 height="100%"
@@ -304,19 +340,27 @@ export default function KMarketLocationRadiusModal({
                 marginHeight={0}
                 marginWidth={0}
                 src={mapEmbedUrl}
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover transition-opacity duration-300"
               />
 
-              {/* 내 위치 타겟 마커 오버레이 */}
+              {/* 내 위치 타겟 마커 및 반경 원 오버레이 */}
               <div className="absolute inset-0 pointer-events-none flex items-center justify-center">
                 <div className="relative flex items-center justify-center">
+                  {/* 정적 반경 범위 가이드 원 */}
                   <div
-                    className={`rounded-full border-2 border-blue-500 bg-blue-500/20 animate-ping pointer-events-none ${
-                      radiusKm === 1 ? 'w-24 h-24' : radiusKm === 3 ? 'w-40 h-40' : 'w-56 h-56'
+                    className={`rounded-full border-2 border-dashed border-blue-500/80 bg-blue-500/10 pointer-events-none transition-all duration-500 ${
+                      radiusKm === 1 ? 'w-24 h-24' : radiusKm === 3 ? 'w-44 h-44' : 'w-64 h-64'
                     }`}
                   />
-                  <div className="absolute w-5 h-5 rounded-full bg-rose-600 text-white flex items-center justify-center shadow-lg border-2 border-white">
-                    <div className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
+                  {/* 동적 펄스 파동 */}
+                  <div
+                    className={`absolute rounded-full border border-blue-400 bg-blue-400/20 animate-ping pointer-events-none ${
+                      radiusKm === 1 ? 'w-20 h-20' : radiusKm === 3 ? 'w-36 h-36' : 'w-52 h-52'
+                    }`}
+                  />
+                  {/* 중심 핀 */}
+                  <div className="absolute w-6 h-6 rounded-full bg-rose-600 text-white flex items-center justify-center shadow-lg border-2 border-white z-10">
+                    <div className="w-2 h-2 rounded-full bg-white animate-pulse" />
                   </div>
                 </div>
               </div>

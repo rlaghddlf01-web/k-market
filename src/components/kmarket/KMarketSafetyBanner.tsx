@@ -34,10 +34,7 @@ export default function KMarketSafetyBanner() {
             <div>
               <div className="flex items-center space-x-2">
                 <span className="text-xs font-bold text-[#5c4a39] uppercase tracking-wider bg-[#e5dad0] px-2 py-0.5 rounded-full border border-[#ded1c4]">
-                  🛡️ 외국인 안심 거래 쉴드
-                </span>
-                <span className="text-[10px] text-[#8c7866] hidden sm:inline font-medium">
-                  Anti-Scam Safety Shield
+                  🛡️ {t('scam_bar_badge')}
                 </span>
               </div>
               <p className="text-xs font-bold text-[#1f1914] mt-1">
@@ -67,10 +64,10 @@ export default function KMarketSafetyBanner() {
                 </div>
                 <div>
                   <h3 className="text-lg font-black tracking-tight">
-                    외국인 안심 거래 3대 수칙
+                    {t('safety_modal_title')}
                   </h3>
                   <p className="text-xs text-emerald-100">
-                    K-Market 회원 보호 및 사기 범죄 원천 차단 가이드
+                    {t('safety_modal_subtitle')}
                   </p>
                 </div>
               </div>
@@ -95,7 +92,7 @@ export default function KMarketSafetyBanner() {
                     <span>{t('auto_ui_252')}</span>
                   </h4>
                   <p className="text-rose-900/80 dark:text-rose-300/80 text-xs leading-relaxed">
-                    "물건을 맡아둘 테니 1만원만 먼저 보내라", "택배비 먼저 입금해라" 등은 대표적인 사기 수법입니다. 반드시 <strong>{t('auto_ui_253')}</strong> 대금을 지급하세요.
+                    {t('safety_rule_1_desc')} <strong>{t('auto_ui_253')}</strong> {t('safety_rule_1_desc_tail')}
                   </p>
                 </div>
               </div>
@@ -111,7 +108,7 @@ export default function KMarketSafetyBanner() {
                     <span>{t('auto_ui_254')}</span>
                   </h4>
                   <p className="text-amber-900/80 dark:text-amber-300/80 text-xs leading-relaxed">
-                    외부 메신저로 대화할 경우 사기 피해 발생 시 증거 확보 및 구제가 어렵습니다. K-Market의 <strong>{t('auto_ui_255')}</strong> 안에서만 거래를 진행하세요.
+                    {t('safety_rule_2_desc')} <strong>{t('auto_ui_255')}</strong> {t('safety_rule_2_desc_tail')}
                   </p>
                 </div>
               </div>
@@ -127,7 +124,7 @@ export default function KMarketSafetyBanner() {
                     <span>{t('auto_ui_256')}</span>
                   </h4>
                   <p className="text-blue-900/80 dark:text-blue-300/80 text-xs leading-relaxed">
-                    인적이 드문 골목보다 <strong>{t('auto_ui_257')}</strong> 등 밝고 안전한 랜드마크 지도 핀을 약속 장소로 잡으세요.
+                    {t('safety_rule_3_desc')} <strong>{t('auto_ui_257')}</strong> {t('safety_rule_3_desc_tail')}
                   </p>
                 </div>
               </div>
@@ -136,7 +133,7 @@ export default function KMarketSafetyBanner() {
                 onClick={() => setShowDetailModal(false)}
                 className="w-full py-3.5 bg-slate-900 hover:bg-black text-white font-black text-sm rounded-2xl shadow-lg transition-all cursor-pointer"
               >
-                확인했습니다
+                {t('btn_confirm')}
               </button>
             </div>
           </div>

@@ -23,29 +23,32 @@ export function LanguageProvider({
   children: React.ReactNode;
   initialLang?: SupportedLanguage;
 }) {
-  // 초기 렌더링 0초 시점에 URL 및 initialLang을 즉시 감지하여 깜빡임 원천 차단
+  // 서버 렌더링과 클라이언트 첫 하이드레이션 일치를 위해 initialLang 또는 'ko'로 초기화
   const [currentLang, setCurrentLangState] = useState<SupportedLanguage>(() => {
     if (initialLang && SUPPORTED_LANGUAGES.some((l) => l.code === initialLang)) {
       return initialLang;
     }
+    return 'ko';
+  });
+
+  // 클라이언트 마운트 후 URL 및 localStorage의 언어로 안전하게 동기화 (하이드레이션 불일치 원천 차단)
+  useEffect(() => {
+    if (initialLang && SUPPORTED_LANGUAGES.some((l) => l.code === initialLang)) {
+      setCurrentLangState(initialLang);
+      return;
+    }
+
     if (typeof window !== 'undefined') {
       const pathSegments = window.location.pathname.split('/').filter(Boolean);
       const urlLang = pathSegments[0] as SupportedLanguage;
       if (urlLang && SUPPORTED_LANGUAGES.some((l) => l.code === urlLang)) {
-        return urlLang;
+        setCurrentLangState(urlLang);
+        return;
       }
       const saved = localStorage.getItem('kmarket_lang') as SupportedLanguage;
       if (saved && SUPPORTED_LANGUAGES.some((l) => l.code === saved)) {
-        return saved;
+        setCurrentLangState(saved);
       }
-    }
-    return 'ko';
-  });
-
-  // initialLang이 변경될 경우 동기화
-  useEffect(() => {
-    if (initialLang && SUPPORTED_LANGUAGES.some((l) => l.code === initialLang)) {
-      setCurrentLangState(initialLang);
     }
   }, [initialLang]);
 

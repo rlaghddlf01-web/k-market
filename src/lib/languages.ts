@@ -136,15 +136,15 @@ export const CATEGORIES_DATA: { id: ItemCategory; label: string; icon: string }[
 ];
 
 export const REGIONS_DATA: { id: IndustrialRegion; name: string; badge: string; icon: string; nameKo: string }[] = [
-  { id: 'all', name: '전국 공단 직거래', badge: '전국', icon: '🏭', nameKo: '전국' },
-  { id: 'pyeongtaek', name: '평택 포승/고덕 공단', badge: '평택', icon: '🏭', nameKo: '평택' },
-  { id: 'ansan', name: '안산 반월/시화/원곡동', badge: '안산', icon: '🏭', nameKo: '안산' },
-  { id: 'hwaseong', name: '화성 향남/남양/발안 공단', badge: '화성', icon: '🏭', nameKo: '화성' },
-  { id: 'siheung', name: '시흥 정왕/스마트허브', badge: '시흥', icon: '🏭', nameKo: '시흥' },
-  { id: 'gumi', name: '구미 국가산업단지', badge: '구미', icon: '🏭', nameKo: '구미' },
-  { id: 'gimhae', name: '김해 골든루트/주촌', badge: '김해', icon: '🏭', nameKo: '김해' },
-  { id: 'incheon', name: '인천 남동공단', badge: '인천', icon: '🏭', nameKo: '인천' },
-  { id: 'gwangju', name: '광주 하남공단', badge: '광주', icon: '🏭', nameKo: '광주' },
+  { id: 'all', name: '전체 지역 직거래', badge: '전체', icon: '📍', nameKo: '전체' },
+  { id: 'pyeongtaek', name: '경기 평택시', badge: '평택', icon: '📍', nameKo: '평택' },
+  { id: 'ansan', name: '경기 안산시', badge: '안산', icon: '📍', nameKo: '안산' },
+  { id: 'hwaseong', name: '경기 화성시', badge: '화성', icon: '📍', nameKo: '화성' },
+  { id: 'siheung', name: '경기 시흥시', badge: '시흥', icon: '📍', nameKo: '시흥' },
+  { id: 'gumi', name: '경북 구미시', badge: '구미', icon: '📍', nameKo: '구미' },
+  { id: 'gimhae', name: '경남 김해시', badge: '김해', icon: '📍', nameKo: '김해' },
+  { id: 'incheon', name: '인천광역시', badge: '인천', icon: '📍', nameKo: '인천' },
+  { id: 'gwangju', name: '광주광역시', badge: '광주', icon: '📍', nameKo: '광주' },
 ];
 
 export const LANGUAGE_DICTIONARY: Record<SupportedLanguage, LanguageOption> =

@@ -168,7 +168,7 @@ export default function KMarketWelcomeLanguageGateway({
           <button
             onClick={onClose}
             className="absolute top-4 right-4 p-2 text-slate-400 hover:text-slate-600 bg-slate-100 hover:bg-slate-200 rounded-full transition-colors z-10"
-            aria-label="닫기"
+            aria-label={t('pwa_toast_dismiss_btn')}
           >
             <X className="w-5 h-5" />
           </button>

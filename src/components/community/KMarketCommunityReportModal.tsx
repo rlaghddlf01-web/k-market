@@ -29,7 +29,7 @@ export default function KMarketCommunityReportModal() {
     const ok = await reportContent(selectedReason, detail);
     setIsSubmitting(false);
     if (ok) {
-      alert('신고가 정상 접수되었습니다. 해당 게시물/댓글은 즉시 숨김 처리되었습니다.');
+      alert(t('auto_loop_687'));
       setDetail('');
     }
   };

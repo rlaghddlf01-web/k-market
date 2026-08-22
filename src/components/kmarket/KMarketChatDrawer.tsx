@@ -207,7 +207,7 @@ export default function KMarketChatDrawer() {
                 {activeChat.item.status !== 'reserved' && activeChat.item.status !== 'sold' && (
                   <button
                     onClick={() => {
-                      alert('이 구매자와 [예약중]으로 설정되었습니다.');
+                      alert(t('auto_loop_767'));
                     }}
                     className="px-2 py-1 bg-amber-50 hover:bg-amber-100 text-amber-700 text-[10px] font-bold rounded-lg border border-amber-200 transition-colors cursor-pointer"
                   >

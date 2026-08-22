@@ -216,7 +216,7 @@ export default function KMarketItemDetail() {
                         {selectedItem.seller_name}
                       </span>
                       <span className="text-[11px] bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded-full font-semibold">
-                        비자인증됨
+                        {t('auth_verified_badge')}
                       </span>
                     </div>
                     <p className="text-xs text-slate-500 flex items-center space-x-1 mt-0.5">
@@ -315,7 +315,7 @@ export default function KMarketItemDetail() {
                 onClick={() => setShowStatusModal(true)}
                 className="px-3 py-2 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold rounded-xl shadow-xs transition-colors shrink-0 cursor-pointer"
               >
-                상태변경 / 끌올
+                {t('btn_change_status_boost')}
               </button>
             </div>
 
@@ -327,7 +327,7 @@ export default function KMarketItemDetail() {
             {/* 상품 상세 설명 */}
             <div className="space-y-2">
               <h3 className="text-xs font-bold text-slate-400 uppercase tracking-wider">
-                상세 설명 (Item Description)
+                {t('create_desc_header')}
               </h3>
               <p className="text-sm text-slate-800 leading-relaxed whitespace-pre-line bg-white p-4 rounded-2xl border border-slate-100 shadow-xs">
                 {showOriginalLang ? selectedItem.description : translatedDesc}

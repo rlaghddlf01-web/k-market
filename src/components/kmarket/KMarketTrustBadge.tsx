@@ -47,7 +47,7 @@ export default function KMarketTrustBadge({
         className={`flex items-center gap-2 text-xs ${
           onClick ? 'cursor-pointer group' : ''
         }`}
-        title={`매너온도: ${mannerTemp.toFixed(1)}℃ (${levelTitle})`}
+        title={`${t('trust_score_title')}: ${mannerTemp.toFixed(1)}℃ (${levelTitle})`}
       >
         <div className="flex flex-col items-end">
           <div className="flex items-center gap-1">

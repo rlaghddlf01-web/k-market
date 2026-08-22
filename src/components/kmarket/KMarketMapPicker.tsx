@@ -175,7 +175,7 @@ export default function KMarketMapPicker({
   // 2. GPS 내 위치 버튼 클릭 시 지도 & 핀 이동
   const handleGetGpsLocation = () => {
     if (!navigator.geolocation) {
-      alert('위치 정보(GPS)를 지원하지 않는 브라우저입니다.');
+      alert(t('auto_loop_718'));
       return;
     }
 
@@ -197,7 +197,7 @@ export default function KMarketMapPicker({
       (err) => {
         setIsLocating(false);
         console.warn(err);
-        alert('위치 권한을 허용해 주시거나 지도 위를 직접 클릭하여 핀을 이동해 주세요.');
+        alert(t('auto_loop_719'));
       },
       { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
     );
@@ -241,7 +241,7 @@ export default function KMarketMapPicker({
       console.warn('Address search error:', err);
     }
 
-    alert('주소를 찾았습니다. 지도 위를 직접 클릭하여 핀을 미세 조정할 수 있습니다.');
+    alert(t('auto_loop_841'));
     updateFullLocation(baseAddress, landmarkDetail);
   };
 
@@ -355,7 +355,7 @@ export default function KMarketMapPicker({
 
           {/* 우측 하단 안내 툴팁 */}
           <div className="absolute bottom-3 right-3 bg-white/90 backdrop-blur-xs text-[#3d2817] px-2.5 py-1 rounded-xl text-[10px] font-black shadow-md border border-[#ded1c4] pointer-events-none z-10">
-            🖱️ 지도 클릭 / 핀 드래그로 이동
+            {t('auto_ui_200')}
           </div>
         </div>
       </div>

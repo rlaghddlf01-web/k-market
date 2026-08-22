@@ -130,4 +130,11 @@ export const WELCOME_17_LANGUAGES: Record<SupportedLanguage, WelcomeLanguageText
     footerButton: '🇵🇰 اردو میں شروع کریں',
     bannerBenefit: '17 زبانوں میں فوری خودکار ترجمہ چیٹ',
   },
+  tl: {
+    badge: '17-Wikang Real-time',
+    title: 'Ligtas na Pamilihan at Buhay Komunidad',
+    subtitle: 'Direktang kalakalan sa pagitan ng mga dayuhan nang walang komisyon',
+    footerButton: 'Simulan ang K-Market',
+    bannerBenefit: '0 won komisyon + ARC ID verified',
+  },
 };

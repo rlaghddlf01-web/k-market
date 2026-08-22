@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useLanguage } from '@/context/LanguageContext';
 import { useKMarket } from '@/context/KMarketContext';
+import { getLocalizedAddressDisplay } from '@/lib/koreanLocationRomanizer';
 import { Globe, PlusCircle, Search, Sparkles, ShieldCheck, UserCheck, UserPlus, Bell, MapPin, ChevronDown, Download, Smartphone } from 'lucide-react';
 import { SupportedLanguage } from '@/types/kmarket';
 import KMarketWelcomeLanguageGateway from '../common/KMarketWelcomeLanguageGateway';
@@ -29,6 +30,7 @@ export default function KMarketHeader() {
     setActiveMainTab,
     keywordAlerts,
     authedUser,
+    userLocation,
   } = useKMarket();
 
   const [isLangDropdownOpen, setIsLangDropdownOpen] = useState(false);
@@ -131,8 +133,8 @@ export default function KMarketHeader() {
                           />
                         </div>
                         <div>
-                          <p className="font-semibold text-[#1f1914]">{lang.nativeName}</p>
-                          <p className="text-[10px] text-[#8c7866]">{lang.name}</p>
+                          <p className="font-bold text-[#1f1914] text-xs">{lang.nativeName}</p>
+                          <p className="text-[10px] text-[#8c7866] font-medium">{lang.countryCode} · {lang.code.toUpperCase()}</p>
                         </div>
                       </div>
                       {currentLang === lang.code && (
@@ -185,7 +187,7 @@ export default function KMarketHeader() {
               </div>
             </div>
 
-            {/* 위치 칩 */}
+            {/* 위치 칩 (내 주변 반경 실시간 동적 연동) */}
             <button
               onClick={() => setIsLocationRadiusModalOpen(true)}
               className="flex items-center gap-1.5 px-3 py-1.5 rounded-full hover:opacity-80 text-[#5c4a39] border border-[#ded1c4] text-xs font-bold transition-all cursor-pointer active:scale-95"
@@ -193,18 +195,12 @@ export default function KMarketHeader() {
               title={t('auto_ui_145')}
             >
               <MapPin className="w-3.5 h-3.5 text-[#845b37] shrink-0" />
-              <span className="truncate max-w-[100px]">
-                {selectedRegion === 'all'
-                  ? '내 위치'
-                  : selectedRegion === 'pyeongtaek'
-                  ? '평택 포승'
-                  : selectedRegion === 'ansan'
-                  ? '안산 원곡'
-                  : selectedRegion === 'hwaseong'
-                  ? '화성 향남'
-                  : selectedRegion}
+              <span className="truncate max-w-[140px] font-bold">
+                {getLocalizedAddressDisplay(userLocation?.locationName || '내 주변', currentLang)}
               </span>
-              <span className="text-[9px] bg-[#3d2817] text-[#fbf9f6] px-1.5 py-0.5 rounded-full font-extrabold">3km</span>
+              <span className="text-[9px] bg-[#3d2817] text-[#fbf9f6] px-1.5 py-0.5 rounded-full font-extrabold shadow-xs transition-all">
+                {userLocation?.radiusKm || 3}km
+              </span>
               <ChevronDown className="w-3 h-3 opacity-50" />
             </button>
           </div>
@@ -214,7 +210,7 @@ export default function KMarketHeader() {
             <div className="relative">
               <input
                 type="text"
-                placeholder={t('auto_ui_146')}
+                placeholder={t('search_placeholder')}
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="w-full pl-10 pr-4 py-2.5 input-premium text-sm font-medium text-[#1f1914]"

@@ -15,7 +15,8 @@ export type SupportedLanguage =
   | 'si'
   | 'kk'
   | 'bn'
-  | 'ur';
+  | 'ur'
+  | 'tl';
 
 export type LanguageCode = SupportedLanguage;
 
@@ -25,6 +26,17 @@ export interface LanguageOption {
   nativeName: string;
   flag: string;
   countryCode: string;
+}
+
+export interface UserLocationSettings {
+  locationName: string;
+  radiusKm: 1 | 3 | 10;
+  coords: {
+    lat: number;
+    lng: number;
+  };
+  isGpsVerified: boolean;
+  updatedAt?: string;
 }
 
 export type ItemCategory =

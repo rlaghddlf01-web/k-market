@@ -17,6 +17,7 @@ import {
   Sliders,
 } from 'lucide-react';
 import { AppNotification, NotificationType } from '@/types/kmarket';
+import { getAdaptedNotification } from '@/lib/itemTranslationService';
 
 export default function KMarketNotificationDrawer() {
   const {
@@ -33,7 +34,7 @@ export default function KMarketNotificationDrawer() {
     setIsKeywordModalOpen,
   } = useKMarket();
 
-  const { t } = useLanguage();
+  const { t, currentLang } = useLanguage();
   const [activeFilter, setActiveFilter] = useState<'all' | NotificationType>('all');
 
   if (!isNotificationCenterOpen) return null;
@@ -134,10 +135,10 @@ export default function KMarketNotificationDrawer() {
         <div className="p-2.5 bg-slate-50 dark:bg-gray-800/60 border-b border-slate-200/80 dark:border-gray-800 flex items-center justify-between gap-1.5 shrink-0">
           <div className="flex items-center space-x-1 overflow-x-auto no-scrollbar">
             {[
-              { id: 'all', label: '전체' },
-              { id: 'keyword', label: '키워드 알림' },
-              { id: 'chat', label: '번역 채팅' },
-              { id: 'price_drop', label: '가격 인하' },
+              { id: 'all', label: t('filter_all') },
+              { id: 'keyword', label: t('notif_tab_keyword') },
+              { id: 'chat', label: t('notif_tab_chat') },
+              { id: 'price_drop', label: t('notif_tab_price_drop') },
             ].map((tab) => (
               <button
                 key={tab.id}
@@ -161,7 +162,7 @@ export default function KMarketNotificationDrawer() {
             className="text-[11px] font-bold text-blue-600 dark:text-blue-400 hover:underline shrink-0 flex items-center gap-0.5"
           >
             <Sliders className="w-3 h-3" />
-            <span>{t('auto_ui_235')}</span>
+            <span>{t('btn_setup_alerts')}</span>
           </button>
         </div>
 
@@ -170,6 +171,7 @@ export default function KMarketNotificationDrawer() {
           {filteredNotifications.length > 0 ? (
             filteredNotifications.map((notif) => {
               const isUnread = !notif.is_read;
+              const adapted = getAdaptedNotification(notif, currentLang, t);
 
               return (
                 <div
@@ -203,19 +205,19 @@ export default function KMarketNotificationDrawer() {
                               : 'text-slate-800 dark:text-slate-200'
                           }`}
                         >
-                          {notif.title}
+                          {adapted.title}
                         </span>
                         {isUnread && (
                           <span className="w-1.5 h-1.5 rounded-full bg-blue-600 shrink-0 animate-pulse" />
                         )}
                       </div>
                       <span className="text-[10px] text-slate-400 shrink-0">
-                        {notif.created_at}
+                        {adapted.created_at}
                       </span>
                     </div>
 
                     <p className="text-xs text-slate-600 dark:text-slate-300 leading-snug line-clamp-2">
-                      {notif.message}
+                      {adapted.message}
                     </p>
                   </div>
 
@@ -247,7 +249,7 @@ export default function KMarketNotificationDrawer() {
               <Bell className="w-10 h-10 mx-auto opacity-30 stroke-1" />
               <p className="text-xs font-bold">{t('auto_ui_237')}</p>
               <p className="text-[11px] max-w-xs mx-auto text-slate-400">
-                관심 있는 키워드를 등록해두면 원하는 매물이 올라올 때 즉시 알려드립니다!
+                {t('notif_empty_keyword_tip')}
               </p>
             </div>
           )}

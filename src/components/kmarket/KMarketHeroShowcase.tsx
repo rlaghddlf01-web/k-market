@@ -25,8 +25,7 @@ export default function KMarketHeroShowcase() {
             </div>
 
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#1f1914] tracking-tight leading-tight sm:leading-tight">
-              {t('hero_title_1')} <br />
-              <span className="text-[#845b37]">{t('hero_title_moving')}</span> {t('hero_title_collection')}
+              {t('hero_main_headline')}
             </h1>
 
             <p className="text-sm sm:text-base text-[#5c4a39] font-medium leading-relaxed max-w-lg">
@@ -79,7 +78,7 @@ export default function KMarketHeroShowcase() {
                   {t('hero_moving_tag_main')}
                 </span>
                 <span className="text-[9px] font-extrabold bg-rose-600 px-1.5 py-0.2 rounded-full mt-0.5">
-                  75% OFF
+                  {t('hero_bundle_discount')}
                 </span>
               </div>
 
@@ -88,7 +87,7 @@ export default function KMarketHeroShowcase() {
                 <div className="flex items-center justify-between">
                   <div>
                     <span className="text-[10px] font-black uppercase tracking-wider text-[#f3ba2f]">
-                      Full-Package Bundle
+                      {t('hero_bundle_tag')}
                     </span>
                     <p className="text-sm font-black drop-shadow-sm truncate">
                       {t('hero_bundle_title')}

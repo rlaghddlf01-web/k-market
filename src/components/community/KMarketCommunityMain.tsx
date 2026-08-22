@@ -46,22 +46,21 @@ export default function KMarketCommunityMain() {
         <div className="relative z-10 space-y-2 max-w-2xl">
           <div className="flex items-center gap-2">
             <span className="bg-[#f3ba2f] text-[#09101f] text-[10px] font-black px-2.5 py-0.5 rounded-full uppercase tracking-wider">
-              15개국어 실시간 소통
+              {t('comm_banner_badge')}
             </span>
             <span className="text-xs text-indigo-200 font-bold flex items-center gap-1">
               <Globe className="w-3.5 h-3.5" />
-              <span>{t('auto_ui_16')}</span>
+              <span>{t('comm_banner_sub')}</span>
             </span>
           </div>
 
           <h2 className="text-lg sm:text-xl font-black tracking-tight text-white flex items-center gap-2">
-            <span>{t('auto_ui_17')}</span>
+            <span>{t('comm_banner_title')}</span>
             <span className="text-xl">🤝</span>
           </h2>
 
           <p className="text-xs text-indigo-100/90 leading-relaxed font-normal">
-            타향살이 외로움을 달래는 <strong>{t('auto_ui_18')}</strong>{t('auto_ui_19')} <strong>{t('auto_ui_20')}</strong>, 
-            궁금한 <strong>{t('auto_ui_21')}</strong>까지 따뜻한 온기를 나누세요.
+            {t('comm_banner_desc')}
           </p>
         </div>
 
@@ -82,7 +81,7 @@ export default function KMarketCommunityMain() {
                 : 'bg-white dark:bg-gray-800 text-slate-600 dark:text-slate-300 border-slate-200 dark:border-gray-700 hover:bg-slate-50'
             }`}
           >
-            전체 보기
+            {t('comm_tab_all')}
           </button>
 
           {/* 6대 카테고리 버튼들 */}
@@ -97,7 +96,7 @@ export default function KMarketCommunityMain() {
               }`}
             >
               <span>{cat.icon}</span>
-              <span>{cat.labelKo}</span>
+              <span>{t(`comm_cat_${cat.id}`)}</span>
             </button>
           ))}
         </div>
@@ -128,10 +127,10 @@ export default function KMarketCommunityMain() {
           <HeartHandshake className="w-12 h-12 mx-auto text-indigo-400 opacity-60" />
           <div className="space-y-1">
             <h4 className="text-sm font-bold text-slate-800 dark:text-white">
-              해당 카테고리에 아직 작성된 글이 없습니다.
+              {t('comm_empty_title')}
             </h4>
             <p className="text-xs text-slate-500">
-              첫 번째로 동네 친구를 사귀거나 따뜻한 이야기를 올려보세요!
+              {t('comm_empty_desc')}
             </p>
           </div>
           <button
@@ -139,7 +138,7 @@ export default function KMarketCommunityMain() {
             className="btn-primary px-5 py-2 text-xs cursor-pointer inline-flex items-center gap-1"
           >
             <PlusCircle className="w-3.5 h-3.5" />
-            <span>{t('auto_ui_23')}</span>
+            <span>{t('comm_empty_create_btn')}</span>
           </button>
         </div>
       )}

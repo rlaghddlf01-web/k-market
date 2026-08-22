@@ -186,7 +186,7 @@ export default function KMarketUserProfileModal({
                   </div>
                 ) : (
                   <div className="text-center py-4 text-xs text-gray-400">
-                    아직 등록된 칭찬 키워드가 없습니다.
+                    {t('profile_no_keywords')}
                   </div>
                 )}
               </div>
@@ -230,7 +230,7 @@ export default function KMarketUserProfileModal({
                   </div>
                 ) : (
                   <div className="text-center py-4 text-xs text-gray-400">
-                    첫 번째 거래 후기를 남겨보세요!
+                    {t('profile_no_reviews')}
                   </div>
                 )}
               </div>

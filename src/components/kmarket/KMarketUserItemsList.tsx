@@ -83,7 +83,7 @@ export default function KMarketUserItemsList({
                 />
                 {isSold && (
                   <div className="absolute inset-0 bg-black/50 flex items-center justify-center text-white text-[9px] font-black">
-                    완료
+                    {t('status_sold')}
                   </div>
                 )}
                 {item.is_moving_sale && !isSold && (
@@ -113,7 +113,7 @@ export default function KMarketUserItemsList({
                   </span>
                   {item.original_price && item.original_price > item.price && (
                     <span className="text-[10px] text-slate-400 line-through">
-                      {item.original_price.toLocaleString()}원
+                      {item.original_price.toLocaleString()}{t('currency_won')}
                     </span>
                   )}
                 </div>

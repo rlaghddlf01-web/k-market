@@ -39,7 +39,7 @@ export default function KMarketCommunityCreateModal() {
     // 이미 선택된 사진과 합쳐서 최대 5장 제한
     const remainingSlots = 5 - compressedImages.length;
     if (remainingSlots <= 0) {
-      alert('사진은 최대 5장까지만 등록 가능합니다.');
+      alert(t('comm_photos_max_alert'));
       return;
     }
 
@@ -51,7 +51,7 @@ export default function KMarketCommunityCreateModal() {
       setCompressedImages((prev) => [...prev, ...results]);
     } catch (err) {
       console.error('Image compression error:', err);
-      alert('사진 압축 중 오류가 발생했습니다.');
+      alert(t('comm_photos_error_alert'));
     } finally {
       setIsCompressing(false);
       e.target.value = '';
@@ -65,7 +65,7 @@ export default function KMarketCommunityCreateModal() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!title.trim() || !content.trim()) {
-      alert('제목과 내용을 입력해주세요.');
+      alert(t('comm_input_required_alert'));
       return;
     }
 
@@ -109,10 +109,10 @@ export default function KMarketCommunityCreateModal() {
           </span>
           <div>
             <h2 className="text-base font-black text-slate-900 dark:text-white">
-              {t('auto_ui_22')}
+              {t('comm_modal_create_title')}
             </h2>
             <p className="text-[11px] text-slate-400">
-              15개국어로 자동 번역되어 동네 이웃들에게 따뜻하게 전해집니다.
+              {t('comm_modal_create_subtitle')}
             </p>
           </div>
         </div>
@@ -122,7 +122,7 @@ export default function KMarketCommunityCreateModal() {
           {/* 1. 6대 카테고리 선택 칩 */}
           <div className="space-y-1.5">
             <label className="text-xs font-bold text-slate-700 dark:text-slate-300">
-              카테고리 선택
+              {t('comm_category_select_label')}
             </label>
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-1.5">
               {COMMUNITY_CATEGORIES.map((cat) => (
@@ -137,7 +137,7 @@ export default function KMarketCommunityCreateModal() {
                   }`}
                 >
                   <span className="text-sm">{cat.icon}</span>
-                  <span className="truncate">{cat.labelKo}</span>
+                  <span className="truncate">{t(`comm_cat_${cat.id}`)}</span>
                 </button>
               ))}
             </div>
@@ -146,13 +146,13 @@ export default function KMarketCommunityCreateModal() {
           {/* 2. 글 제목 */}
           <div className="space-y-1.5">
             <label className="text-xs font-bold text-slate-700 dark:text-slate-300">
-              {t('create_title_label')}
+              {t('post_item_title_label')}
             </label>
             <input
               type="text"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
-              placeholder={t('auto_ui_6')}
+              placeholder={t('comm_title_placeholder')}
               className="w-full px-4 py-2.5 rounded-2xl bg-slate-50 dark:bg-gray-800 border border-slate-200 dark:border-gray-700 text-xs font-medium text-slate-900 dark:text-white focus:outline-hidden focus:border-blue-500"
               required
             />
@@ -161,13 +161,13 @@ export default function KMarketCommunityCreateModal() {
           {/* 3. 본문 내용 */}
           <div className="space-y-1.5">
             <label className="text-xs font-bold text-slate-700 dark:text-slate-300">
-              내용
+              {t('comm_content_label')}
             </label>
             <textarea
               rows={4}
               value={content}
               onChange={(e) => setContent(e.target.value)}
-              placeholder={t('auto_ui_7')}
+              placeholder={t('comm_content_placeholder')}
               className="w-full px-4 py-2.5 rounded-2xl bg-slate-50 dark:bg-gray-800 border border-slate-200 dark:border-gray-700 text-xs font-medium text-slate-900 dark:text-white focus:outline-hidden focus:border-blue-500 leading-relaxed"
               required
             />
@@ -177,10 +177,10 @@ export default function KMarketCommunityCreateModal() {
           <div className="space-y-2">
             <div className="flex items-center justify-between">
               <label className="text-xs font-bold text-slate-700 dark:text-slate-300 flex items-center gap-1">
-                <span>{t('auto_ui_8')}</span>
+                <span>{t('comm_photos_label')}</span>
                 <span className="text-[10px] text-emerald-600 dark:text-emerald-400 font-extrabold flex items-center gap-0.5">
                   <Zap className="w-3 h-3" />
-                  <span>{t('auto_ui_9')}</span>
+                  <span>{t('comm_photos_compress_hint')}</span>
                 </span>
               </label>
               <span className="text-[11px] text-slate-400 font-bold">
@@ -193,7 +193,7 @@ export default function KMarketCommunityCreateModal() {
               {compressedImages.length < 5 && (
                 <label className="w-20 h-20 rounded-2xl border-2 border-dashed border-slate-300 dark:border-gray-700 hover:border-blue-500 bg-slate-50 dark:bg-gray-800 flex flex-col items-center justify-center gap-1 cursor-pointer transition-all">
                   <Camera className="w-5 h-5 text-slate-400" />
-                  <span className="text-[10px] font-bold text-slate-500">{t('auto_ui_10')}</span>
+                  <span className="text-[10px] font-bold text-slate-500">{t('comm_photos_add_btn')}</span>
                   <input
                     type="file"
                     accept="image/*"
@@ -246,17 +246,17 @@ export default function KMarketCommunityCreateModal() {
               <button
                 type="submit"
                 disabled={isSubmitting || isCompressing}
-                className="w-full py-3 rounded-2xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:opacity-95 text-white font-black text-xs flex items-center justify-center gap-2 shadow-lg transition-all cursor-pointer disabled:opacity-50"
+                className="w-full py-3.5 rounded-2xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:opacity-95 text-white font-black text-sm flex items-center justify-center gap-2 shadow-lg transition-all cursor-pointer disabled:opacity-50"
               >
                 {isSubmitting ? (
                   <>
                     <Loader2 className="w-4 h-4 animate-spin" />
-                    <span>{t('auto_ui_13')}</span>
+                    <span>{t('comm_submitting_label')}</span>
                   </>
                 ) : (
                   <>
                     <CheckCircle className="w-4 h-4" />
-                    <span>{t('auto_ui_14')}</span>
+                    <span>{t('comm_submit_btn')}</span>
                   </>
                 )}
               </button>
@@ -264,10 +264,10 @@ export default function KMarketCommunityCreateModal() {
               <button
                 type="button"
                 onClick={() => setIsAuthModalOpen(true)}
-                className="w-full py-3 rounded-2xl bg-amber-500 hover:bg-amber-600 text-white font-black text-xs flex items-center justify-center gap-2 shadow-md transition-all cursor-pointer"
+                className="w-full py-3.5 rounded-2xl bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white font-black text-sm flex items-center justify-center gap-2 shadow-md transition-all cursor-pointer"
               >
                 <Lock className="w-4 h-4" />
-                <span>{t('auto_ui_15')}</span>
+                <span>{t('comm_auth_required_btn')}</span>
               </button>
             )}
           </div>

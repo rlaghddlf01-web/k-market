@@ -24,8 +24,8 @@ const SAMPLE_IMAGE_PRESETS = [
 ];
 
 export default function KMarketCreatePost() {
-  const { isCreateModalOpen, setIsCreateModalOpen, addItem, isLoading } = useKMarket();
-  const { t, currentLangOption, languages } = useLanguage();
+  const { isCreateModalOpen, setIsCreateModalOpen, addItem, isLoading, authedUser } = useKMarket();
+  const { t, currentLang, currentLangOption, languages } = useLanguage();
 
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
@@ -39,8 +39,10 @@ export default function KMarketCreatePost() {
   const [isMovingSale, setIsMovingSale] = useState(false);
   const [movingDDay, setMovingDDay] = useState(5);
   const [images, setImages] = useState<string[]>([SAMPLE_IMAGE_PRESETS[0]]);
-  const [sellerCountry, setSellerCountry] = useState(currentLangOption.countryCode || 'VN');
-  const [sellerName, setSellerName] = useState('Nguyễn (외국인 회원)');
+  const [sellerCountry, setSellerCountry] = useState(currentLangOption.countryCode || (currentLang === 'ko' ? 'KR' : 'VN'));
+  const [sellerName, setSellerName] = useState(
+    authedUser?.userName || (currentLang === 'vi' ? 'Nguyễn' : (currentLang === 'ko' ? '안산호랑이' : 'Global User'))
+  );
 
   if (!isCreateModalOpen) return null;
 
@@ -57,7 +59,7 @@ export default function KMarketCreatePost() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!title.trim() || !description.trim()) {
-      alert('제목과 설명을 입력해 주세요.');
+      alert(t('auto_loop_776'));
       return;
     }
 
@@ -116,7 +118,7 @@ export default function KMarketCreatePost() {
           {/* 1. 사진 업로드 및 프리셋 */}
           <div className="space-y-2">
             <label className="block font-bold text-slate-800">
-              📷 상품 사진 ({images.length}/5장)
+              📷 {t('create_photos_label')} ({images.length}/5)
             </label>
             <div className="flex items-center space-x-2 overflow-x-auto pb-1">
               {images.map((img, idx) => (
@@ -130,9 +132,7 @@ export default function KMarketCreatePost() {
                     <Trash2 className="w-3 h-3" />
                   </button>
                   {idx === 0 && (
-                    <span className="absolute bottom-0 inset-x-0 bg-blue-600 text-white text-[9px] font-bold text-center py-0.5">
-                      대표사진
-                    </span>
+                    <span className="absolute bottom-0 inset-x-0 bg-blue-600 text-white text-[9px] font-bold text-center py-0.5">{t('create_main_photo_badge')}</span>
                   )}
                 </div>
               ))}
@@ -165,7 +165,7 @@ export default function KMarketCreatePost() {
             {/* 빠른 샘플 사진 클릭 추가 */}
             <div className="pt-1">
               <span className="text-[11px] text-slate-500 block mb-1">
-                💡 빠른 테스트용 추천 사진 클릭:
+                💡 {t('create_sample_photos_hint')}
               </span>
               <div className="flex items-center space-x-1.5 overflow-x-auto no-scrollbar">
                 {SAMPLE_IMAGE_PRESETS.map((preset, i) => (
@@ -205,7 +205,7 @@ export default function KMarketCreatePost() {
               <div className="space-y-2 pt-2 border-t border-amber-200/60">
                 <div>
                   <span className="text-[11px] text-orange-900 font-bold block mb-1.5">
-                    귀국 예정 D-Day 선택 (남은 기간에 따라 긴박감 뱃지 자동 부착)
+                    {t('create_moving_dday_title')}
                   </span>
                   <div className="grid grid-cols-2 sm:grid-cols-4 gap-1.5">
                     {[
@@ -233,7 +233,7 @@ export default function KMarketCreatePost() {
 
                 <div>
                   <span className="text-[11px] text-orange-900 font-bold block mb-1">
-                    원래 구입 가격 / 정가 (할인율 뱃지 표시용)
+                    {t('create_orig_price_title')}
                   </span>
                   <input
                     type="number"
@@ -275,8 +275,8 @@ export default function KMarketCreatePost() {
                   { id: 'digital', label: t('cat_digital'), icon: '📱' },
                   { id: 'moving_sale', label: t('cat_moving_bundle'), icon: '✈️', badge: 'HOT' },
                   { id: 'free_give', label: t('cat_free_share'), icon: '🎁', badge: '0' },
-                  { id: 'clothes', label: t('cat_fashion'), icon: '👕' },
-                  { id: 'daily', label: t('cat_living'), icon: '🍳' },
+                  { id: 'clothes', label: t('cat_clothes'), icon: '👕' },
+                  { id: 'daily', label: t('cat_daily'), icon: '🍳' },
                   { id: 'vehicles', label: t('cat_vehicles'), icon: '🚲' },
                 ].map((cat) => {
                   const isSelected = category === cat.id;
@@ -347,9 +347,7 @@ export default function KMarketCreatePost() {
                   placeholder={t('auto_ui_114')}
                   className="w-full pl-4 pr-12 py-2.5 bg-slate-50 rounded-xl border border-slate-200 focus:bg-white focus:border-[#f3ba2f] text-sm font-black text-[#1f1914] focus:outline-none"
                 />
-                <span className="absolute right-4 top-2.5 text-xs font-bold text-slate-400">
-                  원 (KRW)
-                </span>
+                <span className="absolute right-4 top-2.5 text-xs font-bold text-slate-400">{t('currency_krw')}</span>
               </div>
             </div>
           </div>
@@ -373,7 +371,7 @@ export default function KMarketCreatePost() {
           <div className="grid grid-cols-2 gap-2">
             <div>
               <label className="block font-bold text-slate-800 mb-1">
-                판매자 국가 (Country)
+                {t('create_seller_country_label')}
               </label>
               <select
                 value={sellerCountry}
@@ -382,7 +380,7 @@ export default function KMarketCreatePost() {
               >
                 {languages.map((lang) => (
                   <option key={lang.code} value={lang.countryCode}>
-                    {lang.flag} {lang.name} ({lang.nativeName})
+                    {lang.flag} {lang.nativeName} ({lang.countryCode})
                   </option>
                 ))}
               </select>
@@ -390,7 +388,7 @@ export default function KMarketCreatePost() {
 
             <div>
               <label className="block font-bold text-slate-800 mb-1">
-                판매자 닉네임
+                {t('create_seller_name_label')}
               </label>
               <input
                 type="text"
@@ -405,7 +403,7 @@ export default function KMarketCreatePost() {
           <div>
             <div className="flex justify-between items-center mb-1">
               <label className="font-bold text-slate-800">
-                상세 설명 (Description)
+                {t('create_desc_header')}
               </label>
               <span className="text-[10px] text-blue-600 flex items-center space-x-1">
                 <Sparkles className="w-3 h-3" />

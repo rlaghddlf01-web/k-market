@@ -78,15 +78,15 @@ export function parseAlienRegistrationCard(text: string): OcrResultData {
   }
 
   // 4. 비자 종류 파싱 (E-9, E-7, F-4, H-2, D-2 등)
-  let visaType = 'E-9 (비전문취업)';
+  let visaType = 'E-9';
   const visaRegex = /([EFHD]-\d(?:\s*-\s*\d)?)/i;
   const visaMatch = visaRegex.exec(cleanText);
   if (visaMatch) {
     const rawVisa = visaMatch[1].toUpperCase().replace(/\s+/g, '');
-    if (rawVisa.includes('E-9')) visaType = 'E-9 (비전문취업)';
-    else if (rawVisa.includes('E-7')) visaType = 'E-7 (특정활동전문)';
-    else if (rawVisa.includes('F-4')) visaType = 'F-4 (재외동포)';
-    else if (rawVisa.includes('H-2')) visaType = 'H-2 (방문취업)';
+    if (rawVisa.includes('E-9')) visaType = 'E-9';
+    else if (rawVisa.includes('E-7')) visaType = 'E-7';
+    else if (rawVisa.includes('F-4')) visaType = 'F-4';
+    else if (rawVisa.includes('H-2')) visaType = 'H-2';
     else visaType = rawVisa;
   }
 

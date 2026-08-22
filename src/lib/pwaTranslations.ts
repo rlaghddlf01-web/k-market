@@ -220,4 +220,16 @@ export const PWA_TRANSLATIONS: Record<SupportedLanguage, PwaTranslationItem> = {
     openChromeBtn: 'کروم میں کھولیں',
     copyLinkBtn: 'لنک کاپی کریں',
   },
+  tl: {
+    promptTitle: 'I-install ang K-Market sa 1 segundo ⚡',
+    promptDesc: 'Makatanggap ng mga alerto sa chat at balita sa komunidad.',
+    installBtn: 'I-install ang App',
+    dismissBtn: 'Mamaya na',
+    inAppChromeTitle: 'Buksan sa Chrome',
+    inAppChromeDesc: 'Para sa mas maayos na karanasan sa pag-install',
+    inAppSafariTitle: 'Buksan sa Safari',
+    inAppSafariDesc: 'Pindutin ang share button at Idagdag sa Home Screen',
+    openChromeBtn: 'Buksan sa Browser',
+    copyLinkBtn: 'Kopyahin ang Link',
+  },
 };

@@ -52,14 +52,14 @@ export default function KMarketMovingSaleSection() {
           <div>
             <div className="flex items-center space-x-2">
               <h2 className="text-base sm:text-lg font-extrabold text-[#1f1914] tracking-tight">
-                ✈️ 귀국 D-Day 무빙세일 (Moving Sale)
+                ✈️ {t('moving_sale_title')}
               </h2>
               <span className="bg-[#845b37] text-white text-[10px] font-black px-2 py-0.5 rounded-full uppercase tracking-wider">
                 HOT
               </span>
             </div>
             <p className="text-xs text-[#705e4f]">
-              비자 만료 귀국 외국인 근로자들의 생활 가전·가구 묶음 헐값 급처분관
+              {t('moving_sale_desc')}
             </p>
           </div>
         </div>
@@ -80,7 +80,7 @@ export default function KMarketMovingSaleSection() {
               : 'bg-white text-[#5c4a39] border-[#ded1c4] hover:bg-[#eae3dc]'
           }`}
         >
-          전체 매물 ({movingSaleItems.length})
+          {t('moving_all_badge')} ({movingSaleItems.length})
         </button>
 
         <button
@@ -125,24 +125,15 @@ export default function KMarketMovingSaleSection() {
         {filteredItems
           .slice((movingPage - 1) * MOVING_ITEMS_PER_PAGE, movingPage * MOVING_ITEMS_PER_PAGE)
           .map((item) => {
-            const badgeInfo = getMovingSaleBadgeInfo(item.moving_d_day || 7);
+            const badgeInfo = getMovingSaleBadgeInfo(item.moving_d_day || 7, currentLang);
             const discountPercent = item.original_price
               ? Math.round(((item.original_price - item.price) / item.original_price) * 100)
               : 0;
             const isLiked = likedItemIds.has(item.id);
-            const displayRegion = getAdaptedItemRegion(item, selectedRegion);
+            const displayRegion = getAdaptedItemRegion(item, selectedRegion, currentLang);
 
-            // 다국어 제목 가져오기
-            const displayTitle =
-              currentLang === 'vi' && item.translations?.vi?.title
-                ? item.translations.vi.title
-                : currentLang === 'en' && item.translations?.en?.title
-                ? item.translations.en.title
-                : currentLang === 'mn' && item.translations?.mn?.title
-                ? item.translations.mn.title
-                : currentLang === 'zh' && item.translations?.zh?.title
-                ? item.translations.zh.title
-                : item.title;
+            // 다국어 제목 가져오기 (17개국어 전체 완벽 지원)
+            const displayTitle = item.translations?.[currentLang]?.title || item.title;
 
             return (
               <div
@@ -269,7 +260,7 @@ export default function KMarketMovingSaleSection() {
                 : 'bg-white text-[#1f1914] border-[#ded1c4] hover:bg-[#eae3dc] active:scale-95 cursor-pointer shadow-xs'
             }`}
           >
-            ◀ 이전
+            ◀ {t('btn_prev')}
           </button>
 
           {Array.from(
@@ -305,7 +296,7 @@ export default function KMarketMovingSaleSection() {
                 : 'bg-white text-[#1f1914] border-[#ded1c4] hover:bg-[#eae3dc] active:scale-95 cursor-pointer shadow-xs'
             }`}
           >
-            다음 ▶
+            {t('btn_next')} ▶
           </button>
         </div>
       )}

@@ -175,7 +175,7 @@ export default function KMarketMainFeed() {
                             : 'bg-white text-[#1f1914] border-[#ded1c4] hover:bg-[#eae3dc] active:scale-95 cursor-pointer shadow-xs'
                         }`}
                       >
-                        ◀ 이전
+                        ◀ {t('btn_prev')}
                       </button>
 
                       {/* 페이지 번호 목록 */}
@@ -217,7 +217,7 @@ export default function KMarketMainFeed() {
                             : 'bg-white text-[#1f1914] border-[#ded1c4] hover:bg-[#eae3dc] active:scale-95 cursor-pointer shadow-xs'
                         }`}
                       >
-                        다음 ▶
+                        {t('btn_next')} ▶
                       </button>
                     </div>
                   )}
@@ -282,7 +282,7 @@ export default function KMarketMainFeed() {
                   <span className="text-[10px] font-black bg-[#f3ba2f] text-[#09101f] px-2 py-0.5 rounded-full uppercase tracking-wider">Zero Fee C2C</span>
                 </div>
                 <p className="text-[#f1f5f9] text-xs font-semibold leading-relaxed max-w-sm">
-                  대한민국 No.1 외국인 종합 슈퍼앱 KTRS 연계<br />외국인 전용 0원 안심 중고거래 &amp; 귀국 무빙세일 &amp; 동네생활 커뮤니티
+                  {t('footer_platform_desc')}
                 </p>
               </div>
 
@@ -351,7 +351,7 @@ export default function KMarketMainFeed() {
           onClose={() => setIsAuthModalOpen(false)}
           onSuccessAuth={(userData) => {
             setAuthedUser(userData);
-            alert(`[신원인증 완료] ${userData.userName} 님의 인증이 완료되었습니다.`);
+            alert(`${t('auth_success_alert')} (${userData.userName})`);
           }}
         />
         <KMarketMyPageModal

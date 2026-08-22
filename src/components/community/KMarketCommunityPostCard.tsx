@@ -5,6 +5,7 @@ import { CommunityPost, COMMUNITY_CATEGORIES } from '@/types/community';
 import { useLanguage } from '@/context/LanguageContext';
 import { useCommunity } from '@/context/CommunityContext';
 import CountryFlag from '../kmarket/CountryFlag';
+import { getAdaptedItemRegion } from '@/lib/dynamicLocationAdapter';
 import {
   Heart,
   Coffee,
@@ -76,17 +77,17 @@ export default function KMarketCommunityPostCard({
             shape="circle"
             className="shadow-2xs"
           />
-          <div>
+            <div>
             <div className="flex items-center gap-1.5">
               <span className="text-xs font-bold text-slate-900 dark:text-white">
-                {post.user_name}
+                {post.user_country === 'VN' && currentLang === 'vi' ? 'Nguyễn' : post.user_name}
               </span>
               <span className="text-[10px] text-slate-400 font-medium">
-                • {post.region}
+                • {getAdaptedItemRegion({ id: post.id, region: post.region } as any, undefined, currentLang)}
               </span>
             </div>
             <span className="text-[10px] text-slate-400">
-              {new Date(post.created_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+              {new Date(post.created_at).toLocaleTimeString(currentLang === 'vi' ? 'vi-VN' : (currentLang === 'en' ? 'en-US' : 'ko-KR'), { hour: '2-digit', minute: '2-digit' })}
             </span>
           </div>
         </div>
@@ -97,7 +98,7 @@ export default function KMarketCommunityPostCard({
             className={`text-[11px] font-extrabold px-2.5 py-0.5 rounded-full border flex items-center gap-1 ${categoryInfo.color}`}
           >
             <span>{categoryInfo.icon}</span>
-            <span>{categoryInfo.labelKo}</span>
+            <span>{t(`comm_cat_${categoryInfo.id}`)}</span>
           </span>
 
           {/* 더보기 / 신고 버튼 */}
@@ -150,7 +151,7 @@ export default function KMarketCommunityPostCard({
               className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-blue-50 dark:bg-blue-950/50 text-blue-600 dark:text-blue-400 text-[10px] font-bold border border-blue-200 dark:border-blue-800/60 hover:bg-blue-100 transition-colors"
             >
               <Globe className="w-3 h-3" />
-              <span>{t('auto_ui_25')}</span>
+              <span>{showOriginal ? t('btn_show_trans') : t('btn_show_orig')}</span>
             </button>
           </div>
         )}
@@ -208,7 +209,7 @@ export default function KMarketCommunityPostCard({
             title={t('auto_ui_27')}
           >
             <Coffee className="w-3.5 h-3.5 text-amber-500" />
-            <span>{t('auto_ui_28')}</span>
+            <span>{post.cheer_count}</span>
           </button>
 
           {/* 💬 댓글 수 */}

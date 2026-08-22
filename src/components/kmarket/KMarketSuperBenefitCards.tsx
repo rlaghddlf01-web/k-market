@@ -82,7 +82,7 @@ export default function KMarketSuperBenefitCards() {
 
         {/* 2. ⚡ 외국인 맞춤 대출 (최대 5,000만원) */}
         <div 
-          onClick={() => alert('⚡ [KTRS 외국인 맞춤 대출 API]\n국세청 5개년 소득증빙 연계를 통해 최대 5,000만원 안심 대출 한도 조회 서비스가 제공됩니다.')}
+          onClick={() => alert(t('auto_loop_868'))}
           className="relative rounded-3xl p-5 sm:p-6 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl cursor-pointer flex flex-col justify-between overflow-hidden border group"
           style={{
             background: 'linear-gradient(145deg, #131b2e 0%, #0a0f1c 100%)',
@@ -147,7 +147,7 @@ export default function KMarketSuperBenefitCards() {
 
         {/* 3. 🏠 내 동네 안심 원룸 & 주택 */}
         <div 
-          onClick={() => alert('🏠 [KTRS 내 동네 안심 부동산 & 원룸]\n국토교통부 실거래가 기반 시세 검증 및 15개국어 제휴 공인중개사 안심 매물 서비스가 연결됩니다.')}
+          onClick={() => alert(t('auto_loop_869'))}
           className="relative rounded-3xl p-5 sm:p-6 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl cursor-pointer flex flex-col justify-between overflow-hidden border group"
           style={{
             background: 'linear-gradient(145deg, #13241b 0%, #09140e 100%)',

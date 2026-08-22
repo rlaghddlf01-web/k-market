@@ -1,9 +1,107 @@
-// KTRS K-Market 17개국어 매물 및 커뮤니티 번역 매트릭스 엔진 (미국·일본·러시아 포함)
-
 import { SupportedLanguage } from '@/types/kmarket';
 
 // 1. 카테고리/품목 핵심 어휘 17개국어 매트릭스
 export const NOUN_TRANSLATIONS: Record<string, Record<SupportedLanguage, string>> = {
+  '아이패드 에어 6세대 M2 11 128G WIFI': {
+    ko: '아이패드 에어 6세대 M2 11인치 128G WIFI',
+    en: 'iPad Air 6th Gen M2 11" 128G WiFi',
+    vi: 'iPad Air 6 M2 11 inch 128G Wifi',
+    zh: 'iPad Air 6代 M2 11寸 128G WiFi',
+    ja: 'iPad Air 第6世代 M2 11インチ 128G WiFi',
+    ru: 'iPad Air 6-го поколения M2 11" 128G WiFi',
+    th: 'iPad Air รุ่น 6 M2 11 นิ้ว 128G WiFi',
+    uz: 'iPad Air 6-avlod M2 11" 128G WiFi',
+    km: 'iPad Air ជំនាន់ទី 6 M2 11 អ៊ីញ 128G WiFi',
+    mn: 'iPad Air 6-р үе M2 11" 128G WiFi',
+    ne: 'आईप्याड एयर ६ M2 ११ इन्च १२८G WiFi',
+    id: 'iPad Air Gen 6 M2 11" 128G WiFi',
+    my: 'iPad Air 6th Gen M2 11" 128G WiFi',
+    si: 'iPad Air 6th Gen M2 11" 128G WiFi',
+    kk: 'iPad Air 6-буын M2 11" 128G WiFi',
+    bn: 'আইপ্যাড এয়ার ৬ M2 ১১" ১২৮G ওয়াইফাই',
+    ur: 'آئی پیڈ ایئر 6th Gen M2 11" 128G وائی فائی',
+    tl: 'iPad Air 6th Gen M2 11" 128G WiFi',
+  },
+  '아이패드': {
+    ko: '아이패드 태블릿',
+    en: 'iPad Tablet',
+    vi: 'Máy tính bảng iPad',
+    zh: '苹果平板 iPad',
+    ja: 'iPad タブレット',
+    ru: 'Планшет iPad',
+    th: 'แท็บเล็ต iPad',
+    uz: 'iPad plansheti',
+    km: 'ថេបប្លេត iPad',
+    mn: 'iPad таблет',
+    ne: 'आईप्याड ट्याब्लेट',
+    id: 'Tablet iPad',
+    my: 'iPad တက်ဘလက်',
+    si: 'iPad ටැබ්ලට්',
+    kk: 'iPad планшеті',
+    bn: 'আইপ্যাড ট্যাবলেট',
+    ur: 'آئی پیڈ ٹیبلٹ',
+    tl: 'Tablet na iPad',
+  },
+  '아이폰': {
+    ko: '아이폰 스마트폰',
+    en: 'iPhone Apple',
+    vi: 'Điện thoại iPhone',
+    zh: '苹果手机 iPhone',
+    ja: 'iPhone スマホ',
+    ru: 'Смартфон iPhone',
+    th: 'มือถือ iPhone',
+    uz: 'iPhone smartfoni',
+    km: 'ទូរស័ព្ទ iPhone',
+    mn: 'iPhone утас',
+    ne: 'आईफोन मोबाइल',
+    id: 'Ponsel iPhone',
+    my: 'iPhone ဖုန်း',
+    si: 'iPhone ජංගම දුරකථනය',
+    kk: 'iPhone смартфоны',
+    bn: 'আইফোন মোবাইল',
+    ur: 'آئی فون اسمارٹ فون',
+    tl: 'iPhone Smartphone',
+  },
+  '세그웨이 나인봇 ES4 Xe trượt điện': {
+    ko: '세그웨이 나인봇 ES4 전동킥보드',
+    en: 'Segway Ninebot ES4 Electric Scooter',
+    vi: 'Xe trượt điện Segway Ninebot ES4',
+    zh: '赛格威九号 ES4 电动滑板车',
+    ja: 'セグウェイ ナインボット ES4 電動キックボード',
+    ru: 'Электросамокат Segway Ninebot ES4',
+    th: 'สกู๊ตเตอร์ไฟฟ้า Segway Ninebot ES4',
+    uz: 'Segway Ninebot ES4 elektr samokat',
+    km: 'ស្គូតទ័រអគ្គិសនី Segway Ninebot ES4',
+    mn: 'Segway Ninebot ES4 цахилгаан скүүтер',
+    ne: 'Segway Ninebot ES4 इलेक्ट्रिक स्कुटर',
+    id: 'Skuter Listrik Segway Ninebot ES4',
+    my: 'Segway Ninebot ES4 လျှပ်စစ်စကူတာ',
+    si: 'Segway Ninebot ES4 විදුලි ස්කූටරය',
+    kk: 'Segway Ninebot ES4 электр самокаты',
+    bn: 'সেগওয়ে नाइनবট ES4 বৈদ্যুতিক স্কুটার',
+    ur: 'سیگ وے نائن بوٹ ES4 الیکٹرک اسکوٹر',
+    tl: 'Segway Ninebot ES4 Electric Scooter',
+  },
+  '세그웨이': {
+    ko: '세그웨이 나인봇',
+    en: 'Segway Ninebot Scooter',
+    vi: 'Xe trượt điện Segway',
+    zh: '赛格威电动滑板车',
+    ja: 'セグウェイ電動スクーター',
+    ru: 'Электросамокат Segway',
+    th: 'สกู๊ตเตอร์ Segway',
+    uz: 'Segway samokat',
+    km: 'ស្គូតទ័រ Segway',
+    mn: 'Segway скүүтер',
+    ne: 'Segway स्कुटर',
+    id: 'Skuter Segway',
+    my: 'Segway စကူတာ',
+    si: 'Segway ස්කූටරය',
+    kk: 'Segway самокаты',
+    bn: 'সেগওয়ে স্কুটার',
+    ur: 'سیگ وے اسکوٹر',
+    tl: 'Segway Scooter',
+  },
   '전기포트': {
     ko: '전기포트',
     vi: 'Ấm siêu tốc',
@@ -22,6 +120,7 @@ export const NOUN_TRANSLATIONS: Record<string, Record<SupportedLanguage, string>
     kk: 'Электр шәйнек',
     bn: 'বৈদ্যুতিক কেটলি',
     ur: 'الیکٹرک کیتلی',
+    tl: 'Electric Kettle',
   },
   '마이크': {
     ko: '마이크',
@@ -41,6 +140,7 @@ export const NOUN_TRANSLATIONS: Record<string, Record<SupportedLanguage, string>
     kk: 'Микрофон',
     bn: 'মাইক্রোফোন',
     ur: 'مائیکروفون',
+    tl: 'Microphone',
   },
   'RAM': {
     ko: 'RAM',
@@ -60,12 +160,13 @@ export const NOUN_TRANSLATIONS: Record<string, Record<SupportedLanguage, string>
     kk: 'Компьютерлік RAM',
     bn: 'কম্পিউটার RAM',
     ur: 'کمپیوٹر ریم',
+    tl: 'RAM ng Kompyuter',
   },
   '밥솥': {
-    ko: '밥솥',
-    vi: 'Nồi cơm điện',
-    zh: '电饭煲',
-    en: 'Rice Cooker',
+    ko: '쿠쿠 전기 밥솥',
+    vi: 'Nồi cơm điện Cuckoo',
+    zh: '福库电饭煲',
+    en: 'Cuckoo Rice Cooker',
     ja: '炊飯器',
     ru: 'Рисоварка',
     th: 'หม้อหุงข้าว',
@@ -79,6 +180,7 @@ export const NOUN_TRANSLATIONS: Record<string, Record<SupportedLanguage, string>
     kk: 'Күріш пісіргіш',
     bn: 'রাইস কুকার',
     ur: 'رائس ککر',
+    tl: 'Rice Cooker',
   },
   '세탁기': {
     ko: '세탁기',
@@ -98,50 +200,53 @@ export const NOUN_TRANSLATIONS: Record<string, Record<SupportedLanguage, string>
     kk: 'Кір жуғыш машина',
     bn: 'ওয়াশিং মেশিন',
     ur: 'واشنگ مشین',
+    tl: 'Washing Machine',
   },
   '냉장고': {
-    ko: '냉장고',
-    vi: 'Tủ lạnh',
-    zh: '冰箱',
-    en: 'Refrigerator',
-    ja: '冷蔵庫',
+    ko: '소형 원룸 냉장고',
+    en: 'Compact Refrigerator',
+    vi: 'Tủ lạnh mini',
+    zh: '小型单间冰箱',
+    ja: '小型冷蔵庫',
     ru: 'Холодильник',
-    th: 'ตู้เย็น',
-    uz: 'Muzlatgich',
-    km: 'ទូទឹកកក',
+    th: 'ตู้เย็นขนาดเล็ก',
+    uz: 'Kichik muzlatgich',
+    km: 'ទូទឹកកកតូច',
     mn: 'Хөргөгч',
-    ne: 'फ्रिज',
-    id: 'Kulkas',
-    my: 'ရေခဲသေတ္တာ',
-    si: 'ශීතකරණය',
+    ne: 'सानो फ्रिज',
+    id: 'Kulkas Mini',
+    my: 'ရေခဲသေတ္တာအသေး',
+    si: 'කුඩා ශීතකරණය',
     kk: 'Тоңазытқыш',
-    bn: 'ফ্রিজ',
-    ur: 'ریفریجریٹر',
+    bn: 'ছোট ফ্রিজ',
+    ur: 'چھوٹا فریج',
+    tl: 'Mini Refrigerator',
   },
   '자전거': {
-    ko: '자전거',
-    vi: 'Xe đạp',
-    zh: '自行车',
-    en: 'Bicycle',
-    ja: '自転車',
-    ru: 'Велосипед',
-    th: 'จักรยาน',
+    ko: '출퇴근용 자전거',
+    en: 'Commuter Bicycle',
+    vi: 'Xe đạp đi làm',
+    zh: '通勤自行车',
+    ja: '通勤用自転車',
+    ru: 'Городской велосипед',
+    th: 'จักรยานปั่นไปทำงาน',
     uz: 'Velosiped',
-    km: 'កង់',
+    km: 'កង់ជិះទៅធ្វើការ',
     mn: 'Унадаг дугуй',
     ne: 'साइकल',
-    id: 'Sepeda',
+    id: 'Sepeda Komuter',
     my: 'စက်ဘီး',
-    si: 'බයිසිකලය',
+    si: 'පාපැදිය',
     kk: 'Велосипед',
     bn: 'সাইকেল',
     ur: 'سائیکل',
+    tl: 'Bisekleta',
   },
   '전동킥보드': {
     ko: '전동킥보드',
+    en: 'Electric Scooter',
     vi: 'Xe trượt điện',
     zh: '电动滑板车',
-    en: 'Electric Scooter',
     ja: '電動キックボード',
     ru: 'Электросамокат',
     th: 'สกู๊ตเตอร์ไฟฟ้า',
@@ -155,177 +260,185 @@ export const NOUN_TRANSLATIONS: Record<string, Record<SupportedLanguage, string>
     kk: 'Электрлік самокат',
     bn: 'বৈদ্যুতিক স্কুটার',
     ur: 'الیکٹرک اسکوٹر',
+    tl: 'Electric Scooter',
   },
   '전자레인지': {
     ko: '전자레인지',
+    en: 'Microwave Oven',
     vi: 'Lò vi sóng',
     zh: '微波炉',
-    en: 'Microwave Oven',
     ja: '電子レンジ',
     ru: 'Микроволновка',
     th: 'ไมโครเวฟ',
-    uz: 'Mikroto‘lqinli pech',
-    km: 'ម៉ាស៊ីនកម្ដៅម្ហូប',
+    uz: 'Mikroto\'lqinli pech',
+    km: 'ម៉ាស៊ីនមីក្រូវ៉េវ',
     mn: 'Богино долгионы зуух',
     ne: 'माइक्रोवेभ',
     id: 'Microwave',
     my: 'မိုက်ခရိုဝေ့ဖ်',
     si: 'මයික්‍රෝවේව් උදුන',
-    kk: 'Қысқатолқынды пеш',
+    kk: 'Микротолқынды пеш',
     bn: 'মাইক্রোওয়েভ',
-    ur: 'مائکروویو اوون',
-  },
-  '스마트폰': {
-    ko: '스마트폰',
-    vi: 'Điện thoại thông minh',
-    zh: '智能手机',
-    en: 'Smartphone',
-    ja: 'スマートフォン',
-    ru: 'Смартфон',
-    th: 'สมาร์ทโฟน',
-    uz: 'Smartfon',
-    km: 'ទូរស័ព្ទឆ្លាតវៃ',
-    mn: 'Ухаалаг утас',
-    ne: 'स्मार्टफोन',
-    id: 'Smartphone',
-    my: 'စမတ်ဖုန်း',
-    si: 'ස්මාර්ට් ජංගම දුරකථනය',
-    kk: 'Смартфон',
-    bn: 'স্মার্টফোন',
-    ur: 'اسمارٹ فون',
-  },
-  '침대': {
-    ko: '침대',
-    vi: 'Giường ngủ',
-    zh: '床',
-    en: 'Bed',
-    ja: 'ベッド',
-    ru: 'Кровать/Матрас',
-    th: 'เตียงนอน',
-    uz: 'Yotoq/Krovat',
-    km: 'គ្រែគេង',
-    mn: 'Ор',
-    ne: 'ओछ्यान/खाट',
-    id: 'Tempat Tidur',
-    my: 'ကုတင်',
-    si: 'ඇඳ',
-    kk: 'Кереует',
-    bn: 'বিছানা',
-    ur: 'بستر',
-  },
-  '가스버너': {
-    ko: '가스버너',
-    vi: 'Bếp ga mini',
-    zh: '便携卡式炉',
-    en: 'Portable Gas Stove',
-    ja: 'カセットコンロ',
-    ru: 'Газовая плитка',
-    th: 'เตาแก๊สพกพา',
-    uz: 'Portativ gaz plitasi',
-    km: 'ចង្ក្រានហ្គាសចល័ត',
-    mn: 'Зөөврийн газан плитка',
-    ne: 'ग्यास चुल्हो',
-    id: 'Kompor Gas Portabel',
-    my: 'သယ်ဆောင်ရလွယ် ဂတ်စ်မီးဖို',
-    si: 'ගෑස් ලිප',
-    kk: 'Портативті газ плитасы',
-    bn: 'পোর্টেবল গ্যাস স্টোভ',
-    ur: 'پورٹیبل گیس چولہا',
+    ur: 'مائیکرو ویو اوون',
+    tl: 'Microwave Oven',
   },
   '모니터': {
-    ko: '모니터',
-    vi: 'Màn hình máy tính',
-    zh: '电脑显示器',
-    en: 'Computer Monitor',
-    ja: 'PCモニター',
-    ru: 'Монитор',
-    th: 'จอมอนิเตอร์',
-    uz: 'Kompyuter monitori',
-    km: 'អេក្រង់កុំព្យូទ័រ',
-    mn: 'Компьютерийн дэлгэц',
-    ne: 'कम्प्युटर मनिटर',
-    id: 'Monitor Komputer',
-    my: 'ကွန်ပျူတာ မော်နီတာ',
-    si: 'පරිගණක මොනිටරය',
-    kk: 'Компьютер мониторы',
-    bn: 'কম্পিউটার মনিটর',
-    ur: 'کمپیوٹر مانیٹر',
+    ko: '게이밍 모니터 27인치',
+    en: '27" Gaming Monitor',
+    vi: 'Màn hình máy tính 27 inch',
+    zh: '27寸电竞显示器',
+    ja: '27インチ ゲーミングモニター',
+    ru: 'Игровой монитор 27"',
+    th: 'จอคอมพิวเตอร์ 27 นิ้ว',
+    uz: '27 dyuymli monitor',
+    km: 'អេក្រង់កុំព្យូទ័រ 27 អ៊ីញ',
+    mn: '27 инчийн дэлгэц',
+    ne: '२७ इन्च मनिटर',
+    id: 'Monitor Komputer 27"',
+    my: '၂၇ လက်မ မော်နီတာ',
+    si: 'අඟල් 27 මොනිටරය',
+    kk: '27 дюймдік монитор',
+    bn: '২৭ ইঞ্চি মনিটর',
+    ur: '27 انچ مانیٹر',
+    tl: '27-inch Monitor',
   },
+  '에어프라이어': {
+    ko: '에어프라이어',
+    en: 'Air Fryer',
+    vi: 'Nồi chiên không dầu',
+    zh: '空气炸锅',
+    ja: 'ノンフライヤー',
+    ru: 'Аэрогриль',
+    th: 'หม้อทอดไร้น้ำมัน',
+    uz: 'Aerogril',
+    km: 'ឆ្នាំងបំពងគ្មានខ្លាញ់',
+    mn: 'Агаар шарагч',
+    ne: 'एयर फ्रायर',
+    id: 'Air Fryer',
+    my: 'လေဖိအားကြော်အိုး',
+    si: 'එයාර් ෆ්‍රයර්',
+    kk: 'Аэрогриль',
+    bn: 'এয়ার ফ্রায়ার',
+    ur: 'ایئر فرائر',
+    tl: 'Air Fryer',
+  },
+  '온수매트': {
+    ko: '따뜻한 온수매트 싱글',
+    en: 'Warm Heated Mattress Single',
+    vi: 'Đệm sưởi nước ấm đơn',
+    zh: '水暖加热床垫 单人',
+    ja: '温水マット シングル',
+    ru: 'Водяной матрас с подогревом',
+    th: 'แผ่นรองนอนน้ำอุ่น',
+    uz: 'Isitiladigan matras',
+    km: 'ពូកកម្តៅទឹកក្តៅ',
+    mn: 'Халаалттай матрас',
+    ne: 'तातो म्याट्रेस',
+    id: 'Matras Pemanas Air',
+    my: 'ရေနွေးအပူပေးမွေ့ရာ',
+    si: 'උණුසුම් ජල මෙට්ටය',
+    kk: 'Жылытылатын матрас',
+    bn: 'গরম পানির তোশক',
+    ur: 'گرم پانی والا گدا',
+    tl: 'Heated Mattress Pad',
+  },
+  '청소기': {
+    ko: '무선 청소기',
+    en: 'Cordless Vacuum Cleaner',
+    vi: 'Máy hút bụi không dây',
+    zh: '无线手持吸尘器',
+    ja: 'コードレス掃除機',
+    ru: 'Беспроводной пылесос',
+    th: 'เครื่องดูดฝุ่นไร้สาย',
+    uz: 'Simsiz changyutgich',
+    km: 'ម៉ាស៊ីនបូមធូលីឥតខ្សែ',
+    mn: 'Утасгүй тоос сорогч',
+    ne: 'ताररहित भ्याकुम क्लिनर',
+    id: 'Penyedot Debu Nirkabel',
+    my: 'ကြိုးမဲ့ ဖုန်စုပ်စက်',
+    si: 'රැහැන් රහිත වැකියුම් ක්ලීනර්',
+    kk: 'Сымсыз шаңсорғыш',
+    bn: 'ওয়্যারলেস ভ্যাকুয়াম ক্লিনার',
+    ur: 'وائرلیس ویکیوم کلینر',
+    tl: 'Cordless Vacuum Cleaner',
+  }
 };
 
-// 2. 수식어/상태 17개국어 템플릿
+// 2. 거래 상태 접두사 (무료나눔, 귀국 D-Day 무빙세일 등)
 export const STATUS_PREFIX: Record<string, Record<SupportedLanguage, string>> = {
-  moving_d3: {
-    ko: '✈️ [귀국 D-3 오늘마감 헐값]',
-    vi: '✈️ [Về nước D-3 Gấp hôm nay]',
-    zh: '✈️ [回国倒计时D-3 今日特惠清仓]',
-    en: '✈️ [Moving Sale D-3 Today Last Chance]',
-    ja: '✈️ [帰国D-3 本日締切 破格処分]',
-    ru: '✈️ [Отъезд D-3 Сегодня срочно/дешево]',
-    th: '✈️ [กลับประเทศ D-3 ลดราคาด่วนวันนี้]',
-    uz: '✈️ [Vatanga qaytish D-3 Bugun arzon sotuv]',
-    km: '✈️ [ត្រឡប់ទៅប្រទេស D-3 បញ្ចុះតម្លៃពិសេសថ្ងៃនេះ]',
-    mn: '✈️ [Нутгаа буцах D-3 Өнөөдөр яаралтай хямд]',
-    ne: '✈️ [घर फिर्ता D-3 आज अन्तिम सस्तो]',
-    id: '✈️ [Pulang D-3 Obral Hari Ini]',
-    my: '✈️ [နေရပ်ပြန် D-3 ယနေ့အထူးစျေး]',
-    si: '✈️ [නැවත රට බලා D-3 අද අවසන් වට්ටම]',
-    kk: '✈️ [Елге қайту D-3 Бүгін арзан сатылым]',
-    bn: '✈️ [দেশে ফেরা D-3 আজকের শেষ সস্তা]',
-    ur: '✈️ [وطن واپسی D-3 آج آخری سستی قیمت]',
-  },
-  moving_d7: {
-    ko: '✈️ [귀국 D-7 무빙세일 특가]',
-    vi: '✈️ [Về nước D-7 Moving Sale]',
-    zh: '✈️ [回国倒计时D-7 搬家特惠甩卖]',
-    en: '✈️ [Moving Sale D-7 Great Deal]',
-    ja: '✈️ [帰国D-7 ムービングセール特売]',
-    ru: '✈️ [Отъезд D-7 Распродажа Moving Sale]',
-    th: '✈️ [กลับประเทศ D-7 มูฟวิ่งเซลราคาพิเศษ]',
-    uz: '✈️ [Vatanga qaytish D-7 Moving Sale arzon]',
-    km: '✈️ [ត្រឡប់ទៅប្រទេស D-7 តម្លៃពិសេស Moving Sale]',
-    mn: '✈️ [Нутгаа буцах D-7 Мувинг сэйл хямдрал]',
-    ne: '✈️ [घर फिर्ता D-7 मुभिङ सेल]',
-    id: '✈️ [Pulang D-7 Moving Sale Murah]',
-    my: '✈️ [နေရပ်ပြန် D-7 အထူးလျှော့စျေး]',
-    si: '✈️ [නැවත රට බලා D-7 විශේෂ වට්ටම්]',
-    kk: '✈️ [Елге қайту D-7 Арзан бағада сату]',
-    bn: '✈️ [দেশে ফেরা D-7 মুভিং সেল]',
-    ur: '✈️ [وطن واپسی D-7 موونگ سیل]',
-  },
   free_give: {
     ko: '🎁 [0원 무료나눔]',
-    vi: '🎁 [0 Won Tặng Miễn Phí]',
-    zh: '🎁 [0元 免费赠送]',
-    en: '🎁 [Free 0 KRW Giveaway]',
-    ja: '🎁 [0ウォン 無料譲渡]',
-    ru: '🎁 [0 вон Отдам даром]',
-    th: '🎁 [0 วอน แจกฟรี]',
-    uz: '🎁 [0 Won Bepul beriladi]',
-    km: '🎁 [0 វ៉ុន ផ្តល់ជូនឥតគិតថ្លៃ]',
-    mn: '🎁 [0 вон Үнэгүй өгнө]',
-    ne: '🎁 [० वोन नि:शुल्क उपहार]',
-    id: '🎁 [0 Won Gratis]',
+    vi: '🎁 [Tặng 0đ]',
+    zh: '🎁 [0元免费赠送]',
+    en: '🎁 [Free Give]',
+    ja: '🎁 [0円無料譲渡]',
+    ru: '🎁 [Бесплатно 0 вон]',
+    th: '🎁 [แจกฟรี 0 วอน]',
+    uz: '🎁 [0 von Bepul]',
+    km: '🎁 [ចែកឥតគិតថ្លៃ 0 វ៉ុន]',
+    mn: '🎁 [0 вон Үнэгүй]',
+    ne: '🎁 [० वन निःशुल्क]',
+    id: '🎁 [Gratis 0 Won]',
     my: '🎁 [၀ ဝမ် အခမဲ့ပေးမည်]',
-    si: '🎁 [0 වොන් නොමිලේ දීමනාව]',
-    kk: '🎁 [0 вон Тегін беру]',
-    bn: '🎁 [০ ওন বিনামূল্যে উপহার]',
-    ur: '🎁 [0 وون مفت دیا جا رہا ہے]',
+    si: '🎁 [0 වොන් නොමිලේ]',
+    kk: '🎁 [0 вон Тегін]',
+    bn: '🎁 [০ ওন উপহার]',
+    ur: '🎁 [مفت 0 وون]',
+    tl: '🎁 [0 won Libreng Pamigay]',
+  },
+  moving_d3: {
+    ko: '🚨 [D-3 오늘마감 헐값]',
+    vi: '🚨 [D-3 Về nước gấp]',
+    zh: '🚨 [D-3 回国甩卖]',
+    en: '🚨 [D-3 Urgent Moving Sale]',
+    ja: '🚨 [D-3 帰国直前処分]',
+    ru: '🚨 [D-3 Срочная распродажа]',
+    th: '🚨 [D-3 ด่วนวันสุดท้าย]',
+    uz: '🚨 [D-3 Shoshilinch sotuv]',
+    km: '🚨 [D-3 លក់បន្ទាន់]',
+    mn: '🚨 [D-3 Яаралтай хямд зарна]',
+    ne: '🚨 [D-3 आज अन्तिम सस्तो बिक्री]',
+    id: '🚨 [D-3 Cuci Gudang Cepat]',
+    my: '🚨 [D-3 အရေးပေါ် အမြန်ရောင်းမည်]',
+    si: '🚨 [D-3 අද අවසන් හදිසි විකිණීම]',
+    kk: '🚨 [D-3 Шұғыл арзан сату]',
+    bn: '🚨 [D-3 আজই শেষ]',
+    ur: '🚨 [D-3 فوری واپسی سیل]',
+    tl: '🚨 [D-3 Uuwi Na Agad]',
+  },
+  moving_d7: {
+    ko: '✈️ [D-7 이번주 귀국]',
+    vi: '✈️ [D-7 Về nước tuần này]',
+    zh: '✈️ [D-7 本周回国清仓]',
+    en: '✈️ [D-7 Moving This Week]',
+    ja: '✈️ [D-7 今週帰国]',
+    ru: '✈️ [D-7 Отъезд на этой неделе]',
+    th: '✈️ [D-7 กลับประเทศสัปดาห์นี้]',
+    uz: '✈️ [D-7 Shu hafta qaytish]',
+    km: '✈️ [D-7 ត្រឡប់សប្តាហ៍នេះ]',
+    mn: '✈️ [D-7 Энэ долоо хоногт буцна]',
+    ne: '✈️ [D-7 यो हप्ता फिर्ता]',
+    id: '✈️ [D-7 Pulang Minggu Ini]',
+    my: '✈️ [D-7 ယခုအပတ် နေရပ်ပြန်မည်]',
+    si: '✈️ [D-7 මේ සතියේ ආපසු]',
+    kk: '✈️ [D-7 Осы аптада қайту]',
+    bn: '✈️ [D-7 এই সপ্তাহে ফেরা]',
+    ur: '✈️ [D-7 اس ہفتے واپسی]',
+    tl: '✈️ [D-7 Uuwi Ngayong Linggo]',
   },
 };
 
-// 3. 상세 설명 17개국어 템플릿
 export const DESC_TEMPLATES: Record<SupportedLanguage, (isMoving: boolean, days?: number) => string> = {
   ko: (isMoving, days) =>
-    `${isMoving ? `다음 주 비자 만료로 귀국 예정(D-${days || 7})이라 기숙사 살림 정리합니다! ` : ''}원룸 기숙사에서 깨끗하게 사용하던 물건입니다. 사진 보시는 것처럼 상태 양호하고 작동 100% 잘 됩니다. 공단 기숙사 입구/편의점 앞 직거래 원합니다. 1:1 번역 채팅으로 편하게 연락주세요!`,
+    `${isMoving ? `비자 만료로 다음 주 귀국하게 되어 (D-${days || 7}) 기숙사 살림 정리 급처분합니다! ` : ''}기숙사에서 깔끔하게 사용하던 물건이며, 작동 100% 완벽하게 잘 됩니다. 공단 기숙사 앞에서 안심 직거래 가능합니다. 1:1 번역 채팅으로 편하게 연락주세요!`,
   vi: (isMoving, days) =>
-    `${isMoving ? `Tuần sau hết hạn visa về nước (D-${days || 7}) nên thanh lý đồ KTX! ` : ''}Đồ dùng ký túc xá còn rất tốt, có nhiều ảnh chụp thực tế. Hoạt động hoàn hảo 100%. Giao dịch trực tiếp gần KTX. Chat dịch 1:1 ngay nhé!`,
+    `${isMoving ? `Tuần sau hết hạn visa về nước (D-${days || 7}) nên mình thanh lý đồ ký túc xá giá rẻ! ` : ''}Đồ dùng trong KTX rất sạch sẽ, hoạt động 100% tốt. Giao dịch trực tiếp an toàn trước KTX khu công nghiệp. Nhắn tin qua chat dịch 1:1 nhé!`,
   zh: (isMoving, days) =>
-    `${isMoving ? `下周签证到期即将回国(D-${days || 7})，特惠处理宿舍生活用品！ ` : ''}自用闲置好物，多角度实拍照片，运转正常成色佳。支持工区宿舍门口当面交易，欢迎1:1多语言翻译聊天咨询！`,
+    `${isMoving ? `下周签证到期准备回国 (D-${days || 7})，宿舍生活用品超低价急甩卖！` : ''}在宿舍使用非常爱惜，功能100%完好无任何问题。支持在工业园区宿舍门前安心当面交易。欢迎通过1:1实时翻译聊天联系！`,
   en: (isMoving, days) =>
-    `${isMoving ? `Returning home next week due to visa expiration (D-${days || 7}), clearing out dorm items! ` : ''}Clean item used in dorm room with multiple real photos. Works 100% perfectly. Direct meetup near industrial complex dorm entrance. Feel free to message via 1:1 translation chat!`,
+    `${isMoving ? `Visa expires next week and moving back home (D-${days || 7}), urgent sale of dormitory items! ` : ''}Used cleanly in the dorm, 100% works perfectly. Safe direct trade available in front of industrial complex dorm. Feel free to contact via 1:1 translation chat!`,
   ja: (isMoving, days) =>
-    `${isMoving ? `来週ビザ満了のため帰国予定(D-${days || 7})につき、寮の生活用品をお譲りします！ ` : ''}ワンルーム寮で綺麗に使用していた物です。写真の通り状態良好で100%動作確認済みです。団地寮の入口・コンビニ前での手渡し希望です。1:1翻訳チャットでお気軽にご連絡ください！`,
+    `${isMoving ? `来週ビザ満了で帰国するため (D-${days || 7})、寮の生活用品を格安処分します！` : ''}寮で綺麗に使っていた物で、動作100%確認済みで問題ありません。工業団地の寮前で直接取引可能です。1:1自動翻訳チャットでお気軽にご連絡ください！`,
   ru: (isMoving, days) =>
     `${isMoving ? `На следующей неделе заканчивается виза и возвращаюсь на родину (D-${days || 7}), распродаю вещи из общежития! ` : ''}Вещи в отличном состоянии, всё 100% работает. Личная встреча около общежития промзоны. Пишите в 1:1 чат с автопереводом!`,
   th: (isMoving, days) =>
@@ -348,6 +461,8 @@ export const DESC_TEMPLATES: Record<SupportedLanguage, (isMoving: boolean, days?
     `${isMoving ? `Келесі аптада виза бітіп елге қайтамын (D-${days || 7}), жатақхана заттарын арзан бағада сатамын! ` : ''}Жатақханада таза ұсталған, 100% тамаша жұмыс істейді. Өндірістік аймақтың жатақханасы алдында қолма-қол алып кете аласыз. 1:1 аударма чатында хабарласыңыз!`,
   bn: (isMoving, days) =>
     `${isMoving ? `আগামী সপ্তাহে ভিসা শেষ হয়ে দেশে ফিরে যাচ্ছি (D-${days || 7}), হোস্টেলের জিনিসপত্র সস্তায় বিক্রি করছি! ` : ''}হোস্টেলে খুব সুন্দরভাবে ব্যবহার করা জিনিস, ১০০% সঠিকভাবে কাজ করে। শিল্প এলাকার হোস্টেলের সামনে সরাসরি লেনদেন করা যাবে। ১:১ অনুবাদ চ্যাটে যোগাযোগ করুন!`,
+  tl: (isMoving, days) =>
+    `${isMoving ? `Uuwi na sa sariling bansa dahil tapos na ang visa sa susunod na linggo (D-${days || 7}), rush sale ng gamit sa dormitoryo! ` : ''}Maayos at malinis na ginamit sa dormitoryo, 100% gumagana nang maayos. Puwedeng makipagkita sa tapat ng dormitoryo. Mag-message sa 1:1 translation chat!`,
   ur: (isMoving, days) =>
     `${isMoving ? `اگلے ہفتے ویزا ختم ہونے پر وطن واپس جا رہا ہوں (D-${days || 7})، ہاسٹل کا سامان سستے داموں بیچ رہا ہوں! ` : ''}ہاسٹل میں صاف ستھرا استعمال شدہ سامان ہے، 100% بالکل ٹھیک چلتا ہے۔ انڈسٹریل کمپلیکس ہاسٹل کے سامنے ملاقات کر کے خریدا جا سکتا ہے۔ 1:1 ترجمہ چیٹ میں رابطہ کریں!`,
 };
@@ -364,7 +479,7 @@ export function generate15LangTranslations(
   const result: Partial<Record<SupportedLanguage, { title: string; description: string }>> = {};
 
   const allLangs: SupportedLanguage[] = [
-    'ko', 'vi', 'zh', 'en', 'ja', 'ru', 'th', 'uz', 'km', 'mn', 'ne', 'id', 'my', 'si', 'kk', 'bn', 'ur'
+    'ko', 'vi', 'zh', 'en', 'ja', 'ru', 'th', 'uz', 'km', 'mn', 'ne', 'id', 'my', 'si', 'kk', 'bn', 'ur', 'tl'
   ];
 
   for (const lang of allLangs) {
@@ -420,3 +535,173 @@ export async function translateTextWithGemini(
   }
   return text;
 }
+
+export function getAdaptedKeyword(keyword: string, lang: SupportedLanguage): string {
+  const kw = keyword.toLowerCase().trim();
+  if (kw.includes('세탁기') || kw.includes('washer') || kw.includes('máy giặt')) {
+    const map: Record<SupportedLanguage, string> = {
+      ko: '세탁기', vi: 'Máy giặt', en: 'Washing Machine', zh: '洗衣机', ja: '洗濯機',
+      ru: 'Стиральная машина', th: 'เครื่องซักผ้า', uz: 'Kir yuvish mashinasi', km: 'ម៉ាស៊ីនបោកខោអាវ',
+      mn: 'Угаалгын машин', ne: 'वाशिङ मेसिन', id: 'Mesin Cuci', my: 'အဝတ်လျှော်စက်', si: 'රෙදි සෝදන යන්ත්‍රය',
+      kk: 'Кір жуғыш машина', bn: 'ওয়াশিং মেশিন', ur: 'واشنگ مشین', tl: 'Washing Machine'
+    };
+    return map[lang] || keyword;
+  }
+  if (kw.includes('냉장고') || kw.includes('fridge') || kw.includes('tủ lạnh')) {
+    const map: Record<SupportedLanguage, string> = {
+      ko: '냉장고', vi: 'Tủ lạnh', en: 'Refrigerator', zh: '冰箱', ja: '冷蔵庫',
+      ru: 'Холодильник', th: 'ตู้เย็น', uz: 'Muzlatgich', km: 'ទូទឹកកក',
+      mn: 'Хөргөгч', ne: 'फ्रिज', id: 'Kulkas', my: 'ရေခဲသေတ္တာ', si: 'ශීතකරණය',
+      kk: 'Тоңазытқыш', bn: 'ফ্রিজ', ur: 'فرج', tl: 'Refrigerator'
+    };
+    return map[lang] || keyword;
+  }
+  if (kw.includes('0원') || kw.includes('무료') || kw.includes('free') || kw.includes('0đ') || kw.includes('0 won')) {
+    const map: Record<SupportedLanguage, string> = {
+      ko: '0원 나눔', vi: '0đ Miễn phí', en: '0 Won Free', zh: '0元免费', ja: '0ウォン無料',
+      ru: '0 вон бесплатно', th: '0 วอน แจกฟรี', uz: '0 von bepul', km: '0 វ៉ុន ឥតគិតថ្លៃ',
+      mn: '0 вон үнэгүй', ne: '० वन निःशुल्क', id: '0 Won Gratis', my: '၀ ဝမ် အခမဲ့', si: '0 යි නොමිලේ',
+      kk: '0 вон тегін', bn: '০ ওন ফ্রি', ur: '0 وان مفت', tl: '0 Won Libre'
+    };
+    return map[lang] || keyword;
+  }
+  if (kw.includes('밥솥') || kw.includes('쿠쿠') || kw.includes('nồi cơm')) {
+    const map: Record<SupportedLanguage, string> = {
+      ko: '전기밥솥', vi: 'Nồi cơm điện', en: 'Rice Cooker', zh: '电饭煲', ja: '炊飯器',
+      ru: 'Рисоварка', th: 'หม้อหุงข้าว', uz: 'Guruch pishirgich', km: 'ឆ្នាំងដាំបាយ',
+      mn: 'Будаа агшаагч', ne: 'राइस कुकर', id: 'Rice Cooker', my: 'ထမင်းပေါင်းအိုး', si: 'බත් උයන යන්ත්‍රය',
+      kk: 'Күріш пісіргіш', bn: 'রাইস কুকার', ur: 'رائس ککر', tl: 'Rice Cooker'
+    };
+    return map[lang] || keyword;
+  }
+  if (kw.includes('아이폰') || kw.includes('iphone')) {
+    return 'iPhone';
+  }
+  if (kw.includes('자전거') || kw.includes('bike') || kw.includes('xe đạp')) {
+    const map: Record<SupportedLanguage, string> = {
+      ko: '자전거', vi: 'Xe đạp', en: 'Bicycle', zh: '自行车', ja: '自転車',
+      ru: 'Велосипед', th: 'จักรยาน', uz: 'Velosiped', km: 'កង់',
+      mn: 'Унадаг дугуй', ne: 'साइकल', id: 'Sepeda', my: 'စက်ဘီး', si: 'පාපැදි',
+      kk: 'Велосипед', bn: 'সাইকেল', ur: 'سائیکل', tl: 'Bisikleta'
+    };
+    return map[lang] || keyword;
+  }
+  if (kw.includes('모니터') || kw.includes('monitor') || kw.includes('màn hình')) {
+    const map: Record<SupportedLanguage, string> = {
+      ko: '모니터', vi: 'Màn hình', en: 'Monitor', zh: '显示器', ja: 'モニター',
+      ru: 'Монитор', th: 'จอคอม', uz: 'Monitor', km: 'ម៉ូនីទ័រ',
+      mn: 'Дэлгэц', ne: 'मोनिटर', id: 'Monitor', my: 'မော်နီတာ', si: 'මොනිටරය',
+      kk: 'Монитор', bn: 'মনিটর', ur: 'مانیٹر', tl: 'Monitor'
+    };
+    return map[lang] || keyword;
+  }
+  if (kw.includes('매트리스') || kw.includes('mattress') || kw.includes('nệm')) {
+    const map: Record<SupportedLanguage, string> = {
+      ko: '매트리스', vi: 'Nệm giường', en: 'Bed Mattress', zh: '床垫', ja: 'マットレス',
+      ru: 'Матрас', th: 'ที่นอน', uz: 'Matras', km: 'ពូក',
+      mn: 'Гудас', ne: 'डस्ना', id: 'Kasur', my: 'မွေ့ရာ', si: 'මෙට්ටය',
+      kk: 'Матрас', bn: 'গদি', ur: 'گدا', tl: 'Kutson'
+    };
+    return map[lang] || keyword;
+  }
+  return keyword;
+}
+
+export function getAdaptedItemTitle(
+  item: { title: string; translations?: Record<string, { title: string; description?: string }> },
+  lang: SupportedLanguage
+): string {
+  if (item.translations && item.translations[lang]?.title) {
+    return item.translations[lang].title;
+  }
+  let translatedCore = item.title;
+  for (const [krWord, transMap] of Object.entries(NOUN_TRANSLATIONS)) {
+    if (translatedCore.includes(krWord)) {
+      translatedCore = translatedCore.replace(krWord, transMap[lang]);
+      break;
+    }
+  }
+  return translatedCore;
+}
+
+export function getAdaptedTimeAgo(timeStr: string, lang: SupportedLanguage): string {
+  if (!timeStr) return '';
+  const clean = timeStr.trim();
+  if (clean.includes('10분 전') || clean.includes('10 min')) {
+    const map: Record<SupportedLanguage, string> = {
+      ko: '10분 전', vi: '10 phút trước', en: '10 min ago', zh: '10分钟前', ja: '10分前',
+      ru: '10 мин назад', th: '10 นาทีที่แล้ว', uz: '10 daqiqa oldin', km: '10 នាទីមុន',
+      mn: '10 минутын өмнө', ne: '१० मिनेट अघि', id: '10 menit lalu', my: '၁၀ မိနစ်အလို', si: 'මිනිත්තු 10 කට පෙර',
+      kk: '10 минут бұрын', bn: '১০ মিনিট আগে', ur: '10 منٹ پہلے', tl: '10 min ang nakalipas'
+    };
+    return map[lang] || timeStr;
+  }
+  if (clean.includes('25분 전') || clean.includes('25 min')) {
+    const map: Record<SupportedLanguage, string> = {
+      ko: '25분 전', vi: '25 phút trước', en: '25 min ago', zh: '25分钟前', ja: '25分前',
+      ru: '25 мин назад', th: '25 นาทีที่แล้ว', uz: '25 daqiqa oldin', km: '25 នាទីមុន',
+      mn: '25 минутын өмнө', ne: '२५ मिनेट अघि', id: '25 menit lalu', my: '၂၅ မိနစ်အလို', si: 'මිනිත්තු 25 කට පෙර',
+      kk: '25 минут бұрын', bn: '২৫ মিনিট আগে', ur: '25 منٹ پہلے', tl: '25 min ang nakalipas'
+    };
+    return map[lang] || timeStr;
+  }
+  if (clean.includes('1시간 전') || clean.includes('1 hour')) {
+    const map: Record<SupportedLanguage, string> = {
+      ko: '1시간 전', vi: '1 giờ trước', en: '1 hour ago', zh: '1小时前', ja: '1時間前',
+      ru: '1 час назад', th: '1 ชั่วโมงที่แล้ว', uz: '1 soat oldin', km: '1 ម៉ោងមុន',
+      mn: '1 цагийн өмнө', ne: '१ घण्टा अघि', id: '1 jam lalu', my: '၁ နာရီအလို', si: 'පැය 1 කට පෙර',
+      kk: '1 сағат бұрын', bn: '১ ঘন্টা আগে', ur: '1 گھنٹہ پہلے', tl: '1 oras ang nakalipas'
+    };
+    return map[lang] || timeStr;
+  }
+  if (clean.includes('2시간 전') || clean.includes('2 hour')) {
+    const map: Record<SupportedLanguage, string> = {
+      ko: '2시간 전', vi: '2 giờ trước', en: '2 hours ago', zh: '2小时前', ja: '2時間前',
+      ru: '2 часа назад', th: '2 ชั่วโมงที่แล้ว', uz: '2 soat oldin', km: '2 ម៉ោងមុន',
+      mn: '2 цагийн өмнө', ne: '२ घण्टा अघि', id: '2 jam lalu', my: '၂ နာရီအလို', si: 'පැය 2 කට පෙර',
+      kk: '2 сағат бұрын', bn: '২ ঘন্টা আগে', ur: '2 گھنٹے پہلے', tl: '2 oras ang nakalipas'
+    };
+    return map[lang] || timeStr;
+  }
+  if (clean.includes('방금 전') || clean.includes('just now')) {
+    const map: Record<SupportedLanguage, string> = {
+      ko: '방금 전', vi: 'Vừa xong', en: 'Just now', zh: '刚刚', ja: 'たった今',
+      ru: 'Только что', th: 'เมื่อสักครู่', uz: 'Hozirгина', km: 'ទើបតែឥឡូវនេះ',
+      mn: 'Дөнгөж сая', ne: 'भर्खरै', id: 'Baru saja', my: 'အခုလေးတင်', si: 'දැන්',
+      kk: 'Жаңа ғана', bn: 'এইমাত্র', ur: 'ابھی ابھی', tl: 'Kani-kanina lang'
+    };
+    return map[lang] || timeStr;
+  }
+  return timeStr;
+}
+
+export function getAdaptedNotification(
+  notif: { id: string; type: string; title: string; message?: string; created_at: string },
+  lang: SupportedLanguage,
+  t: (k: any) => string
+): { title: string; message: string; created_at: string } {
+  let title = notif.title || '';
+  let message = notif.message || '';
+
+  if (notif.id === 'notif-1' || notif.type === 'keyword') {
+    const washerName = getAdaptedKeyword('세탁기', lang);
+    title = `🔔 ${t('notif_tab_keyword')}: [${washerName}]`;
+    message = t('notif_msg_keyword_washer') || message;
+  } else if (notif.id === 'notif-2' || notif.type === 'chat') {
+    title = `💬 ${t('notif_tab_chat')}`;
+    message = t('notif_msg_chat_nguyen') || message;
+  } else if (notif.id === 'notif-3' || notif.type === 'price_drop') {
+    title = `🔥 ${t('notif_tab_price_drop')}`;
+    message = t('notif_msg_price_drop') || message;
+  } else if (notif.id === 'notif-4' || notif.type === 'appointment') {
+    title = `📍 ${t('notif_appoint_reminder_title')}`;
+    message = t('notif_msg_appointment') || message;
+  }
+
+  return {
+    title,
+    message,
+    created_at: getAdaptedTimeAgo(notif.created_at, lang),
+  };
+}
+

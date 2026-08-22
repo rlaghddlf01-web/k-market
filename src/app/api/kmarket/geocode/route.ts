@@ -68,14 +68,19 @@ export async function POST(req: NextRequest) {
 
     // 3. 한국 좌표 범위 기반 스마트 폴백
     if (!detectedAddress) {
-      if (latitude >= 37.4 && latitude <= 37.7 && longitude >= 126.8 && longitude <= 127.2) {
+      // 경기 남양주시 좌표 범위 (위도 37.55~37.75, 경도 127.14~127.38)
+      if (latitude >= 37.55 && latitude <= 37.75 && longitude >= 127.14 && longitude <= 127.38) {
+        detectedAddress = '경기 남양주시 다산동 인근';
+      } else if (latitude >= 37.54 && latitude <= 37.70 && longitude >= 126.90 && longitude <= 127.10) {
         detectedAddress = '서울 특별시 (GPS 위치 확인됨)';
-      } else if (latitude >= 37.2 && latitude < 37.4) {
-        detectedAddress = '경기 안산시 단원구 원곡동 인근';
-      } else if (latitude >= 37.0 && latitude < 37.2) {
-        detectedAddress = '경기 평택시 포승읍 포승공단 인근';
+      } else if (latitude >= 37.25 && latitude <= 37.42 && longitude >= 126.75 && longitude <= 126.95) {
+        detectedAddress = '경기 안산시 단원구 인근';
+      } else if (latitude >= 37.20 && latitude <= 37.38 && longitude >= 126.95 && longitude <= 127.15) {
+        detectedAddress = '경기 수원시 인근';
+      } else if (latitude >= 37.40 && latitude <= 37.58 && longitude >= 126.60 && longitude <= 126.80) {
+        detectedAddress = '인천광역시 인근';
       } else {
-        detectedAddress = `대한민국 (위도: ${latitude.toFixed(4)}, 경도: ${longitude.toFixed(4)})`;
+        detectedAddress = `내 주변 (위도 ${latitude.toFixed(3)}, 경도 ${longitude.toFixed(3)})`;
       }
     }
 

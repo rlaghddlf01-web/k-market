@@ -27,7 +27,7 @@ export default function KMarketItemCard({ item }: KMarketItemCardProps) {
   const { t, formatWon, currentLang } = useLanguage();
   const [showProfileModal, setShowProfileModal] = useState(false);
 
-  const displayRegion = getAdaptedItemRegion(item, selectedRegion);
+  const displayRegion = getAdaptedItemRegion(item, selectedRegion, currentLang);
 
   // 상대 시간 텍스트 계산
   const [timeAgoText, setTimeAgoText] = useState('방금 전');
@@ -152,7 +152,7 @@ export default function KMarketItemCard({ item }: KMarketItemCardProps) {
                 ? 'bg-red-500 text-white shadow-md shadow-red-500/40'
                 : 'bg-black/40 text-white hover:bg-black/60'
             }`}
-            aria-label="찜하기"
+            aria-label={t('item_detail_like_btn')}
           >
             <Heart className={`w-4 h-4 ${isLiked ? 'fill-current' : ''}`} />
           </button>

@@ -172,4 +172,13 @@ export const PUSH_TRANSLATIONS: Record<
     appointmentTitle: (time) => `📍 [براہ راست ملاقات کا وقت طے] ${time}`,
     appointmentBody: (place) => `"${place}" پر ملتے ہیں! (1 گھنٹہ پہلے یاد دہانی طے ہے)`,
   },
+  tl: {
+    welcomeTitle: '🔔 Aktibo na ang mga alerto ng K-Market!',
+    welcomeBody: 'Makatanggap agad ng 17-wikang chat at mga alerto sa paboritong gamit.',
+    keywordTitle: (kw) => `🔔 [Keyword Alert] Bagong item na "${kw}" ang na-post!`,
+    keywordBody: (t, p, r) => `[${r}] ${t} - ${p} (Mag-message agad sa 1:1 translation chat)`,
+    chatTitle: (s) => `💬 [${s}] Bagong mensahe na may pagsasalin`,
+    appointmentTitle: (time) => `📍 [Kumpirmadong Oras ng Meetup] ${time}`,
+    appointmentBody: (place) => `Magkita tayo sa "${place}"! (May paalala 1 oras bago ang meetup)`,
+  },
 };

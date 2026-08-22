@@ -78,13 +78,10 @@ export default function KMarketEasyTaxRefundWidget({
       <div className="relative z-10 space-y-1 text-center pb-1">
         <div className="inline-flex items-center space-x-1.5 bg-amber-500/20 text-amber-300 border border-amber-500/40 px-2.5 py-0.5 rounded-full text-[11px] font-black tracking-wide">
           <Sparkles className="w-3 h-3 text-yellow-300 animate-spin" />
-          <span>{t('auto_ui_120')}</span>
+          <span>{t('tax_modal_link_badge')}</span>
         </div>
         <h3 className="text-base sm:text-lg font-black tracking-tight text-white">
-          나의 잠재 환급액{' '}
-          <span className="text-amber-400 underline decoration-amber-400/50 underline-offset-4">
-            10초 만에 확인하기
-          </span>
+          {t('widget_tax_headline')}
         </h3>
       </div>
 
@@ -96,17 +93,17 @@ export default function KMarketEasyTaxRefundWidget({
           </div>
           <div className="min-w-0">
             <div className="flex items-center gap-1">
-              <span className="text-[11px] font-black text-white">{t('auto_ui_121')}</span>
+              <span className="text-[11px] font-black text-white">{t('widget_tax_age_benefit_label')}</span>
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
               <span className="text-[9px] text-emerald-300 font-bold hidden sm:inline">AI LIVE TRACKER</span>
             </div>
             <p className="text-[10px] text-slate-300 truncate">
-              1991년 8월 22일 ~ 2011년 8월 21일 (만 15세 ~ 34세)
+              {t('widget_tax_age_desc')}
             </p>
           </div>
         </div>
         <span className="bg-amber-400 text-slate-950 font-black text-[10px] px-2 py-0.5 rounded-lg shrink-0 shadow-xs">
-          만 15세~34세
+          {t('widget_tax_age_badge')}
         </span>
       </div>
 
@@ -115,10 +112,10 @@ export default function KMarketEasyTaxRefundWidget({
         <div className="flex items-center justify-between">
           <span className="text-[11px] font-bold text-slate-300 flex items-center gap-1">
             <Calendar className="w-3 h-3 text-indigo-400" />
-            <span>{t('auto_ui_122')}</span>
+            <span>{t('tax_work_years_label')}</span>
           </span>
           <span className="text-xs font-black text-amber-400 bg-amber-400/10 px-2 py-0.2 rounded-md border border-amber-400/20">
-            {months}개월 ({(months / 12).toFixed(1)}년)
+            {months}{t('time_months')} ({(months / 12).toFixed(1)}{t('time_years')})
           </span>
         </div>
 
@@ -132,9 +129,9 @@ export default function KMarketEasyTaxRefundWidget({
         />
 
         <div className="flex justify-between text-[9px] text-slate-400 font-medium px-0.5">
-          <span>{t('auto_ui_123')}</span>
-          <span>{t('auto_ui_124')}</span>
-          <span>{t('auto_ui_125')}</span>
+          <span>1{t('time_months')}</span>
+          <span>30{t('time_months')} (2.5{t('time_years')})</span>
+          <span>60{t('time_months')} (5{t('time_years')})</span>
         </div>
       </div>
 
@@ -143,10 +140,10 @@ export default function KMarketEasyTaxRefundWidget({
         <div className="flex items-center justify-between">
           <span className="text-[11px] font-bold text-slate-300 flex items-center gap-1">
             <Coins className="w-3 h-3 text-indigo-400" />
-            <span>{t('auto_ui_126')}</span>
+            <span>{t('tax_monthly_pay_label')}</span>
           </span>
           <span className="text-xs font-black text-amber-400">
-            {salaryManwon}만 원
+            {salaryManwon} {t('currency_10k_won')}
           </span>
         </div>
 
@@ -178,7 +175,7 @@ export default function KMarketEasyTaxRefundWidget({
           <span className="w-6 h-px bg-amber-500/40" />
           <span className="flex items-center gap-1">
             <TrendingUp className="w-3 h-3 text-amber-400" />
-            <span>{t('auto_ui_127')}</span>
+            <span>{t('tax_estimated_refund_badge')}</span>
           </span>
           <span className="w-6 h-px bg-amber-500/40" />
         </div>
@@ -192,10 +189,10 @@ export default function KMarketEasyTaxRefundWidget({
         <div className="flex items-center justify-center gap-1.5 pt-0.5">
           <span className="text-[10px] bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 px-2.5 py-0.5 rounded-full font-black flex items-center gap-1 shadow-xs">
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping" />
-            <span>{t('auto_ui_128')}</span>
+            <span>{t('tax_modal_zero_prepay')}</span>
           </span>
           <span className="text-[10px] text-slate-300">
-            100% 환급 성공 시 후불
+            {t('tax_success_fee_note')}
           </span>
         </div>
       </div>
@@ -208,12 +205,12 @@ export default function KMarketEasyTaxRefundWidget({
           className="w-full py-3 rounded-xl bg-gradient-to-r from-amber-400 via-amber-500 to-yellow-500 hover:from-amber-300 hover:to-amber-400 text-slate-950 font-black text-xs sm:text-sm shadow-lg shadow-amber-500/20 active:scale-[0.98] transition-all flex items-center justify-center space-x-1.5 cursor-pointer"
         >
           <span>
-            🚀 KTRS에서 ₩ {estimatedRefund.toLocaleString()} 바로 환급 신청하기
+            {t('widget_tax_apply_btn')} (₩ {estimatedRefund.toLocaleString()})
           </span>
           <ArrowRight className="w-4 h-4 text-slate-950" />
         </button>
         <p className="text-[10px] text-amber-200/90 text-center mt-1 font-medium">
-          🛡️ 선결제 0원 (후불결제) · 서류 제출 없이 1초 접수
+          {t('widget_tax_guarantee_note')}
         </p>
       </div>
     </div>

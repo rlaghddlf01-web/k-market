@@ -45,7 +45,7 @@ export default function KMarketAuthModal({
   const [nickname, setNickname] = useState('');
   const [arcNumber, setArcNumber] = useState('');
   const [country, setCountry] = useState('VN');
-  const [visaType, setVisaType] = useState('E-9 (비전문취업)');
+  const [visaType, setVisaType] = useState('E-9');
   const [stayExpiryDate, setStayExpiryDate] = useState('2026-11-30');
   const [telecom, setTelecom] = useState('SKT_MVNO');
   const [phone, setPhone] = useState('010-8492-3184');
@@ -64,7 +64,7 @@ export default function KMarketAuthModal({
   // GPS 내 위치 동의 및 주소 자동 변환 (서버 지오코딩 API 연동)
   const handleGetGpsLocation = () => {
     if (!navigator.geolocation) {
-      alert('사용 중인 브라우저에서 위치 정보(GPS)를 지원하지 않습니다. 수기로 입력해 주세요.');
+      alert(t('auto_loop_725'));
       return;
     }
 
@@ -100,9 +100,9 @@ export default function KMarketAuthModal({
         setIsLocating(false);
         console.warn('Geolocation error:', error);
         if (error.code === error.PERMISSION_DENIED) {
-          alert('브라우저 상단 주소창에서 [위치 정보 권한]을 [허용]해 주시거나 주소를 직접 입력해 주세요.');
+          alert(t('auto_loop_727'));
         } else {
-          alert('GPS 위치를 수신할 수 없습니다. 주소를 직접 입력해 주세요.');
+          alert(t('auto_loop_728'));
         }
       },
       { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
@@ -148,7 +148,7 @@ export default function KMarketAuthModal({
   // 2. 알리고 SMS 인증번호 발송
   const handleSendSms = async () => {
     if (!phone || phone.length < 10) {
-      alert('올바른 휴대폰 번호를 입력해 주세요.');
+      alert(t('auto_loop_746'));
       return;
     }
 
@@ -164,7 +164,7 @@ export default function KMarketAuthModal({
       if (res.success && res.authCode) {
         setSentAuthCode(res.authCode);
         setStep('sms');
-        alert(`[알리고 SMS] 인증번호 [${res.authCode}]가 발송되었습니다.`);
+        alert(`${t('auth_sms_sent_prefix')} [${res.authCode}] ${t('auth_sms_sent_suffix')}`);
       }
     } catch (err) {
       console.error(err);
@@ -478,7 +478,7 @@ export default function KMarketAuthModal({
               <div className="p-4 rounded-3xl bg-[#f7f2eb] border border-[#ded1c4] space-y-3">
                 <span className="text-xs font-black text-[#1f1914] flex items-center gap-1.5">
                   <Smartphone className="w-4 h-4 text-[#845b37]" />
-                  <span>{t('auto_ui_77')}</span>
+                  <span>{t('auth_telecom_phone_label')}</span>
                 </span>
 
                 {/* 통신사 드롭다운 셀렉트 */}
@@ -488,12 +488,12 @@ export default function KMarketAuthModal({
                     onChange={(e) => setTelecom(e.target.value)}
                     className="w-full appearance-none px-4 py-2.5 bg-white rounded-xl border border-[#ded1c4] text-xs font-bold text-[#1f1914] focus:outline-none focus:border-[#845b37] cursor-pointer pr-10"
                   >
-                    <option value="SKT_MVNO">{t('auto_ui_78')}</option>
-                    <option value="KT_MVNO">{t('auto_ui_79')}</option>
-                    <option value="LGU_MVNO">{t('auto_ui_80')}</option>
-                    <option value="SKT">{t('auto_ui_81')}</option>
-                    <option value="KT">{t('auto_ui_82')}</option>
-                    <option value="LGU">{t('auto_ui_83')}</option>
+                    <option value="SKT_MVNO">{t('telecom_skt_mvno')}</option>
+                    <option value="KT_MVNO">{t('telecom_kt_mvno')}</option>
+                    <option value="LGU_MVNO">{t('telecom_lgu_mvno')}</option>
+                    <option value="SKT">{t('telecom_skt')}</option>
+                    <option value="KT">{t('telecom_kt')}</option>
+                    <option value="LGU">{t('telecom_lgu')}</option>
                   </select>
                   <ChevronDown className="w-4 h-4 text-[#8c7866] absolute right-3 top-3 pointer-events-none" />
                 </div>
@@ -512,7 +512,7 @@ export default function KMarketAuthModal({
                     disabled={isSmsSending}
                     className="px-4 py-2.5 bg-[#3d2817] hover:bg-[#2b1c10] text-[#fbf9f6] font-bold text-xs rounded-xl shadow-xs transition-all shrink-0 cursor-pointer border border-[#5c3818]"
                   >
-                    {isSmsSending ? '발송중...' : '인증번호 받기'}
+                    {isSmsSending ? t('sms_sending_btn') : t('sms_request_code_btn')}
                   </button>
                 </div>
               </div>
@@ -522,7 +522,7 @@ export default function KMarketAuthModal({
                 <div className="flex items-center justify-between">
                   <label className="text-xs font-black text-[#3d2817] flex items-center gap-1.5">
                     <MapPin className="w-4 h-4 text-[#845b37]" />
-                    <span>{t('auto_ui_84')}</span>
+                    <span>{t('auth_address_label')}</span>
                   </label>
                   <button
                     type="button"
@@ -534,11 +534,11 @@ export default function KMarketAuthModal({
                     {isLocating ? (
                       <>
                         <RefreshCw className="w-3.5 h-3.5 animate-spin text-[#845b37]" />
-                        <span>{t('auto_ui_48')}</span>
+                        <span>{t('loc_finding_msg')}</span>
                       </>
                     ) : (
                       <>
-                        <span>{t('auto_ui_86')}</span>
+                        <span>{t('auth_gps_btn')}</span>
                       </>
                     )}
                   </button>
@@ -550,18 +550,18 @@ export default function KMarketAuthModal({
                     required
                     value={dormitory}
                     onChange={(e) => setDormitory(e.target.value)}
-                    placeholder={t('auto_ui_87')}
+                    placeholder={t('auth_address_placeholder')}
                     className="w-full px-3.5 py-2.5 bg-white rounded-xl border border-[#ded1c4] text-xs font-bold text-[#1f1914] focus:border-[#845b37] focus:outline-none shadow-2xs pr-8"
                   />
                   {dormitory && (
                     <span className="absolute right-2.5 top-2.5 text-[10px] bg-emerald-100 text-emerald-800 font-bold px-1.5 py-0.5 rounded-md">
-                      반경 5km 설정
+                      {t('auth_radius_badge')}
                     </span>
                   )}
                 </div>
 
                 <p className="text-[10px] text-[#705e4f] flex items-center justify-between">
-                  <span>{t('auto_ui_88')}</span>
+                  <span>{t('auth_location_benefit_notice')}</span>
                 </p>
               </div>
             </div>
@@ -576,10 +576,10 @@ export default function KMarketAuthModal({
 
               <div className="space-y-1">
                 <h3 className="text-base font-black text-[#1f1914]">
-                  알리고 SMS 6자리 인증번호 입력
+                  {t('auth_sms_step_title')}
                 </h3>
                 <p className="text-xs text-[#705e4f]">
-                  <strong>{phone}</strong> 번호로 발송된 6자리 번호를 입력해 주세요.
+                  <strong>{phone}</strong> {t('auth_sms_step_desc')}
                 </p>
               </div>
 
@@ -607,13 +607,13 @@ export default function KMarketAuthModal({
                   onClick={() => setStep('form')}
                   className="px-4 py-2.5 bg-[#f4ede6] hover:bg-[#ede2d6] text-[#5c4a39] font-bold text-xs rounded-xl border border-[#ded1c4] cursor-pointer"
                 >
-                  이전 단계
+                  {t('btn_prev')}
                 </button>
                 <button
                   type="submit"
                   className="px-6 py-2.5 bg-[#3d2817] hover:bg-[#2b1c10] text-[#fbf9f6] font-black text-xs rounded-xl shadow-md border border-[#5c3818] cursor-pointer"
                 >
-                  인증 확인 완료
+                  {t('auth_sms_confirm_btn')}
                 </button>
               </div>
             </form>
@@ -628,13 +628,13 @@ export default function KMarketAuthModal({
 
               <div className="space-y-1">
                 <span className="text-xs font-black text-emerald-800 uppercase tracking-wider">
-                  KTRS K-Market 신원 인증 완료!
+                  {t('auth_complete_badge')}
                 </span>
                 <h3 className="text-lg font-black text-[#1f1914]">
-                  {nickname || userName} 님, 환영합니다!
+                  {nickname || userName} {t('auth_welcome_suffix')}
                 </h3>
                 <p className="text-xs text-[#705e4f] max-w-sm mx-auto">
-                  {authTab === 'ocr' ? '실물 신분증 OCR 검증' : '수기 인증'} 및 휴대폰 본인인증이 완료되어 <strong className="text-[#3d2817]">{t('auto_ui_90')}</strong>가 발급되었습니다.
+                  {authTab === 'ocr' ? t('auth_complete_ocr_desc') : t('auth_complete_manual_desc')}
                 </p>
               </div>
 
@@ -645,7 +645,7 @@ export default function KMarketAuthModal({
                   <span>{t('auto_ui_91')}</span>
                 </span>
                 <p className="text-xs text-[#705e4f]">
-                  인증하신 외국인등록번호로 <strong className="text-[#3d2817]">{t('auto_ui_92')}</strong>을 선결제 0원 (후불결제)로 즉시 신청하실 수 있습니다.
+                  {t('auth_tax_bonus_notice')}
                 </p>
               </div>
 
@@ -654,7 +654,7 @@ export default function KMarketAuthModal({
                 onClick={handleFinish}
                 className="w-full py-4 bg-[#3d2817] hover:bg-[#2b1c10] text-[#fbf9f6] font-black text-sm rounded-2xl shadow-xl border border-[#5c3818] cursor-pointer"
               >
-                K-Market 중고거래 시작하기
+                {t('auth_start_trading_btn')}
               </button>
             </div>
           )}

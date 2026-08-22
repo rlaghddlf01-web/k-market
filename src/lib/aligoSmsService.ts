@@ -85,6 +85,10 @@ export const SMS_AUTH_TEMPLATES: Record<SupportedLanguage, (code: string) => { t
     title: 'K-Market تصدیق',
     body: `[KTRS K-Market] آپ کا تصدیقی کوڈ [${code}] ہے۔ (5 منٹ کے لیے درست)`,
   }),
+  tl: (code) => ({
+    title: 'K-Market Pagpapatunay',
+    body: `[KTRS K-Market] Ang iyong verification code ay [${code}]. (Valid nang 5 minuto)`,
+  }),
 };
 
 /**

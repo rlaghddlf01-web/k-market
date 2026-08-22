@@ -53,7 +53,7 @@ export default function InAppBrowserEscaper() {
           navigator.clipboard.writeText(currentUrl);
           alert(trans.copyLinkBtn + ' 완료! 사파리(Safari) 주소창에 붙여넣어 주세요.');
         } else {
-          alert('우측 상단 또는 하단의 메뉴(⋮ 또는 공유)를 누른 후 [Safari로 열기]를 선택해 주세요!');
+          alert(t('inapp_safari_guide_fallback'));
         }
       }
     }

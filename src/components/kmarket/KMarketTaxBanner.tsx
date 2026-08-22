@@ -25,7 +25,7 @@ export default function KMarketTaxBanner() {
         <div className="absolute right-0 top-0 bottom-0 w-full sm:w-1/2 overflow-hidden opacity-20 sm:opacity-30 mix-blend-luminosity pointer-events-none">
           <img
             src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=800&q=80"
-            alt="Tax refund consultation"
+            alt={t('tax_banner_img_alt')}
             className="w-full h-full object-cover object-center group-hover:scale-108 transition-transform duration-700"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-[#09101f] via-[#09101f]/80 to-transparent" />

@@ -18,6 +18,7 @@ import { si } from './locales/si';
 import { kk } from './locales/kk';
 import { bn } from './locales/bn';
 import { ur } from './locales/ur';
+import { tl } from './locales/tl';
 
 export * from './types';
 
@@ -40,6 +41,7 @@ export const LOCALES: Record<SupportedLanguage, TranslationDictionary> = {
   kk,
   bn,
   ur,
+  tl,
 };
 
 /**
@@ -68,6 +70,7 @@ export function buildUiTranslations(): Record<string, Record<SupportedLanguage, 
       kk: kk[key] || ko[key] || '',
       bn: bn[key] || ko[key] || '',
       ur: ur[key] || ko[key] || '',
+      tl: tl[key] || ko[key] || '',
     };
   }
 

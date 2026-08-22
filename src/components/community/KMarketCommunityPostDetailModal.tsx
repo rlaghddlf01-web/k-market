@@ -136,7 +136,7 @@ export default function KMarketCommunityPostDetailModal() {
                 className={`text-xs font-extrabold px-3 py-1 rounded-full border flex items-center gap-1.5 ${categoryInfo.color}`}
               >
                 <span>{categoryInfo.icon}</span>
-                <span>{categoryInfo.labelKo}</span>
+                <span>{t(`comm_cat_${categoryInfo.id}`)}</span>
               </span>
 
               {/* 메뉴 */}
@@ -172,7 +172,7 @@ export default function KMarketCommunityPostDetailModal() {
               className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-blue-50 dark:bg-blue-950/50 text-blue-600 dark:text-blue-400 text-xs font-bold border border-blue-200 dark:border-blue-800/60 hover:bg-blue-100 transition-colors cursor-pointer"
             >
               <Globe className="w-3.5 h-3.5" />
-              <span>{t('auto_ui_25')}</span>
+              <span>{showOriginal ? t('btn_show_trans') : t('btn_show_orig')}</span>
             </button>
           </div>
 
@@ -222,7 +222,7 @@ export default function KMarketCommunityPostDetailModal() {
               className="flex-1 py-2 rounded-xl bg-rose-50 hover:bg-rose-100 dark:bg-rose-950/30 text-rose-600 font-extrabold text-xs flex items-center justify-center gap-1.5 transition-colors cursor-pointer border border-rose-200 dark:border-rose-900/40"
             >
               <Heart className="w-4 h-4 fill-rose-500" />
-              <span>{t('auto_ui_29')}</span>
+              <span>{t('btn_like')} ({selectedPost.like_count})</span>
             </button>
 
             <button
@@ -230,7 +230,7 @@ export default function KMarketCommunityPostDetailModal() {
               className="flex-1 py-2 rounded-xl bg-amber-50 hover:bg-amber-100 dark:bg-amber-950/30 text-amber-700 font-extrabold text-xs flex items-center justify-center gap-1.5 transition-colors cursor-pointer border border-amber-200 dark:border-amber-900/40"
             >
               <Coffee className="w-4 h-4 text-amber-600" />
-              <span>{t('auto_ui_30')}</span>
+              <span>{t('btn_cheer')} ({selectedPost.cheer_count})</span>
             </button>
           </div>
 
@@ -238,13 +238,13 @@ export default function KMarketCommunityPostDetailModal() {
           <div className="space-y-3 pt-2">
             <h4 className="text-xs font-black text-slate-900 dark:text-white flex items-center gap-1.5">
               <MessageCircle className="w-4 h-4 text-blue-600" />
-              <span>{t('auto_ui_31')}</span>
+              <span>{t('comment_header')} ({comments.length})</span>
             </h4>
 
             <div className="space-y-2">
               {isCommentsLoading ? (
                 <div className="py-6 text-center text-xs text-slate-400">
-                  댓글을 불러오는 중...
+                  {t('comm_loading_comments')}
                 </div>
               ) : comments.length > 0 ? (
                 comments.map((comm) => {
@@ -287,7 +287,7 @@ export default function KMarketCommunityPostDetailModal() {
                 })
               ) : (
                 <div className="py-6 text-center text-xs text-slate-400 bg-slate-50 dark:bg-gray-800/40 rounded-2xl">
-                  첫 번째 따뜻한 댓글을 남겨보세요!
+                  {t('comm_first_comment_prompt')}
                 </div>
               )}
             </div>
