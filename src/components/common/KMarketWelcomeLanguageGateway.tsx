@@ -233,7 +233,7 @@ export default function KMarketWelcomeLanguageGateway({
             onClick={handleSelectKorean}
             className="px-4 py-2 bg-slate-900 hover:bg-slate-800 text-white rounded-xl text-xs font-bold transition-all active:scale-95 shadow-sm cursor-pointer"
           >
-            한국어로 계속하기 ➔
+            {t('welcome_btn_korean')}
           </button>
         </div>
       </div>

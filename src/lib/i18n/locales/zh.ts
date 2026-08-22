@@ -1,6 +1,15 @@
 import { TranslationDictionary } from '../types';
 
 export const zh: TranslationDictionary = {
+  welcome_change_ko: "🇰🇷 切换为韩语",
+  welcome_btn_korean: "继续使用韩语 ➔",
+  time_recent: "最近",
+  time_months_ago: "个月前",
+  badge_discount_rate: "折",
+  badge_completed: "已完成",
+  unit_items_count: "件",
+  zone_sub_desc: "浦升·半月·乡南·南洞等宿舍周边",
+  header_quick_lang: "🌍 快速选择语言 (17国语言)",
   moving_d_day_tail: "天清仓",
   moving_d_day_badge: "回国倒计时 D-",
   verified_worker_badge: "已实名认证外籍劳工",

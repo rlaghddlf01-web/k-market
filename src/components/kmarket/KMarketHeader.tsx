@@ -105,7 +105,7 @@ export default function KMarketHeader() {
                   </div>
 
                   <div className="px-3 py-1.5 text-[11px] font-semibold text-[#8c7866] border-b border-[#ded1c4]">
-                    🌍 빠른 언어 선택 (15개국어)
+                    {t('header_quick_lang')}
                   </div>
                   {languages.map((lang) => (
                     <button

@@ -49,7 +49,7 @@ export default function KMarketUserItemsList({
         <h4 className="text-xs font-black text-slate-900 dark:text-white flex items-center gap-1.5">
           <span>{t('auto_ui_359')}</span>
           <span className="text-blue-600 dark:text-blue-400 font-extrabold bg-blue-50 dark:bg-blue-950 px-2 py-0.2 rounded-full text-[11px]">
-            {userItems.length}개
+            {userItems.length}{t('unit_items_count')}
           </span>
         </h4>
         <span className="text-[10px] text-slate-400 flex items-center gap-1">

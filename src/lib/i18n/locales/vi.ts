@@ -1,6 +1,15 @@
 import { TranslationDictionary } from '../types';
 
 export const vi: TranslationDictionary = {
+  welcome_change_ko: "🇰🇷 Chuyển sang tiếng Hàn",
+  welcome_btn_korean: "Tiếp tục bằng tiếng Hàn ➔",
+  time_recent: "Gần đây",
+  time_months_ago: "tháng trước",
+  badge_discount_rate: "Giảm",
+  badge_completed: "Xong",
+  unit_items_count: " món",
+  zone_sub_desc: "Gần KTX các KCN Poseung, Banwol, Hyangnam, Namdong",
+  header_quick_lang: "🌍 Chọn nhanh ngôn ngữ (17 thứ tiếng)",
   moving_d_day_tail: " ngày",
   moving_d_day_badge: "Về nước D-",
   verified_worker_badge: "Lao động đã xác minh",

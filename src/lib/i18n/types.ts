@@ -1,6 +1,15 @@
 // K-Market 17개국어 표준 번역 키 마스터 인터페이스
 
 export interface TranslationDictionary {
+  welcome_change_ko: string;
+  welcome_btn_korean: string;
+  time_recent: string;
+  time_months_ago: string;
+  badge_discount_rate: string;
+  badge_completed: string;
+  unit_items_count: string;
+  zone_sub_desc: string;
+  header_quick_lang: string;
   moving_d_day_tail: string;
   moving_d_day_badge: string;
   verified_worker_badge: string;

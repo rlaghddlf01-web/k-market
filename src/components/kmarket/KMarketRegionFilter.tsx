@@ -34,7 +34,7 @@ export default function KMarketRegionFilter() {
             <span>{t('meetup_zone_title')}</span>
           </div>
           <span className="text-[11px] text-[#8c7866] font-medium hidden sm:inline">
-            포승 · 반월 · 향남 · 남동 등 기숙사 인근
+            {t('zone_sub_desc')}
           </span>
         </div>
 

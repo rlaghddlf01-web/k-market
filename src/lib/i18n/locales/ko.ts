@@ -1,6 +1,15 @@
 import { TranslationDictionary } from '../types';
 
 export const ko: TranslationDictionary = {
+  welcome_change_ko: "🇰🇷 Switch to Korean",
+  welcome_btn_korean: "Continue in Korean ➔",
+  time_recent: "Recent",
+  time_months_ago: "mo ago",
+  badge_discount_rate: "Off",
+  badge_completed: "Done",
+  unit_items_count: " items",
+  zone_sub_desc: "Near dorms in Poseung, Banwol, Hyangnam, Namdong",
+  header_quick_lang: "🌍 Quick Language Selection (17 Languages)",
   moving_d_day_tail: "일 정리",
   moving_d_day_badge: "귀국 D-",
   verified_worker_badge: "신원 인증된 외국인 근로자",

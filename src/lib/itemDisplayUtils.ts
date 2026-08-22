@@ -1,9 +1,5 @@
 import { KMarketItem, SupportedLanguage } from '@/types/kmarket';
 
-/**
- * 현재 사용자의 언어(currentLang)에 맞게 매물 제목을 반환합니다.
- * 번역 데이터가 있으면 번역본을 반환하고, 없으면 원본 제목을 반환합니다.
- */
 export function getItemLocalizedTitle(item: KMarketItem, currentLang: SupportedLanguage): string {
   if (item.translations && item.translations[currentLang]?.title) {
     return item.translations[currentLang].title;
@@ -11,9 +7,6 @@ export function getItemLocalizedTitle(item: KMarketItem, currentLang: SupportedL
   return item.title;
 }
 
-/**
- * 현재 사용자의 언어(currentLang)에 맞게 매물 설명을 반환합니다.
- */
 export function getItemLocalizedDescription(item: KMarketItem, currentLang: SupportedLanguage): string {
   if (item.translations && item.translations[currentLang]?.description) {
     return item.translations[currentLang].description;
@@ -21,32 +14,39 @@ export function getItemLocalizedDescription(item: KMarketItem, currentLang: Supp
   return item.description;
 }
 
-/**
- * 원문과 번역본이 다른지 여부 (번역 토글 버튼 표시용)
- */
 export function hasItemTranslation(item: KMarketItem, currentLang: SupportedLanguage): boolean {
   if (!item.translations || !item.translations[currentLang]) return false;
-  // 원문 언어와 현재 유저 언어가 다른 경우
   if (item.source_lang && item.source_lang === currentLang) return false;
   return Boolean(item.translations[currentLang].title || item.translations[currentLang].description);
 }
 
-/**
- * 작성일시(ISO 문자열)를 받아 상대 시간 문자열을 반환합니다.
- */
-export function calcTimeAgo(dateStr: string): string {
+const TIME_FORMATTERS: Record<string, { justNow: string; minAgo: string; hourAgo: string; dayAgo: string; monthAgo: string; recent: string }> = {
+  ko: { justNow: '방금 전', minAgo: '분 전', hourAgo: '시간 전', dayAgo: '일 전', monthAgo: '개월 전', recent: '최근' },
+  vi: { justNow: 'Vừa xong', minAgo: ' phút trước', hourAgo: ' giờ trước', dayAgo: ' ngày trước', monthAgo: ' tháng trước', recent: 'Gần đây' },
+  zh: { justNow: '刚刚', minAgo: '分钟前', hourAgo: '小时前', dayAgo: '天前', monthAgo: '个月前', recent: '最近' },
+  en: { justNow: 'Just now', minAgo: 'm ago', hourAgo: 'h ago', dayAgo: 'd ago', monthAgo: 'mo ago', recent: 'Recent' },
+  ja: { justNow: 'たった今', minAgo: '分前', hourAgo: '時間前', dayAgo: '日前', monthAgo: 'ヶ月前', recent: '最近' },
+  ru: { justNow: 'Только что', minAgo: ' мин назад', hourAgo: ' ч назад', dayAgo: ' дн назад', monthAgo: ' мес назад', recent: 'Недавно' },
+  th: { justNow: 'เมื่อสักครู่', minAgo: ' นาทีที่แล้ว', hourAgo: ' ชั่วโมงที่แล้ว', dayAgo: ' วันที่แล้ว', monthAgo: ' เดือนที่แล้ว', recent: 'ล่าสุด' },
+  uz: { justNow: 'Hozirgina', minAgo: ' daqiqa oldin', hourAgo: ' soat oldin', dayAgo: ' kun oldin', monthAgo: ' oy oldin', recent: 'Yaqinda' },
+};
+
+export function calcTimeAgo(dateStr: string, lang: SupportedLanguage = 'ko'): string {
   try {
     const diffMs = Date.now() - new Date(dateStr).getTime();
     const diffSec = Math.floor(diffMs / 1000);
-    if (diffSec < 60) return '방금 전';
+    const fmt = TIME_FORMATTERS[lang] || TIME_FORMATTERS.en || TIME_FORMATTERS.ko;
+
+    if (diffSec < 60) return fmt.justNow;
     const diffMin = Math.floor(diffSec / 60);
-    if (diffMin < 60) return `${diffMin}분 전`;
+    if (diffMin < 60) return `${diffMin}${fmt.minAgo}`;
     const diffHours = Math.floor(diffMin / 60);
-    if (diffHours < 24) return `${diffHours}시간 전`;
+    if (diffHours < 24) return `${diffHours}${fmt.hourAgo}`;
     const diffDays = Math.floor(diffHours / 24);
-    if (diffDays < 30) return `${diffDays}일 전`;
-    return `${Math.floor(diffDays / 30)}개월 전`;
+    if (diffDays < 30) return `${diffDays}${fmt.dayAgo}`;
+    return `${Math.floor(diffDays / 30)}${fmt.monthAgo}`;
   } catch {
-    return '최근';
+    const fmt = TIME_FORMATTERS[lang] || TIME_FORMATTERS.ko;
+    return fmt.recent;
   }
 }

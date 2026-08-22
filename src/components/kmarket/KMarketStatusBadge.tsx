@@ -52,7 +52,7 @@ export default function KMarketStatusBadge({
         className={`inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-extrabold bg-rose-500 text-white shadow-xs ${className}`}
       >
         <TrendingDown className="w-3.5 h-3.5" />
-        <span>{dropDiscountRate ? `${dropDiscountRate}% 할인` : '가격인하'}</span>
+        <span>{dropDiscountRate ? `${dropDiscountRate}% ${t('badge_discount_rate')}` : t('status_price_dropped')}</span>
       </div>
     );
   }

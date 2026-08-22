@@ -33,9 +33,9 @@ export default function KMarketItemCard({ item }: KMarketItemCardProps) {
   const [timeAgoText, setTimeAgoText] = useState('방금 전');
   useEffect(() => {
     if (item.created_at) {
-      setTimeAgoText(calcTimeAgo(item.created_at));
+      setTimeAgoText(calcTimeAgo(item.created_at, currentLang));
     }
-  }, [item.created_at]);
+  }, [item.created_at, currentLang]);
 
   const isLiked = likedItemIds.has(item.id);
   const isFree = item.price === 0;
