@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { Globe, ArrowRight, ShieldCheck, MessageSquare, Sparkles } from 'lucide-react';
+import { Globe, ArrowRight, ShieldCheck, MessageSquare, Sparkles, CheckCircle2 } from 'lucide-react';
 import { useLanguage } from '@/context/LanguageContext';
 import { SupportedLanguage } from '@/types/kmarket';
 import { WELCOME_17_LANGUAGES } from '@/lib/i18n/welcomeTranslations';
@@ -117,56 +117,66 @@ const EASY_TAX_LANGUAGES: LanguageCardItem[] = [
 function WelcomeEasyTaxContent() {
   const router = useRouter();
   const { currentLang, setLanguage } = useLanguage();
-  // 사용자가 마우스 오버하거나 탭했을 때 실시간으로 변경되는 언어 상태 (기본: currentLang 또는 'ko')
-  const [activeLang, setActiveLang] = useState<SupportedLanguage>(currentLang || 'ko');
+  
+  // 현재 활성화된 선택 언어 (기본: ko)
+  const [selectedCode, setSelectedCode] = useState<SupportedLanguage>(currentLang || 'ko');
 
-  const currentWelcome = WELCOME_17_LANGUAGES[activeLang] || WELCOME_17_LANGUAGES.ko;
+  const currentWelcome = WELCOME_17_LANGUAGES[selectedCode] || WELCOME_17_LANGUAGES.ko;
 
-  const handleSelectLanguage = (code: SupportedLanguage) => {
+  const handleCardClick = (code: SupportedLanguage) => {
+    setSelectedCode(code);
     setLanguage(code);
-    setActiveLang(code);
+  };
+
+  const handleConfirmEnter = () => {
     if (typeof window !== 'undefined') {
-      localStorage.setItem('kmarket_selected_lang', code);
+      localStorage.setItem('kmarket_selected_lang', selectedCode);
       localStorage.setItem('kmarket_welcomed', 'true');
     }
-    router.push(code === 'ko' ? '/' : `/${code}`);
+    router.push(selectedCode === 'ko' ? '/' : `/${selectedCode}`);
   };
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#fbf7f4] via-[#f7f0e8] to-[#eee5db] text-[#2b1810] flex flex-col items-center justify-center p-4 sm:p-6 selection:bg-amber-500 selection:text-white transition-colors duration-300">
       <div className="w-full max-w-5xl space-y-7 my-auto">
-        {/* 상단 로고 & 17개국어 실시간 반응형 뱃지 및 타이틀 */}
+        {/* 상단 17개국어 실시간 라이브 변환 헤더 */}
         <div className="text-center space-y-3">
-          <div className="inline-flex items-center gap-2 bg-[#f4ede6] border border-[#d97706]/40 text-[#92400e] px-4 py-1.5 rounded-full text-xs sm:text-sm font-black shadow-xs transition-all duration-300">
+          <div className="inline-flex items-center gap-2 bg-[#f4ede6] border border-[#d97706]/40 text-[#92400e] px-4 py-1.5 rounded-full text-xs sm:text-sm font-black shadow-xs transition-all duration-200">
             <Globe className="w-4 h-4 text-[#d97706] animate-pulse" />
             <span className="tracking-tight">{currentWelcome.badge}</span>
           </div>
 
-          <h1 className="text-2xl sm:text-4xl font-black tracking-tight text-[#2b1810] min-h-[44px] flex items-center justify-center transition-all duration-300">
+          <h1 className="text-2xl sm:text-4xl font-black tracking-tight text-[#2b1810] min-h-[48px] flex items-center justify-center transition-all duration-200">
             {currentWelcome.title}
           </h1>
-          <p className="text-sm sm:text-base text-[#5c4a39] max-w-2xl mx-auto font-medium min-h-[48px] flex items-center justify-center transition-all duration-300">
+          <p className="text-sm sm:text-base text-[#5c4a39] max-w-2xl mx-auto font-medium min-h-[48px] flex items-center justify-center transition-all duration-200 bg-white/50 py-1.5 px-4 rounded-xl border border-[#e2d5c7]/60">
             {currentWelcome.subtitle}
           </p>
         </div>
 
         {/* 16개국 국기 카드 그리드 */}
-        <div className="bg-white/85 border-2 border-[#e2d5c7] rounded-3xl p-6 sm:p-8 backdrop-blur-md shadow-xl space-y-6">
+        <div className="bg-white/90 border-2 border-[#e2d5c7] rounded-3xl p-6 sm:p-8 backdrop-blur-md shadow-xl space-y-6">
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 gap-3.5 sm:gap-4">
             {EASY_TAX_LANGUAGES.map((item) => {
-              const isSelected = activeLang === item.code;
+              const isSelected = selectedCode === item.code;
               return (
                 <button
                   key={item.code}
                   type="button"
-                  onMouseEnter={() => setActiveLang(item.code)}
-                  onClick={() => handleSelectLanguage(item.code)}
-                  className={`group flex flex-col items-center p-3.5 sm:p-4 rounded-2xl border transition-all cursor-pointer text-center relative overflow-hidden ${
+                  onClick={() => handleCardClick(item.code)}
+                  className={`group flex flex-col items-center p-3.5 sm:p-4 rounded-2xl border-2 transition-all duration-200 cursor-pointer text-center relative overflow-hidden active:scale-95 ${
                     isSelected
-                      ? 'bg-amber-50/80 border-[#d97706] shadow-lg shadow-amber-500/20 scale-[1.03]'
-                      : 'bg-[#faf5f0] hover:bg-white border-[#e2d5c7] hover:border-[#d97706] hover:shadow-md'
+                      ? 'bg-amber-50 border-[#d97706] shadow-lg shadow-amber-500/25 scale-[1.04] ring-2 ring-[#d97706]/40'
+                      : 'bg-[#faf5f0] hover:bg-white border-[#e2d5c7] hover:border-[#d97706]/70 hover:shadow-md'
                   }`}
                 >
+                  {/* 선택 표시 체크 배지 */}
+                  {isSelected && (
+                    <div className="absolute top-2 right-2 text-[#d97706] animate-bounce">
+                      <CheckCircle2 className="w-4 h-4 fill-[#d97706] text-white" />
+                    </div>
+                  )}
+
                   <div className="w-14 h-9 sm:w-16 sm:h-10 rounded-md overflow-hidden shadow-xs mb-2.5 border border-slate-200 group-hover:scale-110 transition-transform">
                     <img
                       src={item.flagUrl}
@@ -175,10 +185,12 @@ function WelcomeEasyTaxContent() {
                     />
                   </div>
 
-                  <span className="text-xs sm:text-sm font-black text-[#2b1810] group-hover:text-[#92400e] leading-tight">
+                  <span className={`text-xs sm:text-sm font-black leading-tight ${
+                    isSelected ? 'text-[#92400e]' : 'text-[#2b1810]'
+                  }`}>
                     {item.name}
                   </span>
-                  <span className="text-[10px] sm:text-xs text-[#8c7866] mt-0.5 group-hover:text-[#b45309] font-medium truncate w-full">
+                  <span className="text-[10px] sm:text-xs text-[#8c7866] mt-0.5 font-medium truncate w-full">
                     {item.country}
                   </span>
                 </button>
@@ -186,17 +198,29 @@ function WelcomeEasyTaxContent() {
             })}
           </div>
 
-          {/* 한국어 사용자 바로가기 */}
-          <div className="pt-4 border-t border-[#e2d5c7] flex items-center justify-center">
+          {/* 중앙 입장 CTA 버튼 (선택한 언어로 즉시 입장) */}
+          <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3">
             <button
               type="button"
-              onMouseEnter={() => setActiveLang('ko')}
-              onClick={() => handleSelectLanguage('ko')}
-              className="px-6 py-3 bg-[#2b1810] hover:bg-[#3d2817] text-white font-black text-xs sm:text-sm rounded-xl shadow-md transition-all flex items-center gap-2 cursor-pointer active:scale-95"
+              onClick={handleConfirmEnter}
+              className="w-full sm:w-auto px-8 py-3.5 bg-gradient-to-r from-[#d97706] to-[#b45309] hover:from-[#b45309] hover:to-[#92400e] text-white font-black text-sm sm:text-base rounded-2xl shadow-lg shadow-amber-600/30 transition-all flex items-center justify-center gap-2 cursor-pointer active:scale-95 animate-pulse hover:animate-none"
             >
-              <span>{WELCOME_17_LANGUAGES.ko.footerButton}</span>
-              <ArrowRight className="w-4 h-4 text-amber-300" />
+              <span>{currentWelcome.footerButton}</span>
+              <ArrowRight className="w-5 h-5 text-amber-200" />
             </button>
+
+            {selectedCode !== 'ko' && (
+              <button
+                type="button"
+                onClick={() => {
+                  setSelectedCode('ko');
+                  setLanguage('ko');
+                }}
+                className="px-4 py-2 text-xs font-bold text-slate-500 hover:text-slate-800 underline transition-colors"
+              >
+                🇰🇷 한국어로 변경
+              </button>
+            )}
           </div>
         </div>
 
