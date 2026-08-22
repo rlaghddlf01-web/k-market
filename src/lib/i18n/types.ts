@@ -1,6 +1,29 @@
 // K-Market 17개국어 표준 번역 키 마스터 인터페이스 (한국어 원본 기준)
 
 export interface TranslationDictionary {
+  loc_saved_alert: string;
+  loc_save_btn: string;
+  loc_map_zoom_badge: string;
+  loc_map_title: string;
+  loc_radius_desc_hint: string;
+  loc_radius_10km_desc: string;
+  loc_radius_10km_title: string;
+  loc_radius_3km_desc: string;
+  loc_radius_3km_title: string;
+  loc_radius_1km_desc: string;
+  loc_radius_1km_title: string;
+  loc_radius_current_badge: string;
+  loc_radius_setting_title: string;
+  loc_search_btn: string;
+  loc_search_placeholder: string;
+  loc_manual_search_label: string;
+  loc_base_location_label: string;
+  loc_gps_btn_auto: string;
+  loc_gps_btn_finding: string;
+  loc_gps_precision: string;
+  loc_gps_auth_title: string;
+  loc_modal_title: string;
+  loc_modal_badge: string;
   app_name: string;
   app_slogan: string;
   nav_platform_slogan: string;
