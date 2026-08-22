@@ -305,6 +305,18 @@ export const CHAT_SAFETY_POLICY_I18N: Record<LanguageCode, { badge: string; text
     badge: '🛡️ K-Market নিরাপত্তা নির্দেশিকা',
     text: 'অগ্রিম টাকা চাওয়া বা বাইরের মেসেঞ্জারে (KakaoTalk, LINE, Telegram) ডাকার চেষ্টা করলে অ্যাকাউন্ট তাৎক্ষণিকভাবে সাময়িক বা স্থায়ীভাবে স্থগিত করা হবে। সর্বদা সরাসরি উপস্থিত হয়ে লেনদেন করুন।',
   },
+  si: {
+    badge: '🛡️ K-Market ආරක්ෂක නීති',
+    text: 'කලින් මුදල් ඉල්ලීම හෝ බාහිර මැසෙන්ජර් වෙත යොමු කිරීම ගිණුම වහාම අත්හිටුවීමට හේතු වේ. සෑම විටම මුහුණට මුහුණ හමුවී ගනුදෙනු කරන්න.',
+  },
+  kk: {
+    badge: '🛡️ K-Market Қауіпсіздік ережелері',
+    text: 'Алдын ала төлем талап ету немесе басқа мессенджерлерге шақыру есептік жазбаны біржола бұғаттауға әкеледі. Тек тікелей кездесіп саудаласыңыз.',
+  },
+  ur: {
+    badge: '🛡️ K-Market حفاظتی اصول',
+    text: 'پیشگی رقم کا مطالبہ یا بیرونی میسنجر پر لے جانا اکاؤنٹ کی فوری معطلی کا باعث بنے گا۔ ہمیشہ روبرو مل کر لین دین کریں۔',
+  },
   en: {
     badge: '🛡️ K-Market Safety Policy',
     text: 'Requesting advance payment or redirecting to external messengers (KakaoTalk, LINE, Telegram) will result in IMMEDIATE TEMPORARY OR PERMANENT ACCOUNT SUSPENSION and reporting. Always trade in person.',
