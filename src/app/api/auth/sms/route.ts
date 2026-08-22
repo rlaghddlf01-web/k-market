@@ -1,13 +1,14 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { generateAuthCode } from '@/lib/aligoSmsService';
+import { generateAuthCode, SMS_AUTH_TEMPLATES } from '@/lib/aligoSmsService';
+import { SupportedLanguage } from '@/types/kmarket';
 
 /**
- * 이지텍스(Easy-Tax-Refund) 알리고(Aligo) 실서버 & Fixie 고정 IP 프록시 SMS 발송 API
+ * 이지텍스(Easy-Tax-Refund) 알리고(Aligo) 실서버 & Fixie 고정 IP 프록시 17개국어 SMS 발송 API
  */
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    const { receiverPhone, msgType, customMessage, receiverName } = body;
+    const { receiverPhone, msgType, customMessage, receiverName, lang } = body;
 
     if (!receiverPhone) {
       return NextResponse.json(
@@ -19,22 +20,17 @@ export async function POST(req: NextRequest) {
     // 전화번호 정규화 (숫자만 추출)
     const cleanPhone = receiverPhone.replace(/[^0-9]/g, '');
     const authCode = generateAuthCode();
+    const userLang = (lang || 'ko') as SupportedLanguage;
 
-    // 메시지 내용 구성 (이지텍스 표준)
-    let messageContent = `[KTRS K-Market] 인증번호는 [${authCode}] 입니다. (5분 이내 입력)`;
-    let messageTitle = 'K-Market 본인인증';
+    // 17개국어 모국어 SMS 템플릿 적용
+    const templateGen = SMS_AUTH_TEMPLATES[userLang] || SMS_AUTH_TEMPLATES.ko;
+    const template = templateGen(authCode);
 
-    if (msgType === 'appointment_reminder') {
-      messageTitle = 'K-Market 직거래 약속 알림';
-      messageContent =
-        customMessage ||
-        `[KTRS K-Market] ${receiverName || '회원'}님, 오늘 직거래 약속 1시간 전입니다. 안전한 공단 랜드마크에서 만나요!`;
-    } else if (msgType === 'scam_alert') {
-      messageTitle = 'K-Market 보안 경고';
-      messageContent = `[KTRS K-Market] 선입금 사기 주의! 물건을 직접 확인하기 전에 절대 돈을 송금하지 마세요.`;
-    } else if (msgType === 'tax_update') {
-      messageTitle = 'KTRS 세금 환급 안내';
-      messageContent = `[KTRS] 신청하신 세금 환급(평균 184만원) 서류 검토가 정상 접수되었습니다.`;
+    let messageTitle = template.title;
+    let messageContent = template.body;
+
+    if (msgType === 'custom' && customMessage) {
+      messageContent = customMessage;
     }
 
     // 알리고 계정 환경변수 로드
@@ -51,6 +47,7 @@ export async function POST(req: NextRequest) {
         messageId: `aligo-demo-${Date.now()}`,
         phone: cleanPhone,
         isLiveSent: false,
+        lang: userLang,
         message: '인증번호가 생성되었습니다. (시연 모드)',
       });
     }
@@ -79,41 +76,44 @@ export async function POST(req: NextRequest) {
 
       const data = await res.json();
 
-      if (data.result_code === 1 || data.result_code === '1') {
+      if (data.result_code === '1' || data.result_code === 1) {
         return NextResponse.json({
           success: true,
           authCode,
-          messageId: data.msg_id || `aligo-${Date.now()}`,
+          messageId: String(data.msg_id || Date.now()),
           phone: cleanPhone,
           isLiveSent: true,
-          message: '알리고 실서버 SMS가 실제 스마트폰으로 발송되었습니다.',
+          lang: userLang,
+          message: '17개국어 인증번호 SMS가 실시간 발송되었습니다.',
         });
       } else {
-        console.warn(`[Aligo SMS Note] ${data.message} (code: ${data.result_code})`);
+        console.warn('⚠️ 알리고 실서버 응답 오류:', data.message || data.result_code);
         return NextResponse.json({
           success: true,
           authCode,
-          messageId: `aligo-res-${Date.now()}`,
+          messageId: `aligo-fallback-${Date.now()}`,
           phone: cleanPhone,
           isLiveSent: false,
-          message: `인증번호 [${authCode}] 가 생성되었습니다. (${data.message || '인증 모드'})`,
+          lang: userLang,
+          message: `인증번호가 생성되었습니다. (${data.message || '개발 모드'})`,
         });
       }
-    } catch (fetchErr: any) {
-      console.warn('[Aligo Fetch Fallback]:', fetchErr.message);
+    } catch (aligoErr) {
+      console.error('Aligo Live Send Error:', aligoErr);
       return NextResponse.json({
         success: true,
         authCode,
-        messageId: `aligo-fallback-${Date.now()}`,
+        messageId: `aligo-catch-${Date.now()}`,
         phone: cleanPhone,
         isLiveSent: false,
-        message: `인증번호 [${authCode}] 가 발송되었습니다.`,
+        lang: userLang,
+        message: '인증번호가 생성되었습니다. (대체 모드)',
       });
     }
-  } catch (error: any) {
-    console.error('Aligo OTP Route Error:', error.message);
+  } catch (err) {
+    console.error('SMS API Error:', err);
     return NextResponse.json(
-      { success: false, message: 'SMS 요청 처리 중 오류가 발생했습니다.' },
+      { success: false, message: 'SMS 발송 처리 중 오류가 발생했습니다.' },
       { status: 500 }
     );
   }

@@ -155,6 +155,7 @@ export default function KMarketAuthModal({
       const res = await sendAligoAuthSms({
         receiverPhone: phone,
         receiverName: userName || '외국인 회원',
+        lang: currentLang,
       });
 
       if (res.success && res.authCode) {
