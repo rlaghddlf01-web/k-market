@@ -1,0 +1,27 @@
+import { TranslationDictionary } from '../types';
+
+export const mn: TranslationDictionary = {
+  app_name: 'K-Market',
+  app_slogan: 'Гадаад иргэдэд зориулсан үнэ төлбөргүй хуучин барааны зах',
+  ktrs_tab_tax: '💰 Татварын буцаан олголт',
+  ktrs_tab_loan: '⚡ Яаралтай зээл',
+  ktrs_tab_housing: '🏠 Аюулгүй байр',
+  ktrs_tab_market: '🛒 K-Market (Зах/Нүүдэл)',
+  tax_banner_title: 'Солонгост 1+ жил ажилласан уу? Татварын буцаан олголт [1.84 сая вон] 30 секундэд үнэгүй шалгах!',
+  tax_banner_btn: 'Одоо шалгах ➔',
+  moving_sale_title: '✈️ Буцах дөхсөн D-7 [Хямд нүүдлийн худалдаа]',
+  moving_sale_badge: 'Багцын хямдрал',
+  post_item_btn: '✏️ 1 минутад бараа зарах',
+  chat_btn: '💬 Шууд орчуулгатай чат',
+  chat_translation_hint: '✨ Gemini AI ашиглан 0.3 секундэд шууд орчуулагдана',
+  free_share: 'Үнэгүй өгнө',
+  filter_all_regions: 'Бүх үйлдвэрийн бүс',
+  search_placeholder: 'Үйлдвэрийн бүсийн бараа хайх...',
+  status_selling: 'Зарж байна',
+  status_reserved: 'Захиалсан',
+  status_sold: 'Зарагдсан',
+  walk_trade_available: '5 мин алхаад уулзаж авна',
+  zero_fee_badge: '0 хураамж 100% үнэгүй',
+  community_title: 'Хөршийн амьдрал & Чат',
+  manner_temperature: 'Итгэлийн хэмжүүр',
+};

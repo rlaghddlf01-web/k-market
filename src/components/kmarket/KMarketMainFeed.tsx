@@ -23,6 +23,7 @@ import KMarketMyPageModal from './KMarketMyPageModal';
 import KMarketKeywordAlertModal from './KMarketKeywordAlertModal';
 import KMarketLocationRadiusModal from './KMarketLocationRadiusModal';
 import KMarketNotificationDrawer from './KMarketNotificationDrawer';
+import KMarketFeedbackModal from './KMarketFeedbackModal';
 import { CommunityProvider } from '@/context/CommunityContext';
 import KMarketCommunityMain from '../community/KMarketCommunityMain';
 import { ShoppingBag, Sparkles, ShieldCheck, Plus, PackageOpen, ShieldAlert } from 'lucide-react';
@@ -46,9 +47,20 @@ export default function KMarketMainFeed() {
     setIsKeywordModalOpen,
     isLocationRadiusModalOpen,
     setIsLocationRadiusModalOpen,
+    isFeedbackModalOpen,
+    setIsFeedbackModalOpen,
     setAuthedUser,
   } = useKMarket();
   const { t } = useLanguage();
+
+  // 📄 20개 단위 페이지네이션 상태
+  const ITEMS_PER_PAGE = 20;
+  const [currentPage, setCurrentPage] = useState(1);
+
+  // 카테고리 / 지역 / 검색어 변경 시 1페이지로 자동 리셋
+  React.useEffect(() => {
+    setCurrentPage(1);
+  }, [selectedCategory, selectedRegion, searchQuery, isMovingSaleOnly]);
 
   // 검색 및 필터링 적용된 매물 목록
   const filteredItems = items.filter((item) => {
@@ -136,13 +148,80 @@ export default function KMarketMainFeed() {
                 </div>
               </div>
 
-              {/* 5. 매물 그리드 */}
+              {/* 5. 매물 그리드 (20개 단위 페이징) */}
               {filteredItems.length > 0 ? (
-                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-5 sm:gap-6">
-                  {filteredItems.map((item) => (
-                    <KMarketItemCard key={item.id} item={item} />
-                  ))}
-                </div>
+                <>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3.5 sm:gap-6">
+                    {filteredItems
+                      .slice((currentPage - 1) * ITEMS_PER_PAGE, currentPage * ITEMS_PER_PAGE)
+                      .map((item) => (
+                        <KMarketItemCard key={item.id} item={item} />
+                      ))}
+                  </div>
+
+                  {/* 📄 스마트 페이지네이션 네비게이션 바 */}
+                  {Math.ceil(filteredItems.length / ITEMS_PER_PAGE) > 1 && (
+                    <div className="flex items-center justify-center gap-2 pt-10 pb-4">
+                      {/* 이전 페이지 버튼 */}
+                      <button
+                        onClick={() => {
+                          setCurrentPage((prev) => Math.max(prev - 1, 1));
+                          window.scrollTo({ top: 400, behavior: 'smooth' });
+                        }}
+                        disabled={currentPage === 1}
+                        className={`px-3 py-2 rounded-xl text-xs font-bold transition-all border ${
+                          currentPage === 1
+                            ? 'opacity-40 cursor-not-allowed bg-gray-100 text-gray-400 border-gray-200'
+                            : 'bg-white text-[#1f1914] border-[#ded1c4] hover:bg-[#eae3dc] active:scale-95 cursor-pointer shadow-xs'
+                        }`}
+                      >
+                        ◀ 이전
+                      </button>
+
+                      {/* 페이지 번호 목록 */}
+                      {Array.from(
+                        { length: Math.min(Math.ceil(filteredItems.length / ITEMS_PER_PAGE), 7) },
+                        (_, idx) => {
+                          const pageNum = idx + 1;
+                          const isCurrent = currentPage === pageNum;
+                          return (
+                            <button
+                              key={pageNum}
+                              onClick={() => {
+                                setCurrentPage(pageNum);
+                                window.scrollTo({ top: 400, behavior: 'smooth' });
+                              }}
+                              className={`w-9 h-9 rounded-xl text-xs font-black transition-all cursor-pointer ${
+                                isCurrent
+                                  ? 'bg-[#1f1914] text-[#fbf9f6] shadow-md scale-105'
+                                  : 'bg-white text-[#5c4a39] border border-[#ded1c4] hover:bg-[#eae3dc]'
+                              }`}
+                            >
+                              {pageNum}
+                            </button>
+                          );
+                        }
+                      )}
+
+                      {/* 다음 페이지 버튼 */}
+                      <button
+                        onClick={() => {
+                          const maxPage = Math.ceil(filteredItems.length / ITEMS_PER_PAGE);
+                          setCurrentPage((prev) => Math.min(prev + 1, maxPage));
+                          window.scrollTo({ top: 400, behavior: 'smooth' });
+                        }}
+                        disabled={currentPage === Math.ceil(filteredItems.length / ITEMS_PER_PAGE)}
+                        className={`px-3 py-2 rounded-xl text-xs font-bold transition-all border ${
+                          currentPage === Math.ceil(filteredItems.length / ITEMS_PER_PAGE)
+                            ? 'opacity-40 cursor-not-allowed bg-gray-100 text-gray-400 border-gray-200'
+                            : 'bg-white text-[#1f1914] border-[#ded1c4] hover:bg-[#eae3dc] active:scale-95 cursor-pointer shadow-xs'
+                        }`}
+                      >
+                        다음 ▶
+                      </button>
+                    </div>
+                  )}
+                </>
               ) : (
                 <div className="card-premium p-14 text-center my-8 space-y-5">
                   <div className="w-20 h-20 rounded-3xl flex items-center justify-center mx-auto" style={{ background: 'linear-gradient(135deg, #eff6ff 0%, #eef2ff 100%)' }}>
@@ -286,6 +365,10 @@ export default function KMarketMainFeed() {
         <KMarketLocationRadiusModal
           isOpen={isLocationRadiusModalOpen}
           onClose={() => setIsLocationRadiusModalOpen(false)}
+        />
+        <KMarketFeedbackModal
+          isOpen={isFeedbackModalOpen}
+          onClose={() => setIsFeedbackModalOpen(false)}
         />
         <KMarketNotificationDrawer />
       </div>

@@ -1,0 +1,27 @@
+import { TranslationDictionary } from '../types';
+
+export const ru: TranslationDictionary = {
+  app_name: 'K-Market',
+  app_slogan: 'Бесплатная барахолка и распродажа для иностранцев',
+  ktrs_tab_tax: '💰 Возврат налога (1.84 млн)',
+  ktrs_tab_loan: '⚡ Срочный займ',
+  ktrs_tab_housing: '🏠 Безопасное жилье',
+  ktrs_tab_market: '🛒 K-Market (Барахолка)',
+  tax_banner_title: 'Работаете в Корее больше года? Проверьте возврат налога [1.84 млн вон] бесплатно за 30 сек!',
+  tax_banner_btn: 'Узнать сумму возврата ➔',
+  moving_sale_title: '✈️ Скорый отъезд D-7 [Распродажа Moving Sale]',
+  moving_sale_badge: 'Скидка на комплект',
+  post_item_btn: '✏️ Продать за 1 мин',
+  chat_btn: '💬 1:1 Чат с автопереводом',
+  chat_translation_hint: '✨ Мгновенный перевод на язык собеседника за 0.3 сек через Gemini AI',
+  free_share: 'Бесплатно / Отдам даром',
+  filter_all_regions: 'Все промзоны Кореи',
+  search_placeholder: 'Поиск вещей рядом с промзоной (стиралка, велик, рисоварка)...',
+  status_selling: 'Продается',
+  status_reserved: 'Забронировано',
+  status_sold: 'Продано',
+  walk_trade_available: 'Самовывоз 5 мин пешком',
+  zero_fee_badge: 'Комиссия 0 вон (100% бесплатно)',
+  community_title: 'Общение и помощь',
+  manner_temperature: 'Рейтинг доверия',
+};

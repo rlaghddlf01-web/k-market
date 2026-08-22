@@ -24,6 +24,10 @@ import KMarketReviewModal from './KMarketReviewModal';
 import KMarketAppointmentModal from './KMarketAppointmentModal';
 import KMarketScamWarningModal from './KMarketScamWarningModal';
 import KMarketReportBlockModal from './KMarketReportBlockModal';
+import KMarketStatusActionModal from './KMarketStatusActionModal';
+import KMarketScamInterventionBanner from '../chat/KMarketScamInterventionBanner';
+import KMarketChatSafetyNotice from '../chat/KMarketChatSafetyNotice';
+import { sendLocalPushNotification } from '@/lib/webPushService';
 import CountryFlag from './CountryFlag';
 
 export default function KMarketChatDrawer() {
@@ -80,6 +84,11 @@ export default function KMarketChatDrawer() {
     setActiveAppointment(appointment);
     sendMessage(
       `📍 [직거래 약속] ${appointment.meet_time}에 "${appointment.place_name}"에서 봬요! (지도 핀 위치 공유됨)`
+    );
+    sendLocalPushNotification(
+      `📍 [직거래 약속 확정] ${appointment.meet_time}`,
+      `"${appointment.place_name}"에서 만나요! (1시간 전 리마인더 예약됨)`,
+      `/?chat=${activeChat.id}`
     );
   };
 
@@ -250,12 +259,8 @@ export default function KMarketChatDrawer() {
 
         {/* 5. 메시지 목록 스크롤 영역 */}
         <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-slate-50/50">
-          {/* 환영 안내 */}
-          <div className="text-center my-2">
-            <span className="inline-block bg-slate-200/70 text-slate-600 text-[11px] px-3 py-1 rounded-full font-medium">
-              안전한 직거래를 위해 기숙사나 공단 밝은 곳에서 만나세요.
-            </span>
-          </div>
+          {/* 15개국어 K-Market 공식 안전 거래 수칙 공지 */}
+          <KMarketChatSafetyNotice currentLang={currentLang} />
 
           {chatMessages.map((msg) => {
             const isMe = msg.sender_type === 'buyer';
@@ -357,12 +362,20 @@ export default function KMarketChatDrawer() {
                         : 'bg-white text-slate-900 border border-slate-200 rounded-bl-xs'
                     }`}
                   >
-                    {/* 사기 주의 뱃지 (외부 메신저 / 선입금 유도 감지 시) */}
-                    {detectScamPattern(msg.original_text) && (
-                      <div className="bg-red-500 text-white text-[10px] font-black px-2 py-0.5 rounded-md flex items-center gap-1 shadow-xs animate-pulse">
-                        <span>🚨 사기 주의! 외부 메신저/선입금 요구 의심</span>
-                      </div>
-                    )}
+                    {/* 15개국어 실시간 시스템 사기 안심 개입 배너 */}
+                    {(() => {
+                      const detected = detectScamPattern(msg.original_text);
+                      if (!detected) return null;
+                      return (
+                        <div className="mb-2">
+                          <KMarketScamInterventionBanner
+                            threatType={detected.threatType}
+                            currentLang={currentLang}
+                            onReportClick={() => setShowReportModal(true)}
+                          />
+                        </div>
+                      );
+                    })()}
 
                     {/* 원문 텍스트 */}
                     <p className="text-xs sm:text-sm font-medium leading-relaxed">

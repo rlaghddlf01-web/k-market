@@ -276,8 +276,10 @@ CREATE TABLE IF NOT EXISTS public.kmarket_reports (
   target_user_name TEXT NOT NULL,
   item_id TEXT,
   item_title TEXT,
-  reason_type TEXT NOT NULL,
+  reason_type TEXT NOT NULL,                         -- 'scam_fraud', 'nsfw_nudity', 'bad_manner_abuse', 'fake_item_photos', 'prohibited_items', 'no_show_flake', 'other'
   details TEXT,
+  evidence_urls TEXT[] DEFAULT '{}',                 -- 신고 당시 첨부/참조된 이미지 URL 배열
+  ai_analysis JSONB DEFAULT '{}'::jsonb,             -- AI가 자동 분석한 위험도 점수 및 판독 요약 (confidence_score, detected_violations, auto_action)
   block_user BOOLEAN DEFAULT TRUE,
   status TEXT DEFAULT 'pending' CHECK (status IN ('pending', 'banned', 'suspended', 'dismissed', 'resolved')),
   created_at TIMESTAMPTZ DEFAULT TIMEZONE('utc', NOW())
@@ -298,7 +300,26 @@ CREATE INDEX IF NOT EXISTS idx_kmarket_reports_target ON public.kmarket_reports(
 CREATE INDEX IF NOT EXISTS idx_kmarket_blocks_blocker ON public.kmarket_blocks(blocker_id);
 
 -- ==============================================================================
--- 🔒 14. RLS (Row Level Security) 정책 일괄 적용
+-- 🌐 14. 실시간 16대 유입 채널 트래픽 로그 테이블 (kmarket_traffic_logs)
+-- ==============================================================================
+CREATE TABLE IF NOT EXISTS public.kmarket_traffic_logs (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  channel_key TEXT NOT NULL,                          -- 'tiktok', 'facebook', 'zalo', 'line', 'telegram', 'offline_qr', 'youtube', 'direct' 등
+  channel_name TEXT NOT NULL,
+  source_url TEXT,
+  utm_source TEXT,
+  utm_medium TEXT,
+  utm_campaign TEXT,
+  referrer TEXT,
+  user_ip_hash TEXT,
+  created_at TIMESTAMPTZ DEFAULT TIMEZONE('utc', NOW())
+);
+
+CREATE INDEX IF NOT EXISTS idx_kmarket_traffic_channel ON public.kmarket_traffic_logs(channel_key);
+CREATE INDEX IF NOT EXISTS idx_kmarket_traffic_created_at ON public.kmarket_traffic_logs(created_at DESC);
+
+-- ==============================================================================
+-- 🔒 15. RLS (Row Level Security) 정책 일괄 적용
 -- ==============================================================================
 ALTER TABLE public.kmarket_user_profiles ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.kmarket_tax_refund_leads ENABLE ROW LEVEL SECURITY;

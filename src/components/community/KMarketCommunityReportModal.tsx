@@ -5,7 +5,8 @@ import { useCommunity } from '@/context/CommunityContext';
 import { X, ShieldAlert, CheckCircle, AlertTriangle } from 'lucide-react';
 
 const REPORT_REASONS = [
-  { id: 'spam', label: '🔞 불법 광고 / 스팸 / 도박 홍보' },
+  { id: 'nsfw', label: '🔞 음란물 / 선정적인 사진 / 성인물' },
+  { id: 'spam', label: '🚫 불법 광고 / 스팸 / 도박 홍보' },
   { id: 'abuse', label: '🤬 욕설 / 혐오 발언 / 비매너 / 성희롱' },
   { id: 'illegal', label: '⚠️ 불법 취업 알선 / 브로커 / 사기 의심' },
   { id: 'fake', label: '📢 거짓 정보 / 허위 사실 유포' },

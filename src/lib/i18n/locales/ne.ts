@@ -1,0 +1,27 @@
+import { TranslationDictionary } from '../types';
+
+export const ne: TranslationDictionary = {
+  app_name: 'K-Market',
+  app_slogan: 'विदेशी कामदारहरूको लागि नि:शुल्क सेकेन्ड-ह्यान्ड बजार',
+  ktrs_tab_tax: '💰 कर फिर्ता (१८.४ लाख)',
+  ktrs_tab_loan: '⚡ आकस्मिक ऋण',
+  ktrs_tab_housing: '🏠 सुरक्षित कोठा',
+  ktrs_tab_market: '🛒 K-Market (बजार/सामान)',
+  tax_banner_title: 'कोरियामा १ वर्ष+ काम गर्नुभयो? ३० सेकेन्डमा [औसत १८.४ लाख वन] कर फिर्ता निःशुल्क हेर्नुहोस्!',
+  tax_banner_btn: 'मेरो कर फिर्ता रकम हेर्नुहोस् ➔',
+  moving_sale_title: '✈️ घर फिर्ता D-7 [मुभिङ सेल भारी छुट]',
+  moving_sale_badge: 'भारी छुट बन्डल',
+  post_item_btn: '✏️ १ मिनेटमा सामान बेच्नुहोस्',
+  chat_btn: '💬 १:१ प्रत्यक्ष अनुवाद च्याट',
+  chat_translation_hint: '✨ Gemini AI द्वारा ०.३ सेकेन्डमा स्वतः अनुवाद हुन्छ',
+  free_share: 'निःशुल्क',
+  filter_all_regions: 'सबै औद्योगिक क्षेत्रहरू',
+  search_placeholder: 'औद्योगिक क्षेत्र नजिक सामान खोज्नुहोस्...',
+  status_selling: 'बिक्रीमा',
+  status_reserved: 'आरक्षित',
+  status_sold: 'बिक्री भयो',
+  walk_trade_available: '५ मिनेट हिँडेर भेट्न सकिने',
+  zero_fee_badge: 'शुल्क ० वन १००% निःशुल्क',
+  community_title: 'छिमेकी जीवन र कुराकानी',
+  manner_temperature: 'विश्वास तापमान',
+};

@@ -1,0 +1,27 @@
+import { TranslationDictionary } from '../types';
+
+export const en: TranslationDictionary = {
+  app_name: 'K-Market',
+  app_slogan: 'Zero-Fee Used Market & Moving Sale for Foreigners',
+  ktrs_tab_tax: '💰 Tax Refund ($1,400)',
+  ktrs_tab_loan: '⚡ Emergency Loan',
+  ktrs_tab_housing: '🏠 Safe Housing',
+  ktrs_tab_market: '🛒 K-Market (Used/Moving)',
+  tax_banner_title: 'Worked in Korea 1+ yr? Check [Avg ₩1.84M] Tax Refund in 30s for FREE!',
+  tax_banner_btn: 'Check My Refund Now ➔',
+  moving_sale_title: '✈️ Returning Home D-7 [Moving Sale Mega Deals]',
+  moving_sale_badge: 'Bundle Clearance',
+  post_item_btn: '✏️ Post Item in 1 Min',
+  chat_btn: '💬 1:1 Real-time Auto Translate Chat',
+  chat_translation_hint: '✨ Translated to partner language in 0.3s powered by Gemini AI',
+  free_share: 'Free Giveaway',
+  filter_all_regions: 'Nationwide Industrial Zones',
+  search_placeholder: 'Search items near industrial zones (washer, bike, rice cooker)...',
+  status_selling: 'Selling',
+  status_reserved: 'Reserved',
+  status_sold: 'Sold Out',
+  walk_trade_available: '5-min walk direct meetup',
+  zero_fee_badge: '0 Fee 100% Free',
+  community_title: 'Community & Lounge',
+  manner_temperature: 'Trust Score',
+};

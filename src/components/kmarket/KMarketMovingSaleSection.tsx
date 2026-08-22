@@ -6,11 +6,19 @@ import { useLanguage } from '@/context/LanguageContext';
 import { Plane, Tag, MapPin, MessageCircle, Heart, Flame, AlertCircle } from 'lucide-react';
 import CountryFlag from './CountryFlag';
 import { getMovingSaleBadgeInfo } from '@/lib/movingSaleUtils';
+import { getAdaptedItemRegion } from '@/lib/dynamicLocationAdapter';
 
 export default function KMarketMovingSaleSection() {
-  const { items, setSelectedItem, openChatForItem, toggleLike, likedItemIds } = useKMarket();
+  const { items, setSelectedItem, openChatForItem, toggleLike, likedItemIds, selectedRegion } = useKMarket();
   const { t, formatWon, currentLang } = useLanguage();
   const [dDayFilter, setDDayFilter] = useState<'all' | 'd3' | 'd7' | 'd14'>('all');
+  const MOVING_ITEMS_PER_PAGE = 20;
+  const [movingPage, setMovingPage] = useState(1);
+
+  // D-Day 필터 변경 시 1페이지로 리셋
+  React.useEffect(() => {
+    setMovingPage(1);
+  }, [dDayFilter]);
 
   const movingSaleItems = items.filter(
     (item) => item.is_moving_sale || item.category === 'moving_sale'
@@ -112,126 +120,195 @@ export default function KMarketMovingSaleSection() {
         </button>
       </div>
 
-      {/* 무빙세일 매물 그리드 */}
+      {/* 무빙세일 매물 그리드 (20개 단위 페이징) */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        {filteredItems.map((item) => {
-          const badgeInfo = getMovingSaleBadgeInfo(item.moving_d_day || 7);
-          const discountPercent = item.original_price
-            ? Math.round(((item.original_price - item.price) / item.original_price) * 100)
-            : 0;
-          const isLiked = likedItemIds.has(item.id);
+        {filteredItems
+          .slice((movingPage - 1) * MOVING_ITEMS_PER_PAGE, movingPage * MOVING_ITEMS_PER_PAGE)
+          .map((item) => {
+            const badgeInfo = getMovingSaleBadgeInfo(item.moving_d_day || 7);
+            const discountPercent = item.original_price
+              ? Math.round(((item.original_price - item.price) / item.original_price) * 100)
+              : 0;
+            const isLiked = likedItemIds.has(item.id);
+            const displayRegion = getAdaptedItemRegion(item, selectedRegion);
 
-          // 다국어 제목 가져오기
-          const displayTitle =
-            item.translations?.[currentLang]?.title || item.title;
+            // 다국어 제목 가져오기
+            const displayTitle =
+              currentLang === 'vi' && item.translations?.vi?.title
+                ? item.translations.vi.title
+                : currentLang === 'en' && item.translations?.en?.title
+                ? item.translations.en.title
+                : currentLang === 'mn' && item.translations?.mn?.title
+                ? item.translations.mn.title
+                : currentLang === 'zh' && item.translations?.zh?.title
+                ? item.translations.zh.title
+                : item.title;
 
-          return (
-            <div
-              key={item.id}
-              onClick={() => setSelectedItem(item)}
-              className="group bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/80 dark:border-slate-800 hover:border-orange-400 shadow-xs hover:shadow-xl transition-all duration-300 overflow-hidden flex flex-col cursor-pointer"
-            >
-              {/* 이미지 썸네일 */}
-              <div className="relative h-44 w-full bg-slate-100 dark:bg-slate-800 overflow-hidden">
-                <img
-                  src={item.images[0]}
-                  alt={item.title}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-
-                {/* 3단계 귀국 D-Day 긴박감 배지 */}
-                <div
-                  className={`absolute top-2.5 left-2.5 backdrop-blur-xs text-[11px] font-black px-2.5 py-1 rounded-full flex items-center space-x-1 ${badgeInfo.badgeColorClass} ${
-                    badgeInfo.pulse ? 'animate-pulse' : ''
-                  }`}
-                >
-                  <span>{badgeInfo.badgeText}</span>
-                </div>
-
-                {/* 판매자 국가 국기 & 국가코드 배지 */}
-                <div className="absolute top-2.5 right-2.5 bg-black/75 backdrop-blur-md text-white text-xs font-bold px-2.5 py-1 rounded-full shadow-md flex items-center space-x-1.5 border border-white/20">
-                  <CountryFlag
-                    countryCode={item.seller_country}
-                    fallbackEmoji={item.seller_country_flag}
-                    size="xs"
-                    shape="circle"
-                  />
-                  <span className="text-[10px] text-amber-300 font-bold">{item.seller_country}</span>
-                  <span className="text-[10px] text-slate-100">{item.seller_name.split(' ')[0]}</span>
-                </div>
-
-                {/* 묶음 할인율 뱃지 */}
-                {discountPercent > 0 && (
-                  <div className="absolute bottom-2.5 left-2.5 bg-amber-400 text-slate-950 text-xs font-black px-2 py-0.5 rounded-md shadow-xs">
-                    {discountPercent}% 묶음특가
-                  </div>
-                )}
-
-                {/* 찜하기 버튼 */}
-                <button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    toggleLike(item.id);
-                  }}
-                  className={`absolute bottom-2.5 right-2.5 p-1.5 rounded-full backdrop-blur-md transition-transform active:scale-90 ${
-                    isLiked
-                      ? 'bg-red-500 text-white'
-                      : 'bg-black/30 text-white hover:bg-black/50'
-                  }`}
-                >
-                  <Heart className={`w-4 h-4 ${isLiked ? 'fill-current' : ''}`} />
-                </button>
-              </div>
-
-              {/* 매물 본문 */}
-              <div className="p-4 flex-1 flex flex-col justify-between space-y-3">
-                <div className="space-y-1.5">
-                  <div className="text-[10px] font-semibold text-orange-600 dark:text-orange-400">
-                    {badgeInfo.badgeSubText}
-                  </div>
-
-                  <h3 className="font-bold text-sm text-slate-900 dark:text-white line-clamp-2 group-hover:text-orange-600 transition-colors leading-snug">
-                    {displayTitle}
-                  </h3>
-
-                  <div className="flex items-baseline space-x-2">
-                    <span className="text-lg font-black text-slate-950 dark:text-white">
-                      {formatWon(item.price)}
+            return (
+              <div
+                key={item.id}
+                onClick={() => setSelectedItem(item)}
+                className="group p-4 flex flex-col justify-between hover:border-amber-400/80 hover:shadow-lg transition-all duration-300 relative overflow-hidden bg-white/95 backdrop-blur-xs cursor-pointer border border-[#ded1c4] rounded-2xl"
+              >
+                {/* 상단 뱃지 라인 */}
+                <div className="flex items-center justify-between gap-2 mb-3">
+                  <div className="flex items-center space-x-1.5 min-w-0">
+                    <CountryFlag
+                      countryCode={item.seller_country}
+                      fallbackEmoji={item.seller_country_flag}
+                      size="sm"
+                    />
+                    <span className="text-xs font-semibold text-slate-700 truncate">
+                      {item.seller_name}
                     </span>
-                    {item.original_price && (
-                      <span className="text-xs text-slate-400 line-through">
-                        {item.original_price.toLocaleString()}원
-                      </span>
-                    )}
                   </div>
+
+                  <span
+                    className={`text-[10px] font-black px-2 py-0.5 rounded-md shrink-0 flex items-center space-x-1 ${badgeInfo.color || 'bg-amber-100 text-amber-900'}`}
+                  >
+                    <span>{badgeInfo.icon}</span>
+                    <span>{badgeInfo.text}</span>
+                  </span>
                 </div>
 
-                <div className="pt-2 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-xs text-slate-500 dark:text-slate-400">
-                  <div className="flex items-center space-x-1 truncate max-w-[170px]">
-                    <MapPin className="w-3.5 h-3.5 text-blue-600 shrink-0" />
-                    <span className="truncate">{item.region}</span>
-                  </div>
+                {/* 썸네일 이미지 & 할인율 뱃지 */}
+                <div className="relative aspect-16/10 rounded-2xl overflow-hidden mb-3 bg-slate-100">
+                  <img
+                    src={item.images[0]}
+                    alt={displayTitle}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    loading="lazy"
+                  />
 
+                  {/* 묶음 할인율 뱃지 */}
+                  {discountPercent > 0 && (
+                    <div className="absolute top-2 left-2 bg-gradient-to-r from-red-600 to-rose-600 text-white text-[11px] font-black px-2 py-0.5 rounded-lg shadow-md flex items-center space-x-0.5">
+                      <Flame className="w-3 h-3 fill-current" />
+                      <span>{discountPercent}% OFF</span>
+                    </div>
+                  )}
+
+                  {/* 다중 사진 인디케이터 */}
+                  {item.images.length > 1 && (
+                    <div className="absolute bottom-2 left-2 bg-black/50 backdrop-blur-sm text-white text-[10px] px-2 py-0.5 rounded-md font-semibold">
+                      📷 1/{item.images.length}
+                    </div>
+                  )}
+
+                  {/* 찜 버튼 */}
                   <button
                     onClick={(e) => {
                       e.stopPropagation();
-                      openChatForItem(item);
+                      toggleLike(item.id);
                     }}
-                    className="flex items-center space-x-1.5 text-xs font-bold px-3 py-1.5 rounded-xl transition-all duration-200 cursor-pointer shadow-2xs hover:scale-105 active:scale-95"
-                    style={{
-                      background: '#09101f',
-                      border: '1.5px solid #f3ba2f',
-                    }}
+                    className={`absolute bottom-2 right-2 p-1.5 rounded-full backdrop-blur-md transition-all active:scale-75 ${
+                      isLiked
+                        ? 'bg-red-500 text-white shadow-md shadow-red-500/40'
+                        : 'bg-black/30 text-white hover:bg-black/50'
+                    }`}
                   >
-                    <MessageCircle className="w-3.5 h-3.5 text-[#f3ba2f]" />
-                    <span className="text-[#f3ba2f] font-extrabold">1:1 번역챗</span>
+                    <Heart className={`w-3.5 h-3.5 ${isLiked ? 'fill-current' : ''}`} />
                   </button>
                 </div>
+
+                {/* 상품 정보 */}
+                <div className="space-y-2 flex-1 flex flex-col justify-between">
+                  <div>
+                    <h3 className="font-bold text-sm text-slate-900 group-hover:text-amber-800 transition-colors line-clamp-2 leading-snug">
+                      {displayTitle}
+                    </h3>
+
+                    <div className="flex items-baseline space-x-2">
+                      <span className="text-lg font-black text-slate-950">
+                        {formatWon(item.price)}
+                      </span>
+                      {item.original_price && (
+                        <span className="text-xs text-slate-400 line-through">
+                          {item.original_price.toLocaleString()}원
+                        </span>
+                      )}
+                    </div>
+                  </div>
+
+                  <div className="pt-2 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+                    <div className="flex items-center space-x-1 truncate max-w-[170px]" title={displayRegion}>
+                      <MapPin className="w-3.5 h-3.5 text-[#845b37] shrink-0" />
+                      <span className="truncate font-semibold">{displayRegion}</span>
+                    </div>
+
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        openChatForItem(item);
+                      }}
+                      className="flex items-center space-x-1.5 text-xs font-bold px-3 py-1.5 rounded-xl transition-all duration-200 cursor-pointer shadow-2xs hover:scale-105 active:scale-95"
+                      style={{
+                        background: '#09101f',
+                        border: '1.5px solid #f3ba2f',
+                      }}
+                    >
+                      <MessageCircle className="w-3.5 h-3.5 text-[#f3ba2f]" />
+                      <span className="text-[#f3ba2f] font-extrabold">1:1 번역챗</span>
+                    </button>
+                  </div>
+                </div>
               </div>
-            </div>
-          );
-        })}
+            );
+          })}
       </div>
+
+      {/* ✈️ 상단 무빙세일 스마트 페이지네이션 바 */}
+      {Math.ceil(filteredItems.length / MOVING_ITEMS_PER_PAGE) > 1 && (
+        <div className="flex items-center justify-center gap-2 pt-6">
+          <button
+            onClick={() => setMovingPage((prev) => Math.max(prev - 1, 1))}
+            disabled={movingPage === 1}
+            className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all border ${
+              movingPage === 1
+                ? 'opacity-40 cursor-not-allowed bg-gray-100 text-gray-400 border-gray-200'
+                : 'bg-white text-[#1f1914] border-[#ded1c4] hover:bg-[#eae3dc] active:scale-95 cursor-pointer shadow-xs'
+            }`}
+          >
+            ◀ 이전
+          </button>
+
+          {Array.from(
+            { length: Math.ceil(filteredItems.length / MOVING_ITEMS_PER_PAGE) },
+            (_, idx) => {
+              const pageNum = idx + 1;
+              const isCurrent = movingPage === pageNum;
+              return (
+                <button
+                  key={pageNum}
+                  onClick={() => setMovingPage(pageNum)}
+                  className={`w-8 h-8 rounded-xl text-xs font-black transition-all cursor-pointer ${
+                    isCurrent
+                      ? 'bg-[#1f1914] text-[#fbf9f6] shadow-md scale-105'
+                      : 'bg-white text-[#5c4a39] border border-[#ded1c4] hover:bg-[#eae3dc]'
+                  }`}
+                >
+                  {pageNum}
+                </button>
+              );
+            }
+          )}
+
+          <button
+            onClick={() => {
+              const maxPage = Math.ceil(filteredItems.length / MOVING_ITEMS_PER_PAGE);
+              setMovingPage((prev) => Math.min(prev + 1, maxPage));
+            }}
+            disabled={movingPage === Math.ceil(filteredItems.length / MOVING_ITEMS_PER_PAGE)}
+            className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all border ${
+              movingPage === Math.ceil(filteredItems.length / MOVING_ITEMS_PER_PAGE)
+                ? 'opacity-40 cursor-not-allowed bg-gray-100 text-gray-400 border-gray-200'
+                : 'bg-white text-[#1f1914] border-[#ded1c4] hover:bg-[#eae3dc] active:scale-95 cursor-pointer shadow-xs'
+            }`}
+          >
+            다음 ▶
+          </button>
+        </div>
+      )}
     </section>
   );
 }

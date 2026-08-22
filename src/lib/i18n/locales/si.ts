@@ -1,0 +1,27 @@
+import { TranslationDictionary } from '../types';
+
+export const si: TranslationDictionary = {
+  app_name: 'K-Market',
+  app_slogan: 'විදේශිකයන් සඳහා නොමිලේ පාවිච්චි කළ බඩු වෙළඳපොළ',
+  ktrs_tab_tax: '💰 බදු ආපසු ගෙවීම',
+  ktrs_tab_loan: '⚡ හදිසි ණය',
+  ktrs_tab_housing: '🏠 ආරක්ෂිත නවාතැන්',
+  ktrs_tab_market: '🛒 K-Market (වෙළඳපොළ)',
+  tax_banner_title: 'කොරියාවේ වසර 1+ සේවය කළාද? තත්පර 30 කින් නොමිලේ බදු ආපසු මුදල [1.84M] පරීක්ෂා කරන්න!',
+  tax_banner_btn: 'මුදල පරීක්ෂා කරන්න ➔',
+  moving_sale_title: '✈️ ආපසු රටට D-7 [විශේෂ වට්ටම් සහිත විකිණීම]',
+  moving_sale_badge: 'පැකේජ වට්ටම්',
+  post_item_btn: '✏️ විනාඩි 1 කින් විකුණන්න',
+  chat_btn: '💬 සජීවී පරිවර්තන චැට්',
+  chat_translation_hint: '✨ Gemini AI මඟින් තත්පර 0.3 කින් ස්වයංක්‍රීයව පරිවර්තනය වේ',
+  free_share: 'නොමිලේ',
+  filter_all_regions: 'සියලුම කාර්මික කලාප',
+  search_placeholder: 'කාර්මික කලාපය අසල බඩු සොයන්න...',
+  status_selling: 'විකිණීමට ඇත',
+  status_reserved: 'වෙන්කර ඇත',
+  status_sold: 'විකුණා අවසන්',
+  walk_trade_available: 'විනාඩි 5 කින් හමුවිය හැක',
+  zero_fee_badge: 'ගාස්තු රහිතයි 100% නොමිලේ',
+  community_title: 'ප්‍රජාව සහ සාකච්ඡා',
+  manner_temperature: 'විශ්වාසනීයත්ව ලකුණු',
+};

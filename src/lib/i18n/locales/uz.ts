@@ -1,0 +1,27 @@
+import { TranslationDictionary } from '../types';
+
+export const uz: TranslationDictionary = {
+  app_name: 'K-Market',
+  app_slogan: "Xorijiy ishchilar uchun 0 so'mlik bepul bozor",
+  ktrs_tab_tax: '💰 Soliq qaytarish (1.84mln)',
+  ktrs_tab_loan: '⚡ Shoshilinch qarz',
+  ktrs_tab_housing: '🏠 Ishonchli xona',
+  ktrs_tab_market: '🛒 K-Market (Bozor)',
+  tax_banner_title: "Koreyada 1 yildan ortiq ishladingizmi? [1.84 mln von] soliq qaytarishni 30 soniyada bepul tekshiring!",
+  tax_banner_btn: 'Pulimni tekshirish ➔',
+  moving_sale_title: "✈️ Vatinga qaytish D-7 [Arzon Moving Sale]",
+  moving_sale_badge: 'Paket arzon narx',
+  post_item_btn: "✏️ 1 daqiqada e'lon berish",
+  chat_btn: '💬 1:1 Jonli tarjima chat',
+  chat_translation_hint: '✨ Gemini AI orqali 0.3 soniyada suhbatdosh tiliga tarjima qilinadi',
+  free_share: 'Tekin berish',
+  filter_all_regions: 'Barcha sanoat zonalari',
+  search_placeholder: 'Sanoat zonasi atrofidan qidirish...',
+  status_selling: 'Sotilmoqda',
+  status_reserved: 'Band qilingan',
+  status_sold: 'Sotildi',
+  walk_trade_available: '5 daqiqa piyoda uchrashuv',
+  zero_fee_badge: "Komissiya 0 so'm",
+  community_title: 'Mahalliy hayot & Suhbat',
+  manner_temperature: 'Ishonch darajasi',
+};

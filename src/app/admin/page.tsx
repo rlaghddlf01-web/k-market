@@ -20,100 +20,38 @@ import { INITIAL_ITEMS } from '@/lib/mockData';
 import { INITIAL_COMMUNITY_POSTS } from '@/lib/communityMockData';
 import { KMarketItem, UserReportData } from '@/types/kmarket';
 import { CommunityPost } from '@/types/community';
-import { MessageSquareHeart, EyeOff } from 'lucide-react';
+import { MessageSquareHeart, EyeOff, Lightbulb } from 'lucide-react';
+import KMarketAdminUsersTab from '@/components/admin/KMarketAdminUsersTab';
+import KMarketAdminAnalyticsDashboard from '@/components/admin/KMarketAdminAnalyticsDashboard';
+import KMarketAdminFeedbackTab from '@/components/admin/KMarketAdminFeedbackTab';
 
 export default function KMarketAdminPage() {
-  const [activeTab, setActiveTab] = useState<'overview' | 'reports' | 'community' | 'items' | 'users' | 'taxes'>('overview');
+  const [activeTab, setActiveTab] = useState<'overview' | 'reports' | 'community' | 'items' | 'users' | 'taxes' | 'feedback'>('overview');
   const [reportFilter, setReportFilter] = useState<'all' | 'pending' | 'resolved'>('all');
-  const [communityPosts, setCommunityPosts] = useState<CommunityPost[]>(INITIAL_COMMUNITY_POSTS);
+  const [communityPosts, setCommunityPosts] = useState<CommunityPost[]>([]);
 
-  // 관리자 신고 리스트 상태
+  // 관리자 신고 리스트 상태 (실제 접수 시 실시간 누적, 초기 0건)
   const [reports, setReports] = useState<
     (UserReportData & { status: 'pending' | 'banned' | 'suspended' | 'dismissed' | 'resolved' })[]
-  >([
-    {
-      id: 'rep-101',
-      reporter_id: 'user-kr-9',
-      reporter_name: '김철수 (대한민국)',
-      target_user_id: 'user-fake-1',
-      target_user_name: 'Nguyen Van A (베트남)',
-      item_id: 'item-fake-1',
-      item_title: '아이폰 15 프로 미개봉 (10만원 헐값)',
-      reason_type: 'scam_fraud',
-      details: '카카오톡으로 먼저 5만원 입금하면 택배로 보내준다고 유도함. 전형적인 선입금 사기 의심.',
-      block_user: true,
-      status: 'pending',
-      created_at: '방금 전 (10분 전)',
-    },
-    {
-      id: 'rep-102',
-      reporter_id: 'user-vn-3',
-      reporter_name: 'Lê Thị Mai (베트남)',
-      target_user_id: 'user-bad-2',
-      target_user_name: 'Somchai (태국)',
-      item_id: 'item-2',
-      item_title: '쿠쿠 전기밥솥 6인용',
-      reason_type: 'no_show_flake',
-      details: '포승공단 GS25 앞에서 19시에 만나기로 약속해놓고 나타나지 않고 연락 두절됨.',
-      block_user: true,
-      status: 'pending',
-      created_at: '1시간 전',
-    },
-    {
-      id: 'rep-103',
-      reporter_id: 'user-mn-2',
-      reporter_name: 'Batbayar (몽골)',
-      target_user_id: 'user-bad-3',
-      target_user_name: 'John Doe (필리핀)',
-      item_id: 'item-3',
-      item_title: '중고 자전거 26인치',
-      reason_type: 'bad_manner_abuse',
-      details: '가격 네고 거절하자 심한 욕설과 비속어를 사용함.',
-      block_user: true,
-      status: 'resolved',
-      created_at: '어제',
-    },
-  ]);
+  >([]);
 
-  // 관리자 매물 리스트 상태
+  // 관리자 매물 리스트 상태 (실제 등록 매물)
   const [items, setItems] = useState<KMarketItem[]>(INITIAL_ITEMS);
 
-  // KTRS 세금 환급 연계 신청 리스트
-  const [taxLeads, setTaxLeads] = useState([
+  // KTRS 세금 환급 연계 신청 리스트 (실제 신청 시 실시간 누적, 초기 0건)
+  const [taxLeads, setTaxLeads] = useState<
     {
-      id: 'tax-01',
-      userName: 'Trần Văn Đức',
-      country: '베트남 🇻🇳',
-      workPeriod: '3년 (E-9)',
-      salary: '280만원',
-      estimatedRefund: '184만원',
-      feeType: '선결제 0원 (후불결제)',
-      status: '서류 검토중',
-      appliedAt: '2026-08-21 11:20',
-    },
-    {
-      id: 'tax-02',
-      userName: 'Batbayar Bold',
-      country: '몽골 🇲🇳',
-      workPeriod: '4년 (E-9)',
-      salary: '320만원',
-      estimatedRefund: '210만원',
-      feeType: '선결제 0원 (후불결제)',
-      status: '환급 승인 대기',
-      appliedAt: '2026-08-21 09:45',
-    },
-    {
-      id: 'tax-03',
-      userName: 'Anil Shrestha',
-      country: '네팔 🇳🇵',
-      workPeriod: '2년 (E-9)',
-      salary: '250만원',
-      estimatedRefund: '145만원',
-      feeType: '선결제 0원 (후불결제)',
-      status: '환급금 입금완료',
-      appliedAt: '2026-08-20 16:30',
-    },
-  ]);
+      id: string;
+      userName: string;
+      country: string;
+      workPeriod: string;
+      salary: string;
+      estimatedRefund: string;
+      feeType: string;
+      status: string;
+      appliedAt: string;
+    }[]
+  >([]);
 
   // 관리자 신고 제재 액션
   const handleReportAction = (
@@ -216,8 +154,8 @@ export default function KMarketAdminPage() {
         </div>
       </header>
 
-      {/* 2. 관리자 메인 레이아웃 (사이드바 + 본문) */}
-      <div className="flex-1 flex max-w-7xl w-full mx-auto p-4 sm:p-6 gap-6">
+      {/* 2. 관리자 메인 레이아웃 (풀 와이드 100% 가로 확장) */}
+      <div className="flex-1 flex w-full px-4 sm:px-6 lg:px-8 py-4 sm:py-6 gap-6">
         {/* 좌측 밝은 네비게이션 사이드바 */}
         <aside className="w-64 shrink-0 space-y-2 hidden md:block">
           <nav className="space-y-1.5 bg-white p-3 rounded-3xl border border-slate-200/80 shadow-xs">
@@ -317,6 +255,23 @@ export default function KMarketAdminPage() {
                 <span>외국인 회원 관리</span>
               </div>
             </button>
+
+            <button
+              onClick={() => setActiveTab('feedback')}
+              className={`w-full flex items-center justify-between px-3.5 py-3 rounded-2xl text-xs sm:text-sm font-extrabold transition-all cursor-pointer ${
+                activeTab === 'feedback'
+                  ? 'bg-indigo-900 text-amber-300 shadow-md shadow-indigo-900/30 ring-2 ring-amber-400/40'
+                  : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900'
+              }`}
+            >
+              <div className="flex items-center space-x-2.5">
+                <Lightbulb className="w-4 h-4 text-amber-400" />
+                <span>유저 피드백 / VOC</span>
+              </div>
+              <span className="bg-amber-400 text-slate-950 text-[10px] font-black px-2 py-0.5 rounded-full">
+                VOC
+              </span>
+            </button>
           </nav>
 
           {/* 안전 관제 현황 미니 카드 */}
@@ -369,6 +324,9 @@ export default function KMarketAdminPage() {
           {/* 1. 종합 운영 대시보드 탭 (Overview) */}
           {activeTab === 'overview' && (
             <div className="space-y-6">
+              {/* 📈 IR 피칭용 기간별 정밀 분석 & SNS 유입 추적 대시보드 */}
+              <KMarketAdminAnalyticsDashboard />
+
               {/* 4대 주요 핵심 지표 카드 (이지텍스 밝은 카드 스타일) */}
               <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
                 <div className="p-5 rounded-3xl bg-white border border-slate-200/80 shadow-xs space-y-2 hover:shadow-md transition-shadow">
@@ -409,10 +367,10 @@ export default function KMarketAdminPage() {
                     </div>
                   </div>
                   <div className="text-2xl sm:text-3xl font-black text-amber-600">
-                    539만원
+                    0원
                   </div>
                   <span className="text-[11px] text-amber-800 font-bold bg-amber-50 px-2 py-0.5 rounded-md inline-block">
-                    선결제 0원 후불 신청 누적
+                    선결제 0원 후불 신청 대기
                   </span>
                 </div>
 
@@ -424,47 +382,47 @@ export default function KMarketAdminPage() {
                     </div>
                   </div>
                   <div className="text-2xl sm:text-3xl font-black text-purple-700">
-                    1,280명
+                    0명
                   </div>
                   <span className="text-[11px] text-purple-800 font-bold bg-purple-50 px-2 py-0.5 rounded-md inline-block">
-                    15개국 근로자 활동중
+                    실시간 가입 회원 집계중
                   </span>
                 </div>
               </div>
 
-              {/* 공단별 직거래 현황 & 국적별 분포 */}
+              {/* 공단별 직거래 현황 & 국적별 분포 (실제 데이터 0부터 집계) */}
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
                 <div className="p-5 rounded-3xl bg-white border border-slate-200/80 shadow-xs space-y-3.5">
                   <h3 className="font-black text-sm text-slate-900 flex items-center gap-1.5">
-                    <MapPin className="w-4 h-4 text-blue-600" />
+                    <MapPin className="w-4 h-4 text-[#845b37]" />
                     <span>주요 외국인 공단별 거래 점유율</span>
                   </h3>
                   <div className="space-y-3 text-xs">
                     <div>
                       <div className="flex justify-between text-[11px] font-bold text-slate-700 mb-1">
                         <span>경기 평택 포승국가산단</span>
-                        <span className="text-blue-600">38% (124건)</span>
+                        <span className="text-[#845b37]">0% (0건)</span>
                       </div>
                       <div className="w-full h-2 rounded-full bg-slate-100 overflow-hidden">
-                        <div className="w-[38%] h-full bg-blue-600 rounded-full" />
+                        <div className="w-0 h-full bg-[#845b37] rounded-full" />
                       </div>
                     </div>
                     <div>
                       <div className="flex justify-between text-[11px] font-bold text-slate-700 mb-1">
                         <span>경기 안산 반월시화 / 원곡동</span>
-                        <span className="text-indigo-600">32% (105건)</span>
+                        <span className="text-[#845b37]">0% (0건)</span>
                       </div>
                       <div className="w-full h-2 rounded-full bg-slate-100 overflow-hidden">
-                        <div className="w-[32%] h-full bg-indigo-600 rounded-full" />
+                        <div className="w-0 h-full bg-[#845b37] rounded-full" />
                       </div>
                     </div>
                     <div>
                       <div className="flex justify-between text-[11px] font-bold text-slate-700 mb-1">
                         <span>경기 화성 향남제약 / 마도</span>
-                        <span className="text-sky-600">18% (59건)</span>
+                        <span className="text-[#845b37]">0% (0건)</span>
                       </div>
                       <div className="w-full h-2 rounded-full bg-slate-100 overflow-hidden">
-                        <div className="w-[18%] h-full bg-sky-500 rounded-full" />
+                        <div className="w-0 h-full bg-[#845b37] rounded-full" />
                       </div>
                     </div>
                   </div>
@@ -478,25 +436,28 @@ export default function KMarketAdminPage() {
                   <div className="grid grid-cols-2 gap-2.5 text-xs">
                     <div className="p-3 bg-slate-50 rounded-2xl border border-slate-200/80 flex items-center justify-between font-bold">
                       <span className="text-slate-800">🇻🇳 베트남 (Vietnam)</span>
-                      <strong className="text-blue-600 font-black">41%</strong>
+                      <strong className="text-[#845b37] font-black">0%</strong>
                     </div>
                     <div className="p-3 bg-slate-50 rounded-2xl border border-slate-200/80 flex items-center justify-between font-bold">
                       <span className="text-slate-800">🇲🇳 몽골 (Mongolia)</span>
-                      <strong className="text-indigo-600 font-black">22%</strong>
+                      <strong className="text-[#845b37] font-black">0%</strong>
                     </div>
                     <div className="p-3 bg-slate-50 rounded-2xl border border-slate-200/80 flex items-center justify-between font-bold">
                       <span className="text-slate-800">🇹🇭 태국 (Thailand)</span>
-                      <strong className="text-amber-600 font-black">16%</strong>
+                      <strong className="text-[#845b37] font-black">0%</strong>
                     </div>
                     <div className="p-3 bg-slate-50 rounded-2xl border border-slate-200/80 flex items-center justify-between font-bold">
                       <span className="text-slate-800">🇳🇵 네팔 (Nepal)</span>
-                      <strong className="text-purple-600 font-black">12%</strong>
+                      <strong className="text-[#845b37] font-black">0%</strong>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
           )}
+
+          {/* 6. 유저 피드백 / VOC 관제 탭 */}
+          {activeTab === 'feedback' && <KMarketAdminFeedbackTab />}
 
           {/* 2. 불량 매물 & 사기 신고 관제 탭 (Reports) */}
           {activeTab === 'reports' && (
@@ -525,79 +486,89 @@ export default function KMarketAdminPage() {
               </div>
 
               <div className="space-y-3">
-                {reports.map((rep) => (
-                  <div
-                    key={rep.id}
-                    className="p-5 rounded-3xl bg-white border border-slate-200/80 shadow-xs space-y-3"
-                  >
-                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-100 pb-3">
-                      <div className="flex items-center space-x-2">
-                        <span
-                          className={`px-2.5 py-0.5 rounded-full text-xs font-black ${
-                            rep.status === 'pending'
-                              ? 'bg-rose-500 text-white animate-pulse'
-                              : 'bg-slate-100 text-slate-700'
-                          }`}
-                        >
-                          {rep.status === 'pending' ? '🚨 심사 대기' : '✅ 조치 완료'}
-                        </span>
-                        <span className="font-bold text-xs text-slate-800">신고번호: #{rep.id}</span>
-                        <span className="text-[11px] text-slate-400">({rep.created_at})</span>
-                      </div>
-                      <span className="text-xs text-slate-500">
-                        신고자: <strong>{rep.reporter_name}</strong>
-                      </span>
-                    </div>
+                {reports.length === 0 ? (
+                  <div className="p-12 text-center bg-white rounded-3xl border border-slate-200/80 shadow-xs space-y-2">
+                    <ShieldAlert className="w-10 h-10 text-emerald-500 mx-auto opacity-80" />
+                    <h4 className="text-sm font-black text-slate-900">접수된 사기 및 불량 신고가 없습니다</h4>
+                    <p className="text-xs text-slate-400">사용자가 신고 팝업을 통해 접수한 불량 사용자/매물 내역이 여기에 실시간 표시됩니다.</p>
+                  </div>
+                ) : (
+                  reports
+                    .filter((r) => (reportFilter === 'all' ? true : r.status === 'pending'))
+                    .map((rep) => (
+                      <div
+                        key={rep.id}
+                        className="p-5 rounded-3xl bg-white border border-slate-200/80 shadow-xs space-y-3"
+                      >
+                        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-100 pb-3">
+                          <div className="flex items-center space-x-2">
+                            <span
+                              className={`px-2.5 py-0.5 rounded-full text-xs font-black ${
+                                rep.status === 'pending'
+                                  ? 'bg-rose-500 text-white animate-pulse'
+                                  : 'bg-slate-100 text-slate-700'
+                              }`}
+                            >
+                              {rep.status === 'pending' ? '🚨 심사 대기' : '✅ 조치 완료'}
+                            </span>
+                            <span className="font-bold text-xs text-slate-800">신고번호: #{rep.id}</span>
+                            <span className="text-[11px] text-slate-400">({rep.created_at})</span>
+                          </div>
+                          <span className="text-xs text-slate-500">
+                            신고자: <strong>{rep.reporter_name}</strong>
+                          </span>
+                        </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
-                      <div>
-                        <span className="text-slate-500">피신고 회원: </span>
-                        <strong className="text-rose-600 text-sm font-bold">{rep.target_user_name}</strong>
-                        {rep.item_title && (
-                          <p className="text-slate-600 mt-1 font-semibold">관련 매물: {rep.item_title}</p>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
+                          <div>
+                            <span className="text-slate-500">피신고 회원: </span>
+                            <strong className="text-rose-600 text-sm font-bold">{rep.target_user_name}</strong>
+                            {rep.item_title && (
+                              <p className="text-slate-600 mt-1 font-semibold">관련 매물: {rep.item_title}</p>
+                            )}
+                          </div>
+                          <div className="p-3 bg-rose-50/50 rounded-2xl border border-rose-100">
+                            <span className="text-[11px] font-bold text-rose-700 block mb-1">
+                              사유: {rep.reason_type}
+                            </span>
+                            <p className="text-slate-800 leading-relaxed font-medium">"{rep.details}"</p>
+                          </div>
+                        </div>
+
+                        {rep.status === 'pending' && (
+                          <div className="pt-3 border-t border-slate-100 flex items-center justify-end gap-2 flex-wrap">
+                            <button
+                              onClick={() => handleReportAction(rep.id, 'dismiss')}
+                              className="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold rounded-xl transition-colors cursor-pointer"
+                            >
+                              신고 기각 (무혐의)
+                            </button>
+                            <button
+                              onClick={() => handleReportAction(rep.id, 'delete_item')}
+                              className="px-3 py-1.5 bg-amber-50 hover:bg-amber-100 text-amber-900 border border-amber-200 text-xs font-bold rounded-xl transition-colors cursor-pointer flex items-center gap-1"
+                            >
+                              <Trash2 className="w-3.5 h-3.5 text-amber-600" />
+                              <span>매물 강제 삭제</span>
+                            </button>
+                            <button
+                              onClick={() => handleReportAction(rep.id, 'suspend')}
+                              className="px-3 py-1.5 bg-orange-600 hover:bg-orange-700 text-white text-xs font-bold rounded-xl transition-all cursor-pointer flex items-center gap-1 shadow-xs"
+                            >
+                              <Clock className="w-3.5 h-3.5" />
+                              <span>7일 거래 정지</span>
+                            </button>
+                            <button
+                              onClick={() => handleReportAction(rep.id, 'ban')}
+                              className="px-4 py-1.5 bg-rose-600 hover:bg-rose-700 text-white text-xs font-black rounded-xl transition-all shadow-md shadow-rose-600/30 cursor-pointer flex items-center gap-1"
+                            >
+                              <Ban className="w-3.5 h-3.5" />
+                              <span>🚨 플랫폼 영구 제재</span>
+                            </button>
+                          </div>
                         )}
                       </div>
-                      <div className="p-3 bg-rose-50/50 rounded-2xl border border-rose-100">
-                        <span className="text-[11px] font-bold text-rose-700 block mb-1">
-                          사유: {rep.reason_type}
-                        </span>
-                        <p className="text-slate-800 leading-relaxed font-medium">"{rep.details}"</p>
-                      </div>
-                    </div>
-
-                    {rep.status === 'pending' && (
-                      <div className="pt-3 border-t border-slate-100 flex items-center justify-end gap-2 flex-wrap">
-                        <button
-                          onClick={() => handleReportAction(rep.id, 'dismiss')}
-                          className="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold rounded-xl transition-colors cursor-pointer"
-                        >
-                          신고 기각 (무혐의)
-                        </button>
-                        <button
-                          onClick={() => handleReportAction(rep.id, 'delete_item')}
-                          className="px-3 py-1.5 bg-amber-50 hover:bg-amber-100 text-amber-900 border border-amber-200 text-xs font-bold rounded-xl transition-colors cursor-pointer flex items-center gap-1"
-                        >
-                          <Trash2 className="w-3.5 h-3.5 text-amber-600" />
-                          <span>매물 강제 삭제</span>
-                        </button>
-                        <button
-                          onClick={() => handleReportAction(rep.id, 'suspend')}
-                          className="px-3 py-1.5 bg-orange-600 hover:bg-orange-700 text-white text-xs font-bold rounded-xl transition-all cursor-pointer flex items-center gap-1 shadow-xs"
-                        >
-                          <Clock className="w-3.5 h-3.5" />
-                          <span>7일 거래 정지</span>
-                        </button>
-                        <button
-                          onClick={() => handleReportAction(rep.id, 'ban')}
-                          className="px-4 py-1.5 bg-rose-600 hover:bg-rose-700 text-white text-xs font-black rounded-xl transition-all shadow-md shadow-rose-600/30 cursor-pointer flex items-center gap-1"
-                        >
-                          <Ban className="w-3.5 h-3.5" />
-                          <span>🚨 플랫폼 영구 제재</span>
-                        </button>
-                      </div>
-                    )}
-                  </div>
-                ))}
+                    ))
+                )}
               </div>
             </div>
           )}
@@ -630,50 +601,58 @@ export default function KMarketAdminPage() {
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-slate-100 text-slate-700">
-                    {communityPosts.map((post) => (
-                      <tr key={post.id} className="hover:bg-slate-50 transition-colors">
-                        <td className="p-3.5">
-                          <div className="space-y-0.5">
-                            <span className="text-[10px] font-bold text-indigo-600 bg-indigo-50 px-2 py-0.5 rounded-md">
-                              {post.category}
-                            </span>
-                            <p className="font-bold text-slate-900 truncate max-w-[240px]">
-                              {post.title}
-                            </p>
-                          </div>
-                        </td>
-                        <td className="p-3.5 font-medium">
-                          {post.user_name} ({post.user_flag})
-                        </td>
-                        <td className="p-3.5 text-slate-500">{post.region}</td>
-                        <td className="p-3.5">
-                          <span className="text-slate-600 font-bold">
-                            ❤️ {post.like_count} • 💬 {post.comment_count}
-                          </span>
-                        </td>
-                        <td className="p-3.5 text-slate-400 text-[11px]">
-                          {new Date(post.created_at).toLocaleDateString()}
-                        </td>
-                        <td className="p-3.5 text-right space-x-1">
-                          <button
-                            onClick={() => handleHideCommunityPost(post.id, post.title)}
-                            className="px-2.5 py-1 bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-200 rounded-lg font-bold text-[10px] transition-colors cursor-pointer inline-flex items-center gap-1"
-                            title="커뮤니티에서 숨김 처리"
-                          >
-                            <EyeOff className="w-3 h-3 text-amber-600" />
-                            <span>블라인드</span>
-                          </button>
-                          <button
-                            onClick={() => handleBanCommunityUser(post.user_id, post.user_name)}
-                            className="px-2.5 py-1 bg-rose-50 hover:bg-rose-100 text-rose-700 border border-rose-200 rounded-lg font-bold text-[10px] transition-colors cursor-pointer inline-flex items-center gap-1"
-                            title="유저 영구 퇴출"
-                          >
-                            <Ban className="w-3 h-3 text-rose-600" />
-                            <span>퇴출</span>
-                          </button>
+                    {communityPosts.length === 0 ? (
+                      <tr>
+                        <td colSpan={6} className="p-8 text-center text-slate-400 text-xs">
+                          등록된 커뮤니티 게시글이 없습니다. (0개)
                         </td>
                       </tr>
-                    ))}
+                    ) : (
+                      communityPosts.map((post) => (
+                        <tr key={post.id} className="hover:bg-slate-50 transition-colors">
+                          <td className="p-3.5">
+                            <div className="space-y-0.5">
+                              <span className="text-[10px] font-bold text-indigo-600 bg-indigo-50 px-2 py-0.5 rounded-md">
+                                {post.category}
+                              </span>
+                              <p className="font-bold text-slate-900 truncate max-w-[240px]">
+                                {post.title}
+                              </p>
+                            </div>
+                          </td>
+                          <td className="p-3.5 font-medium">
+                            {post.user_name} ({post.user_flag})
+                          </td>
+                          <td className="p-3.5 text-slate-500">{post.region}</td>
+                          <td className="p-3.5">
+                            <span className="text-slate-600 font-bold">
+                              ❤️ {post.like_count} • 💬 {post.comment_count}
+                            </span>
+                          </td>
+                          <td className="p-3.5 text-slate-400 text-[11px]">
+                            {new Date(post.created_at).toLocaleDateString()}
+                          </td>
+                          <td className="p-3.5 text-right space-x-1">
+                            <button
+                              onClick={() => handleHideCommunityPost(post.id, post.title)}
+                              className="px-2.5 py-1 bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-200 rounded-lg font-bold text-[10px] transition-colors cursor-pointer inline-flex items-center gap-1"
+                              title="커뮤니티에서 숨김 처리"
+                            >
+                              <EyeOff className="w-3 h-3 text-amber-600" />
+                              <span>블라인드</span>
+                            </button>
+                            <button
+                              onClick={() => handleBanCommunityUser(post.user_id, post.user_name)}
+                              className="px-2.5 py-1 bg-rose-50 hover:bg-rose-100 text-rose-700 border border-rose-200 rounded-lg font-bold text-[10px] transition-colors cursor-pointer inline-flex items-center gap-1"
+                              title="유저 영구 퇴출"
+                            >
+                              <Ban className="w-3 h-3 text-rose-600" />
+                              <span>퇴출</span>
+                            </button>
+                          </td>
+                        </tr>
+                      ))
+                    )}
                   </tbody>
                 </table>
               </div>
@@ -746,7 +725,7 @@ export default function KMarketAdminPage() {
             <div className="space-y-4">
               <div>
                 <h3 className="font-black text-sm text-slate-900">
-                  KTRS 184만원 세금 환급 연계 신청 현황
+                  KTRS 184만원 세금 환급 연계 신청 현황 ({taxLeads.length}건)
                 </h3>
                 <p className="text-xs text-slate-500 mt-0.5">
                   선결제 0원 (후불결제) 모델로 접수된 외국인 근로자 리드 목록
@@ -766,44 +745,40 @@ export default function KMarketAdminPage() {
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-slate-100 text-slate-700">
-                    {taxLeads.map((lead) => (
-                      <tr key={lead.id} className="hover:bg-slate-50 transition-colors">
-                        <td className="p-3.5 font-bold text-slate-950">
-                          {lead.userName} ({lead.country})
-                        </td>
-                        <td className="p-3.5">{lead.workPeriod}</td>
-                        <td className="p-3.5">{lead.salary}</td>
-                        <td className="p-3.5 font-black text-amber-600 text-sm">
-                          {lead.estimatedRefund}
-                        </td>
-                        <td className="p-3.5 text-emerald-700 font-bold">{lead.feeType}</td>
-                        <td className="p-3.5">
-                          <span className="px-2.5 py-1 rounded-full text-[10px] font-bold bg-amber-50 text-amber-800 border border-amber-200">
-                            {lead.status}
-                          </span>
+                    {taxLeads.length === 0 ? (
+                      <tr>
+                        <td colSpan={6} className="p-8 text-center text-slate-400 text-xs">
+                          접수된 세금 환급 연계 신청 내역이 없습니다. (0건)
                         </td>
                       </tr>
-                    ))}
+                    ) : (
+                      taxLeads.map((lead) => (
+                        <tr key={lead.id} className="hover:bg-slate-50 transition-colors">
+                          <td className="p-3.5 font-bold text-slate-950">
+                            {lead.userName} ({lead.country})
+                          </td>
+                          <td className="p-3.5">{lead.workPeriod}</td>
+                          <td className="p-3.5">{lead.salary}</td>
+                          <td className="p-3.5 font-black text-amber-600 text-sm">
+                            {lead.estimatedRefund}
+                          </td>
+                          <td className="p-3.5 text-emerald-700 font-bold">{lead.feeType}</td>
+                          <td className="p-3.5">
+                            <span className="px-2.5 py-1 rounded-full text-[10px] font-bold bg-amber-50 text-amber-800 border border-amber-200">
+                              {lead.status}
+                            </span>
+                          </td>
+                        </tr>
+                      ))
+                    )}
                   </tbody>
                 </table>
               </div>
             </div>
           )}
 
-          {/* 5. 외국인 회원 관리 탭 (Users) */}
-          {activeTab === 'users' && (
-            <div className="p-10 rounded-3xl bg-white border border-slate-200/80 shadow-xs text-center space-y-3">
-              <div className="w-14 h-14 rounded-2xl bg-purple-50 text-purple-600 flex items-center justify-center mx-auto">
-                <Users className="w-7 h-7" />
-              </div>
-              <h3 className="font-black text-base text-slate-900">
-                15개국 외국인 회원 통합 신원 인증 데이터베이스
-              </h3>
-              <p className="text-xs text-slate-500 max-w-md mx-auto leading-relaxed">
-                법무부 외국인등록번호 및 고용노동부 E-9 비자 연동을 통한 기숙사 인증 회원 관리 시스템이 안전하게 연동되어 있습니다.
-              </p>
-            </div>
-          )}
+          {/* 5. 외국인 회원 및 OCR 신분인증 관리 탭 (Users) */}
+          {activeTab === 'users' && <KMarketAdminUsersTab />}
         </main>
       </div>
     </div>

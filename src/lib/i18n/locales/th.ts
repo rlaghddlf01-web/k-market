@@ -1,0 +1,27 @@
+import { TranslationDictionary } from '../types';
+
+export const th: TranslationDictionary = {
+  app_name: 'K-Market',
+  app_slogan: 'ตลาดมือสองและขายเหมากลับประเทศ ฟรีค่าธรรมเนียม',
+  ktrs_tab_tax: '💰 ขอคืนภาษี (1.84 ล้าน)',
+  ktrs_tab_loan: '⚡ เงินกู้ฉุกเฉิน',
+  ktrs_tab_housing: '🏠 ห้องพักปลอดภัย',
+  ktrs_tab_market: '🛒 K-Market (มือสอง/เหมา)',
+  tax_banner_title: 'ทำงานในเกาหลี 1 ปีขึ้นไป? ตรวจสอบเงินคืนภาษี [เฉลี่ย 1.84 ล้านวอน] ฟรีใน 30 วินาที!',
+  tax_banner_btn: 'เช็คเงินคืนของฉันตอนนี้ ➔',
+  moving_sale_title: '✈️ กลับประเทศ D-7 [Moving Sale ลดล้างสต๊อก]',
+  moving_sale_badge: 'มัดรวมราคาถูก',
+  post_item_btn: '✏️ ลงขายง่ายใน 1 นาที',
+  chat_btn: '💬 แชทแปลสดอัตโนมัติ 1:1',
+  chat_translation_hint: '✨ แปลเป็นภาษาคู่สนทนาอัตโนมัติใน 0.3 วินาทีด้วย Gemini AI',
+  free_share: 'แจกฟรี',
+  filter_all_regions: 'ทุกนิคมอุตสาหกรรม',
+  search_placeholder: 'ค้นหาสินค้าใกล้นิคม (เครื่องซักผ้า, จักรยาน, หม้อหุงข้าว)...',
+  status_selling: 'กำลังขาย',
+  status_reserved: 'ติดจอง',
+  status_sold: 'ขายแล้ว',
+  walk_trade_available: 'นัดรับเดิน 5 นาที',
+  zero_fee_badge: 'ค่าธรรมเนียม 0 วอน ฟรี 100%',
+  community_title: 'ชีวิตชุมชน & พูดคุย',
+  manner_temperature: 'คะแนนมารยาท',
+};

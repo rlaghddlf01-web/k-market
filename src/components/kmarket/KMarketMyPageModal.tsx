@@ -14,9 +14,14 @@ import {
   ArrowRight,
   MapPin,
   Bell,
+  MessageSquarePlus,
+  Lightbulb,
+  Download,
+  Smartphone,
 } from 'lucide-react';
 import CountryFlag from './CountryFlag';
 import KMarketEasyTaxRefundWidget from './KMarketEasyTaxRefundWidget';
+import { triggerPwaInstall } from '@/lib/pwaInstaller';
 
 interface KMarketMyPageModalProps {
   isOpen: boolean;
@@ -31,6 +36,7 @@ export default function KMarketMyPageModal({ isOpen, onClose }: KMarketMyPageMod
     authedUser,
     setIsTaxModalOpen,
     setIsKeywordModalOpen,
+    setIsFeedbackModalOpen,
     keywordAlerts,
     openChatForItem,
     setSelectedItem,
@@ -186,6 +192,34 @@ export default function KMarketMyPageModal({ isOpen, onClose }: KMarketMyPageMod
                 </ul>
               </div>
             )}
+          </div>
+
+          {/* 📲 1초 만에 K-Market 앱 설치하기 (PWA 홈 화면 추가) */}
+          <div className="px-4 py-3 bg-gradient-to-r from-[#09101f] via-[#111d38] to-[#162447] text-white rounded-2xl border-2 border-[#f3ba2f]/70 shadow-md flex items-center justify-between gap-3">
+            <div className="flex items-center space-x-2.5 min-w-0">
+              <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-[#f3ba2f] to-[#e5a91b] text-[#09101f] flex items-center justify-center font-black shrink-0 shadow-xs">
+                <Smartphone className="w-5 h-5 stroke-[2.5]" />
+              </div>
+              <div className="min-w-0">
+                <h5 className="text-xs font-black text-white flex items-center gap-1.5 truncate">
+                  <span>📲 홈 화면에 K-Market 앱 설치하기</span>
+                  <span className="text-[9px] bg-[#f3ba2f] text-[#09101f] px-1.5 py-0.2 rounded-full font-black">
+                    1초 설치
+                  </span>
+                </h5>
+                <p className="text-[10px] text-slate-300 mt-0.5 truncate">
+                  바탕화면에 설치하고 15개국 번역 채팅 및 직거래 알림을 가장 빠르게 받으세요.
+                </p>
+              </div>
+            </div>
+
+            <button
+              onClick={() => triggerPwaInstall()}
+              className="px-3.5 py-2 bg-gradient-to-r from-[#f3ba2f] to-[#e5a91b] hover:from-[#fcd34d] hover:to-[#f59e0b] text-[#09101f] font-black text-xs rounded-xl shadow-xs transition-all shrink-0 cursor-pointer flex items-center gap-1"
+            >
+              <Download className="w-3.5 h-3.5 stroke-[3]" />
+              <span>앱 설치</span>
+            </button>
           </div>
 
           {/* 🔔 키워드 실시간 알림 관리 섹션 (독립 카드) */}
@@ -485,6 +519,38 @@ export default function KMarketMyPageModal({ isOpen, onClose }: KMarketMyPageMod
               )}
             </div>
           )}
+
+          {/* 💡 앱 개선 제안 / VOC 건의 창구 (마이페이지 최하단) */}
+          <div className="mt-6 pt-4 border-t border-slate-200/80">
+            <div className="px-4 py-3.5 bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 text-white rounded-2xl border border-indigo-900/60 shadow-sm flex items-center justify-between gap-3">
+              <div className="flex items-center space-x-2.5 min-w-0">
+                <div className="p-2 rounded-xl bg-amber-400 text-slate-950 shrink-0 shadow-xs">
+                  <Lightbulb className="w-4 h-4" />
+                </div>
+                <div className="min-w-0">
+                  <h5 className="text-xs font-black text-white flex items-center gap-1.5 truncate">
+                    <span>💡 앱 개선 제안 및 건의하기</span>
+                    <span className="text-[9px] bg-amber-400/20 text-amber-300 px-1.5 py-0.2 rounded-md font-bold">
+                      VOC 소통창구
+                    </span>
+                  </h5>
+                  <p className="text-[10px] text-slate-300 mt-0.5 truncate">
+                    불편한 점, 번역 오류, 새로운 공단 추가 요청을 관리자에게 직접 보내주세요.
+                  </p>
+                </div>
+              </div>
+
+              <button
+                onClick={() => {
+                  onClose();
+                  setIsFeedbackModalOpen(true);
+                }}
+                className="px-3.5 py-2 bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-500 hover:to-amber-600 text-slate-950 font-black text-xs rounded-xl shadow-xs transition-all shrink-0 cursor-pointer"
+              >
+                의견 보내기
+              </button>
+            </div>
+          </div>
         </div>
         </div>
       </div>

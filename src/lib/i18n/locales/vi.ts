@@ -1,0 +1,27 @@
+import { TranslationDictionary } from '../types';
+
+export const vi: TranslationDictionary = {
+  app_name: 'K-Market',
+  app_slogan: 'Chợ đồ cũ & Thanh lý về nước 0 đồng cho lao động',
+  ktrs_tab_tax: '💰 Hoàn thuế (1,84tr)',
+  ktrs_tab_loan: '⚡ Vay khẩn cấp',
+  ktrs_tab_housing: '🏠 Phòng trọ an tâm',
+  ktrs_tab_market: '🛒 K-Market (Đồ cũ/Moving)',
+  tax_banner_title: 'Làm việc tại Hàn trên 1 năm? Kiểm tra hoàn thuế [1,84 triệu won] miễn phí trong 30 giây!',
+  tax_banner_btn: 'Kiểm tra tiền hoàn ngay ➔',
+  moving_sale_title: '✈️ Thanh lý gấp về nước D-7 [Moving Sale Siêu Rẻ]',
+  moving_sale_badge: 'Gói đại hạ giá',
+  post_item_btn: '✏️ Đăng bán trong 1 phút',
+  chat_btn: '💬 Chat dịch tự động 1:1',
+  chat_translation_hint: '✨ Tự động dịch sang ngôn ngữ đối phương sau 0.3 giây bằng Gemini AI',
+  free_share: 'Tặng miễn phí',
+  filter_all_regions: 'Khu công nghiệp toàn quốc',
+  search_placeholder: 'Tìm đồ gần khu công nghiệp (máy giặt, xe đạp, nồi cơm)...',
+  status_selling: 'Đang bán',
+  status_reserved: 'Đã cọc/hẹn',
+  status_sold: 'Đã bán',
+  walk_trade_available: 'Giao dịch trực tiếp đi bộ 5 phút',
+  zero_fee_badge: 'Phí 0 đồng 100% miễn phí',
+  community_title: 'Đời sống & Giao lưu',
+  manner_temperature: 'Nhiệt độ uy tín',
+};

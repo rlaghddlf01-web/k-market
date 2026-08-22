@@ -30,3 +30,23 @@ export function hasItemTranslation(item: KMarketItem, currentLang: SupportedLang
   if (item.source_lang && item.source_lang === currentLang) return false;
   return Boolean(item.translations[currentLang].title || item.translations[currentLang].description);
 }
+
+/**
+ * 작성일시(ISO 문자열)를 받아 상대 시간 문자열을 반환합니다.
+ */
+export function calcTimeAgo(dateStr: string): string {
+  try {
+    const diffMs = Date.now() - new Date(dateStr).getTime();
+    const diffSec = Math.floor(diffMs / 1000);
+    if (diffSec < 60) return '방금 전';
+    const diffMin = Math.floor(diffSec / 60);
+    if (diffMin < 60) return `${diffMin}분 전`;
+    const diffHours = Math.floor(diffMin / 60);
+    if (diffHours < 24) return `${diffHours}시간 전`;
+    const diffDays = Math.floor(diffHours / 24);
+    if (diffDays < 30) return `${diffDays}일 전`;
+    return `${Math.floor(diffDays / 30)}개월 전`;
+  } catch {
+    return '최근';
+  }
+}

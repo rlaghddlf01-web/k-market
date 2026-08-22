@@ -13,21 +13,41 @@ interface LanguageContextType {
   formatWon: (amount: number) => string;
 }
 
-const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
+export const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
   const [currentLang, setCurrentLangState] = useState<SupportedLanguage>('ko');
 
   useEffect(() => {
-    const saved = localStorage.getItem('kmarket_lang') as SupportedLanguage;
-    if (saved && SUPPORTED_LANGUAGES.some((l) => l.code === saved)) {
-      setCurrentLangState(saved);
+    try {
+      // 1. 이전에 선택하여 저장된 언어가 있으면 최우선 복원 (예: 'vi', 'mn', 'th')
+      const saved = localStorage.getItem('kmarket_lang') as SupportedLanguage;
+      if (saved && SUPPORTED_LANGUAGES.some((l) => l.code === saved)) {
+        setCurrentLangState(saved);
+        return;
+      }
+
+      // 2. 처음 설치하여 실행한 경우, 스마트폰 기기 언어 감지 (예: vi, th, mn, uz 등)
+      if (typeof window !== 'undefined' && window.navigator) {
+        const browserLang = window.navigator.language.slice(0, 2).toLowerCase();
+        const matched = SUPPORTED_LANGUAGES.find((l) => l.code === browserLang);
+        if (matched) {
+          setCurrentLangState(matched.code);
+          localStorage.setItem('kmarket_lang', matched.code);
+        }
+      }
+    } catch (e) {
+      console.warn('Language initialization error:', e);
     }
   }, []);
 
   const setLanguage = (lang: SupportedLanguage) => {
     setCurrentLangState(lang);
-    localStorage.setItem('kmarket_lang', lang);
+    try {
+      localStorage.setItem('kmarket_lang', lang);
+    } catch (e) {
+      console.warn(e);
+    }
   };
 
   const currentLangOption =

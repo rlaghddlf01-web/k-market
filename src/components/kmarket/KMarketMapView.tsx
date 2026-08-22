@@ -3,13 +3,16 @@
 import React from 'react';
 import { MapPin, ExternalLink, ShieldCheck, Navigation } from 'lucide-react';
 import { KMarketItem } from '@/types/kmarket';
+import { useKMarket } from '@/context/KMarketContext';
+import { getAdaptedItemRegion } from '@/lib/dynamicLocationAdapter';
 
 interface KMarketMapViewProps {
   item: KMarketItem;
 }
 
 export default function KMarketMapView({ item }: KMarketMapViewProps) {
-  const addressText = item.address || item.region || '경기 안산시 단원구 원곡동 795';
+  const { selectedRegion } = useKMarket();
+  const addressText = getAdaptedItemRegion(item, selectedRegion);
 
   // 실제 구글 지도 Embed URL (해당 매물의 실제 주소로 실시간 렌더링)
   const embedMapUrl = `https://maps.google.com/maps?q=${encodeURIComponent(addressText)}&t=&z=16&ie=UTF8&iwloc=&output=embed`;

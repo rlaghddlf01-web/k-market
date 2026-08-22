@@ -12,6 +12,7 @@ import {
   PackageX,
   Clock,
   HelpCircle,
+  EyeOff,
 } from 'lucide-react';
 
 interface KMarketReportBlockModalProps {
@@ -31,6 +32,12 @@ const REPORT_REASONS: { type: ReportReasonType; label: string; desc: string; ico
     label: '🚨 사기 의심 (선입금 / 외부 메신저 유도)',
     desc: '카톡/라인으로 유도하거나 계좌 선입금을 요구함',
     icon: <ShieldAlert className="w-4 h-4 text-red-600" />,
+  },
+  {
+    type: 'nsfw_nudity',
+    label: '🔞 음란물 / 선정적인 사진 / 성인물',
+    desc: '노출이 심한 사진, 성인용품, 음란성 이미지 또는 성희롱 사진 게시',
+    icon: <EyeOff className="w-4 h-4 text-pink-600" />,
   },
   {
     type: 'bad_manner_abuse',

@@ -1,19 +1,19 @@
 export type SupportedLanguage =
-  | 'ko' // 한국어
-  | 'en' // English
-  | 'vi' // Tiếng Việt (베트남)
-  | 'ne' // नेपाली (네팔)
-  | 'th' // ไทย (태국)
-  | 'my' // မြန်မာ (미얀마)
-  | 'km' // ភាសាខ្មែរ (캄보디아)
-  | 'mn' // Монгол (몽골)
-  | 'uz' // O'zbek (우즈베키스탄)
-  | 'tl' // Tagalog (필리핀)
-  | 'id' // Bahasa Indonesia (인도네시아)
-  | 'si' // සිංහල (스리랑카)
-  | 'bn' // বাংলা (방글라데시)
-  | 'zh' // 中文 (중국)
-  | 'ru'; // Русский (러시아)
+  | 'ko'
+  | 'vi'
+  | 'zh'
+  | 'km'
+  | 'ne'
+  | 'uz'
+  | 'my'
+  | 'id'
+  | 'th'
+  | 'en'
+  | 'si'
+  | 'mn'
+  | 'bn'
+  | 'kk'
+  | 'ur';
 
 export interface LanguageOption {
   code: SupportedLanguage;
@@ -178,6 +178,7 @@ export interface UserTrustProfile {
 
 export type ReportReasonType =
   | 'scam_fraud'         // 사기 의심 (선입금 / 외부 메신저 유도)
+  | 'nsfw_nudity'        // 음란물 / 선정적인 사진 / 성인물
   | 'bad_manner_abuse'   // 비매너 / 욕설 / 성희롱
   | 'fake_item_photos'   // 허위 매물 / 가짜 사진
   | 'prohibited_items'   // 판매 금지 품목 (주류, 담배, 불법 알선 등)
@@ -244,5 +245,22 @@ export interface AuthedUserData {
   isPhoneVerified: boolean;
 }
 
+export type FeedbackCategory =
+  | 'translation_error'   // 🌐 번역 / 언어 오류 제보
+  | 'location_request'     // 📍 공단 / 직거래 장소 추가
+  | 'security_improve'     // 🛡️ 사기 방지 / 안심 거래 개선
+  | 'finance_service'      // 💰 세무 / 대출 / 금융 요청
+  | 'bug_report'           // 📱 앱 오류 / 화면 버그 제보
+  | 'general_suggestion';  // 💬 기타 자유 건의 및 칭찬
 
-
+export interface FeedbackItem {
+  id: string;
+  user_id: string;
+  user_name: string;
+  country: string;
+  category: FeedbackCategory;
+  content: string;
+  contact_info?: string;
+  status: 'pending' | 'reviewing' | 'resolved';
+  created_at: string;
+}

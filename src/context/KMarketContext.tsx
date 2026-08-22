@@ -11,9 +11,13 @@ import {
   SupportedLanguage,
   KeywordAlert,
   AppNotification,
+  AuthedUserData,
+  FeedbackItem,
 } from '@/types/kmarket';
 import { INITIAL_ITEMS, INITIAL_CHATS } from '@/lib/mockData';
 import { useLanguage } from './LanguageContext';
+import { sendLocalPushNotification, sendLocalizedPushNotification } from '@/lib/webPushService';
+import { generateSmartSellerReply } from '@/lib/autoSellerReply';
 
 interface KMarketContextType {
   items: KMarketItem[];
@@ -48,6 +52,10 @@ interface KMarketContextType {
   setIsLocationRadiusModalOpen: (open: boolean) => void;
   isNotificationCenterOpen: boolean;
   setIsNotificationCenterOpen: (open: boolean) => void;
+  isFeedbackModalOpen: boolean;
+  setIsFeedbackModalOpen: (open: boolean) => void;
+  feedbacks: FeedbackItem[];
+  submitFeedback: (feedback: FeedbackItem) => void;
   authedUser: any;
   setAuthedUser: (user: any) => void;
   
@@ -113,7 +121,23 @@ export function KMarketProvider({ children }: { children: React.ReactNode }) {
   const [isKeywordModalOpen, setIsKeywordModalOpen] = useState<boolean>(false);
   const [isLocationRadiusModalOpen, setIsLocationRadiusModalOpen] = useState<boolean>(false);
   const [isNotificationCenterOpen, setIsNotificationCenterOpen] = useState<boolean>(false);
+  const [isFeedbackModalOpen, setIsFeedbackModalOpen] = useState<boolean>(false);
+  const [feedbacks, setFeedbacks] = useState<FeedbackItem[]>([]);
   const [authedUser, setAuthedUser] = useState<any>(null);
+
+  // 피드백 건의 제출 함수
+  const submitFeedback = (newFeedback: FeedbackItem) => {
+    setFeedbacks((prev) => [newFeedback, ...prev]);
+    // 로컬스토리지 백업
+    if (typeof window !== 'undefined') {
+      try {
+        const stored = JSON.parse(localStorage.getItem('kmarket_feedbacks') || '[]');
+        localStorage.setItem('kmarket_feedbacks', JSON.stringify([newFeedback, ...stored]));
+      } catch (err) {
+        console.error('Failed to save feedback to storage', err);
+      }
+    }
+  };
 
   // 통합 알림 목록 상태 (초기 시드 알림 제공)
   const [notifications, setNotifications] = useState<AppNotification[]>([
@@ -243,15 +267,13 @@ export function KMarketProvider({ children }: { children: React.ReactNode }) {
   // 초기 로컬 스토리지 불러오기 및 ?item= 딥링크 자동 모달 오픈
   useEffect(() => {
     try {
-      let currentItems = INITIAL_ITEMS;
-      const savedItems = localStorage.getItem('kmarket_local_items');
-      if (savedItems) {
-        const parsed = JSON.parse(savedItems);
-        if (Array.isArray(parsed) && parsed.length > 0) {
-          currentItems = parsed;
-          setItems(parsed);
-        }
+      // 중고나라 471개 실매물 데이터셋으로 최신 동기화
+      if (typeof window !== 'undefined') {
+        localStorage.removeItem('kmarket_local_items');
       }
+
+      setItems(INITIAL_ITEMS);
+      let currentItems = INITIAL_ITEMS;
       const savedLikes = localStorage.getItem('kmarket_liked_items');
       if (savedLikes) {
         setLikedItemIds(new Set(JSON.parse(savedLikes)));
@@ -346,6 +368,27 @@ export function KMarketProvider({ children }: { children: React.ReactNode }) {
             console.warn(e);
           }
           return updated;
+        });
+
+        // 🔔 관심 키워드 매칭 시 실시간 15개국어 웹 푸시 알림 발송 (Service Worker)
+        keywordAlerts.forEach((kw) => {
+          if (
+            kw.is_active &&
+            (created.title.toLowerCase().includes(kw.keyword.toLowerCase()) ||
+              created.description.toLowerCase().includes(kw.keyword.toLowerCase()))
+          ) {
+            sendLocalizedPushNotification({
+              type: 'keyword',
+              lang: currentLang,
+              params: {
+                keyword: kw.keyword,
+                itemTitle: created.title,
+                itemPrice: created.price === 0 ? '0원' : created.price.toLocaleString() + '원',
+                itemRegion: created.region,
+              },
+              url: `/?item=${created.id}`,
+            });
+          }
         });
       }
     } catch (err) {
@@ -562,73 +605,31 @@ export function KMarketProvider({ children }: { children: React.ReactNode }) {
         setChatMessages((prev) => [...prev, msgData.message]);
       }
 
-      // 3. 상대방 판매자의 실시간 자동 응답 & 구매자 언어(currentLang)로 번역
+        // 3. 판매자의 지능형 스마트 답장 시뮬레이션 (1.2초 후 실제 상황별 15개국어 자동 응답)
       setTimeout(async () => {
-        const sampleSellerReplies: Record<
-          string,
-          { original: string; lang: SupportedLanguage }
-        > = {
-          vi: {
-            original: 'Cảm ơn bạn! Mình có thể bớt thêm 5,000 won cho bạn nhé. Tối nay 7h gặp nha!',
-            lang: 'vi',
-          },
-          ne: {
-            original: 'धन्यवाद! म ५,००० वोन छुट दिन सक्छु। आज साँझ ७ बजे भेटौँला!',
-            lang: 'ne',
-          },
-          th: {
-            original: 'ขอบคุณครับ! ลดให้อีก 5,000 วอนได้ครับ เจอกัน 1 ทุ่มนี้นะครับ',
-            lang: 'th',
-          },
-          mn: {
-            original: 'Баярлалаа! Би 5,000 вон хөнгөлөлт үзүүлж чадна. Өнөө орой 19:00 цагт уулзъя!',
-            lang: 'mn',
-          },
-          uz: {
-            original: "Rahmat! Men sizga 5,000 von arzonlashtirib bera olaman. Bugun kechqurun soat 19:00 da ko'rishamiz!",
-            lang: 'uz',
-          },
-          ru: {
-            original: 'Спасибо! Могу скинуть еще 5,000 вон. Встретимся сегодня в 19:00!',
-            lang: 'ru',
-          },
-          zh: {
-            original: '谢谢！我可以再给您优惠5000韩元。今晚7点见面吧！',
-            lang: 'zh',
-          },
-          en: {
-            original: 'Thank you! I can give you a 5,000 won discount. See you tonight at 7 PM!',
-            lang: 'en',
-          },
-          ko: {
-            original: '감사합니다! 5,000원 더 깎아드릴 수 있어요. 오늘 저녁 7시에 봬요!',
-            lang: 'ko',
-          },
-        };
-
-        const sellerCountryKey = (activeChat.seller_country || 'VN').toUpperCase();
-        const sellerLang =
-          activeChat.seller_lang || countryToLangMap[sellerCountryKey] || 'vi';
-        const replyItem = sampleSellerReplies[sellerLang] || sampleSellerReplies['vi'];
+        const targetItem = activeChat.item || items.find((it) => it.id === activeChat.item_id) || items[0];
+        const smartReply = generateSmartSellerReply(text, targetItem, currentLang);
 
         // 판매자 원문 -> 현재 구매자 언어(currentLang)로 실시간 번역
-        let sellerTransText = '';
-        try {
-          const transRes = await fetch('/api/kmarket/translate', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              text: replyItem.original,
-              sourceLang: replyItem.lang,
-              targetLang: currentLang,
-            }),
-          });
-          if (transRes.ok) {
-            const data = await transRes.json();
-            sellerTransText = data.translatedText;
+        let sellerTransText = smartReply.koreanMeaning;
+        if (currentLang !== 'ko') {
+          try {
+            const transRes = await fetch('/api/kmarket/translate', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                text: smartReply.original,
+                sourceLang: smartReply.sourceLang,
+                targetLang: currentLang,
+              }),
+            });
+            if (transRes.ok) {
+              const data = await transRes.json();
+              sellerTransText = data.translatedText;
+            }
+          } catch (e) {
+            console.warn('Seller translation failed:', e);
           }
-        } catch (e) {
-          console.warn('Seller translation failed:', e);
         }
 
         const autoReplyMsg: KMarketMessage = {
@@ -636,15 +637,26 @@ export function KMarketProvider({ children }: { children: React.ReactNode }) {
           chat_id: activeChat.id,
           sender_id: activeChat.seller_id,
           sender_type: 'seller',
-          original_text: replyItem.original,
-          translated_text: sellerTransText || replyItem.original,
-          source_lang: replyItem.lang,
+          original_text: smartReply.original,
+          translated_text: sellerTransText || smartReply.koreanMeaning,
+          source_lang: smartReply.sourceLang,
           target_lang: currentLang,
           is_read: true,
           created_at: new Date().toISOString(),
         };
 
         setChatMessages((prev) => [...prev, autoReplyMsg]);
+
+        // 🔔 1:1 번역 채팅 실시간 15개국어 웹 푸시 알림 발송 (Service Worker)
+        sendLocalizedPushNotification({
+          type: 'chat',
+          lang: currentLang,
+          params: {
+            senderName: activeChat.seller_name,
+            itemTitle: sellerTransText || replyItem.original,
+          },
+          url: `/?chat=${activeChat.id}`,
+        });
       }, 1200);
     } catch (error) {
       console.error('Error sending message:', error);
@@ -686,6 +698,10 @@ export function KMarketProvider({ children }: { children: React.ReactNode }) {
         setIsLocationRadiusModalOpen,
         isNotificationCenterOpen,
         setIsNotificationCenterOpen,
+        isFeedbackModalOpen,
+        setIsFeedbackModalOpen,
+        feedbacks,
+        submitFeedback,
         notifications,
         unreadNotificationCount,
         markAllNotificationsAsRead,

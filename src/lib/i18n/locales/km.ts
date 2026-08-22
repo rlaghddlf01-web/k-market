@@ -1,0 +1,27 @@
+import { TranslationDictionary } from '../types';
+
+export const km: TranslationDictionary = {
+  app_name: 'K-Market',
+  app_slogan: 'ផ្សារទំនិញជជុះ និងលក់បង្ហើយត្រឡប់ទៅស្រុកឥតគិតថ្លៃ',
+  ktrs_tab_tax: '💰 សងពន្ធវិញ (១.៨៤លាន)',
+  ktrs_tab_loan: '⚡ កម្ចីបន្ទាន់',
+  ktrs_tab_housing: '🏠 បន្ទប់ជួលសុវត្ថិភាព',
+  ktrs_tab_market: '🛒 K-Market (ជជុះ/លក់បង្ហើយ)',
+  tax_banner_title: 'ធ្វើការនៅកូរ៉េលើសពី ១ ឆ្នាំ? ពិនិត្យប្រាក់ពន្ធសងវិញ [ជាមធ្យម ១.៨៤លានវ៉ុន] ឥតគិតថ្លៃក្នុង ៣០ វិនាទី!',
+  tax_banner_btn: 'ពិនិត្យប្រាក់សងវិញឥឡូវនេះ ➔',
+  moving_sale_title: '✈️ ត្រឡប់ទៅស្រុកវិញ D-7 [ការលក់បង្ហើយ Moving Sale]',
+  moving_sale_badge: 'បញ្ចុះតម្លៃជាកញ្ចប់',
+  post_item_btn: '✏️ ចុះលក់ក្នុង ១ នាទី',
+  chat_btn: '💬 ជជែកបកប្រែផ្ទាល់ ១:១',
+  chat_translation_hint: '✨ បកប្រែដោយស្វ័យប្រវត្តទៅភាសាដៃគូក្នុង ០.៣ វិនាទីដោយ Gemini AI',
+  free_share: 'ចែកឥតគិតថ្លៃ',
+  filter_all_regions: 'តំបន់ឧស្សាហកម្មទាំងអស់',
+  search_placeholder: 'ស្វែងរកទំនិញក្បែរតំបន់ឧស្សាហកម្ម...',
+  status_selling: 'កំពុងលក់',
+  status_reserved: 'កក់រួច',
+  status_sold: 'លក់ដាច់ហើយ',
+  walk_trade_available: 'ដើរ ៥ នាទីជួបផ្ទាល់',
+  zero_fee_badge: 'កម្រៃជើងសារ ០ រៀល',
+  community_title: 'សហគមន៍ & ការជជែក',
+  manner_temperature: 'ពិន្ទុទំនុកចិត្ត',
+};

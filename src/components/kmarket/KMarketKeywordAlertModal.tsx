@@ -17,8 +17,10 @@ import {
   ToggleLeft,
   ToggleRight,
   Send,
+  BellRing,
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
+import { sendLocalPushNotification, sendLocalizedPushNotification } from '@/lib/webPushService';
 
 interface KMarketKeywordAlertModalProps {
   isOpen: boolean;
@@ -47,6 +49,7 @@ export default function KMarketKeywordAlertModal({
     removeKeywordAlert,
     toggleKeywordAlert,
   } = useKMarket();
+  const { currentLang } = useLanguage();
 
   const [inputKeyword, setInputKeyword] = useState('');
   const [selectedZone, setSelectedZone] = useState<IndustrialRegion>('all');
@@ -87,15 +90,21 @@ export default function KMarketKeywordAlertModal({
     }
   };
 
-  // 모의 알리고 SMS 발송 테스트
-  const handleSimulateSms = (keyword: string) => {
+  // 실시간 15개국어 웹 푸시 발송 테스트
+  const handleSimulateWebPush = async (keyword: string) => {
     setIsTestingSms(true);
-    setTimeout(() => {
-      setIsTestingSms(false);
-      alert(
-        `📱 [알리고 SMS 알림톡 발송 완료]\n\n[KTRS K-Market] 등록하신 키워드 [${keyword}] 새 매물이 평택 포승공단에 등록되었습니다!\n👉 실시간 1:1 번역 채팅으로 1초 만에 득템하세요!`
-      );
-    }, 600);
+    await sendLocalizedPushNotification({
+      type: 'keyword',
+      lang: currentLang,
+      params: {
+        keyword,
+        itemTitle: `${keyword} (새것 같은 풀박스 S급)`,
+        itemPrice: '0원 (무료나눔) 또는 25,000원',
+        itemRegion: selectedZone === 'all' ? '평택 포승공단' : selectedZone,
+      },
+      url: '/',
+    });
+    setIsTestingSms(false);
   };
 
   return (
@@ -180,8 +189,8 @@ export default function KMarketKeywordAlertModal({
               </div>
 
               <label className="flex items-center space-x-1.5 cursor-pointer text-xs font-bold text-slate-700 dark:text-slate-300">
-                <Smartphone className="w-3.5 h-3.5 text-blue-600" />
-                <span>알리고 SMS 알림 수신</span>
+                <BellRing className="w-3.5 h-3.5 text-blue-600 animate-pulse" />
+                <span>실시간 웹 푸시 알림 수신 (무료)</span>
                 <input
                   type="checkbox"
                   checked={notifyBySms}
@@ -255,22 +264,22 @@ export default function KMarketKeywordAlertModal({
                         </div>
                         <span className="text-[11px] text-slate-400 flex items-center gap-1 mt-0.5">
                           <span>매칭 {alertItem.matched_count}건</span>
-                          {alertItem.notify_by_sms && <span>• 알리고 SMS ON</span>}
+                          {alertItem.notify_by_sms && <span>• 웹 푸시 ON</span>}
                         </span>
                       </div>
                     </div>
 
-                    {/* 액션: SMS 테스트 발송 / 활성화 토글 / 삭제 */}
+                    {/* 액션: 웹 푸시 테스트 발송 / 활성화 토글 / 삭제 */}
                     <div className="flex items-center space-x-1.5 shrink-0">
                       <button
                         type="button"
-                        onClick={() => handleSimulateSms(alertItem.keyword)}
+                        onClick={() => handleSimulateWebPush(alertItem.keyword)}
                         disabled={isTestingSms}
                         className="px-2.5 py-1 bg-amber-50 text-amber-800 hover:bg-amber-100 text-[11px] font-bold rounded-lg border border-amber-200 transition-all cursor-pointer flex items-center gap-1"
-                        title="알리고 SMS 알림 발송 테스트"
+                        title="실시간 웹 푸시 알림 발송 테스트"
                       >
-                        <Send className="w-3 h-3 text-amber-600" />
-                        <span>SMS 테스트</span>
+                        <BellRing className="w-3 h-3 text-amber-600" />
+                        <span>푸시 테스트</span>
                       </button>
 
                       <button

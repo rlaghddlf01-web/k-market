@@ -1,0 +1,27 @@
+import { TranslationDictionary } from '../types';
+
+export const ko: TranslationDictionary = {
+  app_name: 'K-Market',
+  app_slogan: '외국인 근로자 0원 무료 중고거래 & 무빙세일',
+  ktrs_tab_tax: '💰 세무 환급 (184만)',
+  ktrs_tab_loan: '⚡ 비상금 대출',
+  ktrs_tab_housing: '🏠 안심 원룸',
+  ktrs_tab_market: '🛒 K-Market (중고/무빙)',
+  tax_banner_title: '한국 근무 1년 이상? 떼인 세금 [평균 184만원] 30초 무료 환급 조회!',
+  tax_banner_btn: '내 환급금 지금 조회하기 ➔',
+  moving_sale_title: '✈️ 귀국 D-7 초특가 [무빙 세일(Moving Sale)]',
+  moving_sale_badge: '급처분 묶음할인',
+  post_item_btn: '✏️ 1분 간편 매물 등록',
+  chat_btn: '💬 1:1 실시간 자동번역 채팅',
+  chat_translation_hint: '✨ 상대방 모국어로 0.3초 만에 실시간 번역되어 전송됩니다 (Gemini AI 탑재)',
+  free_share: '무료나눔',
+  filter_all_regions: '전국 공단 직거래',
+  search_placeholder: '공단 근처 매물 검색 (세탁기, 자전거, 밥솥 등)...',
+  status_selling: '판매중',
+  status_reserved: '예약중',
+  status_sold: '거래완료',
+  walk_trade_available: '도보 5분 직거래 가능',
+  zero_fee_badge: '수수료 0원 100% 무료',
+  community_title: '동네생활 & 쉼터',
+  manner_temperature: '매너온도',
+};

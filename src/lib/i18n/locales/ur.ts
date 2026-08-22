@@ -1,0 +1,28 @@
+import { TranslationDictionary } from '../types';
+
+// اردو (파키스탄 - ur) 번역 사전
+export const ur: TranslationDictionary = {
+  app_name: 'K-Market',
+  app_slogan: 'غیر ملکیوں کے لیے 0 فیس استعمال شدہ اشیاء اور واپسی سیل',
+  ktrs_tab_tax: 'ٹیکس ریفنڈ (18.4 لاکھ)',
+  ktrs_tab_loan: 'قرضہ سروس',
+  ktrs_tab_housing: 'ہاسٹل / رہائش',
+  ktrs_tab_market: 'K-Market خرید و فروخت',
+  tax_banner_title: 'کیا آپ نے واپسی سے پہلے ٹیکس ریفنڈ چیک کیا؟ اوسط 18.4 لاکھ ون',
+  tax_banner_btn: '30 سیکنڈ میں مفت ٹیکس چیک کریں >',
+  moving_sale_title: 'واپسی D-7 موونگ سیل (سستی اشیاء)',
+  moving_sale_badge: 'فوری فروخت رعایت',
+  post_item_btn: '1 منٹ میں اشتہار لگائیں',
+  chat_btn: '1:1 ترجمہ چیٹ',
+  chat_translation_hint: '15 زبانوں میں فوری ترجمہ',
+  free_share: 'مفت تحفہ (0 ون)',
+  filter_all_regions: 'تمام صنعتی علاقے',
+  search_placeholder: 'واشنگ مشین، رائس ککر، فون تلاش کریں...',
+  status_selling: 'دستیاب ہے',
+  status_reserved: 'بک کر لیا گیا',
+  status_sold: 'فروخت ہو گیا',
+  walk_trade_available: '5 منٹ پیدل محفوظ سودا',
+  zero_fee_badge: 'غیر ملکیوں کے لیے 0 فیس',
+  community_title: 'کمیونٹی زندگی اور سوال جواب',
+  manner_temperature: 'بھروسہ درجہ حرارت',
+};

@@ -1,0 +1,27 @@
+import { TranslationDictionary } from '../types';
+
+export const bn: TranslationDictionary = {
+  app_name: 'K-Market',
+  app_slogan: 'বিদেশি কর্মীদের জন্য সম্পূর্ণ ফ্রি সেকেন্ড-হ্যান্ড মার্কেট',
+  ktrs_tab_tax: '💰 ট্যাক্স রিফান্ড (১৮.৪ লাখ)',
+  ktrs_tab_loan: '⚡ জরুরি লোন',
+  ktrs_tab_housing: '🏠 নিরাপদ রুম',
+  ktrs_tab_market: '🛒 কে-মার্কেট (সেকেন্ড-হ্যান্ড)',
+  tax_banner_title: 'কোরিয়ায় ১+ বছর কাজ করেছেন? ৩০ সেকেন্ডে [গড়ে ১৮.৪ লাখ ওন] ট্যাক্স রিফান্ড ফ্রি চেক করুন!',
+  tax_banner_btn: 'আমার রিফান্ড চেক করুন ➔',
+  moving_sale_title: '✈️ দেশে ফেরা D-7 [মুভিং সেল বাম্পার ছাড়]',
+  moving_sale_badge: 'বান্ডিল ডিসকাউন্ট',
+  post_item_btn: '✏️ ১ মিনিটে পণ্য পোস্ট করুন',
+  chat_btn: '💬 ১:১ রিয়েল-টাইম অনুবাদ চ্যাট',
+  chat_translation_hint: '✨ জেমিনি এআই দিয়ে ০.৩ সেকেন্ডে স্বয়ংক্রিয় অনুবাদ হয়',
+  free_share: 'বিনামূল্যে',
+  filter_all_regions: 'সকল শিল্পাঞ্চল',
+  search_placeholder: 'শিল্পাঞ্চলের কাছাকাছি পণ্য খুঁজুন...',
+  status_selling: 'বিক্রি চলছে',
+  status_reserved: 'বুক করা হয়েছে',
+  status_sold: 'বিক্রি সম্পন্ন',
+  walk_trade_available: '৫ মিনিট হেঁটে দেখা করে নেওয়া যাবে',
+  zero_fee_badge: 'কমিশন ০ ওন ১০০% ফ্রি',
+  community_title: 'কমিউনিটি ও আলোচনা',
+  manner_temperature: 'আস্থা স্কোর',
+};

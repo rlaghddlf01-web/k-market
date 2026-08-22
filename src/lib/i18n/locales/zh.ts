@@ -1,0 +1,27 @@
+import { TranslationDictionary } from '../types';
+
+export const zh: TranslationDictionary = {
+  app_name: 'K-Market',
+  app_slogan: '外籍务工者0手续费二手交易与归国清仓',
+  ktrs_tab_tax: '💰 退税申请 (184万)',
+  ktrs_tab_loan: '⚡ 应急借款',
+  ktrs_tab_housing: '🏠 放心租房',
+  ktrs_tab_market: '🛒 K-Market (二手/清仓)',
+  tax_banner_title: '在韩国工作1年以上？30秒免费查询未退税款 [平均184万韩元]！',
+  tax_banner_btn: '立即查询我的退税 ➔',
+  moving_sale_title: '✈️ 归国D-7甩卖 [清仓 Moving Sale]',
+  moving_sale_badge: '打包超值清仓',
+  post_item_btn: '✏️ 1分钟极速发布',
+  chat_btn: '💬 1:1实时自动翻译聊天',
+  chat_translation_hint: '✨ 基于 Gemini AI，0.3秒内自动双向翻译',
+  free_share: '免费赠送',
+  filter_all_regions: '全国各大工业园区',
+  search_placeholder: '搜索园区附近二手好物（洗衣机、电饭煲、自行车等）...',
+  status_selling: '出售中',
+  status_reserved: '已预约',
+  status_sold: '已售出',
+  walk_trade_available: '步行5分钟当面自提',
+  zero_fee_badge: '0手续费 100%免费',
+  community_title: '同城生活与互助',
+  manner_temperature: '信用温度',
+};

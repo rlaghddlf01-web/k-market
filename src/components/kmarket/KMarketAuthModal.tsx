@@ -2,7 +2,7 @@
 
 import React, { useState, useRef } from 'react';
 import { scanAlienCardImage, OcrResultData } from '@/lib/ocrService';
-import { sendAligoSms, verifyAuthCode } from '@/lib/aligoSmsService';
+import { sendAligoAuthSms, verifyAuthCode } from '@/lib/aligoSmsService';
 import {
   Camera,
   CheckCircle2,
@@ -152,9 +152,8 @@ export default function KMarketAuthModal({
     setIsSmsSending(true);
     setSmsError('');
     try {
-      const res = await sendAligoSms({
+      const res = await sendAligoAuthSms({
         receiverPhone: phone,
-        msgType: 'auth_code',
         receiverName: userName || '외국인 회원',
       });
 

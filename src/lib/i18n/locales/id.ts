@@ -1,0 +1,27 @@
+import { TranslationDictionary } from '../types';
+
+export const id: TranslationDictionary = {
+  app_name: 'K-Market',
+  app_slogan: 'Pasar Barang Bekas & Cuci Gudang Pulang Kampung Gratis',
+  ktrs_tab_tax: '💰 Pengembalian Pajak (1,84jt)',
+  ktrs_tab_loan: '⚡ Pinjaman Darurat',
+  ktrs_tab_housing: '🏠 Sewa Kamar Aman',
+  ktrs_tab_market: '🛒 K-Market (Barang Bekas)',
+  tax_banner_title: 'Bekerja di Korea 1+ tahun? Cek pengembalian pajak [rata-rata 1,84 juta won] gratis dlm 30 detik!',
+  tax_banner_btn: 'Cek Pengembalian Sekarang ➔',
+  moving_sale_title: '✈️ Mau Pulang D-7 [Cuci Gudang Super Murah]',
+  moving_sale_badge: 'Diskon Borongan',
+  post_item_btn: '✏️ Pasang Iklan 1 Menit',
+  chat_btn: '💬 Chat Terjemahan Otomatis 1:1',
+  chat_translation_hint: '✨ Diterjemahkan otomatis dlm 0.3 detik didukung Gemini AI',
+  free_share: 'Gratis',
+  filter_all_regions: 'Semua Kawasan Industri',
+  search_placeholder: 'Cari barang dekat pabrik (mesin cuci, sepeda, rice cooker)...',
+  status_selling: 'Dijual',
+  status_reserved: 'Dibooking',
+  status_sold: 'Terjual',
+  walk_trade_available: 'COD jalan kaki 5 menit',
+  zero_fee_badge: 'Biaya Admin 0 Rupiah',
+  community_title: 'Komunitas & Obrolan',
+  manner_temperature: 'Suhu Reputasi',
+};

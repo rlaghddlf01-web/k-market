@@ -1,10 +1,8 @@
-// KTRS K-Market 알리고(Aligo) SMS / 카카오 알림톡 발송 및 본인인증 엔진
+// KTRS K-Market 알리고(Aligo) SMS 회원가입 / 본인인증(OTP) 전용 엔진
 
 export interface SmsSendParams {
   receiverPhone: string;
-  msgType: 'auth_code' | 'appointment_reminder' | 'scam_alert' | 'tax_update' | 'moving_sale';
   receiverName?: string;
-  customMessage?: string;
   authCode?: string;
 }
 
@@ -15,21 +13,25 @@ export interface SmsVerifyResult {
 }
 
 /**
- * 6자리 무작위 SMS 인증번호 생성
+ * 6자리 무작위 SMS 본인인증 번호 생성
  */
 export function generateAuthCode(): string {
   return Math.floor(100000 + Math.random() * 900000).toString();
 }
 
 /**
- * 알리고 SMS / 알림톡 발송 API 호출
+ * 알리고 회원가입 / 본인인증 SMS 발송 (회원등록 전용)
  */
-export async function sendAligoSms(params: SmsSendParams): Promise<{ success: boolean; authCode?: string; messageId?: string }> {
+export async function sendAligoAuthSms(params: SmsSendParams): Promise<{ success: boolean; authCode?: string; messageId?: string; isLiveSent?: boolean; message?: string }> {
   try {
     const res = await fetch('/api/auth/sms', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(params),
+      body: JSON.stringify({
+        receiverPhone: params.receiverPhone,
+        receiverName: params.receiverName,
+        msgType: 'auth_code',
+      }),
     });
 
     const data = await res.json();
@@ -42,6 +44,7 @@ export async function sendAligoSms(params: SmsSendParams): Promise<{ success: bo
       success: true,
       authCode: code,
       messageId: 'aligo-demo-' + Date.now(),
+      isLiveSent: false,
     };
   }
 }

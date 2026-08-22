@@ -1,0 +1,27 @@
+import { TranslationDictionary } from '../types';
+
+export const my: TranslationDictionary = {
+  app_name: 'K-Market',
+  app_slogan: 'နိုင်ငံခြားသားများအတွက် အခမဲ့ တစ်ပတ်ရစ်စျေးကွက်',
+  ktrs_tab_tax: '💰 အခွန်ပြန်အမ်းငွေ (၁.၈၄ သန်း)',
+  ktrs_tab_loan: '⚡ အရေးပေါ် ချေးငွေ',
+  ktrs_tab_housing: '🏠 လုံခြုံသော အိမ်ခန်း',
+  ktrs_tab_market: '🛒 K-Market (တစ်ပတ်ရစ်)',
+  tax_banner_title: 'ကိုရီးယားတွင် ၁ နှစ်အထက် အလုပ်လုပ်ခဲ့သလား? အခွန်ပြန်အမ်းငွေ [၁.၈၄ သန်း] ၃၀ စက္ကန့်အတွင်း အခမဲ့ စစ်ဆေးပါ!',
+  tax_banner_btn: 'ငွေပြန်အမ်းစစ်ဆေးမည် ➔',
+  moving_sale_title: '✈️ ပြည်တော်ပြန် D-7 [အထူးလျှော့စျေးရောင်းပွဲ]',
+  moving_sale_badge: 'အထူးအတွဲလျှော့စျေး',
+  post_item_btn: '✏️ ၁ မိနစ်အတွင်း ပစ္စည်းတင်ပါ',
+  chat_btn: '💬 ၁:၁ တိုက်ရိုက်ဘာသာပြန်ချက်',
+  chat_translation_hint: '✨ Gemini AI ဖြင့် ၀.၃ စက္ကန့်အတွင်း အလိုအလျောက် ဘာသာပြန်ပေးသည်',
+  free_share: 'အခမဲ့ပေးခြင်း',
+  filter_all_regions: 'စက်မှုဇုန်အားလုံး',
+  search_placeholder: 'စက်မှုဇုန်အနီး ပစ္စည်းရှာဖွေရန်...',
+  status_selling: 'ရောင်းရန်ရှိ',
+  status_reserved: 'ကြိုတင်ထားသည်',
+  status_sold: 'ရောင်းပြီး',
+  walk_trade_available: '၅ မိနစ်လမ်းလျှောက် လူချင်းတွေ့ယူနိုင်',
+  zero_fee_badge: 'အခကြေးငွေ လုံးဝမယူပါ',
+  community_title: 'အသိုင်းအဝိုင်း စကားပြောခန်း',
+  manner_temperature: 'ယုံကြည်စိတ်ချမှု ရမှတ်',
+};
