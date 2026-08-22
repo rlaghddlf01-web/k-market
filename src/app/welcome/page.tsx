@@ -13,14 +13,25 @@ interface LanguageCardItem {
   flagUrl: string;
 }
 
-// 14개국 외국인 모국어 국기 카드 목록 (1순위: 🇺🇸 English)
+// 16개 외국인 모국어 국기 카드 목록 (1순위: 🇺🇸 English, 2순위: 🇯🇵 日本語, 3순위: 🇷🇺 Русский)
 const EASY_TAX_LANGUAGES: LanguageCardItem[] = [
-  // Row 1
   {
     code: 'en',
     name: 'English',
     country: 'United States / Global',
     flagUrl: 'https://flagcdn.com/w160/us.png',
+  },
+  {
+    code: 'ja',
+    name: '日本語',
+    country: 'Japan',
+    flagUrl: 'https://flagcdn.com/w160/jp.png',
+  },
+  {
+    code: 'ru',
+    name: 'Русский',
+    country: 'Russia / CIS',
+    flagUrl: 'https://flagcdn.com/w160/ru.png',
   },
   {
     code: 'vi',
@@ -35,18 +46,11 @@ const EASY_TAX_LANGUAGES: LanguageCardItem[] = [
     flagUrl: 'https://flagcdn.com/w160/cn.png',
   },
   {
-    code: 'km',
-    name: 'ភាសាខ្មែរ',
-    country: 'Cambodia',
-    flagUrl: 'https://flagcdn.com/w160/kh.png',
+    code: 'th',
+    name: 'ไทย',
+    country: 'Thailand',
+    flagUrl: 'https://flagcdn.com/w160/th.png',
   },
-  {
-    code: 'ne',
-    name: 'नेपाली',
-    country: 'Nepal',
-    flagUrl: 'https://flagcdn.com/w160/np.png',
-  },
-  // Row 2
   {
     code: 'uz',
     name: "O'zbekcha",
@@ -54,10 +58,22 @@ const EASY_TAX_LANGUAGES: LanguageCardItem[] = [
     flagUrl: 'https://flagcdn.com/w160/uz.png',
   },
   {
-    code: 'my',
-    name: 'မြန်မာဘာသာ',
-    country: 'Myanmar',
-    flagUrl: 'https://flagcdn.com/w160/mm.png',
+    code: 'km',
+    name: 'ភាសាខ្មែរ',
+    country: 'Cambodia',
+    flagUrl: 'https://flagcdn.com/w160/kh.png',
+  },
+  {
+    code: 'mn',
+    name: 'Монгол',
+    country: 'Mongolia',
+    flagUrl: 'https://flagcdn.com/w160/mn.png',
+  },
+  {
+    code: 'ne',
+    name: 'नेपाली',
+    country: 'Nepal',
+    flagUrl: 'https://flagcdn.com/w160/np.png',
   },
   {
     code: 'id',
@@ -66,10 +82,10 @@ const EASY_TAX_LANGUAGES: LanguageCardItem[] = [
     flagUrl: 'https://flagcdn.com/w160/id.png',
   },
   {
-    code: 'th',
-    name: 'ไทย',
-    country: 'Thailand',
-    flagUrl: 'https://flagcdn.com/w160/th.png',
+    code: 'my',
+    name: 'မြန်မာဘာသာ',
+    country: 'Myanmar',
+    flagUrl: 'https://flagcdn.com/w160/mm.png',
   },
   {
     code: 'si',
@@ -77,24 +93,17 @@ const EASY_TAX_LANGUAGES: LanguageCardItem[] = [
     country: 'Sri Lanka',
     flagUrl: 'https://flagcdn.com/w160/lk.png',
   },
-  // Row 3
   {
-    code: 'mn',
-    name: 'Монгол',
-    country: 'Mongolia',
-    flagUrl: 'https://flagcdn.com/w160/mn.png',
+    code: 'kk',
+    name: 'Қазақша',
+    country: 'Kazakhstan',
+    flagUrl: 'https://flagcdn.com/w160/kz.png',
   },
   {
     code: 'bn',
     name: 'বাংলা',
     country: 'Bangladesh',
     flagUrl: 'https://flagcdn.com/w160/bd.png',
-  },
-  {
-    code: 'kk',
-    name: 'Қазақша',
-    country: 'Kazakhstan',
-    flagUrl: 'https://flagcdn.com/w160/kz.png',
   },
   {
     code: 'ur',
@@ -119,25 +128,25 @@ function WelcomeEasyTaxContent() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#fbf7f4] via-[#f7f0e8] to-[#eee5db] text-[#2b1810] flex flex-col items-center justify-center p-4 sm:p-6 selection:bg-amber-500 selection:text-white">
-      <div className="w-full max-w-4xl space-y-7 my-auto">
+      <div className="w-full max-w-5xl space-y-7 my-auto">
         {/* 상단 로고 & 뱃지 */}
         <div className="text-center space-y-3">
           <div className="inline-flex items-center gap-2 bg-[#f4ede6] border border-[#d97706]/40 text-[#92400e] px-4 py-1.5 rounded-full text-xs sm:text-sm font-black shadow-xs">
             <Globe className="w-4 h-4 text-[#d97706]" />
-            <span>K-Market 15개국어 모국어 게이트웨이</span>
+            <span>K-Market 17개국어 모국어 게이트웨이</span>
           </div>
 
           <h1 className="text-2xl sm:text-4xl font-black tracking-tight text-[#2b1810]">
             Choose Your Language / 국가 언어를 선택하세요
           </h1>
           <p className="text-sm sm:text-base text-[#5c4a39] max-w-xl mx-auto font-medium">
-            대한민국 No.1 외국인 근로자 전용 0원 수수료 중고거래 & 15개국어 실시간 번역 플랫폼
+            대한민국 No.1 외국인 근로자 전용 0원 수수료 중고거래 & 17개국어 실시간 번역 플랫폼
           </p>
         </div>
 
-        {/* 14개국 국기 카드 그리드 (화사한 웜 크림 & 밀크화이트) */}
+        {/* 16개국 국기 카드 그리드 (미국, 일본, 러시아 최상단) */}
         <div className="bg-white/85 border-2 border-[#e2d5c7] rounded-3xl p-6 sm:p-8 backdrop-blur-md shadow-xl space-y-6">
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3.5 sm:gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 gap-3.5 sm:gap-4">
             {EASY_TAX_LANGUAGES.map((item) => (
               <button
                 key={item.code}
@@ -156,7 +165,7 @@ function WelcomeEasyTaxContent() {
                 <span className="text-xs sm:text-sm font-black text-[#2b1810] group-hover:text-[#92400e] leading-tight">
                   {item.name}
                 </span>
-                <span className="text-[10px] sm:text-xs text-[#8c7866] mt-0.5 group-hover:text-[#b45309] font-medium">
+                <span className="text-[10px] sm:text-xs text-[#8c7866] mt-0.5 group-hover:text-[#b45309] font-medium truncate w-full">
                   {item.country}
                 </span>
               </button>
@@ -184,7 +193,7 @@ function WelcomeEasyTaxContent() {
           </div>
           <div className="flex items-center justify-center gap-2 bg-white/70 p-3 rounded-2xl border border-[#e2d5c7] shadow-2xs font-bold">
             <MessageSquare className="w-4 h-4 text-blue-600" />
-            <span>15개국어 실시간 자동 번역 채팅</span>
+            <span>17개국어 실시간 자동 번역 채팅</span>
           </div>
           <div className="flex items-center justify-center gap-2 bg-white/70 p-3 rounded-2xl border border-[#e2d5c7] shadow-2xs font-bold">
             <Sparkles className="w-4 h-4 text-[#d97706]" />
