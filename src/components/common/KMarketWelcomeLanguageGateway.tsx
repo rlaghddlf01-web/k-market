@@ -1,10 +1,11 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Globe, X } from 'lucide-react';
 import { useLanguage } from '@/context/LanguageContext';
 import { SupportedLanguage } from '@/types/kmarket';
+import { WELCOME_17_LANGUAGES } from '@/lib/i18n/welcomeTranslations';
 
 interface LanguageCardItem {
   code: SupportedLanguage;
@@ -13,9 +14,8 @@ interface LanguageCardItem {
   flagUrl: string;
 }
 
-// 16개국 외국인 모국어 국기 카드 목록 (1순위: 🇺🇸 English, 2순위: 🇯🇵 日本語, 3순위: 🇷🇺 Русский)
+// 16개 외국인 모국어 국기 카드 목록 (1순위: 🇺🇸 English, 2순위: 🇯🇵 日本語, 3순위: 🇷🇺 Русский)
 const EASY_TAX_LANGUAGES: LanguageCardItem[] = [
-  // 🏆 1순위 글로벌/주요국
   {
     code: 'en',
     name: 'English',
@@ -124,10 +124,14 @@ export default function KMarketWelcomeLanguageGateway({
   isStandalonePage = false,
 }: KMarketWelcomeLanguageGatewayProps) {
   const router = useRouter();
-  const { setLanguage } = useLanguage();
+  const { currentLang, setLanguage } = useLanguage();
+  const [activeLang, setActiveLang] = useState<SupportedLanguage>(currentLang || 'ko');
+
+  const currentWelcome = WELCOME_17_LANGUAGES[activeLang] || WELCOME_17_LANGUAGES.ko;
 
   const handleSelectLanguage = (langCode: SupportedLanguage) => {
     setLanguage(langCode);
+    setActiveLang(langCode);
     if (typeof window !== 'undefined') {
       localStorage.setItem('kmarket_selected_lang', langCode);
       localStorage.setItem('kmarket_welcomed', 'true');
@@ -141,6 +145,7 @@ export default function KMarketWelcomeLanguageGateway({
 
   const handleSelectKorean = () => {
     setLanguage('ko');
+    setActiveLang('ko');
     if (typeof window !== 'undefined') {
       localStorage.setItem('kmarket_selected_lang', 'ko');
       localStorage.setItem('kmarket_welcomed', 'true');
@@ -168,45 +173,52 @@ export default function KMarketWelcomeLanguageGateway({
           </button>
         )}
 
-        {/* 헤더 안내 영역 */}
-        <div className="p-6 text-center border-b border-slate-100 bg-gradient-to-b from-amber-50/50 to-white">
+        {/* 헤더 안내 영역 (17개국어 실시간 반응) */}
+        <div className="p-6 text-center border-b border-slate-100 bg-gradient-to-b from-amber-50/50 to-white transition-all duration-300">
           <div className="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-amber-500/10 text-[#845b37] mb-3 shadow-inner">
             <Globe className="w-6 h-6 animate-pulse" />
           </div>
-          <h1 className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">
-            Select Your Language
+          <h1 className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight transition-all duration-300">
+            {currentWelcome.title}
           </h1>
-          <p className="text-sm font-semibold text-slate-600 mt-1">
-            모국어를 선택하시면 1:1 자동번역과 전용 혜택이 제공됩니다
+          <p className="text-sm font-semibold text-slate-600 mt-1 transition-all duration-300">
+            {currentWelcome.subtitle}
           </p>
         </div>
 
         {/* 16개국 외국인 모국어 그리드 (스크롤 가능) */}
         <div className="p-4 sm:p-6 overflow-y-auto flex-1 custom-scrollbar">
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
-            {EASY_TAX_LANGUAGES.map((lang) => (
-              <button
-                key={lang.code}
-                onClick={() => handleSelectLanguage(lang.code)}
-                className="group relative flex flex-col items-center justify-center p-3.5 rounded-2xl border-2 border-slate-200 hover:border-amber-500 bg-white hover:bg-amber-50/30 transition-all duration-200 shadow-xs hover:shadow-md active:scale-95 cursor-pointer text-center"
-              >
-                {/* 실물 고화질 국기 이미지 */}
-                <div className="w-10 h-7 rounded-sm overflow-hidden shadow-xs mb-2 group-hover:scale-110 transition-transform">
-                  <img
-                    src={lang.flagUrl}
-                    alt={lang.name}
-                    className="w-full h-full object-cover"
-                    loading="lazy"
-                  />
-                </div>
-                <span className="font-extrabold text-sm text-slate-900 group-hover:text-amber-900 leading-tight">
-                  {lang.name}
-                </span>
-                <span className="text-[11px] font-medium text-slate-500 truncate w-full mt-0.5">
-                  {lang.country}
-                </span>
-              </button>
-            ))}
+            {EASY_TAX_LANGUAGES.map((lang) => {
+              const isSelected = activeLang === lang.code;
+              return (
+                <button
+                  key={lang.code}
+                  onMouseEnter={() => setActiveLang(lang.code)}
+                  onClick={() => handleSelectLanguage(lang.code)}
+                  className={`group relative flex flex-col items-center justify-center p-3.5 rounded-2xl border-2 transition-all duration-200 shadow-xs cursor-pointer text-center ${
+                    isSelected
+                      ? 'border-[#d97706] bg-amber-50/60 shadow-md scale-105'
+                      : 'border-slate-200 hover:border-[#d97706] bg-white hover:bg-amber-50/30 hover:shadow-md'
+                  }`}
+                >
+                  <div className="w-10 h-7 rounded-sm overflow-hidden shadow-xs mb-2 group-hover:scale-110 transition-transform">
+                    <img
+                      src={lang.flagUrl}
+                      alt={lang.name}
+                      className="w-full h-full object-cover"
+                      loading="lazy"
+                    />
+                  </div>
+                  <span className="font-extrabold text-sm text-slate-900 group-hover:text-amber-900 leading-tight">
+                    {lang.name}
+                  </span>
+                  <span className="text-[11px] font-medium text-slate-500 truncate w-full mt-0.5">
+                    {lang.country}
+                  </span>
+                </button>
+              );
+            })}
           </div>
         </div>
 
@@ -216,8 +228,9 @@ export default function KMarketWelcomeLanguageGateway({
             <span>🇰🇷 한국인이신가요?</span>
           </div>
           <button
+            onMouseEnter={() => setActiveLang('ko')}
             onClick={handleSelectKorean}
-            className="px-4 py-2 bg-slate-900 hover:bg-slate-800 text-white rounded-xl text-xs font-bold transition-all active:scale-95 shadow-sm"
+            className="px-4 py-2 bg-slate-900 hover:bg-slate-800 text-white rounded-xl text-xs font-bold transition-all active:scale-95 shadow-sm cursor-pointer"
           >
             한국어로 계속하기 ➔
           </button>
