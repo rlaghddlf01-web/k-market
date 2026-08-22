@@ -24,4 +24,10 @@ export const ru: TranslationDictionary = {
   zero_fee_badge: 'Комиссия 0 вон (100% бесплатно)',
   community_title: 'Общение и помощь',
   manner_temperature: 'Рейтинг доверия',
+  nav_platform_slogan: 'Платформа №1 в Корее для иностранных работников',
+  nav_signup: 'Регистрация',
+  nav_mypage: 'Мой профиль',
+  nav_community: 'Сообщество и отдых',
+  meetup_zone_title: 'Пешая зона сделок в промзонах (Meetup Zone)',
+  post_short_btn: 'Подать',
 };

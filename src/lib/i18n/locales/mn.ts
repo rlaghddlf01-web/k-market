@@ -24,4 +24,10 @@ export const mn: TranslationDictionary = {
   zero_fee_badge: '0 хураамж 100% үнэгүй',
   community_title: 'Хөршийн амьдрал & Чат',
   manner_temperature: 'Итгэлийн хэмжүүр',
+  nav_platform_slogan: 'Солонгос дахь гадаад ажилчдын №1 нэгдсэн платформ',
+  nav_signup: 'Бүртгүүлэх',
+  nav_mypage: 'Миний',
+  nav_community: 'Нийгэмлэг ба амралт',
+  meetup_zone_title: 'Үйлдвэрийн бүсийн биечлэн уулзах цэг',
+  post_short_btn: 'Нийтлэх',
 };

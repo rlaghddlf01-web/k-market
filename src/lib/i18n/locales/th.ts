@@ -24,4 +24,10 @@ export const th: TranslationDictionary = {
   zero_fee_badge: 'ค่าธรรมเนียม 0 วอน ฟรี 100%',
   community_title: 'ชีวิตชุมชน & พูดคุย',
   manner_temperature: 'คะแนนมารยาท',
+  nav_platform_slogan: 'แพลตฟอร์มครบวงจรอันดับ 1 สำหรับแรงงานต่างชาติในเกาหลี',
+  nav_signup: 'สมัครสมาชิก',
+  nav_mypage: 'ของฉัน',
+  nav_community: 'ชุมชนและพูดคุย',
+  meetup_zone_title: 'โซนซื้อขายตรงในนิคมอุตสาหกรรม (Meetup Zone)',
+  post_short_btn: 'ลงขาย',
 };

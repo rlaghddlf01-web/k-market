@@ -24,4 +24,10 @@ export const id: TranslationDictionary = {
   zero_fee_badge: 'Biaya Admin 0 Rupiah',
   community_title: 'Komunitas & Obrolan',
   manner_temperature: 'Suhu Reputasi',
+  nav_platform_slogan: 'Platform Terlengkap No.1 untuk Pekerja Asing di Korea',
+  nav_signup: 'Daftar',
+  nav_mypage: 'Profil',
+  nav_community: 'Komunitas & Ruang Santai',
+  meetup_zone_title: 'Zona COD Kawasan Industri (Meetup Zone)',
+  post_short_btn: 'Pasang',
 };

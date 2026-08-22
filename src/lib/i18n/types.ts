@@ -24,4 +24,10 @@ export interface TranslationDictionary {
   zero_fee_badge: string;
   community_title?: string;
   manner_temperature?: string;
+  nav_platform_slogan?: string;
+  nav_signup?: string;
+  nav_mypage?: string;
+  nav_community?: string;
+  meetup_zone_title?: string;
+  post_short_btn?: string;
 }

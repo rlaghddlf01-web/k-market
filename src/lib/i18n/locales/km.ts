@@ -24,4 +24,10 @@ export const km: TranslationDictionary = {
   zero_fee_badge: 'កម្រៃជើងសារ ០ រៀល',
   community_title: 'សហគមន៍ & ការជជែក',
   manner_temperature: 'ពិន្ទុទំនុកចិត្ត',
+  nav_platform_slogan: 'វេទិកាពេញលេញលេខ ១ សម្រាប់ពលករបរទេសនៅកូរ៉េ',
+  nav_signup: 'ចុះឈ្មោះ',
+  nav_mypage: 'គណនីខ្ញុំ',
+  nav_community: 'សហគមន៍ & ការជួបជុំ',
+  meetup_zone_title: 'តំបន់ជួញដូរផ្ទាល់ក្នុងតំបន់ឧស្សាហកម្ម',
+  post_short_btn: 'បង្ហោះ',
 };

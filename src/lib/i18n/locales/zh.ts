@@ -24,4 +24,10 @@ export const zh: TranslationDictionary = {
   zero_fee_badge: '0手续费 100%免费',
   community_title: '同城生活与互助',
   manner_temperature: '信用温度',
+  nav_platform_slogan: '韩国第一外籍劳工综合生活服务平台',
+  nav_signup: '注册账号',
+  nav_mypage: '我的',
+  nav_community: '同城生活与社区',
+  meetup_zone_title: '重点工业园区步行面交专区 (Meetup Zone)',
+  post_short_btn: '发布',
 };

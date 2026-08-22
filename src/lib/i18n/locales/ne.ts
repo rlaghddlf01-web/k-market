@@ -24,4 +24,10 @@ export const ne: TranslationDictionary = {
   zero_fee_badge: 'शुल्क ० वन १००% निःशुल्क',
   community_title: 'छिमेकी जीवन र कुराकानी',
   manner_temperature: 'विश्वास तापमान',
+  nav_platform_slogan: 'कोरियामा विदेशी कामदारहरूको लागि नम्बर १ प्लेटफर्म',
+  nav_signup: 'दर्ता गर्नुहोस्',
+  nav_mypage: 'मेरो प्रोफाइल',
+  nav_community: 'समुदाय र लाउन्ज',
+  meetup_zone_title: 'औद्योगिक क्षेत्र प्रत्यक्ष कारोबार क्षेत्र',
+  post_short_btn: 'पोष्ट',
 };

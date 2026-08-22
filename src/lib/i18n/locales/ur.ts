@@ -25,4 +25,10 @@ export const ur: TranslationDictionary = {
   zero_fee_badge: 'غیر ملکیوں کے لیے 0 فیس',
   community_title: 'کمیونٹی زندگی اور سوال جواب',
   manner_temperature: 'بھروسہ درجہ حرارت',
+  nav_platform_slogan: 'کوریا میں غیر ملکی کارکنوں کے لیے نمبر 1 پلیٹ فارم',
+  nav_signup: 'سائن اپ',
+  nav_mypage: 'میرا اکاؤنٹ',
+  nav_community: 'کمیونٹی اور لاؤنج',
+  meetup_zone_title: 'صنعتی زون میں براہ راست لین دین کا علاقہ',
+  post_short_btn: 'پوسٹ',
 };

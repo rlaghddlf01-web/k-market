@@ -24,4 +24,10 @@ export const ko: TranslationDictionary = {
   zero_fee_badge: '수수료 0원 100% 무료',
   community_title: '동네생활 & 쉼터',
   manner_temperature: '매너온도',
+  nav_platform_slogan: '대한민국 No.1 외국인 근로자 종합 플랫폼',
+  nav_signup: '회원가입',
+  nav_mypage: '마이',
+  nav_community: '동네생활 & 쉼터',
+  meetup_zone_title: '주요 공단 도보 직거래 (Meetup Zone)',
+  post_short_btn: '등록',
 };

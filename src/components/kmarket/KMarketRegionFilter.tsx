@@ -31,7 +31,7 @@ export default function KMarketRegionFilter() {
         <div className="flex items-center justify-between mb-2.5 px-1">
           <div className="flex items-center gap-1.5 text-xs font-bold text-[#1f1914]">
             <MapPin className="w-3.5 h-3.5 text-[#845b37]" />
-            <span>주요 공단 도보 직거래 (Meetup Zone)</span>
+            <span>{t('meetup_zone_title')}</span>
           </div>
           <span className="text-[11px] text-[#8c7866] font-medium hidden sm:inline">
             포승 · 반월 · 향남 · 남동 등 기숙사 인근

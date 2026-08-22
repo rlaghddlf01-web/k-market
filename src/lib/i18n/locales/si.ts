@@ -24,4 +24,10 @@ export const si: TranslationDictionary = {
   zero_fee_badge: 'ගාස්තු රහිතයි 100% නොමිලේ',
   community_title: 'ප්‍රජාව සහ සාකච්ඡා',
   manner_temperature: 'විශ්වාසනීයත්ව ලකුණු',
+  nav_platform_slogan: 'කොරියාවේ විදේශීය සේවකයින් සඳහා අංක 1 වේදිකාව',
+  nav_signup: 'ලියාපදිංචි වන්න',
+  nav_mypage: 'මගේ ගිණුම',
+  nav_community: 'ප්‍රජාව සහ විවේකාගාරය',
+  meetup_zone_title: 'කාර්මික කලාප සෘජු ගනුදෙනු කලාපය',
+  post_short_btn: 'පළ කරන්න',
 };

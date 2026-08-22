@@ -24,4 +24,10 @@ export const ja: TranslationDictionary = {
   zero_fee_badge: '手数料0円 100%無料',
   community_title: '近所・コミュニティ',
   manner_temperature: 'マナー温度',
+  nav_platform_slogan: '韓国No.1外国人労働者総合プラットフォーム',
+  nav_signup: '新規登録',
+  nav_mypage: 'マイページ',
+  nav_community: 'ご近所生活＆ラウンジ',
+  meetup_zone_title: '主要工団 徒歩手渡しエリア (Meetup Zone)',
+  post_short_btn: '出品',
 };

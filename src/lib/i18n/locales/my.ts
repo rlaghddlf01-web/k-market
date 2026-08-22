@@ -24,4 +24,10 @@ export const my: TranslationDictionary = {
   zero_fee_badge: 'အခကြေးငွေ လုံးဝမယူပါ',
   community_title: 'အသိုင်းအဝိုင်း စကားပြောခန်း',
   manner_temperature: 'ယုံကြည်စိတ်ချမှု ရမှတ်',
+  nav_platform_slogan: 'ကိုရီးယားနိုင်ငံရှိ နိုင်ငံခြားသားအလုပ်သမားများအတွက် နံပါတ် ၁ ပလက်ဖောင်း',
+  nav_signup: 'အကောင့်ဖွင့်ရန်',
+  nav_mypage: 'ကျွန်ုပ်၏အကောင့်',
+  nav_community: 'အသိုင်းအဝိုင်းနှင့် စကားပြောခန်း',
+  meetup_zone_title: 'စက်မှုဇုန် တိုက်ရိုက်အရောင်းအဝယ်ဇုန်',
+  post_short_btn: 'တင်မည်',
 };

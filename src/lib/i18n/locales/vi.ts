@@ -24,4 +24,10 @@ export const vi: TranslationDictionary = {
   zero_fee_badge: 'Phí 0 đồng 100% miễn phí',
   community_title: 'Đời sống & Giao lưu',
   manner_temperature: 'Nhiệt độ uy tín',
+  nav_platform_slogan: 'Nền tảng việc làm & đồ cũ số 1 Hàn Quốc cho người nước ngoài',
+  nav_signup: 'Đăng ký',
+  nav_mypage: 'Cá nhân',
+  nav_community: 'Đời sống & Giao lưu',
+  meetup_zone_title: 'Giao dịch trực tiếp KCN (Khu vực gặp mặt)',
+  post_short_btn: 'Đăng tin',
 };

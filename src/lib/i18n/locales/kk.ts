@@ -25,4 +25,10 @@ export const kk: TranslationDictionary = {
   zero_fee_badge: 'Шетелдіктерге комиссия 0 вон',
   community_title: 'Өндіріс өмірі & Сұрақ-жауап',
   manner_temperature: 'Сенім температурасы',
+  nav_platform_slogan: 'Кореядағы шетелдік жұмысшыларға арналған №1 платформа',
+  nav_signup: 'Тіркелу',
+  nav_mypage: 'Менің парақшам',
+  nav_community: 'Қоғамдастық және демалыс',
+  meetup_zone_title: 'Өндірістік аймақтардағы тікелей сауда аймағы',
+  post_short_btn: 'Жариялау',
 };

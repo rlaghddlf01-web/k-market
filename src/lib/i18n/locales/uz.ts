@@ -24,4 +24,10 @@ export const uz: TranslationDictionary = {
   zero_fee_badge: "Komissiya 0 so'm",
   community_title: 'Mahalliy hayot & Suhbat',
   manner_temperature: 'Ishonch darajasi',
+  nav_platform_slogan: 'Koreyadagi chet ellik ishchilar uchun 1-raqamli platforma',
+  nav_signup: 'Ro‘yxatdan o‘tish',
+  nav_mypage: 'Profilim',
+  nav_community: 'Jamiyat va Muloqot',
+  meetup_zone_title: 'Sanoat zonalari to‘g‘ridan-to‘g‘ri savdo hududi',
+  post_short_btn: 'Joylash',
 };

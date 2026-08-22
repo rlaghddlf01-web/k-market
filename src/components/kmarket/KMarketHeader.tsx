@@ -61,7 +61,7 @@ export default function KMarketHeader() {
               KTRS
             </span>
             <span className="hidden sm:inline font-bold text-white text-[13px] tracking-tight">
-              대한민국 No.1 외국인 근로자 종합 플랫폼
+              {t('nav_platform_slogan')}
             </span>
           </div>
 
@@ -267,7 +267,7 @@ export default function KMarketHeader() {
                   style={{ background: '#f4ede6' }}
                 >
                   <UserPlus className="w-3.5 h-3.5 text-[#845b37]" />
-                  <span>회원가입</span>
+                  <span>{t('nav_signup')}</span>
                 </button>
 
                 {/* 마이 */}
@@ -275,7 +275,7 @@ export default function KMarketHeader() {
                   onClick={() => setIsMyPageOpen(true)}
                   className="px-2.5 py-1.5 rounded-full bg-[#f4ede6] hover:bg-[#ede2d6] text-[#5c4a39] text-xs font-bold transition-all cursor-pointer border border-[#ded1c4]"
                 >
-                  마이
+                  {t('nav_mypage')}
                 </button>
               </>
             )}
@@ -314,14 +314,14 @@ export default function KMarketHeader() {
                   className="flex items-center gap-0.5 px-2 py-1 rounded-full bg-[#f4ede6] text-[#5c4a39] text-[11px] font-bold border border-[#ded1c4] cursor-pointer"
                 >
                   <UserPlus className="w-3 h-3 text-[#845b37]" />
-                  <span>가입</span>
+                  <span>{t('nav_signup')}</span>
                 </button>
 
                 <button
                   onClick={() => setIsMyPageOpen(true)}
                   className="px-2 py-1 rounded-full bg-[#f4ede6] text-[#5c4a39] text-[11px] font-bold border border-[#ded1c4] cursor-pointer"
                 >
-                  마이
+                  {t('nav_mypage')}
                 </button>
               </>
             )}
@@ -333,7 +333,7 @@ export default function KMarketHeader() {
           <div className="relative flex-1">
             <input
               type="text"
-              placeholder="매물 검색 (세탁기, 냉장고 등)..."
+              placeholder={t('search_placeholder')}
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="w-full pl-9 pr-3 py-1.5 input-premium text-xs font-medium text-[#1f1914]"
@@ -347,7 +347,7 @@ export default function KMarketHeader() {
             className="btn-primary flex items-center gap-1 text-xs px-3 py-1.5 cursor-pointer shrink-0 rounded-xl font-bold shadow-xs"
           >
             <PlusCircle className="w-3.5 h-3.5" />
-            <span>등록</span>
+            <span>{t('post_short_btn')}</span>
           </button>
         </div>
       </div>
@@ -368,7 +368,7 @@ export default function KMarketHeader() {
               <span>{t('ktrs_tab_market')}</span>
             </button>
 
-            {/* 2. 동네생활 & 쉼터 탭 (15개국어 Q&A 및 친구 사귀기) */}
+            {/* 2. 동네생활 & 쉼터 탭 (17개국어 Q&A 및 친구 사귀기) */}
             <button
               onClick={() => setActiveMainTab('community')}
               className={`px-4 py-1.5 rounded-full font-black transition-all shrink-0 cursor-pointer shadow-2xs flex items-center gap-1.5 relative ${
@@ -378,7 +378,7 @@ export default function KMarketHeader() {
               }`}
             >
               <span>🗣️</span>
-              <span>동네생활 &amp; 쉼터</span>
+              <span>{t('nav_community')}</span>
               <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" />
             </button>
           </div>

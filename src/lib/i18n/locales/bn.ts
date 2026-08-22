@@ -24,4 +24,10 @@ export const bn: TranslationDictionary = {
   zero_fee_badge: 'কমিশন ০ ওন ১০০% ফ্রি',
   community_title: 'কমিউনিটি ও আলোচনা',
   manner_temperature: 'আস্থা স্কোর',
+  nav_platform_slogan: 'কোরিয়ায় বিদেশী কর্মীদের জন্য ১ নম্বর প্ল্যাটফর্ম',
+  nav_signup: 'নিবন্ধন করুন',
+  nav_mypage: 'আমার প্রোফাইল',
+  nav_community: 'কমিউনিটি ও লাউঞ্জ',
+  meetup_zone_title: 'শিল্পাঞ্চল সরাসরি লেনদেন অঞ্চল',
+  post_short_btn: 'পোস্ট',
 };

@@ -24,4 +24,10 @@ export const en: TranslationDictionary = {
   zero_fee_badge: '0 Fee 100% Free',
   community_title: 'Community & Lounge',
   manner_temperature: 'Trust Score',
+  nav_platform_slogan: 'No.1 Comprehensive Platform for Foreign Workers in Korea',
+  nav_signup: 'Sign Up',
+  nav_mypage: 'My Page',
+  nav_community: 'Community & Lounge',
+  meetup_zone_title: 'Industrial Complex Walk-up Deal Zone',
+  post_short_btn: 'Post',
 };
