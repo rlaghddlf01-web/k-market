@@ -2,7 +2,8 @@
 
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { SupportedLanguage, LanguageOption } from '@/types/kmarket';
-import { SUPPORTED_LANGUAGES, UI_TRANSLATIONS } from '@/lib/languages';
+import { SUPPORTED_LANGUAGES } from '@/lib/languages';
+import { LOCALES } from '@/lib/i18n';
 
 interface LanguageContextType {
   currentLang: SupportedLanguage;
@@ -38,7 +39,7 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
         return;
       }
 
-      // 2. 처음 설치하여 실행한 경우, 스마트폰 기기 언어 감지
+      // 2. 스마트폰 기기 언어 감지
       if (typeof window !== 'undefined' && window.navigator) {
         const browserLang = window.navigator.language.slice(0, 2).toLowerCase();
         const matched = SUPPORTED_LANGUAGES.find((l) => l.code === browserLang);
@@ -61,9 +62,8 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
 
       if (typeof window !== 'undefined') {
         const targetPath = lang === 'ko' ? '/' : `/${lang}`;
-        // 현재 경로가 welcome 페이지가 아닌 일반 피드일 경우 주소창 실시간 업데이트
         if (!window.location.pathname.includes('/welcome')) {
-          window.history.pushState({ lang }, '', targetPath);
+          window.location.href = targetPath;
         }
       }
     } catch (e) {
@@ -75,18 +75,20 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
     SUPPORTED_LANGUAGES.find((l) => l.code === currentLang) || SUPPORTED_LANGUAGES[0];
 
   const t = (key: string): string => {
-    if (UI_TRANSLATIONS[key] && UI_TRANSLATIONS[key][currentLang]) {
-      return UI_TRANSLATIONS[key][currentLang];
+    const dict = LOCALES[currentLang] || LOCALES.ko;
+    if (dict && (dict as any)[key]) {
+      return (dict as any)[key];
     }
-    if (UI_TRANSLATIONS[key] && UI_TRANSLATIONS[key]['ko']) {
-      return UI_TRANSLATIONS[key]['ko'];
+    const koDict = LOCALES.ko;
+    if (koDict && (koDict as any)[key]) {
+      return (koDict as any)[key];
     }
     return key;
   };
 
   const formatWon = (amount: number): string => {
-    if (amount === 0) return '0원 (무료)';
-    return `${amount.toLocaleString()}원`;
+    if (amount === 0) return t('currency_free');
+    return `${amount.toLocaleString()}${t('currency_won')}`;
   };
 
   return (

@@ -1,0 +1,109 @@
+{
+  "totalAuditPoints": 3672,
+  "totalMissingPoints": 0,
+  "masterKeyCount": 216,
+  "results": [
+    {
+      "lang": "ko",
+      "totalKeys": 216,
+      "missingCount": 0,
+      "passRate": 100
+    },
+    {
+      "lang": "vi",
+      "totalKeys": 216,
+      "missingCount": 0,
+      "passRate": 100
+    },
+    {
+      "lang": "zh",
+      "totalKeys": 216,
+      "missingCount": 0,
+      "passRate": 100
+    },
+    {
+      "lang": "en",
+      "totalKeys": 216,
+      "missingCount": 0,
+      "passRate": 100
+    },
+    {
+      "lang": "ja",
+      "totalKeys": 216,
+      "missingCount": 0,
+      "passRate": 100
+    },
+    {
+      "lang": "ru",
+      "totalKeys": 216,
+      "missingCount": 0,
+      "passRate": 100
+    },
+    {
+      "lang": "th",
+      "totalKeys": 216,
+      "missingCount": 0,
+      "passRate": 100
+    },
+    {
+      "lang": "uz",
+      "totalKeys": 216,
+      "missingCount": 0,
+      "passRate": 100
+    },
+    {
+      "lang": "km",
+      "totalKeys": 216,
+      "missingCount": 0,
+      "passRate": 100
+    },
+    {
+      "lang": "mn",
+      "totalKeys": 216,
+      "missingCount": 0,
+      "passRate": 100
+    },
+    {
+      "lang": "ne",
+      "totalKeys": 216,
+      "missingCount": 0,
+      "passRate": 100
+    },
+    {
+      "lang": "id",
+      "totalKeys": 216,
+      "missingCount": 0,
+      "passRate": 100
+    },
+    {
+      "lang": "my",
+      "totalKeys": 216,
+      "missingCount": 0,
+      "passRate": 100
+    },
+    {
+      "lang": "si",
+      "totalKeys": 216,
+      "missingCount": 0,
+      "passRate": 100
+    },
+    {
+      "lang": "kk",
+      "totalKeys": 216,
+      "missingCount": 0,
+      "passRate": 100
+    },
+    {
+      "lang": "bn",
+      "totalKeys": 216,
+      "missingCount": 0,
+      "passRate": 100
+    },
+    {
+      "lang": "ur",
+      "totalKeys": 216,
+      "missingCount": 0,
+      "passRate": 100
+    }
+  ]
+}
