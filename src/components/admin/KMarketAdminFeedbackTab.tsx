@@ -4,13 +4,17 @@ import React, { useState, useEffect } from 'react';
 import { Lightbulb, Sparkles, MapPin, ShieldAlert, Wallet, Bug, CheckCircle2, Clock, Trash2, Filter } from 'lucide-react';
 import { FeedbackItem, FeedbackCategory } from '@/types/kmarket';
 
-const CATEGORY_LABEL_MAP: Record<FeedbackCategory, { label: string; icon: string; color: string }> = {
+const CATEGORY_LABEL_MAP: Partial<Record<FeedbackCategory, { label: string; icon: string; color: string }>> = {
   translation_error: { label: '🌐 번역/언어 오류', icon: '🌐', color: 'bg-indigo-100 text-indigo-800 border-indigo-200' },
   location_request: { label: '📍 공단/장소 추가', icon: '📍', color: 'bg-emerald-100 text-emerald-800 border-emerald-200' },
   security_improve: { label: '🛡️ 사기방지 개선', icon: '🛡️', color: 'bg-rose-100 text-rose-800 border-rose-200' },
   finance_service: { label: '💰 세무/금융 요청', icon: '💰', color: 'bg-amber-100 text-amber-800 border-amber-200' },
   bug_report: { label: '📱 화면 렉/버그', icon: '📱', color: 'bg-red-100 text-red-800 border-red-200' },
   general_suggestion: { label: '💬 기타 자유 건의', icon: '💬', color: 'bg-blue-100 text-blue-800 border-blue-200' },
+  bug: { label: '📱 화면 렉/버그', icon: '📱', color: 'bg-red-100 text-red-800 border-red-200' },
+  feature: { label: '✨ 기능 제안', icon: '✨', color: 'bg-blue-100 text-blue-800 border-blue-200' },
+  praise: { label: '❤️ 칭찬/응원', icon: '❤️', color: 'bg-pink-100 text-pink-800 border-pink-200' },
+  other: { label: '💬 기타 자유 건의', icon: '💬', color: 'bg-gray-100 text-gray-800 border-gray-200' },
 };
 
 export default function KMarketAdminFeedbackTab() {
@@ -115,8 +119,8 @@ export default function KMarketAdminFeedbackTab() {
               >
                 <div className="space-y-2.5">
                   <div className="flex items-center justify-between gap-2 flex-wrap">
-                    <span className={`text-[11px] font-bold px-2.5 py-1 rounded-xl border ${catInfo.color}`}>
-                      {catInfo.label}
+                    <span className={`text-[11px] font-bold px-2.5 py-1 rounded-xl border ${catInfo?.color || 'bg-slate-100 text-slate-800'}`}>
+                      {catInfo?.label || '피드백'}
                     </span>
                     <span className="text-[10px] text-slate-400 flex items-center gap-1">
                       <Clock className="w-3 h-3" />

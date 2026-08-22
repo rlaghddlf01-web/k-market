@@ -9,6 +9,9 @@ export interface MovingSaleBadgeInfo {
   badgeColorClass: string;
   pulse: boolean;
   filterLabel: string;
+  color?: string;
+  icon?: string;
+  text?: string;
 }
 
 /**
@@ -26,6 +29,9 @@ export function getMovingSaleBadgeInfo(dDay: number = 7): MovingSaleBadgeInfo {
       badgeColorClass: 'bg-gradient-to-r from-red-600 to-rose-600 text-white shadow-md shadow-red-500/30 ring-1 ring-red-300',
       pulse: true,
       filterLabel: '🚨 D-3 오늘마감',
+      color: 'bg-red-600 text-white',
+      icon: '🚨',
+      text: `D-${dDay} 오늘마감`,
     };
   }
 
@@ -37,6 +43,9 @@ export function getMovingSaleBadgeInfo(dDay: number = 7): MovingSaleBadgeInfo {
       badgeColorClass: 'bg-gradient-to-r from-orange-600 to-amber-500 text-white shadow-md shadow-orange-500/25',
       pulse: false,
       filterLabel: '🔥 D-7 마감임박',
+      color: 'bg-orange-600 text-white',
+      icon: '🔥',
+      text: `D-${dDay} 초특가`,
     };
   }
 
@@ -47,6 +56,9 @@ export function getMovingSaleBadgeInfo(dDay: number = 7): MovingSaleBadgeInfo {
     badgeColorClass: 'bg-gradient-to-r from-blue-600 to-teal-600 text-white shadow-md shadow-blue-500/20',
     pulse: false,
     filterLabel: '✈️ D-14 묶음할인',
+    color: 'bg-blue-600 text-white',
+    icon: '✈️',
+    text: `D-${dDay} 묶음`,
   };
 }
 

@@ -264,7 +264,8 @@ export default function KMarketChatDrawer() {
 
           {chatMessages.map((msg) => {
             const isMe = msg.sender_type === 'buyer';
-            const isAppointmentMessage = msg.original_text.includes('[직거래 약속]');
+            const originalText = msg.original_text || msg.text || '';
+            const isAppointmentMessage = originalText.includes('[직거래 약속]');
 
             return (
               <div
@@ -364,7 +365,8 @@ export default function KMarketChatDrawer() {
                   >
                     {/* 15개국어 실시간 시스템 사기 안심 개입 배너 */}
                     {(() => {
-                      const detected = detectScamPattern(msg.original_text);
+                      const textToCheck = msg.original_text || msg.text || '';
+                      const detected = detectScamPattern(textToCheck);
                       if (!detected) return null;
                       return (
                         <div className="mb-2">
@@ -479,7 +481,7 @@ export default function KMarketChatDrawer() {
       onClose={() => setShowReviewModal(false)}
       targetUserId={activeChat.seller_id}
       targetUserName={activeChat.seller_name}
-      targetUserFlag={activeChat.seller_flag}
+      targetUserFlag={activeChat.seller_flag || activeChat.seller_country_flag || '🇻🇳'}
       targetUserCountry={activeChat.seller_country}
       itemId={activeChat.item_id}
       itemTitle={activeChat.item?.title || 'K-Market 거래 상품'}

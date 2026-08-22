@@ -549,8 +549,10 @@ export function KMarketProvider({ children }: { children: React.ReactNode }) {
         MM: 'my',
         KH: 'km',
         MN: 'mn',
-        UZ: 'uz',
-        PH: 'tl',
+        PH: 'en',
+        JP: 'ja',
+        KZ: 'kk',
+        PK: 'ur',
         ID: 'id',
         LK: 'si',
         BD: 'bn',
@@ -647,13 +649,13 @@ export function KMarketProvider({ children }: { children: React.ReactNode }) {
 
         setChatMessages((prev) => [...prev, autoReplyMsg]);
 
-        // 🔔 1:1 번역 채팅 실시간 15개국어 웹 푸시 알림 발송 (Service Worker)
+        // 🔔 1:1 번역 채팅 실시간 17개국어 웹 푸시 알림 발송 (Service Worker)
         sendLocalizedPushNotification({
           type: 'chat',
           lang: currentLang,
           params: {
             senderName: activeChat.seller_name,
-            itemTitle: sellerTransText || replyItem.original,
+            itemTitle: sellerTransText || activeChat.item_title,
           },
           url: `/?chat=${activeChat.id}`,
         });

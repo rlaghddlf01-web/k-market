@@ -16,6 +16,7 @@ interface KMarketUserProfileModalProps {
   userName?: string;
   userCountry?: string;
   userFlag?: string;
+  userCountryFlag?: string;
 }
 
 export default function KMarketUserProfileModal({
@@ -24,8 +25,10 @@ export default function KMarketUserProfileModal({
   userId,
   userName = 'K-Market User',
   userCountry = 'VN',
-  userFlag = '🇻🇳',
+  userFlag,
+  userCountryFlag,
 }: KMarketUserProfileModalProps) {
+  const finalFlag = userCountryFlag || userFlag || '🇻🇳';
   const { currentLang } = useLanguage();
   const { items, setSelectedItem } = useKMarket();
   const [activeTab, setActiveTab] = useState<'items' | 'manner'>('items');
@@ -81,7 +84,7 @@ export default function KMarketUserProfileModal({
           <KMarketTrustBadge
             mannerTemp={profile.manner_temp}
             tradeCount={profile.trade_count}
-            isVerifiedWorker={profile.is_verified_worker}
+            isVerifiedWorker={profile.is_verified_arc}
             isVerifiedDormitory={profile.is_verified_dormitory}
             variant="detailed"
           />

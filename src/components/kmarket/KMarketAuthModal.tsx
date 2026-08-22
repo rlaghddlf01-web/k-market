@@ -17,6 +17,7 @@ import {
   MapPin,
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
+import { useLanguage } from '@/context/LanguageContext';
 
 interface KMarketAuthModalProps {
   isOpen: boolean;
@@ -29,6 +30,7 @@ export default function KMarketAuthModal({
   onClose,
   onSuccessAuth,
 }: KMarketAuthModalProps) {
+  const { currentLang } = useLanguage();
   const [authTab, setAuthTab] = useState<'ocr' | 'manual'>('ocr');
   const [step, setStep] = useState<'form' | 'sms' | 'complete'>('form');
 

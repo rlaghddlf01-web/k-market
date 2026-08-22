@@ -1,4 +1,4 @@
-import { LanguageOption, SupportedLanguage } from '@/types/kmarket';
+import { LanguageOption, SupportedLanguage, ItemCategory, IndustrialRegion } from '@/types/kmarket';
 
 // KTRS K-Market 17개국어 표준 언어 목록 (미국·일본·러시아 우선순위 적용)
 export const SUPPORTED_LANGUAGES: LanguageOption[] = [
@@ -121,6 +121,30 @@ export const SUPPORTED_LANGUAGES: LanguageOption[] = [
     flag: '🇵🇰',
     countryCode: 'PK',
   },
+];
+
+export const CATEGORIES_DATA: { id: ItemCategory; label: string; icon: string }[] = [
+  { id: 'all', label: '전체', icon: '✨' },
+  { id: 'moving_sale', label: '무빙세일', icon: '✈️' },
+  { id: 'appliances', label: '생활가전', icon: '🔌' },
+  { id: 'furniture', label: '가구/수납', icon: '🛏️' },
+  { id: 'digital', label: '디지털', icon: '📱' },
+  { id: 'clothes', label: '의류/잡화', icon: '👕' },
+  { id: 'daily', label: '주방/생활', icon: '🍳' },
+  { id: 'vehicles', label: '자전거/이동', icon: '🚲' },
+  { id: 'free_give', label: '무료나눔', icon: '🎁' },
+];
+
+export const REGIONS_DATA: { id: IndustrialRegion; name: string; badge: string; icon: string; nameKo: string }[] = [
+  { id: 'all', name: '전국 공단 직거래', badge: '전국', icon: '🏭', nameKo: '전국' },
+  { id: 'pyeongtaek', name: '평택 포승/고덕 공단', badge: '평택', icon: '🏭', nameKo: '평택' },
+  { id: 'ansan', name: '안산 반월/시화/원곡동', badge: '안산', icon: '🏭', nameKo: '안산' },
+  { id: 'hwaseong', name: '화성 향남/남양/발안 공단', badge: '화성', icon: '🏭', nameKo: '화성' },
+  { id: 'siheung', name: '시흥 정왕/스마트허브', badge: '시흥', icon: '🏭', nameKo: '시흥' },
+  { id: 'gumi', name: '구미 국가산업단지', badge: '구미', icon: '🏭', nameKo: '구미' },
+  { id: 'gimhae', name: '김해 골든루트/주촌', badge: '김해', icon: '🏭', nameKo: '김해' },
+  { id: 'incheon', name: '인천 남동공단', badge: '인천', icon: '🏭', nameKo: '인천' },
+  { id: 'gwangju', name: '광주 하남공단', badge: '광주', icon: '🏭', nameKo: '광주' },
 ];
 
 export const LANGUAGE_DICTIONARY: Record<SupportedLanguage, LanguageOption> =

@@ -12,7 +12,7 @@ export interface ScamWarningContent {
 // 15개국어 사기 유형별 다국어 경고 문구 매핑
 export const SCAM_WARNINGS_I18N: Record<
   ScamThreatType,
-  Record<LanguageCode, ScamWarningContent>
+  Partial<Record<LanguageCode, ScamWarningContent>>
 > = {
   // 1. 선입금 / 계좌이체 사기 유도 (최고 위험도)
   prepayment_wire: {
@@ -50,11 +50,6 @@ export const SCAM_WARNINGS_I18N: Record<
       title: '🚨 [ВНИМАНИЕ МОШЕННИКИ] Ни в коем случае не переводите предоплату!',
       description: 'Требование перевести деньги до личной встречи — это 100% мошенничество. Оплачивайте товар только после личной проверки.',
       actionText: 'Личная безопасная сделка',
-    },
-    tl: {
-      title: '🚨 [BABALA SA SCAM] Huwag na huwag magpapadala ng pera nang maaga!',
-      description: 'Ang paghingi ng bayad o deposito bago magkita ay 100% panloloko. Magbayad lamang kapag nahawakan at nasuri na ang gamit nang personal.',
-      actionText: 'Kaliwaan / Personal na transaksyon',
     },
     id: {
       title: '🚨 [PERINGATAN PENIPUAN] Jangan pernah transfer uang di awal!',
@@ -130,11 +125,6 @@ export const SCAM_WARNINGS_I18N: Record<
       description: 'Мошенники часто уводят жертв в сторонние мессенджеры. Общайтесь только внутри защищенного чата K-Market с автопереводом.',
       actionText: 'Оставайтесь в чате приложения',
     },
-    tl: {
-      title: '⚠️ [BABALA] Huwag lumipat sa labas na messenger gaya ng KakaoTalk!',
-      description: 'Madalas ilipat ng mga scammer ang usapan sa labas upang makapanloko. Manatili sa K-Market chat para sa iyong proteksyon.',
-      actionText: 'Manatili sa chat ng app',
-    },
     id: {
       title: '⚠️ [PERINGATAN] Jangan berpindah ke WhatsApp atau Telegram!',
       description: 'Penipu sering mengajak transaksi di luar aplikasi. Tetaplah mengobrol di dalam chat K-Market yang terlindungi terjemahan otomatis.',
@@ -209,11 +199,6 @@ export const SCAM_WARNINGS_I18N: Record<
       description: 'Требование подарочных карт или отправка фальшивых ссылок на оплату — это фишинг. Не открывайте подозрительные ссылки.',
       actionText: 'Не нажимайте на ссылки',
     },
-    tl: {
-      title: '🚨 [BABALA SA PEKENG LINK] Huwag mag-click ng mga panlabas na link!',
-      description: 'Ang paghingi ng gift cards o pagpapadala ng pekeng payment links ay phishing scam. Huwag buksan ang mga link.',
-      actionText: 'Huwag i-click ang link',
-    },
     id: {
       title: '🚨 [PERINGATAN LINK PALSU] Jangan klik tautan yang mencurigakan!',
       description: 'Meminta voucher atau mengirim tautan pembayaran palsu adalah modus pencurian akun. Jangan buka tautan apa pun.',
@@ -248,7 +233,7 @@ export const SCAM_WARNINGS_I18N: Record<
 };
 
 // 15개국어 채팅방 공식 안전 수칙 사전
-export const CHAT_SAFETY_POLICY_I18N: Record<LanguageCode, { badge: string; text: string }> = {
+export const CHAT_SAFETY_POLICY_I18N: Partial<Record<LanguageCode, { badge: string; text: string }>> = {
   ko: {
     badge: '🛡️ K-Market 안전 수칙',
     text: '선입금 요구 및 외부 메신저(카톡·라인·텔레그램) 유도 시 시스템에 의해 즉시 계정이 일시 및 영구 정지 및 신고 조치됩니다. 반드시 현장 직거래를 이용하세요.',
@@ -276,10 +261,6 @@ export const CHAT_SAFETY_POLICY_I18N: Record<LanguageCode, { badge: string; text
   ru: {
     badge: '🛡️ Правила безопасности K-Market',
     text: 'Требование предоплаты или попытка перевода в сторонние мессенджеры (Telegram, WhatsApp, KakaoTalk) приведет к НЕМЕДЛЕННОЙ ВРЕМЕННОЙ ИЛИ ПОЛНОЙ БЛОКИРОВКЕ аккаунта. Совершайте сделки только лично.',
-  },
-  tl: {
-    badge: '🛡️ Mga Batas sa Kaligtasan ng K-Market',
-    text: 'Ang paghingi ng paunang bayad o paglilipat sa labas na messenger (KakaoTalk, LINE, Telegram) ay magdudulot ng PANSAMANTALA O PERMANENTENG PAGKA-SUSPENDE ng account. Palaging makipag-transaksyon nang personal.',
   },
   id: {
     badge: '🛡️ Aturan Keamanan K-Market',
@@ -327,16 +308,16 @@ export const CHAT_SAFETY_POLICY_I18N: Record<LanguageCode, { badge: string; text
  * 상대방의 현재 언어 설정에 맞는 15개국어 안전 수칙 반환
  */
 export function getChatSafetyPolicyI18n(lang: LanguageCode = 'ko') {
-  return CHAT_SAFETY_POLICY_I18N[lang] || CHAT_SAFETY_POLICY_I18N.ko;
+  return CHAT_SAFETY_POLICY_I18N[lang] || CHAT_SAFETY_POLICY_I18N.ko!;
 }
 
 /**
- * 상대방의 현재 언어 설정에 맞는 15개국어 사기 경고 텍스트 반환
+ * 상대방의 현재 언어 설정에 맞는 17개국어 사기 경고 텍스트 반환
  */
 export function getScamWarningI18n(
   threatType: ScamThreatType,
   lang: LanguageCode = 'ko'
 ): ScamWarningContent {
   const table = SCAM_WARNINGS_I18N[threatType] || SCAM_WARNINGS_I18N.prepayment_wire;
-  return table[lang] || table.ko || table.en;
+  return (table[lang] || table.ko || table.en)!;
 }

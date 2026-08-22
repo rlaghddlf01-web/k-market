@@ -77,7 +77,7 @@ export async function sendLocalPushNotification(
           badge: '/images/kmarket-logo.jpg',
           vibrate: [200, 100, 200],
           data: { url },
-        });
+        } as any);
         return true;
       }
     }

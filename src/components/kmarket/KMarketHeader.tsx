@@ -395,11 +395,12 @@ export default function KMarketHeader() {
         </div>
       </div>
 
-      {/* 15개국 대형 국기 언어 선택 웰컴 게이트웨이 모달 (세금환급앱 디자인 일치) */}
-      <KMarketWelcomeLanguageGateway
-        isOpen={showWelcomeGateway}
-        onClose={() => setShowWelcomeGateway(false)}
-      />
+      {/* 17개국 대형 국기 언어 선택 웰컴 게이트웨이 모달 */}
+      {showWelcomeGateway && (
+        <KMarketWelcomeLanguageGateway
+          onClose={() => setShowWelcomeGateway(false)}
+        />
+      )}
     </header>
   );
 }
