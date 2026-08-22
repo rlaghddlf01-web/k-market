@@ -126,14 +126,16 @@ function WelcomeEasyTaxContent() {
   const handleCardClick = (code: SupportedLanguage) => {
     setSelectedCode(code);
     setLanguage(code);
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('kmarket_selected_lang', code);
+      localStorage.setItem('kmarket_welcomed', 'true');
+    }
+    // 즉시 주소창 URL을 /ru, /ja, /vi 등으로 실시간 변경하며 해당 언어 피드로 이동!
+    router.push(code === 'ko' ? '/' : `/${code}`);
   };
 
   const handleConfirmEnter = () => {
-    if (typeof window !== 'undefined') {
-      localStorage.setItem('kmarket_selected_lang', selectedCode);
-      localStorage.setItem('kmarket_welcomed', 'true');
-    }
-    router.push(selectedCode === 'ko' ? '/' : `/${selectedCode}`);
+    handleCardClick(selectedCode);
   };
 
   return (
