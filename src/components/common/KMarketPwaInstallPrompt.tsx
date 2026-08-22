@@ -143,8 +143,8 @@ export default function KMarketPwaInstallPrompt() {
                 <Smartphone className="w-5 h-5" />
               </div>
               <div>
-                <h3 className="font-black text-base text-white">iPhone / Safari 설치 방법</h3>
-                <p className="text-xs text-amber-300">간단한 2단계로 홈 화면에 추가하세요</p>
+                <h3 className="font-black text-base text-white">{t('auto_loop_673')}</h3>
+                <p className="text-xs text-amber-300">{t('auto_loop_674')}</p>
               </div>
             </div>
 
@@ -155,7 +155,7 @@ export default function KMarketPwaInstallPrompt() {
                   <p className="font-bold text-white flex items-center gap-1.5">
                     화면 하단의 <Share2 className="w-3.5 h-3.5 text-blue-400 inline" /> [공유] 버튼 클릭
                   </p>
-                  <p className="text-[11px] text-slate-400 mt-0.5">사파리 브라우저 하단 중앙의 네모 위 화살표 아이콘</p>
+                  <p className="text-[11px] text-slate-400 mt-0.5">{t('auto_loop_675')}</p>
                 </div>
               </div>
 
@@ -165,7 +165,7 @@ export default function KMarketPwaInstallPrompt() {
                   <p className="font-bold text-white flex items-center gap-1.5">
                     <PlusSquare className="w-3.5 h-3.5 text-amber-400 inline" /> [홈 화면에 추가] 선택
                   </p>
-                  <p className="text-[11px] text-slate-400 mt-0.5">메뉴를 아래로 내려 [홈 화면에 추가]를 누르면 완료!</p>
+                  <p className="text-[11px] text-slate-400 mt-0.5">{t('auto_loop_676')}</p>
                 </div>
               </div>
             </div>

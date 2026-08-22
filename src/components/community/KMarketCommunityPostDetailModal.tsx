@@ -172,7 +172,7 @@ export default function KMarketCommunityPostDetailModal() {
               className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-blue-50 dark:bg-blue-950/50 text-blue-600 dark:text-blue-400 text-xs font-bold border border-blue-200 dark:border-blue-800/60 hover:bg-blue-100 transition-colors cursor-pointer"
             >
               <Globe className="w-3.5 h-3.5" />
-              <span>{showOriginal ? '🌐 번역문 보기 (Gemini AI)' : '🇰🇷 원문 보기'}</span>
+              <span>{t('auto_ui_25')}</span>
             </button>
           </div>
 

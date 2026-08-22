@@ -150,7 +150,7 @@ export default function KMarketCommunityPostCard({
               className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-blue-50 dark:bg-blue-950/50 text-blue-600 dark:text-blue-400 text-[10px] font-bold border border-blue-200 dark:border-blue-800/60 hover:bg-blue-100 transition-colors"
             >
               <Globe className="w-3 h-3" />
-              <span>{showOriginal ? '🌐 번역문 보기 (Gemini AI)' : '🇰🇷 원문 보기'}</span>
+              <span>{t('auto_ui_25')}</span>
             </button>
           </div>
         )}

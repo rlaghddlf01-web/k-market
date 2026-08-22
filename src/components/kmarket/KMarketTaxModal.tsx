@@ -240,7 +240,7 @@ export default function KMarketTaxModal() {
                 </div>
                 <div className="text-3xl sm:text-4xl font-black tracking-tight">
                   {result.estimatedTotalRefund.toLocaleString()}
-                  <span className="text-xl font-bold ml-1">원</span>
+                  <span className="text-xl font-bold ml-1">{t('currency_won')}</span>
                 </div>
                 <p className="text-xs text-orange-100">
                   * 선결제 비용 0원! 국세청에서 고객님 계좌로 환급금이 입금된 후에만 처리됩니다.

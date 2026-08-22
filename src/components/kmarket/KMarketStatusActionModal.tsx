@@ -201,7 +201,7 @@ export default function KMarketStatusActionModal({
               <span>{t('auto_ui_269')}</span>
             </div>
             <span className="text-[10px] bg-indigo-600 text-white font-bold px-2 py-0.5 rounded-full">
-              무료
+              {t('auto_loop_1042')}
             </span>
           </div>
 

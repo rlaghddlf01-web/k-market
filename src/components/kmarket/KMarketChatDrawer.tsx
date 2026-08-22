@@ -274,7 +274,7 @@ export default function KMarketChatDrawer() {
               >
                 {/* 발신자 정보 */}
                 <div className="flex items-center space-x-1.5 text-[10px] text-slate-400 px-1">
-                  <span>{isMe ? '나 (Me)' : activeChat.seller_name}</span>
+                  <span>{t('auto_ui_100')}</span>
                   <span>•</span>
                   <span>
                     {new Date(msg.created_at).toLocaleTimeString([], {
