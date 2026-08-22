@@ -13,14 +13,26 @@ interface LanguageCardItem {
   flagUrl: string;
 }
 
-// 14개국 외국인 모국어 국기 카드 목록 (1순위: 🇺🇸 English)
+// 16개국 외국인 모국어 국기 카드 목록 (1순위: 🇺🇸 English, 2순위: 🇯🇵 日本語, 3순위: 🇷🇺 Русский)
 const EASY_TAX_LANGUAGES: LanguageCardItem[] = [
-  // Row 1
+  // 🏆 1순위 글로벌/주요국
   {
     code: 'en',
     name: 'English',
     country: 'United States / Global',
     flagUrl: 'https://flagcdn.com/w160/us.png',
+  },
+  {
+    code: 'ja',
+    name: '日本語',
+    country: 'Japan',
+    flagUrl: 'https://flagcdn.com/w160/jp.png',
+  },
+  {
+    code: 'ru',
+    name: 'Русский',
+    country: 'Russia / CIS',
+    flagUrl: 'https://flagcdn.com/w160/ru.png',
   },
   {
     code: 'vi',
@@ -35,18 +47,11 @@ const EASY_TAX_LANGUAGES: LanguageCardItem[] = [
     flagUrl: 'https://flagcdn.com/w160/cn.png',
   },
   {
-    code: 'km',
-    name: 'ភាសាខ្មែរ',
-    country: 'Cambodia',
-    flagUrl: 'https://flagcdn.com/w160/kh.png',
+    code: 'th',
+    name: 'ไทย',
+    country: 'Thailand',
+    flagUrl: 'https://flagcdn.com/w160/th.png',
   },
-  {
-    code: 'ne',
-    name: 'नेपाली',
-    country: 'Nepal',
-    flagUrl: 'https://flagcdn.com/w160/np.png',
-  },
-  // Row 2
   {
     code: 'uz',
     name: "O'zbekcha",
@@ -54,10 +59,22 @@ const EASY_TAX_LANGUAGES: LanguageCardItem[] = [
     flagUrl: 'https://flagcdn.com/w160/uz.png',
   },
   {
-    code: 'my',
-    name: 'မြန်မာဘာသာ',
-    country: 'Myanmar',
-    flagUrl: 'https://flagcdn.com/w160/mm.png',
+    code: 'km',
+    name: 'ភាសាខ្មែរ',
+    country: 'Cambodia',
+    flagUrl: 'https://flagcdn.com/w160/kh.png',
+  },
+  {
+    code: 'mn',
+    name: 'Монгол',
+    country: 'Mongolia',
+    flagUrl: 'https://flagcdn.com/w160/mn.png',
+  },
+  {
+    code: 'ne',
+    name: 'नेपाली',
+    country: 'Nepal',
+    flagUrl: 'https://flagcdn.com/w160/np.png',
   },
   {
     code: 'id',
@@ -66,10 +83,10 @@ const EASY_TAX_LANGUAGES: LanguageCardItem[] = [
     flagUrl: 'https://flagcdn.com/w160/id.png',
   },
   {
-    code: 'th',
-    name: 'ไทย',
-    country: 'Thailand',
-    flagUrl: 'https://flagcdn.com/w160/th.png',
+    code: 'my',
+    name: 'မြန်မာဘာသာ',
+    country: 'Myanmar',
+    flagUrl: 'https://flagcdn.com/w160/mm.png',
   },
   {
     code: 'si',
@@ -77,24 +94,17 @@ const EASY_TAX_LANGUAGES: LanguageCardItem[] = [
     country: 'Sri Lanka',
     flagUrl: 'https://flagcdn.com/w160/lk.png',
   },
-  // Row 3
   {
-    code: 'mn',
-    name: 'Монгол',
-    country: 'Mongolia',
-    flagUrl: 'https://flagcdn.com/w160/mn.png',
+    code: 'kk',
+    name: 'Қазақша',
+    country: 'Kazakhstan',
+    flagUrl: 'https://flagcdn.com/w160/kz.png',
   },
   {
     code: 'bn',
     name: 'বাংলা',
     country: 'Bangladesh',
     flagUrl: 'https://flagcdn.com/w160/bd.png',
-  },
-  {
-    code: 'kk',
-    name: 'Қазақша',
-    country: 'Kazakhstan',
-    flagUrl: 'https://flagcdn.com/w160/kz.png',
   },
   {
     code: 'ur',
@@ -105,106 +115,111 @@ const EASY_TAX_LANGUAGES: LanguageCardItem[] = [
 ];
 
 interface KMarketWelcomeLanguageGatewayProps {
-  isOpen: boolean;
-  onClose: () => void;
-  isFirstVisit?: boolean;
+  onClose?: () => void;
+  isStandalonePage?: boolean;
 }
 
 export default function KMarketWelcomeLanguageGateway({
-  isOpen,
   onClose,
-  isFirstVisit = false,
+  isStandalonePage = false,
 }: KMarketWelcomeLanguageGatewayProps) {
   const router = useRouter();
   const { setLanguage } = useLanguage();
 
-  if (!isOpen) return null;
-
-  const handleSelectLanguage = (code: SupportedLanguage) => {
-    setLanguage(code);
+  const handleSelectLanguage = (langCode: SupportedLanguage) => {
+    setLanguage(langCode);
     if (typeof window !== 'undefined') {
-      localStorage.setItem('kmarket_selected_lang', code);
+      localStorage.setItem('kmarket_selected_lang', langCode);
       localStorage.setItem('kmarket_welcomed', 'true');
     }
-    router.push(code === 'ko' ? '/' : `/${code}`);
-    setTimeout(() => {
+    if (isStandalonePage) {
+      router.push(`/${langCode}`);
+    } else if (onClose) {
       onClose();
-    }, 150);
+    }
+  };
+
+  const handleSelectKorean = () => {
+    setLanguage('ko');
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('kmarket_selected_lang', 'ko');
+      localStorage.setItem('kmarket_welcomed', 'true');
+    }
+    if (isStandalonePage) {
+      router.push('/');
+    } else if (onClose) {
+      onClose();
+    }
   };
 
   return (
-    <div className="fixed inset-0 z-[10000] flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs animate-in fade-in duration-200">
-      <div className="bg-[#fbf7f4] border-2 border-[#e2d5c7] rounded-3xl w-full max-w-2xl p-6 sm:p-8 shadow-2xl text-[#2b1810] relative max-h-[92vh] overflow-y-auto">
-        {/* 닫기 버튼 */}
-        <button
-          type="button"
-          onClick={onClose}
-          className="absolute top-5 right-5 text-slate-400 hover:text-[#2b1810] transition-colors cursor-pointer p-1.5"
-          title="닫기"
-        >
-          <X className="w-6 h-6" />
-        </button>
+    <div
+      className={`fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md animate-fadeIn`}
+    >
+      <div className="relative w-full max-w-2xl bg-white rounded-3xl shadow-2xl overflow-hidden border border-slate-200 flex flex-col max-h-[90vh]">
+        {/* 상단 닫기 버튼 */}
+        {onClose && !isStandalonePage && (
+          <button
+            onClick={onClose}
+            className="absolute top-4 right-4 p-2 text-slate-400 hover:text-slate-600 bg-slate-100 hover:bg-slate-200 rounded-full transition-colors z-10"
+            aria-label="닫기"
+          >
+            <X className="w-5 h-5" />
+          </button>
+        )}
 
-        {/* 헤더 안내 */}
-        <div className="text-center space-y-2 mb-6">
-          <div className="inline-flex items-center gap-2 bg-[#f4ede6] border border-[#d97706]/40 text-[#92400e] px-3.5 py-1 rounded-full text-xs font-black shadow-xs">
-            <Globe className="w-3.5 h-3.5 text-[#d97706]" />
-            <span>K-Market 15개국어 모국어 선택</span>
+        {/* 헤더 안내 영역 */}
+        <div className="p-6 text-center border-b border-slate-100 bg-gradient-to-b from-amber-50/50 to-white">
+          <div className="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-amber-500/10 text-[#845b37] mb-3 shadow-inner">
+            <Globe className="w-6 h-6 animate-pulse" />
           </div>
-
-          <h2 className="text-xl sm:text-2xl font-black tracking-tight text-[#2b1810]">
-            Choose Your Language / 모국어를 선택하세요
-          </h2>
-          <p className="text-xs text-[#5c4a39] font-medium">
-            외국인 근로자 전용 0원 수수료 중고거래 & 15개국어 실시간 번역 플랫폼
+          <h1 className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">
+            Select Your Language
+          </h1>
+          <p className="text-sm font-semibold text-slate-600 mt-1">
+            모국어를 선택하시면 1:1 자동번역과 전용 혜택이 제공됩니다
           </p>
         </div>
 
-        {/* 14개국 국기 카드 그리드 (크림 & 베이지) */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
-          {EASY_TAX_LANGUAGES.map((item) => (
-            <button
-              key={item.code}
-              type="button"
-              onClick={() => handleSelectLanguage(item.code)}
-              className="group flex flex-col items-center p-3 rounded-2xl bg-white hover:bg-[#faf4ee] border border-[#e2d5c7] hover:border-[#d97706] hover:shadow-md hover:shadow-amber-500/15 transition-all cursor-pointer text-center relative overflow-hidden"
-            >
-              {/* 국기 이미지 */}
-              <div className="w-12 h-8 rounded-md overflow-hidden shadow-xs mb-2 border border-slate-200 group-hover:scale-110 transition-transform">
-                <img
-                  src={item.flagUrl}
-                  alt={item.name}
-                  className="w-full h-full object-cover"
-                />
-              </div>
-
-              {/* 언어명 */}
-              <span className="text-xs font-black text-[#2b1810] group-hover:text-[#92400e] leading-tight">
-                {item.name}
-              </span>
-              <span className="text-[10px] text-[#8c7866] mt-0.5 group-hover:text-[#b45309] font-medium">
-                {item.country}
-              </span>
-            </button>
-          ))}
+        {/* 16개국 외국인 모국어 그리드 (스크롤 가능) */}
+        <div className="p-4 sm:p-6 overflow-y-auto flex-1 custom-scrollbar">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
+            {EASY_TAX_LANGUAGES.map((lang) => (
+              <button
+                key={lang.code}
+                onClick={() => handleSelectLanguage(lang.code)}
+                className="group relative flex flex-col items-center justify-center p-3.5 rounded-2xl border-2 border-slate-200 hover:border-amber-500 bg-white hover:bg-amber-50/30 transition-all duration-200 shadow-xs hover:shadow-md active:scale-95 cursor-pointer text-center"
+              >
+                {/* 실물 고화질 국기 이미지 */}
+                <div className="w-10 h-7 rounded-sm overflow-hidden shadow-xs mb-2 group-hover:scale-110 transition-transform">
+                  <img
+                    src={lang.flagUrl}
+                    alt={lang.name}
+                    className="w-full h-full object-cover"
+                    loading="lazy"
+                  />
+                </div>
+                <span className="font-extrabold text-sm text-slate-900 group-hover:text-amber-900 leading-tight">
+                  {lang.name}
+                </span>
+                <span className="text-[11px] font-medium text-slate-500 truncate w-full mt-0.5">
+                  {lang.country}
+                </span>
+              </button>
+            ))}
+          </div>
         </div>
 
-        {/* 하단 한국어 유지 버튼 */}
-        <div className="mt-6 pt-4 border-t border-[#e2d5c7] flex items-center justify-between text-xs">
+        {/* 하단: 한국어 바로가기 버튼 */}
+        <div className="p-4 border-t border-slate-100 bg-slate-50 flex items-center justify-between">
+          <div className="flex items-center gap-2 text-xs text-slate-600 font-medium">
+            <span>🇰🇷 한국인이신가요?</span>
+          </div>
           <button
-            type="button"
-            onClick={() => handleSelectLanguage('ko')}
-            className="text-[#5c4a39] hover:text-[#2b1810] transition-colors cursor-pointer flex items-center gap-1.5 font-bold"
+            onClick={handleSelectKorean}
+            className="px-4 py-2 bg-slate-900 hover:bg-slate-800 text-white rounded-xl text-xs font-bold transition-all active:scale-95 shadow-sm"
           >
-            <span>🇰🇷 한국어로 계속 이용하기 (Korean)</span>
-          </button>
-
-          <button
-            type="button"
-            onClick={onClose}
-            className="px-4 py-2 bg-[#2b1810] hover:bg-[#3d2817] text-white font-bold rounded-xl transition-all cursor-pointer shadow-xs"
-          >
-            닫기
+            한국어로 계속하기 ➔
           </button>
         </div>
       </div>

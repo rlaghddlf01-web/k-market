@@ -1,0 +1,27 @@
+import { TranslationDictionary } from '../types';
+
+export const ja: TranslationDictionary = {
+  app_name: 'K-Market',
+  app_slogan: '外国人向け 手数料0円の安心フリマ＆ムービングセール',
+  ktrs_tab_tax: '💰 税金還付 (平均184万W)',
+  ktrs_tab_loan: '⚡ 緊急小口ローン',
+  ktrs_tab_housing: '🏠 安心ワンルーム',
+  ktrs_tab_market: '🛒 K-Market (中古/帰国処分)',
+  tax_banner_title: '韓国勤務1年以上？払いすぎた税金［平均184万ウォン］30秒無料還付診断！',
+  tax_banner_btn: '還付金を今すぐ診断する ➔',
+  moving_sale_title: '✈️ 帰国D-7 超特価［ムービングセール (Moving Sale)］',
+  moving_sale_badge: 'まとめ売り特価',
+  post_item_btn: '✏️ 1分で出品する',
+  chat_btn: '💬 1:1 リアルタイム自動翻訳チャット',
+  chat_translation_hint: '✨ 相手の母国語に0.3秒で自動翻訳されて送信されます (Gemini AI搭載)',
+  free_share: '無料譲渡',
+  filter_all_regions: '全国工業団地 直接取引',
+  search_placeholder: '団地周辺の出品検索 (洗濯機、自転車、炊飯器など)...',
+  status_selling: '販売中',
+  status_reserved: '予約中',
+  status_sold: '取引完了',
+  walk_trade_available: '徒歩5分 直接手渡し可能',
+  zero_fee_badge: '手数料0円 100%無料',
+  community_title: '近所・コミュニティ',
+  manner_temperature: 'マナー温度',
+};

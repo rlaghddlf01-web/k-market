@@ -1,4 +1,4 @@
-// KTRS K-Market 중고나라 실매물 랜덤 셔플 & 15개국어 전수 번역 로더
+// KTRS K-Market 중고나라 실매물 랜덤 셔플 & 17개국어 전수 번역 로더
 
 import { KMarketItem, ItemCategory, SupportedLanguage } from '@/types/kmarket';
 import joongnaMultiRaw from '../../joongna_multi_compressed_500.json';
@@ -8,6 +8,8 @@ const SELLERS_POOL = [
   { name: 'Nguyen Van Tu', country: 'VN', flag: '🇻🇳', temp: 39.5, lang: 'vi' },
   { name: 'Tran Thi Mai', country: 'VN', flag: '🇻🇳', temp: 40.2, lang: 'vi' },
   { name: 'Le Hoang Nam', country: 'VN', flag: '🇻🇳', temp: 38.1, lang: 'vi' },
+  { name: 'Kenji Sato (佐藤 健二)', country: 'JP', flag: '🇯🇵', temp: 41.2, lang: 'ja' },
+  { name: 'Elena Ivanova (Елена)', country: 'RU', flag: '🇷🇺', temp: 39.8, lang: 'ru' },
   { name: 'Bat-Erdene', country: 'MN', flag: '🇲🇳', temp: 41.0, lang: 'mn' },
   { name: 'Zolboo', country: 'MN', flag: '🇲🇳', temp: 37.8, lang: 'mn' },
   { name: 'Somchai Prasert', country: 'TH', flag: '🇹🇭', temp: 39.0, lang: 'th' },
@@ -57,7 +59,6 @@ function pseudoRandom(seed: number) {
 export function getJoongnaRealItems(): KMarketItem[] {
   const rawList = Array.isArray(joongnaMultiRaw) ? [...joongnaMultiRaw] : [];
   
-  // 🔀 카테고리 쏠림 방지: Fisher-Yates 알고리즘으로 무작위 셔플
   for (let i = rawList.length - 1; i > 0; i--) {
     const j = Math.floor(pseudoRandom(i * 97 + 13) * (i + 1));
     [rawList[i], rawList[j]] = [rawList[j], rawList[i]];
@@ -95,7 +96,7 @@ export function getJoongnaRealItems(): KMarketItem[] {
       ? raw.images
       : ['https://img2.joongna.com/media/original/2026/07/20/1784543687792qcM_p3jSz.jpg?impolicy=thumb&size=500'];
 
-    // 🌐 15개국어 전체 번역 매트릭스 생성
+    // 🌐 17개국어 전체 번역 매트릭스 생성
     const allTranslations = generate15LangTranslations(
       fullKoreanTitle,
       isMoving,
