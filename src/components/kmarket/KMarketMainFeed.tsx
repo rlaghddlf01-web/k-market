@@ -228,7 +228,7 @@ export default function KMarketMainFeed() {
                     <PackageOpen className="w-9 h-9 text-blue-400" />
                   </div>
                   <div className="space-y-1.5">
-                    <h3 className="text-base font-bold text-slate-800">조건에 맞는 매물이 없습니다</h3>
+                    <h3 className="text-base font-bold text-slate-800">{t('auto_ui_180')}</h3>
                     <p className="text-xs text-slate-500 max-w-sm mx-auto leading-relaxed">
                       필터를 전체로 변경하거나, 첫 번째로 내 중고 물건을 1분 만에 등록해 보세요!
                     </p>
@@ -289,11 +289,11 @@ export default function KMarketMainFeed() {
               <div className="flex flex-col gap-2 text-xs font-bold text-[#f8fafc]">
                 <div className="flex items-center gap-2">
                   <ShieldCheck className="w-4 h-4 text-[#f3ba2f]" />
-                  <span className="text-white font-bold">수수료 0원 100% 무료 안심 직거래</span>
+                  <span className="text-white font-bold">{t('auto_ui_181')}</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <Sparkles className="w-4 h-4 text-[#f3ba2f]" />
-                  <span className="text-white font-bold">15개국어 실시간 Gemini AI 양방향 번역</span>
+                  <span className="text-white font-bold">{t('auto_ui_182')}</span>
                 </div>
               </div>
             </div>
@@ -301,21 +301,21 @@ export default function KMarketMainFeed() {
             {/* 공식 사업자등록 정보 */}
             <div className="space-y-2.5 text-xs text-white leading-relaxed font-medium">
               <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-white">
-                <span><strong className="text-[#f3ba2f] font-extrabold">사업자명:</strong> 주식회사 펫에이앤씨</span>
+                <span><strong className="text-[#f3ba2f] font-extrabold">{t('auto_ui_183')}</strong> {t('auto_ui_184')}</span>
                 <span className="text-white/40">|</span>
-                <span><strong className="text-[#f3ba2f] font-extrabold">대표자:</strong> 전기창</span>
+                <span><strong className="text-[#f3ba2f] font-extrabold">{t('auto_ui_185')}</strong> {t('auto_ui_186')}</span>
                 <span className="text-white/40">|</span>
-                <span><strong className="text-[#f3ba2f] font-extrabold">사업자 등록번호:</strong> 229-86-03034</span>
+                <span><strong className="text-[#f3ba2f] font-extrabold">{t('auto_ui_187')}</strong> 229-86-03034</span>
                 <span className="text-white/40">|</span>
-                <span><strong className="text-[#f3ba2f] font-extrabold">통신판매업 번호:</strong> 제 2023-진접오남-0680호</span>
+                <span><strong className="text-[#f3ba2f] font-extrabold">{t('auto_ui_188')}</strong> {t('auto_ui_189')}</span>
               </div>
 
               <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-white">
-                <span><strong className="text-[#f3ba2f] font-extrabold">주소:</strong> 서울특별시 광진구 광나루로 436, 5층(화양동, 에듀킨빌딩)</span>
+                <span><strong className="text-[#f3ba2f] font-extrabold">{t('auto_ui_190')}</strong> {t('auto_ui_191')}</span>
                 <span className="text-white/40">|</span>
-                <span><strong className="text-[#f3ba2f] font-extrabold">연락처:</strong> 010-5964-5340</span>
+                <span><strong className="text-[#f3ba2f] font-extrabold">{t('auto_ui_192')}</strong> 010-5964-5340</span>
                 <span className="text-white/40">|</span>
-                <span><strong className="text-[#f3ba2f] font-extrabold">이메일:</strong> zkfnth021@gmail.com</span>
+                <span><strong className="text-[#f3ba2f] font-extrabold">{t('auto_ui_193')}</strong> zkfnth021@gmail.com</span>
               </div>
             </div>
 
@@ -323,13 +323,13 @@ export default function KMarketMainFeed() {
             <div className="pt-5 border-t border-[#2d1a12] text-[11px] text-[#94a3b8] font-semibold flex flex-col sm:flex-row justify-between items-center gap-3">
               <p>© 2026 KTRS (Korea Tax &amp; Foreign Resident Service). All rights reserved.</p>
               <div className="flex items-center gap-3">
-                <span className="text-[#cbd5e1]">안심 가이드 | 고객센터 1588-0000</span>
+                <span className="text-[#cbd5e1]">{t('auto_ui_194')}</span>
                 <Link
                   href="/admin"
                   className="px-2.5 py-1 bg-[#20140f] hover:bg-[#3d2817] border border-[#845b37]/80 text-[#f3ba2f] font-extrabold rounded-lg text-[10px] transition-all flex items-center gap-1 cursor-pointer"
-                  title="KTRS 관리자 전용 관제 콘솔 페이지"
+                  title={t('auto_ui_195')}
                 >
-                  <span>관리자 관제 콘솔 (/admin)</span>
+                  <span>{t('auto_ui_196')}</span>
                 </Link>
               </div>
             </div>

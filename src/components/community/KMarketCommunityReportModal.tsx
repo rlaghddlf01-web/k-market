@@ -1,5 +1,6 @@
 'use client';
 
+import { useLanguage } from '@/context/LanguageContext';
 import React, { useState } from 'react';
 import { useCommunity } from '@/context/CommunityContext';
 import { X, ShieldAlert, CheckCircle, AlertTriangle } from 'lucide-react';
@@ -14,6 +15,7 @@ const REPORT_REASONS = [
 ];
 
 export default function KMarketCommunityReportModal() {
+  const { t } = useLanguage();
   const { isReportModalOpen, setIsReportModalOpen, reportTarget, reportContent } = useCommunity();
   const [selectedReason, setSelectedReason] = useState('spam');
   const [detail, setDetail] = useState('');
@@ -44,7 +46,7 @@ export default function KMarketCommunityReportModal() {
 
         <div className="flex items-center gap-2 text-rose-600">
           <ShieldAlert className="w-6 h-6" />
-          <h3 className="text-base font-black">신고 및 차단하기</h3>
+          <h3 className="text-base font-black">{t('auto_ui_35')}</h3>
         </div>
 
         <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
@@ -54,7 +56,7 @@ export default function KMarketCommunityReportModal() {
         <form onSubmit={handleSubmit} className="space-y-3">
           <div className="space-y-1.5">
             <label className="text-xs font-bold text-slate-700 dark:text-slate-300">
-              신고 사유 선택
+              {t('report_reason_label')}
             </label>
             <div className="space-y-1">
               {REPORT_REASONS.map((r) => (
@@ -88,7 +90,7 @@ export default function KMarketCommunityReportModal() {
               rows={2}
               value={detail}
               onChange={(e) => setDetail(e.target.value)}
-              placeholder="자세한 사유를 적어주시면 빠른 조치에 도움이 됩니다."
+              placeholder={t('auto_ui_36')}
               className="w-full px-3 py-2 rounded-xl bg-slate-50 dark:bg-gray-800 border border-slate-200 dark:border-gray-700 text-xs text-slate-900 dark:text-white"
             />
           </div>

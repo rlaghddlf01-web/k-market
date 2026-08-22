@@ -1,5 +1,6 @@
 'use client';
 
+import { useLanguage } from '@/context/LanguageContext';
 import React from 'react';
 import { useCommunity } from '@/context/CommunityContext';
 import { COMMUNITY_CATEGORIES, CommunityCategory } from '@/types/community';
@@ -17,6 +18,7 @@ import {
 } from 'lucide-react';
 
 export default function KMarketCommunityMain() {
+  const { t } = useLanguage();
   const {
     posts,
     selectedCategory,
@@ -48,18 +50,18 @@ export default function KMarketCommunityMain() {
             </span>
             <span className="text-xs text-indigo-200 font-bold flex items-center gap-1">
               <Globe className="w-3.5 h-3.5" />
-              <span>언어 장벽 없이 내 모국어로 편하게</span>
+              <span>{t('auto_ui_16')}</span>
             </span>
           </div>
 
           <h2 className="text-lg sm:text-xl font-black tracking-tight text-white flex items-center gap-2">
-            <span>외국인 이웃들의 따뜻한 동네생활 &amp; 쉼터</span>
+            <span>{t('auto_ui_17')}</span>
             <span className="text-xl">🤝</span>
           </h2>
 
           <p className="text-xs text-indigo-100/90 leading-relaxed font-normal">
-            타향살이 외로움을 달래는 <strong>동네 친구 사귀기</strong>부터, 고향 가족 생각나는 <strong>사는 이야기</strong>, 
-            궁금한 <strong>한국 생활 Q&amp;A</strong>까지 따뜻한 온기를 나누세요.
+            타향살이 외로움을 달래는 <strong>{t('auto_ui_18')}</strong>{t('auto_ui_19')} <strong>{t('auto_ui_20')}</strong>, 
+            궁금한 <strong>{t('auto_ui_21')}</strong>까지 따뜻한 온기를 나누세요.
           </p>
         </div>
 
@@ -106,7 +108,7 @@ export default function KMarketCommunityMain() {
           className="btn-primary flex items-center justify-center gap-1.5 text-xs px-4 py-2.5 shrink-0 cursor-pointer shadow-md self-end sm:self-auto"
         >
           <PlusCircle className="w-4 h-4" />
-          <span>동네생활 글쓰기</span>
+          <span>{t('auto_ui_22')}</span>
         </button>
       </div>
 
@@ -137,7 +139,7 @@ export default function KMarketCommunityMain() {
             className="btn-primary px-5 py-2 text-xs cursor-pointer inline-flex items-center gap-1"
           >
             <PlusCircle className="w-3.5 h-3.5" />
-            <span>첫 이야기 작성하기</span>
+            <span>{t('auto_ui_23')}</span>
           </button>
         </div>
       )}

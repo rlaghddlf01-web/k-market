@@ -123,6 +123,7 @@ export default function KMarketWelcomeLanguageGateway({
   onClose,
   isStandalonePage = false,
 }: KMarketWelcomeLanguageGatewayProps) {
+  const { t } = useLanguage();
   const router = useRouter();
   const { currentLang, setLanguage } = useLanguage();
   const [activeLang, setActiveLang] = useState<SupportedLanguage>(currentLang || 'ko');
@@ -225,7 +226,7 @@ export default function KMarketWelcomeLanguageGateway({
         {/* 하단: 한국어 바로가기 버튼 */}
         <div className="p-4 border-t border-slate-100 bg-slate-50 flex items-center justify-between">
           <div className="flex items-center gap-2 text-xs text-slate-600 font-medium">
-            <span>🇰🇷 한국인이신가요?</span>
+            <span>{t('auto_ui_5')}</span>
           </div>
           <button
             onMouseEnter={() => setActiveLang('ko')}

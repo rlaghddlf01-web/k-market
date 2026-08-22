@@ -101,6 +101,7 @@ interface KMarketContextType {
 const KMarketContext = createContext<KMarketContextType | undefined>(undefined);
 
 export function KMarketProvider({ children }: { children: React.ReactNode }) {
+  const { t } = useLanguage();
   const { currentLang } = useLanguage();
   const [items, setItems] = useState<KMarketItem[]>(INITIAL_ITEMS);
   const [isLoading, setIsLoading] = useState<boolean>(false);

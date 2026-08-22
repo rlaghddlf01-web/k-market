@@ -17,6 +17,7 @@ export default function KMarketUserItemsList({
   userId,
   onSelectItem,
 }: KMarketUserItemsListProps) {
+  const { t } = useLanguage();
   const { items, setSelectedItem } = useKMarket();
   const { currentLang, formatWon } = useLanguage();
 
@@ -37,7 +38,7 @@ export default function KMarketUserItemsList({
     return (
       <div className="text-center py-6 text-xs text-slate-400 dark:text-slate-500 bg-slate-50 dark:bg-gray-800/40 rounded-2xl border border-slate-100 dark:border-gray-800">
         <Package className="w-8 h-8 mx-auto mb-1.5 opacity-40 text-slate-400" />
-        <p>현재 판매 중인 다른 물품이 없습니다.</p>
+        <p>{t('seller_no_other_items')}</p>
       </div>
     );
   }
@@ -46,14 +47,14 @@ export default function KMarketUserItemsList({
     <div className="space-y-2">
       <div className="flex items-center justify-between">
         <h4 className="text-xs font-black text-slate-900 dark:text-white flex items-center gap-1.5">
-          <span>🛍️ 판매 상품</span>
+          <span>{t('auto_ui_359')}</span>
           <span className="text-blue-600 dark:text-blue-400 font-extrabold bg-blue-50 dark:bg-blue-950 px-2 py-0.2 rounded-full text-[11px]">
             {userItems.length}개
           </span>
         </h4>
         <span className="text-[10px] text-slate-400 flex items-center gap-1">
           <Sparkles className="w-3 h-3 text-[#f3ba2f]" />
-          <span>묶음 구매 시 네고 문의 가능</span>
+          <span>{t('auto_ui_360')}</span>
         </span>
       </div>
 

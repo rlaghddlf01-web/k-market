@@ -59,7 +59,7 @@ export default function KMarketHeroShowcase() {
             <div className="relative aspect-4/3 rounded-3xl overflow-hidden shadow-2xl border-2 border-white bg-white group">
               <img
                 src="/images/hero-appliances-bundle.jpg"
-                alt="원룸 풀옵션 가전 가구 묶음 쇼케이스"
+                alt={t('auto_ui_148')}
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
               />
 

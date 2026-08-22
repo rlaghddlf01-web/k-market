@@ -1,5 +1,6 @@
 'use client';
 
+import { useLanguage } from '@/context/LanguageContext';
 import React from 'react';
 import { getMannerTempDetails } from '@/lib/trustData';
 import { ShieldCheck, Home } from 'lucide-react';
@@ -21,6 +22,7 @@ export default function KMarketTrustBadge({
   variant = 'compact',
   onClick,
 }: KMarketTrustBadgeProps) {
+  const { t } = useLanguage();
   const { color, barColor, faceEmoji, levelTitle } = getMannerTempDetails(mannerTemp);
   const percentage = Math.min(100, Math.max(10, ((mannerTemp - 30) / (60 - 30)) * 100));
 
@@ -76,7 +78,7 @@ export default function KMarketTrustBadge({
       <div className="flex items-center justify-between">
         <div>
           <div className="text-xs text-gray-500 dark:text-gray-400 font-medium">
-            K-Trust 매너온도
+            {t('auto_ui_207')}
           </div>
           <div className="flex items-center gap-1.5 mt-0.5">
             <span className={`text-base font-extrabold ${color}`}>
@@ -89,7 +91,7 @@ export default function KMarketTrustBadge({
           </div>
         </div>
         <div className="text-right">
-          <div className="text-[11px] text-gray-500 dark:text-gray-400">거래 {tradeCount}회</div>
+          <div className="text-[11px] text-gray-500 dark:text-gray-400">{t('auto_ui_356')}</div>
           <div className="w-20 h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden mt-1.5">
             <div
               className={`h-full ${barColor} transition-all duration-500`}
@@ -104,13 +106,13 @@ export default function KMarketTrustBadge({
         {isVerifiedWorker && (
           <div className="inline-flex items-center gap-1 text-emerald-600 dark:text-emerald-400 font-semibold bg-emerald-50 dark:bg-emerald-950/40 px-2 py-0.5 rounded-md">
             <ShieldCheck className="w-3.5 h-3.5" />
-            <span>비자·신분 인증</span>
+            <span>{t('auto_ui_357')}</span>
           </div>
         )}
         {isVerifiedDormitory && (
           <div className="inline-flex items-center gap-1 text-blue-600 dark:text-blue-400 font-semibold bg-blue-50 dark:bg-blue-950/40 px-2 py-0.5 rounded-md">
             <Home className="w-3.5 h-3.5" />
-            <span>공단 기숙사 인증</span>
+            <span>{t('auto_ui_358')}</span>
           </div>
         )}
       </div>

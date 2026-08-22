@@ -43,6 +43,7 @@ export default function KMarketKeywordAlertModal({
   isOpen,
   onClose,
 }: KMarketKeywordAlertModalProps) {
+  const { t } = useLanguage();
   const {
     keywordAlerts,
     addKeywordAlert,
@@ -119,7 +120,7 @@ export default function KMarketKeywordAlertModal({
             <div>
               <div className="inline-flex items-center space-x-1.5 bg-black/20 px-2.5 py-0.5 rounded-full text-xs font-bold text-sky-200 mb-0.5">
                 <Sparkles className="w-3 h-3 text-yellow-300" />
-                <span>외국인 선호도 1위 득템 알리미</span>
+                <span>{t('auto_ui_162')}</span>
               </div>
               <h2 className="text-xl font-black tracking-tight">
                 키워드 실시간 알림 설정
@@ -141,7 +142,7 @@ export default function KMarketKeywordAlertModal({
           <div className="p-4 rounded-2xl bg-blue-50/60 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 space-y-3">
             <span className="text-xs font-black text-blue-950 dark:text-blue-200 flex items-center gap-1.5">
               <Plus className="w-4 h-4 text-blue-600" />
-              <span>새 키워드 등록하기</span>
+              <span>{t('auto_ui_163')}</span>
             </span>
 
             <div className="flex items-center gap-2">
@@ -156,7 +157,7 @@ export default function KMarketKeywordAlertModal({
                       handleAddKeyword(inputKeyword);
                     }
                   }}
-                  placeholder="예: 세탁기, 아이폰, 0원, 밥솥"
+                  placeholder={t('auto_ui_164')}
                   className="w-full pl-9 pr-3 py-2.5 bg-white dark:bg-gray-800 rounded-xl border border-slate-200 dark:border-gray-700 text-xs font-bold text-slate-900 dark:text-white focus:outline-none focus:border-blue-500"
                 />
                 <Search className="w-4 h-4 text-slate-400 absolute left-3 top-3" />
@@ -167,7 +168,7 @@ export default function KMarketKeywordAlertModal({
                 onClick={() => handleAddKeyword(inputKeyword)}
                 className="px-4 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs rounded-xl shadow-xs transition-all shrink-0 cursor-pointer"
               >
-                등록
+                {t('post_short_btn')}
               </button>
             </div>
 
@@ -180,17 +181,17 @@ export default function KMarketKeywordAlertModal({
                   onChange={(e) => setSelectedZone(e.target.value as IndustrialRegion)}
                   className="px-2 py-1 bg-white dark:bg-gray-800 border border-slate-200 dark:border-gray-700 rounded-lg text-xs font-bold text-slate-700 dark:text-slate-300"
                 >
-                  <option value="all">전체 공단 알림</option>
-                  <option value="pyeongtaek">평택 포승공단</option>
-                  <option value="ansan">안산 원곡/반월</option>
-                  <option value="hwaseong">화성 향남공단</option>
-                  <option value="gumi">구미 국가산단</option>
+                  <option value="all">{t('auto_ui_165')}</option>
+                  <option value="pyeongtaek">{t('auto_ui_166')}</option>
+                  <option value="ansan">{t('auto_ui_167')}</option>
+                  <option value="hwaseong">{t('auto_ui_168')}</option>
+                  <option value="gumi">{t('auto_ui_169')}</option>
                 </select>
               </div>
 
               <label className="flex items-center space-x-1.5 cursor-pointer text-xs font-bold text-slate-700 dark:text-slate-300">
                 <BellRing className="w-3.5 h-3.5 text-blue-600 animate-pulse" />
-                <span>실시간 웹 푸시 알림 수신 (무료)</span>
+                <span>{t('auto_ui_170')}</span>
                 <input
                   type="checkbox"
                   checked={notifyBySms}
@@ -205,7 +206,7 @@ export default function KMarketKeywordAlertModal({
           <div className="space-y-2">
             <span className="text-xs font-black text-slate-900 dark:text-white flex items-center gap-1">
               <Flame className="w-4 h-4 text-orange-500 fill-orange-500" />
-              <span>외국인 기숙사 인기 검색 키워드 (클릭 시 1초 등록)</span>
+              <span>{t('auto_ui_171')}</span>
             </span>
 
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-1.5">
@@ -239,8 +240,8 @@ export default function KMarketKeywordAlertModal({
             {keywordAlerts.length === 0 ? (
               <div className="py-8 text-center text-slate-400 space-y-1 bg-slate-50 dark:bg-gray-800/40 rounded-2xl border border-dashed border-slate-200 dark:border-gray-800">
                 <Bell className="w-8 h-8 mx-auto text-slate-300" />
-                <p className="text-xs font-bold">등록된 키워드가 없습니다.</p>
-                <p className="text-[11px]">원하는 키워드를 등록하고 헐값 꿀매물을 가장 먼저 잡으세요!</p>
+                <p className="text-xs font-bold">{t('auto_ui_172')}</p>
+                <p className="text-[11px]">{t('auto_ui_173')}</p>
               </div>
             ) : (
               <div className="divide-y divide-slate-100 dark:divide-gray-800 bg-white dark:bg-gray-800/60 rounded-2xl border border-slate-200 dark:border-gray-800 p-2 space-y-1">
@@ -263,8 +264,8 @@ export default function KMarketKeywordAlertModal({
                           </span>
                         </div>
                         <span className="text-[11px] text-slate-400 flex items-center gap-1 mt-0.5">
-                          <span>매칭 {alertItem.matched_count}건</span>
-                          {alertItem.notify_by_sms && <span>• 웹 푸시 ON</span>}
+                          <span>{t('auto_ui_174')}</span>
+                          {alertItem.notify_by_sms && <span>{t('auto_ui_175')}</span>}
                         </span>
                       </div>
                     </div>
@@ -276,17 +277,17 @@ export default function KMarketKeywordAlertModal({
                         onClick={() => handleSimulateWebPush(alertItem.keyword)}
                         disabled={isTestingSms}
                         className="px-2.5 py-1 bg-amber-50 text-amber-800 hover:bg-amber-100 text-[11px] font-bold rounded-lg border border-amber-200 transition-all cursor-pointer flex items-center gap-1"
-                        title="실시간 웹 푸시 알림 발송 테스트"
+                        title={t('auto_ui_176')}
                       >
                         <BellRing className="w-3 h-3 text-amber-600" />
-                        <span>푸시 테스트</span>
+                        <span>{t('auto_ui_177')}</span>
                       </button>
 
                       <button
                         type="button"
                         onClick={() => toggleKeywordAlert(alertItem.id)}
                         className="p-1 text-slate-400 hover:text-blue-600 transition-colors cursor-pointer"
-                        title="알림 On/Off 토글"
+                        title={t('auto_ui_178')}
                       >
                         {alertItem.is_active ? (
                           <ToggleRight className="w-6 h-6 text-blue-600" />
@@ -299,7 +300,7 @@ export default function KMarketKeywordAlertModal({
                         type="button"
                         onClick={() => removeKeywordAlert(alertItem.id)}
                         className="p-1.5 text-slate-400 hover:text-red-500 rounded-lg hover:bg-red-50 transition-colors cursor-pointer"
-                        title="키워드 삭제"
+                        title={t('auto_ui_179')}
                       >
                         <Trash2 className="w-4 h-4" />
                       </button>

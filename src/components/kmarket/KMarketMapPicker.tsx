@@ -1,5 +1,6 @@
 'use client';
 
+import { useLanguage } from '@/context/LanguageContext';
 import React, { useState, useEffect, useRef } from 'react';
 import { MapPin, Search, Navigation, RefreshCw, Crosshair } from 'lucide-react';
 
@@ -24,6 +25,7 @@ export default function KMarketMapPicker({
   longitude = 126.7924,
   onChangeCoordinates,
 }: KMarketMapPickerProps) {
+  const { t } = useLanguage();
   const [currentLat, setCurrentLat] = useState(latitude);
   const [currentLng, setCurrentLng] = useState(longitude);
   const [baseAddress, setBaseAddress] = useState(regionText || '경기 안산시 단원구 원곡동 795');
@@ -250,7 +252,7 @@ export default function KMarketMapPicker({
         <div className="flex items-center justify-between">
           <label className="text-xs font-black text-[#3d2817] flex items-center gap-1.5">
             <MapPin className="w-4 h-4 text-[#845b37]" />
-            <span>📍 직거래 주소 &amp; 만남 장소 (지도 핀 이동 가능)</span>
+            <span>{t('auto_ui_197')}</span>
           </label>
 
           {/* GPS 내 위치 자동완성 버튼 */}
@@ -259,17 +261,17 @@ export default function KMarketMapPicker({
             onClick={handleGetGpsLocation}
             disabled={isLocating}
             className="text-[11px] font-bold text-[#5c3818] hover:text-[#1f1914] bg-[#ede2d6] hover:bg-[#e2d4c5] px-2.5 py-1 rounded-lg transition-all flex items-center gap-1 cursor-pointer border border-[#ded1c4] shadow-2xs"
-            title="현재 내 위치로 주소 & 핀 자동 세팅"
+            title={t('auto_ui_47')}
           >
             {isLocating ? (
               <>
                 <RefreshCw className="w-3 h-3 animate-spin text-[#845b37]" />
-                <span>위치 확인중...</span>
+                <span>{t('auto_ui_48')}</span>
               </>
             ) : (
               <>
                 <Crosshair className="w-3.5 h-3.5 text-[#845b37]" />
-                <span>📍 내 위치로 핀 이동</span>
+                <span>{t('auto_ui_49')}</span>
               </>
             )}
           </button>
@@ -292,7 +294,7 @@ export default function KMarketMapPicker({
                   handleSearchSubmit(e);
                 }
               }}
-              placeholder="도로명/동네 주소 검색 또는 지도에서 핀을 직접 클릭하세요"
+              placeholder={t('auto_ui_50')}
               className="w-full pl-9 pr-3 py-2.5 bg-white rounded-xl border border-[#ded1c4] text-xs sm:text-sm font-bold text-[#1f1914] focus:outline-none focus:border-[#845b37] shadow-2xs"
             />
             <MapPin className="w-4 h-4 text-[#845b37] absolute left-3 top-3" />
@@ -304,15 +306,15 @@ export default function KMarketMapPicker({
             className="px-3.5 py-2.5 bg-[#3d2817] hover:bg-[#2b1c10] text-[#fbf9f6] font-bold text-xs rounded-xl transition-all shadow-xs shrink-0 cursor-pointer flex items-center gap-1 border border-[#5c3818]"
           >
             <Search className="w-3.5 h-3.5 text-[#f3ba2f]" />
-            <span>주소 검색</span>
+            <span>{t('auto_ui_51')}</span>
           </button>
         </div>
 
         {/* 2) 고객 직접 입력 상세 장소명 */}
         <div className="space-y-1 pt-2 border-t border-[#ded1c4]/70">
           <label className="text-xs font-black text-[#3d2817] flex items-center justify-between">
-            <span>상세 만남 장소명 (고객 직접 입력)</span>
-            <span className="text-[10px] text-[#845b37] font-bold">편의점 앞, 기숙사 정문, 3번 출구 등</span>
+            <span>{t('auto_ui_198')}</span>
+            <span className="text-[10px] text-[#845b37] font-bold">{t('auto_ui_53')}</span>
           </label>
           <input
             type="text"
@@ -321,7 +323,7 @@ export default function KMarketMapPicker({
               setLandmarkDetail(e.target.value);
               updateFullLocation(baseAddress, e.target.value);
             }}
-            placeholder="예: GS25 편의점 앞 / 기숙사 2동 경비실 앞 / 정문 시계탑"
+            placeholder={t('auto_ui_54')}
             className="w-full px-3.5 py-2 bg-white rounded-xl border border-[#ded1c4] text-xs font-bold text-[#1f1914] focus:outline-none focus:border-[#845b37] shadow-2xs"
           />
         </div>
@@ -332,7 +334,7 @@ export default function KMarketMapPicker({
         <div className="flex justify-between items-center text-xs font-bold text-slate-800">
           <span className="flex items-center gap-1 text-[#3d2817] font-black">
             <Navigation className="w-3.5 h-3.5 text-[#f3ba2f]" />
-            <span>👇 지도를 클릭하거나 핀을 끌어당겨 원하는 만남 장소에 콕 찍으세요!</span>
+            <span>{t('auto_ui_55')}</span>
           </span>
         </div>
 
@@ -344,7 +346,7 @@ export default function KMarketMapPicker({
           <div className="absolute top-3 left-3 bg-[#09101f]/90 backdrop-blur-md text-white px-3.5 py-1.5 rounded-2xl border border-[#f3ba2f]/70 text-xs shadow-lg max-w-[85%] pointer-events-none z-10">
             <div className="flex items-center gap-1 font-bold text-[#f3ba2f]">
               <MapPin className="w-3.5 h-3.5 fill-[#f3ba2f]" />
-              <span>선택된 직거래 핀 위치</span>
+              <span>{t('auto_ui_199')}</span>
             </div>
             <p className="text-[11px] text-slate-100 font-medium truncate mt-0.5">
               {landmarkDetail ? `${baseAddress} (${landmarkDetail})` : baseAddress}

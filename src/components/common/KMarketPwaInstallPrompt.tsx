@@ -1,5 +1,6 @@
 'use client';
 
+import { useLanguage } from '@/context/LanguageContext';
 import React, { useState, useEffect, useContext } from 'react';
 import { Download, X, Sparkles, Smartphone, Share2, PlusSquare, ShieldCheck } from 'lucide-react';
 import { triggerPwaInstall } from '@/lib/pwaInstaller';
@@ -8,6 +9,7 @@ import { PWA_TRANSLATIONS } from '@/lib/pwaTranslations';
 import { SupportedLanguage } from '@/types/kmarket';
 
 export default function KMarketPwaInstallPrompt() {
+  const { t } = useLanguage();
   const [isVisible, setIsVisible] = useState(true);
   const [isIOS, setIsIOS] = useState(false);
   const [showIOSGuide, setShowIOSGuide] = useState(false);
@@ -64,7 +66,7 @@ export default function KMarketPwaInstallPrompt() {
             type="button"
             onClick={handleDismiss}
             className="absolute top-3 right-3 text-slate-400 hover:text-white transition-colors cursor-pointer p-1"
-            title="닫기"
+            title={t('pwa_toast_dismiss_btn')}
           >
             <X className="w-4 h-4" />
           </button>
@@ -74,7 +76,7 @@ export default function KMarketPwaInstallPrompt() {
             <div className="w-11 h-11 rounded-2xl overflow-hidden shadow-md border-2 border-[#f3ba2f] shrink-0 bg-[#09101f] flex items-center justify-center p-0.5 animate-pulse">
               <img
                 src="/images/kmarket-logo.jpg"
-                alt="K-Market"
+                alt={t('app_name')}
                 className="w-full h-full object-cover rounded-xl"
               />
             </div>
@@ -140,7 +142,7 @@ export default function KMarketPwaInstallPrompt() {
                   1
                 </div>
                 <p className="text-slate-200">
-                  화면 하단 중앙의 <strong>[공유 버튼 <Share2 className="w-3.5 h-3.5 inline mx-0.5 text-sky-400" />]</strong>을 누릅니다.
+                  화면 하단 중앙의 <strong>{t('auto_ui_3')} <Share2 className="w-3.5 h-3.5 inline mx-0.5 text-sky-400" />]</strong>을 누릅니다.
                 </p>
               </div>
 
@@ -149,7 +151,7 @@ export default function KMarketPwaInstallPrompt() {
                   2
                 </div>
                 <p className="text-slate-200">
-                  메뉴에서 <strong>[홈 화면에 추가 <PlusSquare className="w-3.5 h-3.5 inline mx-0.5 text-amber-400" />]</strong>를 선택하면 설치 완료!
+                  메뉴에서 <strong>{t('auto_ui_4')} <PlusSquare className="w-3.5 h-3.5 inline mx-0.5 text-amber-400" />]</strong>를 선택하면 설치 완료!
                 </p>
               </div>
             </div>

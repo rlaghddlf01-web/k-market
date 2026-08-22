@@ -1,10 +1,12 @@
 'use client';
 
+import { useLanguage } from '@/context/LanguageContext';
 import React, { useEffect, useState } from 'react';
 import { Bell, BellRing, CheckCircle2, X } from 'lucide-react';
 import { registerServiceWorker, requestPushPermission, sendLocalPushNotification } from '@/lib/webPushService';
 
 export default function KMarketPushNotificationManager() {
+  const { t } = useLanguage();
   const [permission, setPermission] = useState<NotificationPermission>('default');
   const [showBanner, setShowBanner] = useState(false);
 
@@ -47,7 +49,7 @@ export default function KMarketPushNotificationManager() {
               실시간 거래 &amp; 키워드 알림 받기
             </p>
             <p className="text-[10px] text-slate-300 truncate">
-              채팅 도착 및 관심 매물 등록 시 즉시 알려드려요!
+              {t('pwa_push_mgr_desc')}
             </p>
           </div>
         </div>
@@ -58,7 +60,7 @@ export default function KMarketPushNotificationManager() {
             onClick={handleEnablePush}
             className="px-3 py-1.5 bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-500 hover:to-amber-600 text-slate-950 font-black text-[11px] rounded-xl shadow-xs transition-all cursor-pointer"
           >
-            알림 켜기
+            {t('pwa_push_mgr_btn')}
           </button>
           <button
             type="button"

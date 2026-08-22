@@ -80,9 +80,9 @@ export default function KMarketItemDetail() {
               <button
                 onClick={() => setShowReportModal(true)}
                 className="bg-black/40 hover:bg-red-600/80 text-white px-2.5 py-1.5 rounded-full backdrop-blur-md transition-colors cursor-pointer text-xs font-bold flex items-center gap-1"
-                title="불량 매물/사용자 신고 및 차단"
+                title={t('auto_ui_152')}
               >
-                <span>🚫 신고</span>
+                <span>{t('auto_ui_153')}</span>
               </button>
               <button
                 onClick={async () => {
@@ -109,7 +109,7 @@ export default function KMarketItemDetail() {
                   }
                 }}
                 className="bg-black/40 hover:bg-[#f3ba2f] hover:text-[#09101f] text-white p-2.5 rounded-full backdrop-blur-md transition-all cursor-pointer shadow-md hover:scale-105 active:scale-95"
-                title="매물 링크 공유하기 (카카오톡, 페이스북 등)"
+                title={t('auto_ui_154')}
               >
                 <Share2 className="w-5 h-5" />
               </button>
@@ -154,7 +154,7 @@ export default function KMarketItemDetail() {
                     );
                   }}
                   className="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/50 hover:bg-black/80 text-white flex items-center justify-center backdrop-blur-md border border-white/30 shadow-xl transition-all cursor-pointer hover:scale-110 active:scale-95"
-                  title="이전 사진 보기"
+                  title={t('auto_ui_155')}
                 >
                   <ChevronLeft className="w-6 h-6 text-white" />
                 </button>
@@ -171,7 +171,7 @@ export default function KMarketItemDetail() {
                     );
                   }}
                   className="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/50 hover:bg-black/80 text-white flex items-center justify-center backdrop-blur-md border border-white/30 shadow-xl transition-all cursor-pointer hover:scale-110 active:scale-95"
-                  title="다음 사진 보기"
+                  title={t('auto_ui_156')}
                 >
                   <ChevronRight className="w-6 h-6 text-white" />
                 </button>
@@ -220,7 +220,7 @@ export default function KMarketItemDetail() {
                       </span>
                     </div>
                     <p className="text-xs text-slate-500 flex items-center space-x-1 mt-0.5">
-                      <span>프로필 & 거래후기 보기 &gt;</span>
+                      <span>{t('auto_ui_157')}</span>
                     </p>
                   </div>
                 </div>
@@ -308,8 +308,8 @@ export default function KMarketItemDetail() {
             {/* 판매자 전용 상태 관리 액션 바 */}
             <div className="p-3 bg-gradient-to-r from-indigo-50 to-purple-50 rounded-2xl border border-indigo-100 flex items-center justify-between gap-2">
               <div className="text-xs text-indigo-900">
-                <span className="font-bold block">내 매물 상태를 관리해보세요</span>
-                <span className="text-[11px] text-indigo-700 opacity-80">예약중/거래완료 변경, 상단 끌올</span>
+                <span className="font-bold block">{t('auto_ui_158')}</span>
+                <span className="text-[11px] text-indigo-700 opacity-80">{t('auto_ui_159')}</span>
               </div>
               <button
                 onClick={() => setShowStatusModal(true)}
@@ -365,8 +365,8 @@ export default function KMarketItemDetail() {
             className="flex-1 py-3.5 text-white font-black text-sm sm:text-base rounded-2xl shadow-xl active:scale-98 transition-all flex items-center justify-center space-x-2 cursor-pointer hover:bg-[#111d38]"
           >
             <MessageCircle className="w-5 h-5 text-[#f3ba2f]" />
-            <span className="text-[#f3ba2f] font-black">1:1 안심 번역 채팅</span>
-            <span className="text-white font-bold">시작 →</span>
+            <span className="text-[#f3ba2f] font-black">{t('auto_ui_160')}</span>
+            <span className="text-white font-bold">{t('auto_ui_161')}</span>
           </button>
         </div>
       </div>

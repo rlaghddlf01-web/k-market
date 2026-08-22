@@ -1,5 +1,6 @@
 'use client';
 
+import { useLanguage } from '@/context/LanguageContext';
 import React, { useState } from 'react';
 import { useCommunity } from '@/context/CommunityContext';
 import { useKMarket } from '@/context/KMarketContext';
@@ -17,6 +18,7 @@ import {
 } from 'lucide-react';
 
 export default function KMarketCommunityCreateModal() {
+  const { t } = useLanguage();
   const { isCreateModalOpen, setIsCreateModalOpen, createPost } = useCommunity();
   const { authedUser, setIsAuthModalOpen } = useKMarket();
 
@@ -107,7 +109,7 @@ export default function KMarketCommunityCreateModal() {
           </span>
           <div>
             <h2 className="text-base font-black text-slate-900 dark:text-white">
-              동네생활 글쓰기
+              {t('auto_ui_22')}
             </h2>
             <p className="text-[11px] text-slate-400">
               15개국어로 자동 번역되어 동네 이웃들에게 따뜻하게 전해집니다.
@@ -144,13 +146,13 @@ export default function KMarketCommunityCreateModal() {
           {/* 2. 글 제목 */}
           <div className="space-y-1.5">
             <label className="text-xs font-bold text-slate-700 dark:text-slate-300">
-              제목
+              {t('create_title_label')}
             </label>
             <input
               type="text"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
-              placeholder="예: 이번 주말에 같이 밥 먹고 한국어 공부할 친구 구해요!"
+              placeholder={t('auto_ui_6')}
               className="w-full px-4 py-2.5 rounded-2xl bg-slate-50 dark:bg-gray-800 border border-slate-200 dark:border-gray-700 text-xs font-medium text-slate-900 dark:text-white focus:outline-hidden focus:border-blue-500"
               required
             />
@@ -165,7 +167,7 @@ export default function KMarketCommunityCreateModal() {
               rows={4}
               value={content}
               onChange={(e) => setContent(e.target.value)}
-              placeholder="솔직하고 따뜻한 이야기, 궁금한 점, 나누고 싶은 꿀팁을 편하게 적어주세요. (어떤 언어로 작성하셔도 15개국어로 자동 번역됩니다)"
+              placeholder={t('auto_ui_7')}
               className="w-full px-4 py-2.5 rounded-2xl bg-slate-50 dark:bg-gray-800 border border-slate-200 dark:border-gray-700 text-xs font-medium text-slate-900 dark:text-white focus:outline-hidden focus:border-blue-500 leading-relaxed"
               required
             />
@@ -175,10 +177,10 @@ export default function KMarketCommunityCreateModal() {
           <div className="space-y-2">
             <div className="flex items-center justify-between">
               <label className="text-xs font-bold text-slate-700 dark:text-slate-300 flex items-center gap-1">
-                <span>사진 첨부 (최대 5장)</span>
+                <span>{t('auto_ui_8')}</span>
                 <span className="text-[10px] text-emerald-600 dark:text-emerald-400 font-extrabold flex items-center gap-0.5">
                   <Zap className="w-3 h-3" />
-                  <span>0.3초 95% 고화질 자동 압축</span>
+                  <span>{t('auto_ui_9')}</span>
                 </span>
               </label>
               <span className="text-[11px] text-slate-400 font-bold">
@@ -191,7 +193,7 @@ export default function KMarketCommunityCreateModal() {
               {compressedImages.length < 5 && (
                 <label className="w-20 h-20 rounded-2xl border-2 border-dashed border-slate-300 dark:border-gray-700 hover:border-blue-500 bg-slate-50 dark:bg-gray-800 flex flex-col items-center justify-center gap-1 cursor-pointer transition-all">
                   <Camera className="w-5 h-5 text-slate-400" />
-                  <span className="text-[10px] font-bold text-slate-500">사진 추가</span>
+                  <span className="text-[10px] font-bold text-slate-500">{t('auto_ui_10')}</span>
                   <input
                     type="file"
                     accept="image/*"
@@ -207,7 +209,7 @@ export default function KMarketCommunityCreateModal() {
               {isCompressing && (
                 <div className="w-20 h-20 rounded-2xl bg-slate-100 dark:bg-gray-800 flex flex-col items-center justify-center gap-1">
                   <Loader2 className="w-5 h-5 text-blue-500 animate-spin" />
-                  <span className="text-[9px] font-bold text-slate-500">압축 중...</span>
+                  <span className="text-[9px] font-bold text-slate-500">{t('auto_ui_11')}</span>
                 </div>
               )}
 
@@ -229,7 +231,7 @@ export default function KMarketCommunityCreateModal() {
                     type="button"
                     onClick={() => handleRemoveImage(idx)}
                     className="absolute top-1 right-1 p-1 bg-rose-600 text-white rounded-full opacity-90 hover:opacity-100 transition-opacity cursor-pointer shadow-xs"
-                    title="사진 삭제"
+                    title={t('auto_ui_12')}
                   >
                     <Trash2 className="w-3 h-3" />
                   </button>
@@ -249,12 +251,12 @@ export default function KMarketCommunityCreateModal() {
                 {isSubmitting ? (
                   <>
                     <Loader2 className="w-4 h-4 animate-spin" />
-                    <span>15개국어 자동 번역 생성 중...</span>
+                    <span>{t('auto_ui_13')}</span>
                   </>
                 ) : (
                   <>
                     <CheckCircle className="w-4 h-4" />
-                    <span>15개국어 자동 번역으로 글 등록하기</span>
+                    <span>{t('auto_ui_14')}</span>
                   </>
                 )}
               </button>
@@ -265,7 +267,7 @@ export default function KMarketCommunityCreateModal() {
                 className="w-full py-3 rounded-2xl bg-amber-500 hover:bg-amber-600 text-white font-black text-xs flex items-center justify-center gap-2 shadow-md transition-all cursor-pointer"
               >
                 <Lock className="w-4 h-4" />
-                <span>1분 간편 인증(회원가입) 후 글 올리기 →</span>
+                <span>{t('auto_ui_15')}</span>
               </button>
             )}
           </div>

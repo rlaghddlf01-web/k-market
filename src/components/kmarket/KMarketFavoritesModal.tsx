@@ -54,7 +54,7 @@ export default function KMarketFavoritesModal() {
             <div>
               <div className="inline-flex items-center space-x-1.5 bg-black/20 px-2.5 py-0.5 rounded-full text-xs font-bold text-rose-100 mb-0.5">
                 <Sparkles className="w-3 h-3 text-yellow-300" />
-                <span>나의 중고거래 활동 보관함</span>
+                <span>{t('auto_ui_129')}</span>
               </div>
               <h2 className="text-xl font-black tracking-tight">
                 찜한 매물 & 마이페이지
@@ -81,7 +81,7 @@ export default function KMarketFavoritesModal() {
             }`}
           >
             <Heart className={`w-4 h-4 ${activeTab === 'favorites' ? 'fill-current' : ''}`} />
-            <span>찜한 매물 ({likedItems.length})</span>
+            <span>{t('auto_ui_130')}</span>
           </button>
 
           <button
@@ -93,7 +93,7 @@ export default function KMarketFavoritesModal() {
             }`}
           >
             <Package className="w-4 h-4" />
-            <span>내 판매내역 ({mySalesItems.length})</span>
+            <span>{t('auto_ui_131')}</span>
           </button>
 
           <button
@@ -105,7 +105,7 @@ export default function KMarketFavoritesModal() {
             }`}
           >
             <ShoppingBag className="w-4 h-4" />
-            <span>거래 완료 ({myBuyItems.length})</span>
+            <span>{t('auto_ui_132')}</span>
           </button>
         </div>
 
@@ -158,7 +158,7 @@ export default function KMarketFavoritesModal() {
                         {item.is_price_dropped && (
                           <div className="absolute top-1 left-1 bg-red-500 text-white text-[9px] font-black px-1.5 py-0.5 rounded-sm flex items-center gap-0.5">
                             <TrendingDown className="w-2.5 h-2.5" />
-                            <span>가격인하</span>
+                            <span>{t('status_price_dropped')}</span>
                           </div>
                         )}
                       </div>
@@ -205,13 +205,13 @@ export default function KMarketFavoritesModal() {
                               className="px-2.5 py-1.5 bg-blue-50 hover:bg-blue-100 text-blue-700 font-bold text-xs rounded-lg transition-colors flex items-center gap-1 cursor-pointer"
                             >
                               <MessageCircle className="w-3.5 h-3.5" />
-                              <span className="hidden sm:inline">1:1 번역챗</span>
+                              <span className="hidden sm:inline">{t('auto_ui_133')}</span>
                             </button>
 
                             <button
                               onClick={() => toggleLike(item.id)}
                               className="p-1.5 rounded-lg bg-rose-50 hover:bg-rose-100 text-rose-600 transition-colors cursor-pointer"
-                              title="찜 목록에서 삭제"
+                              title={t('auto_ui_134')}
                             >
                               <Trash2 className="w-4 h-4" />
                             </button>
@@ -231,7 +231,7 @@ export default function KMarketFavoritesModal() {
               {mySalesItems.length === 0 ? (
                 <div className="py-12 text-center text-slate-400">
                   <Package className="w-8 h-8 mx-auto text-slate-300 mb-2" />
-                  <p className="text-xs">현재 등록된 내 판매 매물이 없습니다.</p>
+                  <p className="text-xs">{t('auto_ui_135')}</p>
                 </div>
               ) : (
                 mySalesItems.map((item) => (
@@ -291,7 +291,7 @@ export default function KMarketFavoritesModal() {
                     />
                     <div className="truncate">
                       <span className="text-[10px] bg-slate-200 dark:bg-gray-700 text-slate-700 dark:text-slate-300 font-bold px-2 py-0.5 rounded-sm">
-                        거래완료
+                        {t('status_sold')}
                       </span>
                       <h4 className="text-xs font-bold text-slate-900 dark:text-white truncate mt-1">
                         {item.title}

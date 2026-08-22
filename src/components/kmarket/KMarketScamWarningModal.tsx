@@ -22,6 +22,7 @@ export default function KMarketScamWarningModal({
   onClose,
   scamInfo,
 }: KMarketScamWarningModalProps) {
+  const { t } = useLanguage();
   const { currentLang } = useLanguage();
 
   if (!isOpen || !scamInfo) return null;
@@ -93,7 +94,7 @@ export default function KMarketScamWarningModal({
             </div>
 
             <div className="pt-2 border-t border-red-200/60 dark:border-red-900/40 flex items-center justify-between text-[11px] text-red-700 dark:text-red-400 font-semibold">
-              <span>감지된 주의 단어:</span>
+              <span>{t('auto_ui_258')}</span>
               <span className="bg-red-200 dark:bg-red-900/60 px-2 py-0.5 rounded-md font-mono text-red-950 dark:text-red-200 font-bold">
                 "{scamInfo.matchedKeyword}"
               </span>
@@ -103,20 +104,20 @@ export default function KMarketScamWarningModal({
           {/* K-Market 3대 안전 수칙 체크리스트 */}
           <div className="space-y-2">
             <span className="font-bold text-slate-800 dark:text-slate-200 text-xs block">
-              🛡️ 외국인 안심 직거래 3대 철칙 (Safety Rules)
+              {t('scam_warning_title')}
             </span>
             <div className="space-y-1.5 text-xs text-slate-600 dark:text-slate-300">
               <div className="flex items-center space-x-2 bg-slate-50 dark:bg-gray-800 p-2.5 rounded-xl border border-slate-200/70">
                 <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
-                <span><strong>1. 선입금 절대 금지:</strong> 반드시 만나서 물건을 본 뒤 현금/이체하기</span>
+                <span><strong>{t('auto_ui_259')}</strong> {t('auto_ui_260')}</span>
               </div>
               <div className="flex items-center space-x-2 bg-slate-50 dark:bg-gray-800 p-2.5 rounded-xl border border-slate-200/70">
                 <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
-                <span><strong>2. 앱 안에서만 대화:</strong> 카톡/라인/텔레그램 이동 거절하기</span>
+                <span><strong>{t('auto_ui_261')}</strong> {t('auto_ui_262')}</span>
               </div>
               <div className="flex items-center space-x-2 bg-slate-50 dark:bg-gray-800 p-2.5 rounded-xl border border-slate-200/70">
                 <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
-                <span><strong>3. 공단 밝은 곳에서 만남:</strong> GS25 편의점, 기숙사 정문 핀 활용</span>
+                <span><strong>{t('auto_ui_263')}</strong> {t('auto_ui_264')}</span>
               </div>
             </div>
           </div>
@@ -127,7 +128,7 @@ export default function KMarketScamWarningModal({
             className="w-full py-3.5 bg-gradient-to-r from-red-600 to-rose-600 hover:from-red-700 hover:to-rose-700 text-white font-black text-sm rounded-2xl shadow-xl shadow-red-600/25 active:scale-[0.98] transition-all cursor-pointer flex items-center justify-center space-x-2"
           >
             <ShieldCheck className="w-5 h-5 text-yellow-300" />
-            <span>안전 수칙을 확인했으며 주의하겠습니다</span>
+            <span>{t('auto_ui_265')}</span>
           </button>
         </div>
       </div>

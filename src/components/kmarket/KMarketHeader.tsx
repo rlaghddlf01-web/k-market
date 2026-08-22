@@ -100,7 +100,7 @@ export default function KMarketHeader() {
                       className="w-full py-2 px-3 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white rounded-xl text-xs font-black flex items-center justify-center gap-1.5 shadow-sm cursor-pointer transition-all"
                     >
                       <Globe className="w-4 h-4 text-yellow-300" />
-                      <span>15개국 대형 국기 선택창 열기</span>
+                      <span>{t('auto_ui_142')}</span>
                     </button>
                   </div>
 
@@ -155,10 +155,10 @@ export default function KMarketHeader() {
               type="button"
               onClick={() => triggerPwaInstall()}
               className="flex items-center gap-1.5 bg-gradient-to-r from-[#f3ba2f] via-[#fcd34d] to-[#f59e0b] hover:scale-105 transition-all text-[#09101f] px-3 py-1 rounded-full text-[11px] font-black border border-white/50 shadow-md shadow-[#f3ba2f]/30 cursor-pointer animate-pulse"
-              title="K-Market 1초 만에 앱 설치하기"
+              title={t('auto_ui_143')}
             >
               <Smartphone className="w-3.5 h-3.5 stroke-[2.5]" />
-              <span>1초 앱설치</span>
+              <span>{t('auto_ui_144')}</span>
             </button>
           </div>
         </div>
@@ -178,7 +178,7 @@ export default function KMarketHeader() {
               </div>
               <div>
                 <div className="flex items-center gap-1.5">
-                  <span className="text-[20px] sm:text-[22px] font-black tracking-tight text-[#1f1914] leading-none">K-Market</span>
+                  <span className="text-[20px] sm:text-[22px] font-black tracking-tight text-[#1f1914] leading-none">{t('app_name')}</span>
                   <span className="text-[9px] font-black bg-[#ede2d6] text-[#5c4a39] px-1.5 py-0.5 rounded-md tracking-wider">FREE</span>
                 </div>
                 <p className="text-[11px] text-[#8c7866] hidden sm:block mt-0.5 font-medium">{t('app_slogan')}</p>
@@ -190,7 +190,7 @@ export default function KMarketHeader() {
               onClick={() => setIsLocationRadiusModalOpen(true)}
               className="flex items-center gap-1.5 px-3 py-1.5 rounded-full hover:opacity-80 text-[#5c4a39] border border-[#ded1c4] text-xs font-bold transition-all cursor-pointer active:scale-95"
               style={{ background: '#f4ede6' }}
-              title="내 실제 위치 및 직거래 반경 설정"
+              title={t('auto_ui_145')}
             >
               <MapPin className="w-3.5 h-3.5 text-[#845b37] shrink-0" />
               <span className="truncate max-w-[100px]">
@@ -214,7 +214,7 @@ export default function KMarketHeader() {
             <div className="relative">
               <input
                 type="text"
-                placeholder="매물 검색 (세탁기, 냉장고, 아이폰 등)..."
+                placeholder={t('auto_ui_146')}
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="w-full pl-10 pr-4 py-2.5 input-premium text-sm font-medium text-[#1f1914]"
@@ -239,7 +239,7 @@ export default function KMarketHeader() {
               type="button"
               onClick={() => setIsNotificationCenterOpen(true)}
               className="relative p-2 text-[#6b5847] hover:text-[#1f1914] hover:bg-[#f4ede6] rounded-full cursor-pointer transition-colors"
-              title="통합 알림 센터 (키워드/채팅/가격인하)"
+              title={t('auto_ui_147')}
             >
               <Bell className="w-5 h-5" />
               {unreadNotificationCount > 0 && (
@@ -288,7 +288,7 @@ export default function KMarketHeader() {
               type="button"
               onClick={() => setIsNotificationCenterOpen(true)}
               className="relative p-1.5 text-[#6b5847] hover:text-[#1f1914] hover:bg-[#f4ede6] rounded-full cursor-pointer transition-colors"
-              title="통합 알림 센터"
+              title={t('notif_center_title')}
             >
               <Bell className="w-4 h-4" />
               {unreadNotificationCount > 0 && (

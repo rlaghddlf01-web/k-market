@@ -127,7 +127,7 @@ export default function KMarketChatDrawer() {
                   </span>
                 </div>
                 <p className="text-[11px] text-emerald-200 flex items-center space-x-1">
-                  <span>신뢰도 41.2℃ (프로필 보기 &gt;)</span>
+                  <span>{t('auto_ui_93')}</span>
                 </p>
               </div>
             </div>
@@ -136,18 +136,18 @@ export default function KMarketChatDrawer() {
               <button
                 onClick={() => setShowReportModal(true)}
                 className="px-2.5 py-1 rounded-full bg-rose-500/30 hover:bg-rose-500/50 text-rose-100 text-xs font-bold transition-all flex items-center gap-1 cursor-pointer border border-rose-400/30"
-                title="비매너/사기 신고 및 차단"
+                title={t('auto_ui_94')}
               >
-                <span>🚫 차단/신고</span>
+                <span>{t('auto_ui_95')}</span>
               </button>
 
               <button
                 onClick={() => setShowReviewModal(true)}
                 className="px-2.5 py-1 rounded-full bg-white/20 hover:bg-white/30 text-white text-xs font-bold transition-all flex items-center gap-1 cursor-pointer"
-                title="거래 완료 및 매너 평가"
+                title={t('auto_ui_96')}
               >
                 <Star className="w-3.5 h-3.5 fill-yellow-300 text-yellow-300" />
-                <span>후기</span>
+                <span>{t('auto_ui_97')}</span>
               </button>
 
               <button
@@ -176,7 +176,7 @@ export default function KMarketChatDrawer() {
                     </p>
                     {activeChat.item.status === 'reserved' && (
                       <span className="text-[10px] bg-amber-500 text-white px-1.5 py-0.2 rounded-md font-bold shrink-0">
-                        예약중
+                        {t('status_reserved')}
                       </span>
                     )}
                     {activeChat.item.status === 'sold' && (
@@ -202,7 +202,7 @@ export default function KMarketChatDrawer() {
                   className="px-2.5 py-1 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white text-[10px] font-bold rounded-lg shadow-xs transition-all flex items-center gap-1 cursor-pointer"
                 >
                   <MapPin className="w-3 h-3 text-yellow-300" />
-                  <span>약속잡기</span>
+                  <span>{t('auto_ui_98')}</span>
                 </button>
                 {activeChat.item.status !== 'reserved' && activeChat.item.status !== 'sold' && (
                   <button
@@ -220,7 +220,7 @@ export default function KMarketChatDrawer() {
                     className="px-2.5 py-1 bg-emerald-600 hover:bg-emerald-700 text-white text-[10px] font-bold rounded-lg shadow-xs transition-all flex items-center gap-1 cursor-pointer"
                   >
                     <CheckCircle2 className="w-3 h-3" />
-                    <span>거래완료</span>
+                    <span>{t('status_sold')}</span>
                   </button>
                 )}
               </div>
@@ -236,7 +236,7 @@ export default function KMarketChatDrawer() {
                 <Clock className="w-3.5 h-3.5 text-yellow-200" />
               </div>
               <div className="truncate">
-                <span className="text-yellow-200 font-extrabold mr-1">[직거래 약속]</span>
+                <span className="text-yellow-200 font-extrabold mr-1">{t('auto_ui_99')}</span>
                 <span>{activeAppointment.meet_time}</span>
                 <span className="text-amber-100 font-medium ml-1">({activeAppointment.place_name})</span>
               </div>
@@ -292,7 +292,7 @@ export default function KMarketChatDrawer() {
                       <div className="flex justify-between items-center z-10">
                         <span className="bg-blue-600 text-white text-[10px] font-black px-2.5 py-0.5 rounded-full shadow-xs flex items-center gap-1">
                           <MapPin className="w-3 h-3 text-yellow-300" />
-                          <span>직거래 만남 장소 핀</span>
+                          <span>{t('auto_ui_101')}</span>
                         </span>
                         <span className="bg-black/60 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">
                           ⏰ {activeAppointment.meet_time}
@@ -326,9 +326,9 @@ export default function KMarketChatDrawer() {
                       <div className="p-2 rounded-xl bg-amber-50 border border-amber-200/80 flex items-center justify-between text-[11px]">
                         <span className="font-bold text-amber-900 flex items-center gap-1">
                           <Clock className="w-3 h-3 text-amber-600" />
-                          <span>약속 시간: {activeAppointment.meet_time}</span>
+                          <span>{t('auto_ui_102')}</span>
                         </span>
-                        <span className="text-[10px] text-amber-700 font-semibold">1시간 전 리마인더</span>
+                        <span className="text-[10px] text-amber-700 font-semibold">{t('auto_ui_103')}</span>
                       </div>
 
                       <div className="grid grid-cols-2 gap-2">
@@ -340,7 +340,7 @@ export default function KMarketChatDrawer() {
                           className="py-2 px-2 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl transition-all flex items-center justify-center gap-1.5 cursor-pointer text-[11px] shadow-xs"
                         >
                           <Navigation className="w-3.5 h-3.5" />
-                          <span>구글 맵 길찾기</span>
+                          <span>{t('auto_ui_104')}</span>
                         </button>
                         <button
                           onClick={() => {
@@ -349,7 +349,7 @@ export default function KMarketChatDrawer() {
                           }}
                           className="py-2 px-2 bg-yellow-400 hover:bg-yellow-500 text-slate-950 font-bold rounded-xl transition-all flex items-center justify-center gap-1.5 cursor-pointer text-[11px] shadow-xs"
                         >
-                          <span>카카오맵 보기</span>
+                          <span>{t('auto_ui_105')}</span>
                         </button>
                       </div>
                     </div>
@@ -416,7 +416,7 @@ export default function KMarketChatDrawer() {
           {isTranslating && (
             <div className="flex items-center space-x-2 text-xs text-indigo-600 bg-indigo-50 p-2.5 rounded-2xl w-fit border border-indigo-100 animate-pulse">
               <Bot className="w-4 h-4 text-indigo-600" />
-              <span>Gemini AI가 0.3초 만에 실시간 번역 중...</span>
+              <span>{t('auto_ui_106')}</span>
             </div>
           )}
 
@@ -430,7 +430,7 @@ export default function KMarketChatDrawer() {
             className="flex items-center space-x-1 px-3 py-1.5 rounded-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-bold text-xs shrink-0 shadow-xs hover:shadow-md transition-all cursor-pointer"
           >
             <MapPin className="w-3.5 h-3.5 text-yellow-300" />
-            <span>📍 만남 장소 핀 잡기</span>
+            <span>{t('auto_ui_107')}</span>
           </button>
           {quickPhrases.map((q, idx) => (
             <button
@@ -450,7 +450,7 @@ export default function KMarketChatDrawer() {
               type="text"
               value={inputText}
               onChange={(e) => setInputText(e.target.value)}
-              placeholder="내 모국어로 편하게 입력하세요 (상대방 언어로 즉시 자동번역)"
+              placeholder={t('auto_ui_108')}
               className="flex-1 px-4 py-2.5 bg-slate-100 focus:bg-white text-xs sm:text-sm rounded-full border border-transparent focus:border-blue-500 focus:outline-none transition-all"
             />
             <button

@@ -1,5 +1,6 @@
 'use client';
 
+import { useLanguage } from '@/context/LanguageContext';
 import React, { useState } from 'react';
 import { useKMarket } from '@/context/KMarketContext';
 import {
@@ -29,6 +30,7 @@ interface KMarketMyPageModalProps {
 }
 
 export default function KMarketMyPageModal({ isOpen, onClose }: KMarketMyPageModalProps) {
+  const { t } = useLanguage();
   const {
     items,
     likedItemIds,
@@ -137,14 +139,14 @@ export default function KMarketMyPageModal({ isOpen, onClose }: KMarketMyPageMod
               <div className="flex items-center space-x-2">
                 <span className="text-xs font-black text-slate-900 dark:text-white flex items-center gap-1">
                   <Flame className="w-4 h-4 text-orange-500 fill-orange-500 animate-pulse" />
-                  <span>K-Trust 매너온도</span>
+                  <span>{t('auto_ui_207')}</span>
                 </span>
                 <button
                   onClick={() => setShowMannerGuide(!showMannerGuide)}
                   className="inline-flex items-center space-x-0.5 text-[11px] font-bold text-blue-600 dark:text-blue-400 hover:underline cursor-pointer"
                 >
                   <HelpCircle className="w-3.5 h-3.5" />
-                  <span>매너온도란?</span>
+                  <span>{t('auto_ui_208')}</span>
                 </button>
               </div>
 
@@ -169,7 +171,7 @@ export default function KMarketMyPageModal({ isOpen, onClose }: KMarketMyPageMod
               <div className="flex items-center space-x-1.5">
                 <span className="inline-flex items-center space-x-1 px-2.5 py-0.5 rounded-full bg-emerald-50 dark:bg-emerald-950/40 text-emerald-800 dark:text-emerald-300 font-bold text-[11px] border border-emerald-200/60 dark:border-emerald-800/40">
                   <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
-                  <span>법무부 실물 신분증 OCR 검증 (+7.0℃ 보너스 반영)</span>
+                  <span>{t('auto_ui_209')}</span>
                 </span>
               </div>
               <span className="text-[11px] text-slate-500 font-medium">
@@ -182,13 +184,13 @@ export default function KMarketMyPageModal({ isOpen, onClose }: KMarketMyPageMod
               <div className="p-3.5 bg-blue-50 dark:bg-blue-950/40 rounded-2xl border border-blue-200 dark:border-blue-800 text-xs space-y-2 animate-fadeIn">
                 <h4 className="font-black text-blue-950 dark:text-blue-200 flex items-center gap-1.5">
                   <Sparkles className="w-4 h-4 text-amber-500" />
-                  <span>💡 K-Trust 매너온도 시스템 안내</span>
+                  <span>{t('auto_ui_210')}</span>
                 </h4>
                 <ul className="space-y-1 text-slate-600 dark:text-slate-300 text-[11px] leading-relaxed">
-                  <li>• <strong>36.5℃</strong>는 사람의 따뜻한 체온처럼 가입 시 주어지는 기본 신뢰 점수입니다.</li>
-                  <li>• <strong>📸 실물 신분증 OCR 사진 촬영</strong> 시 즉시 <strong>+7.0℃</strong>가 올라가 <strong>43.5℃(골드 등급)</strong>가 됩니다.</li>
-                  <li>• <strong>43.5℃ 이상</strong>이면 구매자들이 100% 신뢰하여 내 매물이 <strong>3배 더 빠르게 판매</strong>됩니다!</li>
-                  <li>• 직거래 후 시간 약속과 친절 칭찬 후기를 받으면 온도가 계속 상승합니다. (노쇼/사기 신고 시 하강)</li>
+                  <li>• <strong>36.5℃</strong>{t('auto_ui_211')}</li>
+                  <li>• <strong>{t('auto_ui_212')}</strong> {t('auto_ui_213')} <strong>+7.0℃</strong>{t('auto_ui_214')} <strong>{t('auto_ui_215')}</strong>{t('auto_ui_216')}</li>
+                  <li>• <strong>{t('auto_ui_217')}</strong>{t('auto_ui_218')} <strong>{t('auto_ui_219')}</strong>{t('auto_ui_220')}</li>
+                  <li>{t('auto_ui_221')}</li>
                 </ul>
               </div>
             )}
@@ -202,7 +204,7 @@ export default function KMarketMyPageModal({ isOpen, onClose }: KMarketMyPageMod
               </div>
               <div className="min-w-0">
                 <h5 className="text-xs font-black text-white flex items-center gap-1.5 truncate">
-                  <span>📲 홈 화면에 K-Market 앱 설치하기</span>
+                  <span>{t('auto_ui_222')}</span>
                   <span className="text-[9px] bg-[#f3ba2f] text-[#09101f] px-1.5 py-0.2 rounded-full font-black">
                     1초 설치
                   </span>
@@ -218,7 +220,7 @@ export default function KMarketMyPageModal({ isOpen, onClose }: KMarketMyPageMod
               className="px-3.5 py-2 bg-gradient-to-r from-[#f3ba2f] to-[#e5a91b] hover:from-[#fcd34d] hover:to-[#f59e0b] text-[#09101f] font-black text-xs rounded-xl shadow-xs transition-all shrink-0 cursor-pointer flex items-center gap-1"
             >
               <Download className="w-3.5 h-3.5 stroke-[3]" />
-              <span>앱 설치</span>
+              <span>{t('auto_ui_223')}</span>
             </button>
           </div>
 
@@ -230,7 +232,7 @@ export default function KMarketMyPageModal({ isOpen, onClose }: KMarketMyPageMod
               </div>
               <div className="min-w-0">
                 <h5 className="text-xs font-black text-slate-900 dark:text-white flex items-center gap-1.5 truncate">
-                  <span>🔔 키워드 실시간 알림 ({keywordAlerts.length}개 등록중)</span>
+                  <span>{t('auto_ui_224')}</span>
                 </h5>
                 <div className="flex items-center gap-1 mt-0.5 overflow-x-auto no-scrollbar">
                   {keywordAlerts.slice(0, 3).map((kw) => (
@@ -267,7 +269,7 @@ export default function KMarketMyPageModal({ isOpen, onClose }: KMarketMyPageMod
               }`}
             >
               <Package className="w-4 h-4" />
-              <span>내가 파는 물건 ({mySellingItems.length})</span>
+              <span>{t('auto_ui_225')}</span>
             </button>
 
             <button
@@ -279,7 +281,7 @@ export default function KMarketMyPageModal({ isOpen, onClose }: KMarketMyPageMod
               }`}
             >
               <ShoppingBag className="w-4 h-4" />
-              <span>내가 산 물건 ({myPurchasedItems.length})</span>
+              <span>{t('auto_ui_226')}</span>
             </button>
 
             <button
@@ -291,7 +293,7 @@ export default function KMarketMyPageModal({ isOpen, onClose }: KMarketMyPageMod
               }`}
             >
               <Heart className="w-4 h-4 fill-current" />
-              <span>내가 찜한 물건 ({favoriteItems.length})</span>
+              <span>{t('auto_ui_227')}</span>
             </button>
           </div>
 
@@ -322,7 +324,7 @@ export default function KMarketMyPageModal({ isOpen, onClose }: KMarketMyPageMod
               {filteredSellingItems.length === 0 ? (
                 <div className="py-12 text-center text-slate-400 space-y-2">
                   <Package className="w-12 h-12 mx-auto text-slate-300" />
-                  <p className="text-xs">해당 상태의 판매 매물이 없습니다.</p>
+                  <p className="text-xs">{t('auto_ui_228')}</p>
                 </div>
               ) : (
                 <div className="divide-y divide-slate-100 dark:divide-gray-800">
@@ -344,17 +346,17 @@ export default function KMarketMyPageModal({ isOpen, onClose }: KMarketMyPageMod
                           <div className="flex items-center space-x-1.5">
                             {item.status === 'selling' && (
                               <span className="bg-emerald-100 text-emerald-800 text-[10px] font-black px-2 py-0.5 rounded-full">
-                                판매중
+                                {t('status_selling')}
                               </span>
                             )}
                             {item.status === 'reserved' && (
                               <span className="bg-amber-100 text-amber-800 text-[10px] font-black px-2 py-0.5 rounded-full">
-                                예약중
+                                {t('status_reserved')}
                               </span>
                             )}
                             {item.status === 'sold' && (
                               <span className="bg-slate-200 text-slate-700 text-[10px] font-black px-2 py-0.5 rounded-full">
-                                거래완료
+                                {t('status_sold')}
                               </span>
                             )}
                             <h4 className="font-bold text-xs sm:text-sm text-slate-900 dark:text-white truncate">
@@ -410,7 +412,7 @@ export default function KMarketMyPageModal({ isOpen, onClose }: KMarketMyPageMod
               {myPurchasedItems.length === 0 ? (
                 <div className="py-12 text-center text-slate-400 space-y-2">
                   <ShoppingBag className="w-12 h-12 mx-auto text-slate-300" />
-                  <p className="text-xs">구매 완료한 내역이 없습니다.</p>
+                  <p className="text-xs">{t('auto_ui_229')}</p>
                 </div>
               ) : (
                 <div className="divide-y divide-slate-100 dark:divide-gray-800">
@@ -463,8 +465,8 @@ export default function KMarketMyPageModal({ isOpen, onClose }: KMarketMyPageMod
               {favoriteItems.length === 0 ? (
                 <div className="py-12 text-center text-slate-400 space-y-2">
                   <Heart className="w-12 h-12 mx-auto text-slate-300" />
-                  <p className="text-xs font-bold">아직 찜한 물건이 없습니다.</p>
-                  <p className="text-[11px]">마음에 드는 물건에 하트(❤️)를 눌러보세요!</p>
+                  <p className="text-xs font-bold">{t('auto_ui_230')}</p>
+                  <p className="text-[11px]">{t('auto_ui_231')}</p>
                 </div>
               ) : (
                 <div className="divide-y divide-slate-100 dark:divide-gray-800">
@@ -508,7 +510,7 @@ export default function KMarketMyPageModal({ isOpen, onClose }: KMarketMyPageMod
                         <button
                           onClick={() => toggleLike(item.id)}
                           className="p-1.5 text-rose-500 hover:bg-rose-50 rounded-xl transition-colors cursor-pointer"
-                          title="찜 취소"
+                          title={t('auto_ui_232')}
                         >
                           <Heart className="w-5 h-5 fill-rose-500" />
                         </button>
@@ -529,7 +531,7 @@ export default function KMarketMyPageModal({ isOpen, onClose }: KMarketMyPageMod
                 </div>
                 <div className="min-w-0">
                   <h5 className="text-xs font-black text-white flex items-center gap-1.5 truncate">
-                    <span>💡 앱 개선 제안 및 건의하기</span>
+                    <span>{t('auto_ui_233')}</span>
                     <span className="text-[9px] bg-amber-400/20 text-amber-300 px-1.5 py-0.2 rounded-md font-bold">
                       VOC 소통창구
                     </span>

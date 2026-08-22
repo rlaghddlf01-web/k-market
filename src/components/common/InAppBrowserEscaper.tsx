@@ -1,5 +1,6 @@
 'use client';
 
+import { useLanguage } from '@/context/LanguageContext';
 import React, { useState, useEffect, useContext } from 'react';
 import { Compass, ExternalLink, X, ArrowUpRight, Share2, MoreVertical, ShieldCheck } from 'lucide-react';
 import { checkInAppBrowser, getAndroidChromeIntentUrl, InAppBrowserInfo } from '@/lib/inAppBrowserDetector';
@@ -8,6 +9,7 @@ import { PWA_TRANSLATIONS } from '@/lib/pwaTranslations';
 import { SupportedLanguage } from '@/types/kmarket';
 
 export default function InAppBrowserEscaper() {
+  const { t } = useLanguage();
   const [inAppInfo, setInAppInfo] = useState<InAppBrowserInfo | null>(null);
   const [isDismissed, setIsDismissed] = useState(false);
   const [detectedLang, setDetectedLang] = useState<SupportedLanguage>('ko');
@@ -93,7 +95,7 @@ export default function InAppBrowserEscaper() {
             type="button"
             onClick={() => setIsDismissed(true)}
             className="p-1.5 text-slate-400 hover:text-white transition-colors cursor-pointer"
-            title="닫기"
+            title={t('pwa_toast_dismiss_btn')}
           >
             <X className="w-4 h-4" />
           </button>

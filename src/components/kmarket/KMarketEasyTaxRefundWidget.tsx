@@ -1,5 +1,6 @@
 'use client';
 
+import { useLanguage } from '@/context/LanguageContext';
 import React, { useState } from 'react';
 import { useKMarket } from '@/context/KMarketContext';
 import {
@@ -21,6 +22,7 @@ const SALARY_OPTIONS = [150, 200, 250, 300, 350, 400, 500, 600];
 export default function KMarketEasyTaxRefundWidget({
   onApplyClick,
 }: KMarketEasyTaxRefundWidgetProps) {
+  const { t } = useLanguage();
   const { setIsTaxModalOpen } = useKMarket();
 
   // 1. 근무 개월 수 (1 ~ 60개월, 기본 36개월)
@@ -76,7 +78,7 @@ export default function KMarketEasyTaxRefundWidget({
       <div className="relative z-10 space-y-1 text-center pb-1">
         <div className="inline-flex items-center space-x-1.5 bg-amber-500/20 text-amber-300 border border-amber-500/40 px-2.5 py-0.5 rounded-full text-[11px] font-black tracking-wide">
           <Sparkles className="w-3 h-3 text-yellow-300 animate-spin" />
-          <span>KTRS × EasyTax 실시간 연계</span>
+          <span>{t('auto_ui_120')}</span>
         </div>
         <h3 className="text-base sm:text-lg font-black tracking-tight text-white">
           나의 잠재 환급액{' '}
@@ -94,7 +96,7 @@ export default function KMarketEasyTaxRefundWidget({
           </div>
           <div className="min-w-0">
             <div className="flex items-center gap-1">
-              <span className="text-[11px] font-black text-white">대상 연령 안내</span>
+              <span className="text-[11px] font-black text-white">{t('auto_ui_121')}</span>
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
               <span className="text-[9px] text-emerald-300 font-bold hidden sm:inline">AI LIVE TRACKER</span>
             </div>
@@ -113,7 +115,7 @@ export default function KMarketEasyTaxRefundWidget({
         <div className="flex items-center justify-between">
           <span className="text-[11px] font-bold text-slate-300 flex items-center gap-1">
             <Calendar className="w-3 h-3 text-indigo-400" />
-            <span>최근 5년 한국 근무 기간</span>
+            <span>{t('auto_ui_122')}</span>
           </span>
           <span className="text-xs font-black text-amber-400 bg-amber-400/10 px-2 py-0.2 rounded-md border border-amber-400/20">
             {months}개월 ({(months / 12).toFixed(1)}년)
@@ -130,9 +132,9 @@ export default function KMarketEasyTaxRefundWidget({
         />
 
         <div className="flex justify-between text-[9px] text-slate-400 font-medium px-0.5">
-          <span>1개월</span>
-          <span>30개월 (2.5년)</span>
-          <span>60개월 (5년)</span>
+          <span>{t('auto_ui_123')}</span>
+          <span>{t('auto_ui_124')}</span>
+          <span>{t('auto_ui_125')}</span>
         </div>
       </div>
 
@@ -141,7 +143,7 @@ export default function KMarketEasyTaxRefundWidget({
         <div className="flex items-center justify-between">
           <span className="text-[11px] font-bold text-slate-300 flex items-center gap-1">
             <Coins className="w-3 h-3 text-indigo-400" />
-            <span>평균 월 급여 (세전)</span>
+            <span>{t('auto_ui_126')}</span>
           </span>
           <span className="text-xs font-black text-amber-400">
             {salaryManwon}만 원
@@ -176,7 +178,7 @@ export default function KMarketEasyTaxRefundWidget({
           <span className="w-6 h-px bg-amber-500/40" />
           <span className="flex items-center gap-1">
             <TrendingUp className="w-3 h-3 text-amber-400" />
-            <span>AI 예상 환급 가능 금액</span>
+            <span>{t('auto_ui_127')}</span>
           </span>
           <span className="w-6 h-px bg-amber-500/40" />
         </div>
@@ -190,7 +192,7 @@ export default function KMarketEasyTaxRefundWidget({
         <div className="flex items-center justify-center gap-1.5 pt-0.5">
           <span className="text-[10px] bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 px-2.5 py-0.5 rounded-full font-black flex items-center gap-1 shadow-xs">
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping" />
-            <span>선결제 0원 (후불결제)</span>
+            <span>{t('auto_ui_128')}</span>
           </span>
           <span className="text-[10px] text-slate-300">
             100% 환급 성공 시 후불

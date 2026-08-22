@@ -1,5 +1,6 @@
 'use client';
 
+import { useLanguage } from '@/context/LanguageContext';
 import React, { useState } from 'react';
 import { X, Sparkles, Send, CheckCircle2, MessageSquarePlus, Lightbulb, ShieldAlert, MapPin, Bug, Wallet } from 'lucide-react';
 import { FeedbackCategory, FeedbackItem } from '@/types/kmarket';
@@ -57,6 +58,7 @@ const CATEGORY_OPTIONS: CategoryOption[] = [
 ];
 
 export default function KMarketFeedbackModal({ isOpen, onClose }: KMarketFeedbackModalProps) {
+  const { t } = useLanguage();
   const { authedUser, submitFeedback } = useKMarket();
   const [selectedCategory, setSelectedCategory] = useState<FeedbackCategory>('general_suggestion');
   const [content, setContent] = useState('');
@@ -113,7 +115,7 @@ export default function KMarketFeedbackModal({ isOpen, onClose }: KMarketFeedbac
             </div>
             <div>
               <h3 className="text-base sm:text-lg font-black tracking-tight flex items-center gap-1.5">
-                <span>앱 개선 제안 및 의견 보내기</span>
+                <span>{t('auto_ui_136')}</span>
                 <span className="text-[10px] bg-amber-400 text-slate-950 font-extrabold px-2 py-0.5 rounded-full">
                   VOC 창구
                 </span>
@@ -179,8 +181,8 @@ export default function KMarketFeedbackModal({ isOpen, onClose }: KMarketFeedbac
             {/* 2. 상세 내용 텍스트 입력창 */}
             <div>
               <label className="block text-xs font-bold text-slate-700 mb-1.5 flex items-center justify-between">
-                <span>2. 개선할 점을 자유롭게 글로 작성해 주세요 <span className="text-rose-500">*</span></span>
-                <span className="text-[10px] text-slate-400 font-normal">{content.length}자</span>
+                <span>{t('auto_ui_137')} <span className="text-rose-500">*</span></span>
+                <span className="text-[10px] text-slate-400 font-normal">{t('auto_ui_138')}</span>
               </label>
               <textarea
                 value={content}
@@ -201,7 +203,7 @@ export default function KMarketFeedbackModal({ isOpen, onClose }: KMarketFeedbac
                 type="text"
                 value={contactInfo}
                 onChange={(e) => setContactInfo(e.target.value)}
-                placeholder="전화번호(카톡) 또는 이메일 (선택 사항)"
+                placeholder={t('auto_ui_139')}
                 className="w-full p-3 bg-slate-50 border border-slate-200 rounded-2xl text-xs text-slate-900 placeholder:text-slate-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all"
               />
             </div>
@@ -214,11 +216,11 @@ export default function KMarketFeedbackModal({ isOpen, onClose }: KMarketFeedbac
                 className="w-full py-3.5 bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 disabled:opacity-50 text-white font-black text-sm rounded-2xl shadow-md transition-all flex items-center justify-center gap-2 cursor-pointer"
               >
                 {isSubmitting ? (
-                  <span>전송 중...</span>
+                  <span>{t('auto_ui_140')}</span>
                 ) : (
                   <>
                     <Send className="w-4 h-4" />
-                    <span>관리자에게 개선 의견 보내기</span>
+                    <span>{t('auto_ui_141')}</span>
                   </>
                 )}
               </button>

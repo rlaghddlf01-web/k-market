@@ -1,5 +1,6 @@
 'use client';
 
+import { useLanguage } from '@/context/LanguageContext';
 import React from 'react';
 import { ShieldAlert, AlertTriangle, ExternalLink, Flag } from 'lucide-react';
 import { LanguageCode } from '@/types/kmarket';
@@ -16,6 +17,7 @@ export default function KMarketScamInterventionBanner({
   currentLang = 'ko',
   onReportClick,
 }: KMarketScamInterventionBannerProps) {
+  const { t } = useLanguage();
   const content = getScamWarningI18n(threatType, currentLang);
   const isDanger = threatType === 'prepayment_wire' || threatType === 'giftcard_fake_link';
 
@@ -66,7 +68,7 @@ export default function KMarketScamInterventionBanner({
                 className="px-2.5 py-1 bg-rose-600 hover:bg-rose-700 text-white text-[10px] font-black rounded-lg transition-all shadow-xs flex items-center gap-1 cursor-pointer"
               >
                 <Flag className="w-3 h-3" />
-                <span>즉시 사기 신고</span>
+                <span>{t('scam_report_btn')}</span>
               </button>
             )}
           </div>

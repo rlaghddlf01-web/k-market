@@ -1,5 +1,6 @@
 'use client';
 
+import { useLanguage } from '@/context/LanguageContext';
 import React from 'react';
 import { MapPin, ExternalLink, ShieldCheck, Navigation } from 'lucide-react';
 import { KMarketItem } from '@/types/kmarket';
@@ -11,6 +12,7 @@ interface KMarketMapViewProps {
 }
 
 export default function KMarketMapView({ item }: KMarketMapViewProps) {
+  const { t } = useLanguage();
   const { selectedRegion } = useKMarket();
   const addressText = getAdaptedItemRegion(item, selectedRegion);
 
@@ -41,14 +43,14 @@ export default function KMarketMapView({ item }: KMarketMapViewProps) {
           className="absolute top-3 right-3 bg-[#09101f]/90 hover:bg-[#09101f] text-[#f3ba2f] border border-[#f3ba2f] px-3.5 py-1.5 rounded-xl text-xs font-black shadow-xl transition-all flex items-center gap-1.5 cursor-pointer backdrop-blur-md hover:scale-105 active:scale-95"
         >
           <Navigation className="w-3.5 h-3.5 fill-[#f3ba2f]" />
-          <span>길찾기 지도 앱</span>
+          <span>{t('map_directions_btn')}</span>
           <ExternalLink className="w-3 h-3 opacity-80" />
         </a>
 
         {/* 좌측 상단: 안심 직거래 배지 */}
         <div className="absolute top-3 left-3 bg-[#09101f]/85 text-white border border-[#f3ba2f]/70 px-3 py-1.5 rounded-xl text-[11px] font-bold flex items-center gap-1.5 shadow-md pointer-events-none backdrop-blur-md">
           <ShieldCheck className="w-4 h-4 text-emerald-400" />
-          <span className="text-[#f3ba2f]">실제 직거래 약속 위치</span>
+          <span className="text-[#f3ba2f]">{t('auto_ui_200')}</span>
         </div>
       </div>
 
@@ -69,7 +71,7 @@ export default function KMarketMapView({ item }: KMarketMapViewProps) {
         <div className="p-3 bg-slate-50 rounded-2xl border border-slate-200 text-xs text-slate-700 space-y-1">
           <p className="font-bold text-slate-900 flex items-center gap-1.5">
             <span>🛡️</span>
-            <span><strong>CCTV 안심 직거래:</strong> 공공장소 및 가로등이 밝은 위 지도 핀 위치에서 안전하게 거래하세요</span>
+            <span><strong>{t('auto_ui_201')}</strong> {t('auto_ui_202')}</span>
           </p>
         </div>
       </div>

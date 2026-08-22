@@ -20,6 +20,7 @@ import {
 } from 'lucide-react';
 
 export default function KMarketCommunityPostDetailModal() {
+  const { t } = useLanguage();
   const {
     selectedPost,
     setSelectedPost,
@@ -153,7 +154,7 @@ export default function KMarketCommunityPostDetailModal() {
                       className="w-full px-3 py-1.5 text-left text-rose-600 hover:bg-rose-50 flex items-center gap-1.5 font-bold cursor-pointer"
                     >
                       <Flag className="w-3.5 h-3.5" />
-                      <span>신고하기</span>
+                      <span>{t('report_btn')}</span>
                     </button>
                   </div>
                 )}
@@ -221,7 +222,7 @@ export default function KMarketCommunityPostDetailModal() {
               className="flex-1 py-2 rounded-xl bg-rose-50 hover:bg-rose-100 dark:bg-rose-950/30 text-rose-600 font-extrabold text-xs flex items-center justify-center gap-1.5 transition-colors cursor-pointer border border-rose-200 dark:border-rose-900/40"
             >
               <Heart className="w-4 h-4 fill-rose-500" />
-              <span>공감해요 ({selectedPost.like_count})</span>
+              <span>{t('auto_ui_29')}</span>
             </button>
 
             <button
@@ -229,7 +230,7 @@ export default function KMarketCommunityPostDetailModal() {
               className="flex-1 py-2 rounded-xl bg-amber-50 hover:bg-amber-100 dark:bg-amber-950/30 text-amber-700 font-extrabold text-xs flex items-center justify-center gap-1.5 transition-colors cursor-pointer border border-amber-200 dark:border-amber-900/40"
             >
               <Coffee className="w-4 h-4 text-amber-600" />
-              <span>힘내세요 ({selectedPost.cheer_count})</span>
+              <span>{t('auto_ui_30')}</span>
             </button>
           </div>
 
@@ -237,7 +238,7 @@ export default function KMarketCommunityPostDetailModal() {
           <div className="space-y-3 pt-2">
             <h4 className="text-xs font-black text-slate-900 dark:text-white flex items-center gap-1.5">
               <MessageCircle className="w-4 h-4 text-blue-600" />
-              <span>댓글 ({comments.length})</span>
+              <span>{t('auto_ui_31')}</span>
             </h4>
 
             <div className="space-y-2">
@@ -271,7 +272,7 @@ export default function KMarketCommunityPostDetailModal() {
                           <button
                             onClick={() => handleReportComment(comm)}
                             className="hover:text-rose-500 cursor-pointer p-0.5"
-                            title="댓글 신고"
+                            title={t('auto_ui_32')}
                           >
                             <Flag className="w-3 h-3" />
                           </button>
@@ -301,7 +302,7 @@ export default function KMarketCommunityPostDetailModal() {
                 type="text"
                 value={commentInput}
                 onChange={(e) => setCommentInput(e.target.value)}
-                placeholder="따뜻한 응원이나 답변을 남겨보세요 (15개국어 자동번역)..."
+                placeholder={t('auto_ui_33')}
                 className="flex-1 px-4 py-2.5 rounded-2xl bg-slate-100 dark:bg-gray-800 border border-slate-200 dark:border-gray-700 text-xs font-medium text-slate-900 dark:text-white focus:outline-hidden focus:border-blue-500"
               />
               <button
@@ -310,7 +311,7 @@ export default function KMarketCommunityPostDetailModal() {
                 className="px-4 py-2.5 rounded-2xl bg-blue-600 hover:bg-blue-700 disabled:opacity-50 text-white font-bold text-xs flex items-center gap-1 cursor-pointer transition-colors shadow-md"
               >
                 <Send className="w-3.5 h-3.5" />
-                <span>등록</span>
+                <span>{t('post_short_btn')}</span>
               </button>
             </form>
           ) : (
@@ -320,7 +321,7 @@ export default function KMarketCommunityPostDetailModal() {
             >
               <p className="text-xs font-bold text-amber-800 dark:text-amber-300 flex items-center justify-center gap-1.5">
                 <Lock className="w-3.5 h-3.5" />
-                <span>댓글을 남기려면 1분 간편 인증(회원가입)이 필요합니다 →</span>
+                <span>{t('auto_ui_34')}</span>
               </p>
             </div>
           )}

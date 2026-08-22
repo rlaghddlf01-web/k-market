@@ -25,6 +25,7 @@ export default function KMarketCommunityPostCard({
   post,
   onSelect,
 }: KMarketCommunityPostCardProps) {
+  const { t } = useLanguage();
   const { currentLang } = useLanguage();
   const { reactToPost, setIsReportModalOpen, setReportTarget } = useCommunity();
   const [showMenu, setShowMenu] = useState(false);
@@ -121,7 +122,7 @@ export default function KMarketCommunityPostCard({
                   className="w-full px-3 py-1.5 text-left text-rose-600 hover:bg-rose-50 dark:hover:bg-rose-950/30 flex items-center gap-1.5 font-bold cursor-pointer"
                 >
                   <Flag className="w-3.5 h-3.5" />
-                  <span>신고 / 차단</span>
+                  <span>{t('auto_ui_24')}</span>
                 </button>
               </div>
             )}
@@ -194,7 +195,7 @@ export default function KMarketCommunityPostCard({
           <button
             onClick={handleHeartClick}
             className="flex items-center gap-1 px-2 py-1 rounded-xl bg-slate-50 dark:bg-gray-700/50 hover:bg-rose-50 dark:hover:bg-rose-950/30 hover:text-rose-600 transition-all font-bold cursor-pointer"
-            title="공감해요"
+            title={t('auto_ui_26')}
           >
             <Heart className="w-3.5 h-3.5 text-rose-500 fill-rose-500/20" />
             <span>{post.like_count}</span>
@@ -204,10 +205,10 @@ export default function KMarketCommunityPostCard({
           <button
             onClick={handleCheerClick}
             className="flex items-center gap-1 px-2 py-1 rounded-xl bg-slate-50 dark:bg-gray-700/50 hover:bg-amber-50 dark:hover:bg-amber-950/30 hover:text-amber-600 transition-all font-bold cursor-pointer"
-            title="힘내세요 / 응원해요"
+            title={t('auto_ui_27')}
           >
             <Coffee className="w-3.5 h-3.5 text-amber-500" />
-            <span>힘내요 {post.cheer_count}</span>
+            <span>{t('auto_ui_28')}</span>
           </button>
 
           {/* 💬 댓글 수 */}

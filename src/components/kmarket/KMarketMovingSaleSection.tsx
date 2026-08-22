@@ -66,7 +66,7 @@ export default function KMarketMovingSaleSection() {
 
         <div className="inline-flex items-center space-x-1.5 self-start sm:self-auto bg-white/80 text-[#5c4a39] text-xs font-bold px-3 py-1 rounded-full border border-[#ded1c4]">
           <Tag className="w-3.5 h-3.5 text-[#845b37]" />
-          <span>최대 85% 묶음 할인</span>
+          <span>{t('auto_ui_203')}</span>
         </div>
       </div>
 
@@ -92,7 +92,7 @@ export default function KMarketMovingSaleSection() {
           }`}
         >
           <AlertCircle className="w-3.5 h-3.5" />
-          <span>🚨 D-3 오늘마감 헐값/나눔</span>
+          <span>{t('auto_ui_204')}</span>
         </button>
 
         <button
@@ -104,7 +104,7 @@ export default function KMarketMovingSaleSection() {
           }`}
         >
           <Flame className="w-3.5 h-3.5" />
-          <span>🔥 D-7 마감임박 초특가</span>
+          <span>{t('auto_ui_205')}</span>
         </button>
 
         <button
@@ -116,7 +116,7 @@ export default function KMarketMovingSaleSection() {
           }`}
         >
           <Plane className="w-3.5 h-3.5" />
-          <span>✈️ D-14 묶음할인 (사전예약)</span>
+          <span>{t('auto_ui_206')}</span>
         </button>
       </div>
 
@@ -248,7 +248,7 @@ export default function KMarketMovingSaleSection() {
                       }}
                     >
                       <MessageCircle className="w-3.5 h-3.5 text-[#f3ba2f]" />
-                      <span className="text-[#f3ba2f] font-extrabold">1:1 번역챗</span>
+                      <span className="text-[#f3ba2f] font-extrabold">{t('auto_ui_133')}</span>
                     </button>
                   </div>
                 </div>
