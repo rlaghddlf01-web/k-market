@@ -1,75 +1,91 @@
 'use client';
 
-import { useLanguage } from '@/context/LanguageContext';
 import React, { useEffect, useState } from 'react';
 import { Bell, BellRing, CheckCircle2, X } from 'lucide-react';
 import { registerServiceWorker, requestPushPermission, sendLocalPushNotification } from '@/lib/webPushService';
+import { useLanguage } from '@/context/LanguageContext';
 
 export default function KMarketPushNotificationManager() {
   const { t } = useLanguage();
+  const [mounted, setMounted] = useState(false);
   const [permission, setPermission] = useState<NotificationPermission>('default');
-  const [showBanner, setShowBanner] = useState(false);
+  const [isPromptOpen, setIsPromptOpen] = useState(false);
 
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      // 1. PWA 서비스 워커 자동 등록
+    setMounted(true);
+    if (typeof window !== 'undefined' && 'Notification' in window) {
+      setPermission(Notification.permission);
       registerServiceWorker();
 
-      // 2. 현재 푸시 권한 확인
-      if ('Notification' in window) {
-        setPermission(Notification.permission);
-        if (Notification.permission === 'default') {
-          // 첫 진입 시 3초 후 부드럽게 알림 권한 허용 유도 배너 노출
-          const timer = setTimeout(() => {
-            setShowBanner(true);
-          }, 3000);
-          return () => clearTimeout(timer);
-        }
+      const dismissed = localStorage.getItem('kmarket_push_dismissed');
+      if (Notification.permission === 'default' && !dismissed) {
+        const timer = setTimeout(() => {
+          setIsPromptOpen(true);
+        }, 3000);
+        return () => clearTimeout(timer);
       }
     }
   }, []);
 
+  if (!mounted || !isPromptOpen || permission !== 'default') return null;
+
   const handleEnablePush = async () => {
-    const res = await requestPushPermission();
-    setPermission(res);
-    setShowBanner(false);
+    const granted = await requestPushPermission();
+    if (granted) {
+      setPermission('granted');
+      setIsPromptOpen(false);
+      sendLocalPushNotification(
+        '🔔 K-Market 실시간 알림이 켜졌습니다!',
+        '17개국어 번역 채팅과 관심 키워드 매물 알림을 가장 빠르게 보내드립니다.',
+        '/'
+      );
+    }
   };
 
-  if (!showBanner || permission === 'granted') return null;
+  const handleDismiss = () => {
+    setIsPromptOpen(false);
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('kmarket_push_dismissed', 'true');
+    }
+  };
 
   return (
-    <div className="fixed top-16 right-3 sm:right-6 z-40 max-w-sm w-full animate-in slide-in-from-top-3 duration-300">
-      <div className="bg-slate-900/95 text-white p-3.5 px-4 rounded-2xl shadow-xl border border-amber-400/60 backdrop-blur-md flex items-center justify-between gap-3">
-        <div className="flex items-center space-x-2.5 min-w-0">
-          <div className="w-8 h-8 rounded-xl bg-amber-400 text-slate-950 flex items-center justify-center shrink-0 font-black animate-bounce">
-            <BellRing className="w-4 h-4" />
-          </div>
-          <div className="min-w-0">
-            <p className="text-xs font-black text-white truncate">
-              실시간 거래 &amp; 키워드 알림 받기
-            </p>
-            <p className="text-[10px] text-slate-300 truncate">
-              {t('pwa_push_mgr_desc')}
-            </p>
-          </div>
-        </div>
+    <div className="fixed bottom-24 right-4 z-40 max-w-xs w-full bg-white dark:bg-gray-800 rounded-2xl shadow-2xl border border-amber-200 dark:border-gray-700 p-4 animate-fadeIn">
+      <button
+        onClick={handleDismiss}
+        className="absolute top-2.5 right-2.5 text-gray-400 hover:text-gray-600 p-1"
+      >
+        <X className="w-4 h-4" />
+      </button>
 
-        <div className="flex items-center gap-1.5 shrink-0">
-          <button
-            type="button"
-            onClick={handleEnablePush}
-            className="px-3 py-1.5 bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-500 hover:to-amber-600 text-slate-950 font-black text-[11px] rounded-xl shadow-xs transition-all cursor-pointer"
-          >
-            {t('pwa_push_mgr_btn')}
-          </button>
-          <button
-            type="button"
-            onClick={() => setShowBanner(false)}
-            className="p-1 text-slate-400 hover:text-white transition-colors cursor-pointer"
-          >
-            <X className="w-3.5 h-3.5" />
-          </button>
+      <div className="flex items-start space-x-3">
+        <div className="w-9 h-9 rounded-xl bg-amber-100 dark:bg-amber-900/40 text-amber-600 flex items-center justify-center shrink-0">
+          <BellRing className="w-5 h-5 animate-pulse" />
         </div>
+        <div className="flex-1 min-w-0 pr-4">
+          <h4 className="text-xs font-black text-gray-900 dark:text-white truncate">
+            {t('pwa_push_mgr_title')}
+          </h4>
+          <p className="text-[11px] text-gray-600 dark:text-gray-300 mt-0.5 leading-snug">
+            {t('pwa_push_mgr_desc')}
+          </p>
+        </div>
+      </div>
+
+      <div className="mt-3 flex items-center space-x-2">
+        <button
+          onClick={handleEnablePush}
+          className="flex-1 py-2 px-3 bg-amber-500 hover:bg-amber-600 active:scale-95 text-[#09101f] font-black text-xs rounded-xl shadow-md transition-all flex items-center justify-center space-x-1 cursor-pointer"
+        >
+          <Bell className="w-3.5 h-3.5" />
+          <span>{t('pwa_push_mgr_btn')}</span>
+        </button>
+        <button
+          onClick={handleDismiss}
+          className="py-2 px-2.5 bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 text-xs font-bold rounded-xl"
+        >
+          {t('close_btn')}
+        </button>
       </div>
     </div>
   );

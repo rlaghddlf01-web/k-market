@@ -1,15 +1,15 @@
 'use client';
 
-import { useLanguage } from '@/context/LanguageContext';
 import React, { useState, useEffect, useContext } from 'react';
 import { Compass, ExternalLink, X, ArrowUpRight, Share2, MoreVertical, ShieldCheck } from 'lucide-react';
 import { checkInAppBrowser, getAndroidChromeIntentUrl, InAppBrowserInfo } from '@/lib/inAppBrowserDetector';
-import { LanguageContext } from '@/context/LanguageContext';
+import { LanguageContext, useLanguage } from '@/context/LanguageContext';
 import { PWA_TRANSLATIONS } from '@/lib/pwaTranslations';
 import { SupportedLanguage } from '@/types/kmarket';
 
 export default function InAppBrowserEscaper() {
   const { t } = useLanguage();
+  const [mounted, setMounted] = useState(false);
   const [inAppInfo, setInAppInfo] = useState<InAppBrowserInfo | null>(null);
   const [isDismissed, setIsDismissed] = useState(false);
   const [detectedLang, setDetectedLang] = useState<SupportedLanguage>('ko');
@@ -20,15 +20,14 @@ export default function InAppBrowserEscaper() {
   const trans = PWA_TRANSLATIONS[currentLang] || PWA_TRANSLATIONS.ko;
 
   useEffect(() => {
+    setMounted(true);
     if (typeof window !== 'undefined') {
-      // 로컬스토리지 또는 브라우저 언어 감지
       const savedLang = (localStorage.getItem('kmarket_lang') || 'ko') as SupportedLanguage;
       setDetectedLang(savedLang);
 
       const info = checkInAppBrowser();
       setInAppInfo(info);
 
-      // 안드로이드 인앱 브라우저 감지 시 구글 크롬으로 0.2초 만에 자동 탈출 시도
       if (info.isInApp && info.isAndroid) {
         const currentUrl = window.location.href;
         const chromeIntent = getAndroidChromeIntentUrl(currentUrl);
@@ -42,7 +41,7 @@ export default function InAppBrowserEscaper() {
     }
   }, []);
 
-  if (!inAppInfo || !inAppInfo.isInApp || isDismissed) return null;
+  if (!mounted || !inAppInfo || !inAppInfo.isInApp || isDismissed) return null;
 
   const handleManualEscape = () => {
     if (typeof window !== 'undefined') {
@@ -50,7 +49,6 @@ export default function InAppBrowserEscaper() {
       if (inAppInfo.isAndroid) {
         window.location.href = getAndroidChromeIntentUrl(currentUrl);
       } else {
-        // iOS Safari 안내 복사
         if (navigator.clipboard) {
           navigator.clipboard.writeText(currentUrl);
           alert(trans.copyLinkBtn + ' 완료! 사파리(Safari) 주소창에 붙여넣어 주세요.');
@@ -62,40 +60,39 @@ export default function InAppBrowserEscaper() {
   };
 
   return (
-    <div className="fixed top-0 left-0 right-0 z-[10001] bg-gradient-to-r from-[#09101f] via-[#111d38] to-[#162447] text-white p-3 px-4 border-b-2 border-[#f3ba2f] shadow-2xl animate-in slide-in-from-top-full duration-300">
-      <div className="max-w-6xl mx-auto flex items-center justify-between gap-3 text-xs">
-        <div className="flex items-center gap-2.5 min-w-0">
-          <div className="w-8 h-8 rounded-xl bg-[#f3ba2f] text-[#09101f] flex items-center justify-center font-black shrink-0 shadow-xs animate-pulse">
-            <Compass className="w-4 h-4" />
+    <div className="fixed top-0 inset-x-0 z-50 bg-gradient-to-r from-amber-500 via-rose-500 to-indigo-600 text-white shadow-xl animate-fadeIn">
+      <div className="max-w-6xl mx-auto px-4 py-3 sm:py-3.5 flex flex-col sm:flex-row items-center justify-between gap-3">
+        <div className="flex items-center gap-3 w-full sm:w-auto">
+          <div className="w-10 h-10 rounded-xl bg-white/20 flex items-center justify-center shrink-0">
+            <Compass className="w-5 h-5 text-yellow-300 animate-spin" style={{ animationDuration: '6s' }} />
           </div>
-          <div className="min-w-0">
-            <p className="font-extrabold text-white truncate text-[12px] flex items-center gap-1.5">
-              <span>{inAppInfo.isIOS ? trans.inAppSafariTitle : trans.inAppChromeTitle}</span>
-              <span className="text-[9px] bg-[#f3ba2f] text-[#09101f] px-1.5 py-0.2 rounded-md font-black">
-                PWA
+          <div className="flex-1 min-w-0">
+            <div className="flex items-center gap-2">
+              <span className="bg-black/30 text-yellow-300 font-extrabold text-[10px] px-2 py-0.5 rounded-full">
+                In-App Browser
               </span>
-            </p>
-            <p className="text-[10px] text-slate-300 truncate">
-              {inAppInfo.isIOS ? trans.inAppSafariDesc : trans.inAppChromeDesc}
+              <h4 className="font-black text-xs sm:text-sm truncate text-white">
+                {inAppInfo.isAndroid ? trans.inAppChromeTitle : trans.inAppSafariTitle}
+              </h4>
+            </div>
+            <p className="text-[11px] text-white/90 truncate mt-0.5 font-medium">
+              {inAppInfo.isAndroid ? trans.inAppChromeDesc : trans.inAppSafariDesc}
             </p>
           </div>
         </div>
 
-        <div className="flex items-center gap-1.5 shrink-0">
+        <div className="flex items-center gap-2 w-full sm:w-auto justify-end shrink-0">
           <button
-            type="button"
             onClick={handleManualEscape}
-            className="px-3 py-1.5 bg-[#f3ba2f] hover:bg-[#fcd34d] text-[#09101f] font-black text-xs rounded-xl shadow-xs transition-all flex items-center gap-1 cursor-pointer"
+            className="flex-1 sm:flex-none px-4 py-2 bg-white text-[#09101f] hover:bg-yellow-300 font-black text-xs rounded-xl shadow-md transition-all flex items-center justify-center gap-1.5 active:scale-95 cursor-pointer"
           >
-            <span>{inAppInfo.isIOS ? trans.copyLinkBtn : trans.openChromeBtn}</span>
-            <ArrowUpRight className="w-3.5 h-3.5 stroke-[3]" />
+            <span>{inAppInfo.isAndroid ? trans.openChromeBtn : trans.copyLinkBtn}</span>
+            <ArrowUpRight className="w-3.5 h-3.5" />
           </button>
-
           <button
-            type="button"
             onClick={() => setIsDismissed(true)}
-            className="p-1.5 text-slate-400 hover:text-white transition-colors cursor-pointer"
-            title={t('pwa_toast_dismiss_btn')}
+            className="p-2 text-white/80 hover:text-white rounded-lg hover:bg-white/10 transition-colors cursor-pointer"
+            title={trans.dismissBtn}
           >
             <X className="w-4 h-4" />
           </button>
