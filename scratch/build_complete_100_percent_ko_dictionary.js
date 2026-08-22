@@ -1,0 +1,282 @@
+const fs = require('fs');
+const path = require('path');
+
+const ULTIMATE_MASTER_KO = {
+  // ── 1. 공통 & 네비게이션 & 헤더 ──────────────────────────────────
+  app_name: 'K-Market',
+  app_slogan: '외국인 근로자 17개국어 안심 직거래 마켓',
+  nav_platform_slogan: '대한민국 No.1 외국인 근로자 종합 플랫폼',
+  nav_signup: '회원가입',
+  nav_mypage: '마이',
+  nav_community: '동네생활 & 쉼터',
+  post_item_btn: '1분 매물 등록',
+  post_short_btn: '등록',
+  search_placeholder: '공단 근처 매물 검색 (세탁기, 자전거, 밥솥 등)...',
+  filter_all_regions: '전국 공단 직거래',
+  meetup_zone_title: '주요 공단 도보 직거래 (Meetup Zone)',
+  free_share: '무료나눔',
+  close_btn: '닫기',
+  cancel_btn: '취소',
+  confirm_btn: '확인',
+  save_btn: '저장하기',
+  edit_btn: '수정',
+  delete_btn: '삭제',
+  back_btn: '뒤로가기',
+  share_btn: '공유하기',
+  report_btn: '신고하기',
+  more_btn: '더보기',
+
+  // ── 2. KTRS 상단 4대 탭 ─────────────────────────────────────────
+  ktrs_tab_tax: '세금 환급 (184만)',
+  ktrs_tab_loan: '외국인 대출',
+  ktrs_tab_housing: '기숙사/원룸',
+  ktrs_tab_market: 'K-Market (중고/무빙)',
+
+  // ── 3. 메인 히어로 쇼케이스 (대형 배너) ─────────────────────────
+  hero_top_badge: '대한민국 외국인 근로자 No.1 안심 플랫폼',
+  hero_title_1: '외국인 안심 직거래 &',
+  hero_title_moving: '귀국 무빙세일',
+  hero_title_collection: '컬렉션',
+  hero_desc_1: '17개국어 실시간 Gemini 양방향 자동번역 채팅과',
+  hero_desc_2: '신원인증 기반 주요 공단 1분 도보 직거래로 안전하게 시작하세요.',
+  hero_post_btn: '내 물건 1분 간편 등록',
+  hero_tax_btn: '세무 환급 184만원 무료조회',
+  hero_moving_tag_top: '귀국 근로자',
+  hero_moving_tag_main: '무빙세일',
+  hero_bundle_title: '냉장고·세탁기·쇼파·노트북 풀패키지 묶음',
+  hero_bundle_action: '일괄 처분',
+
+  // ── 4. 3대 안심 배지 바 ─────────────────────────────────────────
+  trust_bar_fee: '수수료 0원 100% 무료 직거래',
+  trust_bar_ai: '17개국어 실시간 Gemini 번역',
+  trust_bar_tax: '선결제 0원 184만원 세무환급',
+  trust_bar_moving: '귀국 D-Day 무빙세일 전용관',
+
+  // ── 5. 국세청 세금 환급 배너 & 계산기 ───────────────────────────
+  tax_banner_sub: '대한민국 국세청(NTS) 조세특례제한법 제30조 법적 권리',
+  tax_banner_headline_1: '지나치기 쉬운 세금 환급,',
+  tax_banner_headline_2: '외국인 근로자도 보장받는',
+  tax_banner_headline_amount: '[평균 184만원]',
+  tax_banner_headline_tail: '30초 무료 조회',
+  tax_banner_feature_1: '소요시간 30초',
+  tax_banner_feature_2: '평균 184만원 수령',
+  tax_banner_feature_3: '선결제 0원 (100% 후불제)',
+  tax_banner_cta_btn: '내 환급금 30초 무료 조회하기',
+  tax_banner_title: '놓치기 쉬운 세금 환급금 찾기 (평균 184만원)',
+  tax_banner_btn: '30초 환급금 계산하기',
+  tax_calc_title: '💰 외국인 근로자 세금 환급 30초 정밀 계산기',
+  tax_calc_desc: '조세특례제한법 제30조 90% 감면 및 연말정산 누락분을 정밀 계산합니다.',
+  tax_calc_work_months: '한국 근무 기간 (개월)',
+  tax_calc_salary: '평균 월 급여 (만원)',
+  tax_calc_visa: '체류 비자 유형',
+  tax_calc_result_title: '🎉 회원님의 예상 세금 환급금',
+  tax_calc_apply_btn: '1분 간편 환급 신청하기 (선결제 0원)',
+
+  // ── 6. 사기 방지 안심 쉴드 배너 & 모달 ─────────────────────────
+  scam_bar_badge: '외국인 안심 거래 쉴드',
+  scam_bar_desc: '선입금 요구는 99% 사기! 반드시 현장에서 물건 확인 후 결제하세요.',
+  scam_bar_rules_btn: '3대 안심 수칙',
+  scam_report_btn: '즉시 사기 신고',
+  scam_warning_title: '🛡️ 외국인 안심 직거래 3대 철칙 (Safety Rules)',
+  scam_rule_1_title: '1. 절대 선입금 금지 (100% 직거래 현장 결제)',
+  scam_rule_1_desc: '물건을 직접 눈으로 보고 작동을 확인하기 전에는 1원도 먼저 송금하지 마세요.',
+  scam_rule_2_title: '2. 외부 메신저 유도 차단 (K-Market 내 채팅 필수)',
+  scam_rule_2_desc: '카카오톡, 라인, 텔레그램으로 대화를 유도하는 판매자는 사기 위험이 높습니다.',
+  scam_rule_3_title: '3. 외부 결제 링크/기프트카드 요구 거절',
+  scam_rule_3_desc: '안전결제 링크라며 보낸 외부 URL은 피싱 사이트입니다. 절대 클릭하지 마세요.',
+
+  // ── 7. PWA 앱 설치 & 푸시 알림 ─────────────────────────────────
+  pwa_toast_title: 'K-Market 1초 앱 설치',
+  pwa_toast_desc: '홈 화면에 앱 추가하고 17개국어 번역 매물과 공단 직거래 알림을 가장 빠르게 받으세요.',
+  pwa_toast_install_btn: '홈 화면에 K-Market 앱 추가',
+  pwa_toast_dismiss_btn: '닫기',
+  pwa_push_mgr_title: '실시간 거래 & 키워드 알림 받기',
+  pwa_push_mgr_desc: '채팅 도착 및 관심 매물 등록 시 즉시 알려드려요!',
+  pwa_push_mgr_btn: '알림 켜기',
+
+  // ── 8. 인앱 브라우저 탈출 (구글 크롬 / 사파리 이동) ──────────────
+  inapp_chrome_title: '🌐 구글 크롬(Chrome)으로 안전하게 이동',
+  inapp_chrome_desc: '안전한 앱 설치 및 17개국어 실시간 번역 이용을 위해 구글 크롬으로 전환합니다.',
+  inapp_safari_title: '🧭 사파리(Safari) 브라우저로 열기',
+  inapp_safari_desc: '아이폰 앱 설치를 위해 우측 상단/하단 메뉴에서 [Safari로 열기]를 눌러주세요.',
+  inapp_open_chrome_btn: '크롬으로 열기',
+  inapp_copy_link_btn: '주소 복사',
+  inapp_copy_success_safari: '링크 복사 완료! 사파리(Safari) 주소창에 붙여넣어 주세요.',
+  inapp_safari_guide_fallback: '우측 상단 또는 하단의 메뉴(⋮ 또는 공유)를 누른 후 [Safari로 열기]를 선택해 주세요!',
+
+  // ── 9. 통합 알림 센터 드로어 ───────────────────────────────────
+  notif_center_title: '통합 알림 센터',
+  notif_center_desc: '키워드 알림, 실시간 번역 채팅, 가격 인하 소식',
+  notif_center_mark_all: '모두 읽음',
+  notif_tab_all: '전체',
+  notif_tab_keyword: '키워드 알림',
+  notif_tab_chat: '번역 채팅',
+  notif_tab_price_drop: '가격 인하',
+  notif_empty_title: '새로운 알림이 없습니다',
+  notif_empty_desc: '관심 있는 물건의 키워드를 등록하면 매물이 등록될 때 즉시 푸시 알림을 보내드려요.',
+  notif_keyword_manage_btn: '관심 키워드 관리',
+
+  // ── 10. 관심 키워드 알림 모달 ──────────────────────────────────
+  keyword_modal_title: '관심 키워드 실시간 알림 등록',
+  keyword_modal_desc: '세탁기, 냉장고, 자전거 등을 등록하면 새 매물이 뜰 때 1초 만에 푸시 알림을 드립니다.',
+  keyword_input_placeholder: '알림받을 키워드 입력 (예: 냉장고, 밥솥, 자전거)',
+  keyword_add_btn: '키워드 추가',
+  keyword_my_list_title: '내가 등록한 키워드',
+  keyword_empty_desc: '등록된 관심 키워드가 없습니다.',
+
+  // ── 11. 매물 카드, 피드 & 상태 배지 ─────────────────────────────
+  item_card_free_badge: '🎁 무료나눔',
+  item_card_chat_btn: '💬 1:1 실시간 번역 채팅',
+  item_card_chat_desc: '0.3초 AI 자동 번역',
+  status_selling: '판매중',
+  status_reserved: '예약중',
+  status_sold: '거래완료',
+  status_price_dropped: '가격인하',
+  status_discount_badge: '할인',
+  walk_trade_available: '도보 5분 직거래 가능',
+  zero_fee_badge: '수수료 0원 100% 무료',
+  moving_sale_title: '✈️ 귀국 D-Day 무빙세일 특가관',
+  moving_sale_badge: '귀국정리 초특가',
+  chat_btn: '💬 1:1 실시간 자동번역 채팅',
+  chat_translation_hint: '✨ 상대방 모국어로 0.3초 만에 실시간 번역되어 전송됩니다 (Gemini AI 탑재)',
+  community_title: '동네생활 & 쉼터',
+  manner_temperature: '매너온도',
+  time_just_now: '방금 전',
+  time_mins_ago: '분 전',
+  time_hours_ago: '시간 전',
+  time_days_ago: '일 전',
+  seller_other_items_title: '🛍️ 판매자의 다른 상품',
+  seller_no_other_items: '현재 판매 중인 다른 물품이 없습니다.',
+  map_directions_btn: '길찾기 지도 앱',
+  currency_won: '원',
+  currency_free: '0원 (무료)',
+
+  // ── 12. 매물 상세 모달 (Item Detail) ────────────────────────────
+  item_detail_view_count: '조회',
+  item_detail_like_count: '관심',
+  item_detail_chat_btn: '1:1 번역 채팅으로 거래하기',
+  item_detail_like_btn: '찜하기',
+  item_detail_share_btn: '공유',
+  item_detail_report_btn: '신고',
+  item_detail_seller_info: '판매자 정보',
+  item_detail_manner_score: '신뢰 매너온도',
+  item_detail_verified_badge: '신원 인증 완료',
+  item_detail_trade_location: '직거래 희망 장소',
+  item_detail_description_title: '상품 설명',
+
+  // ── 13. 1:1 실시간 번역 채팅창 ─────────────────────────────────
+  chat_appointment_btn: '📍 직거래 약속 잡기',
+  chat_safety_notice_title: '🛡️ K-Market 안전 수칙',
+  chat_safety_notice_body: '선입금 요구 및 외부 메신저(카톡·라인·텔레그램) 유도 시 계정이 즉시 정지됩니다. 반드시 현장 직거래를 이용하세요.',
+  chat_input_placeholder: '메시지를 입력하세요 (상대방 모국어로 자동 번역)...',
+  chat_send_btn: '전송',
+  chat_quick_discount: '조금만 깎아주실 수 있나요?',
+  chat_quick_meetup: '오늘 저녁 기숙사 앞이나 공단 정문에서 직거래 가능할까요?',
+  chat_quick_agree: '네, 좋습니다! 그때 뵐게요.',
+
+  // ── 14. 직거래 약속 & 거래 후기 모달 ───────────────────────────
+  appointment_modal_title: '📍 직거래 만남 약속 잡기',
+  appointment_modal_desc: '판매자와 만날 장소와 시간을 정하고 1시간 전 알림을 받아보세요.',
+  appointment_place_placeholder: '만남 장소 입력 (예: 포승공단 기숙사 정문 앞)',
+  appointment_time_label: '만남 시간',
+  appointment_remind_1hour: '약속 1시간 전 스마트폰 푸시 알림 받기',
+  appointment_confirm_btn: '약속 잡기 완료',
+  review_modal_title: '⭐ 따뜻한 거래 후기 작성',
+  review_rating_label: '거래 매너를 평가해 주세요',
+  review_submit_btn: '후기 남기기',
+
+  // ── 15. 회원가입 & 본인인증 모달 (Auth) ────────────────────────
+  auth_modal_title: 'K-Market 외국인 안심 가입 / 로그인',
+  auth_phone_label: '휴대폰 번호',
+  auth_phone_placeholder: '010-0000-0000',
+  auth_send_code_btn: '인증번호 발송',
+  auth_code_label: '인증번호 (6자리)',
+  auth_code_placeholder: '인증번호 입력',
+  auth_verify_btn: '인증 완료 및 시작하기',
+  auth_name_label: '이름 / 닉네임',
+  auth_country_label: '국적 선택',
+
+  // ── 16. 매물 등록 모달 (Create Post) ───────────────────────────
+  create_modal_title: '1분 간편 매물 등록',
+  create_photo_label: '상품 사진 (최대 5장)',
+  create_title_label: '제목',
+  create_title_placeholder: '상품명을 입력하세요 (예: 쿠쿠 6인용 밥솥)',
+  create_category_label: '카테고리',
+  create_price_label: '가격 (원)',
+  create_price_placeholder: '0 (무료나눔은 0 입력)',
+  create_region_label: '거래 희망 공단/지역',
+  create_desc_label: '자세한 설명',
+  create_desc_placeholder: '구입 시기, 사용감, 하자 유무 등을 자세히 적어주세요. (17개국어로 자동 번역됩니다)',
+  create_moving_sale_check: '✈️ 귀국 정리 무빙세일로 등록',
+  create_submit_btn: '매물 등록 완료',
+
+  // ── 17. 마이페이지 모달 (My Page) ──────────────────────────────
+  mypage_title: '마이페이지',
+  mypage_trade_history: '나의 거래 내역',
+  mypage_sales_tab: '판매 내역',
+  mypage_buys_tab: '구매 내역',
+  mypage_likes_tab: '관심 목록 (찜)',
+  mypage_manner_title: '나의 K-Trust 매너온도',
+  mypage_verified_user: '신원 인증된 외국인 근로자',
+  mypage_keyword_alert_btn: '관심 키워드 알림 설정',
+  mypage_feedback_btn: '앱 건의 및 의견 보내기',
+  mypage_logout_btn: '로그아웃',
+
+  // ── 18. 신고 및 차단 모달 (Report/Block) ────────────────────────
+  report_modal_title: '🚨 사용자 / 게시글 신고',
+  report_reason_label: '신고 사유 선택',
+  report_reason_scam: '선입금 요구 / 사기 의심',
+  report_reason_bad_item: '상품 정보가 실제와 다름',
+  report_reason_no_show: '직거래 약속 직전 잠수 / 노쇼',
+  report_reason_abuse: '욕설, 비매너 및 폭언',
+  report_reason_illegal: '불법 / 판매 금지 품목',
+  report_reason_other: '기타 사유',
+  report_detail_placeholder: '구체적인 피해 내용이나 증거를 적어주세요.',
+  report_block_check: '이 사용자를 즉시 차단하기',
+  report_submit_btn: '신고 접수하기',
+
+  // ── 19. 동네생활 & 커뮤니티 (Community) ─────────────────────────
+  community_tab_all: '전체 글',
+  community_tab_qna: '❓ 질문 & 답변',
+  community_tab_tips: '💡 한국생활 꿀팁',
+  community_tab_friends: '🤝 친구 & 모임',
+  community_write_btn: '글쓰기',
+  community_empty_title: '등록된 게시글이 없습니다',
+  community_empty_desc: '첫 번째 이야기를 동네 이웃들과 나눠보세요!',
+  community_comment_placeholder: '따뜻한 댓글을 남겨주세요 (자동 번역)...',
+  community_comment_btn: '댓글 등록',
+
+  // ── 20. 위치 & 반경 설정 (Location Radius) ──────────────────────
+  location_modal_title: '📍 내 동네 / 공단 반경 설정',
+  location_modal_desc: '도보로 직거래 가능한 공단 반경을 설정하세요.',
+  location_radius_walk: '🚶 도보 5분 (기숙사 인근)',
+  location_radius_1km: '📍 반경 1km (공단 정문/후문)',
+  location_radius_3km: '🚲 반경 3km (자전거/킥보드 거리)',
+  location_radius_all: '🌐 전국 공단 전체 보기',
+  location_confirm_btn: '반경 설정 완료',
+
+  // ── 21. SMS & 알리고 연동 (SMS Auth) ───────────────────────────
+  sms_auth_code_body: '[KTRS K-Market] 인증번호는 [{code}] 입니다. (5분 이내 입력)',
+  sms_auth_success: '휴대폰 본인인증이 성공적으로 완료되었습니다.',
+  sms_auth_error_phone: '수신자 휴대폰 번호가 필요합니다.',
+};
+
+// 1. types.ts 갱신
+const typesFilePath = path.join(__dirname, '..', 'src', 'lib', 'i18n', 'types.ts');
+let typesContent = `// K-Market 17개국어 표준 번역 키 마스터 인터페이스 (한국어 원본 기준)\n\nexport interface TranslationDictionary {\n`;
+for (const key of Object.keys(ULTIMATE_MASTER_KO)) {
+  typesContent += `  ${key}: string;\n`;
+}
+typesContent += `}\n`;
+fs.writeFileSync(typesFilePath, typesContent, 'utf8');
+console.log('✅ [types.ts] 최종 전수 마스터 인터페이스 갱신 완료 (총 키 개수:', Object.keys(ULTIMATE_MASTER_KO).length, '개)');
+
+// 2. ko.ts 갱신
+const koFilePath = path.join(__dirname, '..', 'src', 'lib', 'i18n', 'locales', 'ko.ts');
+let koContent = `import { TranslationDictionary } from '../types';\n\nexport const ko: TranslationDictionary = {\n`;
+for (const [k, v] of Object.entries(ULTIMATE_MASTER_KO)) {
+  koContent += `  ${k}: ${JSON.stringify(v)},\n`;
+}
+koContent += `};\n`;
+fs.writeFileSync(koFilePath, koContent, 'utf8');
+console.log('✅ [ko.ts] 최종 전수 한국어 마스터 사전 구축 완료');

@@ -1,0 +1,7869 @@
+{
+  "totalFiles": 54,
+  "totalKoreanLines": 1513,
+  "totalUniquePhrases": 1700,
+  "components": {
+    "app/admin/page.tsx": [
+      {
+        "line": 65,
+        "code": "alert(`[관리자 집행] \"${rep.target_user_name}\" 회원이 [플랫폼 전체 영구 제재] 처리되었습니다.`);"
+      },
+      {
+        "line": 69,
+        "code": "alert(`[관리자 집행] \"${rep.target_user_name}\" 회원이 [7일간 거래 정지] 처리되었습니다.`);"
+      },
+      {
+        "line": 73,
+        "code": "alert(`[관리자 집행] 불량 매물 \"${rep.item_title}\" 이(가) DB에서 강제 삭제되었습니다.`);"
+      },
+      {
+        "line": 78,
+        "code": "alert(`[관리자 집행] 신고 사유가 불충분하여 기각 처리했습니다.`);"
+      },
+      {
+        "line": 89,
+        "code": "if (confirm(`정말로 매물 \"${title}\"을(를) 강제 삭제하시겠습니까?`)) {"
+      },
+      {
+        "line": 91,
+        "code": "alert('매물이 안전하게 삭제되었습니다.');"
+      },
+      {
+        "line": 97,
+        "code": "if (confirm(`게시글 \"${title}\"을(를) 커뮤니티 피드에서 [블라인드(숨김)] 처리하시겠습니까?`)) {"
+      },
+      {
+        "line": 99,
+        "code": "alert('게시글이 즉시 블라인드 처리되었습니다.');"
+      },
+      {
+        "line": 105,
+        "code": "if (confirm(`악성 회원 \"${userName}\"을(를) [플랫폼 영구 퇴출 및 작성글 전체 삭제] 처리하시겠습니까?`)) {"
+      },
+      {
+        "line": 107,
+        "code": "alert(`[관리자 집행] \"${userName}\" 회원이 영구 퇴출되었습니다.`);"
+      },
+      {
+        "line": 115,
+        "code": "{/* 1. 상단 이지텍스 스타일 밝은 헤더 */}"
+      },
+      {
+        "line": 123,
+        "code": "<span>K-Market 홈으로</span>"
+      },
+      {
+        "line": 135,
+        "code": "KTRS 이지텍스 관리자 관제 센터"
+      },
+      {
+        "line": 148,
+        "code": "<span className=\"text-emerald-800 font-bold text-[11px]\">실시간 관제 시스템 정상 가동중</span>"
+      },
+      {
+        "line": 157,
+        "code": "{/* 2. 관리자 메인 레이아웃 (풀 와이드 100% 가로 확장) */}"
+      },
+      {
+        "line": 159,
+        "code": "{/* 좌측 밝은 네비게이션 사이드바 */}"
+      },
+      {
+        "line": 172,
+        "code": "<span>종합 운영 현황</span>"
+      },
+      {
+        "line": 186,
+        "code": "<span>신고 및 사기 관제</span>"
+      },
+      {
+        "line": 195,
+        "code": "{/* 🗣️ 동네생활 커뮤니티 관제 탭 */}"
+      },
+      {
+        "line": 206,
+        "code": "<span>동네생활 관제</span>"
+      },
+      {
+        "line": 209,
+        "code": "{communityPosts.length}개"
+      },
+      {
+        "line": 223,
+        "code": "<span>중고 매물 관리</span>"
+      },
+      {
+        "line": 225,
+        "code": "<span className=\"text-[10px] text-slate-400 font-bold\">{items.length}개</span>"
+      },
+      {
+        "line": 238,
+        "code": "<span>KTRS 세금 환급 연계</span>"
+      },
+      {
+        "line": 241,
+        "code": "0원 후불"
+      },
+      {
+        "line": 255,
+        "code": "<span>외국인 회원 관리</span>"
+      },
+      {
+        "line": 269,
+        "code": "<span>유저 피드백 / VOC</span>"
+      },
+      {
+        "line": 277,
+        "code": "{/* 안전 관제 현황 미니 카드 */}"
+      },
+      {
+        "line": 281,
+        "code": "<span>실시간 AI 쉴드 상태</span>"
+      },
+      {
+        "line": 284,
+        "code": "<span>15개국어 번역 서버:</span>"
+      },
+      {
+        "line": 285,
+        "code": "<span className=\"text-emerald-700 font-bold\">정상 가동중 (0.3s)</span>"
+      },
+      {
+        "line": 288,
+        "code": "<span>사기 키워드 탐지:</span>"
+      },
+      {
+        "line": 289,
+        "code": "<span className=\"text-emerald-700 font-bold\">실시간 활성화</span>"
+      },
+      {
+        "line": 292,
+        "code": "<span>구글 맵 지오코딩:</span>"
+      },
+      {
+        "line": 293,
+        "code": "<span className=\"text-emerald-700 font-bold\">연동 완료</span>"
+      },
+      {
+        "line": 298,
+        "code": "{/* 우측 메인 뷰 영역 */}"
+      },
+      {
+        "line": 300,
+        "code": "{/* 모바일 탭 바 */}"
+      },
+      {
+        "line": 303,
+        "code": "{ id: 'overview', label: '📊 종합' },"
+      },
+      {
+        "line": 305,
+        "code": "{ id: 'community', label: `🗣️ 커뮤니티 (${communityPosts.length})` },"
+      },
+      {
+        "line": 307,
+        "code": "{ id: 'taxes', label: '💰 세금환급' },"
+      },
+      {
+        "line": 324,
+        "code": "{/* 1. 종합 운영 대시보드 탭 (Overview) */}"
+      },
+      {
+        "line": 327,
+        "code": "{/* 📈 IR 피칭용 기간별 정밀 분석 & SNS 유입 추적 대시보드 */}"
+      },
+      {
+        "line": 330,
+        "code": "{/* 4대 주요 핵심 지표 카드 (이지텍스 밝은 카드 스타일) */}"
+      },
+      {
+        "line": 334,
+        "code": "<span>총 등록 매물</span>"
+      },
+      {
+        "line": 340,
+        "code": "{items.length}건"
+      },
+      {
+        "line": 343,
+        "code": "D-Day 무빙세일 4건 포함"
+      },
+      {
+        "line": 349,
+        "code": "<span>사기 신고/의심</span>"
+      },
+      {
+        "line": 355,
+        "code": "{pendingReportsCount}건"
+      },
+      {
+        "line": 358,
+        "code": "미처리 즉시 조치 대기중"
+      },
+      {
+        "line": 364,
+        "code": "<span>KTRS 세금 환급 연계</span>"
+      },
+      {
+        "line": 370,
+        "code": "0원"
+      },
+      {
+        "line": 373,
+        "code": "선결제 0원 후불 신청 대기"
+      },
+      {
+        "line": 379,
+        "code": "<span>외국인 이용 회원</span>"
+      },
+      {
+        "line": 385,
+        "code": "0명"
+      },
+      {
+        "line": 388,
+        "code": "실시간 가입 회원 집계중"
+      },
+      {
+        "line": 393,
+        "code": "{/* 공단별 직거래 현황 & 국적별 분포 (실제 데이터 0부터 집계) */}"
+      },
+      {
+        "line": 398,
+        "code": "<span>주요 외국인 공단별 거래 점유율</span>"
+      },
+      {
+        "line": 403,
+        "code": "<span>경기 평택 포승국가산단</span>"
+      },
+      {
+        "line": 404,
+        "code": "<span className=\"text-[#845b37]\">0% (0건)</span>"
+      },
+      {
+        "line": 412,
+        "code": "<span>경기 안산 반월시화 / 원곡동</span>"
+      },
+      {
+        "line": 413,
+        "code": "<span className=\"text-[#845b37]\">0% (0건)</span>"
+      },
+      {
+        "line": 421,
+        "code": "<span>경기 화성 향남제약 / 마도</span>"
+      },
+      {
+        "line": 422,
+        "code": "<span className=\"text-[#845b37]\">0% (0건)</span>"
+      },
+      {
+        "line": 434,
+        "code": "<span>외국인 근로자 국적별 거래 비중</span>"
+      },
+      {
+        "line": 438,
+        "code": "<span className=\"text-slate-800\">🇻🇳 베트남 (Vietnam)</span>"
+      },
+      {
+        "line": 442,
+        "code": "<span className=\"text-slate-800\">🇲🇳 몽골 (Mongolia)</span>"
+      },
+      {
+        "line": 446,
+        "code": "<span className=\"text-slate-800\">🇹🇭 태국 (Thailand)</span>"
+      },
+      {
+        "line": 450,
+        "code": "<span className=\"text-slate-800\">🇳🇵 네팔 (Nepal)</span>"
+      },
+      {
+        "line": 459,
+        "code": "{/* 6. 유저 피드백 / VOC 관제 탭 */}"
+      },
+      {
+        "line": 462,
+        "code": "{/* 2. 불량 매물 & 사기 신고 관제 탭 (Reports) */}"
+      },
+      {
+        "line": 474,
+        "code": "전체 ({reports.length})"
+      },
+      {
+        "line": 484,
+        "code": "🚨 미처리 대기 ({pendingReportsCount})"
+      },
+      {
+        "line": 492,
+        "code": "<h4 className=\"text-sm font-black text-slate-900\">접수된 사기 및 불량 신고가 없습니다</h4>"
+      },
+      {
+        "line": 493,
+        "code": "<p className=\"text-xs text-slate-400\">사용자가 신고 팝업을 통해 접수한 불량 사용자/매물 내역이 여기에 실시간 표시됩니다.</p>"
+      },
+      {
+        "line": 512,
+        "code": "{rep.status === 'pending' ? '🚨 심사 대기' : '✅ 조치 완료'}"
+      },
+      {
+        "line": 514,
+        "code": "<span className=\"font-bold text-xs text-slate-800\">신고번호: #{rep.id}</span>"
+      },
+      {
+        "line": 518,
+        "code": "신고자: <strong>{rep.reporter_name}</strong>"
+      },
+      {
+        "line": 524,
+        "code": "<span className=\"text-slate-500\">피신고 회원: </span>"
+      },
+      {
+        "line": 527,
+        "code": "<p className=\"text-slate-600 mt-1 font-semibold\">관련 매물: {rep.item_title}</p>"
+      },
+      {
+        "line": 532,
+        "code": "사유: {rep.reason_type}"
+      },
+      {
+        "line": 544,
+        "code": "신고 기각 (무혐의)"
+      },
+      {
+        "line": 551,
+        "code": "<span>매물 강제 삭제</span>"
+      },
+      {
+        "line": 558,
+        "code": "<span>7일 거래 정지</span>"
+      },
+      {
+        "line": 565,
+        "code": "<span>🚨 플랫폼 영구 제재</span>"
+      },
+      {
+        "line": 576,
+        "code": "{/* 3. 동네생활 커뮤니티 관제 탭 (Community) */}"
+      },
+      {
+        "line": 583,
+        "code": "<span>동네생활 등록 게시글 실시간 관제 ({communityPosts.length}개)</span>"
+      },
+      {
+        "line": 586,
+        "code": "불법 홍보, 악플, 사기 의심 글을 원클릭으로 즉시 블라인드 처리하거나 작성자를 영구 퇴출할 수 있습니다."
+      },
+      {
+        "line": 595,
+        "code": "<th className=\"p-3.5\">카테고리 / 제목</th>"
+      },
+      {
+        "line": 596,
+        "code": "<th className=\"p-3.5\">작성자 / 국적</th>"
+      },
+      {
+        "line": 598,
+        "code": "<th className=\"p-3.5\">공감 / 댓글</th>"
+      },
+      {
+        "line": 599,
+        "code": "<th className=\"p-3.5\">등록일시</th>"
+      },
+      {
+        "line": 600,
+        "code": "<th className=\"p-3.5 text-right\">관리 조치</th>"
+      },
+      {
+        "line": 607,
+        "code": "등록된 커뮤니티 게시글이 없습니다. (0개)"
+      },
+      {
+        "line": 639,
+        "code": "title=\"커뮤니티에서 숨김 처리\""
+      },
+      {
+        "line": 642,
+        "code": "<span>블라인드</span>"
+      },
+      {
+        "line": 647,
+        "code": "title=\"유저 영구 퇴출\""
+      },
+      {
+        "line": 650,
+        "code": "<span>퇴출</span>"
+      },
+      {
+        "line": 662,
+        "code": "{/* 4. 전체 중고 매물 관리 탭 (Items) */}"
+      },
+      {
+        "line": 666,
+        "code": "<h3 className=\"font-black text-sm text-slate-900\">등록된 전체 매물 ({items.length}개)</h3>"
+      },
+      {
+        "line": 673,
+        "code": "<th className=\"p-3.5\">상품명 / 사진</th>"
+      },
+      {
+        "line": 675,
+        "code": "<th className=\"p-3.5\">가격</th>"
+      },
+      {
+        "line": 676,
+        "code": "<th className=\"p-3.5\">공단 위치</th>"
+      },
+      {
+        "line": 678,
+        "code": "<th className=\"p-3.5 text-right\">관리 액션</th>"
+      },
+      {
+        "line": 698,
+        "code": "{item.price.toLocaleString()}원"
+      },
+      {
+        "line": 710,
+        "code": "title=\"매물 강제 삭제\""
+      },
+      {
+        "line": 723,
+        "code": "{/* 4. KTRS 세금 환급 연계 신청 관리 탭 (Taxes) */}"
+      },
+      {
+        "line": 728,
+        "code": "KTRS 184만원 세금 환급 연계 신청 현황 ({taxLeads.length}건)"
+      },
+      {
+        "line": 731,
+        "code": "선결제 0원 (후불결제) 모델로 접수된 외국인 근로자 리드 목록"
+      },
+      {
+        "line": 739,
+        "code": "<th className=\"p-3.5\">신청자명 / 국적</th>"
+      },
+      {
+        "line": 740,
+        "code": "<th className=\"p-3.5\">근무기간 (비자)</th>"
+      },
+      {
+        "line": 742,
+        "code": "<th className=\"p-3.5\">예상 환급액</th>"
+      },
+      {
+        "line": 743,
+        "code": "<th className=\"p-3.5\">수수료 정산</th>"
+      },
+      {
+        "line": 744,
+        "code": "<th className=\"p-3.5\">진행 상태</th>"
+      },
+      {
+        "line": 751,
+        "code": "접수된 세금 환급 연계 신청 내역이 없습니다. (0건)"
+      },
+      {
+        "line": 780,
+        "code": "{/* 5. 외국인 회원 및 OCR 신분인증 관리 탭 (Users) */}"
+      }
+    ],
+    "app/layout.tsx": [
+      {
+        "line": 18,
+        "code": "title: 'KTRS K-Market (케이마켓) | 외국인 중고거래 & 무빙세일',"
+      },
+      {
+        "line": 20,
+        "code": "'대한민국 No.1 외국인 근로자 전용 0원 수수료 중고거래 & 귀국 무빙세일 플랫폼! 15개국어 실시간 자동 번역 채팅, 평택·안산·화성 전국 공단 도보 5분 안심 직거래, 최대 1000만원 세금 환급 원스톱 연계',"
+      },
+      {
+        "line": 29,
+        "code": "'케이마켓',"
+      },
+      {
+        "line": 31,
+        "code": "'외국인 중고거래',"
+      },
+      {
+        "line": 32,
+        "code": "'무빙세일',"
+      },
+      {
+        "line": 34,
+        "code": "'세금환급',"
+      },
+      {
+        "line": 35,
+        "code": "'15개국어 번역 채팅',"
+      },
+      {
+        "line": 36,
+        "code": "'평택 포승공단',"
+      }
+    ],
+    "app/welcome/page.tsx": [
+      {
+        "line": 144,
+        "code": "{/* 상단 17개국어 실시간 라이브 변환 헤더 */}"
+      },
+      {
+        "line": 159,
+        "code": "{/* 16개국 국기 카드 그리드 */}"
+      },
+      {
+        "line": 175,
+        "code": "{/* 선택 표시 체크 배지 */}"
+      },
+      {
+        "line": 203,
+        "code": "{/* 중앙 입장 CTA 버튼 (선택한 언어로 즉시 입장) */}"
+      },
+      {
+        "line": 223,
+        "code": "🇰🇷 한국어로 변경"
+      },
+      {
+        "line": 229,
+        "code": "{/* 하단 안심 보증 3대 뱃지 */}"
+      },
+      {
+        "line": 233,
+        "code": "<span>수수료 0원 외국인 안심 직거래</span>"
+      },
+      {
+        "line": 241,
+        "code": "<span>이지텍스 세금환급 원스톱 연계</span>"
+      }
+    ],
+    "components/admin/KMarketAdminAnalyticsDashboard.tsx": [
+      {
+        "line": 39,
+        "code": "{ name: '틱톡 (TikTok Shorts/바이럴)', category: 'sns', icon: '🎵', badge: '외국인 1위', color: '#0d9488' },"
+      },
+      {
+        "line": 40,
+        "code": "{ name: '페이스북 (외국인 커뮤니티 그룹)', category: 'sns', icon: '📘', badge: '베트남/몽골', color: '#3b82f6' },"
+      },
+      {
+        "line": 41,
+        "code": "{ name: '잘로 (Zalo 베트남 메신저)', category: 'messenger', icon: '💬', badge: '베트남 No.1', color: '#0284c7' },"
+      },
+      {
+        "line": 42,
+        "code": "{ name: '직접 방문 (Direct / 북마크)', category: 'search', icon: '🌐', color: '#845b37' },"
+      },
+      {
+        "line": 43,
+        "code": "{ name: '라인 (LINE 태국/동남아 채널)', category: 'messenger', icon: '🟢', badge: '태국/미얀마', color: '#16a34a' },"
+      },
+      {
+        "line": 44,
+        "code": "{ name: '텔레그램 (Telegram 우즈벡/러시아어)', category: 'messenger', icon: '✈️', badge: '중앙아시아', color: '#0ea5e9' },"
+      },
+      {
+        "line": 46,
+        "code": "{ name: '위챗 (WeChat 동포 네트워크)', category: 'messenger', icon: '💬', badge: '중국/동포', color: '#059669' },"
+      },
+      {
+        "line": 47,
+        "code": "{ name: '인스타그램 (Instagram 릴스)', category: 'sns', icon: '📸', color: '#db2777' },"
+      },
+      {
+        "line": 48,
+        "code": "{ name: '기숙사/쉼터 QR코드 오프라인', category: 'offline_ref', icon: '🏢', badge: '공단 현장', color: '#7c3aed' },"
+      },
+      {
+        "line": 49,
+        "code": "{ name: '구글 (Google 다국어 검색)', category: 'search', icon: '🔍', color: '#2563eb' },"
+      },
+      {
+        "line": 51,
+        "code": "{ name: '네이버 (블로그/카페)', category: 'search', icon: '🟢', color: '#059669' },"
+      },
+      {
+        "line": 52,
+        "code": "{ name: '지인 초대 (친구추천 링크)', category: 'offline_ref', icon: '🎁', color: '#d97706' },"
+      },
+      {
+        "line": 53,
+        "code": "{ name: '고용노동부 EPS 게시판', category: 'offline_ref', icon: '📢', color: '#4f46e5' },"
+      },
+      {
+        "line": 63,
+        "code": "growthRate: '기준년도 (런칭)',"
+      },
+      {
+        "line": 69,
+        "code": "growthRate: '+184% (YoY 성장)',"
+      },
+      {
+        "line": 75,
+        "code": "growthRate: '+240% (YoY 성장)',"
+      },
+      {
+        "line": 81,
+        "code": "growthRate: '+310% (YoY 성장)',"
+      },
+      {
+        "line": 104,
+        "code": "if (tpl.name.includes('틱톡')) key = 'tiktok';"
+      },
+      {
+        "line": 105,
+        "code": "else if (tpl.name.includes('페이스북')) key = 'facebook';"
+      },
+      {
+        "line": 107,
+        "code": "else if (tpl.name.includes('라인')) key = 'line';"
+      },
+      {
+        "line": 108,
+        "code": "else if (tpl.name.includes('텔레그램')) key = 'telegram';"
+      },
+      {
+        "line": 110,
+        "code": "else if (tpl.name.includes('인스타그램')) key = 'instagram';"
+      },
+      {
+        "line": 112,
+        "code": "else if (tpl.name.includes('카카오')) key = 'kakaotalk';"
+      },
+      {
+        "line": 114,
+        "code": "else if (tpl.name.includes('네이버')) key = 'naver';"
+      },
+      {
+        "line": 116,
+        "code": "else if (tpl.name.includes('고용노동부')) key = 'eps_gov';"
+      },
+      {
+        "line": 136,
+        "code": "const HOURS_24 = Array.from({ length: 24 }, (_, i) => `${i < 10 ? '0' + i : i}시`);"
+      },
+      {
+        "line": 144,
+        "code": "? ['8/16', '8/17', '8/18', '8/19', '8/20', '8/21', '오늘']"
+      },
+      {
+        "line": 146,
+        "code": "? ['1주차', '2주차', '3주차', '이번주']"
+      },
+      {
+        "line": 147,
+        "code": ": ['1분기', '2분기', '3분기', '4분기'];"
+      },
+      {
+        "line": 153,
+        "code": "const isCurrentQuarter = idx === 2; // 현재 분기 (3분기)"
+      },
+      {
+        "line": 210,
+        "code": "{/* 1. 대시보드 상단 타이틀 & 기간/연도 선택 탭 */}"
+      },
+      {
+        "line": 216,
+        "code": "실시간 유입 정밀 분석 &amp; 연도별(YoY) 비교 대시보드"
+      },
+      {
+        "line": 219,
+        "code": "{/* 연도 선택 셀렉터 */}"
+      },
+      {
+        "line": 221,
+        "code": "<span className=\"text-[11px] font-extrabold text-[#705e4f]\">기준 연도:</span>"
+      },
+      {
+        "line": 227,
+        "code": "<option value={2026}>2026년</option>"
+      },
+      {
+        "line": 228,
+        "code": "<option value={2027}>2027년 (내년)</option>"
+      },
+      {
+        "line": 230,
+        "code": "<option value={2029}>2029년</option>"
+      },
+      {
+        "line": 235,
+        "code": "{period === 'today' ? '오늘 24시간 실시간' : period === 'weekly' ? '주간 집계' : period === 'monthly' ? '한 달간' : `${selectedYear}년 연간`}"
+      },
+      {
+        "line": 239,
+        "code": "2026년~2027년 이후까지 연도별 실적 및 24시간 시간대별 트래픽을 정밀 비교할 수 있습니다."
+      },
+      {
+        "line": 243,
+        "code": "{/* 기간 필터 버튼 그룹 */}"
+      },
+      {
+        "line": 253,
+        "code": "<span>📅 오늘 (24시간)</span>"
+      },
+      {
+        "line": 263,
+        "code": "<span>📊 주간</span>"
+      },
+      {
+        "line": 273,
+        "code": "<span>📈 월간</span>"
+      },
+      {
+        "line": 283,
+        "code": "<span>🏆 연간 (Yearly/IR)</span>"
+      },
+      {
+        "line": 288,
+        "code": "{/* 2. 4대 KPI 핵심 지표 카드 */}"
+      },
+      {
+        "line": 290,
+        "code": "{/* 오늘 / 기준 PV */}"
+      },
+      {
+        "line": 293,
+        "code": "<span>{period === 'yearly' ? `${selectedYear}년 총 PV` : '오늘 페이지뷰 (PV)'}</span>"
+      },
+      {
+        "line": 299,
+        "code": "{totalLivePv.toLocaleString()} <span className=\"text-xs font-bold text-[#8c7866]\">회</span>"
+      },
+      {
+        "line": 301,
+        "code": "<p className=\"text-[10px] text-[#8c7866] mt-1 font-medium\">실시간 실제 누적 페이지뷰</p>"
+      },
+      {
+        "line": 304,
+        "code": "{/* 기간 누적 PV */}"
+      },
+      {
+        "line": 307,
+        "code": "<span>기간 누적 PV</span>"
+      },
+      {
+        "line": 313,
+        "code": "{totalLivePv.toLocaleString()} <span className=\"text-xs font-bold text-[#8c7866]\">회</span>"
+      },
+      {
+        "line": 315,
+        "code": "<p className=\"text-[10px] text-[#8c7866] mt-1 font-medium\">유입 경로를 통한 총 방문 합계</p>"
+      },
+      {
+        "line": 318,
+        "code": "{/* 연간 성장률 (YoY) */}"
+      },
+      {
+        "line": 321,
+        "code": "<span>연간 성장 지표 (YoY)</span>"
+      },
+      {
+        "line": 330,
+        "code": "<p className=\"text-[10px] text-[#8c7866] mt-1 font-medium\">{selectedYear - 1}년 대비 성장 분석</p>"
+      },
+      {
+        "line": 333,
+        "code": "{/* 활성 사용자 (MAU) */}"
+      },
+      {
+        "line": 336,
+        "code": "<span>활성 방문자 수</span>"
+      },
+      {
+        "line": 342,
+        "code": "{totalLivePv > 0 ? totalLivePv : 0} <span className=\"text-xs font-bold text-[#8c7866]\">명</span>"
+      },
+      {
+        "line": 344,
+        "code": "<p className=\"text-[10px] text-[#845b37] font-extrabold mt-1\">실시간 고유 방문자 측정</p>"
+      },
+      {
+        "line": 348,
+        "code": "{/* 3. 하단: [좌측 24시간 가로스크롤 차트] + [우측 순수 16대 채널별 유입 순위] */}"
+      },
+      {
+        "line": 350,
+        "code": "{/* 좌측 차트 영역 (6 cols) */}"
+      },
+      {
+        "line": 357,
+        "code": "? '오늘 24시간 시간대별 추이 (00시~23시)'"
+      },
+      {
+        "line": 359,
+        "code": "? '지난 7일간 일별 방문자 추이'"
+      },
+      {
+        "line": 361,
+        "code": "? '최근 4주간 주별 방문자 추이'"
+      },
+      {
+        "line": 362,
+        "code": ": `${selectedYear}년 분기별 실적 vs ${selectedYear - 1}년 비교 (YoY)`}"
+      },
+      {
+        "line": 366,
+        "code": "{/* 오늘(24시간)일 때 좌/우 시간대 퀵 스크롤 버튼 */}"
+      },
+      {
+        "line": 372,
+        "code": "title=\"새벽/오전 시간대로 이동\""
+      },
+      {
+        "line": 375,
+        "code": "<span>00~12시</span>"
+      },
+      {
+        "line": 380,
+        "code": "title=\"오후/밤 시간대로 이동\""
+      },
+      {
+        "line": 382,
+        "code": "<span>12~23시</span>"
+      },
+      {
+        "line": 388,
+        "code": "{/* 연간 모드일 때 전년도 비교 토글 버튼 */}"
+      },
+      {
+        "line": 398,
+        "code": "<span>🔄 전년도 비교 {compareYoY ? 'ON' : 'OFF'}</span>"
+      },
+      {
+        "line": 403,
+        "code": "{/* 24시간 가로 스크롤 바 차트 컨테이너 */}"
+      },
+      {
+        "line": 428,
+        "code": "{/* 상단 네온 형광 수치 배지 */}"
+      },
+      {
+        "line": 436,
+        "code": "{bar.value}회"
+      },
+      {
+        "line": 439,
+        "code": "{/* 연간 비교 모드일 때 듀얼 바 */}"
+      },
+      {
+        "line": 443,
+        "code": "title={`${selectedYear - 1}년 ${bar.label}: ${bar.prevValue || 0}회`}"
+      },
+      {
+        "line": 452,
+        "code": "{/* 선택 연도 / 당해 형광 바 */}"
+      },
+      {
+        "line": 454,
+        "code": "title={`${bar.label}: ${bar.value}회`}"
+      },
+      {
+        "line": 468,
+        "code": "{/* 하단 라벨 & 현재 시간대 배지 */}"
+      },
+      {
+        "line": 488,
+        "code": "👉 마우스 휠이나 터치로 좌우 스크롤하여 00시부터 23시까지 전체 시간대를 확인할 수 있습니다."
+      },
+      {
+        "line": 493,
+        "code": "<span className=\"w-2.5 h-2.5 rounded-xs bg-[#cbd5e1]\" /> {selectedYear - 1}년 실적"
+      },
+      {
+        "line": 496,
+        "code": "<span className=\"w-2.5 h-2.5 rounded-xs bg-[#10b981] shadow-2xs shadow-[#10b981]/50\" /> {selectedYear}년 실적 (형광)"
+      },
+      {
+        "line": 500,
+        "code": "<span>💡 {selectedYear}년도 유입 데이터가 실시간으로 집계 및 보존됩니다.</span>"
+      },
+      {
+        "line": 502,
+        "code": "<span className=\"font-bold text-[#10b981]\">기준: {period === 'today' ? '오늘 24H' : `${selectedYear}년`}</span>"
+      },
+      {
+        "line": 506,
+        "code": "{/* 우측: 16대 채널별 실제 유입 순위 (6 cols) */}"
+      },
+      {
+        "line": 512,
+        "code": "글로벌 16대 채널별 실제 유입 현황"
+      },
+      {
+        "line": 516,
+        "code": "{/* 채널 카테고리 필터 */}"
+      },
+      {
+        "line": 519,
+        "code": "{ id: 'all', label: '전체' },"
+      },
+      {
+        "line": 520,
+        "code": "{ id: 'sns', label: '글로벌 SNS' },"
+      },
+      {
+        "line": 521,
+        "code": "{ id: 'messenger', label: '국가별 메신저' },"
+      },
+      {
+        "line": 522,
+        "code": "{ id: 'offline_ref', label: '기관/QR' },"
+      },
+      {
+        "line": 539,
+        "code": "{/* 유입 채널 16종 스크롤 리스트 */}"
+      },
+      {
+        "line": 559,
+        "code": "<span className=\"font-black text-[#1f1914]\">{channel.count}회</span>"
+      },
+      {
+        "line": 564,
+        "code": "{/* 프로그레스 바 */}"
+      }
+    ],
+    "components/admin/KMarketAdminFeedbackTab.tsx": [
+      {
+        "line": 8,
+        "code": "translation_error: { label: '🌐 번역/언어 오류', icon: '🌐', color: 'bg-indigo-100 text-indigo-800 border-indigo-200' },"
+      },
+      {
+        "line": 9,
+        "code": "location_request: { label: '📍 공단/장소 추가', icon: '📍', color: 'bg-emerald-100 text-emerald-800 border-emerald-200' },"
+      },
+      {
+        "line": 10,
+        "code": "security_improve: { label: '🛡️ 사기방지 개선', icon: '🛡️', color: 'bg-rose-100 text-rose-800 border-rose-200' },"
+      },
+      {
+        "line": 12,
+        "code": "bug_report: { label: '📱 화면 렉/버그', icon: '📱', color: 'bg-red-100 text-red-800 border-red-200' },"
+      },
+      {
+        "line": 13,
+        "code": "general_suggestion: { label: '💬 기타 자유 건의', icon: '💬', color: 'bg-blue-100 text-blue-800 border-blue-200' },"
+      },
+      {
+        "line": 15,
+        "code": "feature: { label: '✨ 기능 제안', icon: '✨', color: 'bg-blue-100 text-blue-800 border-blue-200' },"
+      },
+      {
+        "line": 16,
+        "code": "praise: { label: '❤️ 칭찬/응원', icon: '❤️', color: 'bg-pink-100 text-pink-800 border-pink-200' },"
+      },
+      {
+        "line": 17,
+        "code": "other: { label: '💬 기타 자유 건의', icon: '💬', color: 'bg-gray-100 text-gray-800 border-gray-200' },"
+      },
+      {
+        "line": 58,
+        "code": "{/* 1. 상단 통계 바 */}"
+      },
+      {
+        "line": 66,
+        "code": "<span>유저 피드백 &amp; 개선 제안 (VOC 관제)</span>"
+      },
+      {
+        "line": 68,
+        "code": "{feedbacks.length}건 접수"
+      },
+      {
+        "line": 72,
+        "code": "외국인 유저들이 마이페이지에서 직접 남긴 건의사항 및 버그 제보를 실시간으로 모니터링합니다."
+      },
+      {
+        "line": 77,
+        "code": "{/* 카테고리 필터 드롭다운 */}"
+      },
+      {
+        "line": 85,
+        "code": "<option value=\"all\">전체 건의 유형 ({feedbacks.length})</option>"
+      },
+      {
+        "line": 86,
+        "code": "<option value=\"translation_error\">🌐 번역/언어 오류</option>"
+      },
+      {
+        "line": 87,
+        "code": "<option value=\"location_request\">📍 공단/장소 추가</option>"
+      },
+      {
+        "line": 88,
+        "code": "<option value=\"security_improve\">🛡️ 사기방지 개선</option>"
+      },
+      {
+        "line": 90,
+        "code": "<option value=\"bug_report\">📱 화면 렉/버그</option>"
+      },
+      {
+        "line": 91,
+        "code": "<option value=\"general_suggestion\">💬 기타 자유 건의</option>"
+      },
+      {
+        "line": 96,
+        "code": "{/* 2. 피드백 목록 또는 0건 Empty State */}"
+      },
+      {
+        "line": 104,
+        "code": "현재 접수된 유저 개선 건의사항이 없습니다. (0건)"
+      },
+      {
+        "line": 107,
+        "code": "외국인 유저가 마이페이지 내 [💡 앱 개선 제안하기]를 통해 의견을 남기면 이곳에 실시간으로 접수되어 나타납니다."
+      },
+      {
+        "line": 123,
+        "code": "{catInfo?.label || '피드백'}"
+      },
+      {
+        "line": 131,
+        "code": "{/* 건의 본문 내용 */}"
+      },
+      {
+        "line": 136,
+        "code": "{/* 작성자 및 연락처 */}"
+      },
+      {
+        "line": 143,
+        "code": "연락처: {fb.contact_info}"
+      },
+      {
+        "line": 149,
+        "code": "{/* 상태 관리 액션 바 */}"
+      },
+      {
+        "line": 161,
+        "code": "접수대기"
+      },
+      {
+        "line": 172,
+        "code": "검토중"
+      },
+      {
+        "line": 183,
+        "code": "반영완료"
+      },
+      {
+        "line": 191,
+        "code": "title=\"피드백 삭제\""
+      }
+    ],
+    "components/admin/KMarketAdminUsersTab.tsx": [
+      {
+        "line": 28,
+        "code": "visa_type: string;                 // 'E-9 (비전문취업)', 'E-7 (특정활동)', 'F-4 (재외동포)', 'H-2 (방문취업)', 'D-2 (유학)'"
+      },
+      {
+        "line": 29,
+        "code": "industrial_zone: string;          // '평택 포승공단', '안산 원곡동', '화성 향남공단' 등"
+      },
+      {
+        "line": 30,
+        "code": "arc_status: 'auto_verified' | 'pending_review' | 'unverified' | 'banned'; // AI 자동인증 완료, 수동심사 대기, 미인증, 차단"
+      },
+      {
+        "line": 32,
+        "code": "items_count: number;              // 등록 매물 수"
+      },
+      {
+        "line": 33,
+        "code": "trades_completed: number;          // 완료된 거래 수"
+      },
+      {
+        "line": 61,
+        "code": "alert(`[관리자 확인] \"${userName}\" 회원의 신분증(ARC)이 수동 승인 완료되었습니다.\\n- 신분인증 뱃지 부여\\n- 신뢰도 등급 상승`);"
+      },
+      {
+        "line": 66,
+        "code": "if (!confirm(`\"${userName}\" 회원의 신분증 인증을 취소(박탈)하시겠습니까?`)) return;"
+      },
+      {
+        "line": 70,
+        "code": "alert(`\"${userName}\" 회원의 신분인증이 취소되었습니다.`);"
+      },
+      {
+        "line": 79,
+        "code": "alert(`[차단 해제] \"${userName}\" 회원의 이용 정지가 해제되었습니다.`);"
+      },
+      {
+        "line": 81,
+        "code": "if (!confirm(`[경고] \"${userName}\" 회원을 블랙리스트로 등록하고 플랫폼 전체 이용을 차단하시겠습니까?`)) return;"
+      },
+      {
+        "line": 85,
+        "code": "alert(`[블랙리스트 등록 완료] \"${userName}\" 회원의 계정이 영구 정지되었습니다.\\n- 모든 매물 즉시 비공개\\n- 채팅 및 로그인 차단`);"
+      },
+      {
+        "line": 98,
+        "code": "alert(`[경고 발송] \"${userName}\" 회원에게 거래 주의 경고가 발송되었으며, 매너온도가 -3.0℃ 차감되었습니다.`);"
+      },
+      {
+        "line": 103,
+        "code": "{/* 통계 요약 카드 */}"
+      },
+      {
+        "line": 106,
+        "code": "<p className=\"text-[11px] font-bold text-slate-500\">총 외국인 회원</p>"
+      },
+      {
+        "line": 107,
+        "code": "<p className=\"text-xl font-black text-slate-900 mt-1\">{users.length}명</p>"
+      },
+      {
+        "line": 111,
+        "code": "<ShieldCheck className=\"w-3.5 h-3.5\" /> AI OCR 인증 완료"
+      },
+      {
+        "line": 114,
+        "code": "{users.filter((u) => u.arc_status === 'auto_verified').length}명"
+      },
+      {
+        "line": 119,
+        "code": "<Clock className=\"w-3.5 h-3.5\" /> 심사 대기 (빛반사 등)"
+      },
+      {
+        "line": 122,
+        "code": "{users.filter((u) => u.arc_status === 'pending_review').length}건"
+      },
+      {
+        "line": 127,
+        "code": "<Ban className=\"w-3.5 h-3.5\" /> 블랙리스트 차단"
+      },
+      {
+        "line": 130,
+        "code": "{users.filter((u) => u.arc_status === 'banned').length}명"
+      },
+      {
+        "line": 135,
+        "code": "{/* 필터 및 검색 바 */}"
+      },
+      {
+        "line": 146,
+        "code": "전체 ({users.length})"
+      },
+      {
+        "line": 157,
+        "code": "인증완료 ({users.filter((u) => u.arc_status === 'auto_verified').length})"
+      },
+      {
+        "line": 168,
+        "code": "심사대기 ({users.filter((u) => u.arc_status === 'pending_review').length})"
+      },
+      {
+        "line": 178,
+        "code": "미인증 ({users.filter((u) => u.arc_status === 'unverified').length})"
+      },
+      {
+        "line": 189,
+        "code": "차단회원 ({users.filter((u) => u.arc_status === 'banned').length})"
+      },
+      {
+        "line": 193,
+        "code": "{/* 검색 인풋 */}"
+      },
+      {
+        "line": 197,
+        "code": "placeholder=\"이름, 국적, 공단, 비자 검색...\""
+      },
+      {
+        "line": 206,
+        "code": "{/* 회원 테이블 */}"
+      },
+      {
+        "line": 211,
+        "code": "<th className=\"p-3.5\">회원 정보 / 국적</th>"
+      },
+      {
+        "line": 212,
+        "code": "<th className=\"p-3.5\">비자 & 체류자격</th>"
+      },
+      {
+        "line": 214,
+        "code": "<th className=\"p-3.5\">신분증(ARC) 상태</th>"
+      },
+      {
+        "line": 215,
+        "code": "<th className=\"p-3.5\">매너온도 / 거래</th>"
+      },
+      {
+        "line": 217,
+        "code": "<th className=\"p-3.5 text-right\">관리 액션</th>"
+      },
+      {
+        "line": 224,
+        "code": "조건에 일치하는 외국인 회원이 없습니다."
+      },
+      {
+        "line": 230,
+        "code": "{/* 1. 회원 정보 & 국적 */}"
+      },
+      {
+        "line": 252,
+        "code": "{/* 2. 비자 및 체류자격 */}"
+      },
+      {
+        "line": 259,
+        "code": "{/* 3. 거주 공단 */}"
+      },
+      {
+        "line": 267,
+        "code": "{/* 4. 신분증(ARC) OCR 인증 상태 */}"
+      },
+      {
+        "line": 272,
+        "code": "AI 자동인증 완료"
+      },
+      {
+        "line": 278,
+        "code": "심사 대기 (빛반사)"
+      },
+      {
+        "line": 283,
+        "code": "미인증"
+      },
+      {
+        "line": 289,
+        "code": "블랙리스트 차단"
+      },
+      {
+        "line": 294,
+        "code": "{/* 5. 매너온도 및 활동 통계 */}"
+      },
+      {
+        "line": 309,
+        "code": "매물 {user.items_count}건 • 거래 {user.trades_completed}회"
+      },
+      {
+        "line": 314,
+        "code": "{/* 6. 가입일 */}"
+      },
+      {
+        "line": 319,
+        "code": "{/* 7. 관리자 액션 버튼 그룹 */}"
+      },
+      {
+        "line": 321,
+        "code": "{/* 대기중일 때: 수동 승인 버튼 */}"
+      },
+      {
+        "line": 326,
+        "code": "title=\"관리자가 직접 확인 후 승인\""
+      },
+      {
+        "line": 329,
+        "code": "<span>수동 승인</span>"
+      },
+      {
+        "line": 333,
+        "code": "{/* 인증 완료 상태일 때: 인증 박탈/취소 */}"
+      },
+      {
+        "line": 338,
+        "code": "title=\"도용 의심 시 신분인증 취소\""
+      },
+      {
+        "line": 340,
+        "code": "인증 취소"
+      },
+      {
+        "line": 344,
+        "code": "{/* 경고 부여 (매너온도 차감) */}"
+      },
+      {
+        "line": 348,
+        "code": "title=\"비매너 경고 및 매너온도 -3℃ 차감\""
+      },
+      {
+        "line": 350,
+        "code": "경고"
+      },
+      {
+        "line": 353,
+        "code": "{/* 블랙리스트 차단 / 해제 */}"
+      },
+      {
+        "line": 361,
+        "code": "title={user.arc_status === 'banned' ? '차단 해제' : '영구 정지 및 블랙리스트 등록'}"
+      },
+      {
+        "line": 364,
+        "code": "<span>{user.arc_status === 'banned' ? '차단해제' : '차단'}</span>"
+      }
+    ],
+    "components/chat/KMarketScamInterventionBanner.tsx": [
+      {
+        "line": 69,
+        "code": "<span>즉시 사기 신고</span>"
+      }
+    ],
+    "components/common/InAppBrowserEscaper.tsx": [
+      {
+        "line": 54,
+        "code": "alert(trans.copyLinkBtn + ' 완료! 사파리(Safari) 주소창에 붙여넣어 주세요.');"
+      },
+      {
+        "line": 56,
+        "code": "alert('우측 상단 또는 하단의 메뉴(⋮ 또는 공유)를 누른 후 [Safari로 열기]를 선택해 주세요!');"
+      },
+      {
+        "line": 96,
+        "code": "title=\"닫기\""
+      }
+    ],
+    "components/common/KMarketPushNotificationManager.tsx": [
+      {
+        "line": 47,
+        "code": "실시간 거래 &amp; 키워드 알림 받기"
+      },
+      {
+        "line": 50,
+        "code": "채팅 도착 및 관심 매물 등록 시 즉시 알려드려요!"
+      },
+      {
+        "line": 61,
+        "code": "알림 켜기"
+      }
+    ],
+    "components/common/KMarketPwaInstallPrompt.tsx": [
+      {
+        "line": 59,
+        "code": "{/* 1. 화면 우측 하단 상시 플로팅 PWA 설치 배너 (15개국어 지원) */}"
+      },
+      {
+        "line": 62,
+        "code": "{/* 우측 상단 닫기 */}"
+      },
+      {
+        "line": 67,
+        "code": "title=\"닫기\""
+      },
+      {
+        "line": 73,
+        "code": "{/* 앱 로고 아이콘 */}"
+      },
+      {
+        "line": 98,
+        "code": "{/* 액션 버튼 바 */}"
+      },
+      {
+        "line": 120,
+        "code": "{/* 2. iOS Safari 전용 홈 화면 추가 안내 모달 */}"
+      },
+      {
+        "line": 143,
+        "code": "화면 하단 중앙의 <strong>[공유 버튼 <Share2 className=\"w-3.5 h-3.5 inline mx-0.5 text-sky-400\" />]</strong>을 누릅니다."
+      },
+      {
+        "line": 152,
+        "code": "메뉴에서 <strong>[홈 화면에 추가 <PlusSquare className=\"w-3.5 h-3.5 inline mx-0.5 text-amber-400\" />]</strong>를 선택하면 설치 완료!"
+      },
+      {
+        "line": 162,
+        "code": "확인했습니다"
+      }
+    ],
+    "components/common/KMarketWelcomeLanguageGateway.tsx": [
+      {
+        "line": 165,
+        "code": "{/* 상단 닫기 버튼 */}"
+      },
+      {
+        "line": 170,
+        "code": "aria-label=\"닫기\""
+      },
+      {
+        "line": 176,
+        "code": "{/* 헤더 안내 영역 (17개국어 실시간 반응) */}"
+      },
+      {
+        "line": 189,
+        "code": "{/* 16개국 외국인 모국어 그리드 (스크롤 가능) */}"
+      },
+      {
+        "line": 225,
+        "code": "{/* 하단: 한국어 바로가기 버튼 */}"
+      },
+      {
+        "line": 228,
+        "code": "<span>🇰🇷 한국인이신가요?</span>"
+      },
+      {
+        "line": 235,
+        "code": "한국어로 계속하기 ➔"
+      }
+    ],
+    "components/community/KMarketCommunityCreateModal.tsx": [
+      {
+        "line": 40,
+        "code": "alert('사진은 최대 5장까지만 등록 가능합니다.');"
+      },
+      {
+        "line": 52,
+        "code": "alert('사진 압축 중 오류가 발생했습니다.');"
+      },
+      {
+        "line": 66,
+        "code": "alert('제목과 내용을 입력해주세요.');"
+      },
+      {
+        "line": 82,
+        "code": "region: authedUser?.region || '경기 평택시',"
+      },
+      {
+        "line": 96,
+        "code": "{/* 닫기 버튼 */}"
+      },
+      {
+        "line": 110,
+        "code": "동네생활 글쓰기"
+      },
+      {
+        "line": 113,
+        "code": "15개국어로 자동 번역되어 동네 이웃들에게 따뜻하게 전해집니다."
+      },
+      {
+        "line": 118,
+        "code": "{/* 폼 영역 */}"
+      },
+      {
+        "line": 120,
+        "code": "{/* 1. 6대 카테고리 선택 칩 */}"
+      },
+      {
+        "line": 123,
+        "code": "카테고리 선택"
+      },
+      {
+        "line": 144,
+        "code": "{/* 2. 글 제목 */}"
+      },
+      {
+        "line": 147,
+        "code": "제목"
+      },
+      {
+        "line": 153,
+        "code": "placeholder=\"예: 이번 주말에 같이 밥 먹고 한국어 공부할 친구 구해요!\""
+      },
+      {
+        "line": 159,
+        "code": "{/* 3. 본문 내용 */}"
+      },
+      {
+        "line": 162,
+        "code": "내용"
+      },
+      {
+        "line": 168,
+        "code": "placeholder=\"솔직하고 따뜻한 이야기, 궁금한 점, 나누고 싶은 꿀팁을 편하게 적어주세요. (어떤 언어로 작성하셔도 15개국어로 자동 번역됩니다)\""
+      },
+      {
+        "line": 174,
+        "code": "{/* 4. 최대 5장 다중 사진 첨부 & 0.3초 실시간 자동 압축 뷰어 */}"
+      },
+      {
+        "line": 178,
+        "code": "<span>사진 첨부 (최대 5장)</span>"
+      },
+      {
+        "line": 181,
+        "code": "<span>0.3초 95% 고화질 자동 압축</span>"
+      },
+      {
+        "line": 190,
+        "code": "{/* 사진 추가 버튼 */}"
+      },
+      {
+        "line": 194,
+        "code": "<span className=\"text-[10px] font-bold text-slate-500\">사진 추가</span>"
+      },
+      {
+        "line": 206,
+        "code": "{/* 압축 진행 로더 */}"
+      },
+      {
+        "line": 210,
+        "code": "<span className=\"text-[9px] font-bold text-slate-500\">압축 중...</span>"
+      },
+      {
+        "line": 214,
+        "code": "{/* 압축된 사진 미리보기 썸네일 */}"
+      },
+      {
+        "line": 232,
+        "code": "title=\"사진 삭제\""
+      },
+      {
+        "line": 241,
+        "code": "{/* 5. 하단 등록 버튼 */}"
+      },
+      {
+        "line": 252,
+        "code": "<span>15개국어 자동 번역 생성 중...</span>"
+      },
+      {
+        "line": 257,
+        "code": "<span>15개국어 자동 번역으로 글 등록하기</span>"
+      },
+      {
+        "line": 268,
+        "code": "<span>1분 간편 인증(회원가입) 후 글 올리기 →</span>"
+      }
+    ],
+    "components/community/KMarketCommunityMain.tsx": [
+      {
+        "line": 35,
+        "code": "{/* 1. 상단 감성 웰컴 배너 (타향살이 힐링 & 친구 사귀기) */}"
+      },
+      {
+        "line": 47,
+        "code": "15개국어 실시간 소통"
+      },
+      {
+        "line": 51,
+        "code": "<span>언어 장벽 없이 내 모국어로 편하게</span>"
+      },
+      {
+        "line": 56,
+        "code": "<span>외국인 이웃들의 따뜻한 동네생활 &amp; 쉼터</span>"
+      },
+      {
+        "line": 61,
+        "code": "타향살이 외로움을 달래는 <strong>동네 친구 사귀기</strong>부터, 고향 가족 생각나는 <strong>사는 이야기</strong>,"
+      },
+      {
+        "line": 62,
+        "code": "궁금한 <strong>한국 생활 Q&amp;A</strong>까지 따뜻한 온기를 나누세요."
+      },
+      {
+        "line": 71,
+        "code": "{/* 2. 6대 카테고리 탭 바 (1번: 🤝 동네 친구 사귀기) & 글쓰기 버튼 */}"
+      },
+      {
+        "line": 74,
+        "code": "{/* 전체 탭 */}"
+      },
+      {
+        "line": 83,
+        "code": "전체 보기"
+      },
+      {
+        "line": 86,
+        "code": "{/* 6대 카테고리 버튼들 */}"
+      },
+      {
+        "line": 103,
+        "code": "{/* 글쓰기 CTA 버튼 */}"
+      },
+      {
+        "line": 109,
+        "code": "<span>동네생활 글쓰기</span>"
+      },
+      {
+        "line": 113,
+        "code": "{/* 3. 게시글 목록 피드 */}"
+      },
+      {
+        "line": 129,
+        "code": "해당 카테고리에 아직 작성된 글이 없습니다."
+      },
+      {
+        "line": 132,
+        "code": "첫 번째로 동네 친구를 사귀거나 따뜻한 이야기를 올려보세요!"
+      },
+      {
+        "line": 140,
+        "code": "<span>첫 이야기 작성하기</span>"
+      },
+      {
+        "line": 145,
+        "code": "{/* 4. 모달들 마운트 */}"
+      }
+    ],
+    "components/community/KMarketCommunityPostCard.tsx": [
+      {
+        "line": 68,
+        "code": "{/* 1. 상단 작성자 정보 & 카테고리 뱃지 & 더보기 메뉴 */}"
+      },
+      {
+        "line": 94,
+        "code": "{/* 6대 카테고리 뱃지 */}"
+      },
+      {
+        "line": 102,
+        "code": "{/* 더보기 / 신고 버튼 */}"
+      },
+      {
+        "line": 124,
+        "code": "<span>신고 / 차단</span>"
+      },
+      {
+        "line": 132,
+        "code": "{/* 2. 글 제목 및 본문 */}"
+      },
+      {
+        "line": 141,
+        "code": "{/* 15개국어 번역 토글 뱃지 */}"
+      },
+      {
+        "line": 152,
+        "code": "<span>{showOriginal ? '🌐 번역문 보기 (Gemini AI)' : '🇰🇷 원문 보기'}</span>"
+      },
+      {
+        "line": 158,
+        "code": "{/* 3. 최대 5장 이미지 썸네일 그리드 (있을 경우) */}"
+      },
+      {
+        "line": 181,
+        "code": "+{post.images.length - 4}장"
+      },
+      {
+        "line": 190,
+        "code": "{/* 4. 하단 감성 리액션 (공감해요 / 힘내세요 / 댓글수 / 조회수) */}"
+      },
+      {
+        "line": 193,
+        "code": "{/* ❤️ 공감해요 버튼 */}"
+      },
+      {
+        "line": 197,
+        "code": "title=\"공감해요\""
+      },
+      {
+        "line": 203,
+        "code": "{/* ☕ 힘내세요 / 위로 버튼 */}"
+      },
+      {
+        "line": 207,
+        "code": "title=\"힘내세요 / 응원해요\""
+      },
+      {
+        "line": 210,
+        "code": "<span>힘내요 {post.cheer_count}</span>"
+      },
+      {
+        "line": 213,
+        "code": "{/* 💬 댓글 수 */}"
+      }
+    ],
+    "components/community/KMarketCommunityPostDetailModal.tsx": [
+      {
+        "line": 100,
+        "code": "{/* 닫기 버튼 */}"
+      },
+      {
+        "line": 108,
+        "code": "{/* 모달 스크롤 본문 */}"
+      },
+      {
+        "line": 110,
+        "code": "{/* 1. 상단 작성자 정보 & 6대 카테고리 뱃지 */}"
+      },
+      {
+        "line": 141,
+        "code": "{/* 메뉴 */}"
+      },
+      {
+        "line": 156,
+        "code": "<span>신고하기</span>"
+      },
+      {
+        "line": 164,
+        "code": "{/* 2. 글 제목 & 15개국어 번역 토글 */}"
+      },
+      {
+        "line": 174,
+        "code": "<span>{showOriginal ? '🌐 번역문 보기 (Gemini AI)' : '🇰🇷 원문 보기'}</span>"
+      },
+      {
+        "line": 178,
+        "code": "{/* 3. 최대 5장 고화질 이미지 슬라이더 (있을 경우) */}"
+      },
+      {
+        "line": 212,
+        "code": "{/* 4. 본문 내용 */}"
+      },
+      {
+        "line": 217,
+        "code": "{/* 5. 감성 리액션 버튼 바 */}"
+      },
+      {
+        "line": 224,
+        "code": "<span>공감해요 ({selectedPost.like_count})</span>"
+      },
+      {
+        "line": 232,
+        "code": "<span>힘내세요 ({selectedPost.cheer_count})</span>"
+      },
+      {
+        "line": 236,
+        "code": "{/* 6. 댓글 섹션 (15개국어 실시간 번역) */}"
+      },
+      {
+        "line": 240,
+        "code": "<span>댓글 ({comments.length})</span>"
+      },
+      {
+        "line": 246,
+        "code": "댓글을 불러오는 중..."
+      },
+      {
+        "line": 274,
+        "code": "title=\"댓글 신고\""
+      },
+      {
+        "line": 289,
+        "code": "첫 번째 따뜻한 댓글을 남겨보세요!"
+      },
+      {
+        "line": 296,
+        "code": "{/* 7. 하단 댓글 작성창 (비회원 시 로그인 유도) */}"
+      },
+      {
+        "line": 304,
+        "code": "placeholder=\"따뜻한 응원이나 답변을 남겨보세요 (15개국어 자동번역)...\""
+      },
+      {
+        "line": 313,
+        "code": "<span>등록</span>"
+      },
+      {
+        "line": 323,
+        "code": "<span>댓글을 남기려면 1분 간편 인증(회원가입)이 필요합니다 →</span>"
+      }
+    ],
+    "components/community/KMarketCommunityReportModal.tsx": [
+      {
+        "line": 8,
+        "code": "{ id: 'nsfw', label: '🔞 음란물 / 선정적인 사진 / 성인물' },"
+      },
+      {
+        "line": 9,
+        "code": "{ id: 'spam', label: '🚫 불법 광고 / 스팸 / 도박 홍보' },"
+      },
+      {
+        "line": 10,
+        "code": "{ id: 'abuse', label: '🤬 욕설 / 혐오 발언 / 비매너 / 성희롱' },"
+      },
+      {
+        "line": 11,
+        "code": "{ id: 'illegal', label: '⚠️ 불법 취업 알선 / 브로커 / 사기 의심' },"
+      },
+      {
+        "line": 12,
+        "code": "{ id: 'fake', label: '📢 거짓 정보 / 허위 사실 유포' },"
+      },
+      {
+        "line": 30,
+        "code": "alert('신고가 정상 접수되었습니다. 해당 게시물/댓글은 즉시 숨김 처리되었습니다.');"
+      },
+      {
+        "line": 47,
+        "code": "<h3 className=\"text-base font-black\">신고 및 차단하기</h3>"
+      },
+      {
+        "line": 51,
+        "code": "신고된 내용은 24시간 관리자 관제 센터로 즉시 전송되며, 검토 후 해당 사용자는 영구 퇴출 처리됩니다."
+      },
+      {
+        "line": 57,
+        "code": "신고 사유 선택"
+      },
+      {
+        "line": 85,
+        "code": "상세 사유 (선택)"
+      },
+      {
+        "line": 91,
+        "code": "placeholder=\"자세한 사유를 적어주시면 빠른 조치에 도움이 됩니다.\""
+      },
+      {
+        "line": 101,
+        "code": "{isSubmitting ? '접수 중...' : '🚨 신고 접수 및 차단'}"
+      }
+    ],
+    "components/kmarket/CountryFlag.tsx": [
+      {
+        "line": 7,
+        "code": "countryCode?: string; // VN, MN, TH, NP, UZ, KH, LK, KR, MM, PH, ID, BD, CN, RU 등"
+      }
+    ],
+    "components/kmarket/KMarketAdminReportModal.tsx": [
+      {
+        "line": 32,
+        "code": "reporter_name: '김철수 (대한민국)',"
+      },
+      {
+        "line": 34,
+        "code": "target_user_name: 'Nguyen Van A (베트남)',"
+      },
+      {
+        "line": 36,
+        "code": "item_title: '아이폰 15 프로 미개봉 (10만원 헐값)',"
+      },
+      {
+        "line": 38,
+        "code": "details: '카카오톡으로 먼저 5만원 입금하면 택배로 보내준다고 유도함. 전형적인 선입금 사기 의심.',"
+      },
+      {
+        "line": 41,
+        "code": "created_at: '방금 전 (10분 전)',"
+      },
+      {
+        "line": 46,
+        "code": "reporter_name: 'Lê Thị Mai (베트남)',"
+      },
+      {
+        "line": 48,
+        "code": "target_user_name: 'Somchai (태국)',"
+      },
+      {
+        "line": 50,
+        "code": "item_title: '쿠쿠 전기밥솥 6인용',"
+      },
+      {
+        "line": 52,
+        "code": "details: '포승공단 GS25 앞에서 19시에 만나기로 약속해놓고 1시간 동안 나타나지 않고 연락 두절됨.',"
+      },
+      {
+        "line": 55,
+        "code": "created_at: '1시간 전',"
+      },
+      {
+        "line": 60,
+        "code": "reporter_name: 'Batbayar (몽골)',"
+      },
+      {
+        "line": 62,
+        "code": "target_user_name: 'John Doe (필리핀)',"
+      },
+      {
+        "line": 64,
+        "code": "item_title: '중고 자전거 26인치',"
+      },
+      {
+        "line": 66,
+        "code": "details: '네고 거절하자 채팅으로 심한 욕설과 비속어를 사용함.',"
+      },
+      {
+        "line": 69,
+        "code": "created_at: '어제',"
+      },
+      {
+        "line": 84,
+        "code": "alert(`[관리자 승인] \"${rep.target_user_name}\" 회원이 [플랫폼 영구 제재] 처리되었습니다.\\n- 모든 매물 즉시 비공개\\n- 로그인 및 1:1 채팅 차단`);"
+      },
+      {
+        "line": 88,
+        "code": "alert(`[관리자 승인] \"${rep.target_user_name}\" 회원이 [7일 거래 정지] 처리되었습니다.`);"
+      },
+      {
+        "line": 92,
+        "code": "alert(`[관리자 승인] 불량 매물 \"${rep.item_title}\" 이(가) 강제 삭제되었습니다.`);"
+      },
+      {
+        "line": 96,
+        "code": "alert(`[관리자 기각] 허위 신고로 확인되어 해당 건을 기각 처리했습니다.`);"
+      },
+      {
+        "line": 114,
+        "code": "{/* 관리자 헤더 */}"
+      },
+      {
+        "line": 122,
+        "code": "<span>KTRS K-Market 안전 관리자 관제 콘솔</span>"
+      },
+      {
+        "line": 125,
+        "code": "<span>신고 접수 내역 & 회원 제재 관리</span>"
+      },
+      {
+        "line": 127,
+        "code": "미처리 {reports.filter((r) => r.status === 'pending').length}건"
+      },
+      {
+        "line": 141,
+        "code": "{/* 필터 탭 바 */}"
+      },
+      {
+        "line": 152,
+        "code": "전체 보기 ({reports.length})"
+      },
+      {
+        "line": 162,
+        "code": "🚨 미처리 대기중 ({reports.filter((r) => r.status === 'pending').length})"
+      },
+      {
+        "line": 172,
+        "code": "✅ 조치 완료 ({reports.filter((r) => r.status !== 'pending').length})"
+      },
+      {
+        "line": 177,
+        "code": "관리자 확인 후 플랫폼 영구 제재 시 즉시 로그인 및 거래가 차단됩니다."
+      },
+      {
+        "line": 181,
+        "code": "{/* 신고 접수 리스트 */}"
+      },
+      {
+        "line": 187,
+        "code": "현재 대기 중인 신고 건이 없습니다."
+      },
+      {
+        "line": 190,
+        "code": "모든 회원이 안전하게 거래 중입니다."
+      },
+      {
+        "line": 218,
+        "code": "? '🚨 심사 대기'"
+      },
+      {
+        "line": 220,
+        "code": "? '🚫 영구 제재됨'"
+      },
+      {
+        "line": 222,
+        "code": "? '⚠️ 7일 정지'"
+      },
+      {
+        "line": 223,
+        "code": ": '✅ 기각/완료'}"
+      },
+      {
+        "line": 227,
+        "code": "신고 접수 번호: #{rep.id}"
+      },
+      {
+        "line": 233,
+        "code": "신고자: <strong>{rep.reporter_name}</strong>"
+      },
+      {
+        "line": 237,
+        "code": "{/* 신고 내용 상세 박스 */}"
+      },
+      {
+        "line": 241,
+        "code": "<span className=\"text-slate-500\">피신고 대상자: </span>"
+      },
+      {
+        "line": 248,
+        "code": "<span className=\"text-slate-500\">관련 매물: </span>"
+      },
+      {
+        "line": 256,
+        "code": "신고 사유: {rep.reason_type}"
+      },
+      {
+        "line": 264,
+        "code": "{/* 관리자 제재 액션 툴바 */}"
+      },
+      {
+        "line": 271,
+        "code": "신고 기각 (무혐의)"
+      },
+      {
+        "line": 279,
+        "code": "<span>매물 강제 삭제</span>"
+      },
+      {
+        "line": 287,
+        "code": "<span>7일 이용 정지</span>"
+      },
+      {
+        "line": 295,
+        "code": "<span>🚨 플랫폼 영구 제재 (Ban)</span>"
+      }
+    ],
+    "components/kmarket/KMarketAppointmentModal.tsx": [
+      {
+        "line": 36,
+        "code": "const [baseAddress, setBaseAddress] = useState(defaultRegion || '경기 안산시 단원구 원곡동 795');"
+      },
+      {
+        "line": 38,
+        "code": "const [customTimeText, setCustomTimeText] = useState<string>('오늘 저녁 19:00');"
+      },
+      {
+        "line": 67,
+        "code": "const fallback = `위치 지정됨 (위도: ${lat.toFixed(4)}, 경도: ${lng.toFixed(4)})`;"
+      },
+      {
+        "line": 163,
+        "code": "alert('위치 정보(GPS)를 지원하지 않는 브라우저입니다.');"
+      },
+      {
+        "line": 185,
+        "code": "alert('위치 권한을 허용해 주시거나 지도 위를 직접 클릭하여 핀을 이동해 주세요.');"
+      },
+      {
+        "line": 239,
+        "code": "landmark_detail: landmarkDetail.trim() || '지정 직거래 만남 장소',"
+      },
+      {
+        "line": 243,
+        "code": "meet_time: customTimeText.trim() || '오늘 저녁 19:00',"
+      },
+      {
+        "line": 263,
+        "code": "{ label: '오늘 저녁 19:00' },"
+      },
+      {
+        "line": 264,
+        "code": "{ label: '오늘 밤 20:30' },"
+      },
+      {
+        "line": 265,
+        "code": "{ label: '내일 점심 12:30' },"
+      },
+      {
+        "line": 272,
+        "code": "{/* 모달 상단 헤더 (시그니처 딥 에스프레소 & 골드) */}"
+      },
+      {
+        "line": 282,
+        "code": "<span>📍 1:1 안심 직거래 약속</span>"
+      },
+      {
+        "line": 286,
+        "code": "<span>만남 장소 핀 잡기 &amp; 시간 정하기</span>"
+      },
+      {
+        "line": 289,
+        "code": "지도를 클릭하거나 핀을 끌어 만날 위치를 콕 찍고 상세 장소를 적어주세요."
+      },
+      {
+        "line": 293,
+        "code": "{/* 폼 본문 영역 */}"
+      },
+      {
+        "line": 295,
+        "code": "{/* 1. 주소 및 만남 장소 입력 바 */}"
+      },
+      {
+        "line": 300,
+        "code": "<span>1. 기본 도로명 / 동네 주소</span>"
+      },
+      {
+        "line": 303,
+        "code": "{/* GPS 내 위치 자동완성 버튼 */}"
+      },
+      {
+        "line": 309,
+        "code": "title=\"현재 내 위치로 주소 & 핀 자동 세팅\""
+      },
+      {
+        "line": 314,
+        "code": "<span>위치 확인중...</span>"
+      },
+      {
+        "line": 319,
+        "code": "<span>📍 내 위치로 핀 이동</span>"
+      },
+      {
+        "line": 325,
+        "code": "{/* 도로명 주소 검색창 */}"
+      },
+      {
+        "line": 339,
+        "code": "placeholder=\"도로명/동네 주소 검색 또는 지도에서 핀을 직접 클릭하세요\""
+      },
+      {
+        "line": 351,
+        "code": "<span>주소 검색</span>"
+      },
+      {
+        "line": 355,
+        "code": "{/* 고객 직접 입력 상세 장소명 */}"
+      },
+      {
+        "line": 358,
+        "code": "<span>2. 상세 만남 장소명 (고객 직접 입력)</span>"
+      },
+      {
+        "line": 359,
+        "code": "<span className=\"text-[10px] text-[#845b37] font-bold\">편의점 앞, 기숙사 정문, 3번 출구 등</span>"
+      },
+      {
+        "line": 365,
+        "code": "placeholder=\"예: GS25 편의점 앞 / 기숙사 2동 경비실 앞 / 정문 시계탑\""
+      },
+      {
+        "line": 371,
+        "code": "{/* 2. 실제 인터랙티브 지도 (클릭/드래그로 핀 직접 이동) */}"
+      },
+      {
+        "line": 376,
+        "code": "<span>👇 지도를 클릭하거나 핀을 끌어당겨 원하는 만남 장소에 콕 찍으세요!</span>"
+      },
+      {
+        "line": 383,
+        "code": "{/* 좌측 상단: 실시간 핀 주소 배지 */}"
+      },
+      {
+        "line": 387,
+        "code": "<span>만남 지정 핀 위치</span>"
+      },
+      {
+        "line": 394,
+        "code": "{/* 우측 하단 안내 툴팁 */}"
+      },
+      {
+        "line": 396,
+        "code": "🖱️ 지도 클릭 / 핀 드래그로 이동"
+      },
+      {
+        "line": 401,
+        "code": "{/* 3. 만남 날짜 & 시간 텍스트 직접 입력 */}"
+      },
+      {
+        "line": 406,
+        "code": "<span>3. 만남 시간 직접 입력 (Meetup Time)</span>"
+      },
+      {
+        "line": 409,
+        "code": "자유롭게 직접 텍스트 입력 가능"
+      },
+      {
+        "line": 418,
+        "code": "placeholder=\"예: 오늘 저녁 19:30, 내일 토요일 오후 2시, 일요일 점심 등\""
+      },
+      {
+        "line": 424,
+        "code": "{/* 빠른 추천 시간 퀵 칩 */}"
+      },
+      {
+        "line": 443,
+        "code": "{/* 4. 1시간 전 모국어 자동 알림 리마인더 */}"
+      },
+      {
+        "line": 451,
+        "code": "⏰ 약속 1시간 전 모국어 자동 푸시 알림"
+      },
+      {
+        "line": 454,
+        "code": "약속을 잊지 않도록 상대방과 나에게 각자의 언어로 1시간 전에 알려드립니다."
+      },
+      {
+        "line": 467,
+        "code": "{/* 제출 버튼 */}"
+      },
+      {
+        "line": 473,
+        "code": "<span>약속 핀 저장하고 상대방에게 전송하기</span>"
+      }
+    ],
+    "components/kmarket/KMarketAuthModal.tsx": [
+      {
+        "line": 47,
+        "code": "const [visaType, setVisaType] = useState('E-9 (비전문취업)');"
+      },
+      {
+        "line": 66,
+        "code": "alert('사용 중인 브라우저에서 위치 정보(GPS)를 지원하지 않습니다. 수기로 입력해 주세요.');"
+      },
+      {
+        "line": 95,
+        "code": "setDormitory(`위치 확인됨 (위도: ${latitude.toFixed(3)}, 경도: ${longitude.toFixed(3)})`);"
+      },
+      {
+        "line": 102,
+        "code": "alert('브라우저 상단 주소창에서 [위치 정보 권한]을 [허용]해 주시거나 주소를 직접 입력해 주세요.');"
+      },
+      {
+        "line": 104,
+        "code": "alert('GPS 위치를 수신할 수 없습니다. 주소를 직접 입력해 주세요.');"
+      },
+      {
+        "line": 115,
+        "code": "const adjectives = ['친절한', '따뜻한', '행복한', '스마일', '안심', '긍정', '희망', '동네'];"
+      },
+      {
+        "line": 116,
+        "code": "const nouns = ['호랑이', '친구', '이웃', '라이더', '마켓러', '토끼', '곰돌이', '판다', '메이트'];"
+      },
+      {
+        "line": 150,
+        "code": "alert('올바른 휴대폰 번호를 입력해 주세요.');"
+      },
+      {
+        "line": 159,
+        "code": "receiverName: userName || '외국인 회원',"
+      },
+      {
+        "line": 166,
+        "code": "alert(`[알리고 SMS] 인증번호 [${res.authCode}]가 발송되었습니다.`);"
+      },
+      {
+        "line": 199,
+        "code": "const finalNickname = (nickname.trim() || userName.trim() || 'K-이웃').slice(0, 15);"
+      },
+      {
+        "line": 222,
+        "code": "{/* 모달 헤더 - 딥 네이비 & 2px 골드 라인 */}"
+      },
+      {
+        "line": 231,
+        "code": "{/* 미세한 골드 앰비언트 글로우 */}"
+      },
+      {
+        "line": 241,
+        "code": "<span>15개국어 외국인 신원인증 &amp; 가입</span>"
+      },
+      {
+        "line": 244,
+        "code": "외국인 안심 간편가입"
+      },
+      {
+        "line": 257,
+        "code": "{/* 1. OCR vs 직접입력 탭 바 (앱 시그니처 웜톤 라떼 & 에스프레소) */}"
+      },
+      {
+        "line": 271,
+        "code": "<span>등록증 OCR (+7.0℃ &amp; 상단노출 🚀)</span>"
+      },
+      {
+        "line": 286,
+        "code": "<span>수기 입력 (기본 36.5℃)</span>"
+      },
+      {
+        "line": 290,
+        "code": "{/* 모달 본문 영역 */}"
+      },
+      {
+        "line": 292,
+        "code": "{/* STEP 1: 폼 입력 단계 */}"
+      },
+      {
+        "line": 295,
+        "code": "{/* OCR 탭일 때: 매너온도 +7.0℃ & 최상단 노출 혜택 강조 배너 + 촬영 박스 */}"
+      },
+      {
+        "line": 298,
+        "code": "{/* 🔥 매너온도 43.5℃ & 앱 최상단 우선 노출 파격 혜택 하이라이트 카드 (품격있는 웜톤 골드) */}"
+      },
+      {
+        "line": 304,
+        "code": "실물 신분증 OCR 촬영 시 3대 특별 혜택"
+      },
+      {
+        "line": 308,
+        "code": "+7.0℃ 즉시 가산"
+      },
+      {
+        "line": 316,
+        "code": "<p className=\"font-black text-[#3d2817]\">매너온도 43.5℃ 골드 등급</p>"
+      },
+      {
+        "line": 317,
+        "code": "<p className=\"text-[#705e4f] text-[10px] mt-0.5\">가입 즉시 +7.0℃ 상승하여 최우수 안심 회원 뱃지 부여</p>"
+      },
+      {
+        "line": 324,
+        "code": "<p className=\"font-black text-[#845b37]\">내 매물 앱 최상단 우선 노출</p>"
+      },
+      {
+        "line": 325,
+        "code": "<p className=\"text-[#705e4f] text-[10px] mt-0.5\">신뢰도가 높아 구매자에게 먼저 추천되어 3배 빠른 판매 성사!</p>"
+      },
+      {
+        "line": 339,
+        "code": "{/* 카메라 촬영 / 업로드 드롭존 (에스프레소 & 웜 모카) */}"
+      },
+      {
+        "line": 352,
+        "code": "Gemini Vision AI가 신분증 판독 중 (0.5초)..."
+      },
+      {
+        "line": 355,
+        "code": "이름, 외국인등록번호, 비자, 만료일을 자동 추출하고 있습니다."
+      },
+      {
+        "line": 366,
+        "code": "✅ 실물 등록증 OCR 인증 성공!"
+      },
+      {
+        "line": 369,
+        "code": "매너온도 43.5℃ &amp; 상단노출 확정 👑"
+      },
+      {
+        "line": 377,
+        "code": "다시 촬영"
+      },
+      {
+        "line": 387,
+        "code": "외국인등록증 앞면 사진 촬영하기"
+      },
+      {
+        "line": 390,
+        "code": "카메라로 0.5초 비추면 자동 입력 &amp; <strong className=\"text-[#3d2817]\">매너온도 즉시 43.5℃(골드)</strong> 획득!"
+      },
+      {
+        "line": 398,
+        "code": "<span>카메라 열기 / 신분증 촬영하고 43.5℃ 받기 ⚡</span>"
+      },
+      {
+        "line": 406,
+        "code": "{/* 활동 닉네임 / 별명 입력란 (중고거래 & 동네생활 표시용) */}"
+      },
+      {
+        "line": 410,
+        "code": "<span>🌟 활동 닉네임 / 별명 (Nickname)</span>"
+      },
+      {
+        "line": 411,
+        "code": "<span className=\"text-[10px] text-[#845b37] font-bold bg-[#ede2d6] px-1.5 py-0.5 rounded-md\">필수</span>"
+      },
+      {
+        "line": 417,
+        "code": "title=\"센스 있는 별명 자동 추천\""
+      },
+      {
+        "line": 419,
+        "code": "<span>🎲 랜덤 별명 추천</span>"
+      },
+      {
+        "line": 427,
+        "code": "placeholder=\"예: 안산호랑이, 베트남마켓, 평택친구 (2~15자)\""
+      },
+      {
+        "line": 432,
+        "code": "💡 중고거래 채팅과 동네생활 커뮤니티에서 이웃들에게 보여질 친근한 별명을 지어보세요!"
+      },
+      {
+        "line": 436,
+        "code": "{/* 기본 정보 입력창 (OCR 시 자동 채워짐) */}"
+      },
+      {
+        "line": 440,
+        "code": "영문 실명 (Passport Name)"
+      },
+      {
+        "line": 446,
+        "code": "placeholder=\"예: NGUYEN VAN DUC\""
+      },
+      {
+        "line": 453,
+        "code": "외국인등록번호 (13자리)"
+      },
+      {
+        "line": 459,
+        "code": "placeholder=\"예: 950821-5184920\""
+      },
+      {
+        "line": 466,
+        "code": "비자 종류 (Visa Status)"
+      },
+      {
+        "line": 472,
+        "code": "placeholder=\"예: E-9 (비전문취업)\""
+      },
+      {
+        "line": 479,
+        "code": "체류 만료일 (Expiry Date)"
+      },
+      {
+        "line": 490,
+        "code": "{/* 통신사 드롭다운 및 휴대폰 번호 입력 (알리고 SMS 본인확인용) */}"
+      },
+      {
+        "line": 494,
+        "code": "<span>통신사 선택 및 휴대폰 번호 (알리고 SMS 본인인증)</span>"
+      },
+      {
+        "line": 497,
+        "code": "{/* 통신사 드롭다운 셀렉트 */}"
+      },
+      {
+        "line": 504,
+        "code": "<option value=\"SKT_MVNO\">📱 SKT 알뜰폰 (선불폰 / 후불폰)</option>"
+      },
+      {
+        "line": 505,
+        "code": "<option value=\"KT_MVNO\">📱 KT 알뜰폰 (선불폰 / 후불폰)</option>"
+      },
+      {
+        "line": 506,
+        "code": "<option value=\"LGU_MVNO\">📱 LGU+ 알뜰폰 (선불폰 / 후불폰)</option>"
+      },
+      {
+        "line": 508,
+        "code": "<option value=\"KT\">🏢 KT (케이티 공식)</option>"
+      },
+      {
+        "line": 509,
+        "code": "<option value=\"LGU\">🏢 LG유플러스 (LGU+ 공식)</option>"
+      },
+      {
+        "line": 528,
+        "code": "{isSmsSending ? '발송중...' : '인증번호 받기'}"
+      },
+      {
+        "line": 533,
+        "code": "{/* 실제 거주 주소 (동네 / 도로명 주소) - GPS 내 위치 자동완성 지원 */}"
+      },
+      {
+        "line": 538,
+        "code": "<span>📍 실제 거주 주소 (동네 / 도로명 주소)</span>"
+      },
+      {
+        "line": 545,
+        "code": "title=\"현재 스마트폰/브라우저 위치로 주소 자동입력\""
+      },
+      {
+        "line": 550,
+        "code": "<span>위치 확인중...</span>"
+      },
+      {
+        "line": 554,
+        "code": "<span>📍 내 위치 동의하고 자동입력</span>"
+      },
+      {
+        "line": 566,
+        "code": "placeholder=\"[📍 내 위치 동의하고 자동입력] 버튼을 누르거나 직접 입력하세요\""
+      },
+      {
+        "line": 571,
+        "code": "반경 5km 설정"
+      },
+      {
+        "line": 577,
+        "code": "<span>💡 내 위치를 기반으로 가까운 공단/동네 이웃과의 직거래 매물이 우선 표시됩니다.</span>"
+      },
+      {
+        "line": 583,
+        "code": "{/* STEP 2: 알리고 SMS 6자리 인증번호 입력 단계 */}"
+      },
+      {
+        "line": 592,
+        "code": "알리고 SMS 6자리 인증번호 입력"
+      },
+      {
+        "line": 595,
+        "code": "<strong>{phone}</strong> 번호로 발송된 6자리 번호를 입력해 주세요."
+      },
+      {
+        "line": 605,
+        "code": "placeholder=\"인증번호 6자리\""
+      },
+      {
+        "line": 623,
+        "code": "이전 단계"
+      },
+      {
+        "line": 629,
+        "code": "인증 확인 완료"
+      },
+      {
+        "line": 635,
+        "code": "{/* STEP 3: 가입 및 신원인증 완료 단계 */}"
+      },
+      {
+        "line": 644,
+        "code": "KTRS K-Market 신원 인증 완료!"
+      },
+      {
+        "line": 647,
+        "code": "{nickname || userName} 님, 환영합니다!"
+      },
+      {
+        "line": 650,
+        "code": "{authTab === 'ocr' ? '실물 신분증 OCR 검증' : '수기 인증'} 및 휴대폰 본인인증이 완료되어 <strong className=\"text-[#3d2817]\">골드 신뢰 뱃지(매너온도 43.5℃)</strong>가 발급되었습니다."
+      },
+      {
+        "line": 654,
+        "code": "{/* KTRS 184만원 세금 환급 연계 혜택 알림 */}"
+      },
+      {
+        "line": 658,
+        "code": "<span>KTRS 이지텍스 특별 연계 혜택</span>"
+      },
+      {
+        "line": 661,
+        "code": "인증하신 외국인등록번호로 <strong className=\"text-[#3d2817]\">예상 세금 환급액 184만원</strong>을 선결제 0원 (후불결제)로 즉시 신청하실 수 있습니다."
+      },
+      {
+        "line": 670,
+        "code": "K-Market 중고거래 시작하기"
+      }
+    ],
+    "components/kmarket/KMarketCategoryNav.tsx": [
+      {
+        "line": 26,
+        "code": "{ id: 'all', nameKo: '전체보기', nameEn: 'All Items', icon: <Layers className=\"w-5 h-5\" /> },"
+      },
+      {
+        "line": 27,
+        "code": "{ id: 'appliances', nameKo: '원룸 가전', nameEn: 'Appliances', icon: <Tv className=\"w-5 h-5\" /> },"
+      },
+      {
+        "line": 28,
+        "code": "{ id: 'furniture', nameKo: '가구·수납', nameEn: 'Furniture', icon: <Armchair className=\"w-5 h-5\" /> },"
+      },
+      {
+        "line": 30,
+        "code": "{ id: 'moving_sale', nameKo: '무빙세일', nameEn: 'Moving Sale', icon: <Plane className=\"w-5 h-5\" />, badge: 'HOT' },"
+      },
+      {
+        "line": 31,
+        "code": "{ id: 'free_give', nameKo: '무료나눔', nameEn: 'Free Sharing', icon: <Gift className=\"w-5 h-5\" />, badge: '0원' },"
+      },
+      {
+        "line": 33,
+        "code": "{ id: 'daily', nameKo: '생활·주방', nameEn: 'Life & Kitchen', icon: <Sparkles className=\"w-5 h-5\" /> },"
+      },
+      {
+        "line": 57,
+        "code": "Shop by Category / 카테고리별 찾기"
+      },
+      {
+        "line": 61,
+        "code": "{/* 가로 스크롤 가능한 원형 아이콘 카테고리 그리드 */}"
+      },
+      {
+        "line": 72,
+        "code": "{/* 원형 아이콘 버블 (스크린샷 스타일: 진한 남색 + 2px 골드 테두리) */}"
+      },
+      {
+        "line": 87,
+        "code": "{/* 뱃지 */}"
+      },
+      {
+        "line": 99,
+        "code": "{/* 카테고리 명 */}"
+      }
+    ],
+    "components/kmarket/KMarketChatDrawer.tsx": [
+      {
+        "line": 46,
+        "code": "place_name: '포승공단 GS25 편의점 앞',"
+      },
+      {
+        "line": 47,
+        "code": "landmark_detail: '기숙사 2동 맞은편 가로등 앞',"
+      },
+      {
+        "line": 48,
+        "code": "address: '경기 평택시 포승읍 포승공단로 117',"
+      },
+      {
+        "line": 51,
+        "code": "meet_time: '오늘 (Today) 19:00',"
+      },
+      {
+        "line": 86,
+        "code": "`📍 [직거래 약속] ${appointment.meet_time}에 \"${appointment.place_name}\"에서 봬요! (지도 핀 위치 공유됨)`"
+      },
+      {
+        "line": 89,
+        "code": "`📍 [직거래 약속 확정] ${appointment.meet_time}`,"
+      },
+      {
+        "line": 90,
+        "code": "`\"${appointment.place_name}\"에서 만나요! (1시간 전 리마인더 예약됨)`,"
+      },
+      {
+        "line": 97,
+        "code": "{ label: '👋 구매 문의', text: '안녕하세요! 아직 판매 중인가요?' },"
+      },
+      {
+        "line": 98,
+        "code": "{ label: '💰 가격 네고', text: '조금만 깎아주실 수 있나요? (네고 가능한가요?)' },"
+      },
+      {
+        "line": 99,
+        "code": "{ label: '📍 공단 직거래', text: '오늘 저녁 기숙사 앞이나 공단 정문에서 직거래 가능할까요?' },"
+      },
+      {
+        "line": 100,
+        "code": "{ label: '🤝 거래 수락', text: '네, 좋습니다! 그때 뵐게요.' },"
+      },
+      {
+        "line": 107,
+        "code": "{/* 1. 채팅창 상단 헤더 */}"
+      },
+      {
+        "line": 130,
+        "code": "<span>신뢰도 41.2℃ (프로필 보기 &gt;)</span>"
+      },
+      {
+        "line": 139,
+        "code": "title=\"비매너/사기 신고 및 차단\""
+      },
+      {
+        "line": 141,
+        "code": "<span>🚫 차단/신고</span>"
+      },
+      {
+        "line": 147,
+        "code": "title=\"거래 완료 및 매너 평가\""
+      },
+      {
+        "line": 150,
+        "code": "<span>후기</span>"
+      },
+      {
+        "line": 162,
+        "code": "{/* 2. 매물 간단 요약 및 거래 상태 변경 바 */}"
+      },
+      {
+        "line": 179,
+        "code": "예약중"
+      },
+      {
+        "line": 184,
+        "code": "완료"
+      },
+      {
+        "line": 198,
+        "code": "{/* 채팅창 내 원클릭 거래 액션 버튼 */}"
+      },
+      {
+        "line": 205,
+        "code": "<span>약속잡기</span>"
+      },
+      {
+        "line": 210,
+        "code": "alert('이 구매자와 [예약중]으로 설정되었습니다.');"
+      },
+      {
+        "line": 214,
+        "code": "예약하기"
+      },
+      {
+        "line": 223,
+        "code": "<span>거래완료</span>"
+      },
+      {
+        "line": 231,
+        "code": "{/* 3. 직거래 확정 약속 리마인더 배너 (1시간 전 자동 알림) */}"
+      },
+      {
+        "line": 239,
+        "code": "<span className=\"text-yellow-200 font-extrabold mr-1\">[직거래 약속]</span>"
+      },
+      {
+        "line": 248,
+        "code": "1시간 전 알림"
+      },
+      {
+        "line": 254,
+        "code": "{/* 4. AI 실시간 번역 안내 배너 */}"
+      },
+      {
+        "line": 260,
+        "code": "{/* 5. 메시지 목록 스크롤 영역 */}"
+      },
+      {
+        "line": 262,
+        "code": "{/* 15개국어 K-Market 공식 안전 거래 수칙 공지 */}"
+      },
+      {
+        "line": 268,
+        "code": "const isAppointmentMessage = originalText.includes('[직거래 약속]');"
+      },
+      {
+        "line": 275,
+        "code": "{/* 발신자 정보 */}"
+      },
+      {
+        "line": 277,
+        "code": "<span>{isMe ? '나 (Me)' : activeChat.seller_name}</span>"
+      },
+      {
+        "line": 287,
+        "code": "{/* 약속 카드 메시지일 때 인터랙티브 지도 핀 카드 렌더링 */}"
+      },
+      {
+        "line": 290,
+        "code": "{/* 미니 맵 핀 그래픽 헤더 */}"
+      },
+      {
+        "line": 295,
+        "code": "<span>직거래 만남 장소 핀</span>"
+      },
+      {
+        "line": 302,
+        "code": "{/* 지도 중앙 펄스 핀 마커 */}"
+      },
+      {
+        "line": 315,
+        "code": "{/* 카드 본문 상세 정보 */}"
+      },
+      {
+        "line": 329,
+        "code": "<span>약속 시간: {activeAppointment.meet_time}</span>"
+      },
+      {
+        "line": 331,
+        "code": "<span className=\"text-[10px] text-amber-700 font-semibold\">1시간 전 리마인더</span>"
+      },
+      {
+        "line": 343,
+        "code": "<span>구글 맵 길찾기</span>"
+      },
+      {
+        "line": 352,
+        "code": "<span>카카오맵 보기</span>"
+      },
+      {
+        "line": 366,
+        "code": "{/* 15개국어 실시간 시스템 사기 안심 개입 배너 */}"
+      },
+      {
+        "line": 382,
+        "code": "{/* 원문 텍스트 */}"
+      },
+      {
+        "line": 387,
+        "code": "{/* 상대방 언어로 자동 번역된 텍스트 뱃지 */}"
+      },
+      {
+        "line": 403,
+        "code": "{isMe ? '🌐 자동 번역 전송문 (To Seller):' : '🌐 한국어 실시간 번역:'}"
+      },
+      {
+        "line": 415,
+        "code": "{/* 실시간 번역 중 인디케이터 */}"
+      },
+      {
+        "line": 419,
+        "code": "<span>Gemini AI가 0.3초 만에 실시간 번역 중...</span>"
+      },
+      {
+        "line": 426,
+        "code": "{/* 6. 단골 중고거래 퀵 응답 버튼 바 */}"
+      },
+      {
+        "line": 433,
+        "code": "<span>📍 만남 장소 핀 잡기</span>"
+      },
+      {
+        "line": 446,
+        "code": "{/* 7. 메시지 입력창 */}"
+      },
+      {
+        "line": 453,
+        "code": "placeholder=\"내 모국어로 편하게 입력하세요 (상대방 언어로 즉시 자동번역)\""
+      },
+      {
+        "line": 468,
+        "code": "{/* 판매자 신뢰 프로필 모달 */}"
+      },
+      {
+        "line": 478,
+        "code": "{/* 1:1 거래 후기 작성 모달 */}"
+      },
+      {
+        "line": 487,
+        "code": "itemTitle={activeChat.item?.title || 'K-Market 거래 상품'}"
+      },
+      {
+        "line": 490,
+        "code": "{/* 직거래 만남 약속 & 지도 핀 모달 */}"
+      },
+      {
+        "line": 499,
+        "code": "{/* 🛡️ 사기 방지 안심 쉴드 경고 모달 */}"
+      },
+      {
+        "line": 506,
+        "code": "{/* 🚫 사용자 차단 및 불량 신고 모달 */}"
+      },
+      {
+        "line": 516,
+        "code": "alert(`[신고 접수 완료] \"${activeChat.seller_name}\" 회원이 차단 및 신고되었습니다.`);"
+      }
+    ],
+    "components/kmarket/KMarketCreatePost.tsx": [
+      {
+        "line": 18,
+        "code": "'https://images.unsplash.com/photo-1584269600464-37b1b58a9fe7?w=800&auto=format&fit=crop&q=80', // 밥솥"
+      },
+      {
+        "line": 19,
+        "code": "'https://images.unsplash.com/photo-1626806787461-102c1bfaaea1?w=800&auto=format&fit=crop&q=80', // 세탁기"
+      },
+      {
+        "line": 21,
+        "code": "'https://images.unsplash.com/photo-1558981403-c5f9899a28bc?w=800&auto=format&fit=crop&q=80', // 전동킥보드"
+      },
+      {
+        "line": 22,
+        "code": "'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=800&auto=format&fit=crop&q=80', // 스마트폰"
+      },
+      {
+        "line": 23,
+        "code": "'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=800&auto=format&fit=crop&q=80', // 침대매트리스"
+      },
+      {
+        "line": 35,
+        "code": "const [regionDetail, setRegionDetail] = useState('안산시 단원구 원곡동 다문화거리 입구');"
+      },
+      {
+        "line": 38,
+        "code": "const [address, setAddress] = useState<string>('경기 안산시 단원구 원곡동 795');"
+      },
+      {
+        "line": 43,
+        "code": "const [sellerName, setSellerName] = useState('Nguyễn (외국인 회원)');"
+      },
+      {
+        "line": 60,
+        "code": "alert('제목과 설명을 입력해 주세요.');"
+      },
+      {
+        "line": 89,
+        "code": "{/* 모달 헤더 - 딥 네이비 & 2px 골드 테두리 */}"
+      },
+      {
+        "line": 100,
+        "code": "<span>수수료 0원 100% 무료 C2C 직거래</span>"
+      },
+      {
+        "line": 103,
+        "code": "1분 간편 매물 등록"
+      },
+      {
+        "line": 114,
+        "code": "{/* 폼 입력 영역 */}"
+      },
+      {
+        "line": 116,
+        "code": "{/* 1. 사진 업로드 및 프리셋 */}"
+      },
+      {
+        "line": 119,
+        "code": "📷 상품 사진 ({images.length}/5장)"
+      },
+      {
+        "line": 134,
+        "code": "대표사진"
+      },
+      {
+        "line": 143,
+        "code": "<span className=\"text-[10px] mt-1 font-semibold\">+ 사진추가</span>"
+      },
+      {
+        "line": 165,
+        "code": "{/* 빠른 샘플 사진 클릭 추가 */}"
+      },
+      {
+        "line": 168,
+        "code": "💡 빠른 테스트용 추천 사진 클릭:"
+      },
+      {
+        "line": 185,
+        "code": "{/* 2. 귀국자 무빙세일 체크박스 */}"
+      },
+      {
+        "line": 199,
+        "code": "<span>✈️ 귀국자 헐값 급처분 [무빙 세일(Moving Sale)]로 등록하기</span>"
+      },
+      {
+        "line": 208,
+        "code": "귀국 예정 D-Day 선택 (남은 기간에 따라 긴박감 뱃지 자동 부착)"
+      },
+      {
+        "line": 212,
+        "code": "{ days: 3, label: '🚨 D-3 오늘마감', sub: '헐값 급처분' },"
+      },
+      {
+        "line": 213,
+        "code": "{ days: 7, label: '🔥 D-7 초특가', sub: '일주일 임박' },"
+      },
+      {
+        "line": 214,
+        "code": "{ days: 14, label: '⚡ D-14 묶음할인', sub: '2주 전 예약' },"
+      },
+      {
+        "line": 215,
+        "code": "{ days: 30, label: '✈️ D-30 사전예약', sub: '1달 전 등록' },"
+      },
+      {
+        "line": 236,
+        "code": "원래 구입 가격 / 정가 (할인율 뱃지 표시용)"
+      },
+      {
+        "line": 242,
+        "code": "placeholder=\"예: 450000\""
+      },
+      {
+        "line": 250,
+        "code": "{/* 3. 매물 제목 및 카테고리 */}"
+      },
+      {
+        "line": 254,
+        "code": "매물 제목 (Item Title)"
+      },
+      {
+        "line": 261,
+        "code": "placeholder=\"예: 통돌이 세탁기 10kg + 쿠쿠 밥솥 묶음 판매합니다\""
+      },
+      {
+        "line": 266,
+        "code": "{/* 3-1. 카테고리 원터치 선택 칩 그리드 */}"
+      },
+      {
+        "line": 269,
+        "code": "🏷️ 카테고리 선택 (Category)"
+      },
+      {
+        "line": 273,
+        "code": "{ id: 'appliances', label: '원룸 가전', icon: '🔌' },"
+      },
+      {
+        "line": 274,
+        "code": "{ id: 'furniture', label: '가구·수납', icon: '🛏️' },"
+      },
+      {
+        "line": 276,
+        "code": "{ id: 'moving_sale', label: '무빙세일', icon: '✈️', badge: 'HOT' },"
+      },
+      {
+        "line": 277,
+        "code": "{ id: 'free_give', label: '무료나눔', icon: '🎁', badge: '0원' },"
+      },
+      {
+        "line": 279,
+        "code": "{ id: 'daily', label: '생활·주방', icon: '🍳' },"
+      },
+      {
+        "line": 280,
+        "code": "{ id: 'vehicles', label: '자전거·탈것', icon: '🚲' },"
+      },
+      {
+        "line": 324,
+        "code": "{/* 3-2. 판매 가격 */}"
+      },
+      {
+        "line": 328,
+        "code": "💰 판매 가격 (0원 입력 시 무료나눔 자동 적용)"
+      },
+      {
+        "line": 332,
+        "code": "🎁 무료 나눔"
+      },
+      {
+        "line": 347,
+        "code": "placeholder=\"0 (무료나눔)\""
+      },
+      {
+        "line": 351,
+        "code": "원 (KRW)"
+      },
+      {
+        "line": 357,
+        "code": "{/* 4. 당근마켓 스타일 직거래 지도 핀 & 상세 주소 글씨 입력기 */}"
+      },
+      {
+        "line": 372,
+        "code": "{/* 5. 판매자 정보 및 국기 */}"
+      },
+      {
+        "line": 376,
+        "code": "판매자 국가 (Country)"
+      },
+      {
+        "line": 393,
+        "code": "판매자 닉네임"
+      },
+      {
+        "line": 404,
+        "code": "{/* 6. 상세 설명 */}"
+      },
+      {
+        "line": 408,
+        "code": "상세 설명 (Description)"
+      },
+      {
+        "line": 412,
+        "code": "<span>등록 즉시 15개국어로 자동 번역됩니다</span>"
+      },
+      {
+        "line": 420,
+        "code": "placeholder=\"물건의 상태, 사용 기간, 직거래 가능한 시간대를 적어주세요. 모국어로 작성하셔도 구매자에게 자동 번역됩니다.\""
+      },
+      {
+        "line": 425,
+        "code": "{/* 등록 버튼 - 딥 네이비 & 2px 골드 테두리 */}"
+      },
+      {
+        "line": 438,
+        "code": "<span className=\"text-[#f3ba2f]\">매물 등록 및 15개국어 번역 중...</span>"
+      },
+      {
+        "line": 442,
+        "code": "<span className=\"text-[#f3ba2f]\">1분 만에 무료 매물 등록</span>"
+      }
+    ],
+    "components/kmarket/KMarketEasyTaxRefundWidget.tsx": [
+      {
+        "line": 71,
+        "code": "{/* 배경 장식 광원 효과 */}"
+      },
+      {
+        "line": 75,
+        "code": "{/* 상단 헤더: 타이틀 및 KTRS 공식 뱃지 */}"
+      },
+      {
+        "line": 79,
+        "code": "<span>KTRS × EasyTax 실시간 연계</span>"
+      },
+      {
+        "line": 82,
+        "code": "나의 잠재 환급액{' '}"
+      },
+      {
+        "line": 84,
+        "code": "10초 만에 확인하기"
+      },
+      {
+        "line": 89,
+        "code": "{/* 실시간 대상 연령 안내 카드 (슬림 콤팩트) */}"
+      },
+      {
+        "line": 97,
+        "code": "<span className=\"text-[11px] font-black text-white\">대상 연령 안내</span>"
+      },
+      {
+        "line": 102,
+        "code": "1991년 8월 22일 ~ 2011년 8월 21일 (만 15세 ~ 34세)"
+      },
+      {
+        "line": 107,
+        "code": "만 15세~34세"
+      },
+      {
+        "line": 111,
+        "code": "{/* 1. 최근 5년 한국 근무 기간 슬라이더 */}"
+      },
+      {
+        "line": 116,
+        "code": "<span>최근 5년 한국 근무 기간</span>"
+      },
+      {
+        "line": 119,
+        "code": "{months}개월 ({(months / 12).toFixed(1)}년)"
+      },
+      {
+        "line": 133,
+        "code": "<span>1개월</span>"
+      },
+      {
+        "line": 134,
+        "code": "<span>30개월 (2.5년)</span>"
+      },
+      {
+        "line": 135,
+        "code": "<span>60개월 (5년)</span>"
+      },
+      {
+        "line": 139,
+        "code": "{/* 2. 평균 월 급여 (세전) 콤팩트 알약 칩 버튼 */}"
+      },
+      {
+        "line": 144,
+        "code": "<span>평균 월 급여 (세전)</span>"
+      },
+      {
+        "line": 147,
+        "code": "{salaryManwon}만 원"
+      },
+      {
+        "line": 151,
+        "code": "{/* 콤팩트 2열 알약 칩 그리드 */}"
+      },
+      {
+        "line": 173,
+        "code": "{/* 3. AI 예상 환급 가능 금액 디스플레이 박스 (금액은 크고 웅장하게 강조!) */}"
+      },
+      {
+        "line": 179,
+        "code": "<span>AI 예상 환급 가능 금액</span>"
+      },
+      {
+        "line": 184,
+        "code": "{/* 🌟 금액은 그대로 크고 선명하게! */}"
+      },
+      {
+        "line": 189,
+        "code": "{/* 🛡️ 선결제 0원 (후불결제) 안심 뱃지 */}"
+      },
+      {
+        "line": 193,
+        "code": "<span>선결제 0원 (후불결제)</span>"
+      },
+      {
+        "line": 196,
+        "code": "100% 환급 성공 시 후불"
+      },
+      {
+        "line": 201,
+        "code": "{/* 4. KTRS 이지텍스 즉시 환급 신청 CTA 버튼 */}"
+      },
+      {
+        "line": 209,
+        "code": "🚀 KTRS에서 ₩ {estimatedRefund.toLocaleString()} 바로 환급 신청하기"
+      },
+      {
+        "line": 214,
+        "code": "🛡️ 선결제 0원 (후불결제) · 서류 제출 없이 1초 접수"
+      }
+    ],
+    "components/kmarket/KMarketFavoritesModal.tsx": [
+      {
+        "line": 48,
+        "code": "{/* 상단 헤더 */}"
+      },
+      {
+        "line": 57,
+        "code": "<span>나의 중고거래 활동 보관함</span>"
+      },
+      {
+        "line": 60,
+        "code": "찜한 매물 & 마이페이지"
+      },
+      {
+        "line": 73,
+        "code": "{/* 탭 네비게이션 바 */}"
+      },
+      {
+        "line": 84,
+        "code": "<span>찜한 매물 ({likedItems.length})</span>"
+      },
+      {
+        "line": 96,
+        "code": "<span>내 판매내역 ({mySalesItems.length})</span>"
+      },
+      {
+        "line": 108,
+        "code": "<span>거래 완료 ({myBuyItems.length})</span>"
+      },
+      {
+        "line": 112,
+        "code": "{/* 탭별 리스트 렌더링 영역 */}"
+      },
+      {
+        "line": 114,
+        "code": "{/* 1. 찜한 매물 탭 */}"
+      },
+      {
+        "line": 124,
+        "code": "아직 찜한 매물이 없습니다."
+      },
+      {
+        "line": 127,
+        "code": "마음에 드는 상품의 하트(💖) 버튼을 누르면 실시간 가격 변동과 예약 상태를 한눈에 볼 수 있습니다."
+      },
+      {
+        "line": 134,
+        "code": "중고 매물 구경하러 가기"
+      },
+      {
+        "line": 151,
+        "code": "{/* 매물 썸네일 */}"
+      },
+      {
+        "line": 161,
+        "code": "<span>가격인하</span>"
+      },
+      {
+        "line": 166,
+        "code": "{/* 매물 상세 정보 */}"
+      },
+      {
+        "line": 198,
+        "code": "{/* 1:1 번역챗 및 찜 해제 버튼 */}"
+      },
+      {
+        "line": 208,
+        "code": "<span className=\"hidden sm:inline\">1:1 번역챗</span>"
+      },
+      {
+        "line": 214,
+        "code": "title=\"찜 목록에서 삭제\""
+      },
+      {
+        "line": 228,
+        "code": "{/* 2. 내 판매내역 탭 */}"
+      },
+      {
+        "line": 234,
+        "code": "<p className=\"text-xs\">현재 등록된 내 판매 매물이 없습니다.</p>"
+      },
+      {
+        "line": 269,
+        "code": "상세 관리"
+      },
+      {
+        "line": 278,
+        "code": "{/* 3. 내 구매/거래 완료 탭 */}"
+      },
+      {
+        "line": 294,
+        "code": "거래완료"
+      },
+      {
+        "line": 306,
+        "code": "거래 완료됨"
+      }
+    ],
+    "components/kmarket/KMarketFeedbackModal.tsx": [
+      {
+        "line": 23,
+        "code": "label: '🌐 번역 / 언어 오류',"
+      },
+      {
+        "line": 25,
+        "code": "placeholder: '어떤 언어의 어떤 단어나 문장이 어색하거나 잘못되었나요? 상세히 알려주시면 즉시 수정하겠습니다.',"
+      },
+      {
+        "line": 29,
+        "code": "label: '📍 공단 / 직거래 장소 추가',"
+      },
+      {
+        "line": 31,
+        "code": "placeholder: '추가하고 싶은 공단 이름이나 기숙사/편의점 등 직거래 추천 장소를 적어주세요. (예: 화성 마도공단 기숙사 앞)',"
+      },
+      {
+        "line": 35,
+        "code": "label: '🛡️ 사기 방지 / 안심 거래',"
+      },
+      {
+        "line": 37,
+        "code": "placeholder: '사기 피해 예방이나 안심 거래를 위해 더 필요한 안전 기능이 있다면 자유롭게 제안해 주세요.',"
+      },
+      {
+        "line": 41,
+        "code": "label: '💰 세무 / 대출 / 금융',"
+      },
+      {
+        "line": 43,
+        "code": "placeholder: '세금 환급, 비상금 대출, 귀국 퇴직금 등 외국인 근로자에게 필요한 추가 서비스 의견을 들려주세요.',"
+      },
+      {
+        "line": 47,
+        "code": "label: '📱 화면 렉 / 버그 제보',"
+      },
+      {
+        "line": 49,
+        "code": "placeholder: '어떤 화면에서 어떤 문제가 발생했나요? (예: 채팅창이 안 열림, 사진 업로드가 느림 등)',"
+      },
+      {
+        "line": 53,
+        "code": "label: '💬 기타 자유 건의 및 칭찬',"
+      },
+      {
+        "line": 55,
+        "code": "placeholder: 'K-Market을 이용하시면서 느끼신 점이나 추가되었으면 하는 모든 아이디어를 자유롭게 남겨주세요!',"
+      },
+      {
+        "line": 80,
+        "code": "user_name: authedUser?.userName || '익명 유저',"
+      },
+      {
+        "line": 108,
+        "code": "{/* 상단 헤더 */}"
+      },
+      {
+        "line": 116,
+        "code": "<span>앱 개선 제안 및 의견 보내기</span>"
+      },
+      {
+        "line": 118,
+        "code": "VOC 창구"
+      },
+      {
+        "line": 122,
+        "code": "대표님과 관리자 팀이 여러분의 소중한 의견을 직접 읽고 반영합니다."
+      },
+      {
+        "line": 135,
+        "code": "{/* 본문 폼 */}"
+      },
+      {
+        "line": 143,
+        "code": "소중한 의견이 성공적으로 접수되었습니다!"
+      },
+      {
+        "line": 146,
+        "code": "보내주신 개선점은 관리자 팀에서 꼼꼼히 검토 후 앱 업데이트에 신속히 반영하겠습니다. 감사합니다!"
+      },
+      {
+        "line": 152,
+        "code": "{/* 1. 건의 유형 선택 칩 (Chips) */}"
+      },
+      {
+        "line": 155,
+        "code": "1. 어떤 부분에 대한 의견이신가요? (유형 선택)"
+      },
+      {
+        "line": 179,
+        "code": "{/* 2. 상세 내용 텍스트 입력창 */}"
+      },
+      {
+        "line": 182,
+        "code": "<span>2. 개선할 점을 자유롭게 글로 작성해 주세요 <span className=\"text-rose-500\">*</span></span>"
+      },
+      {
+        "line": 183,
+        "code": "<span className=\"text-[10px] text-slate-400 font-normal\">{content.length}자</span>"
+      },
+      {
+        "line": 195,
+        "code": "{/* 3. 답변 받을 연락처 (선택) */}"
+      },
+      {
+        "line": 198,
+        "code": "3. 답변 또는 진행 상황을 안내받으실 연락처 (선택)"
+      },
+      {
+        "line": 204,
+        "code": "placeholder=\"전화번호(카톡) 또는 이메일 (선택 사항)\""
+      },
+      {
+        "line": 209,
+        "code": "{/* 4. 제출 버튼 */}"
+      },
+      {
+        "line": 217,
+        "code": "<span>전송 중...</span>"
+      },
+      {
+        "line": 221,
+        "code": "<span>관리자에게 개선 의견 보내기</span>"
+      }
+    ],
+    "components/kmarket/KMarketHeader.tsx": [
+      {
+        "line": 49,
+        "code": "{/* 상단: KTRS 패밀리 바 (진한 남색 + 3px 선명한 골드 테두리) */}"
+      },
+      {
+        "line": 69,
+        "code": "{/* 언어 드롭다운 (실제 고화질 국기 이미지 + 언어명) */}"
+      },
+      {
+        "line": 77,
+        "code": "{/* 실제 국기 이미지 사진 */}"
+      },
+      {
+        "line": 103,
+        "code": "<span>15개국 대형 국기 선택창 열기</span>"
+      },
+      {
+        "line": 108,
+        "code": "🌍 빠른 언어 선택 (15개국어)"
+      },
+      {
+        "line": 125,
+        "code": "{/* 실제 국기 이미지 사진 */}"
+      },
+      {
+        "line": 147,
+        "code": "{/* 수수료 0원 뱃지 */}"
+      },
+      {
+        "line": 153,
+        "code": "{/* 📲 1초 앱 설치 버튼 (헤더 상시 노출) */}"
+      },
+      {
+        "line": 158,
+        "code": "title=\"K-Market 1초 만에 앱 설치하기\""
+      },
+      {
+        "line": 161,
+        "code": "<span>1초 앱설치</span>"
+      },
+      {
+        "line": 169,
+        "code": "{/* 좌측: 로고 + 위치 셀렉터 */}"
+      },
+      {
+        "line": 188,
+        "code": "{/* 위치 칩 */}"
+      },
+      {
+        "line": 193,
+        "code": "title=\"내 실제 위치 및 직거래 반경 설정\""
+      },
+      {
+        "line": 198,
+        "code": "? '내 위치'"
+      },
+      {
+        "line": 200,
+        "code": "? '평택 포승'"
+      },
+      {
+        "line": 202,
+        "code": "? '안산 원곡'"
+      },
+      {
+        "line": 204,
+        "code": "? '화성 향남'"
+      },
+      {
+        "line": 212,
+        "code": "{/* 검색창 (데스크탑) */}"
+      },
+      {
+        "line": 217,
+        "code": "placeholder=\"매물 검색 (세탁기, 냉장고, 아이폰 등)...\""
+      },
+      {
+        "line": 226,
+        "code": "{/* 데스크탑 우측 액션 그룹 (md 이상) */}"
+      },
+      {
+        "line": 228,
+        "code": "{/* 1분 매물 등록 버튼 - 딥 에스프레소 & 모카 */}"
+      },
+      {
+        "line": 237,
+        "code": "{/* 알림 센터 */}"
+      },
+      {
+        "line": 242,
+        "code": "title=\"통합 알림 센터 (키워드/채팅/가격인하)\""
+      },
+      {
+        "line": 252,
+        "code": "{/* 회원가입 / 마이페이지 */}"
+      },
+      {
+        "line": 273,
+        "code": "{/* 마이 */}"
+      },
+      {
+        "line": 284,
+        "code": "{/* 모바일 우측 액션 그룹 (md 미만: 알림 + 가입/프로필) */}"
+      },
+      {
+        "line": 286,
+        "code": "{/* 알림 센터 */}"
+      },
+      {
+        "line": 291,
+        "code": "title=\"통합 알림 센터\""
+      },
+      {
+        "line": 301,
+        "code": "{/* 회원가입 / 프로필 */}"
+      },
+      {
+        "line": 331,
+        "code": "{/* 모바일 2행: 검색창 + 1분 간편 매물 등록 버튼 */}"
+      },
+      {
+        "line": 344,
+        "code": "{/* 모바일 1분 매물 등록 버튼 */}"
+      },
+      {
+        "line": 355,
+        "code": "{/* 하단: 탭 바 */}"
+      },
+      {
+        "line": 359,
+        "code": "{/* 1. 중고 / 무빙 거래 탭 */}"
+      },
+      {
+        "line": 371,
+        "code": "{/* 2. 동네생활 & 쉼터 탭 (17개국어 Q&A 및 친구 사귀기) */}"
+      },
+      {
+        "line": 398,
+        "code": "{/* 17개국 대형 국기 언어 선택 웰컴 게이트웨이 모달 */}"
+      }
+    ],
+    "components/kmarket/KMarketHeroShowcase.tsx": [
+      {
+        "line": 14,
+        "code": "{/* 웅장한 풀와이드 감성 히어로 쇼케이스 */}"
+      },
+      {
+        "line": 16,
+        "code": "{/* 미세한 앰비언트 글로우 */}"
+      },
+      {
+        "line": 20,
+        "code": "{/* 좌측: 타이포그래피 & CTA */}"
+      },
+      {
+        "line": 24,
+        "code": "<span>대한민국 외국인 근로자 No.1 안심 플랫폼</span>"
+      },
+      {
+        "line": 28,
+        "code": "외국인 안심 직거래 &amp; <br />"
+      },
+      {
+        "line": 29,
+        "code": "<span className=\"text-[#845b37]\">귀국 무빙세일</span> 컬렉션"
+      },
+      {
+        "line": 33,
+        "code": "15개국어 실시간 Gemini 양방향 자동번역 채팅과 <br className=\"hidden sm:inline\" />"
+      },
+      {
+        "line": 34,
+        "code": "신원인증 기반 주요 공단 1분 도보 직거래로 안전하게 시작하세요."
+      },
+      {
+        "line": 37,
+        "code": "{/* CTA 버튼 그룹 */}"
+      },
+      {
+        "line": 43,
+        "code": "<span>내 물건 1분 간편 등록</span>"
+      },
+      {
+        "line": 52,
+        "code": "<span>세무 환급 184만원 무료조회</span>"
+      },
+      {
+        "line": 57,
+        "code": "{/* 우측: 레퍼런스 스타일 가전·가구 통합 광고 쇼케이스 단일 이미지 */}"
+      },
+      {
+        "line": 62,
+        "code": "alt=\"원룸 풀옵션 가전 가구 묶음 쇼케이스\""
+      },
+      {
+        "line": 66,
+        "code": "{/* 스크린샷 스타일 우측 상단 이벤트 원형 배지 */}"
+      },
+      {
+        "line": 76,
+        "code": "귀국 근로자"
+      },
+      {
+        "line": 79,
+        "code": "무빙세일"
+      },
+      {
+        "line": 86,
+        "code": "{/* 하단 타이틀 바 */}"
+      },
+      {
+        "line": 94,
+        "code": "냉장고·세탁기·소파·노트북 풀패키지 묶음"
+      },
+      {
+        "line": 98,
+        "code": "일괄 급처"
+      },
+      {
+        "line": 107,
+        "code": "{/* 하단 4대 안심 보증 띠 바 */}"
+      },
+      {
+        "line": 112,
+        "code": "<span className=\"font-semibold\">수수료 0원 100% 무료 직거래</span>"
+      },
+      {
+        "line": 116,
+        "code": "<span className=\"font-semibold\">15개국어 실시간 Gemini 번역</span>"
+      },
+      {
+        "line": 120,
+        "code": "<span className=\"font-semibold\">선결제 0원 184만원 세무환급</span>"
+      },
+      {
+        "line": 124,
+        "code": "<span className=\"font-semibold\">귀국 D-Day 무빙세일 전용관</span>"
+      }
+    ],
+    "components/kmarket/KMarketItemCard.tsx": [
+      {
+        "line": 33,
+        "code": "const [timeAgoText, setTimeAgoText] = useState('방금 전');"
+      },
+      {
+        "line": 57,
+        "code": "{/* ── 1. 상단 사진 가로 100% 꽉 채우는 풀 와이드 영역 ───────────────── */}"
+      },
+      {
+        "line": 68,
+        "code": "{/* 좌상단: 판매자 국기 + 국가코드 + 이름 반투명 캡슐 배지 */}"
+      },
+      {
+        "line": 76,
+        "code": "title=\"판매자 프로필 보기\""
+      },
+      {
+        "line": 92,
+        "code": "{/* 우상단: D-Day / 상태 배지 그룹 */}"
+      },
+      {
+        "line": 100,
+        "code": "🎁 무료나눔"
+      },
+      {
+        "line": 117,
+        "code": "{/* 가격 인하 / 끌올 뱃지 */}"
+      },
+      {
+        "line": 136,
+        "code": "{/* 좌하단: 다중 사진 인디케이터 (📷 3) */}"
+      },
+      {
+        "line": 144,
+        "code": "{/* 우하단: 찜하기 하트 버튼 */}"
+      },
+      {
+        "line": 155,
+        "code": "aria-label=\"찜하기\""
+      },
+      {
+        "line": 161,
+        "code": "{/* ── 2. 사진 바로 밑 설명 및 상세 정보 영역 ───────────────── */}"
+      },
+      {
+        "line": 164,
+        "code": "{/* 15개국어 자동번역 뱃지 */}"
+      },
+      {
+        "line": 167,
+        "code": "<span>15개국어 자동번역</span>"
+      },
+      {
+        "line": 170,
+        "code": "{/* 상품 제목 */}"
+      },
+      {
+        "line": 175,
+        "code": "{/* 가격 정보 */}"
+      },
+      {
+        "line": 186,
+        "code": "{item.original_price.toLocaleString()}원"
+      },
+      {
+        "line": 192,
+        "code": "{/* ── 3. 하단 메타 정보 + 1:1 번역챗 골드 버튼 ─────────────── */}"
+      },
+      {
+        "line": 194,
+        "code": "{/* 위치 + 시간 */}"
+      },
+      {
+        "line": 206,
+        "code": "{/* 💬 1:1 번역 채팅하기 버튼 (네이비 + 골드 테두리) */}"
+      },
+      {
+        "line": 218,
+        "code": "title=\"15개국어 실시간 자동번역 1:1 채팅\""
+      },
+      {
+        "line": 221,
+        "code": "<span className=\"text-[#f3ba2f] font-black tracking-tight\">1:1 번역 채팅하기</span>"
+      },
+      {
+        "line": 227,
+        "code": "{/* 판매자 프로필 상세 모달 */}"
+      }
+    ],
+    "components/kmarket/KMarketItemDetail.tsx": [
+      {
+        "line": 70,
+        "code": "{/* 상단 닫기 & 공유 버튼 */}"
+      },
+      {
+        "line": 83,
+        "code": "title=\"불량 매물/사용자 신고 및 차단\""
+      },
+      {
+        "line": 85,
+        "code": "<span>🚫 신고</span>"
+      },
+      {
+        "line": 90,
+        "code": "const shareTitle = `[K-Market] ${selectedItem.title} - ${selectedItem.price.toLocaleString()}원`;"
+      },
+      {
+        "line": 108,
+        "code": "alert(`🔗 매물 공유 링크가 복사되었습니다!\\n\\n카카오톡, 페이스북, 인스타그램, 텔레그램 등에 붙여넣어 공유하세요.\\n\\n${shareUrl}`);"
+      },
+      {
+        "line": 112,
+        "code": "title=\"매물 링크 공유하기 (카카오톡, 페이스북 등)\""
+      },
+      {
+        "line": 127,
+        "code": "{/* 본문 스크롤 영역 */}"
+      },
+      {
+        "line": 129,
+        "code": "{/* 이미지 갤러리 (좌우 < , > 슬라이드 버튼 탑재) */}"
+      },
+      {
+        "line": 137,
+        "code": "{/* 사진 번호 뱃지 (예: 1 / 3) */}"
+      },
+      {
+        "line": 146,
+        "code": "{/* 👈 좌측 이전 사진 (<) 버튼 */}"
+      },
+      {
+        "line": 157,
+        "code": "title=\"이전 사진 보기\""
+      },
+      {
+        "line": 163,
+        "code": "{/* 👉 우측 다음 사진 (>) 버튼 */}"
+      },
+      {
+        "line": 174,
+        "code": "title=\"다음 사진 보기\""
+      },
+      {
+        "line": 180,
+        "code": "{/* 다중 사진 썸네일 네비게이션 */}"
+      },
+      {
+        "line": 201,
+        "code": "{/* 판매자 프로필 바 (매너온도 연동) */}"
+      },
+      {
+        "line": 219,
+        "code": "비자인증됨"
+      },
+      {
+        "line": 223,
+        "code": "<span>프로필 & 거래후기 보기 &gt;</span>"
+      },
+      {
+        "line": 233,
+        "code": "{/* 매물 기본 정보 & 가격 */}"
+      },
+      {
+        "line": 235,
+        "code": "{/* 상태 뱃지 및 끌올/가격인하 표시 */}"
+      },
+      {
+        "line": 254,
+        "code": "? `🚨 귀국 D-${selectedItem.moving_d_day || 3} 오늘마감 헐값`"
+      },
+      {
+        "line": 256,
+        "code": "? `🔥 귀국 D-${selectedItem.moving_d_day || 5} 마감임박 초특가`"
+      },
+      {
+        "line": 257,
+        "code": ": `✈️ 귀국 D-${selectedItem.moving_d_day || 14} 묶음할인`}"
+      },
+      {
+        "line": 262,
+        "code": "{selectedItem.reserved_to_user_name} 님과 거래 예약중"
+      },
+      {
+        "line": 267,
+        "code": "{selectedItem.sold_to_user_name} 님과 거래 완료됨"
+      },
+      {
+        "line": 272,
+        "code": "{/* 15개국어 자동번역 토글 바 */}"
+      },
+      {
+        "line": 277,
+        "code": "{currentLangOption.nativeName} ({currentLangOption.flag}) 실시간 번역 적용됨"
+      },
+      {
+        "line": 284,
+        "code": "{showOriginalLang ? '번역문 보기' : '원문 보기'}"
+      },
+      {
+        "line": 302,
+        "code": "정가 {selectedItem.original_price.toLocaleString()}원"
+      },
+      {
+        "line": 308,
+        "code": "{/* 판매자 전용 상태 관리 액션 바 */}"
+      },
+      {
+        "line": 311,
+        "code": "<span className=\"font-bold block\">내 매물 상태를 관리해보세요</span>"
+      },
+      {
+        "line": 312,
+        "code": "<span className=\"text-[11px] text-indigo-700 opacity-80\">예약중/거래완료 변경, 상단 끌올</span>"
+      },
+      {
+        "line": 318,
+        "code": "상태변경 / 끌올"
+      },
+      {
+        "line": 322,
+        "code": "{/* 🗺️ 당근마켓 스타일 직거래 만남 장소 지도 뷰 & 상세 주소 폰트 */}"
+      },
+      {
+        "line": 327,
+        "code": "{/* 상품 상세 설명 */}"
+      },
+      {
+        "line": 330,
+        "code": "상세 설명 (Item Description)"
+      },
+      {
+        "line": 339,
+        "code": "{/* 하단 고정 액션 바 */}"
+      },
+      {
+        "line": 368,
+        "code": "<span className=\"text-[#f3ba2f] font-black\">1:1 안심 번역 채팅</span>"
+      },
+      {
+        "line": 375,
+        "code": "{/* 판매자 신뢰 프로필 모달 */}"
+      },
+      {
+        "line": 385,
+        "code": "{/* 거래 후기 작성 모달 */}"
+      },
+      {
+        "line": 397,
+        "code": "{/* 거래 상태 변경 & 끌올 모달 */}"
+      },
+      {
+        "line": 413,
+        "code": "{/* 🚫 불량 매물/사용자 차단 및 신고 모달 */}"
+      },
+      {
+        "line": 423,
+        "code": "alert(`[신고 접수 완료] \"${selectedItem.seller_name}\" 회원이 차단 및 신고 처리되었습니다.`);"
+      }
+    ],
+    "components/kmarket/KMarketKeywordAlertModal.tsx": [
+      {
+        "line": 32,
+        "code": "{ keyword: '세탁기', icon: '🧺', label: '세탁기 (Washing Machine)' },"
+      },
+      {
+        "line": 33,
+        "code": "{ keyword: '냉장고', icon: '🧊', label: '냉장고 (Refrigerator)' },"
+      },
+      {
+        "line": 35,
+        "code": "{ keyword: '밥솥', icon: '🍚', label: '쿠쿠 전기밥솥 (Rice Cooker)' },"
+      },
+      {
+        "line": 36,
+        "code": "{ keyword: '0원', icon: '🎁', label: '0원 무료 나눔 (Free Give)' },"
+      },
+      {
+        "line": 37,
+        "code": "{ keyword: '자전거', icon: '🚲', label: '자전거 / 킥보드 (Bike)' },"
+      },
+      {
+        "line": 38,
+        "code": "{ keyword: '모니터', icon: '💻', label: '컴퓨터 모니터 (Monitor)' },"
+      },
+      {
+        "line": 39,
+        "code": "{ keyword: '매트리스', icon: '🛏️', label: '싱글 침대 매트리스 (Bed)' },"
+      },
+      {
+        "line": 65,
+        "code": "alert('등록할 키워드를 입력해 주세요.');"
+      },
+      {
+        "line": 70,
+        "code": "alert('이미 등록된 키워드입니다.');"
+      },
+      {
+        "line": 101,
+        "code": "itemTitle: `${keyword} (새것 같은 풀박스 S급)`,"
+      },
+      {
+        "line": 102,
+        "code": "itemPrice: '0원 (무료나눔) 또는 25,000원',"
+      },
+      {
+        "line": 103,
+        "code": "itemRegion: selectedZone === 'all' ? '평택 포승공단' : selectedZone,"
+      },
+      {
+        "line": 113,
+        "code": "{/* 모달 상단 헤더 */}"
+      },
+      {
+        "line": 122,
+        "code": "<span>외국인 선호도 1위 득템 알리미</span>"
+      },
+      {
+        "line": 125,
+        "code": "키워드 실시간 알림 설정"
+      },
+      {
+        "line": 138,
+        "code": "{/* 본문 스크롤 영역 */}"
+      },
+      {
+        "line": 140,
+        "code": "{/* 키워드 직접 입력 폼 */}"
+      },
+      {
+        "line": 144,
+        "code": "<span>새 키워드 등록하기</span>"
+      },
+      {
+        "line": 159,
+        "code": "placeholder=\"예: 세탁기, 아이폰, 0원, 밥솥\""
+      },
+      {
+        "line": 170,
+        "code": "등록"
+      },
+      {
+        "line": 174,
+        "code": "{/* 공단 필터 및 알리고 SMS 수신 토글 */}"
+      },
+      {
+        "line": 183,
+        "code": "<option value=\"all\">전체 공단 알림</option>"
+      },
+      {
+        "line": 184,
+        "code": "<option value=\"pyeongtaek\">평택 포승공단</option>"
+      },
+      {
+        "line": 185,
+        "code": "<option value=\"ansan\">안산 원곡/반월</option>"
+      },
+      {
+        "line": 186,
+        "code": "<option value=\"hwaseong\">화성 향남공단</option>"
+      },
+      {
+        "line": 193,
+        "code": "<span>실시간 웹 푸시 알림 수신 (무료)</span>"
+      },
+      {
+        "line": 204,
+        "code": "{/* 외국인 근로자 인기 급상승 키워드 칩 프리셋 */}"
+      },
+      {
+        "line": 208,
+        "code": "<span>외국인 기숙사 인기 검색 키워드 (클릭 시 1초 등록)</span>"
+      },
+      {
+        "line": 228,
+        "code": "{/* 내가 등록한 키워드 목록 */}"
+      },
+      {
+        "line": 232,
+        "code": "내 등록 키워드 ({keywordAlerts.length}/10개)"
+      },
+      {
+        "line": 235,
+        "code": "새 매물 등록 시 1초 만에 알림"
+      },
+      {
+        "line": 242,
+        "code": "<p className=\"text-xs font-bold\">등록된 키워드가 없습니다.</p>"
+      },
+      {
+        "line": 243,
+        "code": "<p className=\"text-[11px]\">원하는 키워드를 등록하고 헐값 꿀매물을 가장 먼저 잡으세요!</p>"
+      },
+      {
+        "line": 262,
+        "code": "{alertItem.industrial_zone === 'all' ? '전체 공단' : alertItem.industrial_zone}"
+      },
+      {
+        "line": 266,
+        "code": "<span>매칭 {alertItem.matched_count}건</span>"
+      },
+      {
+        "line": 267,
+        "code": "{alertItem.notify_by_sms && <span>• 웹 푸시 ON</span>}"
+      },
+      {
+        "line": 272,
+        "code": "{/* 액션: 웹 푸시 테스트 발송 / 활성화 토글 / 삭제 */}"
+      },
+      {
+        "line": 279,
+        "code": "title=\"실시간 웹 푸시 알림 발송 테스트\""
+      },
+      {
+        "line": 282,
+        "code": "<span>푸시 테스트</span>"
+      },
+      {
+        "line": 289,
+        "code": "title=\"알림 On/Off 토글\""
+      },
+      {
+        "line": 302,
+        "code": "title=\"키워드 삭제\""
+      }
+    ],
+    "components/kmarket/KMarketLocationRadiusModal.tsx": [
+      {
+        "line": 37,
+        "code": "const [locationName, setLocationName] = useState('경기 평택시 포승읍 포승공단 기숙사 2동');"
+      },
+      {
+        "line": 45,
+        "code": "alert('브라우저가 GPS 위치 서비스를 지원하지 않습니다.');"
+      },
+      {
+        "line": 54,
+        "code": "setLocationName(`내 GPS 현재 위치 (위도 ${latitude.toFixed(4)}, 경도 ${longitude.toFixed(4)})`);"
+      },
+      {
+        "line": 62,
+        "code": "setLocationName('내 GPS 현재 위치 (경기 평택시 포승읍 포승공단로)');"
+      },
+      {
+        "line": 108,
+        "code": "`[실제 내 위치 기준 동네 인증 완료]\\n\\n📍 내 기준 위치: ${locationName}\\n📏 거래 반경: 내 위치 반경 ${radiusKm}km 이내 (${"
+      },
+      {
+        "line": 109,
+        "code": "radiusKm === 1 ? '도보 10분 🚶‍♂️' : radiusKm === 3 ? '자전거/킥보드 10분 🚲' : '내 주변 10km 전체 🚗'"
+      },
+      {
+        "line": 110,
+        "code": "})\\n\\n내 실제 위치를 중심으로 ${radiusKm}km 내의 직거래 매물이 우선 표시됩니다!`"
+      },
+      {
+        "line": 118,
+        "code": "{/* 모달 상단 헤더 */}"
+      },
+      {
+        "line": 127,
+        "code": "<span>당근마켓 스타일 실시간 GPS 동네 인증</span>"
+      },
+      {
+        "line": 130,
+        "code": "내 실제 위치 & 직거래 반경"
+      },
+      {
+        "line": 143,
+        "code": "{/* 본문 스크롤 영역 */}"
+      },
+      {
+        "line": 145,
+        "code": "{/* 1. GPS 현재 위치 1초 자동 인증 버튼 */}"
+      },
+      {
+        "line": 150,
+        "code": "<span>현재 내 실제 위치 인증</span>"
+      },
+      {
+        "line": 153,
+        "code": "GPS 정밀 탐색 🛰️"
+      },
+      {
+        "line": 167,
+        "code": "<span>내 GPS 위치 찾는 중...</span>"
+      },
+      {
+        "line": 172,
+        "code": "<span>📍 현재 내 GPS 위치로 1초 자동 설정</span>"
+      },
+      {
+        "line": 179,
+        "code": "<span className=\"text-blue-600 font-bold shrink-0\">기준 위치:</span>"
+      },
+      {
+        "line": 186,
+        "code": "{/* 2. 주소 / 기숙사 직접 검색 폼 */}"
+      },
+      {
+        "line": 189,
+        "code": "또는 도로명 주소 / 기숙사명 직접 검색"
+      },
+      {
+        "line": 197,
+        "code": "placeholder=\"예: 경기 평택시 포승읍 원정리, 안산 원곡동 840\""
+      },
+      {
+        "line": 206,
+        "code": "검색"
+      },
+      {
+        "line": 211,
+        "code": "{/* 3. 거래 반경 3단계 슬라이더 / 칩 (1km, 3km, 10km) */}"
+      },
+      {
+        "line": 216,
+        "code": "<span>내 위치 기준 거래 반경 설정</span>"
+      },
+      {
+        "line": 219,
+        "code": "내 위치 반경 {radiusKm}km"
+      },
+      {
+        "line": 223,
+        "code": "{/* 3단계 칩 버튼 */}"
+      },
+      {
+        "line": 235,
+        "code": "<span className=\"text-xs font-black\">1km 이내</span>"
+      },
+      {
+        "line": 236,
+        "code": "<span className=\"text-[10px] opacity-80\">걸어서 10분 🚶‍♂️</span>"
+      },
+      {
+        "line": 249,
+        "code": "<span className=\"text-xs font-black\">3km 이내</span>"
+      },
+      {
+        "line": 250,
+        "code": "<span className=\"text-[10px] opacity-80\">자전거 10분 🚲</span>"
+      },
+      {
+        "line": 263,
+        "code": "<span className=\"text-xs font-black\">10km 이내</span>"
+      },
+      {
+        "line": 264,
+        "code": "<span className=\"text-[10px] opacity-80\">내 주변 10km 전체 🚗</span>"
+      },
+      {
+        "line": 269,
+        "code": "{radiusKm === 1 && '🔍 내 집/기숙사 바로 앞 걸어서 10분 초밀착 직거래 매물만 봅니다.'}"
+      },
+      {
+        "line": 270,
+        "code": "{radiusKm === 3 && '🚲 자전거, 전동킥보드로 10분 내 왕복 가능한 실속 반경 매물을 봅니다.'}"
+      },
+      {
+        "line": 271,
+        "code": "{radiusKm === 10 && '🚗 내 위치를 중심으로 반경 10km 내의 모든 직거래 매물을 넓게 봅니다.'}"
+      },
+      {
+        "line": 275,
+        "code": "{/* 4. 구글 맵 실시간 뷰 (내 실제 GPS 위치 중심 + 반경 선택 시 실시간 줌인/줌아웃) */}"
+      },
+      {
+        "line": 280,
+        "code": "<span>내 위치 중심 실시간 구글 맵 (반경 {radiusKm}km 자동 줌)</span>"
+      },
+      {
+        "line": 283,
+        "code": "{radiusKm === 1 ? '🔍 1km 세밀 확대' : radiusKm === 3 ? '🗺️ 3km 중간 뷰' : '🌐 10km 넓은 뷰'}"
+      },
+      {
+        "line": 300,
+        "code": "{/* 중심 핀 및 반경 범위 오버레이 */}"
+      },
+      {
+        "line": 317,
+        "code": "{/* 좌측 하단 정보 뱃지 */}"
+      },
+      {
+        "line": 321,
+        "code": "<span className=\"text-yellow-300\">({radiusKm}km 반경)</span>"
+      },
+      {
+        "line": 326,
+        "code": "{/* 하단 저장 버튼 */}"
+      },
+      {
+        "line": 332,
+        "code": "내 실제 위치 기준 & {radiusKm}km 반경으로 설정 완료"
+      }
+    ],
+    "components/kmarket/KMarketMainFeed.tsx": [
+      {
+        "line": 105,
+        "code": "{/* 상단 통합 헤더 */}"
+      },
+      {
+        "line": 108,
+        "code": "{/* 1. 최상단 풀와이드 웅장한 감성 히어로 쇼케이스 (중고마켓 탭일 때 노출) */}"
+      },
+      {
+        "line": 111,
+        "code": "{/* 메인 콘텐츠 컨테이너 */}"
+      },
+      {
+        "line": 119,
+        "code": "{/* 2. KTRS 184만원 세무 환급 감성 사진 배너 */}"
+      },
+      {
+        "line": 122,
+        "code": "{/* 3. 🛡️ 외국인 안심 거래 3대 수칙 (사기 방지 쉴드) 웜톤 배너 */}"
+      },
+      {
+        "line": 125,
+        "code": "{/* 4. 쇼핑몰 스타일 원형 아이콘 카테고리 네비게이션 */}"
+      },
+      {
+        "line": 128,
+        "code": "{/* 5. 귀국자 헐값 급처분 [무빙 세일(Moving Sale)] 전용관 */}"
+      },
+      {
+        "line": 133,
+        "code": "{/* 5. 실시간 매물 리스트 헤더 */}"
+      },
+      {
+        "line": 137,
+        "code": "실시간 등록 매물"
+      },
+      {
+        "line": 142,
+        "code": "{filteredItems.length}개"
+      },
+      {
+        "line": 147,
+        "code": "15개국어 실시간 번역"
+      },
+      {
+        "line": 151,
+        "code": "{/* 5. 매물 그리드 (20개 단위 페이징) */}"
+      },
+      {
+        "line": 162,
+        "code": "{/* 📄 스마트 페이지네이션 네비게이션 바 */}"
+      },
+      {
+        "line": 165,
+        "code": "{/* 이전 페이지 버튼 */}"
+      },
+      {
+        "line": 178,
+        "code": "◀ 이전"
+      },
+      {
+        "line": 181,
+        "code": "{/* 페이지 번호 목록 */}"
+      },
+      {
+        "line": 206,
+        "code": "{/* 다음 페이지 버튼 */}"
+      },
+      {
+        "line": 220,
+        "code": "다음 ▶"
+      },
+      {
+        "line": 231,
+        "code": "<h3 className=\"text-base font-bold text-slate-800\">조건에 맞는 매물이 없습니다</h3>"
+      },
+      {
+        "line": 233,
+        "code": "필터를 전체로 변경하거나, 첫 번째로 내 중고 물건을 1분 만에 등록해 보세요!"
+      },
+      {
+        "line": 240,
+        "code": "✏️ 1분 간편 매물 등록하기"
+      },
+      {
+        "line": 248,
+        "code": "{/* 모바일 플로팅 매물 등록 CTA 버튼 (중고마켓 탭일 때) */}"
+      },
+      {
+        "line": 260,
+        "code": "{/* 푸터 영역 - 진한 남색 & 3px 선명한 럭셔리 골드 테두리 */}"
+      },
+      {
+        "line": 270,
+        "code": "{/* 상단 브랜드 & 혜택 요약 */}"
+      },
+      {
+        "line": 285,
+        "code": "대한민국 No.1 외국인 종합 슈퍼앱 KTRS 연계<br />외국인 전용 0원 안심 중고거래 &amp; 귀국 무빙세일 &amp; 동네생활 커뮤니티"
+      },
+      {
+        "line": 292,
+        "code": "<span className=\"text-white font-bold\">수수료 0원 100% 무료 안심 직거래</span>"
+      },
+      {
+        "line": 296,
+        "code": "<span className=\"text-white font-bold\">15개국어 실시간 Gemini AI 양방향 번역</span>"
+      },
+      {
+        "line": 301,
+        "code": "{/* 공식 사업자등록 정보 */}"
+      },
+      {
+        "line": 304,
+        "code": "<span><strong className=\"text-[#f3ba2f] font-extrabold\">사업자명:</strong> 주식회사 펫에이앤씨</span>"
+      },
+      {
+        "line": 306,
+        "code": "<span><strong className=\"text-[#f3ba2f] font-extrabold\">대표자:</strong> 전기창</span>"
+      },
+      {
+        "line": 308,
+        "code": "<span><strong className=\"text-[#f3ba2f] font-extrabold\">사업자 등록번호:</strong> 229-86-03034</span>"
+      },
+      {
+        "line": 310,
+        "code": "<span><strong className=\"text-[#f3ba2f] font-extrabold\">통신판매업 번호:</strong> 제 2023-진접오남-0680호</span>"
+      },
+      {
+        "line": 314,
+        "code": "<span><strong className=\"text-[#f3ba2f] font-extrabold\">주소:</strong> 서울특별시 광진구 광나루로 436, 5층(화양동, 에듀킨빌딩)</span>"
+      },
+      {
+        "line": 316,
+        "code": "<span><strong className=\"text-[#f3ba2f] font-extrabold\">연락처:</strong> 010-5964-5340</span>"
+      },
+      {
+        "line": 318,
+        "code": "<span><strong className=\"text-[#f3ba2f] font-extrabold\">이메일:</strong> zkfnth021@gmail.com</span>"
+      },
+      {
+        "line": 322,
+        "code": "{/* 하단 카피라이트 & 관리자 링크 */}"
+      },
+      {
+        "line": 326,
+        "code": "<span className=\"text-[#cbd5e1]\">안심 가이드 | 고객센터 1588-0000</span>"
+      },
+      {
+        "line": 330,
+        "code": "title=\"KTRS 관리자 전용 관제 콘솔 페이지\""
+      },
+      {
+        "line": 332,
+        "code": "<span>관리자 관제 콘솔 (/admin)</span>"
+      },
+      {
+        "line": 339,
+        "code": "{/* 모달 & 드로어 컴포넌트들 */}"
+      },
+      {
+        "line": 354,
+        "code": "alert(`[신원인증 완료] ${userData.userName} 님의 인증이 완료되었습니다.`);"
+      }
+    ],
+    "components/kmarket/KMarketMapPicker.tsx": [
+      {
+        "line": 29,
+        "code": "const [baseAddress, setBaseAddress] = useState(regionText || '경기 안산시 단원구 원곡동 795');"
+      },
+      {
+        "line": 74,
+        "code": "const fallback = `위치 지정됨 (위도: ${lat.toFixed(4)}, 경도: ${lng.toFixed(4)})`;"
+      },
+      {
+        "line": 176,
+        "code": "alert('위치 정보(GPS)를 지원하지 않는 브라우저입니다.');"
+      },
+      {
+        "line": 198,
+        "code": "alert('위치 권한을 허용해 주시거나 지도 위를 직접 클릭하여 핀을 이동해 주세요.');"
+      },
+      {
+        "line": 242,
+        "code": "alert('주소를 찾았습니다. 지도 위를 직접 클릭하여 핀을 미세 조정할 수 있습니다.');"
+      },
+      {
+        "line": 248,
+        "code": "{/* 1. 주소 및 만남 장소 입력 바 */}"
+      },
+      {
+        "line": 253,
+        "code": "<span>📍 직거래 주소 &amp; 만남 장소 (지도 핀 이동 가능)</span>"
+      },
+      {
+        "line": 256,
+        "code": "{/* GPS 내 위치 자동완성 버튼 */}"
+      },
+      {
+        "line": 262,
+        "code": "title=\"현재 내 위치로 주소 & 핀 자동 세팅\""
+      },
+      {
+        "line": 267,
+        "code": "<span>위치 확인중...</span>"
+      },
+      {
+        "line": 272,
+        "code": "<span>📍 내 위치로 핀 이동</span>"
+      },
+      {
+        "line": 278,
+        "code": "{/* 1) 도로명 주소 검색창 */}"
+      },
+      {
+        "line": 295,
+        "code": "placeholder=\"도로명/동네 주소 검색 또는 지도에서 핀을 직접 클릭하세요\""
+      },
+      {
+        "line": 307,
+        "code": "<span>주소 검색</span>"
+      },
+      {
+        "line": 311,
+        "code": "{/* 2) 고객 직접 입력 상세 장소명 */}"
+      },
+      {
+        "line": 314,
+        "code": "<span>상세 만남 장소명 (고객 직접 입력)</span>"
+      },
+      {
+        "line": 315,
+        "code": "<span className=\"text-[10px] text-[#845b37] font-bold\">편의점 앞, 기숙사 정문, 3번 출구 등</span>"
+      },
+      {
+        "line": 324,
+        "code": "placeholder=\"예: GS25 편의점 앞 / 기숙사 2동 경비실 앞 / 정문 시계탑\""
+      },
+      {
+        "line": 330,
+        "code": "{/* 2. 실제 인터랙티브 지도 (클릭/드래그로 핀 직접 이동) */}"
+      },
+      {
+        "line": 335,
+        "code": "<span>👇 지도를 클릭하거나 핀을 끌어당겨 원하는 만남 장소에 콕 찍으세요!</span>"
+      },
+      {
+        "line": 339,
+        "code": "{/* Leaflet 인터랙티브 지도 DOM 컨테이너 (100% 즉시 렌더링) */}"
+      },
+      {
+        "line": 343,
+        "code": "{/* 좌측 상단: 실시간 핀 주소 배지 */}"
+      },
+      {
+        "line": 347,
+        "code": "<span>선택된 직거래 핀 위치</span>"
+      },
+      {
+        "line": 354,
+        "code": "{/* 우측 하단 안내 툴팁 */}"
+      },
+      {
+        "line": 356,
+        "code": "🖱️ 지도 클릭 / 핀 드래그로 이동"
+      }
+    ],
+    "components/kmarket/KMarketMapView.tsx": [
+      {
+        "line": 25,
+        "code": "{/* 🗺️ 실제 실시간 인터랙티브 구글 지도 */}"
+      },
+      {
+        "line": 36,
+        "code": "{/* 우측 상단: 실제 지도 앱 길찾기 바로가기 */}"
+      },
+      {
+        "line": 44,
+        "code": "<span>길찾기 지도 앱</span>"
+      },
+      {
+        "line": 48,
+        "code": "{/* 좌측 상단: 안심 직거래 배지 */}"
+      },
+      {
+        "line": 51,
+        "code": "<span className=\"text-[#f3ba2f]\">실제 직거래 약속 위치</span>"
+      },
+      {
+        "line": 55,
+        "code": "{/* 📍 하단 상세 주소 & 직거래 만남 가이드 */}"
+      },
+      {
+        "line": 61,
+        "code": "{/* 크고 두꺼운 직거래 상세 주소 폰트 */}"
+      },
+      {
+        "line": 68,
+        "code": "{/* 안전 직거래 가이드 */}"
+      },
+      {
+        "line": 72,
+        "code": "<span><strong>CCTV 안심 직거래:</strong> 공공장소 및 가로등이 밝은 위 지도 핀 위치에서 안전하게 거래하세요</span>"
+      }
+    ],
+    "components/kmarket/KMarketMovingSaleSection.tsx": [
+      {
+        "line": 46,
+        "code": "{/* 섹션 헤더 */}"
+      },
+      {
+        "line": 55,
+        "code": "✈️ 귀국 D-Day 무빙세일 (Moving Sale)"
+      },
+      {
+        "line": 62,
+        "code": "비자 만료 귀국 외국인 근로자들의 생활 가전·가구 묶음 헐값 급처분관"
+      },
+      {
+        "line": 69,
+        "code": "<span>최대 85% 묶음 할인</span>"
+      },
+      {
+        "line": 73,
+        "code": "{/* 3단계 D-Day 필터 탭 바 (D-3, D-7, D-14) */}"
+      },
+      {
+        "line": 83,
+        "code": "전체 매물 ({movingSaleItems.length})"
+      },
+      {
+        "line": 95,
+        "code": "<span>🚨 D-3 오늘마감 헐값/나눔</span>"
+      },
+      {
+        "line": 107,
+        "code": "<span>🔥 D-7 마감임박 초특가</span>"
+      },
+      {
+        "line": 119,
+        "code": "<span>✈️ D-14 묶음할인 (사전예약)</span>"
+      },
+      {
+        "line": 123,
+        "code": "{/* 무빙세일 매물 그리드 (20개 단위 페이징) */}"
+      },
+      {
+        "line": 153,
+        "code": "{/* 상단 뱃지 라인 */}"
+      },
+      {
+        "line": 174,
+        "code": "{/* 썸네일 이미지 & 할인율 뱃지 */}"
+      },
+      {
+        "line": 183,
+        "code": "{/* 묶음 할인율 뱃지 */}"
+      },
+      {
+        "line": 191,
+        "code": "{/* 다중 사진 인디케이터 */}"
+      },
+      {
+        "line": 198,
+        "code": "{/* 찜 버튼 */}"
+      },
+      {
+        "line": 214,
+        "code": "{/* 상품 정보 */}"
+      },
+      {
+        "line": 227,
+        "code": "{item.original_price.toLocaleString()}원"
+      },
+      {
+        "line": 251,
+        "code": "<span className=\"text-[#f3ba2f] font-extrabold\">1:1 번역챗</span>"
+      },
+      {
+        "line": 260,
+        "code": "{/* ✈️ 상단 무빙세일 스마트 페이지네이션 바 */}"
+      },
+      {
+        "line": 272,
+        "code": "◀ 이전"
+      },
+      {
+        "line": 308,
+        "code": "다음 ▶"
+      }
+    ],
+    "components/kmarket/KMarketMyPageModal.tsx": [
+      {
+        "line": 57,
+        "code": "const userNickname = authedUser?.nickname || '안산호랑이';"
+      },
+      {
+        "line": 58,
+        "code": "const userDisplayName = authedUser?.nickname || authedUser?.userName || '안산호랑이';"
+      },
+      {
+        "line": 60,
+        "code": "const userVisa = authedUser?.visaType || 'E-9 (비전문취업)';"
+      },
+      {
+        "line": 61,
+        "code": "const userDormitory = authedUser?.dormitory || '평택 포승공단 기숙사 2동';"
+      },
+      {
+        "line": 83,
+        "code": "{/* 모달 상단 프로필 헤더 - 앱 시그니처 딥 네이비 & 2px 골드 라인 */}"
+      },
+      {
+        "line": 92,
+        "code": "{/* 미세한 골드 앰비언트 글로우 */}"
+      },
+      {
+        "line": 96,
+        "code": "{/* 프로필 국기 아바타 박스 (골드 테두리 & 딥 네이비) */}"
+      },
+      {
+        "line": 122,
+        "code": "{/* 📜 모달 바디 스크롤 영역 (세금 환급 계산기 + 매너온도 + 키워드알림 + 3대 상품 탭 목록) */}"
+      },
+      {
+        "line": 124,
+        "code": "{/* 💰 1. KTRS 이지텍스 실시간 10초 환급 계산기 & 즉시 신청 위젯 */}"
+      },
+      {
+        "line": 134,
+        "code": "{/* 🌡️ 2. K-Trust 매너온도 & 실물 신분증 OCR 인증 현황 카드 (독립 라운드 카드 & 시원한 여백) */}"
+      },
+      {
+        "line": 140,
+        "code": "<span>K-Trust 매너온도</span>"
+      },
+      {
+        "line": 147,
+        "code": "<span>매너온도란?</span>"
+      },
+      {
+        "line": 159,
+        "code": "{/* 비주얼 온도 게이지 바 */}"
+      },
+      {
+        "line": 167,
+        "code": "{/* OCR 가산점 안내 & 신뢰 뱃지 */}"
+      },
+      {
+        "line": 172,
+        "code": "<span>법무부 실물 신분증 OCR 검증 (+7.0℃ 보너스 반영)</span>"
+      },
+      {
+        "line": 176,
+        "code": "신뢰도 상위 12% 최우수 회원 🛡️"
+      },
+      {
+        "line": 180,
+        "code": "{/* ❓ 매너온도란? 설명 아코디언/안내 박스 */}"
+      },
+      {
+        "line": 185,
+        "code": "<span>💡 K-Trust 매너온도 시스템 안내</span>"
+      },
+      {
+        "line": 188,
+        "code": "<li>• <strong>36.5℃</strong>는 사람의 따뜻한 체온처럼 가입 시 주어지는 기본 신뢰 점수입니다.</li>"
+      },
+      {
+        "line": 189,
+        "code": "<li>• <strong>📸 실물 신분증 OCR 사진 촬영</strong> 시 즉시 <strong>+7.0℃</strong>가 올라가 <strong>43.5℃(골드 등급)</strong>가 됩니다.</li>"
+      },
+      {
+        "line": 190,
+        "code": "<li>• <strong>43.5℃ 이상</strong>이면 구매자들이 100% 신뢰하여 내 매물이 <strong>3배 더 빠르게 판매</strong>됩니다!</li>"
+      },
+      {
+        "line": 191,
+        "code": "<li>• 직거래 후 시간 약속과 친절 칭찬 후기를 받으면 온도가 계속 상승합니다. (노쇼/사기 신고 시 하강)</li>"
+      },
+      {
+        "line": 197,
+        "code": "{/* 📲 1초 만에 K-Market 앱 설치하기 (PWA 홈 화면 추가) */}"
+      },
+      {
+        "line": 205,
+        "code": "<span>📲 홈 화면에 K-Market 앱 설치하기</span>"
+      },
+      {
+        "line": 207,
+        "code": "1초 설치"
+      },
+      {
+        "line": 211,
+        "code": "바탕화면에 설치하고 15개국 번역 채팅 및 직거래 알림을 가장 빠르게 받으세요."
+      },
+      {
+        "line": 221,
+        "code": "<span>앱 설치</span>"
+      },
+      {
+        "line": 225,
+        "code": "{/* 🔔 키워드 실시간 알림 관리 섹션 (독립 카드) */}"
+      },
+      {
+        "line": 233,
+        "code": "<span>🔔 키워드 실시간 알림 ({keywordAlerts.length}개 등록중)</span>"
+      },
+      {
+        "line": 255,
+        "code": "알림 설정"
+      },
+      {
+        "line": 259,
+        "code": "{/* 📦 3대 거래 관리 탭 바: [내가 파는 물건] [내가 산 물건] [내가 찜한 물건] (연한 커피/카푸치노 스타일) */}"
+      },
+      {
+        "line": 270,
+        "code": "<span>내가 파는 물건 ({mySellingItems.length})</span>"
+      },
+      {
+        "line": 282,
+        "code": "<span>내가 산 물건 ({myPurchasedItems.length})</span>"
+      },
+      {
+        "line": 294,
+        "code": "<span>내가 찜한 물건 ({favoriteItems.length})</span>"
+      },
+      {
+        "line": 298,
+        "code": "{/* 탭 컨텐츠 상품 목록 영역 */}"
+      },
+      {
+        "line": 300,
+        "code": "{/* 1. 내가 파는 물건 탭 */}"
+      },
+      {
+        "line": 303,
+        "code": "{/* 서브 필터: 전체 / 판매중 / 거래완료 (연한 커피 라떼 & 카라멜 모카) */}"
+      },
+      {
+        "line": 315,
+        "code": "{filter === 'all' && `전체 (${mySellingItems.length})`}"
+      },
+      {
+        "line": 316,
+        "code": "{filter === 'selling' && '판매중 / 예약중'}"
+      },
+      {
+        "line": 325,
+        "code": "<p className=\"text-xs\">해당 상태의 판매 매물이 없습니다.</p>"
+      },
+      {
+        "line": 347,
+        "code": "판매중"
+      },
+      {
+        "line": 352,
+        "code": "예약중"
+      },
+      {
+        "line": 357,
+        "code": "거래완료"
+      },
+      {
+        "line": 365,
+        "code": "{item.price === 0 ? '0원 (무료 나눔)' : `${item.price.toLocaleString()}원`}"
+      },
+      {
+        "line": 368,
+        "code": "{item.region} • 찜 {item.like_count}"
+      },
+      {
+        "line": 373,
+        "code": "{/* 판매 상태 변경 버튼 그룹 */}"
+      },
+      {
+        "line": 380,
+        "code": "예약중 변경"
+      },
+      {
+        "line": 388,
+        "code": "판매완료 처리"
+      },
+      {
+        "line": 396,
+        "code": "다시 판매"
+      },
+      {
+        "line": 407,
+        "code": "{/* 2. 내가 산 물건 탭 */}"
+      },
+      {
+        "line": 413,
+        "code": "<p className=\"text-xs\">구매 완료한 내역이 없습니다.</p>"
+      },
+      {
+        "line": 433,
+        "code": "직거래 완료 🛍️"
+      },
+      {
+        "line": 439,
+        "code": "{item.price === 0 ? '무료 나눔' : `${item.price.toLocaleString()}원`}"
+      },
+      {
+        "line": 442,
+        "code": "판매자: {item.seller_name} ({item.region})"
+      },
+      {
+        "line": 448,
+        "code": "onClick={() => alert(`[${item.seller_name}] 님에게 따뜻한 칭찬 후기(+0.5℃)를 보냈습니다!`)}"
+      },
+      {
+        "line": 451,
+        "code": "후기 남기기 ⭐"
+      },
+      {
+        "line": 460,
+        "code": "{/* 3. 내가 찜한 물건 탭 */}"
+      },
+      {
+        "line": 466,
+        "code": "<p className=\"text-xs font-bold\">아직 찜한 물건이 없습니다.</p>"
+      },
+      {
+        "line": 467,
+        "code": "<p className=\"text-[11px]\">마음에 드는 물건에 하트(❤️)를 눌러보세요!</p>"
+      },
+      {
+        "line": 490,
+        "code": "{item.price === 0 ? '0원 (무료 나눔)' : `${item.price.toLocaleString()}원`}"
+      },
+      {
+        "line": 506,
+        "code": "1:1 번역챗 💬"
+      },
+      {
+        "line": 511,
+        "code": "title=\"찜 취소\""
+      },
+      {
+        "line": 523,
+        "code": "{/* 💡 앱 개선 제안 / VOC 건의 창구 (마이페이지 최하단) */}"
+      },
+      {
+        "line": 532,
+        "code": "<span>💡 앱 개선 제안 및 건의하기</span>"
+      },
+      {
+        "line": 534,
+        "code": "VOC 소통창구"
+      },
+      {
+        "line": 538,
+        "code": "불편한 점, 번역 오류, 새로운 공단 추가 요청을 관리자에게 직접 보내주세요."
+      },
+      {
+        "line": 550,
+        "code": "의견 보내기"
+      }
+    ],
+    "components/kmarket/KMarketNotificationDrawer.tsx": [
+      {
+        "line": 82,
+        "code": "{/* 상단 헤더 - 딥 네이비 & 골드 뱃지 */}"
+      },
+      {
+        "line": 101,
+        "code": "<span>통합 알림 센터</span>"
+      },
+      {
+        "line": 107,
+        "code": "키워드 알림, 실시간 번역 채팅, 가격 인하 소식"
+      },
+      {
+        "line": 117,
+        "code": "title=\"모든 알림 읽음 처리\""
+      },
+      {
+        "line": 120,
+        "code": "<span>모두 읽음</span>"
+      },
+      {
+        "line": 133,
+        "code": "{/* 2. 필터 탭 바 (전체 / 키워드 / 채팅 / 가격인하) */}"
+      },
+      {
+        "line": 137,
+        "code": "{ id: 'all', label: '전체' },"
+      },
+      {
+        "line": 138,
+        "code": "{ id: 'keyword', label: '키워드 알림' },"
+      },
+      {
+        "line": 140,
+        "code": "{ id: 'price_drop', label: '가격 인하' },"
+      },
+      {
+        "line": 164,
+        "code": "<span>설정</span>"
+      },
+      {
+        "line": 168,
+        "code": "{/* 3. 알림 목록 스크롤 영역 */}"
+      },
+      {
+        "line": 184,
+        "code": "{/* 알림 아이콘 뱃지 */}"
+      },
+      {
+        "line": 195,
+        "code": "{/* 알림 본문 */}"
+      },
+      {
+        "line": 222,
+        "code": "{/* 썸네일 이미지 (있을 경우) */}"
+      },
+      {
+        "line": 231,
+        "code": "{/* 개별 삭제 버튼 */}"
+      },
+      {
+        "line": 238,
+        "code": "title=\"알림 삭제\""
+      },
+      {
+        "line": 248,
+        "code": "<p className=\"text-xs font-bold\">도착한 알림이 없습니다.</p>"
+      },
+      {
+        "line": 250,
+        "code": "관심 있는 키워드를 등록해두면 원하는 매물이 올라올 때 즉시 알려드립니다!"
+      },
+      {
+        "line": 256,
+        "code": "{/* 4. 하단 키워드 알림 바로가기 CTA */}"
+      },
+      {
+        "line": 266,
+        "code": "<span>내 관심 키워드 알림 (세탁기, 0원 등) 설정하기 →</span>"
+      }
+    ],
+    "components/kmarket/KMarketRegionFilter.tsx": [
+      {
+        "line": 23,
+        "code": "{/* 외국인 밀집 주요 공단 직거래 필터 바 */}"
+      },
+      {
+        "line": 37,
+        "code": "포승 · 반월 · 향남 · 남동 등 기숙사 인근"
+      }
+    ],
+    "components/kmarket/KMarketReportBlockModal.tsx": [
+      {
+        "line": 32,
+        "code": "label: '🚨 사기 의심 (선입금 / 외부 메신저 유도)',"
+      },
+      {
+        "line": 33,
+        "code": "desc: '카톡/라인으로 유도하거나 계좌 선입금을 요구함',"
+      },
+      {
+        "line": 38,
+        "code": "label: '🔞 음란물 / 선정적인 사진 / 성인물',"
+      },
+      {
+        "line": 39,
+        "code": "desc: '노출이 심한 사진, 성인용품, 음란성 이미지 또는 성희롱 사진 게시',"
+      },
+      {
+        "line": 44,
+        "code": "label: '🤬 비매너 / 욕설 / 성희롱 / 혐오 발언',"
+      },
+      {
+        "line": 45,
+        "code": "desc: '채팅 중 모욕적이거나 불쾌한 언행을 함',"
+      },
+      {
+        "line": 50,
+        "code": "label: '📦 허위 매물 / 가짜 사진 / 게시글과 다른 물건',"
+      },
+      {
+        "line": 51,
+        "code": "desc: '실물과 사진이 완전히 다르거나 존재하지 않는 매물임',"
+      },
+      {
+        "line": 56,
+        "code": "label: '🚫 판매 금지 품목 (주류, 담배, 의약품, 불법 알선)',"
+      },
+      {
+        "line": 57,
+        "code": "desc: '국내 법률 및 K-Market 규정상 거래가 금지된 품목임',"
+      },
+      {
+        "line": 62,
+        "code": "label: '⏰ 직거래 약속 노쇼 (약속 장소에 안 나옴)',"
+      },
+      {
+        "line": 63,
+        "code": "desc: '약속 시간에 연락 없이 나타나지 않아 피해를 입음',"
+      },
+      {
+        "line": 68,
+        "code": "label: '❓ 기타 사유 직접 입력',"
+      },
+      {
+        "line": 69,
+        "code": "desc: '기타 비정상적인 거래 행위',"
+      },
+      {
+        "line": 95,
+        "code": "reporter_name: '나 (User)',"
+      },
+      {
+        "line": 113,
+        "code": "{/* 헤더 */}"
+      },
+      {
+        "line": 121,
+        "code": "<span>클린 K-Market 안전 신고 센터</span>"
+      },
+      {
+        "line": 124,
+        "code": "사용자 차단 및 불량 신고"
+      },
+      {
+        "line": 137,
+        "code": "{/* 폼 본문 */}"
+      },
+      {
+        "line": 139,
+        "code": "{/* 신고 대상 안내 */}"
+      },
+      {
+        "line": 143,
+        "code": "신고 및 차단 대상 회원:"
+      },
+      {
+        "line": 150,
+        "code": "관련 매물: {itemTitle}"
+      },
+      {
+        "line": 157,
+        "code": "{/* 1. 신고 사유 선택 */}"
+      },
+      {
+        "line": 160,
+        "code": "1. 신고 사유를 선택해 주세요"
+      },
+      {
+        "line": 192,
+        "code": "{/* 2. 상세 설명 입력 */}"
+      },
+      {
+        "line": 195,
+        "code": "2. 상세 내용 (선택 사항)"
+      },
+      {
+        "line": 201,
+        "code": "placeholder=\"구체적인 상황을 적어주시면 안전 운영팀이 신속히 조사 후 제재합니다.\""
+      },
+      {
+        "line": 206,
+        "code": "{/* 3. 이 사용자 즉시 차단하기 체크박스 */}"
+      },
+      {
+        "line": 214,
+        "code": "🚫 이 사용자 즉시 차단하기"
+      },
+      {
+        "line": 217,
+        "code": "차단 시 이 회원의 매물과 메시지가 나에게 더 이상 보이지 않습니다."
+      },
+      {
+        "line": 230,
+        "code": "{/* 제출 버튼 */}"
+      },
+      {
+        "line": 236,
+        "code": "<span>신고 접수 및 차단하기</span>"
+      }
+    ],
+    "components/kmarket/KMarketReviewModal.tsx": [
+      {
+        "line": 56,
+        "code": "reviewer_name: 'Me (나)',"
+      },
+      {
+        "line": 87,
+        "code": "{/* 닫기 버튼 */}"
+      },
+      {
+        "line": 101,
+        "code": "따뜻한 거래 후기가 등록되었습니다!"
+      },
+      {
+        "line": 104,
+        "code": "상대방의 K-Trust 매너온도가 올라갔어요 💖"
+      },
+      {
+        "line": 109,
+        "code": "{/* 상단 헤더 */}"
+      },
+      {
+        "line": 113,
+        "code": "<span>K-Trust 글로벌 매너 평가</span>"
+      },
+      {
+        "line": 122,
+        "code": "<span>{targetUserName} 님과의 거래는 어떠셨나요?</span>"
+      },
+      {
+        "line": 129,
+        "code": "{/* 3단계 평가 버튼 */}"
+      },
+      {
+        "line": 141,
+        "code": "<span className=\"text-xs\">최고예요!</span>"
+      },
+      {
+        "line": 155,
+        "code": "<span className=\"text-xs\">좋아요</span>"
+      },
+      {
+        "line": 169,
+        "code": "<span className=\"text-xs\">아쉬워요</span>"
+      },
+      {
+        "line": 174,
+        "code": "{/* 15개국어 칭찬 태그 선택 리스트 */}"
+      },
+      {
+        "line": 177,
+        "code": "<span>어떤 점이 좋으셨나요? (중복 선택 가능)</span>"
+      },
+      {
+        "line": 178,
+        "code": "<span className=\"text-[11px] text-gray-400\">15개 언어 자동 번역</span>"
+      },
+      {
+        "line": 210,
+        "code": "{/* 따뜻한 한 줄 코멘트 (선택) */}"
+      },
+      {
+        "line": 213,
+        "code": "따뜻한 후기 한마디 (선택)"
+      },
+      {
+        "line": 218,
+        "code": "placeholder=\"상대방에게 전하고 싶은 감사 인사를 남겨주세요.\""
+      },
+      {
+        "line": 224,
+        "code": "{/* 제출 버튼 */}"
+      },
+      {
+        "line": 229,
+        "code": "<span>거래 후기 보내기</span>"
+      }
+    ],
+    "components/kmarket/KMarketSafetyBanner.tsx": [
+      {
+        "line": 27,
+        "code": "{/* 좌측 아이콘 & 헤드라인 */}"
+      },
+      {
+        "line": 35,
+        "code": "🛡️ 외국인 안심 거래 쉴드"
+      },
+      {
+        "line": 42,
+        "code": "선입금 요구는 99% 사기! 반드시 현장에서 물건 확인 후 결제하세요."
+      },
+      {
+        "line": 47,
+        "code": "{/* 우측 3대 수칙 퀵 요약 & 화살표 */}"
+      },
+      {
+        "line": 50,
+        "code": "<span>3대 안심 수칙 보기</span>"
+      },
+      {
+        "line": 57,
+        "code": "{/* 안심 거래 3대 수칙 상세 팝업 모달 */}"
+      },
+      {
+        "line": 68,
+        "code": "외국인 안심 거래 3대 수칙"
+      },
+      {
+        "line": 71,
+        "code": "K-Market 회원 보호 및 사기 범죄 원천 차단 가이드"
+      },
+      {
+        "line": 85,
+        "code": "{/* 1. 선입금 금지 */}"
+      },
+      {
+        "line": 93,
+        "code": "<span>선입금 및 예약금 요구는 99% 사기입니다</span>"
+      },
+      {
+        "line": 96,
+        "code": "\"물건을 맡아둘 테니 1만원만 먼저 보내라\", \"택배비 먼저 입금해라\" 등은 대표적인 사기 수법입니다. 반드시 <strong>직접 만나서 물건 상태를 확인한 후</strong> 대금을 지급하세요."
+      },
+      {
+        "line": 101,
+        "code": "{/* 2. 외부 메신저 거절 */}"
+      },
+      {
+        "line": 109,
+        "code": "<span>카카오톡/라인 등 외부 메신저 유도를 거절하세요</span>"
+      },
+      {
+        "line": 112,
+        "code": "외부 메신저로 대화할 경우 사기 피해 발생 시 증거 확보 및 구제가 어렵습니다. K-Market의 <strong>15개국어 실시간 안심 번역 채팅</strong> 안에서만 거래를 진행하세요."
+      },
+      {
+        "line": 117,
+        "code": "{/* 3. 공단 랜드마크 핀 활용 */}"
+      },
+      {
+        "line": 125,
+        "code": "<span>가로등과 CCTV가 있는 공단 랜드마크에서 만나세요</span>"
+      },
+      {
+        "line": 128,
+        "code": "인적이 드문 골목보다 <strong>포승공단 GS25 앞, 원곡동 시계탑, 기숙사 정문</strong> 등 밝고 안전한 랜드마크 지도 핀을 약속 장소로 잡으세요."
+      },
+      {
+        "line": 137,
+        "code": "확인했습니다"
+      }
+    ],
+    "components/kmarket/KMarketScamWarningModal.tsx": [
+      {
+        "line": 49,
+        "code": "{/* 모달 헤더 (강렬한 레드/앰버 그라데이션) */}"
+      },
+      {
+        "line": 66,
+        "code": "사기 피해 주의 경고"
+      },
+      {
+        "line": 79,
+        "code": "{/* 모달 본문 */}"
+      },
+      {
+        "line": 81,
+        "code": "{/* 감지된 위험 알림 박스 */}"
+      },
+      {
+        "line": 96,
+        "code": "<span>감지된 주의 단어:</span>"
+      },
+      {
+        "line": 103,
+        "code": "{/* K-Market 3대 안전 수칙 체크리스트 */}"
+      },
+      {
+        "line": 106,
+        "code": "🛡️ 외국인 안심 직거래 3대 철칙 (Safety Rules)"
+      },
+      {
+        "line": 111,
+        "code": "<span><strong>1. 선입금 절대 금지:</strong> 반드시 만나서 물건을 본 뒤 현금/이체하기</span>"
+      },
+      {
+        "line": 115,
+        "code": "<span><strong>2. 앱 안에서만 대화:</strong> 카톡/라인/텔레그램 이동 거절하기</span>"
+      },
+      {
+        "line": 119,
+        "code": "<span><strong>3. 공단 밝은 곳에서 만남:</strong> GS25 편의점, 기숙사 정문 핀 활용</span>"
+      },
+      {
+        "line": 124,
+        "code": "{/* 확인 버튼 */}"
+      },
+      {
+        "line": 130,
+        "code": "<span>안전 수칙을 확인했으며 주의하겠습니다</span>"
+      }
+    ],
+    "components/kmarket/KMarketStatusActionModal.tsx": [
+      {
+        "line": 39,
+        "code": "name: 'Nguyen Van A (응우옌)',"
+      },
+      {
+        "line": 99,
+        "code": "{/* 닫기 버튼 */}"
+      },
+      {
+        "line": 107,
+        "code": "{/* 헤더 */}"
+      },
+      {
+        "line": 111,
+        "code": "<span>판매 매물 관리</span>"
+      },
+      {
+        "line": 114,
+        "code": "거래 상태 변경 & 끌어올리기"
+      },
+      {
+        "line": 119,
+        "code": "{/* 현재 상태 표시 & 변경 버튼 */}"
+      },
+      {
+        "line": 122,
+        "code": "1. 거래 상태 변경"
+      },
+      {
+        "line": 136,
+        "code": "<span className=\"text-xs\">판매중</span>"
+      },
+      {
+        "line": 149,
+        "code": "<span className=\"text-xs\">예약중</span>"
+      },
+      {
+        "line": 162,
+        "code": "<span className=\"text-xs\">거래완료</span>"
+      },
+      {
+        "line": 166,
+        "code": "{/* 거래 상대방 선택 */}"
+      },
+      {
+        "line": 171,
+        "code": "<span>거래 상대방 (구매자)</span>"
+      },
+      {
+        "line": 173,
+        "code": "<span className=\"text-[11px] text-emerald-600\">최근 채팅 상대</span>"
+      },
+      {
+        "line": 186,
+        "code": "선택됨"
+      },
+      {
+        "line": 195,
+        "code": "{/* 끌어올리기 (Boost) & 가격 인하 섹션 */}"
+      },
+      {
+        "line": 200,
+        "code": "<span>🚀 피드 최상단 끌어올리기 (Boost)</span>"
+      },
+      {
+        "line": 203,
+        "code": "무료"
+      },
+      {
+        "line": 208,
+        "code": "매물을 목록 맨 위로 끌어올려 외국인 근로자들에게 다시 노출합니다. 가격을 10% 이상 할인하면 <strong>[가격인하 📉]</strong> 뱃지가 함께 부착되어 3배 빠르게 판매됩니다!"
+      },
+      {
+        "line": 211,
+        "code": "{/* 가격 할인 선택 옵션 */}"
+      },
+      {
+        "line": 214,
+        "code": "<span>가격 인하 선택 (선택 사항)</span>"
+      },
+      {
+        "line": 217,
+        "code": "{formatWon(item.price)} ➔ {formatWon(discountedPrice)} ({discountPercent}% 할인)"
+      },
+      {
+        "line": 234,
+        "code": "{pct === 0 ? '가격 유지' : `-${pct}%`}"
+      },
+      {
+        "line": 246,
+        "code": "<span>지금 끌어올리기 완료</span>"
+      }
+    ],
+    "components/kmarket/KMarketStatusBadge.tsx": [
+      {
+        "line": 29,
+        "code": "<span>거래완료</span>"
+      },
+      {
+        "line": 41,
+        "code": "<span>예약중</span>"
+      },
+      {
+        "line": 53,
+        "code": "<span>{dropDiscountRate ? `${dropDiscountRate}% 할인` : '가격인하'}</span>"
+      },
+      {
+        "line": 65,
+        "code": "<span>끌올</span>"
+      }
+    ],
+    "components/kmarket/KMarketSuperBenefitCards.tsx": [
+      {
+        "line": 12,
+        "code": "{/* 3대 프리미엄 혜택 카드 3열 그리드 */}"
+      },
+      {
+        "line": 15,
+        "code": "{/* 1. 💰 5개년 세무 환급 (최대 1,000만원) */}"
+      },
+      {
+        "line": 25,
+        "code": "{/* 상단 럭셔리 골드 글로우 */}"
+      },
+      {
+        "line": 29,
+        "code": "{/* 상단 태그 & 아이콘 */}"
+      },
+      {
+        "line": 33,
+        "code": "<span>국세청 제30조 법적 권리</span>"
+      },
+      {
+        "line": 40,
+        "code": "{/* 타이틀 & 강조 금액 */}"
+      },
+      {
+        "line": 42,
+        "code": "<h3 className=\"text-sm font-bold text-white/80\">5개년 숨은 세금 환급</h3>"
+      },
+      {
+        "line": 44,
+        "code": "<span>최대 1,000만원</span>"
+      },
+      {
+        "line": 45,
+        "code": "<span className=\"text-xs font-semibold text-amber-200/80\">환급</span>"
+      },
+      {
+        "line": 49,
+        "code": "{/* 3대 핵심 혜택 리스트 */}"
+      },
+      {
+        "line": 53,
+        "code": "<span>최근 5년간 지나친 세금 <strong>완벽 전액 환급</strong></span>"
+      },
+      {
+        "line": 57,
+        "code": "<span>간편인증 0회! <strong>30초 모바일 무인 접수</strong></span>"
+      },
+      {
+        "line": 61,
+        "code": "<span>선결제 0원! <strong>환급 완료 시 100% 후불 정산</strong></span>"
+      },
+      {
+        "line": 66,
+        "code": "{/* 하단 CTA 버튼 */}"
+      },
+      {
+        "line": 75,
+        "code": "<span>30초 환급금 무료 조회</span>"
+      },
+      {
+        "line": 81,
+        "code": "{/* 2. ⚡ 외국인 맞춤 대출 (최대 5,000만원) */}"
+      },
+      {
+        "line": 83,
+        "code": "onClick={() => alert('⚡ [KTRS 외국인 맞춤 대출 API]\\n국세청 5개년 소득증빙 연계를 통해 최대 5,000만원 안심 대출 한도 조회 서비스가 제공됩니다.')}"
+      },
+      {
+        "line": 91,
+        "code": "{/* 상단 블루 글로우 */}"
+      },
+      {
+        "line": 95,
+        "code": "{/* 상단 태그 & 아이콘 */}"
+      },
+      {
+        "line": 99,
+        "code": "<span>실시간 금융 API 연동</span>"
+      },
+      {
+        "line": 106,
+        "code": "{/* 타이틀 & 강조 금액 */}"
+      },
+      {
+        "line": 108,
+        "code": "<h3 className=\"text-sm font-bold text-white/80\">외국인 맞춤 신용·비상금</h3>"
+      },
+      {
+        "line": 110,
+        "code": "<span>최대 5,000만원</span>"
+      },
+      {
+        "line": 111,
+        "code": "<span className=\"text-xs font-semibold text-blue-200/80\">한도</span>"
+      },
+      {
+        "line": 115,
+        "code": "{/* 3대 핵심 혜택 리스트 */}"
+      },
+      {
+        "line": 119,
+        "code": "<span>국세청 <strong>5개년 소득증빙 데이터</strong> 기반 승인</span>"
+      },
+      {
+        "line": 123,
+        "code": "<span>소액 긴급 비상금부터 <strong>최대 5,000만원 생활자금</strong></span>"
+      },
+      {
+        "line": 127,
+        "code": "<span>1금융권 및 <strong>우수 공식 제휴 금융사</strong> 안전 연동</span>"
+      },
+      {
+        "line": 132,
+        "code": "{/* 하단 CTA 버튼 */}"
+      },
+      {
+        "line": 140,
+        "code": "<span>내 실시간 대출한도 확인</span>"
+      },
+      {
+        "line": 146,
+        "code": "{/* 3. 🏠 내 동네 안심 원룸 & 주택 */}"
+      },
+      {
+        "line": 148,
+        "code": "onClick={() => alert('🏠 [KTRS 내 동네 안심 부동산 & 원룸]\\n국토교통부 실거래가 기반 시세 검증 및 15개국어 제휴 공인중개사 안심 매물 서비스가 연결됩니다.')}"
+      },
+      {
+        "line": 156,
+        "code": "{/* 상단 에메랄드 글로우 */}"
+      },
+      {
+        "line": 160,
+        "code": "{/* 상단 태그 & 아이콘 */}"
+      },
+      {
+        "line": 164,
+        "code": "<span>국토부 실거래가 검증</span>"
+      },
+      {
+        "line": 171,
+        "code": "{/* 타이틀 & 강조 금액 */}"
+      },
+      {
+        "line": 173,
+        "code": "<h3 className=\"text-sm font-bold text-white/80\">외국인 전용 안심 주거</h3>"
+      },
+      {
+        "line": 175,
+        "code": "<span>내 동네 안심 원룸</span>"
+      },
+      {
+        "line": 176,
+        "code": "<span className=\"text-xs font-semibold text-emerald-200/80\">직방</span>"
+      },
+      {
+        "line": 180,
+        "code": "{/* 3대 핵심 혜택 리스트 */}"
+      },
+      {
+        "line": 184,
+        "code": "<span>국토부 <strong>실거래가 기반 시세 검증</strong> 매물</span>"
+      },
+      {
+        "line": 188,
+        "code": "<span>외국인 보증금 사기 방지 <strong>100% 안심 방</strong></span>"
+      },
+      {
+        "line": 192,
+        "code": "<span><strong>15개국어 계약서 번역</strong> &amp; 안심 중개 동행</span>"
+      },
+      {
+        "line": 197,
+        "code": "{/* 하단 CTA 버튼 */}"
+      },
+      {
+        "line": 205,
+        "code": "<span>내 동네 안심 매물 둘러보기</span>"
+      }
+    ],
+    "components/kmarket/KMarketTaxBanner.tsx": [
+      {
+        "line": 20,
+        "code": "{/* 우측 감성적인 고화질 세무 상담 사진 (미드나잇 오버레이 블렌딩) */}"
+      },
+      {
+        "line": 30,
+        "code": "{/* 럭셔리 골드 앰비언트 글로우 */}"
+      },
+      {
+        "line": 36,
+        "code": "{/* 상단: 국세청 법적 근거 골드 라인 */}"
+      },
+      {
+        "line": 41,
+        "code": "<span>대한민국 국세청(NTS) 조세특례제한법 제30조 법적 권리</span>"
+      },
+      {
+        "line": 46,
+        "code": "{/* 헤드라인 타이틀 */}"
+      },
+      {
+        "line": 48,
+        "code": "지나치기 쉬운 세금 환급, <br className=\"hidden sm:inline\" />"
+      },
+      {
+        "line": 49,
+        "code": "외국인 근로자도 보장받는 <span className=\"text-[#f3ba2f] underline underline-offset-4 decoration-[#f3ba2f]/60\">[평균 184만원]</span> 30초 무료 조회"
+      },
+      {
+        "line": 52,
+        "code": "{/* 3대 핵심 보증 칩 (골드 테두리 & 다크 뱃지) */}"
+      },
+      {
+        "line": 56,
+        "code": "<span>소요시간 30초</span>"
+      },
+      {
+        "line": 60,
+        "code": "<span>평균 184만원 수령</span>"
+      },
+      {
+        "line": 64,
+        "code": "<span>선결제 0원 (100% 후불제)</span>"
+      },
+      {
+        "line": 69,
+        "code": "{/* 우측 액션 버튼: 스크린샷 스타일 골든 그라데이션 솔리드 버튼 */}"
+      },
+      {
+        "line": 78,
+        "code": "<span>내 환급금 30초 무료 조회하기</span>"
+      }
+    ],
+    "components/kmarket/KMarketTaxModal.tsx": [
+      {
+        "line": 51,
+        "code": "alert('성명과 연락처를 입력해 주세요.');"
+      },
+      {
+        "line": 76,
+        "code": "{/* 모달 상단 헤더 */}"
+      },
+      {
+        "line": 91,
+        "code": "선결제 0원 후불제"
+      },
+      {
+        "line": 97,
+        "code": "? '🎉 세금 환급 신청이 접수되었습니다!'"
+      },
+      {
+        "line": 98,
+        "code": ": '외국인 근로자 숨은 세금 30초 무료 환급'}"
+      },
+      {
+        "line": 101,
+        "code": "한국에서 일하며 낸 소득세, 조특법 법정 감면 혜택으로 평균 184만원을 안전하게 돌려받으세요."
+      },
+      {
+        "line": 104,
+        "code": "{/* 진행 스텝 인디케이터 */}"
+      },
+      {
+        "line": 115,
+        "code": "<span>비자 및 급여 선택</span>"
+      },
+      {
+        "line": 126,
+        "code": "<span>예상 환급액 및 간편 접수</span>"
+      },
+      {
+        "line": 132,
+        "code": "{/* 모달 본문 스크롤 영역 */}"
+      },
+      {
+        "line": 134,
+        "code": "{/* STEP 1: 비자 및 근무정보 입력 */}"
+      },
+      {
+        "line": 137,
+        "code": "{/* 1. 비자 종류 선택 */}"
+      },
+      {
+        "line": 140,
+        "code": "<span>1. 체류 비자 유형 (Visa Type)</span>"
+      },
+      {
+        "line": 182,
+        "code": "{/* 2. 한국 근무 연수 슬라이더 */}"
+      },
+      {
+        "line": 185,
+        "code": "<span>2. 한국 근무 기간 (Years in Korea)</span>"
+      },
+      {
+        "line": 187,
+        "code": "{workYears}년 ({workYears * 12}개월 근무)"
+      },
+      {
+        "line": 200,
+        "code": "<span>1년</span>"
+      },
+      {
+        "line": 202,
+        "code": "<span>3년 (평균)</span>"
+      },
+      {
+        "line": 204,
+        "code": "<span>5년 (최대)</span>"
+      },
+      {
+        "line": 208,
+        "code": "{/* 3. 월 평균 급여 슬라이더 */}"
+      },
+      {
+        "line": 211,
+        "code": "<span>3. 월 평균 급여 (세전 Monthly Salary)</span>"
+      },
+      {
+        "line": 213,
+        "code": "{(monthlyPay / 10000).toLocaleString()}만원"
+      },
+      {
+        "line": 226,
+        "code": "<span>200만원</span>"
+      },
+      {
+        "line": 227,
+        "code": "<span>280만원 (평균)</span>"
+      },
+      {
+        "line": 229,
+        "code": "<span>500만원+</span>"
+      },
+      {
+        "line": 233,
+        "code": "{/* 실시간 환급액 프리뷰 카드 */}"
+      },
+      {
+        "line": 237,
+        "code": "<span>실시간 계산된 예상 환급액</span>"
+      },
+      {
+        "line": 241,
+        "code": "<span className=\"text-xl font-bold ml-1\">원</span>"
+      },
+      {
+        "line": 248,
+        "code": "{/* 다음 버튼 */}"
+      },
+      {
+        "line": 253,
+        "code": "<span>예상 환급액 상세 확인 및 무료 신청 (30초)</span>"
+      },
+      {
+        "line": 259,
+        "code": "{/* STEP 2: 상세 견적 및 후불 수수료 보증 & 신청 정보 */}"
+      },
+      {
+        "line": 262,
+        "code": "{/* 환급 상세 내역 브리핑 */}"
+      },
+      {
+        "line": 266,
+        "code": "신청 비자 및 기간"
+      },
+      {
+        "line": 269,
+        "code": "{selectedVisa} 비자 • {workYears}년 근무"
+      },
+      {
+        "line": 275,
+        "code": "<span className=\"text-slate-400\">국세 소득세 환급 (90%):</span>"
+      },
+      {
+        "line": 277,
+        "code": "{result.nationalTaxRefund.toLocaleString()}원"
+      },
+      {
+        "line": 281,
+        "code": "<span className=\"text-slate-400\">지방소득세 환급 (10%):</span>"
+      },
+      {
+        "line": 283,
+        "code": "{result.localTaxRefund.toLocaleString()}원"
+      },
+      {
+        "line": 287,
+        "code": "<span>총 예상 환급 합계:</span>"
+      },
+      {
+        "line": 288,
+        "code": "<span className=\"text-base\">{result.estimatedTotalRefund.toLocaleString()}원</span>"
+      },
+      {
+        "line": 293,
+        "code": "{/* 후불제(선결제 0원) 안심 보증 정책 배너 */}"
+      },
+      {
+        "line": 297,
+        "code": "<span>KTRS 100% 후불 수수료 안심 보증</span>"
+      },
+      {
+        "line": 302,
+        "code": "<span><strong>선결제 비용 0원</strong>: 조회 및 신청 시 단 1원도 내지 않습니다.</span>"
+      },
+      {
+        "line": 306,
+        "code": "<span><strong>성공 후불제 ({result.successFeePercent}%)</strong>: 국세청 환급금이 고객 통장에 100% 입금된 후에만 청구됩니다.</span>"
+      },
+      {
+        "line": 311,
+        "code": "{/* 신청자 정보 입력 폼 */}"
+      },
+      {
+        "line": 314,
+        "code": "환급금 안내 및 접수 정보 입력"
+      },
+      {
+        "line": 320,
+        "code": "신청자 성명 (여권상 영문 또는 한국 이름)"
+      },
+      {
+        "line": 327,
+        "code": "placeholder=\"예: NGUYEN VAN HUNG\""
+      },
+      {
+        "line": 334,
+        "code": "한국 휴대전화 번호"
+      },
+      {
+        "line": 349,
+        "code": "국적 선택 (모국어 상담 지원)"
+      },
+      {
+        "line": 358,
+        "code": "<option value=\"VN\">🇻🇳 베트남 (Vietnam)</option>"
+      },
+      {
+        "line": 360,
+        "code": "<option value=\"TH\">🇹🇭 태국 (Thailand)</option>"
+      },
+      {
+        "line": 361,
+        "code": "<option value=\"UZ\">🇺🇿 우즈베키스탄 (Uzbekistan)</option>"
+      },
+      {
+        "line": 363,
+        "code": "<option value=\"MN\">🇲🇳 몽골 (Mongolia)</option>"
+      },
+      {
+        "line": 364,
+        "code": "<option value=\"LK\">🇱🇰 스리랑카 (Sri Lanka)</option>"
+      },
+      {
+        "line": 366,
+        "code": "<option value=\"PH\">🇵🇭 필리핀 (Philippines)</option>"
+      },
+      {
+        "line": 367,
+        "code": "<option value=\"ID\">🇮🇩 인도네시아 (Indonesia)</option>"
+      },
+      {
+        "line": 369,
+        "code": "<option value=\"KR\">🇰🇷 한국 (Korea)</option>"
+      },
+      {
+        "line": 375,
+        "code": "{/* 약관 동의 */}"
+      },
+      {
+        "line": 385,
+        "code": "[필수] 국세청 환급 대행 및 KTRS 전문 세무사 1:1 상담 연결에 동의합니다."
+      },
+      {
+        "line": 389,
+        "code": "{/* 버튼 그룹 */}"
+      },
+      {
+        "line": 404,
+        "code": "<span>선결제 0원으로 1초 접수 완료하기</span>"
+      },
+      {
+        "line": 411,
+        "code": "<span>개인정보 256bit 암호화 및 국세청 공식 홈택스 전산 연동</span>"
+      },
+      {
+        "line": 416,
+        "code": "{/* STEP 3: 접수 완료 및 접수증 카드 */}"
+      },
+      {
+        "line": 425,
+        "code": "환급 신청이 정상 접수되었습니다!"
+      },
+      {
+        "line": 428,
+        "code": "외국인 전담 KTRS 제휴 세무사가 24시간 이내에 카카오톡/문자로 최종 확정액을 안내합니다."
+      },
+      {
+        "line": 432,
+        "code": "{/* 공식 모바일 접수증 카드 */}"
+      },
+      {
+        "line": 437,
+        "code": "<span>KTRS 모바일 세무 접수증</span>"
+      },
+      {
+        "line": 445,
+        "code": "<span className=\"text-slate-400\">신청자 성명:</span>"
+      },
+      {
+        "line": 452,
+        "code": "<span className=\"text-slate-400\">예상 환급 총액:</span>"
+      },
+      {
+        "line": 454,
+        "code": "{result.estimatedTotalRefund.toLocaleString()}원"
+      },
+      {
+        "line": 459,
+        "code": "<span className=\"text-slate-400\">비용 지불 방식:</span>"
+      },
+      {
+        "line": 461,
+        "code": "100% 후불제 (선결제 0원)"
+      },
+      {
+        "line": 466,
+        "code": "<span className=\"text-slate-400\">환급금 입금 계좌:</span>"
+      },
+      {
+        "line": 468,
+        "code": "세무사 안내 메시지로 계좌 등록"
+      },
+      {
+        "line": 478,
+        "code": "확인 및 K-Market 계속 쇼핑하기"
+      }
+    ],
+    "components/kmarket/KMarketTrustBadge.tsx": [
+      {
+        "line": 48,
+        "code": "title={`매너온도: ${mannerTemp.toFixed(1)}℃ (${levelTitle})`}"
+      },
+      {
+        "line": 79,
+        "code": "K-Trust 매너온도"
+      },
+      {
+        "line": 92,
+        "code": "<div className=\"text-[11px] text-gray-500 dark:text-gray-400\">거래 {tradeCount}회</div>"
+      },
+      {
+        "line": 102,
+        "code": "{/* 인증 뱃지 바 */}"
+      },
+      {
+        "line": 107,
+        "code": "<span>비자·신분 인증</span>"
+      },
+      {
+        "line": 113,
+        "code": "<span>공단 기숙사 인증</span>"
+      }
+    ],
+    "components/kmarket/KMarketUserItemsList.tsx": [
+      {
+        "line": 40,
+        "code": "<p>현재 판매 중인 다른 물품이 없습니다.</p>"
+      },
+      {
+        "line": 49,
+        "code": "<span>🛍️ 판매 상품</span>"
+      },
+      {
+        "line": 51,
+        "code": "{userItems.length}개"
+      },
+      {
+        "line": 56,
+        "code": "<span>묶음 구매 시 네고 문의 가능</span>"
+      },
+      {
+        "line": 76,
+        "code": "{/* 상품 썸네일 */}"
+      },
+      {
+        "line": 85,
+        "code": "완료"
+      },
+      {
+        "line": 95,
+        "code": "{/* 상품 정보 */}"
+      },
+      {
+        "line": 115,
+        "code": "{item.original_price.toLocaleString()}원"
+      }
+    ],
+    "components/kmarket/KMarketUserProfileModal.tsx": [
+      {
+        "line": 48,
+        "code": "{/* 닫기 버튼 */}"
+      },
+      {
+        "line": 57,
+        "code": "{/* 유저 헤더 정보 */}"
+      },
+      {
+        "line": 76,
+        "code": "<span>응답률 {profile.response_rate}%</span>"
+      },
+      {
+        "line": 78,
+        "code": "<span>거래 완료 {profile.trade_count}회</span>"
+      },
+      {
+        "line": 83,
+        "code": "{/* K-Trust 매너온도 간략 배지 */}"
+      },
+      {
+        "line": 92,
+        "code": "{/* 2단 탭 바 (🛍️ 판매 물품 vs ⭐ 매너 & 후기) */}"
+      },
+      {
+        "line": 103,
+        "code": "<span>판매 상품 ({sellerItemsCount})</span>"
+      },
+      {
+        "line": 115,
+        "code": "<span>신뢰 & 거래후기</span>"
+      },
+      {
+        "line": 119,
+        "code": "{/* 탭 1: 판매 물품 목록 */}"
+      },
+      {
+        "line": 132,
+        "code": "{/* 탭 2: 매너 & 후기 */}"
+      },
+      {
+        "line": 135,
+        "code": "{/* 인증 배지 상태 안내 */}"
+      },
+      {
+        "line": 139,
+        "code": "<span>안심 거래 인증 현황</span>"
+      },
+      {
+        "line": 144,
+        "code": "<span>체류비자 신분 확인됨</span>"
+      },
+      {
+        "line": 148,
+        "code": "<span>산단 기숙사 위치 인증</span>"
+      },
+      {
+        "line": 153,
+        "code": "{/* 받은 매너 칭찬 키워드 통계 */}"
+      },
+      {
+        "line": 157,
+        "code": "<span>받은 매너 칭찬 키워드</span>"
+      },
+      {
+        "line": 188,
+        "code": "아직 등록된 칭찬 키워드가 없습니다."
+      },
+      {
+        "line": 193,
+        "code": "{/* 최근 거래 후기 */}"
+      },
+      {
+        "line": 197,
+        "code": "<span>최근 거래 후기 ({profile.recent_reviews.length})</span>"
+      },
+      {
+        "line": 232,
+        "code": "첫 번째 거래 후기를 남겨보세요!"
+      },
+      {
+        "line": 239,
+        "code": "{/* 닫기 버튼 */}"
+      },
+      {
+        "line": 244,
+        "code": "닫기"
+      }
+    ],
+    "context/CommunityContext.tsx": [
+      {
+        "line": 120,
+        "code": "userName: authedUser.userName || '나 (Me)',"
+      },
+      {
+        "line": 166,
+        "code": "userName: authedUser.userName || '나 (Me)',"
+      },
+      {
+        "line": 173,
+        "code": "region: postData.region || '경기 평택시',"
+      },
+      {
+        "line": 241,
+        "code": "reporterName: authedUser?.userName || '익명',"
+      }
+    ],
+    "context/KMarketContext.tsx": [
+      {
+        "line": 147,
+        "code": "title: '🔔 키워드 알림: [세탁기]',"
+      },
+      {
+        "line": 148,
+        "code": "message: '평택 포승공단에 \"통돌이 세탁기 10kg + 쿠쿠 밥솥\" 매물이 새로 등록되었습니다.',"
+      },
+      {
+        "line": 152,
+        "code": "created_at: '10분 전',"
+      },
+      {
+        "line": 157,
+        "code": "title: '💬 1:1 안심 번역 채팅 도착',"
+      },
+      {
+        "line": 158,
+        "code": "message: 'Nguyễn 님이 새로운 번역 메시지를 보냈습니다: \"감사합니다! 오늘 저녁 7시에 만나요!\"',"
+      },
+      {
+        "line": 162,
+        "code": "created_at: '25분 전',"
+      },
+      {
+        "line": 167,
+        "code": "title: '🔥 찜한 매물 가격 인하',"
+      },
+      {
+        "line": 168,
+        "code": "message: '관심 매물 \"쿠쿠 전기밥솥 6인용\" 가격이 25,000원으로 15% 인하되었습니다!',"
+      },
+      {
+        "line": 172,
+        "code": "created_at: '1시간 전',"
+      },
+      {
+        "line": 177,
+        "code": "title: '📍 직거래 약속 1시간 전 리마인더',"
+      },
+      {
+        "line": 178,
+        "code": "message: '오늘 19:00 \"포승공단 GS25 편의점 앞\" 직거래 약속 1시간 전입니다.',"
+      },
+      {
+        "line": 181,
+        "code": "created_at: '2시간 전',"
+      },
+      {
+        "line": 205,
+        "code": "created_at: '방금 전',"
+      },
+      {
+        "line": 214,
+        "code": "keyword: '세탁기',"
+      },
+      {
+        "line": 223,
+        "code": "keyword: '0원',"
+      },
+      {
+        "line": 232,
+        "code": "keyword: '냉장고',"
+      },
+      {
+        "line": 386,
+        "code": "itemPrice: created.price === 0 ? '0원' : created.price.toLocaleString() + '원',"
+      },
+      {
+        "line": 469,
+        "code": "created_at: new Date().toISOString(), // 상단 노출을 위해 시간 갱신"
+      },
+      {
+        "line": 507,
+        "code": "buyer_name: 'Me (나)',"
+      }
+    ],
+    "context/LanguageContext.tsx": [
+      {
+        "line": 88,
+        "code": "if (amount === 0) return '0원 (무료)';"
+      },
+      {
+        "line": 89,
+        "code": "return `${amount.toLocaleString()}원`;"
+      }
+    ]
+  },
+  "uniquePhrases": [
+    "[관리자 집행]",
+    "회원이 [플랫폼 전체 영구 제재] 처리되었습니다",
+    "회원이 [7일간 거래 정지] 처리되었습니다",
+    "[관리자 집행] 불량 매물",
+    "이(가)",
+    "에서 강제 삭제되었습니다",
+    "[관리자 집행] 신고 사유가 불충분하여 기각 처리했습니다",
+    "정말로 매물",
+    "을(를) 강제 삭제하시겠습니까?",
+    "매물이 안전하게 삭제되었습니다",
+    "게시글",
+    "을(를) 커뮤니티 피드에서 [블라인드(숨김)] 처리하시겠습니까?",
+    "게시글이 즉시 블라인드 처리되었습니다",
+    "악성 회원",
+    "을(를) [플랫폼 영구 퇴출 및 작성글 전체 삭제] 처리하시겠습니까?",
+    "회원이 영구 퇴출되었습니다",
+    "상단 이지텍스 스타일 밝은 헤더",
+    "홈으로",
+    "이지텍스 관리자 관제 센터",
+    "실시간 관제 시스템 정상 가동중",
+    "관리자 메인 레이아웃 (풀 와이드 100% 가로 확장)",
+    "좌측 밝은 네비게이션 사이드바",
+    "종합 운영 현황",
+    "신고 및 사기 관제",
+    "동네생활 커뮤니티 관제 탭",
+    "동네생활 관제",
+    "중고 매물 관리",
+    "세금 환급 연계",
+    "0원 후불",
+    "외국인 회원 관리",
+    "유저 피드백 /",
+    "안전 관제 현황 미니 카드",
+    "실시간",
+    "쉴드 상태",
+    "15개국어 번역 서버",
+    "정상 가동중 (0",
+    "사기 키워드 탐지",
+    "실시간 활성화",
+    "구글 맵 지오코딩",
+    "연동 완료",
+    "우측 메인 뷰 영역",
+    "모바일 탭 바",
+    "종합",
+    "커뮤니티 (",
+    "세금환급",
+    "종합 운영 대시보드 탭 (",
+    "피칭용 기간별 정밀 분석",
+    "유입 추적 대시보드",
+    "4대 주요 핵심 지표 카드 (이지텍스 밝은 카드 스타일)",
+    "총 등록 매물",
+    "무빙세일 4건 포함",
+    "사기 신고/의심",
+    "미처리 즉시 조치 대기중",
+    "0원",
+    "선결제 0원 후불 신청 대기",
+    "외국인 이용 회원",
+    "0명",
+    "실시간 가입 회원 집계중",
+    "공단별 직거래 현황",
+    "국적별 분포 (실제 데이터 0부터 집계)",
+    "주요 외국인 공단별 거래 점유율",
+    "경기 평택 포승국가산단",
+    "0% (0건)",
+    "경기 안산 반월시화 / 원곡동",
+    "경기 화성 향남제약 / 마도",
+    "외국인 근로자 국적별 거래 비중",
+    "베트남 (",
+    "몽골 (",
+    "태국 (",
+    "네팔 (",
+    "관제 탭",
+    "불량 매물",
+    "사기 신고 관제 탭 (",
+    "전체 (",
+    "미처리 대기 (",
+    "접수된 사기 및 불량 신고가 없습니다",
+    "사용자가 신고 팝업을 통해 접수한 불량 사용자/매물 내역이 여기에 실시간 표시됩니다",
+    "심사 대기",
+    "조치 완료",
+    "신고번호",
+    "신고자",
+    "피신고 회원",
+    "관련 매물",
+    "사유",
+    "신고 기각 (무혐의)",
+    "매물 강제 삭제",
+    "7일 거래 정지",
+    "플랫폼 영구 제재",
+    "동네생활 커뮤니티 관제 탭 (",
+    "동네생활 등록 게시글 실시간 관제 (",
+    "개)",
+    "불법 홍보, 악플, 사기 의심 글을 원클릭으로 즉시 블라인드 처리하거나 작성자를 영구 퇴출할 수 있습니다",
+    "카테고리 / 제목",
+    "작성자 / 국적",
+    "공감 / 댓글",
+    "등록일시",
+    "관리 조치",
+    "등록된 커뮤니티 게시글이 없습니다",
+    "(0개)",
+    "커뮤니티에서 숨김 처리",
+    "블라인드",
+    "유저 영구 퇴출",
+    "퇴출",
+    "전체 중고 매물 관리 탭 (",
+    "등록된 전체 매물 (",
+    "상품명 / 사진",
+    "가격",
+    "공단 위치",
+    "관리 액션",
+    "세금 환급 연계 신청 관리 탭 (",
+    "184만원 세금 환급 연계 신청 현황 (",
+    "건)",
+    "선결제 0원 (후불결제) 모델로 접수된 외국인 근로자 리드 목록",
+    "신청자명 / 국적",
+    "근무기간 (비자)",
+    "예상 환급액",
+    "수수료 정산",
+    "진행 상태",
+    "접수된 세금 환급 연계 신청 내역이 없습니다",
+    "(0건)",
+    "외국인 회원 및",
+    "신분인증 관리 탭 (",
+    "(케이마켓)",
+    "외국인 중고거래",
+    "무빙세일",
+    "대한민국",
+    "1 외국인 근로자 전용 0원 수수료 중고거래",
+    "귀국 무빙세일 플랫폼! 15개국어 실시간 자동 번역 채팅, 평택·안산·화성 전국 공단 도보 5분 안심 직거래, 최대 1000만원 세금 환급 원스톱 연계",
+    "케이마켓",
+    "15개국어 번역 채팅",
+    "평택 포승공단",
+    "상단 17개국어 실시간 라이브 변환 헤더",
+    "16개국 국기 카드 그리드",
+    "선택 표시 체크 배지",
+    "중앙 입장",
+    "버튼 (선택한 언어로 즉시 입장)",
+    "한국어로 변경",
+    "하단 안심 보증 3대 뱃지",
+    "수수료 0원 외국인 안심 직거래",
+    "이지텍스 세금환급 원스톱 연계",
+    "틱톡 (",
+    "/바이럴)",
+    "외국인 1위",
+    "페이스북 (외국인 커뮤니티 그룹)",
+    "베트남/몽골",
+    "잘로 (",
+    "베트남 메신저)",
+    "베트남",
+    "직접 방문 (",
+    "/ 북마크)",
+    "라인 (",
+    "태국/동남아 채널)",
+    "태국/미얀마",
+    "텔레그램 (",
+    "우즈벡/러시아어)",
+    "중앙아시아",
+    "위챗 (",
+    "동포 네트워크)",
+    "중국/동포",
+    "인스타그램 (",
+    "릴스)",
+    "기숙사/쉼터",
+    "코드 오프라인",
+    "공단 현장",
+    "구글 (",
+    "다국어 검색)",
+    "네이버 (블로그/카페)",
+    "지인 초대 (친구추천 링크)",
+    "고용노동부",
+    "게시판",
+    "기준년도 (런칭)",
+    "성장)",
+    "틱톡",
+    "페이스북",
+    "라인",
+    "텔레그램",
+    "인스타그램",
+    "카카오",
+    "네이버",
+    "오늘",
+    "1주차",
+    "2주차",
+    "3주차",
+    "이번주",
+    "1분기",
+    "2분기",
+    "3분기",
+    "4분기",
+    "// 현재 분기 (3분기)",
+    "대시보드 상단 타이틀",
+    "기간/연도 선택 탭",
+    "실시간 유입 정밀 분석",
+    "연도별(",
+    ") 비교 대시보드",
+    "연도 선택 셀렉터",
+    "기준 연도",
+    "2026년",
+    "2027년 (내년)",
+    "2029년",
+    "오늘 24시간 실시간",
+    "주간 집계",
+    "한 달간",
+    "년 연간",
+    "2026년~2027년 이후까지 연도별 실적 및 24시간 시간대별 트래픽을 정밀 비교할 수 있습니다",
+    "기간 필터 버튼 그룹",
+    "오늘 (24시간)",
+    "주간",
+    "월간",
+    "연간 (",
+    "4대",
+    "핵심 지표 카드",
+    "오늘 / 기준",
+    "년 총",
+    "오늘 페이지뷰 (",
+    "실시간 실제 누적 페이지뷰",
+    "기간 누적",
+    "유입 경로를 통한 총 방문 합계",
+    "연간 성장률 (",
+    "연간 성장 지표 (",
+    "년 대비 성장 분석",
+    "활성 사용자 (",
+    "활성 방문자 수",
+    "실시간 고유 방문자 측정",
+    "하단",
+    "[좌측 24시간 가로스크롤 차트] + [우측 순수 16대 채널별 유입 순위]",
+    "좌측 차트 영역 (6",
+    "오늘 24시간 시간대별 추이 (00시~23시)",
+    "지난 7일간 일별 방문자 추이",
+    "최근 4주간 주별 방문자 추이",
+    "년 분기별 실적",
+    "년 비교 (",
+    "오늘(24시간)일 때 좌/우 시간대 퀵 스크롤 버튼",
+    "새벽/오전 시간대로 이동",
+    "00~12시",
+    "오후/밤 시간대로 이동",
+    "12~23시",
+    "연간 모드일 때 전년도 비교 토글 버튼",
+    "전년도 비교",
+    "24시간 가로 스크롤 바 차트 컨테이너",
+    "상단 네온 형광 수치 배지",
+    "연간 비교 모드일 때 듀얼 바",
+    "선택 연도 / 당해 형광 바",
+    "하단 라벨",
+    "현재 시간대 배지",
+    "마우스 휠이나 터치로 좌우 스크롤하여 00시부터 23시까지 전체 시간대를 확인할 수 있습니다",
+    "년 실적",
+    "년 실적 (형광)",
+    "년도 유입 데이터가 실시간으로 집계 및 보존됩니다",
+    "기준",
+    "오늘 24",
+    "우측",
+    "16대 채널별 실제 유입 순위 (6",
+    "글로벌 16대 채널별 실제 유입 현황",
+    "채널 카테고리 필터",
+    "전체",
+    "글로벌",
+    "국가별 메신저",
+    "기관/",
+    "유입 채널 16종 스크롤 리스트",
+    "프로그레스 바",
+    "번역/언어 오류",
+    "공단/장소 추가",
+    "사기방지 개선",
+    "화면 렉/버그",
+    "기타 자유 건의",
+    "기능 제안",
+    "칭찬/응원",
+    "상단 통계 바",
+    "유저 피드백",
+    "개선 제안 (",
+    "관제)",
+    "건 접수",
+    "외국인 유저들이 마이페이지에서 직접 남긴 건의사항 및 버그 제보를 실시간으로 모니터링합니다",
+    "카테고리 필터 드롭다운",
+    "전체 건의 유형 (",
+    "피드백 목록 또는 0건",
+    "현재 접수된 유저 개선 건의사항이 없습니다",
+    "외국인 유저가 마이페이지 내 [",
+    "앱 개선 제안하기]를 통해 의견을 남기면 이곳에 실시간으로 접수되어 나타납니다",
+    "피드백",
+    "건의 본문 내용",
+    "작성자 및 연락처",
+    "연락처",
+    "상태 관리 액션 바",
+    "접수대기",
+    "검토중",
+    "반영완료",
+    "피드백 삭제",
+    "-9 (비전문취업)",
+    "-7 (특정활동)",
+    "-4 (재외동포)",
+    "-2 (방문취업)",
+    "-2 (유학)",
+    "안산 원곡동",
+    "화성 향남공단",
+    "자동인증 완료, 수동심사 대기, 미인증, 차단",
+    "// 등록 매물 수",
+    "// 완료된 거래 수",
+    "[관리자 확인]",
+    "회원의 신분증(",
+    ")이 수동 승인 완료되었습니다",
+    "- 신분인증 뱃지 부여",
+    "- 신뢰도 등급 상승",
+    "회원의 신분증 인증을 취소(박탈)하시겠습니까?",
+    "회원의 신분인증이 취소되었습니다",
+    "[차단 해제]",
+    "회원의 이용 정지가 해제되었습니다",
+    "[경고]",
+    "회원을 블랙리스트로 등록하고 플랫폼 전체 이용을 차단하시겠습니까?",
+    "[블랙리스트 등록 완료]",
+    "회원의 계정이 영구 정지되었습니다",
+    "- 모든 매물 즉시 비공개",
+    "- 채팅 및 로그인 차단",
+    "[경고 발송]",
+    "회원에게 거래 주의 경고가 발송되었으며, 매너온도가 -3",
+    "차감되었습니다",
+    "통계 요약 카드",
+    "총 외국인 회원",
+    "인증 완료",
+    "심사 대기 (빛반사 등)",
+    "블랙리스트 차단",
+    "필터 및 검색 바",
+    "인증완료 (",
+    "심사대기 (",
+    "미인증 (",
+    "차단회원 (",
+    "검색 인풋",
+    "이름, 국적, 공단, 비자 검색",
+    "회원 테이블",
+    "회원 정보 / 국적",
+    "비자",
+    "체류자격",
+    "신분증(",
+    ") 상태",
+    "매너온도 / 거래",
+    "조건에 일치하는 외국인 회원이 없습니다",
+    "회원 정보",
+    "국적",
+    "비자 및 체류자격",
+    "거주 공단",
+    "인증 상태",
+    "자동인증 완료",
+    "심사 대기 (빛반사)",
+    "미인증",
+    "매너온도 및 활동 통계",
+    "매물",
+    "거래",
+    "가입일",
+    "관리자 액션 버튼 그룹",
+    "대기중일 때",
+    "수동 승인 버튼",
+    "관리자가 직접 확인 후 승인",
+    "수동 승인",
+    "인증 완료 상태일 때",
+    "인증 박탈/취소",
+    "도용 의심 시 신분인증 취소",
+    "인증 취소",
+    "경고 부여 (매너온도 차감)",
+    "비매너 경고 및 매너온도 -3",
+    "차감",
+    "경고",
+    "블랙리스트 차단 / 해제",
+    "차단 해제",
+    "영구 정지 및 블랙리스트 등록",
+    "차단해제",
+    "차단",
+    "즉시 사기 신고",
+    "완료! 사파리(",
+    ") 주소창에 붙여넣어 주세요",
+    "우측 상단 또는 하단의 메뉴(",
+    "또는 공유)를 누른 후 [",
+    "로 열기]를 선택해 주세요!",
+    "닫기",
+    "실시간 거래",
+    "키워드 알림 받기",
+    "채팅 도착 및 관심 매물 등록 시 즉시 알려드려요!",
+    "알림 켜기",
+    "화면 우측 하단 상시 플로팅",
+    "설치 배너 (15개국어 지원)",
+    "우측 상단 닫기",
+    "앱 로고 아이콘",
+    "액션 버튼 바",
+    "전용 홈 화면 추가 안내 모달",
+    "화면 하단 중앙의",
+    "[공유 버튼",
+    "을 누릅니다",
+    "메뉴에서",
+    "[홈 화면에 추가",
+    "를 선택하면 설치 완료!",
+    "확인했습니다",
+    "상단 닫기 버튼",
+    "헤더 안내 영역 (17개국어 실시간 반응)",
+    "16개국 외국인 모국어 그리드 (스크롤 가능)",
+    "한국어 바로가기 버튼",
+    "한국인이신가요?",
+    "한국어로 계속하기",
+    "사진은 최대 5장까지만 등록 가능합니다",
+    "사진 압축 중 오류가 발생했습니다",
+    "제목과 내용을 입력해주세요",
+    "경기 평택시",
+    "닫기 버튼",
+    "동네생활 글쓰기",
+    "15개국어로 자동 번역되어 동네 이웃들에게 따뜻하게 전해집니다",
+    "폼 영역",
+    "6대 카테고리 선택 칩",
+    "카테고리 선택",
+    "글 제목",
+    "제목",
+    "이번 주말에 같이 밥 먹고 한국어 공부할 친구 구해요!",
+    "본문 내용",
+    "내용",
+    "솔직하고 따뜻한 이야기, 궁금한 점, 나누고 싶은 꿀팁을 편하게 적어주세요",
+    "(어떤 언어로 작성하셔도 15개국어로 자동 번역됩니다)",
+    "최대 5장 다중 사진 첨부",
+    "3초 실시간 자동 압축 뷰어",
+    "사진 첨부 (최대 5장)",
+    "3초 95% 고화질 자동 압축",
+    "사진 추가 버튼",
+    "사진 추가",
+    "압축 진행 로더",
+    "압축 중",
+    "압축된 사진 미리보기 썸네일",
+    "사진 삭제",
+    "하단 등록 버튼",
+    "15개국어 자동 번역 생성 중",
+    "15개국어 자동 번역으로 글 등록하기",
+    "1분 간편 인증(회원가입) 후 글 올리기",
+    "상단 감성 웰컴 배너 (타향살이 힐링",
+    "친구 사귀기)",
+    "15개국어 실시간 소통",
+    "언어 장벽 없이 내 모국어로 편하게",
+    "외국인 이웃들의 따뜻한 동네생활",
+    "쉼터",
+    "타향살이 외로움을 달래는",
+    "동네 친구 사귀기",
+    "부터, 고향 가족 생각나는",
+    "사는 이야기",
+    "궁금한",
+    "한국 생활",
+    "까지 따뜻한 온기를 나누세요",
+    "6대 카테고리 탭 바 (1번",
+    "동네 친구 사귀기)",
+    "글쓰기 버튼",
+    "전체 탭",
+    "전체 보기",
+    "6대 카테고리 버튼들",
+    "글쓰기",
+    "버튼",
+    "게시글 목록 피드",
+    "해당 카테고리에 아직 작성된 글이 없습니다",
+    "첫 번째로 동네 친구를 사귀거나 따뜻한 이야기를 올려보세요!",
+    "첫 이야기 작성하기",
+    "모달들 마운트",
+    "상단 작성자 정보",
+    "카테고리 뱃지",
+    "더보기 메뉴",
+    "6대 카테고리 뱃지",
+    "더보기 / 신고 버튼",
+    "신고 / 차단",
+    "글 제목 및 본문",
+    "15개국어 번역 토글 뱃지",
+    "번역문 보기 (",
+    "원문 보기",
+    "최대 5장 이미지 썸네일 그리드 (있을 경우)",
+    "하단 감성 리액션 (공감해요 / 힘내세요 / 댓글수 / 조회수)",
+    "공감해요 버튼",
+    "공감해요",
+    "힘내세요 / 위로 버튼",
+    "힘내세요 / 응원해요",
+    "힘내요",
+    "댓글 수",
+    "모달 스크롤 본문",
+    "메뉴",
+    "신고하기",
+    "15개국어 번역 토글",
+    "최대 5장 고화질 이미지 슬라이더 (있을 경우)",
+    "감성 리액션 버튼 바",
+    "공감해요 (",
+    "힘내세요 (",
+    "댓글 섹션 (15개국어 실시간 번역)",
+    "댓글 (",
+    "댓글을 불러오는 중",
+    "댓글 신고",
+    "첫 번째 따뜻한 댓글을 남겨보세요!",
+    "하단 댓글 작성창 (비회원 시 로그인 유도)",
+    "따뜻한 응원이나 답변을 남겨보세요 (15개국어 자동번역)",
+    "등록",
+    "댓글을 남기려면 1분 간편 인증(회원가입)이 필요합니다",
+    "음란물 / 선정적인 사진 / 성인물",
+    "불법 광고 / 스팸 / 도박 홍보",
+    "욕설 / 혐오 발언 / 비매너 / 성희롱",
+    "불법 취업 알선 / 브로커 / 사기 의심",
+    "거짓 정보 / 허위 사실 유포",
+    "신고가 정상 접수되었습니다",
+    "해당 게시물/댓글은 즉시 숨김 처리되었습니다",
+    "신고 및 차단하기",
+    "신고된 내용은 24시간 관리자 관제 센터로 즉시 전송되며, 검토 후 해당 사용자는 영구 퇴출 처리됩니다",
+    "신고 사유 선택",
+    "상세 사유 (선택)",
+    "자세한 사유를 적어주시면 빠른 조치에 도움이 됩니다",
+    "접수 중",
+    "신고 접수 및 차단",
+    "김철수 (대한민국)",
+    "(베트남)",
+    "아이폰 15 프로 미개봉 (10만원 헐값)",
+    "카카오톡으로 먼저 5만원 입금하면 택배로 보내준다고 유도함",
+    "전형적인 선입금 사기 의심",
+    "방금 전 (10분 전)",
+    "(태국)",
+    "쿠쿠 전기밥솥 6인용",
+    "포승공단",
+    "25 앞에서 19시에 만나기로 약속해놓고 1시간 동안 나타나지 않고 연락 두절됨",
+    "1시간 전",
+    "(몽골)",
+    "(필리핀)",
+    "중고 자전거 26인치",
+    "네고 거절하자 채팅으로 심한 욕설과 비속어를 사용함",
+    "어제",
+    "[관리자 승인]",
+    "회원이 [플랫폼 영구 제재] 처리되었습니다",
+    "- 로그인 및 1",
+    "1 채팅 차단",
+    "회원이 [7일 거래 정지] 처리되었습니다",
+    "[관리자 승인] 불량 매물",
+    "이(가) 강제 삭제되었습니다",
+    "[관리자 기각] 허위 신고로 확인되어 해당 건을 기각 처리했습니다",
+    "관리자 헤더",
+    "안전 관리자 관제 콘솔",
+    "신고 접수 내역",
+    "회원 제재 관리",
+    "미처리",
+    "필터 탭 바",
+    "전체 보기 (",
+    "미처리 대기중 (",
+    "조치 완료 (",
+    "관리자 확인 후 플랫폼 영구 제재 시 즉시 로그인 및 거래가 차단됩니다",
+    "신고 접수 리스트",
+    "현재 대기 중인 신고 건이 없습니다",
+    "모든 회원이 안전하게 거래 중입니다",
+    "영구 제재됨",
+    "7일 정지",
+    "기각/완료",
+    "신고 접수 번호",
+    "신고 내용 상세 박스",
+    "피신고 대상자",
+    "신고 사유",
+    "관리자 제재 액션 툴바",
+    "7일 이용 정지",
+    "플랫폼 영구 제재 (",
+    "경기 안산시 단원구 원곡동 795",
+    "오늘 저녁 19",
+    "위치 지정됨 (위도",
+    ", 경도",
+    "위치 정보(",
+    ")를 지원하지 않는 브라우저입니다",
+    "위치 권한을 허용해 주시거나 지도 위를 직접 클릭하여 핀을 이동해 주세요",
+    "지정 직거래 만남 장소",
+    "오늘 밤 20",
+    "내일 점심 12",
+    "모달 상단 헤더 (시그니처 딥 에스프레소",
+    "골드)",
+    "1 안심 직거래 약속",
+    "만남 장소 핀 잡기",
+    "시간 정하기",
+    "지도를 클릭하거나 핀을 끌어 만날 위치를 콕 찍고 상세 장소를 적어주세요",
+    "폼 본문 영역",
+    "주소 및 만남 장소 입력 바",
+    "기본 도로명 / 동네 주소",
+    "내 위치 자동완성 버튼",
+    "현재 내 위치로 주소",
+    "핀 자동 세팅",
+    "위치 확인중",
+    "내 위치로 핀 이동",
+    "도로명 주소 검색창",
+    "도로명/동네 주소 검색 또는 지도에서 핀을 직접 클릭하세요",
+    "주소 검색",
+    "고객 직접 입력 상세 장소명",
+    "상세 만남 장소명 (고객 직접 입력)",
+    "편의점 앞, 기숙사 정문, 3번 출구 등",
+    "25 편의점 앞 / 기숙사 2동 경비실 앞 / 정문 시계탑",
+    "실제 인터랙티브 지도 (클릭/드래그로 핀 직접 이동)",
+    "지도를 클릭하거나 핀을 끌어당겨 원하는 만남 장소에 콕 찍으세요!",
+    "좌측 상단",
+    "실시간 핀 주소 배지",
+    "만남 지정 핀 위치",
+    "우측 하단 안내 툴팁",
+    "지도 클릭 / 핀 드래그로 이동",
+    "만남 날짜",
+    "시간 텍스트 직접 입력",
+    "만남 시간 직접 입력 (",
+    "자유롭게 직접 텍스트 입력 가능",
+    "30, 내일 토요일 오후 2시, 일요일 점심 등",
+    "빠른 추천 시간 퀵 칩",
+    "1시간 전 모국어 자동 알림 리마인더",
+    "약속 1시간 전 모국어 자동 푸시 알림",
+    "약속을 잊지 않도록 상대방과 나에게 각자의 언어로 1시간 전에 알려드립니다",
+    "제출 버튼",
+    "약속 핀 저장하고 상대방에게 전송하기",
+    "사용 중인 브라우저에서 위치 정보(",
+    ")를 지원하지 않습니다",
+    "수기로 입력해 주세요",
+    "위치 확인됨 (위도",
+    "브라우저 상단 주소창에서 [위치 정보 권한]을 [허용]해 주시거나 주소를 직접 입력해 주세요",
+    "위치를 수신할 수 없습니다",
+    "주소를 직접 입력해 주세요",
+    "친절한",
+    "따뜻한",
+    "행복한",
+    "스마일",
+    "안심",
+    "긍정",
+    "희망",
+    "동네",
+    "호랑이",
+    "친구",
+    "이웃",
+    "라이더",
+    "마켓러",
+    "토끼",
+    "곰돌이",
+    "판다",
+    "메이트",
+    "올바른 휴대폰 번호를 입력해 주세요",
+    "외국인 회원",
+    "[알리고",
+    "] 인증번호 [",
+    "]가 발송되었습니다",
+    "-이웃",
+    "모달 헤더 - 딥 네이비",
+    "골드 라인",
+    "미세한 골드 앰비언트 글로우",
+    "15개국어 외국인 신원인증",
+    "가입",
+    "외국인 안심 간편가입",
+    "직접입력 탭 바 (앱 시그니처 웜톤 라떼",
+    "에스프레소)",
+    "등록증",
+    "상단노출",
+    "수기 입력 (기본 36",
+    "모달 본문 영역",
+    "폼 입력 단계",
+    "탭일 때",
+    "매너온도 +7",
+    "최상단 노출 혜택 강조 배너 + 촬영 박스",
+    "매너온도 43",
+    "앱 최상단 우선 노출 파격 혜택 하이라이트 카드 (품격있는 웜톤 골드)",
+    "실물 신분증",
+    "촬영 시 3대 특별 혜택",
+    "즉시 가산",
+    "골드 등급",
+    "가입 즉시 +7",
+    "상승하여 최우수 안심 회원 뱃지 부여",
+    "내 매물 앱 최상단 우선 노출",
+    "신뢰도가 높아 구매자에게 먼저 추천되어 3배 빠른 판매 성사!",
+    "카메라 촬영 / 업로드 드롭존 (에스프레소",
+    "웜 모카)",
+    "가 신분증 판독 중 (0",
+    "5초)",
+    "이름, 외국인등록번호, 비자, 만료일을 자동 추출하고 있습니다",
+    "실물 등록증",
+    "인증 성공!",
+    "상단노출 확정",
+    "다시 촬영",
+    "외국인등록증 앞면 사진 촬영하기",
+    "카메라로 0",
+    "5초 비추면 자동 입력",
+    "매너온도 즉시 43",
+    "(골드)",
+    "획득!",
+    "카메라 열기 / 신분증 촬영하고 43",
+    "받기",
+    "활동 닉네임 / 별명 입력란 (중고거래",
+    "동네생활 표시용)",
+    "활동 닉네임 / 별명 (",
+    "필수",
+    "센스 있는 별명 자동 추천",
+    "랜덤 별명 추천",
+    "안산호랑이, 베트남마켓, 평택친구 (2~15자)",
+    "중고거래 채팅과 동네생활 커뮤니티에서 이웃들에게 보여질 친근한 별명을 지어보세요!",
+    "기본 정보 입력창 (",
+    "시 자동 채워짐)",
+    "영문 실명 (",
+    "외국인등록번호 (13자리)",
+    "비자 종류 (",
+    "체류 만료일 (",
+    "통신사 드롭다운 및 휴대폰 번호 입력 (알리고",
+    "본인확인용)",
+    "통신사 선택 및 휴대폰 번호 (알리고",
+    "본인인증)",
+    "통신사 드롭다운 셀렉트",
+    "알뜰폰 (선불폰 / 후불폰)",
+    "+ 알뜰폰 (선불폰 / 후불폰)",
+    "(케이티 공식)",
+    "유플러스 (",
+    "+ 공식)",
+    "발송중",
+    "인증번호 받기",
+    "실제 거주 주소 (동네 / 도로명 주소) -",
+    "내 위치 자동완성 지원",
+    "실제 거주 주소 (동네 / 도로명 주소)",
+    "현재 스마트폰/브라우저 위치로 주소 자동입력",
+    "내 위치 동의하고 자동입력",
+    "내 위치 동의하고 자동입력] 버튼을 누르거나 직접 입력하세요",
+    "반경 5",
+    "설정",
+    "내 위치를 기반으로 가까운 공단/동네 이웃과의 직거래 매물이 우선 표시됩니다",
+    "알리고",
+    "6자리 인증번호 입력 단계",
+    "6자리 인증번호 입력",
+    "번호로 발송된 6자리 번호를 입력해 주세요",
+    "인증번호 6자리",
+    "이전 단계",
+    "인증 확인 완료",
+    "가입 및 신원인증 완료 단계",
+    "신원 인증 완료!",
+    "님, 환영합니다!",
+    "검증",
+    "수기 인증",
+    "및 휴대폰 본인인증이 완료되어",
+    "골드 신뢰 뱃지(매너온도 43",
+    "가 발급되었습니다",
+    "184만원 세금 환급 연계 혜택 알림",
+    "이지텍스 특별 연계 혜택",
+    "인증하신 외국인등록번호로",
+    "예상 세금 환급액 184만원",
+    "을 선결제 0원 (후불결제)로 즉시 신청하실 수 있습니다",
+    "중고거래 시작하기",
+    "전체보기",
+    "원룸 가전",
+    "가구·수납",
+    "무료나눔",
+    "생활·주방",
+    "/ 카테고리별 찾기",
+    "가로 스크롤 가능한 원형 아이콘 카테고리 그리드",
+    "원형 아이콘 버블 (스크린샷 스타일",
+    "진한 남색 + 2",
+    "골드 테두리)",
+    "뱃지",
+    "카테고리 명",
+    "25 편의점 앞",
+    "기숙사 2동 맞은편 가로등 앞",
+    "경기 평택시 포승읍 포승공단로 117",
+    "오늘 (",
+    "[직거래 약속]",
+    "에서 봬요! (지도 핀 위치 공유됨)",
+    "[직거래 약속 확정]",
+    "에서 만나요! (1시간 전 리마인더 예약됨)",
+    "구매 문의",
+    "안녕하세요! 아직 판매 중인가요?",
+    "가격 네고",
+    "조금만 깎아주실 수 있나요? (네고 가능한가요?)",
+    "공단 직거래",
+    "오늘 저녁 기숙사 앞이나 공단 정문에서 직거래 가능할까요?",
+    "거래 수락",
+    "네, 좋습니다! 그때 뵐게요",
+    "채팅창 상단 헤더",
+    "신뢰도 41",
+    "(프로필 보기",
+    "비매너/사기 신고 및 차단",
+    "차단/신고",
+    "거래 완료 및 매너 평가",
+    "후기",
+    "매물 간단 요약 및 거래 상태 변경 바",
+    "예약중",
+    "완료",
+    "채팅창 내 원클릭 거래 액션 버튼",
+    "약속잡기",
+    "이 구매자와 [예약중]으로 설정되었습니다",
+    "예약하기",
+    "거래완료",
+    "직거래 확정 약속 리마인더 배너 (1시간 전 자동 알림)",
+    "1시간 전 알림",
+    "실시간 번역 안내 배너",
+    "메시지 목록 스크롤 영역",
+    "15개국어",
+    "공식 안전 거래 수칙 공지",
+    "발신자 정보",
+    "나 (",
+    "약속 카드 메시지일 때 인터랙티브 지도 핀 카드 렌더링",
+    "미니 맵 핀 그래픽 헤더",
+    "직거래 만남 장소 핀",
+    "지도 중앙 펄스 핀 마커",
+    "카드 본문 상세 정보",
+    "약속 시간",
+    "1시간 전 리마인더",
+    "구글 맵 길찾기",
+    "카카오맵 보기",
+    "15개국어 실시간 시스템 사기 안심 개입 배너",
+    "원문 텍스트",
+    "상대방 언어로 자동 번역된 텍스트 뱃지",
+    "자동 번역 전송문 (",
+    "한국어 실시간 번역",
+    "실시간 번역 중 인디케이터",
+    "가 0",
+    "3초 만에 실시간 번역 중",
+    "단골 중고거래 퀵 응답 버튼 바",
+    "메시지 입력창",
+    "내 모국어로 편하게 입력하세요 (상대방 언어로 즉시 자동번역)",
+    "판매자 신뢰 프로필 모달",
+    "1 거래 후기 작성 모달",
+    "거래 상품",
+    "직거래 만남 약속",
+    "지도 핀 모달",
+    "사기 방지 안심 쉴드 경고 모달",
+    "사용자 차단 및 불량 신고 모달",
+    "[신고 접수 완료]",
+    "회원이 차단 및 신고되었습니다",
+    ", // 밥솥",
+    ", // 세탁기",
+    ", // 전동킥보드",
+    ", // 스마트폰",
+    ", // 침대매트리스",
+    "안산시 단원구 원곡동 다문화거리 입구",
+    "(외국인 회원)",
+    "제목과 설명을 입력해 주세요",
+    "골드 테두리",
+    "수수료 0원 100% 무료",
+    "직거래",
+    "1분 간편 매물 등록",
+    "폼 입력 영역",
+    "사진 업로드 및 프리셋",
+    "상품 사진 (",
+    "/5장)",
+    "대표사진",
+    "+ 사진추가",
+    "빠른 샘플 사진 클릭 추가",
+    "빠른 테스트용 추천 사진 클릭",
+    "귀국자 무빙세일 체크박스",
+    "귀국자 헐값 급처분 [무빙 세일(",
+    ")]로 등록하기",
+    "귀국 예정",
+    "선택 (남은 기간에 따라 긴박감 뱃지 자동 부착)",
+    "-3 오늘마감",
+    "헐값 급처분",
+    "-7 초특가",
+    "일주일 임박",
+    "-14 묶음할인",
+    "2주 전 예약",
+    "-30 사전예약",
+    "1달 전 등록",
+    "원래 구입 가격 / 정가 (할인율 뱃지 표시용)",
+    "매물 제목 및 카테고리",
+    "매물 제목 (",
+    "통돌이 세탁기 10",
+    "+ 쿠쿠 밥솥 묶음 판매합니다",
+    "카테고리 원터치 선택 칩 그리드",
+    "카테고리 선택 (",
+    "자전거·탈것",
+    "판매 가격",
+    "판매 가격 (0원 입력 시 무료나눔 자동 적용)",
+    "무료 나눔",
+    "0 (무료나눔)",
+    "원 (",
+    "당근마켓 스타일 직거래 지도 핀",
+    "상세 주소 글씨 입력기",
+    "판매자 정보 및 국기",
+    "판매자 국가 (",
+    "판매자 닉네임",
+    "상세 설명",
+    "상세 설명 (",
+    "등록 즉시 15개국어로 자동 번역됩니다",
+    "물건의 상태, 사용 기간, 직거래 가능한 시간대를 적어주세요",
+    "모국어로 작성하셔도 구매자에게 자동 번역됩니다",
+    "등록 버튼 - 딥 네이비",
+    "매물 등록 및 15개국어 번역 중",
+    "1분 만에 무료 매물 등록",
+    "배경 장식 광원 효과",
+    "상단 헤더",
+    "타이틀 및",
+    "공식 뱃지",
+    "실시간 연계",
+    "나의 잠재 환급액",
+    "10초 만에 확인하기",
+    "실시간 대상 연령 안내 카드 (슬림 콤팩트)",
+    "대상 연령 안내",
+    "1991년 8월 22일 ~ 2011년 8월 21일 (만 15세 ~ 34세)",
+    "만 15세~34세",
+    "최근 5년 한국 근무 기간 슬라이더",
+    "최근 5년 한국 근무 기간",
+    "개월 (",
+    "년)",
+    "1개월",
+    "30개월 (2",
+    "5년)",
+    "60개월 (5년)",
+    "평균 월 급여 (세전) 콤팩트 알약 칩 버튼",
+    "평균 월 급여 (세전)",
+    "만 원",
+    "콤팩트 2열 알약 칩 그리드",
+    "예상 환급 가능 금액 디스플레이 박스 (금액은 크고 웅장하게 강조!)",
+    "예상 환급 가능 금액",
+    "금액은 그대로 크고 선명하게!",
+    "선결제 0원 (후불결제) 안심 뱃지",
+    "선결제 0원 (후불결제)",
+    "100% 환급 성공 시 후불",
+    "이지텍스 즉시 환급 신청",
+    "에서",
+    "바로 환급 신청하기",
+    "선결제 0원 (후불결제) · 서류 제출 없이 1초 접수",
+    "나의 중고거래 활동 보관함",
+    "찜한 매물",
+    "마이페이지",
+    "탭 네비게이션 바",
+    "찜한 매물 (",
+    "내 판매내역 (",
+    "거래 완료 (",
+    "탭별 리스트 렌더링 영역",
+    "찜한 매물 탭",
+    "아직 찜한 매물이 없습니다",
+    "마음에 드는 상품의 하트(",
+    ") 버튼을 누르면 실시간 가격 변동과 예약 상태를 한눈에 볼 수 있습니다",
+    "중고 매물 구경하러 가기",
+    "매물 썸네일",
+    "가격인하",
+    "매물 상세 정보",
+    "1 번역챗 및 찜 해제 버튼",
+    "1 번역챗",
+    "찜 목록에서 삭제",
+    "내 판매내역 탭",
+    "현재 등록된 내 판매 매물이 없습니다",
+    "상세 관리",
+    "내 구매/거래 완료 탭",
+    "거래 완료됨",
+    "번역 / 언어 오류",
+    "어떤 언어의 어떤 단어나 문장이 어색하거나 잘못되었나요? 상세히 알려주시면 즉시 수정하겠습니다",
+    "공단 / 직거래 장소 추가",
+    "추가하고 싶은 공단 이름이나 기숙사/편의점 등 직거래 추천 장소를 적어주세요",
+    "(예",
+    "화성 마도공단 기숙사 앞)",
+    "사기 방지 / 안심 거래",
+    "사기 피해 예방이나 안심 거래를 위해 더 필요한 안전 기능이 있다면 자유롭게 제안해 주세요",
+    "세무 / 대출 / 금융",
+    "세금 환급, 비상금 대출, 귀국 퇴직금 등 외국인 근로자에게 필요한 추가 서비스 의견을 들려주세요",
+    "화면 렉 / 버그 제보",
+    "어떤 화면에서 어떤 문제가 발생했나요? (예",
+    "채팅창이 안 열림, 사진 업로드가 느림 등)",
+    "기타 자유 건의 및 칭찬",
+    "을 이용하시면서 느끼신 점이나 추가되었으면 하는 모든 아이디어를 자유롭게 남겨주세요!",
+    "익명 유저",
+    "앱 개선 제안 및 의견 보내기",
+    "창구",
+    "대표님과 관리자 팀이 여러분의 소중한 의견을 직접 읽고 반영합니다",
+    "본문 폼",
+    "소중한 의견이 성공적으로 접수되었습니다!",
+    "보내주신 개선점은 관리자 팀에서 꼼꼼히 검토 후 앱 업데이트에 신속히 반영하겠습니다",
+    "감사합니다!",
+    "건의 유형 선택 칩 (",
+    "어떤 부분에 대한 의견이신가요? (유형 선택)",
+    "상세 내용 텍스트 입력창",
+    "개선할 점을 자유롭게 글로 작성해 주세요",
+    "답변 받을 연락처 (선택)",
+    "답변 또는 진행 상황을 안내받으실 연락처 (선택)",
+    "전화번호(카톡) 또는 이메일 (선택 사항)",
+    "전송 중",
+    "관리자에게 개선 의견 보내기",
+    "상단",
+    "패밀리 바 (진한 남색 + 3",
+    "선명한 골드 테두리)",
+    "언어 드롭다운 (실제 고화질 국기 이미지 + 언어명)",
+    "실제 국기 이미지 사진",
+    "15개국 대형 국기 선택창 열기",
+    "빠른 언어 선택 (15개국어)",
+    "수수료 0원 뱃지",
+    "1초 앱 설치 버튼 (헤더 상시 노출)",
+    "1초 만에 앱 설치하기",
+    "1초 앱설치",
+    "좌측",
+    "로고 + 위치 셀렉터",
+    "위치 칩",
+    "내 실제 위치 및 직거래 반경 설정",
+    "내 위치",
+    "평택 포승",
+    "안산 원곡",
+    "화성 향남",
+    "검색창 (데스크탑)",
+    "매물 검색 (세탁기, 냉장고, 아이폰 등)",
+    "데스크탑 우측 액션 그룹 (",
+    "이상)",
+    "1분 매물 등록 버튼 - 딥 에스프레소",
+    "모카",
+    "알림 센터",
+    "통합 알림 센터 (키워드/채팅/가격인하)",
+    "회원가입 / 마이페이지",
+    "마이",
+    "모바일 우측 액션 그룹 (",
+    "미만",
+    "알림 + 가입/프로필)",
+    "통합 알림 센터",
+    "회원가입 / 프로필",
+    "모바일 2행",
+    "검색창 + 1분 간편 매물 등록 버튼",
+    "모바일 1분 매물 등록 버튼",
+    "탭 바",
+    "중고 / 무빙 거래 탭",
+    "동네생활",
+    "쉼터 탭 (17개국어",
+    "및 친구 사귀기)",
+    "17개국 대형 국기 언어 선택 웰컴 게이트웨이 모달",
+    "웅장한 풀와이드 감성 히어로 쇼케이스",
+    "미세한 앰비언트 글로우",
+    "타이포그래피",
+    "대한민국 외국인 근로자",
+    "1 안심 플랫폼",
+    "외국인 안심 직거래",
+    "귀국 무빙세일",
+    "컬렉션",
+    "15개국어 실시간",
+    "양방향 자동번역 채팅과",
+    "신원인증 기반 주요 공단 1분 도보 직거래로 안전하게 시작하세요",
+    "버튼 그룹",
+    "내 물건 1분 간편 등록",
+    "세무 환급 184만원 무료조회",
+    "레퍼런스 스타일 가전·가구 통합 광고 쇼케이스 단일 이미지",
+    "원룸 풀옵션 가전 가구 묶음 쇼케이스",
+    "스크린샷 스타일 우측 상단 이벤트 원형 배지",
+    "귀국 근로자",
+    "하단 타이틀 바",
+    "냉장고·세탁기·소파·노트북 풀패키지 묶음",
+    "일괄 급처",
+    "하단 4대 안심 보증 띠 바",
+    "수수료 0원 100% 무료 직거래",
+    "번역",
+    "선결제 0원 184만원 세무환급",
+    "귀국",
+    "무빙세일 전용관",
+    "방금 전",
+    "상단 사진 가로 100% 꽉 채우는 풀 와이드 영역",
+    "좌상단",
+    "판매자 국기 + 국가코드 + 이름 반투명 캡슐 배지",
+    "판매자 프로필 보기",
+    "우상단",
+    "/ 상태 배지 그룹",
+    "가격 인하 / 끌올 뱃지",
+    "좌하단",
+    "다중 사진 인디케이터 (",
+    "우하단",
+    "찜하기 하트 버튼",
+    "찜하기",
+    "사진 바로 밑 설명 및 상세 정보 영역",
+    "15개국어 자동번역 뱃지",
+    "15개국어 자동번역",
+    "상품 제목",
+    "가격 정보",
+    "하단 메타 정보 + 1",
+    "1 번역챗 골드 버튼",
+    "위치 + 시간",
+    "1 번역 채팅하기 버튼 (네이비 + 골드 테두리)",
+    "15개국어 실시간 자동번역 1",
+    "1 채팅",
+    "1 번역 채팅하기",
+    "판매자 프로필 상세 모달",
+    "상단 닫기",
+    "공유 버튼",
+    "불량 매물/사용자 신고 및 차단",
+    "신고",
+    "매물 공유 링크가 복사되었습니다!",
+    "카카오톡, 페이스북, 인스타그램, 텔레그램 등에 붙여넣어 공유하세요",
+    "매물 링크 공유하기 (카카오톡, 페이스북 등)",
+    "본문 스크롤 영역",
+    "이미지 갤러리 (좌우",
+    "슬라이드 버튼 탑재)",
+    "사진 번호 뱃지 (예",
+    "좌측 이전 사진 (",
+    ") 버튼",
+    "이전 사진 보기",
+    "우측 다음 사진 (",
+    "다음 사진 보기",
+    "다중 사진 썸네일 네비게이션",
+    "판매자 프로필 바 (매너온도 연동)",
+    "비자인증됨",
+    "프로필",
+    "거래후기 보기",
+    "매물 기본 정보",
+    "상태 뱃지 및 끌올/가격인하 표시",
+    "오늘마감 헐값",
+    "마감임박 초특가",
+    "묶음할인",
+    "님과 거래 예약중",
+    "님과 거래 완료됨",
+    "15개국어 자동번역 토글 바",
+    ") 실시간 번역 적용됨",
+    "번역문 보기",
+    "정가",
+    "판매자 전용 상태 관리 액션 바",
+    "내 매물 상태를 관리해보세요",
+    "예약중/거래완료 변경, 상단 끌올",
+    "상태변경 / 끌올",
+    "당근마켓 스타일 직거래 만남 장소 지도 뷰",
+    "상세 주소 폰트",
+    "상품 상세 설명",
+    "하단 고정 액션 바",
+    "1 안심 번역 채팅",
+    "거래 후기 작성 모달",
+    "거래 상태 변경",
+    "끌올 모달",
+    "불량 매물/사용자 차단 및 신고 모달",
+    "회원이 차단 및 신고 처리되었습니다",
+    "세탁기",
+    "세탁기 (",
+    "냉장고",
+    "냉장고 (",
+    "밥솥",
+    "쿠쿠 전기밥솥 (",
+    "0원 무료 나눔 (",
+    "자전거",
+    "자전거 / 킥보드 (",
+    "모니터",
+    "컴퓨터 모니터 (",
+    "매트리스",
+    "싱글 침대 매트리스 (",
+    "등록할 키워드를 입력해 주세요",
+    "이미 등록된 키워드입니다",
+    "(새것 같은 풀박스",
+    "급)",
+    "0원 (무료나눔) 또는 25,000원",
+    "모달 상단 헤더",
+    "외국인 선호도 1위 득템 알리미",
+    "키워드 실시간 알림 설정",
+    "키워드 직접 입력 폼",
+    "새 키워드 등록하기",
+    "세탁기, 아이폰, 0원, 밥솥",
+    "공단 필터 및 알리고",
+    "수신 토글",
+    "전체 공단 알림",
+    "안산 원곡/반월",
+    "실시간 웹 푸시 알림 수신 (무료)",
+    "외국인 근로자 인기 급상승 키워드 칩 프리셋",
+    "외국인 기숙사 인기 검색 키워드 (클릭 시 1초 등록)",
+    "내가 등록한 키워드 목록",
+    "내 등록 키워드 (",
+    "/10개)",
+    "새 매물 등록 시 1초 만에 알림",
+    "등록된 키워드가 없습니다",
+    "원하는 키워드를 등록하고 헐값 꿀매물을 가장 먼저 잡으세요!",
+    "전체 공단",
+    "매칭",
+    "웹 푸시",
+    "액션",
+    "웹 푸시 테스트 발송 / 활성화 토글 / 삭제",
+    "실시간 웹 푸시 알림 발송 테스트",
+    "푸시 테스트",
+    "알림",
+    "토글",
+    "키워드 삭제",
+    "경기 평택시 포승읍 포승공단 기숙사 2동",
+    "브라우저가",
+    "위치 서비스를 지원하지 않습니다",
+    "현재 위치 (위도",
+    "현재 위치 (경기 평택시 포승읍 포승공단로)",
+    "[실제 내 위치 기준 동네 인증 완료]",
+    "내 기준 위치",
+    "거래 반경",
+    "내 위치 반경",
+    "이내 (",
+    "도보 10분",
+    "자전거/킥보드 10분",
+    "내 주변 10",
+    "내 실제 위치를 중심으로",
+    "내의 직거래 매물이 우선 표시됩니다!",
+    "당근마켓 스타일 실시간",
+    "동네 인증",
+    "내 실제 위치",
+    "직거래 반경",
+    "현재 위치 1초 자동 인증 버튼",
+    "현재 내 실제 위치 인증",
+    "정밀 탐색",
+    "위치 찾는 중",
+    "현재 내",
+    "위치로 1초 자동 설정",
+    "기준 위치",
+    "주소 / 기숙사 직접 검색 폼",
+    "또는 도로명 주소 / 기숙사명 직접 검색",
+    "경기 평택시 포승읍 원정리, 안산 원곡동 840",
+    "검색",
+    "거래 반경 3단계 슬라이더 / 칩 (1",
+    "내 위치 기준 거래 반경 설정",
+    "3단계 칩 버튼",
+    "이내",
+    "걸어서 10분",
+    "자전거 10분",
+    "내 집/기숙사 바로 앞 걸어서 10분 초밀착 직거래 매물만 봅니다",
+    "자전거, 전동킥보드로 10분 내 왕복 가능한 실속 반경 매물을 봅니다",
+    "내 위치를 중심으로 반경 10",
+    "내의 모든 직거래 매물을 넓게 봅니다",
+    "구글 맵 실시간 뷰 (내 실제",
+    "위치 중심 + 반경 선택 시 실시간 줌인/줌아웃)",
+    "내 위치 중심 실시간 구글 맵 (반경",
+    "자동 줌)",
+    "세밀 확대",
+    "중간 뷰",
+    "넓은 뷰",
+    "중심 핀 및 반경 범위 오버레이",
+    "좌측 하단 정보 뱃지",
+    "반경)",
+    "하단 저장 버튼",
+    "내 실제 위치 기준",
+    "반경으로 설정 완료",
+    "상단 통합 헤더",
+    "최상단 풀와이드 웅장한 감성 히어로 쇼케이스 (중고마켓 탭일 때 노출)",
+    "메인 콘텐츠 컨테이너",
+    "184만원 세무 환급 감성 사진 배너",
+    "외국인 안심 거래 3대 수칙 (사기 방지 쉴드) 웜톤 배너",
+    "쇼핑몰 스타일 원형 아이콘 카테고리 네비게이션",
+    ")] 전용관",
+    "실시간 매물 리스트 헤더",
+    "실시간 등록 매물",
+    "15개국어 실시간 번역",
+    "매물 그리드 (20개 단위 페이징)",
+    "스마트 페이지네이션 네비게이션 바",
+    "이전 페이지 버튼",
+    "이전",
+    "페이지 번호 목록",
+    "다음 페이지 버튼",
+    "다음",
+    "조건에 맞는 매물이 없습니다",
+    "필터를 전체로 변경하거나, 첫 번째로 내 중고 물건을 1분 만에 등록해 보세요!",
+    "1분 간편 매물 등록하기",
+    "모바일 플로팅 매물 등록",
+    "버튼 (중고마켓 탭일 때)",
+    "푸터 영역 - 진한 남색",
+    "선명한 럭셔리 골드 테두리",
+    "상단 브랜드",
+    "혜택 요약",
+    "1 외국인 종합 슈퍼앱",
+    "연계",
+    "외국인 전용 0원 안심 중고거래",
+    "동네생활 커뮤니티",
+    "수수료 0원 100% 무료 안심 직거래",
+    "양방향 번역",
+    "공식 사업자등록 정보",
+    "사업자명",
+    "주식회사 펫에이앤씨",
+    "대표자",
+    "전기창",
+    "사업자 등록번호",
+    "통신판매업 번호",
+    "제 2023-진접오남-0680호",
+    "주소",
+    "서울특별시 광진구 광나루로 436, 5층(화양동, 에듀킨빌딩)",
+    "이메일",
+    "하단 카피라이트",
+    "관리자 링크",
+    "안심 가이드",
+    "고객센터 1588-0000",
+    "관리자 전용 관제 콘솔 페이지",
+    "관리자 관제 콘솔 (/",
+    "모달",
+    "드로어 컴포넌트들",
+    "[신원인증 완료]",
+    "님의 인증이 완료되었습니다",
+    "주소를 찾았습니다",
+    "지도 위를 직접 클릭하여 핀을 미세 조정할 수 있습니다",
+    "직거래 주소",
+    "만남 장소 (지도 핀 이동 가능)",
+    "1) 도로명 주소 검색창",
+    "2) 고객 직접 입력 상세 장소명",
+    "인터랙티브 지도",
+    "컨테이너 (100% 즉시 렌더링)",
+    "선택된 직거래 핀 위치",
+    "실제 실시간 인터랙티브 구글 지도",
+    "우측 상단",
+    "실제 지도 앱 길찾기 바로가기",
+    "길찾기 지도 앱",
+    "안심 직거래 배지",
+    "실제 직거래 약속 위치",
+    "하단 상세 주소",
+    "직거래 만남 가이드",
+    "크고 두꺼운 직거래 상세 주소 폰트",
+    "안전 직거래 가이드",
+    "안심 직거래",
+    "공공장소 및 가로등이 밝은 위 지도 핀 위치에서 안전하게 거래하세요",
+    "섹션 헤더",
+    "무빙세일 (",
+    "비자 만료 귀국 외국인 근로자들의 생활 가전·가구 묶음 헐값 급처분관",
+    "최대 85% 묶음 할인",
+    "3단계",
+    "필터 탭 바 (",
+    "전체 매물 (",
+    "-3 오늘마감 헐값/나눔",
+    "-7 마감임박 초특가",
+    "-14 묶음할인 (사전예약)",
+    "무빙세일 매물 그리드 (20개 단위 페이징)",
+    "상단 뱃지 라인",
+    "썸네일 이미지",
+    "할인율 뱃지",
+    "묶음 할인율 뱃지",
+    "다중 사진 인디케이터",
+    "찜 버튼",
+    "상품 정보",
+    "상단 무빙세일 스마트 페이지네이션 바",
+    "안산호랑이",
+    "평택 포승공단 기숙사 2동",
+    "모달 상단 프로필 헤더 - 앱 시그니처 딥 네이비",
+    "프로필 국기 아바타 박스 (골드 테두리",
+    "딥 네이비)",
+    "모달 바디 스크롤 영역 (세금 환급 계산기 + 매너온도 + 키워드알림 + 3대 상품 탭 목록)",
+    "이지텍스 실시간 10초 환급 계산기",
+    "즉시 신청 위젯",
+    "매너온도",
+    "인증 현황 카드 (독립 라운드 카드",
+    "시원한 여백)",
+    "매너온도란?",
+    "비주얼 온도 게이지 바",
+    "가산점 안내",
+    "신뢰 뱃지",
+    "법무부 실물 신분증",
+    "검증 (+7",
+    "보너스 반영)",
+    "신뢰도 상위 12% 최우수 회원",
+    "매너온도란? 설명 아코디언/안내 박스",
+    "매너온도 시스템 안내",
+    "는 사람의 따뜻한 체온처럼 가입 시 주어지는 기본 신뢰 점수입니다",
+    "사진 촬영",
+    "시 즉시",
+    "가 올라가",
+    "(골드 등급)",
+    "가 됩니다",
+    "이상",
+    "이면 구매자들이 100% 신뢰하여 내 매물이",
+    "3배 더 빠르게 판매",
+    "됩니다!",
+    "직거래 후 시간 약속과 친절 칭찬 후기를 받으면 온도가 계속 상승합니다",
+    "(노쇼/사기 신고 시 하강)",
+    "1초 만에",
+    "앱 설치하기 (",
+    "홈 화면 추가)",
+    "홈 화면에",
+    "앱 설치하기",
+    "1초 설치",
+    "바탕화면에 설치하고 15개국 번역 채팅 및 직거래 알림을 가장 빠르게 받으세요",
+    "앱 설치",
+    "키워드 실시간 알림 관리 섹션 (독립 카드)",
+    "키워드 실시간 알림 (",
+    "개 등록중)",
+    "알림 설정",
+    "3대 거래 관리 탭 바",
+    "[내가 파는 물건] [내가 산 물건] [내가 찜한 물건] (연한 커피/카푸치노 스타일)",
+    "내가 파는 물건 (",
+    "내가 산 물건 (",
+    "내가 찜한 물건 (",
+    "탭 컨텐츠 상품 목록 영역",
+    "내가 파는 물건 탭",
+    "서브 필터",
+    "전체 / 판매중 / 거래완료 (연한 커피 라떼",
+    "카라멜 모카)",
+    "판매중 / 예약중",
+    "해당 상태의 판매 매물이 없습니다",
+    "판매중",
+    "0원 (무료 나눔)",
+    "판매 상태 변경 버튼 그룹",
+    "예약중 변경",
+    "판매완료 처리",
+    "다시 판매",
+    "내가 산 물건 탭",
+    "구매 완료한 내역이 없습니다",
+    "직거래 완료",
+    "판매자",
+    "] 님에게 따뜻한 칭찬 후기(+0",
+    ")를 보냈습니다!",
+    "후기 남기기",
+    "내가 찜한 물건 탭",
+    "아직 찜한 물건이 없습니다",
+    "마음에 드는 물건에 하트(",
+    ")를 눌러보세요!",
+    "찜 취소",
+    "앱 개선 제안 /",
+    "건의 창구 (마이페이지 최하단)",
+    "앱 개선 제안 및 건의하기",
+    "소통창구",
+    "불편한 점, 번역 오류, 새로운 공단 추가 요청을 관리자에게 직접 보내주세요",
+    "의견 보내기",
+    "상단 헤더 - 딥 네이비",
+    "골드 뱃지",
+    "키워드 알림, 실시간 번역 채팅, 가격 인하 소식",
+    "모든 알림 읽음 처리",
+    "모두 읽음",
+    "필터 탭 바 (전체 / 키워드 / 채팅 / 가격인하)",
+    "키워드 알림",
+    "가격 인하",
+    "알림 목록 스크롤 영역",
+    "알림 아이콘 뱃지",
+    "알림 본문",
+    "썸네일 이미지 (있을 경우)",
+    "개별 삭제 버튼",
+    "알림 삭제",
+    "도착한 알림이 없습니다",
+    "관심 있는 키워드를 등록해두면 원하는 매물이 올라올 때 즉시 알려드립니다!",
+    "하단 키워드 알림 바로가기",
+    "내 관심 키워드 알림 (세탁기, 0원 등) 설정하기",
+    "외국인 밀집 주요 공단 직거래 필터 바",
+    "포승 · 반월 · 향남 · 남동 등 기숙사 인근",
+    "사기 의심 (선입금 / 외부 메신저 유도)",
+    "카톡/라인으로 유도하거나 계좌 선입금을 요구함",
+    "노출이 심한 사진, 성인용품, 음란성 이미지 또는 성희롱 사진 게시",
+    "비매너 / 욕설 / 성희롱 / 혐오 발언",
+    "채팅 중 모욕적이거나 불쾌한 언행을 함",
+    "허위 매물 / 가짜 사진 / 게시글과 다른 물건",
+    "실물과 사진이 완전히 다르거나 존재하지 않는 매물임",
+    "판매 금지 품목 (주류, 담배, 의약품, 불법 알선)",
+    "국내 법률 및",
+    "규정상 거래가 금지된 품목임",
+    "직거래 약속 노쇼 (약속 장소에 안 나옴)",
+    "약속 시간에 연락 없이 나타나지 않아 피해를 입음",
+    "기타 사유 직접 입력",
+    "기타 비정상적인 거래 행위",
+    "헤더",
+    "클린",
+    "안전 신고 센터",
+    "사용자 차단 및 불량 신고",
+    "폼 본문",
+    "신고 대상 안내",
+    "신고 및 차단 대상 회원",
+    "신고 사유를 선택해 주세요",
+    "상세 설명 입력",
+    "상세 내용 (선택 사항)",
+    "구체적인 상황을 적어주시면 안전 운영팀이 신속히 조사 후 제재합니다",
+    "이 사용자 즉시 차단하기 체크박스",
+    "이 사용자 즉시 차단하기",
+    "차단 시 이 회원의 매물과 메시지가 나에게 더 이상 보이지 않습니다",
+    "신고 접수 및 차단하기",
+    "(나)",
+    "따뜻한 거래 후기가 등록되었습니다!",
+    "상대방의",
+    "매너온도가 올라갔어요",
+    "글로벌 매너 평가",
+    "님과의 거래는 어떠셨나요?",
+    "3단계 평가 버튼",
+    "최고예요!",
+    "좋아요",
+    "아쉬워요",
+    "15개국어 칭찬 태그 선택 리스트",
+    "어떤 점이 좋으셨나요? (중복 선택 가능)",
+    "15개 언어 자동 번역",
+    "따뜻한 한 줄 코멘트 (선택)",
+    "따뜻한 후기 한마디 (선택)",
+    "상대방에게 전하고 싶은 감사 인사를 남겨주세요",
+    "거래 후기 보내기",
+    "좌측 아이콘",
+    "헤드라인",
+    "외국인 안심 거래 쉴드",
+    "선입금 요구는 99% 사기! 반드시 현장에서 물건 확인 후 결제하세요",
+    "우측 3대 수칙 퀵 요약",
+    "화살표",
+    "3대 안심 수칙 보기",
+    "안심 거래 3대 수칙 상세 팝업 모달",
+    "외국인 안심 거래 3대 수칙",
+    "회원 보호 및 사기 범죄 원천 차단 가이드",
+    "선입금 금지",
+    "선입금 및 예약금 요구는 99% 사기입니다",
+    "물건을 맡아둘 테니 1만원만 먼저 보내라",
+    "택배비 먼저 입금해라",
+    "등은 대표적인 사기 수법입니다",
+    "반드시",
+    "직접 만나서 물건 상태를 확인한 후",
+    "대금을 지급하세요",
+    "외부 메신저 거절",
+    "카카오톡/라인 등 외부 메신저 유도를 거절하세요",
+    "외부 메신저로 대화할 경우 사기 피해 발생 시 증거 확보 및 구제가 어렵습니다",
+    "15개국어 실시간 안심 번역 채팅",
+    "안에서만 거래를 진행하세요",
+    "공단 랜드마크 핀 활용",
+    "가로등과",
+    "가 있는 공단 랜드마크에서 만나세요",
+    "인적이 드문 골목보다",
+    "25 앞, 원곡동 시계탑, 기숙사 정문",
+    "등 밝고 안전한 랜드마크 지도 핀을 약속 장소로 잡으세요",
+    "모달 헤더 (강렬한 레드/앰버 그라데이션)",
+    "사기 피해 주의 경고",
+    "모달 본문",
+    "감지된 위험 알림 박스",
+    "감지된 주의 단어",
+    "3대 안전 수칙 체크리스트",
+    "외국인 안심 직거래 3대 철칙 (",
+    "선입금 절대 금지",
+    "반드시 만나서 물건을 본 뒤 현금/이체하기",
+    "앱 안에서만 대화",
+    "카톡/라인/텔레그램 이동 거절하기",
+    "공단 밝은 곳에서 만남",
+    "25 편의점, 기숙사 정문 핀 활용",
+    "확인 버튼",
+    "안전 수칙을 확인했으며 주의하겠습니다",
+    "(응우옌)",
+    "판매 매물 관리",
+    "끌어올리기",
+    "현재 상태 표시",
+    "변경 버튼",
+    "거래 상대방 선택",
+    "거래 상대방 (구매자)",
+    "최근 채팅 상대",
+    "선택됨",
+    "끌어올리기 (",
+    "가격 인하 섹션",
+    "피드 최상단 끌어올리기 (",
+    "무료",
+    "매물을 목록 맨 위로 끌어올려 외국인 근로자들에게 다시 노출합니다",
+    "가격을 10% 이상 할인하면",
+    "[가격인하",
+    "뱃지가 함께 부착되어 3배 빠르게 판매됩니다!",
+    "가격 할인 선택 옵션",
+    "가격 인하 선택 (선택 사항)",
+    "% 할인)",
+    "가격 유지",
+    "지금 끌어올리기 완료",
+    "% 할인",
+    "끌올",
+    "3대 프리미엄 혜택 카드 3열 그리드",
+    "5개년 세무 환급 (최대 1,000만원)",
+    "상단 럭셔리 골드 글로우",
+    "상단 태그",
+    "아이콘",
+    "국세청 제30조 법적 권리",
+    "타이틀",
+    "강조 금액",
+    "5개년 숨은 세금 환급",
+    "최대 1,000만원",
+    "환급",
+    "3대 핵심 혜택 리스트",
+    "최근 5년간 지나친 세금",
+    "완벽 전액 환급",
+    "간편인증 0회!",
+    "30초 모바일 무인 접수",
+    "선결제 0원!",
+    "환급 완료 시 100% 후불 정산",
+    "30초 환급금 무료 조회",
+    "외국인 맞춤 대출 (최대 5,000만원)",
+    "외국인 맞춤 대출",
+    "국세청 5개년 소득증빙 연계를 통해 최대 5,000만원 안심 대출 한도 조회 서비스가 제공됩니다",
+    "상단 블루 글로우",
+    "실시간 금융",
+    "연동",
+    "외국인 맞춤 신용·비상금",
+    "최대 5,000만원",
+    "한도",
+    "국세청",
+    "5개년 소득증빙 데이터",
+    "기반 승인",
+    "소액 긴급 비상금부터",
+    "최대 5,000만원 생활자금",
+    "1금융권 및",
+    "우수 공식 제휴 금융사",
+    "안전 연동",
+    "내 실시간 대출한도 확인",
+    "내 동네 안심 원룸",
+    "주택",
+    "내 동네 안심 부동산",
+    "원룸]",
+    "국토교통부 실거래가 기반 시세 검증 및 15개국어 제휴 공인중개사 안심 매물 서비스가 연결됩니다",
+    "상단 에메랄드 글로우",
+    "국토부 실거래가 검증",
+    "외국인 전용 안심 주거",
+    "직방",
+    "국토부",
+    "실거래가 기반 시세 검증",
+    "외국인 보증금 사기 방지",
+    "100% 안심 방",
+    "15개국어 계약서 번역",
+    "안심 중개 동행",
+    "내 동네 안심 매물 둘러보기",
+    "우측 감성적인 고화질 세무 상담 사진 (미드나잇 오버레이 블렌딩)",
+    "럭셔리 골드 앰비언트 글로우",
+    "국세청 법적 근거 골드 라인",
+    "대한민국 국세청(",
+    ") 조세특례제한법 제30조 법적 권리",
+    "헤드라인 타이틀",
+    "지나치기 쉬운 세금 환급,",
+    "외국인 근로자도 보장받는",
+    "[평균 184만원]",
+    "30초 무료 조회",
+    "3대 핵심 보증 칩 (골드 테두리",
+    "다크 뱃지)",
+    "소요시간 30초",
+    "평균 184만원 수령",
+    "선결제 0원 (100% 후불제)",
+    "우측 액션 버튼",
+    "스크린샷 스타일 골든 그라데이션 솔리드 버튼",
+    "내 환급금 30초 무료 조회하기",
+    "성명과 연락처를 입력해 주세요",
+    "선결제 0원 후불제",
+    "세금 환급 신청이 접수되었습니다!",
+    "외국인 근로자 숨은 세금 30초 무료 환급",
+    "한국에서 일하며 낸 소득세, 조특법 법정 감면 혜택으로 평균 184만원을 안전하게 돌려받으세요",
+    "진행 스텝 인디케이터",
+    "비자 및 급여 선택",
+    "예상 환급액 및 간편 접수",
+    "모달 본문 스크롤 영역",
+    "비자 및 근무정보 입력",
+    "비자 종류 선택",
+    "체류 비자 유형 (",
+    "한국 근무 연수 슬라이더",
+    "한국 근무 기간 (",
+    "년 (",
+    "개월 근무)",
+    "1년",
+    "3년 (평균)",
+    "5년 (최대)",
+    "월 평균 급여 슬라이더",
+    "월 평균 급여 (세전",
+    "만원",
+    "200만원",
+    "280만원 (평균)",
+    "500만원+",
+    "실시간 환급액 프리뷰 카드",
+    "실시간 계산된 예상 환급액",
+    "다음 버튼",
+    "예상 환급액 상세 확인 및 무료 신청 (30초)",
+    "상세 견적 및 후불 수수료 보증",
+    "신청 정보",
+    "환급 상세 내역 브리핑",
+    "신청 비자 및 기간",
+    "년 근무",
+    "국세 소득세 환급 (90%)",
+    "지방소득세 환급 (10%)",
+    "총 예상 환급 합계",
+    "후불제(선결제 0원) 안심 보증 정책 배너",
+    "100% 후불 수수료 안심 보증",
+    "선결제 비용 0원",
+    "조회 및 신청 시 단 1원도 내지 않습니다",
+    "성공 후불제 (",
+    "국세청 환급금이 고객 통장에 100% 입금된 후에만 청구됩니다",
+    "신청자 정보 입력 폼",
+    "환급금 안내 및 접수 정보 입력",
+    "신청자 성명 (여권상 영문 또는 한국 이름)",
+    "한국 휴대전화 번호",
+    "국적 선택 (모국어 상담 지원)",
+    "우즈베키스탄 (",
+    "스리랑카 (",
+    "필리핀 (",
+    "인도네시아 (",
+    "한국 (",
+    "약관 동의",
+    "[필수] 국세청 환급 대행 및",
+    "전문 세무사 1",
+    "1 상담 연결에 동의합니다",
+    "선결제 0원으로 1초 접수 완료하기",
+    "개인정보 256",
+    "암호화 및 국세청 공식 홈택스 전산 연동",
+    "접수 완료 및 접수증 카드",
+    "환급 신청이 정상 접수되었습니다!",
+    "외국인 전담",
+    "제휴 세무사가 24시간 이내에 카카오톡/문자로 최종 확정액을 안내합니다",
+    "공식 모바일 접수증 카드",
+    "모바일 세무 접수증",
+    "신청자 성명",
+    "예상 환급 총액",
+    "비용 지불 방식",
+    "100% 후불제 (선결제 0원)",
+    "환급금 입금 계좌",
+    "세무사 안내 메시지로 계좌 등록",
+    "확인 및",
+    "계속 쇼핑하기",
+    "인증 뱃지 바",
+    "비자·신분 인증",
+    "공단 기숙사 인증",
+    "현재 판매 중인 다른 물품이 없습니다",
+    "판매 상품",
+    "묶음 구매 시 네고 문의 가능",
+    "상품 썸네일",
+    "유저 헤더 정보",
+    "응답률",
+    "거래 완료",
+    "매너온도 간략 배지",
+    "2단 탭 바 (",
+    "판매 물품",
+    "매너",
+    "후기)",
+    "판매 상품 (",
+    "신뢰",
+    "거래후기",
+    "탭 1",
+    "판매 물품 목록",
+    "탭 2",
+    "인증 배지 상태 안내",
+    "안심 거래 인증 현황",
+    "체류비자 신분 확인됨",
+    "산단 기숙사 위치 인증",
+    "받은 매너 칭찬 키워드 통계",
+    "받은 매너 칭찬 키워드",
+    "아직 등록된 칭찬 키워드가 없습니다",
+    "최근 거래 후기",
+    "최근 거래 후기 (",
+    "첫 번째 거래 후기를 남겨보세요!",
+    "익명",
+    "[세탁기]",
+    "평택 포승공단에",
+    "+ 쿠쿠 밥솥",
+    "매물이 새로 등록되었습니다",
+    "10분 전",
+    "1 안심 번역 채팅 도착",
+    "님이 새로운 번역 메시지를 보냈습니다",
+    "감사합니다! 오늘 저녁 7시에 만나요!",
+    "25분 전",
+    "찜한 매물 가격 인하",
+    "관심 매물",
+    "가격이 25,000원으로 15% 인하되었습니다!",
+    "직거래 약속 1시간 전 리마인더",
+    "오늘 19",
+    "직거래 약속 1시간 전입니다",
+    "2시간 전",
+    "(), // 상단 노출을 위해 시간 갱신",
+    "0원 (무료)"
+  ]
+}

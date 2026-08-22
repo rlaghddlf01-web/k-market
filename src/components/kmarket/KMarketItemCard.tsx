@@ -24,7 +24,7 @@ interface KMarketItemCardProps {
 export default function KMarketItemCard({ item }: KMarketItemCardProps) {
   const { setSelectedItem, openChatForItem, toggleLike, likedItemIds, selectedRegion } =
     useKMarket();
-  const { formatWon, currentLang } = useLanguage();
+  const { t, formatWon, currentLang } = useLanguage();
   const [showProfileModal, setShowProfileModal] = useState(false);
 
   const displayRegion = getAdaptedItemRegion(item, selectedRegion);
@@ -97,7 +97,7 @@ export default function KMarketItemCard({ item }: KMarketItemCardProps) {
               <KMarketStatusBadge status="reserved" />
             ) : isFree ? (
               <div className="bg-emerald-500 text-white text-[11px] font-black px-2.5 py-1 rounded-full shadow-md animate-pulse">
-                🎁 무료나눔
+                {t('item_card_free_badge')}
               </div>
             ) : item.is_moving_sale ? (
               <div
@@ -218,7 +218,7 @@ export default function KMarketItemCard({ item }: KMarketItemCardProps) {
               title="15개국어 실시간 자동번역 1:1 채팅"
             >
               <MessageCircle className="w-4 h-4 text-[#f3ba2f] group-hover/btn:scale-110 transition-transform" />
-              <span className="text-[#f3ba2f] font-black tracking-tight">1:1 번역 채팅하기</span>
+              <span className="text-[#f3ba2f] font-black tracking-tight">{t('item_card_chat_btn')}</span>
             </button>
           </div>
         </div>

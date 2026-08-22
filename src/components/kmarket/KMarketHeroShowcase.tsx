@@ -21,17 +21,17 @@ export default function KMarketHeroShowcase() {
           <div className="max-w-xl space-y-4 text-left">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#ded1c4] text-[#4a3424] text-xs font-bold tracking-wide">
               <Sparkles className="w-3.5 h-3.5 text-[#845b37]" />
-              <span>대한민국 외국인 근로자 No.1 안심 플랫폼</span>
+              <span>{t('hero_top_badge')}</span>
             </div>
 
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#1f1914] tracking-tight leading-tight sm:leading-tight">
-              외국인 안심 직거래 &amp; <br />
-              <span className="text-[#845b37]">귀국 무빙세일</span> 컬렉션
+              {t('hero_title_1')} <br />
+              <span className="text-[#845b37]">{t('hero_title_moving')}</span> {t('hero_title_collection')}
             </h1>
 
             <p className="text-sm sm:text-base text-[#5c4a39] font-medium leading-relaxed max-w-lg">
-              15개국어 실시간 Gemini 양방향 자동번역 채팅과 <br className="hidden sm:inline" />
-              신원인증 기반 주요 공단 1분 도보 직거래로 안전하게 시작하세요.
+              {t('hero_desc_1')} <br className="hidden sm:inline" />
+              {t('hero_desc_2')}
             </p>
 
             {/* CTA 버튼 그룹 */}
@@ -40,7 +40,7 @@ export default function KMarketHeroShowcase() {
                 onClick={() => setIsCreateModalOpen(true)}
                 className="px-6 py-3.5 rounded-full bg-[#1f1914] hover:bg-[#332219] text-[#fbf9f6] text-xs sm:text-sm font-bold transition-all shadow-sm flex items-center gap-2 cursor-pointer active:scale-95"
               >
-                <span>내 물건 1분 간편 등록</span>
+                <span>{t('hero_post_btn')}</span>
                 <ArrowRight className="w-4 h-4 text-amber-200" />
               </button>
 
@@ -49,7 +49,7 @@ export default function KMarketHeroShowcase() {
                 className="px-5 py-3.5 rounded-full bg-[#fefcf9] hover:bg-white text-[#3d2817] border border-[#ded1c4] text-xs sm:text-sm font-bold transition-all flex items-center gap-2 cursor-pointer active:scale-95 shadow-2xs"
               >
                 <span className="w-2 h-2 rounded-full bg-amber-500 animate-pulse" />
-                <span>세무 환급 184만원 무료조회</span>
+                <span>{t('hero_tax_btn')}</span>
               </button>
             </div>
           </div>
@@ -73,10 +73,10 @@ export default function KMarketHeroShowcase() {
                 className="absolute top-3.5 right-3.5 w-20 h-20 sm:w-22 sm:h-22 rounded-full text-white flex flex-col items-center justify-center text-center p-1.5 shadow-xl animate-pulse pointer-events-none"
               >
                 <span className="text-[9px] sm:text-[10px] font-bold text-slate-200 leading-tight">
-                  귀국 근로자
+                  {t('hero_moving_tag_top')}
                 </span>
                 <span className="text-xs sm:text-sm font-black text-[#f3ba2f] leading-tight">
-                  무빙세일
+                  {t('hero_moving_tag_main')}
                 </span>
                 <span className="text-[9px] font-extrabold bg-rose-600 px-1.5 py-0.2 rounded-full mt-0.5">
                   75% OFF
@@ -91,11 +91,11 @@ export default function KMarketHeroShowcase() {
                       Full-Package Bundle
                     </span>
                     <p className="text-sm font-black drop-shadow-sm truncate">
-                      냉장고·세탁기·소파·노트북 풀패키지 묶음
+                      {t('hero_bundle_title')}
                     </p>
                   </div>
                   <span className="text-xs font-black text-rose-400 bg-black/50 px-2 py-1 rounded-lg border border-rose-400/40">
-                    일괄 급처
+                    {t('hero_bundle_action')}
                   </span>
                 </div>
               </div>
@@ -109,19 +109,19 @@ export default function KMarketHeroShowcase() {
         <div className="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-4 text-[#5c4a39] text-xs">
           <div className="flex items-center gap-2">
             <ShieldCheck className="w-4 h-4 text-[#845b37]" />
-            <span className="font-semibold">수수료 0원 100% 무료 직거래</span>
+            <span className="font-semibold">{t('trust_bar_fee')}</span>
           </div>
           <div className="flex items-center gap-2">
             <MessageCircle className="w-4 h-4 text-[#845b37]" />
-            <span className="font-semibold">15개국어 실시간 Gemini 번역</span>
+            <span className="font-semibold">{t('trust_bar_ai')}</span>
           </div>
           <div className="flex items-center gap-2">
             <Sparkles className="w-4 h-4 text-[#845b37]" />
-            <span className="font-semibold">선결제 0원 184만원 세무환급</span>
+            <span className="font-semibold">{t('trust_bar_tax')}</span>
           </div>
           <div className="flex items-center gap-2">
             <RefreshCw className="w-4 h-4 text-[#845b37]" />
-            <span className="font-semibold">귀국 D-Day 무빙세일 전용관</span>
+            <span className="font-semibold">{t('trust_bar_moving')}</span>
           </div>
         </div>
       </div>
