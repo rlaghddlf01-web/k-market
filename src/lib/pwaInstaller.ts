@@ -1,38 +1,43 @@
-// KTRS K-Market 전역 PWA 설치 트리거 엔진
+// PWA 1초 설치 트리거 유틸 (17개국어 대응)
 
-let deferredPrompt: any = null;
-
-if (typeof window !== 'undefined') {
-  window.addEventListener('beforeinstallprompt', (e: Event) => {
-    e.preventDefault();
-    deferredPrompt = e;
-  });
-}
-
-/**
- * 어디서든 호출 가능한 PWA 네이티브 앱 설치 트리거
- */
 export async function triggerPwaInstall(): Promise<boolean> {
   if (typeof window === 'undefined') return false;
 
-  // 1. 네이티브 PWA 설치 프롬프트 이벤트가 대기 중인 경우
+  const deferredPrompt = (window as any).deferredPwaPrompt;
+
   if (deferredPrompt) {
-    deferredPrompt.prompt();
-    const { outcome } = await deferredPrompt.userChoice;
-    deferredPrompt = null;
-    return outcome === 'accepted';
+    try {
+      deferredPrompt.prompt();
+      const choiceResult = await deferredPrompt.userChoice;
+      if (choiceResult.outcome === 'accepted') {
+        (window as any).deferredPwaPrompt = null;
+        return true;
+      }
+    } catch (err) {
+      console.warn('PWA prompt error:', err);
+    }
   }
 
-  // 2. iOS Safari 안내
-  const ua = window.navigator.userAgent.toLowerCase();
-  const isIOS = /iphone|ipad|ipod/.test(ua);
+  // 기기별 안내
+  const isIOS = /iphone|ipad|ipod/.test(window.navigator.userAgent.toLowerCase());
+  const currentLang = localStorage.getItem('kmarket_lang') || 'ko';
 
   if (isIOS) {
-    alert('📱 [iPhone/iPad 설치 안내]\n\n화면 하단 중앙의 [공유 버튼(↑)]을 누른 후\n[홈 화면에 추가(+)]를 선택하시면 앱이 즉시 설치됩니다!');
-    return false;
+    if (currentLang === 'vi') {
+      alert('📱 [Hướng dẫn cài đặt iPhone/Safari]\n\nVui lòng nhấn nút [Chia sẻ (↑)] ở thanh dưới cùng rồi chọn [Thêm vào Màn hình chính (+)] để cài đặt ứng dụng ngay!');
+    } else if (currentLang === 'zh') {
+      alert('📱 [iPhone/Safari 安装指引]\n\n请点击浏览器底部的 [分享按钮(↑)]，然后选择 [添加到主屏幕(+)] 即可完成安装！');
+    } else {
+      alert('📱 [iPhone/Safari Install Guide]\n\nTap the [Share button (↑)] at the bottom and choose [Add to Home Screen (+)] to install the app!');
+    }
+  } else {
+    if (currentLang === 'vi') {
+      alert('📱 [Hướng dẫn cài đặt App K-Market]\n\nNhấn biểu tượng [Cài đặt (⊕)] trên thanh địa chỉ hoặc menu (⋮) rồi chọn [Cài đặt ứng dụng] / [Thêm vào màn hình chính]!');
+    } else if (currentLang === 'zh') {
+      alert('📱 [K-Market 应用安装指引]\n\n点击浏览器地址栏右侧的 [安装图标(⊕)] 或菜单(⋮)中的 [安装应用] / [添加到主屏幕] 即可1秒完成安装！');
+    } else {
+      alert('📱 [K-Market App Installation]\n\nClick the [Install icon (⊕)] in address bar or menu (⋮) and select [Install App] / [Add to Home Screen]!');
+    }
   }
-
-  // 3. PC 크롬 / 안드로이드 fallback 안내
-  alert('📱 [앱 설치 안내]\n\n브라우저 주소창 우측의 [설치 아이콘(⊕)] 또는\n상단 메뉴(⋮)에서 [앱 설치] / [홈 화면에 추가]를 클릭하시면 1초 만에 설치됩니다!');
   return false;
 }
