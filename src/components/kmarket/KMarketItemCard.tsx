@@ -11,6 +11,7 @@ import {
   Sparkles,
   MapPin,
   Clock,
+  Share2,
 } from 'lucide-react';
 import KMarketUserProfileModal from './KMarketUserProfileModal';
 import KMarketStatusBadge from './KMarketStatusBadge';
@@ -22,7 +23,7 @@ interface KMarketItemCardProps {
 }
 
 export default function KMarketItemCard({ item }: KMarketItemCardProps) {
-  const { setSelectedItem, openChatForItem, toggleLike, likedItemIds, selectedRegion } =
+  const { setSelectedItem, openChatForItem, toggleLike, likedItemIds, selectedRegion, openShareModal } =
     useKMarket();
   const { t, formatWon, currentLang } = useLanguage();
   const [showProfileModal, setShowProfileModal] = useState(false);
@@ -141,21 +142,33 @@ export default function KMarketItemCard({ item }: KMarketItemCardProps) {
             </div>
           )}
 
-          {/* 우하단: 찜하기 하트 버튼 */}
-          <button
-            onClick={(e) => {
-              e.stopPropagation();
-              toggleLike(item.id);
-            }}
-            className={`absolute bottom-3 right-3 p-2.5 rounded-full backdrop-blur-md transition-all active:scale-75 ${
-              isLiked
-                ? 'bg-red-500 text-white shadow-md shadow-red-500/40'
-                : 'bg-black/40 text-white hover:bg-black/60'
-            }`}
-            aria-label={t('안내 내용을 확인해 주세요')}
-          >
-            <Heart className={`w-4 h-4 ${isLiked ? 'fill-current' : ''}`} />
-          </button>
+          {/* 우하단: 공유 & 찜하기 버튼 그룹 */}
+          <div className="absolute bottom-3 right-3 flex items-center space-x-1.5">
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                openShareModal(item);
+              }}
+              className="p-2.5 rounded-full bg-black/40 text-white hover:bg-black/70 backdrop-blur-md transition-all active:scale-75 cursor-pointer shadow-sm hover:text-yellow-300"
+              title={t('1초 SNS 공유하기')}
+            >
+              <Share2 className="w-4 h-4" />
+            </button>
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                toggleLike(item.id);
+              }}
+              className={`p-2.5 rounded-full backdrop-blur-md transition-all active:scale-75 cursor-pointer ${
+                isLiked
+                  ? 'bg-red-500 text-white shadow-md shadow-red-500/40'
+                  : 'bg-black/40 text-white hover:bg-black/60'
+              }`}
+              title={t('관심 매물 등록')}
+            >
+              <Heart className={`w-4 h-4 ${isLiked ? 'fill-current' : ''}`} />
+            </button>
+          </div>
         </div>
 
         {/* ── 2. 사진 바로 밑 설명 및 상세 정보 영역 ───────────────── */}

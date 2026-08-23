@@ -24,6 +24,7 @@ import KMarketKeywordAlertModal from './KMarketKeywordAlertModal';
 import KMarketLocationRadiusModal from './KMarketLocationRadiusModal';
 import KMarketNotificationDrawer from './KMarketNotificationDrawer';
 import KMarketFeedbackModal from './KMarketFeedbackModal';
+import KMarketShareModal from './KMarketShareModal';
 import { CommunityProvider } from '@/context/CommunityContext';
 import KMarketCommunityMain from '../community/KMarketCommunityMain';
 import { ShoppingBag, Sparkles, ShieldCheck, Plus, PackageOpen, ShieldAlert } from 'lucide-react';
@@ -50,6 +51,9 @@ export default function KMarketMainFeed() {
     setIsLocationRadiusModalOpen,
     isFeedbackModalOpen,
     setIsFeedbackModalOpen,
+    isShareModalOpen,
+    closeShareModal,
+    shareItem,
     setAuthedUser,
     userLocation,
   } = useKMarket();
@@ -386,6 +390,11 @@ export default function KMarketMainFeed() {
         <KMarketFeedbackModal
           isOpen={isFeedbackModalOpen}
           onClose={() => setIsFeedbackModalOpen(false)}
+        />
+        <KMarketShareModal
+          isOpen={isShareModalOpen}
+          onClose={closeShareModal}
+          item={shareItem}
         />
         <KMarketNotificationDrawer />
       </div>

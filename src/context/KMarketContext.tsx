@@ -58,6 +58,13 @@ interface KMarketContextType {
   setIsFeedbackModalOpen: (open: boolean) => void;
   feedbacks: FeedbackItem[];
   submitFeedback: (feedback: FeedbackItem) => void;
+  
+  // 1터치 글로벌 SNS 공유 모달 상태
+  isShareModalOpen: boolean;
+  setIsShareModalOpen: (open: boolean) => void;
+  shareItem: KMarketItem | null;
+  openShareModal: (item: KMarketItem) => void;
+  closeShareModal: () => void;
   authedUser: any;
   setAuthedUser: (user: any) => void;
   userLocation: UserLocationSettings;
@@ -131,6 +138,20 @@ export function KMarketProvider({ children }: { children: React.ReactNode }) {
   const [isFeedbackModalOpen, setIsFeedbackModalOpen] = useState<boolean>(false);
   const [feedbacks, setFeedbacks] = useState<FeedbackItem[]>([]);
   const [authedUser, setAuthedUser] = useState<any>(null);
+
+  // 1터치 글로벌 SNS 공유 모달 상태
+  const [isShareModalOpen, setIsShareModalOpen] = useState<boolean>(false);
+  const [shareItem, setShareItem] = useState<KMarketItem | null>(null);
+
+  const openShareModal = (item: KMarketItem) => {
+    setShareItem(item);
+    setIsShareModalOpen(true);
+  };
+
+  const closeShareModal = () => {
+    setIsShareModalOpen(false);
+    setShareItem(null);
+  };
 
   // 내 위치 및 반경 설정 (기본값: 내 주변, 3km)
   const [userLocation, setUserLocationState] = useState<UserLocationSettings>({
@@ -875,6 +896,11 @@ export function KMarketProvider({ children }: { children: React.ReactNode }) {
         setIsFeedbackModalOpen,
         feedbacks,
         submitFeedback,
+        isShareModalOpen,
+        setIsShareModalOpen,
+        shareItem,
+        openShareModal,
+        closeShareModal,
         notifications,
         unreadNotificationCount,
         markAllNotificationsAsRead,

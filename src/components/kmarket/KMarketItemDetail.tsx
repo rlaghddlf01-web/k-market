@@ -38,6 +38,7 @@ export default function KMarketItemDetail() {
     updateItemStatus,
     boostItem,
     reportUser,
+    openShareModal,
   } = useKMarket();
   const { t, formatWon, currentLang, currentLangOption } = useLanguage();
   const [activeImageIndex, setActiveImageIndex] = useState(0);
@@ -85,33 +86,11 @@ export default function KMarketItemDetail() {
                 <span>{t('🚫 신고')}</span>
               </button>
               <button
-                onClick={async () => {
-                  const shareUrl = `${window.location.origin}/?item=${selectedItem.id}`;
-                  const shareTitle = `[K-Market] ${selectedItem.title} - ${selectedItem.price.toLocaleString()}원`;
-                  const shareText = `K-Market 외국인 안심 직거래 매물: ${selectedItem.title} (${selectedItem.region})`;
-
-                  if (navigator.share) {
-                    try {
-                      await navigator.share({
-                        title: shareTitle,
-                        text: shareText,
-                        url: shareUrl,
-                      });
-                      return;
-                    } catch (e) {
-                      // 취소하거나 미지원 시 클립보드 복사로 폴백
-                    }
-                  }
-
-                  if (navigator.clipboard) {
-                    await navigator.clipboard.writeText(shareUrl);
-                    alert(`🔗 매물 공유 링크가 복사되었습니다!\n\n카카오톡, 페이스북, 인스타그램, 텔레그램 등에 붙여넣어 공유하세요.\n\n${shareUrl}`);
-                  }
-                }}
-                className="bg-black/40 hover:bg-[#f3ba2f] hover:text-[#09101f] text-white p-2.5 rounded-full backdrop-blur-md transition-all cursor-pointer shadow-md hover:scale-105 active:scale-95"
-                title={t('매물 링크 공유하기 (카카오톡, 페이스북 등)')}
+                onClick={() => openShareModal(selectedItem)}
+                className="bg-black/40 hover:bg-black/60 text-white p-2.5 rounded-full backdrop-blur-md transition-colors cursor-pointer"
+                title={t('1초 SNS 공유하기')}
               >
-                <Share2 className="w-5 h-5" />
+                <Share2 className="w-5 h-5 text-yellow-300" />
               </button>
               <button
                 onClick={() => toggleLike(selectedItem.id)}
@@ -338,7 +317,7 @@ export default function KMarketItemDetail() {
 
         {/* 하단 고정 액션 바 */}
         <div className="absolute bottom-0 left-0 right-0 p-4 bg-white/95 backdrop-blur-md border-t border-slate-100 flex items-center justify-between gap-3 shadow-lg">
-          <div className="flex items-center space-x-1">
+          <div className="flex items-center space-x-2">
             <button
               onClick={() => toggleLike(selectedItem.id)}
               className={`p-3 rounded-2xl border transition-colors cursor-pointer ${
@@ -346,8 +325,16 @@ export default function KMarketItemDetail() {
                   ? 'bg-red-50 border-red-200 text-red-600'
                   : 'bg-slate-100 border-slate-200 text-slate-700'
               }`}
+              title={t('관심 매물 등록')}
             >
               <Heart className={`w-5 h-5 ${isLiked ? 'fill-current' : ''}`} />
+            </button>
+            <button
+              onClick={() => openShareModal(selectedItem)}
+              className="p-3 rounded-2xl border border-slate-200 bg-slate-100 hover:bg-emerald-50 hover:border-emerald-200 hover:text-emerald-600 text-slate-700 transition-colors cursor-pointer"
+              title={t('1초 SNS 공유하기')}
+            >
+              <Share2 className="w-5 h-5" />
             </button>
           </div>
 
