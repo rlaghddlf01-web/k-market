@@ -185,9 +185,8 @@ export default function KMarketHeader() {
                   className="w-full h-full object-cover scale-110"
                 />
               </div>
-              <div className="flex items-center gap-1 whitespace-nowrap shrink-0">
-                <span className="text-[18px] sm:text-[22px] font-black tracking-tight text-[#1f1914] leading-none whitespace-nowrap">{t('케이마켓')}</span>
-                <span className="text-[8px] sm:text-[9px] font-black bg-[#ede2d6] text-[#5c4a39] px-1 py-0.2 rounded tracking-wider">FREE</span>
+              <div className="flex items-center whitespace-nowrap shrink-0">
+                <span className="notranslate text-[18px] sm:text-[22px] font-black tracking-tight text-[#1f1914] leading-none whitespace-nowrap">{t('케이마켓')}</span>
               </div>
             </div>
 
