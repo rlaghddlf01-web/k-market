@@ -1,9 +1,7 @@
 export const header = {
   "17개국 대형 국기 선택창 열기": "Open the large 17-country flag selection window",
   "17개국어 간편 언어 선택": "Easy language selection in 17 languages",
-  "1시간 전 알림": "1 hour ago",
   "1초 만에 앱 설치하기": "Install the app in 1 second",
-  "K-Market 1초 앱 설치": "K-Market 1-Second App Installation",
   "• 실시간 웹 푸시 알림 켜짐": "• Real-time web push notifications enabled",
   "내 관심 키워드 알림 (세탁기, 무료나눔 등) 맞춤 설정하기 →": "Customize your keyword alerts (washing machine, freebies, etc.) →",
   "내 동네 안심 매물 둘러보기": "Browse safe listings in my neighborhood",
@@ -16,7 +14,6 @@ export const header = {
   "실시간 웹 푸시 알림 발송 테스트": "Real-time web push notification send test",
   "실시간 웹 푸시 알림 수신 (무료)": "Receive real-time web push notifications (Free)",
   "아이폰 및 사파리 브라우저 앱 설치 방법": "How to install the app on iPhone and Safari browser",
-  "아이폰 앱 설치를 위해 우측 상단/하단 메뉴에서 [Safari로 열기]를 눌러주세요.": "To install the app on iPhone, please tap [Open in Safari] from the top/bottom right menu.",
   "알림 삭제": "Delete notification",
   "알림 설정": "Notification settings",
   "알림 켜기": "Turn on notifications",
@@ -29,10 +26,6 @@ export const header = {
   "통합 알림 센터": "Unified Notification Center",
   "홈 화면에 앱 설치하기": "Install App on Home Screen",
   "🏠 [케이티알에스 내 동네 안심 부동산 & 원룸] 국토교통부 실거래가 기반 시세 검증 및 17개국어 제휴 공인중개사 안심 매물 서비스가 연결됩니다.": "🏠 [KTRS Local Trusted Real Estate & One-Room] Connecting you with verified market prices based on Ministry of Land, Infrastructure and Transport actual transaction data and trusted listings from partner real estate agents in 17 languages.",
-  "🔔 ${t('키워드 알림')}: [${washerName}]": "🔔 ${t('Keyword Notification')}: [${washerName}]",
-  "🔔 K-Market 실시간 알림이 켜졌습니다!": "🔔 K-Market real-time notifications are enabled!",
-  "🔔 [키워드 알림] \"${kw}\" 매물이 등록되었습니다!": "🔔 [Keyword Notification] A listing for \"${kw}\" has been registered!",
   "🔔 키워드 실시간 알림 등록": "🔔 Register for Real-time Keyword Notifications",
-  "🔔 키워드 알림: [세탁기]": "🔔 Keyword Notification: [Washing Machine]",
 };
 export default header;

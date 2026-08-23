@@ -18,7 +18,6 @@ export const post_create = {
   "사진 압축 처리 중 오류가 발생했습니다.": "Đã xảy ra lỗi trong quá trình nén ảnh.",
   "사진 첨부 (최대 5장)": "Đính kèm ảnh (tối đa 5 ảnh)",
   "사진 추가": "Thêm ảnh",
-  "살게요": "Tôi sẽ mua",
   "상품 사진": "Ảnh sản phẩm",
   "상품 카테고리를 선택해 주세요": "Vui lòng chọn danh mục sản phẩm",
   "선택한 사진 삭제": "Xóa ảnh đã chọn",

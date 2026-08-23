@@ -18,7 +18,6 @@ export const post_create = {
   "사진 압축 처리 중 오류가 발생했습니다.": "An error occurred while processing photo compression.",
   "사진 첨부 (최대 5장)": "Attach photos (Max 5)",
   "사진 추가": "Add photo",
-  "살게요": "I'll buy it",
   "상품 사진": "Product photos",
   "상품 카테고리를 선택해 주세요": "Please select a product category",
   "선택한 사진 삭제": "Delete selected photo",

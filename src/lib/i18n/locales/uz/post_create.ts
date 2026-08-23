@@ -18,7 +18,6 @@ export const post_create = {
   "사진 압축 처리 중 오류가 발생했습니다.": "Rasmni siqish jarayonida xatolik yuz berdi.",
   "사진 첨부 (최대 5장)": "Rasm biriktirish (ko'pi bilan 5 ta)",
   "사진 추가": "Rasm qo'shish",
-  "살게요": "Sotib olaman",
   "상품 사진": "Mahsulot rasmi",
   "상품 카테고리를 선택해 주세요": "Tovar kategoriyasini tanlang",
   "선택한 사진 삭제": "Tanlangan rasmni o'chirish",

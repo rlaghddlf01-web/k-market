@@ -1,9 +1,7 @@
 export const header = {
   "17개국 대형 국기 선택창 열기": "Mở cửa sổ chọn cờ lớn 17 quốc gia",
   "17개국어 간편 언어 선택": "Chọn nhanh ngôn ngữ 17 quốc gia",
-  "1시간 전 알림": "Thông báo 1 giờ trước",
   "1초 만에 앱 설치하기": "Cài đặt ứng dụng chỉ trong 1 giây",
-  "K-Market 1초 앱 설치": "Cài đặt ứng dụng K-Market trong 1 giây",
   "• 실시간 웹 푸시 알림 켜짐": "• Đã bật thông báo đẩy web thời gian thực",
   "내 관심 키워드 알림 (세탁기, 무료나눔 등) 맞춤 설정하기 →": "Cài đặt tùy chỉnh thông báo từ khóa quan tâm (máy giặt, tặng miễn phí, v.v.) →",
   "내 동네 안심 매물 둘러보기": "Xem các mặt hàng an tâm ở khu vực của tôi",
@@ -16,7 +14,6 @@ export const header = {
   "실시간 웹 푸시 알림 발송 테스트": "Kiểm tra gửi thông báo đẩy web thời gian thực",
   "실시간 웹 푸시 알림 수신 (무료)": "Nhận thông báo đẩy web thời gian thực (Miễn phí)",
   "아이폰 및 사파리 브라우저 앱 설치 방법": "Hướng dẫn cài đặt ứng dụng trên iPhone và trình duyệt Safari",
-  "아이폰 앱 설치를 위해 우측 상단/하단 메뉴에서 [Safari로 열기]를 눌러주세요.": "Để cài đặt ứng dụng trên iPhone, vui lòng nhấn [Mở bằng Safari] ở menu góc trên/dưới bên phải.",
   "알림 삭제": "Xóa thông báo",
   "알림 설정": "Cài đặt thông báo",
   "알림 켜기": "Bật thông báo",
@@ -29,10 +26,6 @@ export const header = {
   "통합 알림 센터": "Trung tâm thông báo tích hợp",
   "홈 화면에 앱 설치하기": "Cài đặt ứng dụng vào màn hình chính",
   "🏠 [케이티알에스 내 동네 안심 부동산 & 원룸] 국토교통부 실거래가 기반 시세 검증 및 17개국어 제휴 공인중개사 안심 매물 서비스가 연결됩니다.": "🏠 [KTRS Bất động sản an tâm & Phòng đơn khu tôi] Đã kết nối dịch vụ xác thực giá thị trường dựa trên giá giao dịch thực tế của Bộ Đất đai, Hạ tầng và Giao thông cùng dịch vụ niêm yết bất động sản an toàn từ các nhà môi giới liên kết bằng 17 ngôn ngữ.",
-  "🔔 ${t('키워드 알림')}: [${washerName}]": "🔔 ${t('Thông báo từ khóa')}: [${washerName}]",
-  "🔔 K-Market 실시간 알림이 켜졌습니다!": "🔔 Thông báo thời gian thực của K-Market đã được bật!",
-  "🔔 [키워드 알림] \"${kw}\" 매물이 등록되었습니다!": "🔔 [Thông báo từ khóa] Đã đăng tin \"${kw}\"!",
   "🔔 키워드 실시간 알림 등록": "🔔 Đăng ký thông báo từ khóa thời gian thực",
-  "🔔 키워드 알림: [세탁기]": "🔔 Thông báo từ khóa: [Máy giặt]",
 };
 export default header;
