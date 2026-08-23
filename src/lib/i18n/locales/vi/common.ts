@@ -977,7 +977,7 @@ export const common = {
   "홈 화면에 앱 설치하기": "Cài đặt ứng dụng vào màn hình chính",
   "홈 화면에 앱 추가하고 17개국어 번역 채팅과 공단 직거래 알림을 가장 빠르게 받으세요.": "Thêm vào màn hình chính để nhận tin nhắn dịch 17 ngôn ngữ và báo giao dịch nhanh nhất.",
   "화면 하단의": "Ở cuối màn hình",
-  "화면 하단의 [공유] 버튼 클릭": "화면 하단의 [공유] 버튼 클릭",
+  "화면 하단의 [공유] 버튼 클릭": "Nhấp vào nút [Chia sẻ] ở cuối màn hình",
   "화성": "Hwaseong",
   "화성 향남": "Hyangnam, Hwaseong",
   "화성 향남 근처에 진짜 태국 향신료랑 두리안 파는 아시안 마트 추천합니다 🍲": "Giới thiệu siêu thị Châu Á gần khu Hyangnam, Hwaseong chuyên bán gia vị Thái Lan chuẩn và sầu riêng 🍲",

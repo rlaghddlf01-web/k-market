@@ -977,7 +977,7 @@ export const common = {
   "홈 화면에 앱 설치하기": "Install App on Home Screen",
   "홈 화면에 앱 추가하고 17개국어 번역 채팅과 공단 직거래 알림을 가장 빠르게 받으세요.": "Add to home screen to get 17-language translated chat and direct deal alerts fastest.",
   "화면 하단의": "At the bottom of the screen",
-  "화면 하단의 [공유] 버튼 클릭": "화면 하단의 [공유] 버튼 클릭",
+  "화면 하단의 [공유] 버튼 클릭": "Click the [Share] button at the bottom of the screen",
   "화성": "Hwaseong",
   "화성 향남": "Hwaseong Hyangnam",
   "화성 향남 근처에 진짜 태국 향신료랑 두리안 파는 아시안 마트 추천합니다 🍲": "I recommend an Asian mart near Hyangnam, Hwaseong that sells authentic Thai spices and durian 🍲",

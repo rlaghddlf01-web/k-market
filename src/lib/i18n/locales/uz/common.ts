@@ -975,7 +975,7 @@ export const common = {
   "홈 화면에 앱 설치하기": "Bosh ekranga ilovani o'rnatish",
   "홈 화면에 앱 추가하고 17개국어 번역 채팅과 공단 직거래 알림을 가장 빠르게 받으세요.": "Bosh ekranga ilovani qo'shing va 17 tildagi tarjima tili chatlari hamda sanoat majmuasi to'g'ridan-to'g'ri savdo bildirishnomalarini eng tezkor tarzda oling.",
   "화면 하단의": "Ekran pastki qismidagi",
-  "화면 하단의 [공유] 버튼 클릭": "화면 하단의 [공유] 버튼 클릭",
+  "화면 하단의 [공유] 버튼 클릭": "Ekran pastki qismidagi [Ulashish] tugmasini bosing",
   "화성": "Hwaseong",
   "화성 향남": "Hwaseong Hyangnam",
   "화성 향남 근처에 진짜 태국 향신료랑 두리안 파는 아시안 마트 추천합니다 🍲": "Hwaseong Hyangnam yaqinida haqiqiy Tailand ziravorlari va durian sotadigan osiyo bozorini tavsiya qilaman 🍲",
