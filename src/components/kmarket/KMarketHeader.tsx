@@ -245,32 +245,28 @@ export default function KMarketHeader() {
               )}
             </button>
 
-            {/* 회원가입 / 마이페이지 버튼 */}
+            {/* 단일 스마트 마이페이지 버튼 (기존 회원: 마이페이지 오픈 / 신규: 회원가입창 원클릭 오픈) */}
             {authedUser ? (
               <div
                 onClick={() => setIsMyPageOpen(true)}
-                className="flex items-center gap-1 px-2.5 sm:px-3 py-1.5 rounded-full bg-[#ede2d6] hover:bg-[#e2d4c5] border border-[#ded1c4] text-[#3d2817] text-[11px] sm:text-xs font-bold cursor-pointer shrink-0"
+                className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#ede2d6] hover:bg-[#e2d4c5] border border-[#ded1c4] text-[#3d2817] text-[11px] sm:text-xs font-bold cursor-pointer shrink-0 transition-all shadow-2xs"
+                title={t('내 마이페이지')}
               >
                 <UserCheck className="w-3.5 h-3.5 text-[#5c3818]" />
-                <span className="truncate max-w-[70px] sm:max-w-[80px]">{authedUser.nickname || authedUser.userName}</span>
+                <span className="truncate max-w-[70px] sm:max-w-[90px]">{authedUser.nickname || authedUser.userName}</span>
+                <span className="text-[9px] bg-[#3d2817] text-[#fbf9f6] px-1.5 py-0.2 rounded-full font-black">43.5℃</span>
               </div>
             ) : (
-              <div className="flex items-center gap-1 shrink-0">
-                <button
-                  onClick={() => setIsAuthModalOpen(true)}
-                  className="flex items-center gap-1 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full bg-[#f4ede6] hover:bg-[#ede2d6] text-[#5c4a39] text-[11px] sm:text-xs font-bold transition-all border border-[#ded1c4] cursor-pointer whitespace-nowrap"
-                >
-                  <UserPlus className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#845b37]" />
-                  <span>{t('간편 회원가입')}</span>
-                </button>
-                <button
-                  onClick={() => setIsMyPageOpen(true)}
-                  className="px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full bg-[#f4ede6] hover:bg-[#ede2d6] text-[#5c4a39] text-[11px] sm:text-xs font-bold transition-all cursor-pointer border border-[#ded1c4] whitespace-nowrap"
-                >
-                  <span className="hidden sm:inline">{t('마이페이지')}</span>
-                  <span className="sm:hidden">{t('마이')}</span>
-                </button>
-              </div>
+              <button
+                type="button"
+                onClick={() => setIsAuthModalOpen(true)}
+                className="flex items-center gap-1 px-3 py-1.5 rounded-full bg-[#f4ede6] hover:bg-[#ede2d6] text-[#5c4a39] text-[11px] sm:text-xs font-bold transition-all border border-[#ded1c4] cursor-pointer whitespace-nowrap shadow-2xs active:scale-95"
+                title={t('마이페이지 및 간편 회원가입')}
+              >
+                <UserPlus className="w-3.5 h-3.5 text-[#845b37]" />
+                <span className="hidden sm:inline">{t('마이페이지')}</span>
+                <span className="sm:hidden">{t('마이')}</span>
+              </button>
             )}
 
             {/* 💻 데스크탑 전용 1분 매물 등록 버튼 (md 이상에서 1줄에 꽉 차게 노출) */}
