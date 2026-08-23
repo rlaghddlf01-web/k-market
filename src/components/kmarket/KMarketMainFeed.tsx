@@ -326,7 +326,7 @@ export default function KMarketMainFeed() {
               <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-white">
                 <span><strong className="text-[#f3ba2f] font-extrabold">{t('사업자명:')}</strong> {t('주식회사 펫에이앤씨')}</span>
                 <span className="text-white/40">|</span>
-                <span><strong className="text-[#f3ba2f] font-extrabold">{t('대표자:')}</strong> {t('안내 내용을 확인해 주세요')}</span>
+                <span><strong className="text-[#f3ba2f] font-extrabold">{t('대표자:')}</strong> {t('전기창')}</span>
                 <span className="text-white/40">|</span>
                 <span><strong className="text-[#f3ba2f] font-extrabold">{t('사업자 등록번호:')}</strong> 229-86-03034</span>
                 <span className="text-white/40">|</span>
@@ -334,7 +334,7 @@ export default function KMarketMainFeed() {
               </div>
 
               <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-white">
-                <span><strong className="text-[#f3ba2f] font-extrabold">{t('안내 내용을 확인해 주세요')}</strong> {t('서울특별시 광진구 광나루로 436, 5층(화양동, 에듀킨빌딩)')}</span>
+                <span><strong className="text-[#f3ba2f] font-extrabold">{t('사업장 소재지:')}</strong> {t('서울특별시 광진구 광나루로 436, 5층(화양동, 에듀킨빌딩)')}</span>
                 <span className="text-white/40">|</span>
                 <span><strong className="text-[#f3ba2f] font-extrabold">{t('연락처:')}</strong> 010-5964-5340</span>
                 <span className="text-white/40">|</span>
