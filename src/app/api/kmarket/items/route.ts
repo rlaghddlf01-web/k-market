@@ -103,8 +103,11 @@ export async function POST(req: NextRequest) {
       images: body.images && body.images.length > 0 ? body.images : [
         'https://images.unsplash.com/photo-1584269600464-37b1b58a9fe7?w=800&auto=format&fit=crop&q=80'
       ],
-      region: body.region || '평택 포승공단',
-      industrial_zone: body.industrial_zone || 'pyeongtaek',
+      region: body.region || '내 주변',
+      industrial_zone: body.industrial_zone || 'other',
+      address: body.address || body.region || '내 주변',
+      latitude: body.latitude !== undefined ? Number(body.latitude) : undefined,
+      longitude: body.longitude !== undefined ? Number(body.longitude) : undefined,
       status: 'selling',
       view_count: 1,
       like_count: 0,

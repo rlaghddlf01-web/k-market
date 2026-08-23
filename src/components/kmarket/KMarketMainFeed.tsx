@@ -27,6 +27,7 @@ import KMarketFeedbackModal from './KMarketFeedbackModal';
 import { CommunityProvider } from '@/context/CommunityContext';
 import KMarketCommunityMain from '../community/KMarketCommunityMain';
 import { ShoppingBag, Sparkles, ShieldCheck, Plus, PackageOpen, ShieldAlert } from 'lucide-react';
+import { haversineDistance, radiusToKm } from '@/lib/haversineDistance';
 
 export default function KMarketMainFeed() {
   const [isAdminModalOpen, setIsAdminModalOpen] = useState(false);
@@ -50,6 +51,7 @@ export default function KMarketMainFeed() {
     isFeedbackModalOpen,
     setIsFeedbackModalOpen,
     setAuthedUser,
+    userLocation,
   } = useKMarket();
   const { t } = useLanguage();
 
@@ -80,10 +82,24 @@ export default function KMarketMainFeed() {
         if (item.category !== selectedCategory) return false;
       }
     }
-    // 2. 공단 지역 필터 (단, 전시용 270개 시드 매물은 지역 무관 전국 노출)
+    // 2. 내 주변 반경 필터 or 공단 지역 필터 (단, 전시용 270개 시드 매물은 지역 무관 전국 노출)
     const isSeedItem = item.id.startsWith('item-real-') || item.id.startsWith('item-demo-');
-    if (!isSeedItem && selectedRegion !== 'all' && item.industrial_zone !== selectedRegion) {
-      return false;
+    if (!isSeedItem && selectedRegion !== 'all') {
+      const km = radiusToKm(selectedRegion); // radius_1 → 1, radius_3 → 3, radius_10 → 10
+      if (km !== null) {
+        // 📍 GPS 반경 필터: 내 위치에서 매물까지 Haversine 거리 계산
+        const userCoords = userLocation?.coords;
+        const itemLat = item.latitude;
+        const itemLng = item.longitude;
+        if (userCoords && itemLat !== undefined && itemLng !== undefined) {
+          const distKm = haversineDistance(userCoords.lat, userCoords.lng, itemLat, itemLng);
+          if (distKm > km) return false; // 반경 초과 → 숨김
+        }
+        // GPS 좌표 없는 매물(초기 등록 전)은 통과 처리
+      } else {
+        // 기존 공단 지역 ID (pyeongtaek, ansan 등) 비교
+        if (item.industrial_zone !== selectedRegion) return false;
+      }
     }
     // 3. 무빙세일 전용 여부
     if (isMovingSaleOnly && !item.is_moving_sale && item.category !== 'moving_sale') {

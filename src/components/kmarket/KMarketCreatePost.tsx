@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useKMarket } from '@/context/KMarketContext';
 import { useLanguage } from '@/context/LanguageContext';
 import {
@@ -43,6 +43,24 @@ export default function KMarketCreatePost() {
   const [sellerName, setSellerName] = useState(
     authedUser?.userName || (currentLang === 'vi' ? 'Nguyễn' : (currentLang === 'ko' ? '안산호랑이' : 'Global User'))
   );
+
+  // 📍 매물 등록 모달이 열릴 때 실제 GPS 자동 감지
+  useEffect(() => {
+    if (!isCreateModalOpen) return;
+    if (!navigator.geolocation) return;
+
+    navigator.geolocation.getCurrentPosition(
+      (pos) => {
+        setLat(pos.coords.latitude);
+        setLng(pos.coords.longitude);
+      },
+      (err) => {
+        console.warn('📍 GPS 자동 감지 실패 (편의 요청 거부 등):', err.message);
+        // 실패 시 하드코딩 기본값 유지 (KMarketMapPicker에서 수동 피커 가능)
+      },
+      { enableHighAccuracy: true, timeout: 8000, maximumAge: 60000 }
+    );
+  }, [isCreateModalOpen]);
 
   if (!isCreateModalOpen) return null;
 
