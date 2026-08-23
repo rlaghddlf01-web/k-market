@@ -16,8 +16,10 @@ export default function DynamicLanguagePage({ params }: LangPageProps) {
   const langCode = (resolvedParams?.lang || 'ko') as LanguageCode;
 
   return (
-    <KMarketProvider>
-      <KMarketMainFeed />
-    </KMarketProvider>
+    <LanguageProvider initialLang={langCode}>
+      <KMarketProvider>
+        <KMarketMainFeed />
+      </KMarketProvider>
+    </LanguageProvider>
   );
 }
