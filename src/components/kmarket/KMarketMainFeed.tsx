@@ -8,6 +8,7 @@ import KMarketHeader from './KMarketHeader';
 import KMarketTaxBanner from './KMarketTaxBanner';
 import KMarketHeroShowcase from './KMarketHeroShowcase';
 import KMarketSafetyBanner from './KMarketSafetyBanner';
+import KMarketTop10Showcase from './KMarketTop10Showcase';
 import KMarketCategoryNav from './KMarketCategoryNav';
 import KMarketMovingSaleSection from './KMarketMovingSaleSection';
 import KMarketRegionFilter from './KMarketRegionFilter';
@@ -32,11 +33,14 @@ import KMarketCommunityCreateModal from '../community/KMarketCommunityCreateModa
 import KMarketCommunityReportModal from '../community/KMarketCommunityReportModal';
 import KMarketPwaInstallPrompt from '@/components/common/KMarketPwaInstallPrompt';
 import KMarketPushNotificationManager from '@/components/common/KMarketPushNotificationManager';
-import { ShoppingBag, Sparkles, ShieldCheck, Plus, PackageOpen, ShieldAlert } from 'lucide-react';
+import { ShoppingBag, Sparkles, ShieldCheck, Plus, PackageOpen, ShieldAlert, Loader2, ArrowDown } from 'lucide-react';
 import { haversineDistance, radiusToKm } from '@/lib/haversineDistance';
 
 export default function KMarketMainFeed() {
   const [isAdminModalOpen, setIsAdminModalOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+  const [visibleMobileCount, setVisibleMobileCount] = useState(16);
+  const [isLoadingMore, setIsLoadingMore] = useState(false);
   const {
     items,
     selectedCategory,
@@ -125,6 +129,41 @@ export default function KMarketMainFeed() {
     return true;
   });
 
+  // 화면 너비 감지 (모바일 vs 데스크탑)
+  React.useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  // 모바일 당근마켓식 무한 스크롤 감지
+  React.useEffect(() => {
+    if (!isMobile) return;
+
+    const handleScroll = () => {
+      if (isLoadingMore) return;
+      const scrollY = window.scrollY || window.pageYOffset;
+      const windowHeight = window.innerHeight;
+      const docHeight = document.documentElement.scrollHeight;
+
+      if (scrollY + windowHeight >= docHeight - 300) {
+        if (visibleMobileCount < filteredItems.length) {
+          setIsLoadingMore(true);
+          setTimeout(() => {
+            setVisibleMobileCount((prev) => Math.min(prev + 16, filteredItems.length));
+            setIsLoadingMore(false);
+          }, 250);
+        }
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [isMobile, visibleMobileCount, filteredItems.length, isLoadingMore]);
+
   return (
     <CommunityProvider>
       <div className="min-h-screen flex flex-col" style={{ background: 'var(--surface-bg)', color: 'var(--text-primary)' }}>
@@ -132,7 +171,13 @@ export default function KMarketMainFeed() {
         <KMarketHeader />
 
         {/* 1. 최상단 풀와이드 웅장한 감성 히어로 쇼케이스 (중고마켓 탭일 때 노출) */}
-        {activeMainTab === 'market' && <KMarketHeroShowcase />}
+        {activeMainTab === 'market' && (
+          <>
+            <KMarketHeroShowcase />
+            {/* 🔥 상단 핵심 핫매물 TOP 10 쇼케이스 (1~10 페이지 슬라이더) */}
+            <KMarketTop10Showcase />
+          </>
+        )}
 
         {/* 메인 콘텐츠 컨테이너 */}
         <main className="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 py-6 sm:py-10 space-y-7">
@@ -174,19 +219,40 @@ export default function KMarketMainFeed() {
                 </div>
               </div>
 
-              {/* 5. 매물 그리드 (20개 단위 페이징) */}
+              {/* 5. 매물 그리드 (모바일: 당근마켓 무한 스크롤 / 데스크탑: 20개 단위 페이징) */}
               {filteredItems.length > 0 ? (
                 <>
                   <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3.5 sm:gap-6">
-                    {filteredItems
-                      .slice((currentPage - 1) * ITEMS_PER_PAGE, currentPage * ITEMS_PER_PAGE)
-                      .map((item) => (
-                        <KMarketItemCard key={item.id} item={item} />
-                      ))}
+                    {(isMobile
+                      ? filteredItems.slice(0, visibleMobileCount)
+                      : filteredItems.slice((currentPage - 1) * ITEMS_PER_PAGE, currentPage * ITEMS_PER_PAGE)
+                    ).map((item) => (
+                      <KMarketItemCard key={item.id} item={item} />
+                    ))}
                   </div>
 
-                  {/* 📄 스마트 페이지네이션 네비게이션 바 */}
-                  {Math.ceil(filteredItems.length / ITEMS_PER_PAGE) > 1 && (
+                  {/* 📱 모바일 전용: 당근마켓 스타일 무한 스크롤 로딩 인디케이터 */}
+                  {isMobile && (
+                    <div className="py-8 text-center">
+                      {visibleMobileCount < filteredItems.length ? (
+                        <div className="inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-[#ede3d8] text-[#5c4a39] text-xs font-bold shadow-xs">
+                          <Loader2 className={`w-4 h-4 text-amber-600 ${isLoadingMore ? 'animate-spin' : ''}`} />
+                          <span>
+                            {isLoadingMore
+                              ? '다음 동네 매물 불러오는 중...'
+                              : `스크롤을 내리면 다음 매물이 계속 이어집니다 (${visibleMobileCount} / ${filteredItems.length})`}
+                          </span>
+                        </div>
+                      ) : (
+                        <div className="text-xs text-[#8c7866] font-medium py-2">
+                          🎉 동네의 모든 실시간 매물을 다 확인하셨습니다!
+                        </div>
+                      )}
+                    </div>
+                  )}
+
+                  {/* 💻 데스크탑 전용: 스마트 20개 단위 페이지네이션 네비게이션 바 */}
+                  {!isMobile && Math.ceil(filteredItems.length / ITEMS_PER_PAGE) > 1 && (
                     <div className="flex items-center justify-center gap-2 pt-10 pb-4">
                       {/* 이전 페이지 버튼 */}
                       <button
