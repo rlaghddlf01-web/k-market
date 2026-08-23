@@ -17,6 +17,7 @@ import {
   UserX,
   Filter,
 } from 'lucide-react';
+import { useLanguage } from '@/context/LanguageContext';
 
 export interface AdminUserProfile {
   id: string;
@@ -37,6 +38,7 @@ export interface AdminUserProfile {
 const INITIAL_ADMIN_USERS: AdminUserProfile[] = [];
 
 export default function KMarketAdminUsersTab() {
+  const { t } = useLanguage();
   const [users, setUsers] = useState<AdminUserProfile[]>(INITIAL_ADMIN_USERS);
   const [statusFilter, setStatusFilter] = useState<'all' | 'auto_verified' | 'pending_review' | 'unverified' | 'banned'>('all');
   const [searchQuery, setSearchQuery] = useState('');
@@ -63,11 +65,11 @@ export default function KMarketAdminUsersTab() {
 
   // 3. 관리자 액션: 인증 취소/박탈
   const handleRevokeOcr = (userId: string, userName: string) => {
-    if (!confirm(`"${userName}" 회원의 신분증 인증을 취소(박탈)하시겠습니까?`)) return;
+    if (!confirm(t('해당 회원의 신분증 인증을 취소(박탈)하시겠습니까?'))) return;
     setUsers((prev) =>
       prev.map((u) => (u.id === userId ? { ...u, arc_status: 'unverified' } : u))
     );
-    alert(`"${userName}" 회원의 신분인증이 취소되었습니다.`);
+    alert(t('회원의 신분인증이 취소되었습니다.'));
   };
 
   // 4. 관리자 액션: 블랙리스트 차단 / 차단 해제
@@ -76,13 +78,13 @@ export default function KMarketAdminUsersTab() {
       setUsers((prev) =>
         prev.map((u) => (u.id === userId ? { ...u, arc_status: 'unverified' } : u))
       );
-      alert(`[차단 해제] "${userName}" 회원의 이용 정지가 해제되었습니다.`);
+      alert(t('[차단 해제] 회원의 이용 정지가 해제되었습니다.'));
     } else {
-      if (!confirm(`[경고] "${userName}" 회원을 블랙리스트로 등록하고 플랫폼 전체 이용을 차단하시겠습니까?`)) return;
+      if (!confirm(t('[경고] 해당 회원을 블랙리스트로 등록하고 플랫폼 전체 이용을 차단하시겠습니까?'))) return;
       setUsers((prev) =>
         prev.map((u) => (u.id === userId ? { ...u, arc_status: 'banned', manner_temp: 0 } : u))
       );
-      alert(`[블랙리스트 등록 완료] "${userName}" 회원의 계정이 영구 정지되었습니다.\n- 모든 매물 즉시 비공개\n- 채팅 및 로그인 차단`);
+      alert(t('[블랙리스트 등록 완료] 회원의 계정이 영구 정지되었습니다.'));
     }
   };
 

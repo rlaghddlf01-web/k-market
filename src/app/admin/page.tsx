@@ -21,11 +21,13 @@ import { INITIAL_COMMUNITY_POSTS } from '@/lib/communityMockData';
 import { KMarketItem, UserReportData } from '@/types/kmarket';
 import { CommunityPost } from '@/types/community';
 import { MessageSquareHeart, EyeOff, Lightbulb } from 'lucide-react';
+import { useLanguage } from '@/context/LanguageContext';
 import KMarketAdminUsersTab from '@/components/admin/KMarketAdminUsersTab';
 import KMarketAdminAnalyticsDashboard from '@/components/admin/KMarketAdminAnalyticsDashboard';
 import KMarketAdminFeedbackTab from '@/components/admin/KMarketAdminFeedbackTab';
 
 export default function KMarketAdminPage() {
+  const { t } = useLanguage();
   const [activeTab, setActiveTab] = useState<'overview' | 'reports' | 'community' | 'items' | 'users' | 'taxes' | 'feedback'>('overview');
   const [reportFilter, setReportFilter] = useState<'all' | 'pending' | 'resolved'>('all');
   const [communityPosts, setCommunityPosts] = useState<CommunityPost[]>([]);
@@ -86,25 +88,25 @@ export default function KMarketAdminPage() {
 
   // 매물 강제 삭제
   const handleDeleteItem = (itemId: string, title: string) => {
-    if (confirm(`정말로 매물 "${title}"을(를) 강제 삭제하시겠습니까?`)) {
+    if (confirm(t('정말로 해당 매물을 강제 삭제하시겠습니까?'))) {
       setItems((prev) => prev.filter((i) => i.id !== itemId));
-      alert('매물이 안전하게 삭제되었습니다.');
+      alert(t('매물이 안전하게 삭제되었습니다.'));
     }
   };
 
   // 커뮤니티 글 블라인드 (숨김) 처리
   const handleHideCommunityPost = (postId: string, title: string) => {
-    if (confirm(`게시글 "${title}"을(를) 커뮤니티 피드에서 [블라인드(숨김)] 처리하시겠습니까?`)) {
+    if (confirm(t('해당 게시글을 커뮤니티 피드에서 [블라인드(숨김)] 처리하시겠습니까?'))) {
       setCommunityPosts((prev) => prev.filter((p) => p.id !== postId));
-      alert('게시글이 즉시 블라인드 처리되었습니다.');
+      alert(t('게시글이 즉시 블라인드 처리되었습니다.'));
     }
   };
 
   // 커뮤니티 악성 유저 영구 퇴출
   const handleBanCommunityUser = (userId: string, userName: string) => {
-    if (confirm(`악성 회원 "${userName}"을(를) [플랫폼 영구 퇴출 및 작성글 전체 삭제] 처리하시겠습니까?`)) {
+    if (confirm(t('해당 악성 회원을 [플랫폼 영구 퇴출 및 작성글 전체 삭제] 처리하시겠습니까?'))) {
       setCommunityPosts((prev) => prev.filter((p) => p.user_id !== userId));
-      alert(`[관리자 집행] "${userName}" 회원이 영구 퇴출되었습니다.`);
+      alert(t('[관리자 집행] 해당 회원이 영구 퇴출되었습니다.'));
     }
   };
 
