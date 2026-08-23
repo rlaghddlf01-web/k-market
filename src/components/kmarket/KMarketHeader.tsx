@@ -91,7 +91,13 @@ export default function KMarketHeader() {
               </button>
 
               {isLangDropdownOpen && (
-                <div className="absolute right-0 mt-2 w-72 bg-[#fefcf9] rounded-2xl shadow-2xl border border-[#ded1c4] py-1.5 z-50 max-h-96 overflow-y-auto">
+                <>
+                  {/* 바깥 클릭 시 닫기 백드롭 */}
+                  <div
+                    className="fixed inset-0 z-40"
+                    onClick={() => setIsLangDropdownOpen(false)}
+                  />
+                  <div className="absolute left-1/2 -translate-x-1/2 sm:left-auto sm:right-0 sm:translate-x-0 mt-2 w-72 max-w-[calc(100vw-24px)] bg-[#fefcf9] rounded-2xl shadow-2xl border border-[#ded1c4] py-1.5 z-50 max-h-[80vh] overflow-y-auto">
                   <div className="p-2 border-b border-[#ded1c4]">
                     <button
                       type="button"
@@ -142,8 +148,9 @@ export default function KMarketHeader() {
                     </button>
                   ))}
                 </div>
-              )}
-            </div>
+              </>
+            )}
+          </div>
 
             {/* 수수료 0원 뱃지 (태블릿/PC) */}
             <div className="hidden sm:flex items-center gap-1.5 bg-black/40 text-[#fef08a] px-2.5 py-0.5 rounded-full text-[10px] font-extrabold border border-[#f3ba2f]/60 shadow-2xs">
