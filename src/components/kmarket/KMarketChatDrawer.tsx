@@ -182,7 +182,7 @@ export default function KMarketChatDrawer() {
                     )}
                     {activeChat.item.status === 'sold' && (
                       <span className="text-[10px] bg-gray-600 text-white px-1.5 py-0.2 rounded-md font-bold shrink-0">
-                        완료
+                        {t('완료')}
                       </span>
                     )}
                   </div>
@@ -212,7 +212,7 @@ export default function KMarketChatDrawer() {
                     }}
                     className="px-2 py-1 bg-amber-50 hover:bg-amber-100 text-amber-700 text-[10px] font-bold rounded-lg border border-amber-200 transition-colors cursor-pointer"
                   >
-                    예약하기
+                    {t('예약하기')}
                   </button>
                 )}
                 {activeChat.item.status !== 'sold' && (
@@ -238,15 +238,15 @@ export default function KMarketChatDrawer() {
               </div>
               <div className="truncate">
                 <span className="text-yellow-200 font-extrabold mr-1">{t('[1:1 안심 직거래 약속]')}</span>
-                <span>{activeAppointment.meet_time}</span>
-                <span className="text-amber-100 font-medium ml-1">({activeAppointment.place_name})</span>
+                <span>{t(activeAppointment.meet_time || '')}</span>
+                <span className="text-amber-100 font-medium ml-1">({t(activeAppointment.place_name || '')})</span>
               </div>
             </div>
 
             <div className="flex items-center gap-1 shrink-0 ml-2">
               <span className="bg-black/20 px-2 py-0.5 rounded-full text-[10px] text-amber-200 font-bold flex items-center gap-0.5">
                 <Bell className="w-2.5 h-2.5" />
-                1시간 전 알림
+                {t('1시간 전 알림')}
               </span>
             </div>
           </div>
@@ -457,10 +457,10 @@ export default function KMarketChatDrawer() {
           {quickPhrases.map((q, idx) => (
             <button
               key={idx}
-              onClick={() => handleQuickPhrase(q.text)}
+              onClick={() => handleQuickPhrase(t(q.text))}
               className="px-2.5 py-1 bg-slate-100 hover:bg-blue-50 hover:text-blue-700 text-slate-700 rounded-full text-[11px] font-semibold shrink-0 transition-colors border border-slate-200/80 cursor-pointer"
             >
-              {q.label}
+              {t(q.label)}
             </button>
           ))}
         </div>
