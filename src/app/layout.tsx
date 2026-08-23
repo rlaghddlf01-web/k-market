@@ -49,6 +49,14 @@ export const metadata: Metadata = {
       '대한민국 No.1 외국인 근로자 전용 0원 수수료 중고거래 & 귀국 무빙세일 플랫폼! 17개국어 실시간 번역 채팅 및 공단 안심 직거래',
     images: ['/images/kmarket-logo.jpg'],
   },
+  icons: {
+    icon: [
+      { url: '/images/kmarket-logo.jpg', sizes: '32x32', type: 'image/jpeg' },
+      { url: '/images/kmarket-logo.jpg', sizes: '192x192', type: 'image/jpeg' },
+    ],
+    shortcut: '/images/kmarket-logo.jpg',
+    apple: '/images/kmarket-logo.jpg',
+  },
   keywords: [
     'K-Market',
     '케이마켓',
@@ -71,8 +79,10 @@ export default function RootLayout({
   return (
     <html lang="ko" suppressHydrationWarning>
       <head>
-        <link rel="manifest" href="/manifest.json" />
+        <link rel="icon" href="/images/kmarket-logo.jpg" type="image/jpeg" />
+        <link rel="shortcut icon" href="/images/kmarket-logo.jpg" type="image/jpeg" />
         <link rel="apple-touch-icon" href="/images/kmarket-logo.jpg" />
+        <link rel="manifest" href="/manifest.json" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
         <link
