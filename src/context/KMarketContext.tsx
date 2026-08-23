@@ -398,15 +398,15 @@ export function KMarketProvider({ children }: { children: React.ReactNode }) {
         localStorage.removeItem('kmarket_local_items');
       }
 
-      // 안정적인 매물 목록 고정 로드 (깜빡임 및 무작위 뒤바뀜 원천 차단)
-      setItems(INITIAL_ITEMS);
+      // 접속 및 새로고침 시 1회 다채로운 카테고리 랜덤 셔플 적용 (밥솥/세탁기 몰림 방지)
+      setItems(shuffleItems(INITIAL_ITEMS));
       
-      // 최신 서버 매물이 있을 경우에만 병합 (불필요한 전체 뒤섞기 제거)
+      // 최신 서버 매물이 있을 경우 랜덤 셔플하여 피드 신선도 유지
       fetch('/api/kmarket/items')
         .then((res) => res.json())
         .then((data) => {
           if (data.items && data.items.length > 0) {
-            setItems(data.items);
+            setItems(shuffleItems(data.items));
           }
         })
         .catch((err) => console.warn('Items API fetch warning:', err));
