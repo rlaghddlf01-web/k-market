@@ -80,8 +80,9 @@ export default function KMarketMainFeed() {
         if (item.category !== selectedCategory) return false;
       }
     }
-    // 2. 공단 지역 필터
-    if (selectedRegion !== 'all' && item.industrial_zone !== selectedRegion) {
+    // 2. 공단 지역 필터 (단, 전시용 270개 시드 매물은 지역 무관 전국 노출)
+    const isSeedItem = item.id.startsWith('item-real-') || item.id.startsWith('item-demo-');
+    if (!isSeedItem && selectedRegion !== 'all' && item.industrial_zone !== selectedRegion) {
       return false;
     }
     // 3. 무빙세일 전용 여부
