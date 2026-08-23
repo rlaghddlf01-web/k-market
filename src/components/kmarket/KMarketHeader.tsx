@@ -43,7 +43,7 @@ export default function KMarketHeader() {
   return (
     <header className="sticky top-0 z-40 glass border-b border-white/60 shadow-sm w-full">
       {/* ========================================================================= */}
-      {/* 1. 최상단: KTRS 패밀리 골드 바 (모든 내용 100% 유지) */}
+      {/* 1. 최상단: KTRS 패밀리 골드 바 (데스크탑 / 모바일 공통 완벽 노출) */}
       {/* ========================================================================= */}
       <div
         style={{ 
@@ -161,47 +161,64 @@ export default function KMarketHeader() {
       </div>
 
       {/* ========================================================================= */}
-      {/* 2. 메인 헤더 행 (로고 + 위치 칩 + 회원가입/마이 + 알림) */}
+      {/* 2. 메인 헤더 행 (데스크탑: 1줄 와이드 일체형 / 모바일: 슬림 상단 바) */}
       {/* ========================================================================= */}
       <div className="max-w-6xl mx-auto px-3 sm:px-4">
-        <div className="flex items-center justify-between gap-2 py-2 sm:py-2.5">
-          {/* 좌측: 로고 + 케이마켓 FREE (절대 줄바꿈 없이 한 줄로 선명하게 유지) */}
-          <div 
-            onClick={() => router.push(currentLang === 'ko' ? '/' : `/${currentLang}`)}
-            className="flex items-center gap-1.5 sm:gap-2.5 cursor-pointer shrink-0"
-          >
-            <div className="relative w-8 h-8 sm:w-10 sm:h-10 rounded-xl overflow-hidden shadow-xs shrink-0 border border-[#ded1c4] bg-[#09101f] flex items-center justify-center">
-              <img
-                src="/images/kmarket-logo.jpg"
-                alt={t('케이마켓 로고')}
-                className="w-full h-full object-cover scale-110"
-              />
+        <div className="flex items-center justify-between gap-2 sm:gap-4 py-2 sm:py-2.5">
+          {/* 좌측: 로고 + 위치 칩 */}
+          <div className="flex items-center gap-2 sm:gap-3 shrink-0">
+            {/* 로고 & 케이마켓 FREE */}
+            <div 
+              onClick={() => router.push(currentLang === 'ko' ? '/' : `/${currentLang}`)}
+              className="flex items-center gap-1.5 sm:gap-2.5 cursor-pointer shrink-0"
+            >
+              <div className="relative w-8 h-8 sm:w-10 sm:h-10 rounded-xl overflow-hidden shadow-xs shrink-0 border border-[#ded1c4] bg-[#09101f] flex items-center justify-center">
+                <img
+                  src="/images/kmarket-logo.jpg"
+                  alt={t('케이마켓 로고')}
+                  className="w-full h-full object-cover scale-110"
+                />
+              </div>
+              <div className="flex items-center gap-1 whitespace-nowrap shrink-0">
+                <span className="text-[18px] sm:text-[22px] font-black tracking-tight text-[#1f1914] leading-none whitespace-nowrap">{t('케이마켓')}</span>
+                <span className="text-[8px] sm:text-[9px] font-black bg-[#ede2d6] text-[#5c4a39] px-1 py-0.2 rounded tracking-wider">FREE</span>
+              </div>
             </div>
-            <div className="flex items-center gap-1 whitespace-nowrap shrink-0">
-              <span className="text-[18px] sm:text-[22px] font-black tracking-tight text-[#1f1914] leading-none whitespace-nowrap">{t('케이마켓')}</span>
-              <span className="text-[8px] sm:text-[9px] font-black bg-[#ede2d6] text-[#5c4a39] px-1 py-0.2 rounded tracking-wider">FREE</span>
+
+            {/* 위치 칩 */}
+            <button
+              onClick={() => setIsLocationRadiusModalOpen(true)}
+              className="flex items-center gap-1 px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-full hover:opacity-80 text-[#5c4a39] border border-[#ded1c4] text-[11px] sm:text-xs font-bold transition-all cursor-pointer active:scale-95 shrink-0"
+              style={{ background: '#f4ede6' }}
+              title={t('내 실제 위치 기준 직거래 반경 설정')}
+            >
+              <MapPin className="w-3 h-3 text-[#845b37] shrink-0" />
+              <span className="truncate max-w-[90px] sm:max-w-[140px] font-bold">
+                {getLocalizedAddressDisplay(userLocation?.locationName || '내 주변', currentLang)}
+              </span>
+              <span className="text-[9px] bg-[#3d2817] text-[#fbf9f6] px-1.5 py-0.2 rounded-full font-black shadow-2xs">
+                {userLocation?.radiusKm || 3}km
+              </span>
+              <ChevronDown className="w-2.5 h-2.5 opacity-50 shrink-0" />
+            </button>
+          </div>
+
+          {/* 💻 데스크탑 전용 중앙 대형 검색창 (md 이상에서만 완벽한 1줄 중앙에 노출) */}
+          <div className="flex-1 max-w-md hidden md:block mx-2">
+            <div className="relative">
+              <input
+                type="text"
+                placeholder={t('관심 키워드, 가전, 무빙세일 검색...')}
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full pl-9 pr-4 py-2.5 input-premium text-xs sm:text-sm font-medium text-[#1f1914] rounded-xl shadow-xs"
+              />
+              <Search className="w-4 h-4 text-[#8c7866] absolute left-3 top-3" />
             </div>
           </div>
 
-          {/* 위치 칩 (내 주변 반경) */}
-          <button
-            onClick={() => setIsLocationRadiusModalOpen(true)}
-            className="flex items-center gap-1 px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-full hover:opacity-80 text-[#5c4a39] border border-[#ded1c4] text-[11px] sm:text-xs font-bold transition-all cursor-pointer active:scale-95 shrink-0"
-            style={{ background: '#f4ede6' }}
-            title={t('내 실제 위치 기준 직거래 반경 설정')}
-          >
-            <MapPin className="w-3 h-3 text-[#845b37] shrink-0" />
-            <span className="truncate max-w-[100px] sm:max-w-[150px] font-bold">
-              {getLocalizedAddressDisplay(userLocation?.locationName || '내 주변', currentLang)}
-            </span>
-            <span className="text-[9px] bg-[#3d2817] text-[#fbf9f6] px-1.5 py-0.2 rounded-full font-black shadow-2xs">
-              {userLocation?.radiusKm || 3}km
-            </span>
-            <ChevronDown className="w-2.5 h-2.5 opacity-50 shrink-0" />
-          </button>
-
-          {/* 우측 액션: 알림 벨 + 회원가입/마이 */}
-          <div className="flex items-center gap-1 sm:gap-1.5 shrink-0">
+          {/* 우측 액션 그룹: 데스크탑/모바일 */}
+          <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
             {/* 알림 벨 버튼 */}
             <button
               type="button"
@@ -217,20 +234,20 @@ export default function KMarketHeader() {
               )}
             </button>
 
-            {/* 회원가입 / 마이페이지 */}
+            {/* 회원가입 / 마이페이지 버튼 */}
             {authedUser ? (
               <div
                 onClick={() => setIsMyPageOpen(true)}
-                className="flex items-center gap-1 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full bg-[#ede2d6] hover:bg-[#e2d4c5] border border-[#ded1c4] text-[#3d2817] text-[11px] sm:text-xs font-bold cursor-pointer shrink-0"
+                className="flex items-center gap-1 px-2.5 sm:px-3 py-1.5 rounded-full bg-[#ede2d6] hover:bg-[#e2d4c5] border border-[#ded1c4] text-[#3d2817] text-[11px] sm:text-xs font-bold cursor-pointer shrink-0"
               >
                 <UserCheck className="w-3.5 h-3.5 text-[#5c3818]" />
-                <span className="truncate max-w-[70px] sm:max-w-[90px]">{authedUser.nickname || authedUser.userName}</span>
+                <span className="truncate max-w-[70px] sm:max-w-[80px]">{authedUser.nickname || authedUser.userName}</span>
               </div>
             ) : (
               <div className="flex items-center gap-1 shrink-0">
                 <button
                   onClick={() => setIsAuthModalOpen(true)}
-                  className="flex items-center gap-1 px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-full bg-[#f4ede6] hover:bg-[#ede2d6] text-[#5c4a39] text-[11px] sm:text-xs font-bold transition-all border border-[#ded1c4] cursor-pointer whitespace-nowrap"
+                  className="flex items-center gap-1 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full bg-[#f4ede6] hover:bg-[#ede2d6] text-[#5c4a39] text-[11px] sm:text-xs font-bold transition-all border border-[#ded1c4] cursor-pointer whitespace-nowrap"
                 >
                   <UserPlus className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#845b37]" />
                   <span>{t('간편 회원가입')}</span>
@@ -243,46 +260,54 @@ export default function KMarketHeader() {
                 </button>
               </div>
             )}
+
+            {/* 💻 데스크탑 전용 1분 매물 등록 버튼 (md 이상에서 1줄에 꽉 차게 노출) */}
+            <button
+              onClick={() => setIsCreateModalOpen(true)}
+              className="hidden md:flex btn-primary items-center gap-1.5 text-xs sm:text-sm px-4 py-2 cursor-pointer shrink-0 rounded-xl font-bold shadow-xs"
+            >
+              <PlusCircle className="w-4 h-4" />
+              <span>{t('1분 매물 등록')}</span>
+            </button>
           </div>
         </div>
 
         {/* ========================================================================= */}
-        {/* 3. 검색창 + 1분 새 매물 등록하기 버튼 (시원한 가로 전폭 배치) */}
+        {/* 📱 모바일 전용 3행: 검색창 + 새 매물 등록하기 버튼 (md 미만에서만 노출) */}
         {/* ========================================================================= */}
-        <div className="pb-2.5 flex items-center gap-2 w-full">
+        <div className="pb-2 md:hidden flex items-center gap-2 w-full">
           <div className="relative flex-1 min-w-0">
             <input
               type="text"
               placeholder={t('관심 키워드, 가전, 무빙세일 검색...')}
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-9 pr-8 py-2 input-premium text-xs sm:text-sm font-medium text-[#1f1914] rounded-xl shadow-xs"
+              className="w-full pl-8 pr-7 py-1.5 input-premium text-xs font-medium text-[#1f1914] rounded-xl shadow-2xs"
             />
-            <Search className="w-4 h-4 text-[#8c7866] absolute left-3 top-2.5 sm:top-3" />
+            <Search className="w-3.5 h-3.5 text-[#8c7866] absolute left-2.5 top-2" />
             {searchQuery && (
               <button
                 onClick={() => setSearchQuery('')}
-                className="absolute right-3 top-2.5 text-slate-400 hover:text-slate-600 text-xs cursor-pointer"
+                className="absolute right-2.5 top-2 text-slate-400 hover:text-slate-600 text-xs cursor-pointer"
               >
                 ✕
               </button>
             )}
           </div>
 
-          {/* 1분 새 매물 등록하기 버튼 (절대 텍스트 안 짤리게 whitespace-nowrap) */}
           <button
             onClick={() => setIsCreateModalOpen(true)}
-            className="btn-primary flex items-center gap-1.5 text-xs sm:text-sm px-3 sm:px-4 py-2 cursor-pointer shrink-0 rounded-xl font-bold shadow-xs active:scale-95 transition-all whitespace-nowrap"
-            title={t('1분 만에 내 물건 등록하기')}
+            className="btn-primary flex items-center gap-1 text-xs px-2.5 py-1.5 cursor-pointer shrink-0 rounded-xl font-bold shadow-xs active:scale-95 transition-all whitespace-nowrap"
+            title={t('새 매물 등록하기')}
           >
-            <PlusCircle className="w-4 h-4" />
-            <span>{t('새 매물 등록하기')}</span>
+            <PlusCircle className="w-3.5 h-3.5" />
+            <span className="whitespace-nowrap">{t('새 매물 등록하기')}</span>
           </button>
         </div>
       </div>
 
       {/* ========================================================================= */}
-      {/* 4. 하단 3대 탭 바 (중고/무빙, 동네생활, 세금 환급 — 모바일/PC 모두 완벽 노출) */}
+      {/* 4. 하단 3대 탭 바 (중고/무빙, 동네생활, 세금 환급) */}
       {/* ========================================================================= */}
       <div className="border-t px-3 sm:px-4" style={{ borderColor: 'rgba(180,150,120,0.20)', background: 'rgba(254,252,249,0.95)' }}>
         <div className="max-w-6xl mx-auto flex items-center justify-between gap-1.5 overflow-x-auto no-scrollbar py-2 text-xs">
@@ -314,7 +339,7 @@ export default function KMarketHeader() {
             </button>
           </div>
 
-          {/* 3. 세금 환급 탭 버튼 */}
+          {/* 3. 세금 환급 탭 */}
           <div className="flex items-center gap-1.5 shrink-0">
             <button
               onClick={() => setIsTaxModalOpen(true)}
