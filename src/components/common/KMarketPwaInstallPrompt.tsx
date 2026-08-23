@@ -1,11 +1,9 @@
 'use client';
 
-import React, { useState, useEffect, useContext } from 'react';
-import { Download, X, Sparkles, Smartphone, Share2, PlusSquare, ShieldCheck } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Download, X, Smartphone, Share2, PlusSquare } from 'lucide-react';
 import { triggerPwaInstall } from '@/lib/pwaInstaller';
-import { LanguageContext, useLanguage } from '@/context/LanguageContext';
-import { PWA_TRANSLATIONS } from '@/lib/pwaTranslations';
-import { SupportedLanguage } from '@/types/kmarket';
+import { useLanguage } from '@/context/LanguageContext';
 
 export default function KMarketPwaInstallPrompt() {
   const { t } = useLanguage();
@@ -13,19 +11,10 @@ export default function KMarketPwaInstallPrompt() {
   const [isVisible, setIsVisible] = useState(true);
   const [isIOS, setIsIOS] = useState(false);
   const [showIOSGuide, setShowIOSGuide] = useState(false);
-  const [detectedLang, setDetectedLang] = useState<SupportedLanguage>('ko');
-
-  const langContext = useContext(LanguageContext);
-  const currentLang: SupportedLanguage = langContext?.currentLang || detectedLang;
-
-  const trans = PWA_TRANSLATIONS[currentLang] || PWA_TRANSLATIONS.ko;
 
   useEffect(() => {
     setMounted(true);
     if (typeof window !== 'undefined') {
-      const savedLang = (localStorage.getItem('kmarket_lang') || 'ko') as SupportedLanguage;
-      setDetectedLang(savedLang);
-
       // iOS 기기 감지
       const userAgent = window.navigator.userAgent.toLowerCase();
       const isIosDevice = /iphone|ipad|ipod/.test(userAgent);
@@ -74,7 +63,7 @@ export default function KMarketPwaInstallPrompt() {
             type="button"
             onClick={handleDismiss}
             className="absolute top-3 right-3 text-slate-400 hover:text-white transition-colors cursor-pointer p-1 rounded-full hover:bg-white/10"
-            title={trans.dismissBtn}
+            title={t('닫기')}
           >
             <X className="w-4 h-4" />
           </button>
@@ -89,7 +78,7 @@ export default function KMarketPwaInstallPrompt() {
             <div className="flex-1 min-w-0">
               <div className="flex items-center gap-1.5 flex-wrap">
                 <h4 className="text-xs sm:text-sm font-black text-white tracking-tight flex items-center gap-1">
-                  <span>{trans.promptTitle}</span>
+                  <span>{t('K-Market 1초 앱 설치')}</span>
                   <span className="text-amber-400">✨</span>
                 </h4>
                 <span className="bg-[#f3ba2f] text-[#09101f] text-[9px] font-black px-1.5 py-0.2 rounded-full uppercase">
@@ -97,7 +86,7 @@ export default function KMarketPwaInstallPrompt() {
                 </span>
               </div>
               <p className="text-[11px] text-slate-200 mt-1 leading-snug font-medium line-clamp-2">
-                {trans.promptDesc}
+                {t('홈 화면에 앱 추가하고 17개국어 번역 채팅과 공단 직거래 알림을 가장 빠르게 받으세요.')}
               </p>
             </div>
           </div>
@@ -114,14 +103,14 @@ export default function KMarketPwaInstallPrompt() {
               }}
             >
               <Download className="w-3.5 h-3.5 text-[#09101f] group-hover:translate-y-0.5 transition-transform" />
-              <span>{trans.installBtn}</span>
+              <span>{t('📲 홈 화면에 K-Market 앱 추가')}</span>
             </button>
             <button
               type="button"
               onClick={handleDismiss}
               className="py-2.5 px-3 rounded-xl bg-white/10 hover:bg-white/20 text-slate-300 text-xs font-bold transition-all cursor-pointer"
             >
-              {trans.dismissBtn}
+              {t('닫기')}
             </button>
           </div>
         </div>
@@ -153,7 +142,7 @@ export default function KMarketPwaInstallPrompt() {
                 <span className="w-5 h-5 rounded-full bg-amber-400 text-[#09101f] font-black text-xs flex items-center justify-center shrink-0">1</span>
                 <div>
                   <p className="font-bold text-white flex items-center gap-1.5">
-                    화면 하단의 <Share2 className="w-3.5 h-3.5 text-blue-400 inline" /> [공유] 버튼 클릭
+                    {t('화면 하단의 [공유] 버튼 클릭')}
                   </p>
                   <p className="text-[11px] text-slate-400 mt-0.5">{t('사파리 브라우저 하단 중앙의 네모 위 화살표 아이콘')}</p>
                 </div>
@@ -163,7 +152,7 @@ export default function KMarketPwaInstallPrompt() {
                 <span className="w-5 h-5 rounded-full bg-amber-400 text-[#09101f] font-black text-xs flex items-center justify-center shrink-0">2</span>
                 <div>
                   <p className="font-bold text-white flex items-center gap-1.5">
-                    <PlusSquare className="w-3.5 h-3.5 text-amber-400 inline" /> [홈 화면에 추가] 선택
+                    {t('[홈 화면에 추가] 선택')}
                   </p>
                   <p className="text-[11px] text-slate-400 mt-0.5">{t('메뉴를 아래로 내려 [홈 화면에 추가]를 누르면 완료!')}</p>
                 </div>
@@ -174,7 +163,7 @@ export default function KMarketPwaInstallPrompt() {
               onClick={() => setShowIOSGuide(false)}
               className="w-full mt-5 py-3 rounded-xl bg-amber-400 text-[#09101f] font-black text-xs tracking-wide"
             >
-              확인했습니다
+              {t('확인했습니다')}
             </button>
           </div>
         </div>
