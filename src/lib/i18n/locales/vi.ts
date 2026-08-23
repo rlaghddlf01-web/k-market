@@ -1089,5 +1089,14 @@ export const vi = {
   "실시간 카메라 가이드 & Gemini AI 초정밀 100% 자동 인식": "Khung hướng dẫn camera trực tiếp & Tự động nhận diện 100% cực chính xác với Gemini AI",
   "실시간 카메라 스캐너 열기 ➔": "Mở máy quét camera trực tiếp ➔",
   "외국인등록증 인식이 완료되지 않았습니다. 선명한 사진으로 다시 시도해 주세요.": "Chưa hoàn tất nhận diện thẻ căn cước. Vui lòng thử lại với ảnh rõ nét hơn.",
+  "동네 친구 사귀기": "Kết bạn trong xóm",
+  "사는 이야기 & 힐링": "Chuyện đời sống & Chữa lành",
+  "동네 꿀팁 & 생활정보": "Mẹo vặt & Thông tin sinh hoạt",
+  "비자 / 행정 팁": "Mẹo về Visa & Thủ tục hành chính",
+  "고향 맛집 & 마트": "Quán ăn quê hương & Siêu thị châu Á",
+  "타향살이 속마음, 고향 생각, 따뜻한 위로와 응원": "Tâm tư xứ người, nhớ quê nhà, sự an ủi và động viên ấm áp",
+  "쓰레기 분리수거, 종량제 봉투, 주민센터, 은행": "Phân loại rác, túi rác chuyên dụng, trung tâm cộng đồng, ngân hàng",
+  "다이소/마트 위치, 주말 병원, 가성비 미용실": "Vị trí Daiso/Siêu thị, bệnh viện khám cuối tuần, tiệm tóc giá tốt",
+  "체류 연장 서류 팁, 외국인등록증 재발급 후기": "Mẹo chuẩn bị hồ sơ gia hạn visa, kinh nghiệm cấp lại thẻ cư trú",
 };
 export default vi;

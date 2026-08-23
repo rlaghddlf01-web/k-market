@@ -1090,5 +1090,14 @@ export const uz = {
   "실시간 카메라 가이드 & Gemini AI 초정밀 100% 자동 인식": "Jonli kamera yo'riqnomasi va Gemini AI o'ta aniq 100% avtomatik aniqlash",
   "실시간 카메라 스캐너 열기 ➔": "Jonli kamera skanerini ochish ➔",
   "외국인등록증 인식이 완료되지 않았습니다. 선명한 사진으로 다시 시도해 주세요.": "Hujjatni tanib olish tugallanmadi. Iltimos, aniqroq rasm bilan qayta urinib ko'ring.",
+  "동네 친구 사귀기": "Mahalliy do'stlar orttirish",
+  "사는 이야기 & 힐링": "Hayotiy hikoyalar va tasalli",
+  "동네 꿀팁 & 생활정보": "Mahalliy maslahatlar va hayotiy ma'lumotlar",
+  "비자 / 행정 팁": "Viza va ma'muriy maslahatlar",
+  "고향 맛집 & 마트": "Milliy taomlar va Osiyo do'konlari",
+  "타향살이 속마음, 고향 생각, 따뜻한 위로와 응원": "Musofirlik his-tuyg'ulari, vatanni sog'inish, iliq dalda va qo'llab-quvvatlash",
+  "쓰레기 분리수거, 종량제 봉투, 주민센터, 은행": "Chiqindilarni saralash, rasmiy chiqindi qoplari, mahalla markazi, bank",
+  "다이소/마트 위치, 주말 병원, 가성비 미용실": "Daiso/Do'konlar manzillari, dam olish kuni klinikalari, hamyonbop sartaroshxonalar",
+  "체류 연장 서류 팁, 외국인등록증 재발급 후기": "Viza muddatini uzaytirish hujjatlari bo'yicha maslahatlar, ID kartani qayta olish tajribasi",
 };
 export default uz;

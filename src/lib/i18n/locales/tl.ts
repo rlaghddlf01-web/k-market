@@ -1090,5 +1090,14 @@ export const tl = {
   "실시간 카메라 가이드 & Gemini AI 초정밀 100% 자동 인식": "Live Camera Guide at 100% Awtomatikong Pagkilala gamit ang High-Precision Gemini AI",
   "실시간 카메라 스캐너 열기 ➔": "Buksan ang Live Camera Scanner ➔",
   "외국인등록증 인식이 완료되지 않았습니다. 선명한 사진으로 다시 시도해 주세요.": "Hindi nakumpleto ang pagkilala sa ID card. Subukan muli gamit ang mas malinaw na larawan.",
+  "동네 친구 사귀기": "Makipagkaibigan sa Kapitbahayan",
+  "사는 이야기 & 힐링": "Mga Kwento ng Buhay at Healing",
+  "동네 꿀팁 & 생활정보": "Mga Tip sa Kapitbahayan at Impormasyon sa Pamumuhay",
+  "비자 / 행정 팁": "Mga Tip sa Visa at Administrative",
+  "고향 맛집 & 마트": "Mga Pagkain ng Bayan at Asian Mart",
+  "타향살이 속마음, 고향 생각, 따뜻한 위로와 응원": "Saloobin sa ibang bansa, pangungulila sa bayan, mainit na pampalubag-loob at suporta",
+  "쓰레기 분리수거, 종량제 봉투, 주민센터, 은행": "Paghahati ng basura, pay-per-bag na plastic, community center, pagbabangko",
+  "다이소/마트 위치, 주말 병원, 가성비 미용실": "Lokasyon ng Daiso/Mart, weekend clinic, abot-kayang pagupitan",
+  "체류 연장 서류 팁, 외국인등록증 재발급 후기": "Mga tip sa dokumento para sa visa extension, reviews sa pag-reissue ng Alien Card",
 };
 export default tl;

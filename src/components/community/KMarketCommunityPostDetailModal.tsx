@@ -109,11 +109,11 @@ export default function KMarketCommunityPostDetailModal() {
   return (
     <div
       onClick={() => setSelectedPost(null)}
-      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/75 backdrop-blur-xs animate-fadeIn overflow-y-auto"
+      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/75 backdrop-blur-xs animate-fadeIn"
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className="bg-white dark:bg-gray-900 rounded-3xl max-w-xl w-full shadow-2xl border border-slate-200 dark:border-gray-800 relative max-h-[88vh] flex flex-col overflow-hidden my-auto animate-in zoom-in-95"
+        className="relative w-full max-w-xl bg-white dark:bg-gray-900 rounded-3xl shadow-2xl border border-slate-200 dark:border-gray-800 flex flex-col max-h-[90vh] overflow-hidden"
       >
         {/* 상단 고정 헤더 - 어떤 스크롤에서도 X 버튼 및 작성자 정보가 상단에 항상 고정 */}
         <div className="sticky top-0 z-30 px-5 py-3.5 bg-white/95 dark:bg-gray-900/95 backdrop-blur-md border-b border-slate-100 dark:border-gray-800 flex items-center justify-between shrink-0">
@@ -259,7 +259,7 @@ export default function KMarketCommunityPostDetailModal() {
           <div className="space-y-3 pt-2">
             <h4 className="text-xs font-black text-slate-900 dark:text-white flex items-center gap-1.5">
               <MessageCircle className="w-4 h-4 text-blue-600" />
-              <span>{t('안내 내용을 확인해 주세요')} ({comments.length})</span>
+              <span>{t('댓글')} ({comments.length})</span>
             </h4>
 
             <div className="space-y-2">
@@ -316,7 +316,7 @@ export default function KMarketCommunityPostDetailModal() {
         </div>
 
         {/* 7. 하단 댓글 작성창 (비회원 시 로그인 유도) */}
-        <div className="pt-3 border-t border-slate-100 dark:border-gray-800 shrink-0">
+        <div className="p-4 border-t border-slate-100 dark:border-gray-800 shrink-0 bg-white/95 dark:bg-gray-900/95">
           {authedUser ? (
             <form onSubmit={handleCommentSubmit} className="flex gap-2">
               <input
@@ -329,10 +329,10 @@ export default function KMarketCommunityPostDetailModal() {
               <button
                 type="submit"
                 disabled={!commentInput.trim()}
-                className="px-4 py-2.5 rounded-2xl bg-blue-600 hover:bg-blue-700 disabled:opacity-50 text-white font-bold text-xs flex items-center gap-1 cursor-pointer transition-colors shadow-md"
+                className="px-4 py-2.5 rounded-2xl bg-blue-600 hover:bg-blue-700 disabled:opacity-50 text-white font-bold text-xs flex items-center gap-1 cursor-pointer transition-colors shadow-md shrink-0"
               >
                 <Send className="w-3.5 h-3.5" />
-                <span>{t('새 매물 등록하기')}</span>
+                <span>{t('등록')}</span>
               </button>
             </form>
           ) : (

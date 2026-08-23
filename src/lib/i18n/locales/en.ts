@@ -1089,5 +1089,14 @@ export const en = {
   "실시간 카메라 가이드 & Gemini AI 초정밀 100% 자동 인식": "Live Camera Guide & 100% Auto-Recognition with High-Precision Gemini AI",
   "실시간 카메라 스캐너 열기 ➔": "Open Live Camera Scanner ➔",
   "외국인등록증 인식이 완료되지 않았습니다. 선명한 사진으로 다시 시도해 주세요.": "ID recognition could not be completed. Please try again with a clearer photo.",
+  "동네 친구 사귀기": "Make Local Friends",
+  "사는 이야기 & 힐링": "Life Stories & Healing",
+  "동네 꿀팁 & 생활정보": "Local Tips & Living Info",
+  "비자 / 행정 팁": "Visa & Administrative Tips",
+  "고향 맛집 & 마트": "Hometown Food & Asian Marts",
+  "타향살이 속마음, 고향 생각, 따뜻한 위로와 응원": "Life abroad feelings, missing home, warm comfort and support",
+  "쓰레기 분리수거, 종량제 봉투, 주민센터, 은행": "Waste recycling, pay-per-bag garbage, community center, banking",
+  "다이소/마트 위치, 주말 병원, 가성비 미용실": "Daiso/Mart locations, weekend clinics, affordable hair salons",
+  "체류 연장 서류 팁, 외국인등록증 재발급 후기": "Visa extension document tips, Alien Card re-issuance reviews",
 };
 export default en;
