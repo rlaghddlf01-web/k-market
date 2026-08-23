@@ -749,9 +749,16 @@ export function KMarketProvider({ children }: { children: React.ReactNode }) {
         setChatMessages((prev) => [...prev, msgData.message]);
       }
 
-        // 3. 판매자의 지능형 스마트 답장 시뮬레이션 (1.2초 후 실제 상황별 17개국어 자동 응답)
+      // 3. 270개 전시용 시드 매물(item-real-*)에 대해서만 20개 사유 예약 안내 답장 (실제 고객 등록 매물은 AI 개입 전혀 없이 100% 순수 P2P 대화)
       setTimeout(async () => {
         const targetItem = activeChat.item || items.find((it) => it.id === activeChat.item_id) || items[0];
+        const isSeed270Item = Boolean(targetItem && (targetItem.id.startsWith('item-real-') || targetItem.id.startsWith('item-demo-')));
+        
+        if (!isSeed270Item) {
+          // 🌟 실제 고객이 직접 올린 매물은 AI가 전혀 개입하지 않고 구매자-판매자간 순수 실시간 대화만 유지
+          return;
+        }
+
         const smartReply = generateSmartSellerReply(text, targetItem, currentLang);
 
         // 판매자 원문 -> 현재 구매자 언어(currentLang)로 실시간 번역
