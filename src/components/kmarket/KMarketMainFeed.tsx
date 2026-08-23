@@ -222,7 +222,7 @@ export default function KMarketMainFeed() {
               {/* 5. 매물 그리드 (모바일: 당근마켓 무한 스크롤 / 데스크탑: 20개 단위 페이징) */}
               {filteredItems.length > 0 ? (
                 <>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3.5 sm:gap-6">
+                  <div className="flex flex-col bg-white md:bg-transparent rounded-3xl md:rounded-none border md:border-0 border-[#ded1c4]/60 p-2 sm:p-3 md:p-0 md:grid md:grid-cols-3 lg:grid-cols-4 md:gap-6 shadow-2xs md:shadow-none">
                     {(isMobile
                       ? filteredItems.slice(0, visibleMobileCount)
                       : filteredItems.slice((currentPage - 1) * ITEMS_PER_PAGE, currentPage * ITEMS_PER_PAGE)

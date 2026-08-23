@@ -49,9 +49,114 @@ export default function KMarketItemCard({ item }: KMarketItemCardProps) {
 
   return (
     <>
+      {/* ── 📱 [모바일 전용] 당근마켓 스타일 좌측 1:1 정사각형 사진 + 우측 정보 가로 1줄 뷰 ── */}
       <div
         onClick={() => setSelectedItem(item)}
-        className={`group card-premium overflow-hidden flex flex-col w-full cursor-pointer transition-all duration-300 hover:shadow-xl border border-[#ded1c4] rounded-[24px] bg-white ${
+        className={`md:hidden flex flex-row gap-3 py-3 border-b border-[#ded1c4]/50 bg-white hover:bg-[#fbf9f6] active:bg-[#f5ede4] cursor-pointer transition-colors w-full px-1 ${
+          isSold ? 'opacity-55' : ''
+        }`}
+      >
+        {/* 좌측: 1:1 정사각형 썸네일 사진 */}
+        <div className="relative w-28 h-28 shrink-0 rounded-2xl overflow-hidden bg-slate-100 border border-[#ded1c4]/40">
+          <img
+            src={item.images[0]}
+            alt={item.title}
+            className={`w-full h-full object-cover ${isSold ? 'grayscale-[40%]' : ''}`}
+            loading="lazy"
+          />
+
+          {/* 좌상단: D-Day / 상태 배지 */}
+          <div className="absolute top-1.5 left-1.5">
+            {isSold ? (
+              <KMarketStatusBadge status="sold" />
+            ) : isReserved ? (
+              <KMarketStatusBadge status="reserved" />
+            ) : isFree ? (
+              <div className="bg-emerald-500 text-white text-[9px] font-black px-1.5 py-0.5 rounded-md shadow-xs">
+                {t('🎁 무료나눔')}
+              </div>
+            ) : item.is_moving_sale ? (
+              <div className="bg-rose-600 text-white text-[9px] font-black px-1.5 py-0.5 rounded-md shadow-xs">
+                D-{item.moving_d_day || 5}
+              </div>
+            ) : null}
+          </div>
+
+          {/* 다중 사진 뱃지 */}
+          {item.images.length > 1 && (
+            <div className="absolute bottom-1.5 left-1.5 bg-black/60 backdrop-blur-xs text-white text-[9px] px-1.5 py-0.2 rounded font-bold">
+              📷 {item.images.length}
+            </div>
+          )}
+        </div>
+
+        {/* 우측: 정보 영역 (제목, 내 주변 장소, 국기, 가격, 찜/채팅) */}
+        <div className="flex-1 min-w-0 flex flex-col justify-between py-0.5">
+          <div className="space-y-1">
+            {/* 상품 제목 */}
+            <h3 className="font-extrabold text-[14.5px] text-slate-950 leading-snug tracking-tight line-clamp-2">
+              {displayTitle}
+            </h3>
+
+            {/* 내 주변 장소 + 판매자 국기 & 이름 (시간/공단 텍스트 없음) */}
+            <div className="flex items-center gap-1.5 text-xs text-[#705e4f]">
+              <span className="flex items-center gap-1 truncate font-medium max-w-[60%]">
+                <MapPin className="w-3 h-3 text-[#845b37] shrink-0" />
+                <span className="truncate">{displayRegion}</span>
+              </span>
+              <span className="text-[#ded1c4]">·</span>
+              <span className="flex items-center gap-1 shrink-0 text-[#8c7866]">
+                <CountryFlag countryCode={item.seller_country} size="xs" />
+                <span className="truncate max-w-[80px]">{item.seller_name}</span>
+              </span>
+            </div>
+          </div>
+
+          {/* 하단: 굵은 가격 + 우하단 채팅/하트 */}
+          <div className="flex items-end justify-between pt-1">
+            <div className="flex items-baseline gap-1.5">
+              <span
+                className={`text-base font-black tracking-tight ${
+                  isFree ? 'text-emerald-600' : 'text-slate-950'
+                }`}
+              >
+                {formatWon(item.price)}
+              </span>
+              {item.original_price && item.original_price > item.price && (
+                <span className="text-[11px] text-slate-400 line-through">
+                  {item.original_price.toLocaleString()}원
+                </span>
+              )}
+            </div>
+
+            {/* 우하단: 채팅수 & 하트 버튼 */}
+            <div className="flex items-center gap-2 text-xs text-slate-400">
+              <div className="flex items-center gap-0.5 font-bold text-slate-500">
+                <MessageCircle className="w-3.5 h-3.5 text-blue-500" />
+                <span>{(item as any).chat_count || 1}</span>
+              </div>
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  toggleLike(item.id);
+                }}
+                className="flex items-center gap-0.5 font-bold cursor-pointer hover:text-rose-500 transition-colors"
+              >
+                <Heart className={`w-3.5 h-3.5 ${isLiked ? 'text-rose-500 fill-rose-500' : 'text-slate-400'}`} />
+                <span className={isLiked ? 'text-rose-500' : 'text-slate-500'}>
+                  {item.like_count + (isLiked ? 1 : 0)}
+                </span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* ── 💻 [데스크탑 전용] 4열 와이드 프리미엄 카드 그리드 ── */}
+      <div
+        onClick={() => setSelectedItem(item)}
+        className={`hidden md:flex group card-premium overflow-hidden flex-col w-full cursor-pointer transition-all duration-300 hover:shadow-xl border border-[#ded1c4] rounded-[24px] bg-white ${
           isSold ? 'opacity-55' : ''
         }`}
       >
@@ -204,15 +309,11 @@ export default function KMarketItemCard({ item }: KMarketItemCardProps) {
 
           {/* ── 3. 하단 메타 정보 + 1:1 번역챗 골드 버튼 ─────────────── */}
           <div className="pt-3 border-t border-slate-100 space-y-3">
-            {/* 위치 + 시간 */}
+            {/* 위치 */}
             <div className="flex items-center justify-between text-xs text-[#705e4f] font-semibold">
-              <div className="flex items-center gap-1.5 truncate max-w-[65%]" title={displayRegion}>
+              <div className="flex items-center gap-1.5 truncate max-w-[90%]" title={displayRegion}>
                 <MapPin className="w-3.5 h-3.5 text-[#845b37] shrink-0" />
                 <span className="truncate">{displayRegion}</span>
-              </div>
-              <div className="flex items-center gap-1 shrink-0 text-slate-500">
-                <Clock className="w-3.5 h-3.5" />
-                <span>{timeAgoText}</span>
               </div>
             </div>
 
