@@ -109,7 +109,7 @@ const KMarketContext = createContext<KMarketContextType | undefined>(undefined);
 export function KMarketProvider({ children }: { children: React.ReactNode }) {
   const { t } = useLanguage();
   const { currentLang } = useLanguage();
-  const [items, setItems] = useState<KMarketItem[]>(INITIAL_ITEMS);
+  const [items, setItems] = useState<KMarketItem[]>([]); // SSR hydration 안전: 빈 배열로 시작, useEffect에서 클라이언트에만 로드
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [selectedCategory, setSelectedCategory] = useState<ItemCategory>('all');
   const [selectedRegion, setSelectedRegion] = useState<IndustrialRegion>('all');
