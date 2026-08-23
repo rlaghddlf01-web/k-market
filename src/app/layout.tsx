@@ -15,6 +15,7 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://ktrs-market.vercel.app'),
   title: 'KTRS K-Market (케이마켓) | 외국인 중고거래 & 무빙세일',
   description:
     '대한민국 No.1 외국인 근로자 전용 0원 수수료 중고거래 & 귀국 무빙세일 플랫폼! 17개국어 실시간 자동 번역 채팅, 평택·안산·화성 전국 공단 도보 5분 안심 직거래, 최대 1000만원 세금 환급 원스톱 연계',
@@ -23,6 +24,30 @@ export const metadata: Metadata = {
     capable: true,
     statusBarStyle: 'black-translucent',
     title: 'K-Market',
+  },
+  openGraph: {
+    type: 'website',
+    locale: 'ko_KR',
+    url: 'https://ktrs-market.vercel.app',
+    siteName: 'KTRS K-Market',
+    title: 'KTRS K-Market (케이마켓) | 외국인 중고거래 & 무빙세일',
+    description:
+      '대한민국 No.1 외국인 근로자 전용 0원 수수료 중고거래 & 귀국 무빙세일 플랫폼! 17개국어 실시간 번역 채팅 및 공단 안심 직거래',
+    images: [
+      {
+        url: '/images/kmarket-logo.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'KTRS K-Market 공식 로고',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'KTRS K-Market (케이마켓) | 외국인 중고거래 & 무빙세일',
+    description:
+      '대한민국 No.1 외국인 근로자 전용 0원 수수료 중고거래 & 귀국 무빙세일 플랫폼! 17개국어 실시간 번역 채팅 및 공단 안심 직거래',
+    images: ['/images/kmarket-logo.jpg'],
   },
   keywords: [
     'K-Market',
