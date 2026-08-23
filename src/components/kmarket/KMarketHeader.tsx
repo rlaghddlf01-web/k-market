@@ -171,12 +171,12 @@ export default function KMarketHeader() {
       {/* ========================================================================= */}
       <div className="max-w-6xl mx-auto px-3 sm:px-4">
         <div className="flex items-center justify-between gap-2 sm:gap-4 py-2 sm:py-2.5">
-          {/* 좌측: 로고 + 위치 칩 */}
+          {/* 좌측: 로고 + 설명 문구 + 위치 칩 */}
           <div className="flex items-center gap-2 sm:gap-3 shrink-0">
-            {/* 로고 & 케이마켓 FREE */}
+            {/* 로고 & 케이마켓 브랜드 */}
             <div 
               onClick={() => router.push(currentLang === 'ko' ? '/' : `/${currentLang}`)}
-              className="flex items-center gap-1.5 sm:gap-2.5 cursor-pointer shrink-0"
+              className="flex items-center gap-2 sm:gap-2.5 cursor-pointer shrink-0"
             >
               <div className="relative w-8 h-8 sm:w-10 sm:h-10 rounded-xl overflow-hidden shadow-xs shrink-0 border border-[#ded1c4] bg-[#09101f] flex items-center justify-center">
                 <img
@@ -185,8 +185,14 @@ export default function KMarketHeader() {
                   className="w-full h-full object-cover scale-110"
                 />
               </div>
-              <div className="flex items-center whitespace-nowrap shrink-0">
-                <span className="notranslate text-[18px] sm:text-[22px] font-black tracking-tight text-[#1f1914] leading-none whitespace-nowrap">{t('케이마켓')}</span>
+              <div>
+                <div className="flex items-center whitespace-nowrap shrink-0">
+                  <span className="notranslate text-[18px] sm:text-[22px] font-black tracking-tight text-[#1f1914] leading-none whitespace-nowrap">{t('케이마켓')}</span>
+                </div>
+                {/* 💻 데스크탑 전용 로고 하단 설명 문구 완벽 복원 */}
+                <p className="text-[11px] text-[#8c7866] hidden md:block mt-0.5 font-medium whitespace-nowrap">
+                  {t('외국인 근로자 17개국어 안심 직거래 마켓')}
+                </p>
               </div>
             </div>
 
@@ -259,9 +265,10 @@ export default function KMarketHeader() {
                 </button>
                 <button
                   onClick={() => setIsMyPageOpen(true)}
-                  className="px-2 sm:px-2.5 py-1 sm:py-1.5 rounded-full bg-[#f4ede6] hover:bg-[#ede2d6] text-[#5c4a39] text-[11px] sm:text-xs font-bold transition-all cursor-pointer border border-[#ded1c4] whitespace-nowrap"
+                  className="px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full bg-[#f4ede6] hover:bg-[#ede2d6] text-[#5c4a39] text-[11px] sm:text-xs font-bold transition-all cursor-pointer border border-[#ded1c4] whitespace-nowrap"
                 >
-                  {t('마이')}
+                  <span className="hidden sm:inline">{t('마이페이지')}</span>
+                  <span className="sm:hidden">{t('마이')}</span>
                 </button>
               </div>
             )}
