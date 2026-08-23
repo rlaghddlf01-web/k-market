@@ -510,18 +510,39 @@ export function KMarketProvider({ children }: { children: React.ReactNode }) {
         });
 
         // 🔔 관심 키워드 매칭 시 실시간 17개국어 웹 푸시 알림 발송 (Service Worker)
+        // 원문뿐만 아니라 Gemini가 번역한 17개국어 번역문(translations) 전체와 교차 비교하여
+        // 외국인이 모국어로 키워드를 등록해도 한국어/타국어 매물 등록 시 100% 알림 발송
         keywordAlerts.forEach((kw) => {
-          if (
-            kw.is_active &&
-            (created.title.toLowerCase().includes(kw.keyword.toLowerCase()) ||
-              created.description.toLowerCase().includes(kw.keyword.toLowerCase()))
-          ) {
+          if (!kw.is_active) return;
+          const kwLower = kw.keyword.toLowerCase().trim();
+          if (!kwLower) return;
+
+          // 1. 원문 제목/설명 매칭
+          let isMatched =
+            created.title.toLowerCase().includes(kwLower) ||
+            created.description.toLowerCase().includes(kwLower);
+
+          // 2. 17개국어 번역본 제목/설명 교차 매칭 (베트남어, 중국어, 태국어, 영어, 러시아어 등)
+          if (!isMatched && created.translations) {
+            const transValues = Object.values(created.translations) as Array<{ title?: string; description?: string }>;
+            for (const t of transValues) {
+              if (
+                (t?.title && t.title.toLowerCase().includes(kwLower)) ||
+                (t?.description && t.description.toLowerCase().includes(kwLower))
+              ) {
+                isMatched = true;
+                break;
+              }
+            }
+          }
+
+          if (isMatched) {
             sendLocalizedPushNotification({
               type: 'keyword',
               lang: currentLang,
               params: {
                 keyword: kw.keyword,
-                itemTitle: created.title,
+                itemTitle: created.translations?.[currentLang]?.title || created.title,
                 itemPrice: created.price === 0 ? '0원' : created.price.toLocaleString() + '원',
                 itemRegion: created.region,
               },
