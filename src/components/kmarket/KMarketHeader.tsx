@@ -309,11 +309,11 @@ export default function KMarketHeader() {
 
           <button
             onClick={() => setIsCreateModalOpen(true)}
-            className="btn-primary flex items-center gap-1 text-xs px-2.5 py-1.5 cursor-pointer shrink-0 rounded-xl font-bold shadow-xs active:scale-95 transition-all whitespace-nowrap"
-            title={t('새 매물 등록하기')}
+            className="btn-primary flex items-center gap-1 text-xs px-2.5 sm:px-3 py-1.5 cursor-pointer shrink-0 rounded-xl font-bold shadow-xs active:scale-95 transition-all whitespace-nowrap"
+            title={t('1분 매물 등록')}
           >
             <PlusCircle className="w-3.5 h-3.5" />
-            <span className="whitespace-nowrap">{t('새 매물 등록하기')}</span>
+            <span className="whitespace-nowrap">{t('1분 매물 등록')}</span>
           </button>
         </div>
       </div>
