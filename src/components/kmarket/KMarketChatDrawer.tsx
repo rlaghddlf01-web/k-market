@@ -422,7 +422,7 @@ export default function KMarketChatDrawer() {
                         />
                         <div>
                           <span className="block font-semibold opacity-90 text-[10px]">
-                            {isMe ? '🌐 자동 번역 전송문 (To Seller):' : '🌐 한국어 실시간 번역:'}
+                            {isMe ? t('🌐 자동 번역 전송문 (상대방에게):') : t('🌐 실시간 모국어 자동 번역:')}
                           </span>
                           <span className="font-medium">{msg.translated_text}</span>
                         </div>
