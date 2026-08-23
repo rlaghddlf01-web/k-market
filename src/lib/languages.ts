@@ -136,7 +136,10 @@ export const CATEGORIES_DATA: { id: ItemCategory; label: string; icon: string }[
 ];
 
 export const REGIONS_DATA: { id: IndustrialRegion; name: string; badge: string; icon: string; nameKo: string }[] = [
-  { id: 'all', name: '전체 지역 직거래', badge: '전체', icon: '📍', nameKo: '전체' },
+  { id: 'all', name: '내 주변 전체', badge: '전체', icon: '📍', nameKo: '내 주변 전체' },
+  { id: 'radius_1', name: '내 주변 1km 이내', badge: '1km', icon: '🚶', nameKo: '내 주변 1km' },
+  { id: 'radius_3', name: '내 주변 3km 이내', badge: '3km', icon: '🚴', nameKo: '내 주변 3km' },
+  { id: 'radius_10', name: '내 주변 10km 이내', badge: '10km', icon: '🚗', nameKo: '내 주변 10km' },
   { id: 'pyeongtaek', name: '경기 평택시', badge: '평택', icon: '📍', nameKo: '평택' },
   { id: 'ansan', name: '경기 안산시', badge: '안산', icon: '📍', nameKo: '안산' },
   { id: 'hwaseong', name: '경기 화성시', badge: '화성', icon: '📍', nameKo: '화성' },

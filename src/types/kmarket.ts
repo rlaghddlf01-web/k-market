@@ -52,6 +52,9 @@ export type ItemCategory =
 
 export type IndustrialRegion =
   | 'all'
+  | 'radius_1'   // 내 주변 1km 이내
+  | 'radius_3'   // 내 주변 3km 이내
+  | 'radius_10'  // 내 주변 10km 이내
   | 'pyeongtaek' // 평택 포승/고덕 공단
   | 'ansan'      // 안산 반월/시화/원곡동
   | 'hwaseong'   // 화성 향남/남양/발안 공단

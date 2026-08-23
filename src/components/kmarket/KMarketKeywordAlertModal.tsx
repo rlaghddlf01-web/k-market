@@ -98,7 +98,7 @@ export default function KMarketKeywordAlertModal({
         keyword,
         itemTitle: `${keyword}`,
         itemPrice: t('0원 무료 나눔'),
-        itemRegion: selectedZone === 'all' ? t('안내 내용을 확인해 주세요') : selectedZone,
+        itemRegion: selectedZone === 'all' ? t('내 주변 전체') : selectedZone === 'radius_1' ? t('내 주변 1km 이내') : selectedZone === 'radius_3' ? t('내 주변 3km 이내') : t('내 주변 10km 이내'),
       },
       url: '/',
     });
@@ -169,7 +169,7 @@ export default function KMarketKeywordAlertModal({
               </button>
             </div>
 
-            {/* 공단 필터 및 웹 푸시 수신 토글 */}
+            {/* 위치 반경 및 웹 푸시 수신 토글 */}
             <div className="flex flex-wrap items-center justify-between gap-2 pt-1">
               <div className="flex items-center space-x-1.5">
                 <MapPin className="w-3.5 h-3.5 text-slate-500" />
@@ -178,11 +178,10 @@ export default function KMarketKeywordAlertModal({
                   onChange={(e) => setSelectedZone(e.target.value as IndustrialRegion)}
                   className="px-2 py-1 bg-white dark:bg-gray-800 border border-slate-200 dark:border-gray-700 rounded-lg text-xs font-bold text-slate-700 dark:text-slate-300"
                 >
-                  <option value="all">{t('안내 내용을 확인해 주세요')}</option>
-                  <option value="pyeongtaek">{t('평택 공단')}</option>
-                  <option value="ansan">{t('안산 원곡동')}</option>
-                  <option value="hwaseong">{t('화성 향남/향남공단')}</option>
-                  <option value="gumi">{t('구미 국가산단')}</option>
+                  <option value="all">{t('내 주변 전체')}</option>
+                  <option value="radius_1">{t('내 주변 1km 이내')}</option>
+                  <option value="radius_3">{t('내 주변 3km 이내')}</option>
+                  <option value="radius_10">{t('내 주변 10km 이내')}</option>
                 </select>
               </div>
 
@@ -260,7 +259,7 @@ export default function KMarketKeywordAlertModal({
                             {getAdaptedKeyword(alertItem.keyword, currentLang)}
                           </span>
                           <span className="text-[10px] bg-slate-100 dark:bg-gray-700 text-slate-600 dark:text-slate-300 px-1.5 py-0.2 rounded-sm">
-                            {alertItem.industrial_zone === 'all' ? t('안내 내용을 확인해 주세요') : alertItem.industrial_zone}
+                            {alertItem.industrial_zone === 'all' || !alertItem.industrial_zone ? t('내 주변 전체') : alertItem.industrial_zone === 'radius_1' ? t('내 주변 1km 이내') : alertItem.industrial_zone === 'radius_3' ? t('내 주변 3km 이내') : alertItem.industrial_zone === 'radius_10' ? t('내 주변 10km 이내') : t('내 주변 전체')}
                           </span>
                         </div>
                         <span className="text-[11px] text-slate-400 flex items-center gap-1 mt-0.5">
