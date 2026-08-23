@@ -317,45 +317,96 @@ export default function KMarketHeader() {
       {/* ========================================================================= */}
       {/* 4. 하단 3대 탭 바 (중고/무빙, 동네생활, 세금 환급) */}
       {/* ========================================================================= */}
-      <div className="border-t px-3 sm:px-4" style={{ borderColor: 'rgba(180,150,120,0.20)', background: 'rgba(254,252,249,0.95)' }}>
-        <div className="max-w-6xl mx-auto flex items-center justify-between gap-1.5 overflow-x-auto no-scrollbar py-2 text-xs">
-          <div className="flex items-center gap-1.5 shrink-0">
-            {/* 1. 중고 / 무빙 거래 탭 */}
+      {/* ========================================================================= */}
+      {/* 4. 하단 3대 탭 바 (모바일: 3등분 균등 그리드 2줄 자동정렬 / 데스크탑: 와이드 바) */}
+      {/* ========================================================================= */}
+      <div className="border-t px-2 sm:px-4" style={{ borderColor: 'rgba(180,150,120,0.20)', background: 'rgba(254,252,249,0.95)' }}>
+        <div className="max-w-6xl mx-auto py-1.5 sm:py-2 text-xs">
+          {/* 📱 모바일 전용: 3등분 100% 꽉 찬 균등 그리드 (어떤 폰에서도 짤림 0% & 2줄 자동 줄바꿈) */}
+          <div className="grid grid-cols-3 gap-1 md:hidden w-full items-stretch">
+            {/* 1. 중고 / 무빙 탭 */}
             <button
+              type="button"
               onClick={() => setActiveMainTab('market')}
-              className={`px-3.5 sm:px-4 py-1.5 rounded-full font-black transition-all shrink-0 cursor-pointer shadow-2xs flex items-center gap-1.5 text-xs whitespace-nowrap ${
+              className={`w-full py-1.5 px-1 rounded-xl font-black transition-all cursor-pointer shadow-2xs flex items-center justify-center text-center text-[10px] xs:text-[11px] leading-tight break-keep ${
                 activeMainTab === 'market'
                   ? 'bg-[#3d2817] text-[#fbf9f6] border border-[#3d2817]'
-                  : 'text-[#705e4f] hover:text-[#1f1914] hover:bg-[#f4ede6] bg-transparent'
+                  : 'text-[#705e4f] hover:text-[#1f1914] bg-[#f4ede6]/60 border border-[#ded1c4]/60'
               }`}
             >
-              <span>{t('케이마켓 (중고/무빙)')}</span>
+              <span className="line-clamp-2">{t('케이마켓 (중고/무빙)')}</span>
             </button>
 
             {/* 2. 동네생활 & 쉼터 탭 */}
             <button
+              type="button"
               onClick={() => setActiveMainTab('community')}
-              className={`px-3.5 sm:px-4 py-1.5 rounded-full font-black transition-all shrink-0 cursor-pointer shadow-2xs flex items-center gap-1.5 text-xs whitespace-nowrap relative ${
+              className={`w-full py-1.5 px-1 rounded-xl font-black transition-all cursor-pointer shadow-2xs flex items-center justify-center text-center text-[10px] xs:text-[11px] leading-tight break-keep relative ${
                 activeMainTab === 'community'
                   ? 'bg-gradient-to-r from-indigo-900 to-purple-900 text-white border border-indigo-700'
-                  : 'text-[#705e4f] hover:text-[#1f1914] hover:bg-[#f4ede6] bg-transparent'
+                  : 'text-[#705e4f] hover:text-[#1f1914] bg-[#f4ede6]/60 border border-[#ded1c4]/60'
               }`}
             >
-              <span>🗣️</span>
-              <span>{t('동네생활 & 쉼터')}</span>
-              <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" />
+              <span className="line-clamp-2 flex items-center justify-center gap-0.5">
+                <span>🗣️</span>
+                <span>{t('동네생활 & 쉼터')}</span>
+              </span>
+              <span className="absolute top-1 right-1 w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" />
+            </button>
+
+            {/* 3. 세금 환급 탭 */}
+            <button
+              type="button"
+              onClick={() => setIsTaxModalOpen(true)}
+              className="w-full py-1.5 px-1 rounded-xl font-bold text-[#5c4a39] bg-[#ede2d6] hover:bg-[#e2d4c5] border border-[#ded1c4] transition-all cursor-pointer text-[10px] xs:text-[11px] leading-tight flex items-center justify-center text-center shadow-2xs"
+            >
+              <span className="line-clamp-2 flex items-center justify-center gap-0.5">
+                <Sparkles className="w-3 h-3 text-[#845b37] shrink-0" />
+                <span>{t('세금 환급 (184만)')}</span>
+              </span>
             </button>
           </div>
 
-          {/* 3. 세금 환급 탭 */}
-          <div className="flex items-center gap-1.5 shrink-0">
-            <button
-              onClick={() => setIsTaxModalOpen(true)}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full font-bold text-[#5c4a39] bg-[#ede2d6] hover:bg-[#e2d4c5] border border-[#ded1c4] transition-all shrink-0 cursor-pointer text-xs whitespace-nowrap"
-            >
-              <Sparkles className="w-3.5 h-3.5 text-[#845b37]" />
-              <span>{t('세금 환급 (184만)')}</span>
-            </button>
+          {/* 💻 데스크탑 전용 (md 이상): 기존의 웅장한 가로 와이드 바 100% 유지 */}
+          <div className="hidden md:flex items-center justify-between gap-1.5 w-full">
+            <div className="flex items-center gap-1.5 shrink-0">
+              {/* 1. 중고 / 무빙 거래 탭 */}
+              <button
+                onClick={() => setActiveMainTab('market')}
+                className={`px-4 py-1.5 rounded-full font-black transition-all shrink-0 cursor-pointer shadow-2xs flex items-center gap-1.5 text-xs whitespace-nowrap ${
+                  activeMainTab === 'market'
+                    ? 'bg-[#3d2817] text-[#fbf9f6] border border-[#3d2817]'
+                    : 'text-[#705e4f] hover:text-[#1f1914] hover:bg-[#f4ede6] bg-transparent'
+                }`}
+              >
+                <span>{t('케이마켓 (중고/무빙)')}</span>
+              </button>
+
+              {/* 2. 동네생활 & 쉼터 탭 */}
+              <button
+                onClick={() => setActiveMainTab('community')}
+                className={`px-4 py-1.5 rounded-full font-black transition-all shrink-0 cursor-pointer shadow-2xs flex items-center gap-1.5 text-xs whitespace-nowrap relative ${
+                  activeMainTab === 'community'
+                    ? 'bg-gradient-to-r from-indigo-900 to-purple-900 text-white border border-indigo-700'
+                    : 'text-[#705e4f] hover:text-[#1f1914] hover:bg-[#f4ede6] bg-transparent'
+                }`}
+              >
+                <span>🗣️</span>
+                <span>{t('동네생활 & 쉼터')}</span>
+                <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" />
+              </button>
+            </div>
+
+            {/* 3. 세금 환급 탭 */}
+            <div className="flex items-center gap-1.5 shrink-0">
+              <button
+                onClick={() => setIsTaxModalOpen(true)}
+                className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full font-bold text-[#5c4a39] bg-[#ede2d6] hover:bg-[#e2d4c5] border border-[#ded1c4] transition-all shrink-0 cursor-pointer text-xs whitespace-nowrap shadow-2xs"
+              >
+                <Sparkles className="w-3.5 h-3.5 text-[#845b37]" />
+                <span>{t('세금 환급 (184만)')}</span>
+              </button>
+            </div>
           </div>
         </div>
       </div>
