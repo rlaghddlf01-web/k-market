@@ -77,8 +77,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ko" suppressHydrationWarning>
+    <html lang="ko" translate="no" className="notranslate" suppressHydrationWarning>
       <head>
+        <meta name="google" content="notranslate" />
         <link rel="icon" href="/images/kmarket-logo.jpg" type="image/jpeg" />
         <link rel="shortcut icon" href="/images/kmarket-logo.jpg" type="image/jpeg" />
         <link rel="apple-touch-icon" href="/images/kmarket-logo.jpg" />
