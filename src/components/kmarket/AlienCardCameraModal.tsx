@@ -262,18 +262,18 @@ export default function AlienCardCameraModal({
                     className="w-full h-full object-cover"
                   />
 
-                  {/* 신분증 가이드 사각 프레임 오버레이 */}
-                  <div className="absolute inset-0 pointer-events-none flex items-center justify-center p-6">
-                    <div className="relative w-full max-w-[340px] aspect-[1.58/1] rounded-xl border-2 border-dashed border-blue-400/80 bg-blue-500/5 shadow-[0_0_0_9999px_rgba(0,0,0,0.5)]">
+                  {/* 신분증 가이드 사각 프레임 오버레이 (화면에 꽉 차게 확대) */}
+                  <div className="absolute inset-0 pointer-events-none flex items-center justify-center p-2 sm:p-3">
+                    <div className="relative w-[95%] sm:w-[94%] aspect-[1.58/1] max-h-[92%] rounded-2xl border-2 border-blue-400/90 bg-blue-500/10 shadow-[0_0_0_9999px_rgba(0,0,0,0.55)]">
                       {/* 사각 모서리 강조 가이드 */}
-                      <div className="absolute -top-1 -left-1 w-5 h-5 border-t-4 border-l-4 border-blue-400 rounded-tl-sm" />
-                      <div className="absolute -top-1 -right-1 w-5 h-5 border-t-4 border-r-4 border-blue-400 rounded-tr-sm" />
-                      <div className="absolute -bottom-1 -left-1 w-5 h-5 border-b-4 border-l-4 border-blue-400 rounded-bl-sm" />
-                      <div className="absolute -bottom-1 -right-1 w-5 h-5 border-b-4 border-r-4 border-blue-400 rounded-br-sm" />
+                      <div className="absolute -top-1 -left-1 w-7 h-7 border-t-4 border-l-4 border-blue-400 rounded-tl-xl shadow-sm" />
+                      <div className="absolute -top-1 -right-1 w-7 h-7 border-t-4 border-r-4 border-blue-400 rounded-tr-xl shadow-sm" />
+                      <div className="absolute -bottom-1 -left-1 w-7 h-7 border-b-4 border-l-4 border-blue-400 rounded-bl-xl shadow-sm" />
+                      <div className="absolute -bottom-1 -right-1 w-7 h-7 border-b-4 border-r-4 border-blue-400 rounded-br-xl shadow-sm" />
 
                       {/* 중앙 안내 문구 */}
-                      <div className="absolute inset-x-0 bottom-2 text-center">
-                        <span className="inline-block px-2.5 py-1 rounded-md bg-black/75 text-[11px] font-medium text-blue-200 backdrop-blur-sm">
+                      <div className="absolute inset-x-0 bottom-3 text-center">
+                        <span className="inline-block px-3 py-1 rounded-full bg-black/80 text-[11px] sm:text-xs font-bold text-blue-200 backdrop-blur-md border border-blue-400/40 shadow-md">
                           {t('신분증을 가이드 박스 안에 맞춰주세요')}
                         </span>
                       </div>
