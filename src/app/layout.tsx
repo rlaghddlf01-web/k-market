@@ -35,7 +35,7 @@ export const metadata: Metadata = {
       '대한민국 No.1 외국인 근로자 전용 0원 수수료 중고거래 & 귀국 무빙세일 플랫폼! 17개국어 실시간 번역 채팅 및 공단 안심 직거래',
     images: [
       {
-        url: '/images/kmarket-logo.jpg',
+        url: '/images/og-kmarket.jpg',
         width: 1200,
         height: 630,
         alt: 'KTRS K-Market 공식 로고',
@@ -47,15 +47,16 @@ export const metadata: Metadata = {
     title: 'KTRS K-Market (케이마켓) | 외국인 중고거래 & 무빙세일',
     description:
       '대한민국 No.1 외국인 근로자 전용 0원 수수료 중고거래 & 귀국 무빙세일 플랫폼! 17개국어 실시간 번역 채팅 및 공단 안심 직거래',
-    images: ['/images/kmarket-logo.jpg'],
+    images: ['/images/og-kmarket.jpg'],
   },
   icons: {
     icon: [
-      { url: '/images/kmarket-logo.jpg', sizes: '32x32', type: 'image/jpeg' },
-      { url: '/images/kmarket-logo.jpg', sizes: '192x192', type: 'image/jpeg' },
+      { url: '/favicon.ico' },
+      { url: '/images/icon-192.png', sizes: '192x192', type: 'image/png' },
+      { url: '/images/icon-512.png', sizes: '512x512', type: 'image/png' },
     ],
-    shortcut: '/images/kmarket-logo.jpg',
-    apple: '/images/kmarket-logo.jpg',
+    shortcut: '/favicon.ico',
+    apple: '/apple-touch-icon.png',
   },
   keywords: [
     'K-Market',
@@ -80,9 +81,10 @@ export default function RootLayout({
     <html lang="ko" translate="no" className="notranslate" suppressHydrationWarning>
       <head>
         <meta name="google" content="notranslate" />
-        <link rel="icon" href="/images/kmarket-logo.jpg" type="image/jpeg" />
-        <link rel="shortcut icon" href="/images/kmarket-logo.jpg" type="image/jpeg" />
-        <link rel="apple-touch-icon" href="/images/kmarket-logo.jpg" />
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="icon" href="/images/icon-192.png" type="image/png" />
+        <link rel="shortcut icon" href="/favicon.ico" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <link rel="manifest" href="/manifest.json" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />

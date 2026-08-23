@@ -14,15 +14,15 @@
   "prefer_related_applications": false,
   "icons": [
     {
-      "src": "/images/kmarket-logo.jpg",
+      "src": "/images/icon-192.png",
       "sizes": "192x192",
-      "type": "image/jpeg",
+      "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "/images/kmarket-logo.jpg",
+      "src": "/images/icon-512.png",
       "sizes": "512x512",
-      "type": "image/jpeg",
+      "type": "image/png",
       "purpose": "any maskable"
     }
   ],
@@ -32,21 +32,21 @@
       "short_name": "무빙세일",
       "description": "귀국 D-7 초특가 묶음할인 매물 보기",
       "url": "/?category=moving_sale",
-      "icons": [{ "src": "/images/kmarket-logo.jpg", "sizes": "96x96" }]
+      "icons": [{ "src": "/images/icon-192.png", "sizes": "192x192" }]
     },
     {
       "name": "1분 간편 매물등록",
       "short_name": "매물등록",
       "description": "내 중고물품 1분 만에 등록하기",
       "url": "/?action=create",
-      "icons": [{ "src": "/images/kmarket-logo.jpg", "sizes": "96x96" }]
+      "icons": [{ "src": "/images/icon-192.png", "sizes": "192x192" }]
     },
     {
       "name": "세금 환급 (최대 1000만)",
       "short_name": "세금환급",
       "description": "30초 무료 환급금 조회",
       "url": "/?modal=tax",
-      "icons": [{ "src": "/images/kmarket-logo.jpg", "sizes": "96x96" }]
+      "icons": [{ "src": "/images/icon-192.png", "sizes": "192x192" }]
     }
   ]
 }

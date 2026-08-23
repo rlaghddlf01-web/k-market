@@ -7,7 +7,7 @@ import { useKMarket } from '@/context/KMarketContext';
 import { getLocalizedAddressDisplay } from '@/lib/koreanLocationRomanizer';
 import { Globe, PlusCircle, Search, Sparkles, ShieldCheck, UserCheck, UserPlus, Bell, MapPin, ChevronDown, Smartphone } from 'lucide-react';
 import KMarketWelcomeLanguageGateway from '../common/KMarketWelcomeLanguageGateway';
-import { triggerPwaInstall } from '@/lib/pwaInstaller';
+import { triggerPwaInstall, isPwaInstalled } from '@/lib/pwaInstaller';
 
 export default function KMarketHeader() {
   const router = useRouter();
@@ -30,9 +30,11 @@ export default function KMarketHeader() {
 
   const [isLangDropdownOpen, setIsLangDropdownOpen] = useState(false);
   const [showWelcomeGateway, setShowWelcomeGateway] = useState(false);
+  const [isAppInstalled, setIsAppInstalled] = useState(false);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
+      setIsAppInstalled(isPwaInstalled());
       const welcomed = localStorage.getItem('kmarket_welcomed');
       if (!welcomed) {
         setShowWelcomeGateway(true);
@@ -158,17 +160,19 @@ export default function KMarketHeader() {
               <span className="text-white font-bold">{t('수수료 0원 100% 무료')}</span>
             </div>
 
-            {/* 📲 1초 앱 설치 버튼 (모바일: [앱설치] / 데스크탑: [1초 만에 앱 설치하기]) */}
-            <button
-              type="button"
-              onClick={() => triggerPwaInstall()}
-              className="flex items-center gap-1 bg-gradient-to-r from-[#f3ba2f] via-[#fcd34d] to-[#f59e0b] hover:scale-105 transition-all text-[#09101f] px-2 sm:px-3 py-1 rounded-full text-[10.5px] sm:text-[11px] font-black border border-white/50 shadow-xs cursor-pointer whitespace-nowrap"
-              title={t('케이마켓 1초 만에 앱 설치하기')}
-            >
-              <Smartphone className="w-3 h-3 stroke-[2.5]" />
-              <span className="hidden sm:inline">{t('1초 만에 앱 설치하기')}</span>
-              <span className="sm:hidden font-black">{t('앱설치')}</span>
-            </button>
+            {/* 📲 1초 앱 설치 버튼 (모바일: [앱설치] / 데스크탑: [1초 만에 앱 설치하기] - 이미 설치한 사람은 자동 숨김) */}
+            {!isAppInstalled && (
+              <button
+                type="button"
+                onClick={() => triggerPwaInstall()}
+                className="flex items-center gap-1 bg-gradient-to-r from-[#f3ba2f] via-[#fcd34d] to-[#f59e0b] hover:scale-105 transition-all text-[#09101f] px-2 sm:px-3 py-1 rounded-full text-[10.5px] sm:text-[11px] font-black border border-white/50 shadow-xs cursor-pointer whitespace-nowrap"
+                title={t('케이마켓 1초 만에 앱 설치하기')}
+              >
+                <Smartphone className="w-3 h-3 stroke-[2.5]" />
+                <span className="hidden sm:inline">{t('1초 만에 앱 설치하기')}</span>
+                <span className="sm:hidden font-black">{t('앱설치')}</span>
+              </button>
+            )}
           </div>
         </div>
       </div>
@@ -187,9 +191,9 @@ export default function KMarketHeader() {
             >
               <div className="relative w-8 h-8 sm:w-10 sm:h-10 rounded-xl overflow-hidden shadow-xs shrink-0 border border-[#ded1c4] bg-[#09101f] flex items-center justify-center">
                 <img
-                  src="/images/kmarket-logo.jpg"
+                  src="/images/icon-192.png"
                   alt={t('케이마켓 로고')}
-                  className="w-full h-full object-cover scale-110"
+                  className="w-full h-full object-cover"
                 />
               </div>
 

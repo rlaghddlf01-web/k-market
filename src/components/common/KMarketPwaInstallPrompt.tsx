@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { Download, X, Smartphone, Share2, PlusSquare } from 'lucide-react';
-import { triggerPwaInstall } from '@/lib/pwaInstaller';
+import { triggerPwaInstall, isPwaInstalled } from '@/lib/pwaInstaller';
 import { useLanguage } from '@/context/LanguageContext';
 
 export default function KMarketPwaInstallPrompt() {
@@ -15,6 +15,12 @@ export default function KMarketPwaInstallPrompt() {
   useEffect(() => {
     setMounted(true);
     if (typeof window !== 'undefined') {
+      // 0. 이미 앱을 깐 사용자는 무조건 숨김
+      if (isPwaInstalled()) {
+        setIsVisible(false);
+        return;
+      }
+
       // 1. 이미 '오늘 하루 안 보기'를 눌렀는지 확인 (24시간 유효)
       const dismissUntil = localStorage.getItem('kmarket_pwa_dismiss_until');
       if (dismissUntil && parseInt(dismissUntil, 10) > Date.now()) {
@@ -26,16 +32,6 @@ export default function KMarketPwaInstallPrompt() {
       const userAgent = window.navigator.userAgent.toLowerCase();
       const isIosDevice = /iphone|ipad|ipod/.test(userAgent);
       setIsIOS(isIosDevice);
-
-      // 3. 이미 스탠드얼론 모드(설치된 앱)로 실행 중이면 숨김
-      const isStandaloneMode =
-        window.matchMedia('(display-mode: standalone)').matches ||
-        (window.navigator as any).standalone ||
-        document.referrer.includes('android-app://');
-
-      if (isStandaloneMode) {
-        setIsVisible(false);
-      }
     }
   }, []);
 
@@ -82,9 +78,13 @@ export default function KMarketPwaInstallPrompt() {
           </button>
 
           <div className="flex items-center gap-2.5 sm:gap-3.5 pr-6">
-            {/* 앱 아이콘 */}
-            <div className="w-9 h-9 sm:w-11 sm:h-11 rounded-xl bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center text-[#09101f] font-black text-base sm:text-xl shrink-0 shadow-md border border-white/20">
-              <Smartphone className="w-5 h-5 sm:w-6 sm:h-6 text-[#09101f]" />
+            {/* 앱 로고 아이콘 */}
+            <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl overflow-hidden shadow-md border border-white/20 shrink-0 bg-[#09101f] flex items-center justify-center">
+              <img
+                src="/images/icon-192.png"
+                alt="K-Market Logo"
+                className="w-full h-full object-cover"
+              />
             </div>
 
             {/* 텍스트 내용 */}
@@ -141,8 +141,12 @@ export default function KMarketPwaInstallPrompt() {
             </button>
 
             <div className="flex items-center gap-3 mb-4">
-              <div className="w-10 h-10 rounded-xl bg-amber-400/20 text-amber-300 flex items-center justify-center">
-                <Smartphone className="w-5 h-5" />
+              <div className="w-11 h-11 rounded-xl overflow-hidden shadow-md border border-[#f3ba2f]/40 shrink-0 bg-[#09101f] flex items-center justify-center">
+                <img
+                  src="/images/icon-192.png"
+                  alt="K-Market Logo"
+                  className="w-full h-full object-cover"
+                />
               </div>
               <div>
                 <h3 className="font-black text-base text-white">{t('아이폰 및 사파리 브라우저 앱 설치 방법')}</h3>

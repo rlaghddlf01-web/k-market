@@ -299,9 +299,9 @@ export default function KMarketMainFeed() {
                 <div className="flex items-center gap-2.5">
                   <div className="relative w-9 h-9 rounded-xl overflow-hidden shadow-md shrink-0 border border-[#845b37]/60 bg-[#09101f] flex items-center justify-center">
                     <img
-                      src="/images/kmarket-logo.jpg"
+                      src="/images/icon-192.png"
                       alt={t('케이마켓 로고')}
-                      className="w-full h-full object-cover scale-110"
+                      className="w-full h-full object-cover"
                     />
                   </div>
                   <span className="text-white font-black text-lg tracking-tight">KTRS K-Market</span>

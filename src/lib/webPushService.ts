@@ -73,8 +73,8 @@ export async function sendLocalPushNotification(
       if (registration && 'showNotification' in registration) {
         await registration.showNotification(title, {
           body,
-          icon: '/images/kmarket-logo.jpg',
-          badge: '/images/kmarket-logo.jpg',
+          icon: '/images/icon-192.png',
+          badge: '/images/icon-192.png',
           vibrate: [200, 100, 200],
           data: { url },
         } as any);
@@ -85,7 +85,7 @@ export async function sendLocalPushNotification(
     // 2순위: 기본 Notification 객체 fallback
     new Notification(title, {
       body,
-      icon: '/images/kmarket-logo.jpg',
+      icon: '/images/icon-192.png',
     });
     return true;
   } catch (error) {

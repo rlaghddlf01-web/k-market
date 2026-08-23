@@ -81,6 +81,36 @@ const INSTALL_ALERTS: Record<
   },
 };
 
+// PWA 설치 여부 판별 함수 (스탠드얼론 앱 모드 또는 이미 설치 완료된 사용자)
+export function isPwaInstalled(): boolean {
+  if (typeof window === 'undefined') return false;
+
+  // 1. 브라우저가 스탠드얼론(앱 모드)으로 실행 중인지 체크
+  const isStandalone =
+    window.matchMedia('(display-mode: standalone)').matches ||
+    (window.navigator as any).standalone === true ||
+    document.referrer.includes('android-app://');
+
+  if (isStandalone) return true;
+
+  // 2. 로컬스토리지에 설치 완료 기록이 있는지 체크
+  const savedInstalled = localStorage.getItem('kmarket_pwa_installed');
+  if (savedInstalled === 'true') return true;
+
+  return false;
+}
+
+// 브라우저 초기화 시 설치 완료 이벤트 리스너 등록
+if (typeof window !== 'undefined') {
+  window.addEventListener('appinstalled', () => {
+    try {
+      localStorage.setItem('kmarket_pwa_installed', 'true');
+    } catch (e) {
+      // ignore
+    }
+  });
+}
+
 export async function triggerPwaInstall(): Promise<boolean> {
   if (typeof window === 'undefined') return false;
 
@@ -92,6 +122,7 @@ export async function triggerPwaInstall(): Promise<boolean> {
       const choiceResult = await deferredPrompt.userChoice;
       if (choiceResult.outcome === 'accepted') {
         (window as any).deferredPwaPrompt = null;
+        localStorage.setItem('kmarket_pwa_installed', 'true');
         return true;
       }
     } catch (err) {
