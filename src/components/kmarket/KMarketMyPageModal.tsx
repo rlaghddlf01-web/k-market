@@ -455,7 +455,10 @@ export default function KMarketMyPageModal({ isOpen, onClose }: KMarketMyPageMod
                       </div>
 
                       <button
-                        onClick={() => alert(`[${item.seller_name}] ${t('님에게 따뜻한 칭찬 후기(+0.5℃)를 보냈습니다!')}`)}
+                        onClick={() => {
+                          const doneMsg = t('회원님에게 따뜻한 칭찬 후기가 전달되었습니다.');
+                          alert(`[${item.seller_name}] ${doneMsg}`);
+                        }}
                         className="px-3 py-1.5 rounded-xl bg-blue-50 text-blue-700 hover:bg-blue-100 text-xs font-bold border border-blue-200 shrink-0 cursor-pointer"
                       >
                         {t('후기 남기기')} ⭐

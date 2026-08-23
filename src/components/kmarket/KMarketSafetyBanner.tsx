@@ -92,7 +92,7 @@ export default function KMarketSafetyBanner() {
                     <span>{t('선입금 및 예약금 요구는 99% 사기입니다')}</span>
                   </h4>
                   <p className="text-rose-900/80 dark:text-rose-300/80 text-xs leading-relaxed">
-                    {t('"물건을 맡아둘 테니 1만원만 먼저 보내라", "택배비 먼저 입금해라" 등은 대표적인 사기 수법입니다. 반드시 직접 만나 물건을 꼼꼼히 확인한 후 대금을 지급하세요.')} <strong>{t('직접 만나서 물건 상태를 확인한 후')}</strong> {t('반드시 직접 만나 물건을 꼼꼼히 확인한 후 대금을 지급하세요.')}
+                    {t('선입금 및 예약금 요구는 대표적인 사기 수법입니다.')} <strong>{t('직접 만나서 물건 상태를 확인한 후')}</strong> {t('대금을 지급하세요.')}
                   </p>
                 </div>
               </div>

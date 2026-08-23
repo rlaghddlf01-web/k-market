@@ -372,7 +372,8 @@ export default function KMarketMainFeed() {
           onClose={() => setIsAuthModalOpen(false)}
           onSuccessAuth={(userData) => {
             setAuthedUser(userData);
-            alert(`${t('[신원인증 완료] 인증이 성공적으로 완료되었습니다.')} (${userData.userName})`);
+            const authDoneMsg = t('[신원인증 완료] 인증이 성공적으로 완료되었습니다.');
+            alert(`${authDoneMsg} (${userData.userName})`);
           }}
         />
         <KMarketMyPageModal

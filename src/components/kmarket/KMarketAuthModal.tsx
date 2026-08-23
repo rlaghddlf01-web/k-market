@@ -164,7 +164,9 @@ export default function KMarketAuthModal({
       if (res.success && res.authCode) {
         setSentAuthCode(res.authCode);
         setStep('sms');
-        alert(`${t('[문자 인증] 인증번호')} [${res.authCode}] ${t('가 발송되었습니다.')}`);
+        const msgPrefix = t('[문자 인증] 인증번호');
+        const msgSuffix = t('가 발송되었습니다.');
+        alert(`${msgPrefix} [${res.authCode}] ${msgSuffix}`);
       }
     } catch (err) {
       console.error(err);

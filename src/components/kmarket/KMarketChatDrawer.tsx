@@ -535,7 +535,7 @@ export default function KMarketChatDrawer() {
       itemTitle={activeChat.item?.title}
       onConfirmReport={(report) => {
         reportUser(report);
-        alert(`[신고 접수 완료] "${activeChat.seller_name}" 회원이 차단 및 신고되었습니다.`);
+        alert(t('[신고 접수 완료] 해당 회원이 차단 및 신고 처리되었습니다.'));
         closeChat();
       }}
     />

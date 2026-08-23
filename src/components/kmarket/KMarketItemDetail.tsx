@@ -279,7 +279,7 @@ export default function KMarketItemDetail() {
                 </span>
                 {selectedItem.original_price && selectedItem.original_price > selectedItem.price && (
                   <span className="text-sm text-slate-400 line-through">
-                    {t('정가')} {selectedItem.original_price.toLocaleString()}{t('원')}
+                    {t('정가')} {selectedItem.original_price.toLocaleString()}{t('원 (대한민국 원화)')}
                   </span>
                 )}
               </div>
@@ -409,7 +409,7 @@ export default function KMarketItemDetail() {
       itemTitle={selectedItem.title}
       onConfirmReport={(report) => {
         reportUser(report);
-        alert(`[신고 접수 완료] "${selectedItem.seller_name}" 회원이 차단 및 신고 처리되었습니다.`);
+        alert(t('[신고 접수 완료] 해당 회원이 차단 및 신고 처리되었습니다.'));
         setSelectedItem(null);
       }}
     />
