@@ -69,46 +69,46 @@ export default function KMarketCommunityMain() {
         </div>
       </div>
 
-      {/* 2. 6대 카테고리 탭 바 (1번: 🤝 동네 친구 사귀기) & 글쓰기 버튼 */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-        <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-1">
+      {/* 2. 6대 카테고리 탭 바 & 글쓰기 버튼 (모바일에서 2~3줄로 잘림 없이 전체 노출) */}
+      <div className="flex flex-col gap-3">
+        <div className="flex flex-wrap items-center gap-2 py-1">
           {/* 전체 탭 */}
           <button
             onClick={() => setSelectedCategory('all')}
-            className={`px-3.5 py-2 rounded-2xl text-xs font-black transition-all shrink-0 cursor-pointer border ${
+            className={`px-3.5 py-2 rounded-2xl text-xs font-black transition-all cursor-pointer border shadow-2xs ${
               selectedCategory === 'all'
-                ? 'bg-slate-900 dark:bg-white text-white dark:text-slate-900 border-slate-900 shadow-sm'
-                : 'bg-white dark:bg-gray-800 text-slate-600 dark:text-slate-300 border-slate-200 dark:border-gray-700 hover:bg-slate-50'
+                ? 'bg-slate-900 text-white border-slate-900 shadow-sm scale-102'
+                : 'bg-white text-slate-700 border-[#ded1c4] hover:bg-[#faf6f0]'
             }`}
           >
             {t('전체 보기')}
           </button>
 
-          {/* 6대 카테고리 버튼들 */}
+          {/* 6대 카테고리 버튼들 (2~3줄로 깔끔하게 정렬) */}
           {COMMUNITY_CATEGORIES.map((cat) => (
             <button
               key={cat.id}
               onClick={() => setSelectedCategory(cat.id)}
-              className={`px-3.5 py-2 rounded-2xl text-xs font-black transition-all flex items-center gap-1.5 shrink-0 cursor-pointer border ${
+              className={`px-3.5 py-2 rounded-2xl text-xs font-black transition-all flex items-center gap-1.5 cursor-pointer border shadow-2xs ${
                 selectedCategory === cat.id
-                  ? 'bg-slate-900 dark:bg-white text-white dark:text-slate-900 border-slate-900 shadow-sm scale-102'
-                  : 'bg-white dark:bg-gray-800 text-slate-600 dark:text-slate-300 border-slate-200 dark:border-gray-700 hover:bg-slate-50'
+                  ? 'bg-slate-900 text-white border-slate-900 shadow-sm scale-102'
+                  : 'bg-white text-slate-700 border-[#ded1c4] hover:bg-[#faf6f0]'
               }`}
             >
               <span>{cat.icon}</span>
               <span>{t(cat.labelKo)}</span>
             </button>
           ))}
-        </div>
 
-        {/* 글쓰기 CTA 버튼 */}
-        <button
-          onClick={() => setIsCreateModalOpen(true)}
-          className="btn-primary flex items-center justify-center gap-1.5 text-xs px-4 py-2.5 shrink-0 cursor-pointer shadow-md self-end sm:self-auto"
-        >
-          <PlusCircle className="w-4 h-4" />
-          <span>{t('동네생활 이야기 글쓰기')}</span>
-        </button>
+          {/* 글쓰기 CTA 버튼 (모바일에서도 줄바꿈되어 깔끔하게 노출) */}
+          <button
+            onClick={() => setIsCreateModalOpen(true)}
+            className="flex items-center justify-center gap-1.5 text-xs font-extrabold px-4 py-2 rounded-2xl bg-[#09101f] hover:bg-[#1a2333] text-[#f3ba2f] border border-[#f3ba2f]/40 shadow-sm transition-all active:scale-95 cursor-pointer ml-auto sm:ml-0"
+          >
+            <PlusCircle className="w-4 h-4 text-[#f3ba2f]" />
+            <span>{t('동네생활 이야기 글쓰기')}</span>
+          </button>
+        </div>
       </div>
 
       {/* 3. 게시글 목록 피드 */}
