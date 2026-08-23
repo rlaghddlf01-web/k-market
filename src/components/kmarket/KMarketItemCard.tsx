@@ -120,7 +120,7 @@ export default function KMarketItemCard({ item }: KMarketItemCardProps) {
                   isFree ? 'text-emerald-600' : 'text-gray-950'
                 }`}
               >
-                {formatWon(item.price)}
+                {isFree ? t('🎁 0원 (무료)') : `${item.price.toLocaleString()}원`}
               </span>
               {item.original_price && item.original_price > item.price && (
                 <span className="text-[11px] text-gray-400 line-through">

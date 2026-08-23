@@ -47,14 +47,10 @@ export default function KMarketMovingSaleSection() {
 
   return (
     <section 
-      className="my-6 p-4 sm:p-7 rounded-3xl border transition-all"
-      style={{
-        background: '#f7f2ed',
-        borderColor: '#ded1c4',
-      }}
+      className="my-4 sm:my-6 p-1 sm:p-7 rounded-none sm:rounded-3xl border-0 sm:border transition-all bg-transparent sm:bg-[#f7f2ed] sm:border-[#ded1c4]"
     >
       {/* 섹션 헤더 */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4 px-1 sm:px-0">
         <div className="flex items-center space-x-3">
           <div className="w-10 h-10 rounded-2xl bg-[#1f1914] flex items-center justify-center text-[#fbf9f6] shadow-sm">
             <Plane className="w-5 h-5 text-amber-300" />
@@ -80,58 +76,58 @@ export default function KMarketMovingSaleSection() {
         </div>
       </div>
 
-      {/* 3단계 D-Day 필터 탭 바 (D-3, D-7, D-14) */}
-      <div className="flex items-center space-x-2 overflow-x-auto no-scrollbar pb-3 pt-1">
+      {/* 3단계 D-Day 필터 탭 바 (모바일: 가로 2열 2줄 정갈한 바둑판 그리드, 내부 2~3줄 줄바꿈) */}
+      <div className="grid grid-cols-2 sm:flex sm:flex-wrap items-stretch gap-2 pb-3 pt-1 px-1 sm:px-0">
         <button
           onClick={() => setDDayFilter('all')}
-          className={`px-3.5 py-1.5 rounded-full text-xs font-semibold shrink-0 transition-all cursor-pointer border ${
+          className={`p-2 sm:px-3.5 sm:py-1.5 rounded-xl sm:rounded-full text-[11.5px] sm:text-xs font-bold transition-all cursor-pointer border shadow-2xs flex items-center justify-center text-center break-keep leading-tight min-h-[46px] sm:min-h-0 ${
             dDayFilter === 'all'
               ? 'bg-[#1f1914] text-[#fbf9f6] border-[#1f1914] shadow-xs'
               : 'bg-white text-[#5c4a39] border-[#ded1c4] hover:bg-[#eae3dc]'
           }`}
         >
-          {t('등록된 전체 매물 보기')} ({movingSaleItems.length})
+          <span>{t('등록된 전체 매물 보기')} ({movingSaleItems.length})</span>
         </button>
 
         <button
           onClick={() => setDDayFilter('d3')}
-          className={`flex items-center space-x-1 px-3.5 py-1.5 rounded-full text-xs font-bold shrink-0 transition-all cursor-pointer border ${
+          className={`p-2 sm:px-3.5 sm:py-1.5 rounded-xl sm:rounded-full text-[11.5px] sm:text-xs font-bold transition-all cursor-pointer border shadow-2xs flex items-center justify-center text-center break-keep leading-tight gap-1 min-h-[46px] sm:min-h-0 ${
             dDayFilter === 'd3'
               ? 'bg-[#845b37] text-white border-[#845b37] shadow-xs'
               : 'bg-white text-[#845b37] border-[#ded1c4] hover:bg-[#eae3dc]'
           }`}
         >
-          <AlertCircle className="w-3.5 h-3.5" />
-          <span>{t('🚨 3일 남음 오늘마감 헐값/나눔')}</span>
+          <span className="shrink-0">🚨</span>
+          <span>{t('3일 남음 오늘마감 헐값/나눔')}</span>
         </button>
 
         <button
           onClick={() => setDDayFilter('d7')}
-          className={`flex items-center space-x-1 px-3.5 py-1.5 rounded-full text-xs font-bold shrink-0 transition-all cursor-pointer border ${
+          className={`p-2 sm:px-3.5 sm:py-1.5 rounded-xl sm:rounded-full text-[11.5px] sm:text-xs font-bold transition-all cursor-pointer border shadow-2xs flex items-center justify-center text-center break-keep leading-tight gap-1 min-h-[46px] sm:min-h-0 ${
             dDayFilter === 'd7'
               ? 'bg-[#845b37] text-white border-[#845b37] shadow-xs'
               : 'bg-white text-[#845b37] border-[#ded1c4] hover:bg-[#eae3dc]'
           }`}
         >
-          <Flame className="w-3.5 h-3.5" />
-          <span>{t('🔥 7일 남음 귀국임박 초특가')}</span>
+          <span className="shrink-0">🔥</span>
+          <span>{t('7일 남음 귀국임박 초특가')}</span>
         </button>
 
         <button
           onClick={() => setDDayFilter('d14')}
-          className={`flex items-center space-x-1 px-3.5 py-1.5 rounded-full text-xs font-medium shrink-0 transition-all cursor-pointer border ${
+          className={`p-2 sm:px-3.5 sm:py-1.5 rounded-xl sm:rounded-full text-[11.5px] sm:text-xs font-medium transition-all cursor-pointer border shadow-2xs flex items-center justify-center text-center break-keep leading-tight gap-1 min-h-[46px] sm:min-h-0 ${
             dDayFilter === 'd14'
               ? 'bg-[#845b37] text-white border-[#845b37] shadow-xs'
               : 'bg-white text-[#5c4a39] border-[#ded1c4] hover:bg-[#eae3dc]'
           }`}
         >
-          <Plane className="w-3.5 h-3.5" />
-          <span>{t('✈️ 14일 남음 묶음할인 (사전예약)')}</span>
+          <span className="shrink-0">✈️</span>
+          <span>{t('14일 남음 묶음할인 (사전예약)')}</span>
         </button>
       </div>
 
-      {/* 무빙세일 매물 리스트 (모바일: 당근마켓 가로 1줄 10개 페이징 / 데스크탑: 3열 카드 20개 페이징) */}
-      <div className="flex flex-col bg-white md:bg-transparent rounded-3xl md:rounded-none border md:border-0 border-[#ded1c4]/60 p-2 sm:p-3 md:p-0 md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-4 shadow-2xs md:shadow-none">
+      {/* 무빙세일 매물 리스트 (모바일: 양옆 끝까지 꽉 차는 흰색 당근마켓 1줄 뷰) */}
+      <div className="flex flex-col bg-white w-full md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-4 md:bg-transparent">
         {filteredItems
           .slice((movingPage - 1) * MOVING_ITEMS_PER_PAGE, movingPage * MOVING_ITEMS_PER_PAGE)
           .map((item) => (
