@@ -16,6 +16,7 @@ import {
   UserLocationSettings,
 } from '@/types/kmarket';
 import { INITIAL_ITEMS, INITIAL_CHATS } from '@/lib/mockData';
+import { shuffleItems } from '@/lib/itemShuffleUtils';
 import { useLanguage } from './LanguageContext';
 import { sendLocalPushNotification, sendLocalizedPushNotification } from '@/lib/webPushService';
 import { generateSmartSellerReply } from '@/lib/autoSellerReply';
@@ -376,14 +377,14 @@ export function KMarketProvider({ children }: { children: React.ReactNode }) {
         localStorage.removeItem('kmarket_local_items');
       }
 
-      setItems(INITIAL_ITEMS);
+      setItems(shuffleItems(INITIAL_ITEMS));
       
-      // Supabase 클라우드 실시간 270개 Gemini 정밀 번역 매물 최신 로드
+      // Supabase 클라우드 실시간 270개 Gemini 정밀 번역 매물 최신 로드 (랜덤 셔플 적용)
       fetch('/api/kmarket/items')
         .then((res) => res.json())
         .then((data) => {
           if (data.items && data.items.length > 0) {
-            setItems(data.items);
+            setItems(shuffleItems(data.items));
           }
         })
         .catch((err) => console.warn('Items API fetch warning:', err));
