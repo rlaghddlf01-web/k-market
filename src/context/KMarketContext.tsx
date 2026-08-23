@@ -750,7 +750,7 @@ export function KMarketProvider({ children }: { children: React.ReactNode }) {
       }
 
       // 3. 270개 전시용 시드 매물(item-real-*)에 대해서만 20개 사유 예약 안내 답장 (실제 고객 등록 매물은 AI 개입 전혀 없이 100% 순수 P2P 대화)
-      setTimeout(async () => {
+      const delayedReply = async () => {
         const targetItem = activeChat.item || items.find((it) => it.id === activeChat.item_id) || items[0];
         const isSeed270Item = Boolean(targetItem && (targetItem.id.startsWith('item-real-') || targetItem.id.startsWith('item-demo-')));
         
@@ -808,7 +808,8 @@ export function KMarketProvider({ children }: { children: React.ReactNode }) {
           },
           url: `/?chat=${activeChat.id}`,
         });
-      }, 1200);
+      };
+      setTimeout(delayedReply, 1200);
     } catch (error) {
       console.error('Error sending message:', error);
     } finally {
