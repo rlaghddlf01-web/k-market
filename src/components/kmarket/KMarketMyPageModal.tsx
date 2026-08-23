@@ -322,7 +322,7 @@ export default function KMarketMyPageModal({ isOpen, onClose }: KMarketMyPageMod
                         : 'bg-[#f4ece4] text-[#7d6b5c] hover:bg-[#eae0d5] border border-[#e8ded3]'
                     }`}
                   >
-                    {filter === 'all' && `${t('안내 내용을 확인해 주세요')} (${mySellingItems.length})`}
+                    {filter === 'all' && `${t('전체')} (${mySellingItems.length})`}
                     {filter === 'selling' && t('판매중 / 예약중')}
                     {filter === 'sold' && t('거래완료')}
                   </button>
@@ -354,12 +354,12 @@ export default function KMarketMyPageModal({ isOpen, onClose }: KMarketMyPageMod
                           <div className="flex items-center space-x-1.5">
                             {item.status === 'selling' && (
                               <span className="bg-emerald-100 text-emerald-800 text-[10px] font-black px-2 py-0.5 rounded-full">
-                                {t('안내 내용을 확인해 주세요')}
+                                {t('판매중')}
                               </span>
                             )}
                             {item.status === 'reserved' && (
                               <span className="bg-amber-100 text-amber-800 text-[10px] font-black px-2 py-0.5 rounded-full">
-                                {t('안내 내용을 확인해 주세요')}
+                                {t('예약중')}
                               </span>
                             )}
                             {item.status === 'sold' && (
