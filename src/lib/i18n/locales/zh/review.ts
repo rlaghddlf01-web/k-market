@@ -1,5 +1,4 @@
 export const review = {
-  "${t('케이마켓 신뢰 매너온도 점수')}: ${mannerTemp.toFixed(1)}℃ (${levelTitle})": "${t('K-Market 信任 Manners 评分')}: ${mannerTemp.toFixed(1)}℃ (${levelTitle})",
   "+7.0℃ 즉시 가산": "立即增加 +7.0℃",
   "[${item.seller_name}] ${t('님에게 따뜻한 칭찬 후기(+0.5℃)를 보냈습니다!')}": "已向 [${item.seller_name}] ${t('发送了温暖的表扬评价(+0.5℃)！')}",
   "가입 즉시 +7.0℃ 상승으로 최우수 안심 회원 뱃지 부여": "注册即升 +7.0℃，授予优秀安心会员徽章",
@@ -32,3 +31,4 @@ export const review = {
   "💡 케이마켓 매너온도 시스템 안내": "💡 K-Market 礼貌温度系统指南",
   "💬 기타 자유 건의 및 칭찬": "💬 其他自由建议与表扬",
 };
+export default review;

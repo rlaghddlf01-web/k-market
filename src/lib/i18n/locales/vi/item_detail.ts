@@ -27,8 +27,9 @@ export const item_detail = {
   "판매자 프로필 보기": "Xem hồ sơ người bán",
   "판매중 / 예약중": "Đang bán / Đang đặt trước",
   "판매중 복원": "Khôi phục trạng thái đang bán",
-  "🔗 매물 공유 링크가 복사되었습니다!\\n\\n카카오톡, 페이스북, 인스타그램, 텔레그램 등에 붙여넣어 공유하세요.\\n\\n${shareUrl}": "🔗 Đã sao chép liên kết chia sẻ bất động sản!\\n\\nHãy dán vào KakaoTalk, Facebook, Instagram, Telegram, v.v. để chia sẻ.\\n\\n${shareUrl}",
+  "🔗 매물 공유 링크가 복사되었습니다!nn카카오톡, 페이스북, 인스타그램, 텔레그램 등에 붙여넣어 공유하세요.nn${shareUrl}": "🔗 Đã sao chép liên kết chia sẻ bất động sản!nnHãy dán vào KakaoTalk, Facebook, Instagram, Telegram, v.v. để chia sẻ.nn${shareUrl}",
   "🔥 ${t('가격 인하')}": "🔥 ${t('Giảm giá')}",
   "🔥 찜한 매물 가격 인하": "🔥 Giảm giá bất động sản đã thích",
   "🛍️ 판매 상품": "🛍️ Sản phẩm đang bán",
 };
+export default item_detail;

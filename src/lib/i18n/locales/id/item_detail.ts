@@ -27,8 +27,9 @@ export const item_detail = {
   "판매자 프로필 보기": "Lihat profil penjual",
   "판매중 / 예약중": "Dijual / Dipesan",
   "판매중 복원": "Pulihkan ke status dijual",
-  "🔗 매물 공유 링크가 복사되었습니다!\\n\\n카카오톡, 페이스북, 인스타그램, 텔레그램 등에 붙여넣어 공유하세요.\\n\\n${shareUrl}": "🔗 Tautan berbagi iklan telah disalin!\\n\\nTempel dan bagikan di WhatsApp, Facebook, Instagram, Telegram, dll.\\n\\n${shareUrl}",
+  "🔗 매물 공유 링크가 복사되었습니다!nn카카오톡, 페이스북, 인스타그램, 텔레그램 등에 붙여넣어 공유하세요.nn${shareUrl}": "🔗 Tautan berbagi iklan telah disalin!nnTempel dan bagikan di WhatsApp, Facebook, Instagram, Telegram, dll.nn${shareUrl}",
   "🔥 ${t('가격 인하')}": "🔥 ${t('Penurunan Harga')}",
   "🔥 찜한 매물 가격 인하": "🔥 Penurunan harga pada item favorit",
   "🛍️ 판매 상품": "🛍️ Produk yang dijual",
 };
+export default item_detail;

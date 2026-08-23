@@ -6,3 +6,4 @@ export const safety = {
   "편의점 앞, 밝은 지하철 출구 등 안전한 랜드마크 지도 핀을 만남 장소로 잡으세요.": "Pilihlah tempat pertemuan di pin peta landmark yang aman, seperti di depan minimarket atau pintu keluar stasiun kereta bawah tanah yang terang.",
   "🛡️ K-Market 안전 수칙": "🛡️ Aturan Keselamatan K-Market",
 };
+export default safety;

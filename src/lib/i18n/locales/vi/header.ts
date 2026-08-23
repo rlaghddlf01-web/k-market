@@ -35,3 +35,4 @@ export const header = {
   "🔔 키워드 실시간 알림 등록": "🔔 Đăng ký thông báo từ khóa thời gian thực",
   "🔔 키워드 알림: [세탁기]": "🔔 Thông báo từ khóa: [Máy giặt]",
 };
+export default header;

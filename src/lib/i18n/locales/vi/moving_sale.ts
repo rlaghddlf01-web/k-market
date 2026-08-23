@@ -57,3 +57,4 @@ export const moving_sale = {
   "🚨 [D-3 오늘마감 헐값] 쿠...": "🚨 [D-3 Kết thúc hôm nay Giá rẻ] Ku...",
   "🚨 귀국 D-${selectedItem.moving_d_day || 3} 오늘마감 헐값": "🚨 Về nước D-${selectedItem.moving_d_day || 3} Kết thúc hôm nay Giá rẻ",
 };
+export default moving_sale;

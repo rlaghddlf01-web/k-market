@@ -1,5 +1,4 @@
 export const post_create = {
-  "${raw.term} 팝니다": "${raw.term} sotaman",
   "0.3초 실시간 95% 스마트 초경량 압축": "0.3 soniyada real vaqt rejimida 95% aqlli ultra engil siqish",
   "1분 간편 매물 등록": "1 daqiqada oson e'lon joylashtirish",
   "1분 간편 상품 등록": "1 daqiqada oson tovar ro'yxatdan o'tkazish",
@@ -27,3 +26,4 @@ export const post_create = {
   "판매 가격 (0원을 입력하시면 무료나눔으로 자동 등록됩니다)": "Sotish narxi (0 so'm kiritsangiz, bepul ulashish sifatida avtomatik ro'yxatdan o'tadi)",
   "🏷️ 상품 카테고리를 선택해 주세요": "🏷️ Tovar kategoriyasini tanlang",
 };
+export default post_create;

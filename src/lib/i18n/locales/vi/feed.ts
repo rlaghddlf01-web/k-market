@@ -42,3 +42,4 @@ export const feed = {
   "📦 허위 매물 / 가짜 사진 / 게시글과 다른 물건": "📦 Bài đăng giả mạo / Ảnh giả / Hàng hóa khác với bài đăng",
   "🚀 피드 최상단 끌어올리기": "🚀 Đẩy lên đầu bảng tin",
 };
+export default feed;

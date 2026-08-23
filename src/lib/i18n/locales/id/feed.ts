@@ -42,3 +42,4 @@ export const feed = {
   "📦 허위 매물 / 가짜 사진 / 게시글과 다른 물건": "📦 Listing Palsu / Foto Palsu / Barang Berbeda dari Postingan",
   "🚀 피드 최상단 끌어올리기": "🚀 Dorong ke Paling Atas Beranda",
 };
+export default feed;

@@ -5,3 +5,4 @@ export const footer = {
   "케이티알에스 관리자 전용 관제 콘솔 페이지": "Trang bảng điều khiển giám sát dành riêng cho quản trị viên KTRS",
   "통신판매업 번호:": "Số giấy phép kinh doanh thương mại điện tử:",
 };
+export default footer;

@@ -33,3 +33,4 @@ export const community = {
   "힘내세요 / 따뜻하게 응원해요": "加油 / 给你温暖的应援",
   "💡 앱 개선 제안 및 건의하기": "💡 App改进意见及建议",
 };
+export default community;

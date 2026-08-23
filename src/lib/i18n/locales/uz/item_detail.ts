@@ -27,8 +27,9 @@ export const item_detail = {
   "판매자 프로필 보기": "Sotuvchi profilini ko‘rish",
   "판매중 / 예약중": "Sotilmoqda / Band qilingan",
   "판매중 복원": "Sotuvga qaytarish",
-  "🔗 매물 공유 링크가 복사되었습니다!\\n\\n카카오톡, 페이스북, 인스타그램, 텔레그램 등에 붙여넣어 공유하세요.\\n\\n${shareUrl}": "🔗 E'lonni ulashish havolasi nusxalandi!\\n\\nKakaoTalk, Facebook, Instagram, Telegram va boshqalarga joylashtirib ulashing.\\n\\n${shareUrl}",
+  "🔗 매물 공유 링크가 복사되었습니다!nn카카오톡, 페이스북, 인스타그램, 텔레그램 등에 붙여넣어 공유하세요.nn${shareUrl}": "🔗 E'lonni ulashish havolasi nusxalandi!nnKakaoTalk, Facebook, Instagram, Telegram va boshqalarga joylashtirib ulashing.nn${shareUrl}",
   "🔥 ${t('가격 인하')}": "🔥 ${t('Narxning pasayishi')}",
   "🔥 찜한 매물 가격 인하": "🔥 Saqlangan e'lon narxi pasaydi",
   "🛍️ 판매 상품": "🛍️ Sotuvdagi mahsulotlar",
 };
+export default item_detail;

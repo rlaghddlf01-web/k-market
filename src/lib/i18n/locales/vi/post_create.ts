@@ -1,5 +1,4 @@
 export const post_create = {
-  "${raw.term} 팝니다": "Bán ${raw.term}",
   "0.3초 실시간 95% 스마트 초경량 압축": "Nén thông minh siêu nhẹ 95% thời gian thực 0,3 giây",
   "1분 간편 매물 등록": "Đăng tin rao vặt dễ dàng trong 1 phút",
   "1분 간편 상품 등록": "Đăng sản phẩm dễ dàng trong 1 phút",
@@ -27,3 +26,4 @@ export const post_create = {
   "판매 가격 (0원을 입력하시면 무료나눔으로 자동 등록됩니다)": "Giá bán (Nếu bạn nhập 0 đồng, bài đăng sẽ tự động được đăng ký là tặng miễn phí)",
   "🏷️ 상품 카테고리를 선택해 주세요": "🏷️ Vui lòng chọn danh mục sản phẩm",
 };
+export default post_create;

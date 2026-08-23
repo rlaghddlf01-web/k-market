@@ -35,3 +35,4 @@ export const header = {
   "🔔 키워드 실시간 알림 등록": "🔔 关键词实时提醒登记",
   "🔔 키워드 알림: [세탁기]": "🔔 关键词提醒：[洗衣机]",
 };
+export default header;

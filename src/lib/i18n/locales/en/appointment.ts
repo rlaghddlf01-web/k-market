@@ -1,5 +1,4 @@
 export const appointment = {
-  "${ipCity} (내 위치)": "${ipCity} (My Location)",
   "1. 기본 도로명 / 동네 행정구역 주소": "1. Basic street name / local administrative district address",
   "10킬로미터 이내": "Within 10 kilometers",
   "1:1 만남 약속잡기": "Schedule a 1:1 meeting",
@@ -68,7 +67,7 @@ export const appointment = {
   "약속을 잊지 않도록 상대방과 나에게 각자의 언어로 1시간 전에 알려드립니다.": "We will notify you and the other person in your respective languages 1 hour in advance so you don't forget the appointment.",
   "영어 (미국/글로벌/인도/필리핀)": "English (US/Global/India/Philippines)",
   "예: 편의점 앞, 3공단 기숙사 후문": "e.g., In front of the convenience store, Complex 3 dormitory back gate",
-  "오늘 19:00 \\\"근처 편의점 앞\\\" 직거래 약속 1시간 전입니다.": "This is a reminder for your in-person trade appointment today at 19:00 \\\"in front of the nearby convenience store\\\" in 1 hour.",
+  "오늘 19:00 \"근처 편의점 앞\" 직거래 약속 1시간 전입니다.": "This is a reminder for your in-person trade appointment today at 19:00 \"in front of the nearby convenience store\" in 1 hour.",
   "오늘 밤 20:30": "Tonight at 20:30",
   "오늘 저녁 19:00": "Today at 19:00",
   "오늘 저녁 기숙사 앞이나 공단 정문에서 직거래 가능할까요?": "Would it be possible to meet for an in-person trade this evening in front of the dorm or the main gate of the industrial complex?",
@@ -113,7 +112,6 @@ export const appointment = {
   "📍 1:1 안심 직거래 약속 잡기": "📍 Schedule a 1:1 safe in-person trade appointment",
   "📍 [직거래 약속 확정] ${appointment.meet_time}": "📍 [In-person Trade Confirmed] ${appointment.meet_time}",
   "📍 [직거래 약속 확정] ${time}": "📍 [In-person Trade Confirmed] ${time}",
-  "📍 [직거래 약속] ${appointment.meet_time}에 \\\"${appointment.place_name}\\\"에서 봬요! (지도 핀 위치 공유됨)": "📍 [In-person Trade Appointment] See you at \\\"${appointment.place_name}\\\" at ${appointment.meet_time}! (Map pin location shared)",
   "📍 공단 직거래": "📍 Industrial Complex Direct Trade",
   "📍 내 동네 / 직거래 장소 추가": "📍 Add My Neighborhood / Trade Location",
   "📍 내 위치 정보에 동의하고 주소 1초 자동 입력하기": "📍 Agree to Location Info & Auto-fill Address in 1s",
@@ -123,3 +121,4 @@ export const appointment = {
   "📍 현재 내 위치정보 위치로 1초 자동 설정": "📍 Auto-set to Current Location in 1s",
   "🖱️ 지도 클릭 / 핀 드래그로 이동": "🖱️ Click map / Drag pin to move",
 };
+export default appointment;

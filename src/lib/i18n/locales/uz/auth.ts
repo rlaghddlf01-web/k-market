@@ -1,6 +1,4 @@
 export const auth = {
-  "${t('[문자 인증] 인증번호')} [${res.authCode}] ${t('가 발송되었습니다.')}": "[SMS orqali tasdiqlash] Tasdiqlash kodi [${res.authCode}] yuborildi.",
-  "${t('[신원인증 완료] 인증이 성공적으로 완료되었습니다.')} (${userData.userName})": "[Shaxslikni tasdiqlash yakunlandi] Tasdiqlash muvaffaqiyatli yakunlandi. (${userData.userName})",
   "1. 비자 및 급여 선택": "1. Viza va maoshni tanlash",
   "1. 체류 비자 유형": "1. Bo'lish vizasi turi",
   "17개국어 외국인 신원인증 & 가입": "17 ta tilda chet elliklar shaxsini tasdiqlash va ro'yxatdan o'tish",
@@ -9,7 +7,7 @@ export const auth = {
   "[KTRS K-Market] 인증번호는 [${code}] 입니다. (5분 이내 입력)": "[KTRS K-Market] Tasdiqlash kodi: [${code}]. (5 daqiqa ichida kiriting)",
   "[문자 인증] 인증번호": "[SMS orqali tasdiqlash] Tasdiqlash kodi",
   "[신원인증 완료] 인증이 성공적으로 완료되었습니다.": "[Shaxslikni tasdiqlash yakunlandi] Tasdiqlash muvaffaqiyatli yakunlandi.",
-  "가 발송되었습니다.": " yuborildi.",
+  "가 발송되었습니다.": "yuborildi.",
   "고객님의 휴대폰으로 발송된 6자리 인증번호를 정확하게 입력해 주세요.": "Telefon raqamingizga yuborilgan 6 xonali tasdiqlash kodini to'g'ri kiriting.",
   "기타 비자 (F-2, F-5, F-6 등)": "Boshqa vizalar (F-2, F-5, F-6 va hokazo)",
   "댓글을 작성하려면 1분 간편 본인인증(회원가입)이 필요합니다 →": "Izoh qoldirish uchun 1 daqiqalik oson shaxsni tasdiqlash (ro'yxatdan o'tish) talab qilinadi →",
@@ -44,3 +42,4 @@ export const auth = {
   "휴대폰으로 전송된 문자 인증번호 6자리 입력": "Telefoningizga yuborilgan 6 xonali tasdiqlash kodini kiriting",
   "🇰🇷 대한민국 국적 회원이신가요?": "🇰🇷 Janubiy Koreya fuqaromisiz?",
 };
+export default auth;

@@ -31,3 +31,4 @@ export const report_block = {
   "🤬 비매너 / 욕설 / 성희롱 / 혐오 발언": "🤬 Tidak Sopan / Kata-kata Kasar / Pelecehan Seksual / Ujaran Kebencian",
   "🤬 욕설 / 혐오 발언 / 비매너 / 성희롱": "🤬 Kata-kata Kasar / Ujaran Kebencian / Tidak Sopan / Pelecehan Seksual",
 };
+export default report_block;

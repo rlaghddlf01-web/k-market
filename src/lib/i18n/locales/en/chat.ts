@@ -12,7 +12,7 @@ export const chat = {
   "1:1 안심 번역 채팅": "1:1 Secure Translation Chat",
   "1:1 안심 번역 채팅하기": "Start 1:1 Secure Translation Chat",
   "2. 앱 안에서만 대화:": "2. Chat only within the app:",
-  "Nguyễn 님이 새로운 번역 메시지를 보냈습니다: \\\"감사합니다! 오늘 저녁 7시에 만나요!\\\"": "Nguyễn sent a new translated message: \\\"Thank you! See you at 7 PM today!\\\"",
+  "Nguyễn 님이 새로운 번역 메시지를 보냈습니다: \"감사합니다! 오늘 저녁 7시에 만나요!\"": "Nguyễn sent a new translated message: \"Thank you! See you at 7 PM today!\"",
   "[${r}] ${t} - ${p} (1:1 번역 채팅으로 1초 만에 득템하세요)": "[${r}] ${t} - ${p} (Grab a great deal in 1 second via 1:1 translation chat)",
   "⚠️ [외부 메신저 유도 주의] K-Market 채팅방을 벗어나지 마세요!": "⚠️ [Warning: External Messenger Scam] Do not leave the K-Market chatroom!",
   "내 모국어로 편하게 입력하세요 (상대방 언어로 즉시 자동번역)": "Type comfortably in your native language (instantly auto-translated to the other person's language)",
@@ -33,7 +33,7 @@ export const chat = {
   "오픈채팅": "Open Chat",
   "외부 메신저로 대화할 경우 사기 피해 발생 시 증거 확보 및 구제가 어렵습니다. 반드시 케이마켓의 안심 자동 번역 채팅방 안에서만 안전하게 거래를 진행하세요.": "Communicating through external messengers makes it difficult to secure evidence and recover damages in the event of fraud. Please ensure you conduct transactions safely only within K-Market's secure auto-translated chat rooms.",
   "원문 보기": "View original",
-  "이웃 회원이 새로운 번역 메시지를 보냈습니다: \\\"감사합니다! 오늘 저녁 7시에 만나요!\\\"": "A neighbor sent a new translated message: \\\"Thank you! Let's meet at 7 PM today!\\\"",
+  "이웃 회원이 새로운 번역 메시지를 보냈습니다: \"감사합니다! 오늘 저녁 7시에 만나요!\"": "A neighbor sent a new translated message: \"Thank you! Let's meet at 7 PM today!\"",
   "전송 중...": "Sending...",
   "채팅 도착 및 관심 매물 등록 시 즉시 알려드려요!": "Get notified instantly when a chat arrives or a favorite item is registered!",
   "채팅 응답이 매우 빨라요": "Very fast chat response",
@@ -55,3 +55,4 @@ export const chat = {
   "📍 공단 직거래": "📍 Industrial Complex Direct Deal",
   "🤝 거래 수락": "🤝 Accept Deal",
 };
+export default chat;

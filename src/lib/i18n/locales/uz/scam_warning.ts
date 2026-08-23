@@ -7,3 +7,4 @@ export const scam_warning = {
   "🚨 [선입금 사기 강력 주의] 절대 돈을 먼저 보내지 마세요!": "🚨 [Oldindan to'lov firibgarligidan qattiq ogohlantirish] Pulni aslo oldindan yubormang!",
   "🚨 [선입금 사기 강력 주의] 절대 돈을 먼저 송금하지 마세요!": "🚨 [Oldindan to'lov firibgarligidan qattiq ogohlantirish] Pulni aslo oldindan o'tkazmang!",
 };
+export default scam_warning;

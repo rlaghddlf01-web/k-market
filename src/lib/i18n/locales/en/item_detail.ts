@@ -27,8 +27,9 @@ export const item_detail = {
   "판매자 프로필 보기": "View seller profile",
   "판매중 / 예약중": "For Sale / Reserved",
   "판매중 복원": "Restore to For Sale",
-  "🔗 매물 공유 링크가 복사되었습니다!\\n\\n카카오톡, 페이스북, 인스타그램, 텔레그램 등에 붙여넣어 공유하세요.\\n\\n${shareUrl}": "🔗 Listing share link copied!\\n\\nPaste and share on KakaoTalk, Facebook, Instagram, Telegram, etc.\\n\\n${shareUrl}",
+  "🔗 매물 공유 링크가 복사되었습니다!nn카카오톡, 페이스북, 인스타그램, 텔레그램 등에 붙여넣어 공유하세요.nn${shareUrl}": "🔗 Listing share link copied!nnPaste and share on KakaoTalk, Facebook, Instagram, Telegram, etc.nn${shareUrl}",
   "🔥 ${t('가격 인하')}": "🔥 ${t('Price Drop')}",
   "🔥 찜한 매물 가격 인하": "🔥 Price drop on favorited items",
   "🛍️ 판매 상품": "🛍️ Items for Sale",
 };
+export default item_detail;

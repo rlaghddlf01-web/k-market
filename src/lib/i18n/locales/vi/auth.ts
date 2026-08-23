@@ -1,6 +1,4 @@
 export const auth = {
-  "${t('[문자 인증] 인증번호')} [${res.authCode}] ${t('가 발송되었습니다.')}": "[Xác thực tin nhắn] Mã xác thực [${res.authCode}] đã được gửi.",
-  "${t('[신원인증 완료] 인증이 성공적으로 완료되었습니다.')} (${userData.userName})": "[Hoàn tất xác thực danh tính] Xác thực đã hoàn tất thành công. (${userData.userName})",
   "1. 비자 및 급여 선택": "1. Chọn visa và tiền lương",
   "1. 체류 비자 유형": "1. Loại visa lưu trú",
   "17개국어 외국인 신원인증 & 가입": "Xác thực danh tính người nước ngoài & Đăng ký bằng 17 ngôn ngữ",
@@ -44,3 +42,4 @@ export const auth = {
   "휴대폰으로 전송된 문자 인증번호 6자리 입력": "Nhập 6 chữ số mã xác thực được gửi qua tin nhắn điện thoại",
   "🇰🇷 대한민국 국적 회원이신가요?": "🇰🇷 Bạn là thành viên mang quốc tịch Hàn Quốc phải không?",
 };
+export default auth;

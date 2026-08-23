@@ -12,7 +12,7 @@ export const chat = {
   "1:1 안심 번역 채팅": "Trò chuyện dịch an toàn 1:1",
   "1:1 안심 번역 채팅하기": "Bắt đầu trò chuyện dịch an toàn 1:1",
   "2. 앱 안에서만 대화:": "2. Chỉ trò chuyện trong ứng dụng:",
-  "Nguyễn 님이 새로운 번역 메시지를 보냈습니다: \\\"감사합니다! 오늘 저녁 7시에 만나요!\\\"": "Nguyễn đã gửi một tin nhắn dịch mới: \\\"Cảm ơn bạn! Hẹn gặp nhau lúc 7 giờ tối nay nhé!\\\"",
+  "Nguyễn 님이 새로운 번역 메시지를 보냈습니다: \"감사합니다! 오늘 저녁 7시에 만나요!\"": "Nguyễn đã gửi một tin nhắn dịch mới: \"Cảm ơn bạn! Hẹn gặp nhau lúc 7 giờ tối nay nhé!\"",
   "[${r}] ${t} - ${p} (1:1 번역 채팅으로 1초 만에 득템하세요)": "[${r}] ${t} - ${p} (Săn đồ hời chỉ trong 1 giây với trò chuyện dịch 1:1)",
   "⚠️ [외부 메신저 유도 주의] K-Market 채팅방을 벗어나지 마세요!": "⚠️ [Cảnh báo dụ dỗ sang ứng dụng nhắn tin ngoài] Đừng rời khỏi phòng chat K-Market!",
   "내 모국어로 편하게 입력하세요 (상대방 언어로 즉시 자동번역)": "Nhập thoải mái bằng ngôn ngữ mẹ đẻ của bạn (tự động dịch ngay sang ngôn ngữ của đối phương)",
@@ -33,7 +33,7 @@ export const chat = {
   "오픈채팅": "Trò chuyện mở (Open Chat)",
   "외부 메신저로 대화할 경우 사기 피해 발생 시 증거 확보 및 구제가 어렵습니다. 반드시 케이마켓의 안심 자동 번역 채팅방 안에서만 안전하게 거래를 진행하세요.": "Khi trò chuyện qua ứng dụng nhắn tin bên ngoài, rất khó để thu thập bằng chứng và được bồi thường nếu xảy ra lừa đảo. Vui lòng chỉ tiến hành giao dịch an toàn bên trong phòng chat dịch tự động an toàn của K-Market.",
   "원문 보기": "Xem văn bản gốc",
-  "이웃 회원이 새로운 번역 메시지를 보냈습니다: \\\"감사합니다! 오늘 저녁 7시에 만나요!\\\"": "Thành viên hàng xóm đã gửi một tin nhắn dịch mới: \\\"Cảm ơn bạn! Hẹn gặp lại vào lúc 7 giờ tối nay!\\\"",
+  "이웃 회원이 새로운 번역 메시지를 보냈습니다: \"감사합니다! 오늘 저녁 7시에 만나요!\"": "Thành viên hàng xóm đã gửi một tin nhắn dịch mới: \"Cảm ơn bạn! Hẹn gặp lại vào lúc 7 giờ tối nay!\"",
   "전송 중...": "Đang gửi...",
   "채팅 도착 및 관심 매물 등록 시 즉시 알려드려요!": "Thông báo ngay cho bạn khi có tin nhắn đến hoặc đăng ký sản phẩm quan tâm!",
   "채팅 응답이 매우 빨라요": "Phản hồi chat rất nhanh",
@@ -55,3 +55,4 @@ export const chat = {
   "📍 공단 직거래": "📍 Giao dịch trực tiếp tại khu công nghiệp",
   "🤝 거래 수락": "🤝 Chấp nhận giao dịch",
 };
+export default chat;

@@ -6,3 +6,4 @@ export const safety = {
   "편의점 앞, 밝은 지하철 출구 등 안전한 랜드마크 지도 핀을 만남 장소로 잡으세요.": "请选择便利店前、明亮的地铁出口等安全地标作为见面地点。",
   "🛡️ K-Market 안전 수칙": "🛡️ K-Market 安全守则",
 };
+export default safety;

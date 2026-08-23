@@ -1,5 +1,4 @@
 export const appointment = {
-  "${ipCity} (내 위치)": "${ipCity} (Mening joylashuvim)",
   "1. 기본 도로명 / 동네 행정구역 주소": "1. Asosiy ko'cha nomi / mahalla ma'muriy hududi manzili",
   "10킬로미터 이내": "10 kilometr ichida",
   "1:1 만남 약속잡기": "1:1 uchrashuv vaqtini belgilash",
@@ -69,7 +68,7 @@ export const appointment = {
   "약속을 잊지 않도록 상대방과 나에게 각자의 언어로 1시간 전에 알려드립니다.": "Uchrashuvni unutib qo'ymasligimiz uchun sizga va menga 1 soat oldin o'z tillarimizda eslatib o'tamiz.",
   "영어 (미국/글로벌/인도/필리핀)": "Ingliz tili (AQSh/Global/Hindiston/Filippin)",
   "예: 편의점 앞, 3공단 기숙사 후문": "Masalan: do'kon oldida, 3-sanoat majmuasi yotoqxonasi orqa eshigi",
-  "오늘 19:00 \\\"근처 편의점 앞\\\" 직거래 약속 1시간 전입니다.": "Bugun soat 19:00 da \\\"yaqin atrofdagi do'kon oldida\\\" yuzma-yuz savdo uchrashuvigacha 1 soat qoldi.",
+  "오늘 19:00 \"근처 편의점 앞\" 직거래 약속 1시간 전입니다.": "Bugun soat 19:00 da \"yaqin atrofdagi do'kon oldida\" yuzma-yuz savdo uchrashuvigacha 1 soat qoldi.",
   "오늘 밤 20:30": "Bugun kechasi 20:30",
   "오늘 저녁 19:00": "Bugun kechqurun 19:00",
   "오늘 저녁 기숙사 앞이나 공단 정문에서 직거래 가능할까요?": "Bugun kechqurun yotoqxona oldida yoki sanoat majmuasining bosh kirish eshigida yuzma-yuz savdo qilish mumkinmi?",
@@ -114,7 +113,6 @@ export const appointment = {
   "📍 1:1 안심 직거래 약속 잡기": "📍 1:1 xavfsiz shххiy savdo uchrashuvini belgilash",
   "📍 [직거래 약속 확정] ${appointment.meet_time}": "📍 [Shххiy uchrashuv belgilandi] ${appointment.meet_time}",
   "📍 [직거래 약속 확정] ${time}": "📍 [Shххiy uchrashuv belgilandi] ${time}",
-  "📍 [직거래 약속] ${appointment.meet_time}에 \\\"${appointment.place_name}\\\"에서 봬요! (지도 핀 위치 공유됨)": "📍 [Shххiy uchrashuv] ${appointment.meet_time}da \\\"${appointment.place_name}\\\"da ko'rishamiz! (Xaritadagi pin joylashuvi ulashildi)",
   "📍 공단 직거래": "📍 Sanoat hududida shххiy savdo",
   "📍 내 동네 / 직거래 장소 추가": "📍 Mening hududim / Savdo joyini qo'shish",
   "📍 내 위치 정보에 동의하고 주소 1초 자동 입력하기": "📍 Joylashuv ma'lumotlariga ruxsat berish va manzilni 1 soniyada avtomatik kiritish",
@@ -124,3 +122,4 @@ export const appointment = {
   "📍 현재 내 위치정보 위치로 1초 자동 설정": "📍 Hozirgi joylashuv ma'lumotlari bo'yicha 1 soniyada avtomatik sozlash",
   "🖱️ 지도 클릭 / 핀 드래그로 이동": "🖱️ Xaritani bosing / Pinni sudrab o'tkazing",
 };
+export default appointment;

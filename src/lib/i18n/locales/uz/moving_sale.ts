@@ -57,3 +57,4 @@ export const moving_sale = {
   "🚨 [D-3 오늘마감 헐값] 쿠...": "🚨 [D-3 Bugun yakunlanish muddati Arzon narx] Ku...",
   "🚨 귀국 D-${selectedItem.moving_d_day || 3} 오늘마감 헐값": "🚨 Vataniga qaytish D-${selectedItem.moving_d_day || 3} Bugun yakunlanish muddati Arzon narx",
 };
+export default moving_sale;

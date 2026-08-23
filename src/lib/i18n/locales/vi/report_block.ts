@@ -31,3 +31,4 @@ export const report_block = {
   "🤬 비매너 / 욕설 / 성희롱 / 혐오 발언": "🤬 Thiếu lịch sự / Chửi thề / Quấy rối tình dục / Phát ngôn thù ghét",
   "🤬 욕설 / 혐오 발언 / 비매너 / 성희롱": "🤬 Chửi thề / Phát ngôn thù ghét / Thiếu lịch sự / Quấy rối tình dục",
 };
+export default report_block;

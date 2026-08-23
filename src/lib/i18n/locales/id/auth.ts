@@ -1,6 +1,4 @@
 export const auth = {
-  "${t('[문자 인증] 인증번호')} [${res.authCode}] ${t('가 발송되었습니다.')}": "${t('[Verifikasi SMS] Nomor verifikasi')} [${res.authCode}] ${t('telah dikirim.')}",
-  "${t('[신원인증 완료] 인증이 성공적으로 완료되었습니다.')} (${userData.userName})": "${t('[Verifikasi Identitas Selesai] Verifikasi berhasil diselesaikan.')} (${userData.userName})",
   "1. 비자 및 급여 선택": "1. Pilih Visa dan Gaji",
   "1. 체류 비자 유형": "1. Jenis Visa Tinggal",
   "17개국어 외국인 신원인증 & 가입": "Verifikasi Identitas & Pendaftaran Orang Asing dalam 17 Bahasa",
@@ -44,3 +42,4 @@ export const auth = {
   "휴대폰으로 전송된 문자 인증번호 6자리 입력": "Masukkan 6 digit kode verifikasi SMS yang dikirim ke ponsel Anda",
   "🇰🇷 대한민국 국적 회원이신가요?": "🇰🇷 Apakah Anda warga negara Korea Selatan?",
 };
+export default auth;

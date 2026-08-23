@@ -31,3 +31,4 @@ export const report_block = {
   "🤬 비매너 / 욕설 / 성희롱 / 혐오 발언": "🤬 Rude behavior / Profanity / Sexual harassment / Hate speech",
   "🤬 욕설 / 혐오 발언 / 비매너 / 성희롱": "🤬 Profanity / Hate speech / Rude behavior / Sexual harassment",
 };
+export default report_block;

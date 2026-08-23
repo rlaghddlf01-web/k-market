@@ -61,3 +61,4 @@ export const tax_benefit = {
   "🚀 케이티알에스에서 바로 환급 신청하기": "🚀 Ajukan pengembalian dana sekarang juga di KTRS",
   "🛡️ 선결제 0원 (후불결제) · 서류 제출 없이 1초 접수": "🛡️ Pembayaran di muka 0 won (Bayar belakangan) · Pendaftaran 1 detik tanpa menyerahkan dokumen",
 };
+export default tax_benefit;

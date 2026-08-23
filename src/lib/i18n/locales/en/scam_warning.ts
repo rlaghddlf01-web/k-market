@@ -7,3 +7,4 @@ export const scam_warning = {
   "🚨 [선입금 사기 강력 주의] 절대 돈을 먼저 보내지 마세요!": "🚨 [Strong Warning: Advance Payment Scam] Never send money first!",
   "🚨 [선입금 사기 강력 주의] 절대 돈을 먼저 송금하지 마세요!": "🚨 [Strong Warning: Advance Payment Scam] Never wire money first!",
 };
+export default scam_warning;

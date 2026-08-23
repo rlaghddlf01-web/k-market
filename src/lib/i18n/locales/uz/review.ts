@@ -1,5 +1,4 @@
 export const review = {
-  "${t('케이마켓 신뢰 매너온도 점수')}: ${mannerTemp.toFixed(1)}℃ (${levelTitle})": "${t('K-Market Ishonchli odob harorati bali')}: ${mannerTemp.toFixed(1)}℃ (${levelTitle})",
   "+7.0℃ 즉시 가산": "+7.0℃ darhol qo'shiladi",
   "[${item.seller_name}] ${t('님에게 따뜻한 칭찬 후기(+0.5℃)를 보냈습니다!')}": "[${item.seller_name}] ${t('ga iliq maqtov sharhini (+0.5℃) yubordingiz!')}",
   "가입 즉시 +7.0℃ 상승으로 최우수 안심 회원 뱃지 부여": "Ro'yxatdan o'tishi bilanoq +7.0℃ ko'tarilib, eng yaxshi xavfsiz A'zo nishoni beriladi",
@@ -32,3 +31,4 @@ export const review = {
   "💡 케이마켓 매너온도 시스템 안내": "💡 K-Market odob harorati tizimi haqida ma'lumot",
   "💬 기타 자유 건의 및 칭찬": "💬 Boshqa erkin takliflar va maqtovlar",
 };
+export default review;

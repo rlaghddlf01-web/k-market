@@ -5,3 +5,4 @@ export const footer = {
   "케이티알에스 관리자 전용 관제 콘솔 페이지": "KTRS管理者専用コントロールコンソールページ",
   "통신판매업 번호:": "通信販売業番号：",
 };
+export default footer;

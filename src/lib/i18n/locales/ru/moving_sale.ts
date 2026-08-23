@@ -57,3 +57,4 @@ export const moving_sale = {
   "🚨 [D-3 오늘마감 헐값] 쿠...": "🚨 [D-3 Срочно сегодня/Грязевая цена] Ку...",
   "🚨 귀국 D-${selectedItem.moving_d_day || 3} 오늘마감 헐값": "🚨 Отъезд D-${selectedItem.moving_d_day || 3} Срочно сегодня/Грязевая цена",
 };
+export default moving_sale;

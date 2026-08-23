@@ -1,5 +1,4 @@
 export const appointment = {
-  "${ipCity} (내 위치)": "${ipCity} (Vị trí của tôi)",
   "1. 기본 도로명 / 동네 행정구역 주소": "1. Địa chỉ tên đường / khu vực hành chính địa phương cơ bản",
   "10킬로미터 이내": "Trong vòng 10 km",
   "1:1 만남 약속잡기": "Đặt lịch hẹn gặp 1:1",
@@ -68,7 +67,7 @@ export const appointment = {
   "약속을 잊지 않도록 상대방과 나에게 각자의 언어로 1시간 전에 알려드립니다.": "Để không quên cuộc hẹn, hệ thống sẽ nhắc nhở bạn và đối phương bằng ngôn ngữ của riêng mỗi người trước 1 tiếng.",
   "영어 (미국/글로벌/인도/필리핀)": "Tiếng Anh (Mỹ/Toàn cầu/Ấn Độ/Philippines)",
   "예: 편의점 앞, 3공단 기숙사 후문": "Ví dụ: Trước cửa hàng tiện lợi, cổng sau ký túc xá KCN số 3",
-  "오늘 19:00 \\\"근처 편의점 앞\\\" 직거래 약속 1시간 전입니다.": "Còn 1 tiếng nữa là đến hẹn giao dịch trực tiếp lúc 19:00 hôm nay tại \\\"Trước cửa hàng tiện lợi gần đây\\\".",
+  "오늘 19:00 \"근처 편의점 앞\" 직거래 약속 1시간 전입니다.": "Còn 1 tiếng nữa là đến hẹn giao dịch trực tiếp lúc 19:00 hôm nay tại \"Trước cửa hàng tiện lợi gần đây\".",
   "오늘 밤 20:30": "Đêm nay 20:30",
   "오늘 저녁 19:00": "Tối nay 19:00",
   "오늘 저녁 기숙사 앞이나 공단 정문에서 직거래 가능할까요?": "Tối nay có thể giao dịch trực tiếp trước ký túc xá hoặc cổng chính khu công nghiệp được không ạ?",
@@ -113,7 +112,6 @@ export const appointment = {
   "📍 1:1 안심 직거래 약속 잡기": "📍 Đặt lịch hẹn giao dịch trực tiếp an toàn 1:1",
   "📍 [직거래 약속 확정] ${appointment.meet_time}": "📍 [Đã xác nhận lịch hẹn giao dịch trực tiếp] ${appointment.meet_time}",
   "📍 [직거래 약속 확정] ${time}": "📍 [Đã xác nhận lịch hẹn giao dịch trực tiếp] ${time}",
-  "📍 [직거래 약속] ${appointment.meet_time}에 \\\"${appointment.place_name}\\\"에서 봬요! (지도 핀 위치 공유됨)": "📍 [Lịch hẹn giao dịch] Hẹn gặp bạn lúc ${appointment.meet_time} tại \\\"${appointment.place_name}\\\" nhé! (Đã chia sẻ vị trí ghim bản đồ)",
   "📍 공단 직거래": "📍 Giao dịch trực tiếp khu công nghiệp",
   "📍 내 동네 / 직거래 장소 추가": "📍 Thêm khu vực của tôi / địa điểm giao dịch trực tiếp",
   "📍 내 위치 정보에 동의하고 주소 1초 자동 입력하기": "📍 Đồng ý với thông tin vị trí của tôi và tự động điền địa chỉ trong 1 giây",
@@ -123,3 +121,4 @@ export const appointment = {
   "📍 현재 내 위치정보 위치로 1초 자동 설정": "📍 Tự động thiết lập vị trí theo thông tin vị trí hiện tại của tôi trong 1 giây",
   "🖱️ 지도 클릭 / 핀 드래그로 이동": "🖱️ Nhấp vào bản đồ / Kéo ghim để di chuyển",
 };
+export default appointment;
