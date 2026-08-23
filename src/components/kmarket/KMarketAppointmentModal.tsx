@@ -395,7 +395,7 @@ export default function KMarketAppointmentModal({
 
               {/* 우측 하단 안내 툴팁 */}
               <div className="absolute bottom-3 right-3 bg-white/90 backdrop-blur-xs text-[#3d2817] px-2.5 py-1 rounded-xl text-[10px] font-black shadow-md border border-[#ded1c4] pointer-events-none z-10">
-                🖱️ 지도 클릭 / 핀 드래그로 이동
+                🖱️ {t('지도 클릭 / 핀 드래그로 이동')}
               </div>
             </div>
           </div>
@@ -408,7 +408,7 @@ export default function KMarketAppointmentModal({
                 <span>{t('3. 직거래 희망 날짜 & 만남 시간 입력')}</span>
               </span>
               <span className="text-[10px] text-[#845b37] font-bold">
-                자유롭게 직접 텍스트 입력 가능
+                {t('자유롭게 직접 텍스트 입력 가능')}
               </span>
             </label>
 
@@ -429,14 +429,14 @@ export default function KMarketAppointmentModal({
                 <button
                   key={idx}
                   type="button"
-                  onClick={() => setCustomTimeText(qt.label)}
+                  onClick={() => setCustomTimeText(t(qt.label))}
                   className={`py-1.5 px-1.5 rounded-xl border text-center transition-all cursor-pointer text-xs font-bold ${
-                    customTimeText === qt.label
+                    customTimeText === t(qt.label) || customTimeText === qt.label
                       ? 'border-[#3d2817] bg-[#3d2817] text-[#fbf9f6] shadow-xs'
                       : 'border-[#ded1c4] bg-[#f7f2eb] text-[#5c4a39] hover:bg-[#ede2d6]'
                   }`}
                 >
-                  {qt.label}
+                  {t(qt.label)}
                 </button>
               ))}
             </div>
@@ -450,10 +450,10 @@ export default function KMarketAppointmentModal({
               </div>
               <div>
                 <span className="text-xs font-bold text-[#3d2817] block">
-                  ⏰ 약속 1시간 전 모국어 자동 푸시 알림
+                  ⏰ {t('약속 1시간 전 모국어 자동 푸시 알림')}
                 </span>
                 <span className="text-[10px] text-[#705e4f]">
-                  약속을 잊지 않도록 상대방과 나에게 각자의 언어로 1시간 전에 알려드립니다.
+                  {t('약속을 잊지 않도록 상대방과 나에게 각자의 언어로 1시간 전에 알려드립니다.')}
                 </span>
               </div>
             </div>
