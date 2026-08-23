@@ -28,6 +28,7 @@ import KMarketStatusActionModal from './KMarketStatusActionModal';
 import KMarketScamInterventionBanner from '../chat/KMarketScamInterventionBanner';
 import KMarketChatSafetyNotice from '../chat/KMarketChatSafetyNotice';
 import { sendLocalPushNotification } from '@/lib/webPushService';
+import { createGoogleCalendarUrl } from '@/lib/calendarUtils';
 import CountryFlag from './CountryFlag';
 
 export default function KMarketChatDrawer() {
@@ -331,26 +332,47 @@ export default function KMarketChatDrawer() {
                         <span className="text-[10px] text-amber-700 font-semibold">{t('직거래 약속 1시간 전 자동 리마인더 알림')}</span>
                       </div>
 
-                      <div className="grid grid-cols-2 gap-2">
+                      <div className="space-y-2">
+                        {/* 1. 📅 구글 캘린더에 일정 자동 등록 버튼 (최우선 추천) */}
                         <button
+                          type="button"
                           onClick={() => {
-                            const query = encodeURIComponent(`${activeAppointment.place_name} ${activeAppointment.address}`);
-                            window.open(`https://www.google.com/maps/search/?api=1&query=${query}`, '_blank');
+                            const calUrl = createGoogleCalendarUrl(
+                              activeAppointment,
+                              activeChat?.item_title || activeChat?.item?.title || 'K-Market 직거래'
+                            );
+                            window.open(calUrl, '_blank');
                           }}
-                          className="py-2 px-2 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl transition-all flex items-center justify-center gap-1.5 cursor-pointer text-[11px] shadow-xs"
+                          className="w-full py-2.5 px-3 bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold rounded-xl transition-all flex items-center justify-center gap-2 cursor-pointer text-xs shadow-md active:scale-98"
                         >
-                          <Navigation className="w-3.5 h-3.5" />
-                          <span>{t('구글 지도 길찾기 연동')}</span>
+                          <Calendar className="w-4 h-4 text-yellow-300" />
+                          <span>{t('📅 구글 캘린더에 직거래 일정 담기 (알림)')}</span>
                         </button>
-                        <button
-                          onClick={() => {
-                            const query = encodeURIComponent(`${activeAppointment.place_name} ${activeAppointment.address}`);
-                            window.open(`https://map.kakao.com/link/search/${query}`, '_blank');
-                          }}
-                          className="py-2 px-2 bg-yellow-400 hover:bg-yellow-500 text-slate-950 font-bold rounded-xl transition-all flex items-center justify-center gap-1.5 cursor-pointer text-[11px] shadow-xs"
-                        >
-                          <span>{t('카카오 지도 길찾기 연동')}</span>
-                        </button>
+
+                        {/* 2. 지도 길찾기 2버튼 (구글 지도 / 카카오 지도) */}
+                        <div className="grid grid-cols-2 gap-2">
+                          <button
+                            type="button"
+                            onClick={() => {
+                              const query = encodeURIComponent(`${activeAppointment.place_name} ${activeAppointment.address}`);
+                              window.open(`https://www.google.com/maps/search/?api=1&query=${query}`, '_blank');
+                            }}
+                            className="py-2 px-2 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl transition-all flex items-center justify-center gap-1.5 cursor-pointer text-[11px] shadow-xs"
+                          >
+                            <Navigation className="w-3.5 h-3.5" />
+                            <span>{t('구글 지도 길찾기 연동')}</span>
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => {
+                              const query = encodeURIComponent(`${activeAppointment.place_name} ${activeAppointment.address}`);
+                              window.open(`https://map.kakao.com/link/search/${query}`, '_blank');
+                            }}
+                            className="py-2 px-2 bg-yellow-400 hover:bg-yellow-500 text-slate-950 font-bold rounded-xl transition-all flex items-center justify-center gap-1.5 cursor-pointer text-[11px] shadow-xs"
+                          >
+                            <span>{t('카카오 지도 길찾기 연동')}</span>
+                          </button>
+                        </div>
                       </div>
                     </div>
                   </div>
