@@ -17,5 +17,13 @@ export const moving_sale = {
   "원하는 키워드를 등록하고 헐값 꿀매물을 가장 먼저 잡으세요!": "O'zingizga kerakli kalit so'zni ro'yxatdan o'tkazing va eng arzon foydali taklifni birinchilardan bo'lib qo'lga kiriting!",
   "🔥 7일 남음 마감임박 초특가": "🔥 7 kun qoldi, tugashiga oz qoldi, o'ta maxsus narx",
   "🚨 3일 남음 오늘마감 헐값/나눔": "🚨 3 kun qoldi, bugun tugaydi, arzon/tekinga berish",
+  "3일 남음 오늘마감 헐값/나눔": "3 kun qoldi Bugun oxirgi Kun Arzon/Tekinga",
+  "7일 남음 귀국임박 초특가": "7 kun qoldi Ketish yaqin Katta chegirma",
+  "14일 남음 묶음할인 (사전예약)": "14 kun qoldi To'plam chegirmasi (Oldindan band qilish)",
+  "🔥 7일 남음 귀국임박 초특가": "🔥 7 kun qoldi Ketish yaqin Katta chegirma",
+  "✈️ 14일 남음 묶음할인 (사전예약)": "✈️ 14 kun qoldi To'plam chegirmasi (Oldindan band qilish)",
+  "등록된 전체 매물 보기": "Barcha e'lonlarni ko'rish",
+  "🎁 0원 (무료)": "🎁 0 won (Bepul)",
+  "0원 (무료나눔)": "0 won (Tekinga berish)",
 };
 export default moving_sale;

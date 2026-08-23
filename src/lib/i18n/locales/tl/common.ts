@@ -1056,5 +1056,11 @@ export const common = {
   "🛡️ 선결제 0원 (후불결제) · 서류 제출 없이 1초 접수": "🛡️ 0 won na pre-payment (Post-payment) · 1 segundong aplikasyon nang walang pagsusumite ng dokumento",
   "🤝 거래 수락": "🤝 Tanggapin ang transaksyon",
   "🧭 사파리(Safari) 브라우저로 열기": "🧭 Buksan sa Safari browser",
+  "3일 남음 오늘마감 헐값/나눔": "3 Araw Na Lang Huling Araw Ngayon Mura/Libre",
+  "7일 남음 귀국임박 초특가": "7 Araw Na Lang Pauwi Na Super Sale",
+  "14일 남음 묶음할인 (사전예약)": "14 Araw Na Lang Bundle Discount (Pre-order)",
+  "🔥 7일 남음 귀국임박 초특가": "🔥 7 Araw Na Lang Pauwi Na Super Sale",
+  "🎁 0원 (무료)": "🎁 0 Won (Libre)",
+  "0원 (무료나눔)": "0 Won (Libreng Pamigay)",
 };
 export default common;

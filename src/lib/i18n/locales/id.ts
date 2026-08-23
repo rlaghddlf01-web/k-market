@@ -1106,5 +1106,11 @@ export const id = {
   "오늘 19:00 \"근처 편의점 앞\" 직거래 약속 1시간 전입니다.": "1 jam sebelum janji temu transaksi langsung pukul 19:00 di \"Depan minimarket terdekat\".",
   "오늘 19:00 \"근처 편의점 앞\" 직거래 약속 1시간 전입니다": "1 jam sebelum janji temu transaksi langsung pukul 19:00 di \"Depan minimarket terdekat\"",
   "오늘 하루 안 보기": "Jangan tampilkan hari ini",
+  "3일 남음 오늘마감 헐값/나눔": "Sisa 3 Hari Berakhir Hari Ini Murah/Gratis",
+  "7일 남음 귀국임박 초특가": "Sisa 7 Hari Segera Pulang Super Hemat",
+  "14일 남음 묶음할인 (사전예약)": "Sisa 14 Hari Diskon Paket (Pre-order)",
+  "🔥 7일 남음 귀국임박 초특가": "🔥 Sisa 7 Hari Segera Pulang Super Hemat",
+  "🎁 0원 (무료)": "🎁 0 Won (Gratis)",
+  "0원 (무료나눔)": "0 Won (Bagi Gratis)",
 };
 export default id;

@@ -1107,5 +1107,11 @@ export const tl = {
   "오늘 19:00 \"근처 편의점 앞\" 직거래 약속 1시간 전입니다.": "1 oras bago ang direct meetup sa 19:00 sa \"Harap ng malapit na convenience store\".",
   "오늘 19:00 \"근처 편의점 앞\" 직거래 약속 1시간 전입니다": "1 oras bago ang direct meetup sa 19:00 sa \"Harap ng malapit na convenience store\"",
   "오늘 하루 안 보기": "Huwag nang ipakita ngayong araw",
+  "3일 남음 오늘마감 헐값/나눔": "3 Araw Na Lang Huling Araw Ngayon Mura/Libre",
+  "7일 남음 귀국임박 초특가": "7 Araw Na Lang Pauwi Na Super Sale",
+  "14일 남음 묶음할인 (사전예약)": "14 Araw Na Lang Bundle Discount (Pre-order)",
+  "🔥 7일 남음 귀국임박 초특가": "🔥 7 Araw Na Lang Pauwi Na Super Sale",
+  "🎁 0원 (무료)": "🎁 0 Won (Libre)",
+  "0원 (무료나눔)": "0 Won (Libreng Pamigay)",
 };
 export default tl;

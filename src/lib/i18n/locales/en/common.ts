@@ -1055,5 +1055,11 @@ export const common = {
   "🛡️ 선결제 0원 (후불결제) · 서류 제출 없이 1초 접수": "🛡️ 0 Won Upfront (Pay Later) · 1-Second Application without Submitting Documents",
   "🤝 거래 수락": "🤝 Accept Deal",
   "🧭 사파리(Safari) 브라우저로 열기": "🧭 Open in Safari Browser",
+  "3일 남음 오늘마감 헐값/나눔": "3 Days Left Closing Today Cheap/Free",
+  "7일 남음 귀국임박 초특가": "7 Days Left Leaving Soon Super Deal",
+  "14일 남음 묶음할인 (사전예약)": "14 Days Left Bundle Discount (Pre-order)",
+  "🔥 7일 남음 귀국임박 초특가": "🔥 7 Days Left Leaving Soon Super Deal",
+  "🎁 0원 (무료)": "🎁 Free (0 KRW)",
+  "0원 (무료나눔)": "0 KRW (Free Giveaway)",
 };
 export default common;

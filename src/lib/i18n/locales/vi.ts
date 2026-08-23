@@ -1106,5 +1106,11 @@ export const vi = {
   "오늘 19:00 \"근처 편의점 앞\" 직거래 약속 1시간 전입니다.": "Còn 1 tiếng nữa đến lịch hẹn giao dịch trực tiếp lúc 19:00 tại \"Trước cửa hàng tiện lợi gần đây\".",
   "오늘 19:00 \"근처 편의점 앞\" 직거래 약속 1시간 전입니다": "Còn 1 tiếng nữa đến lịch hẹn giao dịch trực tiếp lúc 19:00 tại \"Trước cửa hàng tiện lợi gần đây\"",
   "오늘 하루 안 보기": "Không hiện lại hôm nay",
+  "3일 남음 오늘마감 헐값/나눔": "Còn 3 ngày Hết hạn hôm nay Rẻ/Tặng",
+  "7일 남음 귀국임박 초특가": "Còn 7 ngày Sắp về nước Siêu rẻ",
+  "14일 남음 묶음할인 (사전예약)": "Còn 14 ngày Giảm giá combo (Đặt trước)",
+  "🔥 7일 남음 귀국임박 초특가": "🔥 Còn 7 ngày Sắp về nước Siêu rẻ",
+  "🎁 0원 (무료)": "🎁 0đ (Miễn phí)",
+  "0원 (무료나눔)": "0đ (Tặng miễn phí)",
 };
 export default vi;

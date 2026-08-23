@@ -1053,5 +1053,11 @@ export const common = {
   "🛡️ 선결제 0원 (후불결제) · 서류 제출 없이 1초 접수": "🛡️ Oldindan to'lov 0 von (keyinroq to'lash) · Hujjatlarsiz 1 soniyada ariza berish",
   "🤝 거래 수락": "🤝 Bitimni qabul qilish",
   "🧭 사파리(Safari) 브라우저로 열기": "🧭 Safari brauzerida ochish",
+  "3일 남음 오늘마감 헐값/나눔": "3 kun qoldi Bugun oxirgi Kun Arzon/Tekinga",
+  "7일 남음 귀국임박 초특가": "7 kun qoldi Ketish yaqin Katta chegirma",
+  "14일 남음 묶음할인 (사전예약)": "14 kun qoldi To'plam chegirmasi (Oldindan band qilish)",
+  "🔥 7일 남음 귀국임박 초특가": "🔥 7 kun qoldi Ketish yaqin Katta chegirma",
+  "🎁 0원 (무료)": "🎁 0 won (Bepul)",
+  "0원 (무료나눔)": "0 won (Tekinga berish)",
 };
 export default common;

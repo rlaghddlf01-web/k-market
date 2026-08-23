@@ -17,5 +17,13 @@ export const moving_sale = {
   "원하는 키워드를 등록하고 헐값 꿀매물을 가장 먼저 잡으세요!": "Đăng ký từ khóa mong muốn và săn những món hời giá rẻ sớm nhất!",
   "🔥 7일 남음 마감임박 초특가": "🔥 Còn 7 ngày - Giá cực sốc sắp kết thúc",
   "🚨 3일 남음 오늘마감 헐값/나눔": "🚨 Còn 3 ngày - Hạn chót hôm nay - Giá rẻ/Chia sẻ miễn phí",
+  "3일 남음 오늘마감 헐값/나눔": "Còn 3 ngày Hết hạn hôm nay Rẻ/Tặng",
+  "7일 남음 귀국임박 초특가": "Còn 7 ngày Sắp về nước Siêu rẻ",
+  "14일 남음 묶음할인 (사전예약)": "Còn 14 ngày Giảm giá combo (Đặt trước)",
+  "🔥 7일 남음 귀국임박 초특가": "🔥 Còn 7 ngày Sắp về nước Siêu rẻ",
+  "✈️ 14일 남음 묶음할인 (사전예약)": "✈️ Còn 14 ngày Giảm giá combo (Đặt trước)",
+  "등록된 전체 매물 보기": "Xem tất cả đồ đăng bán",
+  "🎁 0원 (무료)": "🎁 0đ (Miễn phí)",
+  "0원 (무료나눔)": "0đ (Tặng miễn phí)",
 };
 export default moving_sale;

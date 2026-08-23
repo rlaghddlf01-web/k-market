@@ -1055,5 +1055,11 @@ export const common = {
   "🛡️ 선결제 0원 (후불결제) · 서류 제출 없이 1초 접수": "🛡️ Thanh toán trước 0 won (Thanh toán sau) · Đăng ký trong 1 giây không cần nộp giấy tờ",
   "🤝 거래 수락": "🤝 Chấp nhận giao dịch",
   "🧭 사파리(Safari) 브라우저로 열기": "🧭 Mở bằng trình duyệt Safari",
+  "3일 남음 오늘마감 헐값/나눔": "Còn 3 ngày Hết hạn hôm nay Rẻ/Tặng",
+  "7일 남음 귀국임박 초특가": "Còn 7 ngày Sắp về nước Siêu rẻ",
+  "14일 남음 묶음할인 (사전예약)": "Còn 14 ngày Giảm giá combo (Đặt trước)",
+  "🔥 7일 남음 귀국임박 초특가": "🔥 Còn 7 ngày Sắp về nước Siêu rẻ",
+  "🎁 0원 (무료)": "🎁 0đ (Miễn phí)",
+  "0원 (무료나눔)": "0đ (Tặng miễn phí)",
 };
 export default common;

@@ -1107,5 +1107,11 @@ export const uz = {
   "오늘 19:00 \"근처 편의점 앞\" 직거래 약속 1시간 전입니다.": "Bugun soat 19:00 da \"Yaqin atrofdagi do'kon oldida\" to'g'ridan-to'g'ri uchrashuvga 1 soat qoldi.",
   "오늘 19:00 \"근처 편의점 앞\" 직거래 약속 1시간 전입니다": "Bugun soat 19:00 da \"Yaqin atrofdagi do'kon oldida\" to'g'ridan-to'g'ri uchrashuvga 1 soat qoldi",
   "오늘 하루 안 보기": "Bugun boshqa ko'rsatilmasin",
+  "3일 남음 오늘마감 헐값/나눔": "3 kun qoldi Bugun oxirgi Kun Arzon/Tekinga",
+  "7일 남음 귀국임박 초특가": "7 kun qoldi Ketish yaqin Katta chegirma",
+  "14일 남음 묶음할인 (사전예약)": "14 kun qoldi To'plam chegirmasi (Oldindan band qilish)",
+  "🔥 7일 남음 귀국임박 초특가": "🔥 7 kun qoldi Ketish yaqin Katta chegirma",
+  "🎁 0원 (무료)": "🎁 0 won (Bepul)",
+  "0원 (무료나눔)": "0 won (Tekinga berish)",
 };
 export default uz;

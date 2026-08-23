@@ -1055,5 +1055,11 @@ export const common = {
   "🛡️ 선결제 0원 (후불결제) · 서류 제출 없이 1초 접수": "🛡️ Tanpa Pembayaran Di Muka 0 Won (Pembayaran Belakang) · Pengajuan 1 detik tanpa menyerahkan dokumen",
   "🤝 거래 수락": "🤝 Terima Transaksi",
   "🧭 사파리(Safari) 브라우저로 열기": "🧭 Buka dengan browser Safari",
+  "3일 남음 오늘마감 헐값/나눔": "Sisa 3 Hari Berakhir Hari Ini Murah/Gratis",
+  "7일 남음 귀국임박 초특가": "Sisa 7 Hari Segera Pulang Super Hemat",
+  "14일 남음 묶음할인 (사전예약)": "Sisa 14 Hari Diskon Paket (Pre-order)",
+  "🔥 7일 남음 귀국임박 초특가": "🔥 Sisa 7 Hari Segera Pulang Super Hemat",
+  "🎁 0원 (무료)": "🎁 0 Won (Gratis)",
+  "0원 (무료나눔)": "0 Won (Bagi Gratis)",
 };
 export default common;

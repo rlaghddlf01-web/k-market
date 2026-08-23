@@ -17,5 +17,13 @@ export const moving_sale = {
   "원하는 키워드를 등록하고 헐값 꿀매물을 가장 먼저 잡으세요!": "Daftarkan kata kunci yang Anda inginkan dan dapatkan penawaran terbaik dengan harga murah terlebih dahulu!",
   "🔥 7일 남음 마감임박 초특가": "🔥 Sisa 7 Hari, Batas Waktu Hampir Habis, Harga Super Spesial",
   "🚨 3일 남음 오늘마감 헐값/나눔": "🚨 Tersisa 3 Hari, Tutup Hari Ini, Harga Murah/Donasi",
+  "3일 남음 오늘마감 헐값/나눔": "Sisa 3 Hari Berakhir Hari Ini Murah/Gratis",
+  "7일 남음 귀국임박 초특가": "Sisa 7 Hari Segera Pulang Super Hemat",
+  "14일 남음 묶음할인 (사전예약)": "Sisa 14 Hari Diskon Paket (Pre-order)",
+  "🔥 7일 남음 귀국임박 초특가": "🔥 Sisa 7 Hari Segera Pulang Super Hemat",
+  "✈️ 14일 남음 묶음할인 (사전예약)": "✈️ Sisa 14 Hari Diskon Paket (Pre-order)",
+  "등록된 전체 매물 보기": "Lihat Semua Barang Terdaftar",
+  "🎁 0원 (무료)": "🎁 0 Won (Gratis)",
+  "0원 (무료나눔)": "0 Won (Bagi Gratis)",
 };
 export default moving_sale;

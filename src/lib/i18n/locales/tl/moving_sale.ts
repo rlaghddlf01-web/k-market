@@ -17,5 +17,13 @@ export const moving_sale = {
   "원하는 키워드를 등록하고 헐값 꿀매물을 가장 먼저 잡으세요!": "Magrehistro ng iyong gustong keyword at makuha ang pinakamurang magandang deal nanguna!",
   "🔥 7일 남음 마감임박 초특가": "🔥 7 Araw na Lang ang Natitira - Malapit nang Magtapos ang Super Special Price",
   "🚨 3일 남음 오늘마감 헐값/나눔": "🚨 3 araw na lang ang natitira, nagtatapos ngayon, murang benta/pamimigay",
+  "3일 남음 오늘마감 헐값/나눔": "3 Araw Na Lang Huling Araw Ngayon Mura/Libre",
+  "7일 남음 귀국임박 초특가": "7 Araw Na Lang Pauwi Na Super Sale",
+  "14일 남음 묶음할인 (사전예약)": "14 Araw Na Lang Bundle Discount (Pre-order)",
+  "🔥 7일 남음 귀국임박 초특가": "🔥 7 Araw Na Lang Pauwi Na Super Sale",
+  "✈️ 14일 남음 묶음할인 (사전예약)": "✈️ 14 Araw Na Lang Bundle Discount (Pre-order)",
+  "등록된 전체 매물 보기": "Tingnan Lahat ng Nakalistang Item",
+  "🎁 0원 (무료)": "🎁 0 Won (Libre)",
+  "0원 (무료나눔)": "0 Won (Libreng Pamigay)",
 };
 export default moving_sale;

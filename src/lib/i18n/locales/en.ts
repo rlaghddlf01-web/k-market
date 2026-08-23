@@ -1106,5 +1106,11 @@ export const en = {
   "오늘 19:00 \"근처 편의점 앞\" 직거래 약속 1시간 전입니다.": "1 hour before direct trade meetup at 19:00 in front of the nearby convenience store.",
   "오늘 19:00 \"근처 편의점 앞\" 직거래 약속 1시간 전입니다": "1 hour before direct trade meetup at 19:00 in front of the nearby convenience store",
   "오늘 하루 안 보기": "Don't show today",
+  "3일 남음 오늘마감 헐값/나눔": "3 Days Left Closing Today Cheap/Free",
+  "7일 남음 귀국임박 초특가": "7 Days Left Leaving Soon Super Deal",
+  "14일 남음 묶음할인 (사전예약)": "14 Days Left Bundle Discount (Pre-order)",
+  "🔥 7일 남음 귀국임박 초특가": "🔥 7 Days Left Leaving Soon Super Deal",
+  "🎁 0원 (무료)": "🎁 Free (0 KRW)",
+  "0원 (무료나눔)": "0 KRW (Free Giveaway)",
 };
 export default en;
