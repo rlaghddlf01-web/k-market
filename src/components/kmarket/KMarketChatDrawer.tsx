@@ -93,7 +93,7 @@ export default function KMarketChatDrawer() {
     );
   };
 
-  // 자주 쓰는 퀵 메시지 템플릿
+  // 자주 쓰는 퀵 메시지 템플릿 (현재 사용자 언어로 자동 번역 발송)
   const quickPhrases = [
     { label: '👋 구매 문의', text: '안녕하세요! 아직 판매 중인가요?' },
     { label: '💰 가격 네고', text: '조금만 깎아주실 수 있나요? (네고 가능한가요?)' },
