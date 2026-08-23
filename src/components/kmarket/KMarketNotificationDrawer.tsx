@@ -99,13 +99,13 @@ export default function KMarketNotificationDrawer() {
             </div>
             <div>
               <h2 className="text-base font-black text-white flex items-center gap-1.5">
-                <span>{t('notif_center_title')}</span>
+                <span>{t('통합 알림 센터')}</span>
                 <span className="text-xs px-2 py-0.2 rounded-full bg-[#f3ba2f] text-[#09101f] font-extrabold">
                   {notifications.length}
                 </span>
               </h2>
               <p className="text-[11px] text-slate-300">
-                {t('notif_center_desc')}
+                {t('키워드 알림, 실시간 번역 채팅, 가격 인하 소식')}
               </p>
             </div>
           </div>
@@ -115,10 +115,10 @@ export default function KMarketNotificationDrawer() {
               <button
                 onClick={markAllNotificationsAsRead}
                 className="px-2.5 py-1 text-[11px] font-bold text-sky-200 hover:text-white bg-white/10 hover:bg-white/20 rounded-lg transition-colors flex items-center gap-1 cursor-pointer border border-white/10"
-                title={t('auto_ui_234')}
+                title={t('모든 알림 읽음 처리')}
               >
                 <CheckCheck className="w-3.5 h-3.5" />
-                <span>{t('notif_center_mark_all')}</span>
+                <span>{t('모두 읽음')}</span>
               </button>
             )}
 
@@ -135,10 +135,10 @@ export default function KMarketNotificationDrawer() {
         <div className="p-2.5 bg-slate-50 dark:bg-gray-800/60 border-b border-slate-200/80 dark:border-gray-800 flex items-center justify-between gap-1.5 shrink-0">
           <div className="flex items-center space-x-1 overflow-x-auto no-scrollbar">
             {[
-              { id: 'all', label: t('filter_all') },
-              { id: 'keyword', label: t('notif_tab_keyword') },
-              { id: 'chat', label: t('notif_tab_chat') },
-              { id: 'price_drop', label: t('notif_tab_price_drop') },
+              { id: 'all', label: t('안내 내용을 확인해 주세요') },
+              { id: 'keyword', label: t('키워드 알림') },
+              { id: 'chat', label: t('번역 채팅') },
+              { id: 'price_drop', label: t('가격 인하') },
             ].map((tab) => (
               <button
                 key={tab.id}
@@ -162,7 +162,7 @@ export default function KMarketNotificationDrawer() {
             className="text-[11px] font-bold text-blue-600 dark:text-blue-400 hover:underline shrink-0 flex items-center gap-0.5"
           >
             <Sliders className="w-3 h-3" />
-            <span>{t('btn_setup_alerts')}</span>
+            <span>{t('알림 설정')}</span>
           </button>
         </div>
 
@@ -237,7 +237,7 @@ export default function KMarketNotificationDrawer() {
                       removeNotification(notif.id);
                     }}
                     className="opacity-0 group-hover:opacity-100 p-1 text-slate-400 hover:text-rose-500 rounded-md transition-all cursor-pointer"
-                    title={t('auto_ui_236')}
+                    title={t('알림 삭제')}
                   >
                     <Trash2 className="w-3.5 h-3.5" />
                   </button>
@@ -247,9 +247,9 @@ export default function KMarketNotificationDrawer() {
           ) : (
             <div className="text-center py-16 space-y-2 text-slate-400 dark:text-slate-500">
               <Bell className="w-10 h-10 mx-auto opacity-30 stroke-1" />
-              <p className="text-xs font-bold">{t('auto_ui_237')}</p>
+              <p className="text-xs font-bold">{t('도착한 알림이 없습니다.')}</p>
               <p className="text-[11px] max-w-xs mx-auto text-slate-400">
-                {t('notif_empty_keyword_tip')}
+                {t('관심 있는 키워드를 등록해두면 원하는 매물이 올라올 때 즉시 알려드립니다!')}
               </p>
             </div>
           )}
@@ -265,7 +265,7 @@ export default function KMarketNotificationDrawer() {
             className="w-full py-2.5 px-3 bg-gradient-to-r from-blue-600 via-indigo-600 to-sky-600 hover:opacity-95 active:scale-98 text-white font-bold text-xs rounded-xl shadow-md transition-all flex items-center justify-center gap-1.5 cursor-pointer"
           >
             <Sparkles className="w-3.5 h-3.5 text-[#f3ba2f]" />
-            <span>{t('auto_ui_238')}</span>
+            <span>{t('내 관심 키워드 알림 (세탁기, 무료나눔 등) 맞춤 설정하기 →')}</span>
           </button>
         </div>
       </div>

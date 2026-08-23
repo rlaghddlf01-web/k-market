@@ -168,7 +168,7 @@ export default function KMarketWelcomeLanguageGateway({
           <button
             onClick={onClose}
             className="absolute top-4 right-4 p-2 text-slate-400 hover:text-slate-600 bg-slate-100 hover:bg-slate-200 rounded-full transition-colors z-10"
-            aria-label={t('pwa_toast_dismiss_btn')}
+            aria-label={t('알림창 닫기')}
           >
             <X className="w-5 h-5" />
           </button>
@@ -226,14 +226,14 @@ export default function KMarketWelcomeLanguageGateway({
         {/* 하단: 한국어 바로가기 버튼 */}
         <div className="p-4 border-t border-slate-100 bg-slate-50 flex items-center justify-between">
           <div className="flex items-center gap-2 text-xs text-slate-600 font-medium">
-            <span>{t('auto_ui_5')}</span>
+            <span>{t('🇰🇷 대한민국 국적 회원이신가요?')}</span>
           </div>
           <button
             onMouseEnter={() => setActiveLang('ko')}
             onClick={handleSelectKorean}
             className="px-4 py-2 bg-slate-900 hover:bg-slate-800 text-white rounded-xl text-xs font-bold transition-all active:scale-95 shadow-sm cursor-pointer"
           >
-            {t('welcome_btn_korean')}
+            {t('한국어로 계속 진행하기 ➔')}
           </button>
         </div>
       </div>

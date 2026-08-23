@@ -1,0 +1,17 @@
+export const post_create = {
+  "${raw.term} 팝니다": "Bán ${raw.term}",
+  "0.3초 실시간 95% 스마트 초경량 압축": "Nén thông minh siêu nhẹ 95% thời gian thực 0,3 giây",
+  "AI 안심 번역가 0.3초 만에 실시간 번역 중...": "Người phiên dịch AI an toàn đang dịch thời gian thực trong 0,3 giây...",
+  "✨ 상대방 모국어로 0.3초 만에 실시간 번역되어 전송됩니다 (AI 안심 번역 탑재)": "✨ Được dịch và gửi theo thời gian thực bằng ngôn ngữ mẹ đẻ của người nhận trong 0,3 giây (Tích hợp dịch thuật an toàn AI)",
+  "게시글 등록 완료": "Đăng bài viết thành công",
+  "게시글 등록 중...": "Đang đăng bài viết...",
+  "고화질 이미지 압축 진행 중...": "Đang tiến hành nén hình ảnh chất lượng cao...",
+  "대표사진": "Ảnh đại diện",
+  "사진 압축 처리 중 오류가 발생했습니다.": "Đã xảy ra lỗi trong quá trình nén ảnh.",
+  "사진 첨부 (최대 5장)": "Đính kèm ảnh (tối đa 5 ảnh)",
+  "사진 추가": "Thêm ảnh",
+  "살게요": "Tôi sẽ mua",
+  "상품 사진": "Ảnh sản phẩm",
+  "선택한 사진 삭제": "Xóa ảnh đã chọn",
+  "판매 가격 (0원을 입력하시면 무료나눔으로 자동 등록됩니다)": "Giá bán (Nếu bạn nhập 0 đồng, bài đăng sẽ tự động được đăng ký là tặng miễn phí)",
+};

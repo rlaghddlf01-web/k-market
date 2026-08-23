@@ -377,7 +377,17 @@ export function KMarketProvider({ children }: { children: React.ReactNode }) {
       }
 
       setItems(INITIAL_ITEMS);
-      let currentItems = INITIAL_ITEMS;
+      
+      // Supabase 클라우드 실시간 270개 Gemini 정밀 번역 매물 최신 로드
+      fetch('/api/kmarket/items')
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.items && data.items.length > 0) {
+            setItems(data.items);
+          }
+        })
+        .catch((err) => console.warn('Items API fetch warning:', err));
+
       const savedLikes = localStorage.getItem('kmarket_liked_items');
       if (savedLikes) {
         setLikedItemIds(new Set(JSON.parse(savedLikes)));
@@ -412,7 +422,7 @@ export function KMarketProvider({ children }: { children: React.ReactNode }) {
         const urlParams = new URLSearchParams(window.location.search);
         const targetItemId = urlParams.get('item');
         if (targetItemId) {
-          const matched = currentItems.find((i) => i.id === targetItemId);
+          const matched = INITIAL_ITEMS.find((i: KMarketItem) => i.id === targetItemId);
           if (matched) {
             setSelectedItem(matched);
           }
@@ -498,7 +508,7 @@ export function KMarketProvider({ children }: { children: React.ReactNode }) {
           return updated;
         });
 
-        // 🔔 관심 키워드 매칭 시 실시간 15개국어 웹 푸시 알림 발송 (Service Worker)
+        // 🔔 관심 키워드 매칭 시 실시간 17개국어 웹 푸시 알림 발송 (Service Worker)
         keywordAlerts.forEach((kw) => {
           if (
             kw.is_active &&
@@ -670,23 +680,26 @@ export function KMarketProvider({ children }: { children: React.ReactNode }) {
     try {
       // 1. 상대방 언어로 Gemini 0.3초 실시간 번역 요청
       const countryToLangMap: Record<string, SupportedLanguage> = {
-        VN: 'vi',
-        US: 'en',
-        NP: 'ne',
-        TH: 'th',
-        MM: 'my',
-        KH: 'km',
-        MN: 'mn',
-        PH: 'en',
-        JP: 'ja',
-        KZ: 'kk',
-        PK: 'ur',
-        ID: 'id',
-        LK: 'si',
-        BD: 'bn',
-        CN: 'zh',
-        RU: 'ru',
-        KR: 'ko',
+        KR: 'ko',  // 한국
+        VN: 'vi',  // 베트남
+        CN: 'zh',  // 중국
+        TH: 'th',  // 태국
+        US: 'en',  // 영어권(미국)
+        GB: 'en',  // 영어권(영국)
+        AU: 'en',  // 영어권(호주)
+        UZ: 'uz',  // 우즈베키스탄
+        RU: 'ru',  // 러시아
+        JP: 'ja',  // 일본
+        KH: 'km',  // 캄보디아
+        MN: 'mn',  // 몽골
+        NP: 'ne',  // 네팔
+        ID: 'id',  // 인도네시아
+        MM: 'my',  // 미얀마
+        LK: 'si',  // 스리랑카
+        KZ: 'kk',  // 카자흐스탄
+        BD: 'bn',  // 방글라데시
+        PK: 'ur',  // 파키스탄
+        PH: 'tl',  // 필리핀 (en → tl 수정)
       };
 
       const targetLang =
@@ -735,7 +748,7 @@ export function KMarketProvider({ children }: { children: React.ReactNode }) {
         setChatMessages((prev) => [...prev, msgData.message]);
       }
 
-        // 3. 판매자의 지능형 스마트 답장 시뮬레이션 (1.2초 후 실제 상황별 15개국어 자동 응답)
+        // 3. 판매자의 지능형 스마트 답장 시뮬레이션 (1.2초 후 실제 상황별 17개국어 자동 응답)
       setTimeout(async () => {
         const targetItem = activeChat.item || items.find((it) => it.id === activeChat.item_id) || items[0];
         const smartReply = generateSmartSellerReply(text, targetItem, currentLang);

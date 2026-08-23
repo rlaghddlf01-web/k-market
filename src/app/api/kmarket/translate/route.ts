@@ -155,47 +155,28 @@ export async function POST(req: NextRequest) {
 
     const apiKey = process.env.GEMINI_API_KEY || process.env.GOOGLE_API_KEY;
 
-    // 3. Gemini API 호출
-    if (apiKey) {
-      try {
-        const targetLangName = LANG_NAME_MAP[targetLang as SupportedLanguage] || targetLang;
-        const prompt = `You are a real-time translation engine for K-Market, a second-hand marketplace for foreign workers in Korea.
+    // 3. Genkit + Gemini AI 호출
+    try {
+      const { ai } = await import('@/lib/genkit');
+      const targetLangName = LANG_NAME_MAP[targetLang as SupportedLanguage] || targetLang;
+      const prompt = `You are a real-time translation engine for K-Market, a second-hand marketplace for foreign workers in Korea.
 Translate the following user message accurately, naturally, and politely into ${targetLangName}.
 Output ONLY the translated text without explanations, greetings, quotes, or markdown.
 
 Text to translate:
 ${trimmed}`;
 
-        const response = await fetch(
-          `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`,
-          {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              contents: [{ parts: [{ text: prompt }] }],
-              generationConfig: {
-                temperature: 0.2,
-                maxOutputTokens: 256,
-              },
-            }),
-          }
-        );
-
-        if (response.ok) {
-          const data = await response.json();
-          const candidate = data.candidates?.[0]?.content?.parts?.[0]?.text?.trim();
-          if (candidate) {
-            return NextResponse.json({
-              translatedText: candidate,
-              detectedSourceLang: sourceLang,
-              targetLang,
-              provider: 'gemini-ai',
-            });
-          }
-        }
-      } catch (geminiErr) {
-        console.warn('[Translate API] Gemini error, falling back:', geminiErr);
+      const { text } = await ai.generate(prompt);
+      if (text) {
+        return NextResponse.json({
+          translatedText: text.trim(),
+          detectedSourceLang: sourceLang,
+          targetLang,
+          provider: 'gemini-ai',
+        });
       }
+    } catch (geminiErr) {
+      console.warn('[Translate API] Genkit error, falling back:', geminiErr);
     }
 
     return NextResponse.json({

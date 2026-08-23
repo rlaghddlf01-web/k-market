@@ -1,0 +1,17 @@
+export const post_create = {
+  "${raw.term} 팝니다": "Selling ${raw.term}",
+  "0.3초 실시간 95% 스마트 초경량 압축": "0.3s real-time 95% smart ultra-lightweight compression",
+  "AI 안심 번역가 0.3초 만에 실시간 번역 중...": "AI Secure Translator translating in real-time within 0.3 seconds...",
+  "✨ 상대방 모국어로 0.3초 만에 실시간 번역되어 전송됩니다 (AI 안심 번역 탑재)": "✨ Sent with real-time translation into the recipient's native language in 0.3 seconds (Powered by AI Secure Translation)",
+  "게시글 등록 완료": "Post created",
+  "게시글 등록 중...": "Creating post...",
+  "고화질 이미지 압축 진행 중...": "Compressing high-definition image...",
+  "대표사진": "Main photo",
+  "사진 압축 처리 중 오류가 발생했습니다.": "An error occurred while processing photo compression.",
+  "사진 첨부 (최대 5장)": "Attach photos (Max 5)",
+  "사진 추가": "Add photo",
+  "살게요": "I'll buy it",
+  "상품 사진": "Product photos",
+  "선택한 사진 삭제": "Delete selected photo",
+  "판매 가격 (0원을 입력하시면 무료나눔으로 자동 등록됩니다)": "Selling price (Entering 0 won will automatically register it as a free giveaway)",
+};

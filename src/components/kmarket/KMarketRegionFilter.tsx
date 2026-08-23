@@ -24,10 +24,10 @@ export default function KMarketRegionFilter() {
         <div className="flex items-center justify-between mb-2.5 px-1">
           <div className="flex items-center gap-1.5 text-xs font-bold text-[#1f1914]">
             <MapPin className="w-3.5 h-3.5 text-[#845b37]" />
-            <span>{t('meetup_zone_title')}</span>
+            <span>{t('주요 공단 도보 안심 직거래 구역')}</span>
           </div>
           <span className="text-[11px] text-[#8c7866] font-medium hidden sm:inline">
-            {t('zone_sub_desc')}
+            {t('포승, 반월, 시화, 향남, 남동 공단 기숙사 인근 직거래')}
           </span>
         </div>
 

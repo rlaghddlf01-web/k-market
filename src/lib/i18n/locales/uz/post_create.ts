@@ -1,0 +1,17 @@
+export const post_create = {
+  "${raw.term} 팝니다": "${raw.term} sotaman",
+  "0.3초 실시간 95% 스마트 초경량 압축": "0.3 soniyada real vaqt rejimida 95% aqlli ultra engil siqish",
+  "AI 안심 번역가 0.3초 만에 실시간 번역 중...": "AI xavfsiz tarjimon 0.3 soniyada real vaqt rejimida tarjima qilmoqda...",
+  "✨ 상대방 모국어로 0.3초 만에 실시간 번역되어 전송됩니다 (AI 안심 번역 탑재)": "✨ Suhbatdoshning ona tiliga 0.3 soniyada real vaqt rejimida tarjima qilinib yuboriladi (AI xavfsiz tarjimasi bilan)",
+  "게시글 등록 완료": "E'lon muvaffaqiyatli joylashtirildi",
+  "게시글 등록 중...": "E'lon joylashtirilmoqda...",
+  "고화질 이미지 압축 진행 중...": "Yuqori sifatli rasmni siqish jarayoni ketmoqda...",
+  "대표사진": "Asosiy rasm",
+  "사진 압축 처리 중 오류가 발생했습니다.": "Rasmni siqish jarayonida xatolik yuz berdi.",
+  "사진 첨부 (최대 5장)": "Rasm biriktirish (ko'pi bilan 5 ta)",
+  "사진 추가": "Rasm qo'shish",
+  "살게요": "Sotib olaman",
+  "상품 사진": "Mahsulot rasmi",
+  "선택한 사진 삭제": "Tanlangan rasmni o'chirish",
+  "판매 가격 (0원을 입력하시면 무료나눔으로 자동 등록됩니다)": "Sotish narxi (0 so'm kiritsangiz, bepul ulashish sifatida avtomatik ro'yxatdan o'tadi)",
+};

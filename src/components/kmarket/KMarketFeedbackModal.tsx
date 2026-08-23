@@ -25,39 +25,39 @@ export default function KMarketFeedbackModal({ isOpen, onClose }: KMarketFeedbac
   const CATEGORY_OPTIONS: CategoryOption[] = [
     {
       id: 'translation_error',
-      label: t('voc_cat_translation'),
+      label: t('🌐 번역 / 언어 오류'),
       icon: <Sparkles className="w-4 h-4 text-indigo-500" />,
-      placeholder: t('voc_ph_translation'),
+      placeholder: t('어떤 언어의 어떤 단어나 문장이 어색하거나 잘못되었나요? 상세히 알려주시면 즉시 수정하겠습니다.'),
     },
     {
       id: 'location_request',
-      label: t('voc_cat_location'),
+      label: t('📍 내 동네 / 직거래 장소 추가'),
       icon: <MapPin className="w-4 h-4 text-emerald-500" />,
-      placeholder: t('voc_ph_location'),
+      placeholder: t('추가하고 싶은 지역이나 안심 직거래 추천 장소를 적어주세요. (예: 안심존 편의점 앞, 지하철역 출구)'),
     },
     {
       id: 'security_improve',
-      label: t('voc_cat_security'),
+      label: t('🛡️ 사기 방지 / 안심 거래'),
       icon: <ShieldAlert className="w-4 h-4 text-rose-500" />,
-      placeholder: t('voc_ph_security'),
+      placeholder: t('사기 피해 예방이나 안심 거래를 위해 더 필요한 안전 기능이 있다면 자유롭게 제안해 주세요.'),
     },
     {
       id: 'finance_service',
-      label: t('voc_cat_finance'),
+      label: t('💰 세무 / 대출 / 금융'),
       icon: <Wallet className="w-4 h-4 text-amber-500" />,
-      placeholder: t('voc_ph_finance'),
+      placeholder: t('세금 환급, 비상금 대출, 귀국 퇴직금 등 외국인 근로자에게 필요한 추가 서비스 의견을 들려주세요.'),
     },
     {
       id: 'bug_report',
-      label: t('voc_cat_bug'),
+      label: t('📱 화면 렉 / 버그 제보'),
       icon: <Bug className="w-4 h-4 text-red-500" />,
-      placeholder: t('voc_ph_bug'),
+      placeholder: t('어떤 화면에서 어떤 문제가 발생했나요? (예: 채팅창이 안 열림, 사진 업로드가 느림 등)'),
     },
     {
       id: 'general_suggestion',
-      label: t('voc_cat_general'),
+      label: t('💬 기타 자유 건의 및 칭찬'),
       icon: <Lightbulb className="w-4 h-4 text-blue-500" />,
-      placeholder: t('voc_ph_general'),
+      placeholder: t('케이마켓을 이용하시면서 느끼신 점이나 추가되었으면 하는 모든 아이디어를 자유롭게 남겨주세요!'),
     },
   ];
 
@@ -112,13 +112,13 @@ export default function KMarketFeedbackModal({ isOpen, onClose }: KMarketFeedbac
             </div>
             <div>
               <h3 className="text-base sm:text-lg font-black tracking-tight flex items-center gap-1.5">
-                <span>{t('voc_modal_title')}</span>
+                <span>{t('앱 개선 제안 및 의견 보내기')}</span>
                 <span className="text-[10px] bg-amber-400 text-slate-950 font-extrabold px-2 py-0.5 rounded-full">
-                  {t('voc_modal_badge')}
+                  {t('고객 의견 접수 창구')}
                 </span>
               </h3>
               <p className="text-xs text-slate-300 mt-0.5">
-                {t('voc_modal_desc')}
+                {t('대표님과 관리자 팀이 여러분의 소중한 의견을 직접 읽고 반영합니다.')}
               </p>
             </div>
           </div>
@@ -139,10 +139,10 @@ export default function KMarketFeedbackModal({ isOpen, onClose }: KMarketFeedbac
             </div>
             <div>
               <h4 className="text-lg font-black text-slate-900 dark:text-white">
-                {t('voc_success_title')}
+                {t('소중한 의견이 성공적으로 접수되었습니다!')}
               </h4>
               <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 leading-relaxed">
-                {t('voc_success_desc')}
+                {t('보내주신 개선점은 관리자 팀에서 꼼꼼히 검토 후 앱 업데이트에 신속히 반영하겠습니다. 감사합니다!')}
               </p>
             </div>
           </div>
@@ -151,7 +151,7 @@ export default function KMarketFeedbackModal({ isOpen, onClose }: KMarketFeedbac
             {/* 1. 건의 유형 선택 칩 (Chips) */}
             <div>
               <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-2">
-                {t('voc_step1_label')}
+                {t('1. 어떤 부분에 대한 의견이신가요? (유형 선택)')}
               </label>
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
                 {CATEGORY_OPTIONS.map((opt) => {
@@ -178,7 +178,7 @@ export default function KMarketFeedbackModal({ isOpen, onClose }: KMarketFeedbac
             {/* 2. 상세 내용 텍스트 입력창 */}
             <div>
               <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5 flex items-center justify-between">
-                <span>{t('voc_step2_label')} <span className="text-rose-500">*</span></span>
+                <span>{t('2. 개선할 점을 자유롭게 글로 작성해 주세요')} <span className="text-rose-500">*</span></span>
                 <span className="text-[10px] text-slate-400 font-normal">{content.length} / 500</span>
               </label>
               <textarea
@@ -195,13 +195,13 @@ export default function KMarketFeedbackModal({ isOpen, onClose }: KMarketFeedbac
             {/* 3. 답변 받을 연락처 (선택) */}
             <div>
               <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">
-                {t('voc_step3_label')}
+                {t('3. 답변 또는 진행 상황을 안내받으실 연락처 (선택)')}
               </label>
               <input
                 type="text"
                 value={contactInfo}
                 onChange={(e) => setContactInfo(e.target.value)}
-                placeholder={t('voc_contact_placeholder')}
+                placeholder={t('전화번호(카톡) 또는 이메일 (선택 사항)')}
                 className="w-full p-3 bg-slate-50 dark:bg-gray-800 border border-slate-200 dark:border-gray-700 rounded-2xl text-xs text-slate-900 dark:text-white placeholder:text-slate-400 focus:bg-white dark:focus:bg-gray-800 focus:outline-hidden focus:ring-2 focus:ring-indigo-500 transition-all"
               />
             </div>
@@ -214,11 +214,11 @@ export default function KMarketFeedbackModal({ isOpen, onClose }: KMarketFeedbac
                 className="w-full py-3.5 bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 disabled:opacity-50 text-white font-black text-sm rounded-2xl shadow-md transition-all flex items-center justify-center gap-2 cursor-pointer"
               >
                 {isSubmitting ? (
-                  <span>{t('voc_submitting_label')}</span>
+                  <span>{t('전송 중...')}</span>
                 ) : (
                   <>
                     <Send className="w-4 h-4" />
-                    <span>{t('voc_submit_btn')}</span>
+                    <span>{t('관리자에게 개선 의견 보내기')}</span>
                   </>
                 )}
               </button>

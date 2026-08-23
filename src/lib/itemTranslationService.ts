@@ -518,6 +518,8 @@ export async function translateItemToAllLanguages(
   description: string,
   sourceLang: SupportedLanguage = 'ko'
 ): Promise<Record<string, { title: string; description: string }>> {
+  // 서버 API route(items, community, comments)에서 호출 시 Genkit 번역은
+  // 해당 route.ts에서 직접 처리. 이 함수는 딕셔너리 fallback만 제공.
   const isMoving = title.includes('귀국') || title.includes('무빙') || title.includes('Moving');
   const isFree = title.includes('무료') || title.includes('0원') || title.includes('Free');
   return generate15LangTranslations(title, isMoving, isFree, 7);
@@ -685,17 +687,17 @@ export function getAdaptedNotification(
 
   if (notif.id === 'notif-1' || notif.type === 'keyword') {
     const washerName = getAdaptedKeyword('세탁기', lang);
-    title = `🔔 ${t('notif_tab_keyword')}: [${washerName}]`;
-    message = t('notif_msg_keyword_washer') || message;
+    title = `🔔 ${t('키워드 알림')}: [${washerName}]`;
+    message = t('내 주변에 "통돌이 세탁기 10킬로그램 + 쿠쿠 밥솥" 매물이 새로 등록되었습니다.') || message;
   } else if (notif.id === 'notif-2' || notif.type === 'chat') {
-    title = `💬 ${t('notif_tab_chat')}`;
-    message = t('notif_msg_chat_nguyen') || message;
+    title = `💬 ${t('번역 채팅')}`;
+    message = t('이웃 회원이 새로운 번역 메시지를 보냈습니다: "감사합니다! 오늘 저녁 7시에 만나요!"') || message;
   } else if (notif.id === 'notif-3' || notif.type === 'price_drop') {
-    title = `🔥 ${t('notif_tab_price_drop')}`;
-    message = t('notif_msg_price_drop') || message;
+    title = `🔥 ${t('가격 인하')}`;
+    message = t('관심 매물 "쿠쿠 전기밥솥 6인용" 가격이 25,000원으로 15% 인하되었습니다!') || message;
   } else if (notif.id === 'notif-4' || notif.type === 'appointment') {
-    title = `📍 ${t('notif_appoint_reminder_title')}`;
-    message = t('notif_msg_appointment') || message;
+    title = `📍 ${t('직거래 약속 1시간 전 리마인더')}`;
+    message = t('오늘 19:00 "근처 편의점 앞" 직거래 약속 1시간 전입니다.') || message;
   }
 
   return {

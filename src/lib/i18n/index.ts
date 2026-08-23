@@ -48,29 +48,29 @@ export const LOCALES: Record<SupportedLanguage, TranslationDictionary> = {
  * 키값 기반 역매핑 테이블 생성 (UI_TRANSLATIONS 호환용)
  */
 export function buildUiTranslations(): Record<string, Record<SupportedLanguage, string>> {
-  const keys = Object.keys(ko) as (keyof TranslationDictionary)[];
+  const keys = Object.keys(ko);
   const result: Record<string, Record<SupportedLanguage, string>> = {};
 
   for (const key of keys) {
     result[key] = {
-      ko: ko[key] || '',
-      vi: vi[key] || ko[key] || '',
-      zh: zh[key] || ko[key] || '',
-      en: en[key] || ko[key] || '',
-      ja: ja[key] || ko[key] || '',
-      ru: ru[key] || ko[key] || '',
-      th: th[key] || ko[key] || '',
-      uz: uz[key] || ko[key] || '',
-      km: km[key] || ko[key] || '',
-      mn: mn[key] || ko[key] || '',
-      ne: ne[key] || ko[key] || '',
-      id: id[key] || ko[key] || '',
-      my: my[key] || ko[key] || '',
-      si: si[key] || ko[key] || '',
-      kk: kk[key] || ko[key] || '',
-      bn: bn[key] || ko[key] || '',
-      ur: ur[key] || ko[key] || '',
-      tl: tl[key] || ko[key] || '',
+      ko: (ko as any)[key] || key,
+      vi: (vi as any)[key] || (ko as any)[key] || key,
+      zh: (zh as any)[key] || (ko as any)[key] || key,
+      en: (en as any)[key] || (ko as any)[key] || key,
+      ja: (ja as any)[key] || (ko as any)[key] || key,
+      ru: (ru as any)[key] || (ko as any)[key] || key,
+      th: (th as any)[key] || (ko as any)[key] || key,
+      uz: (uz as any)[key] || (ko as any)[key] || key,
+      km: (km as any)[key] || (ko as any)[key] || key,
+      mn: (mn as any)[key] || (ko as any)[key] || key,
+      ne: (ne as any)[key] || (ko as any)[key] || key,
+      id: (id as any)[key] || (ko as any)[key] || key,
+      my: (my as any)[key] || (ko as any)[key] || key,
+      si: (si as any)[key] || (ko as any)[key] || key,
+      kk: (kk as any)[key] || (ko as any)[key] || key,
+      bn: (bn as any)[key] || (ko as any)[key] || key,
+      ur: (ur as any)[key] || (ko as any)[key] || key,
+      tl: (tl as any)[key] || (ko as any)[key] || key,
     };
   }
 

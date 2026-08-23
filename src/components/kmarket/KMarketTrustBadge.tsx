@@ -47,7 +47,7 @@ export default function KMarketTrustBadge({
         className={`flex items-center gap-2 text-xs ${
           onClick ? 'cursor-pointer group' : ''
         }`}
-        title={`${t('trust_score_title')}: ${mannerTemp.toFixed(1)}℃ (${levelTitle})`}
+        title={`${t('케이마켓 신뢰 매너온도 점수')}: ${mannerTemp.toFixed(1)}℃ (${levelTitle})`}
       >
         <div className="flex flex-col items-end">
           <div className="flex items-center gap-1">
@@ -78,7 +78,7 @@ export default function KMarketTrustBadge({
       <div className="flex items-center justify-between">
         <div>
           <div className="text-xs text-gray-500 dark:text-gray-400 font-medium">
-            {t('auto_ui_207')}
+            {t('케이마켓 매너온도')}
           </div>
           <div className="flex items-center gap-1.5 mt-0.5">
             <span className={`text-base font-extrabold ${color}`}>
@@ -91,7 +91,7 @@ export default function KMarketTrustBadge({
           </div>
         </div>
         <div className="text-right">
-          <div className="text-[11px] text-gray-500 dark:text-gray-400">{t('auto_ui_356')}</div>
+          <div className="text-[11px] text-gray-500 dark:text-gray-400">{t('거래 회')}</div>
           <div className="w-20 h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden mt-1.5">
             <div
               className={`h-full ${barColor} transition-all duration-500`}
@@ -106,13 +106,13 @@ export default function KMarketTrustBadge({
         {isVerifiedWorker && (
           <div className="inline-flex items-center gap-1 text-emerald-600 dark:text-emerald-400 font-semibold bg-emerald-50 dark:bg-emerald-950/40 px-2 py-0.5 rounded-md">
             <ShieldCheck className="w-3.5 h-3.5" />
-            <span>{t('auto_ui_357')}</span>
+            <span>{t('비자·신분 인증')}</span>
           </div>
         )}
         {isVerifiedDormitory && (
           <div className="inline-flex items-center gap-1 text-blue-600 dark:text-blue-400 font-semibold bg-blue-50 dark:bg-blue-950/40 px-2 py-0.5 rounded-md">
             <Home className="w-3.5 h-3.5" />
-            <span>{t('auto_ui_358')}</span>
+            <span>{t('공단 기숙사 인증')}</span>
           </div>
         )}
       </div>

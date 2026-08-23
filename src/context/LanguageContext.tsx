@@ -86,8 +86,8 @@ export function LanguageProvider({
   };
 
   const formatWon = (amount: number): string => {
-    if (amount === 0) return t('currency_free');
-    return `${amount.toLocaleString()}${t('currency_won')}`;
+    if (amount === 0) return t('0원 (무료)');
+    return `${amount.toLocaleString()}${t('원 (대한민국 원화)')}`;
   };
 
   return (

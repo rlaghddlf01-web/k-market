@@ -53,7 +53,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'postId and content are required' }, { status: 400 });
     }
 
-    // 15개국어 번역 생성
+    // 17개국어 번역 생성
     let translations: Record<string, string> = { [sourceLang]: content };
     try {
       const transResult = await translateItemToAllLanguages(

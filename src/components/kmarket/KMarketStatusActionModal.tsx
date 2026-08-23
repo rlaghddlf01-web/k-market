@@ -109,7 +109,7 @@ export default function KMarketStatusActionModal({
         <div className="space-y-1">
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-indigo-50 dark:bg-indigo-950/50 text-indigo-700 dark:text-indigo-300 text-xs font-semibold">
             <Sparkles className="w-3.5 h-3.5" />
-            <span>{t('auto_ui_266')}</span>
+            <span>{t('판매 매물 관리')}</span>
           </div>
           <h2 className="text-xl font-bold text-gray-900 dark:text-white pt-1">
             거래 상태 변경 & 끌어올리기
@@ -134,7 +134,7 @@ export default function KMarketStatusActionModal({
               }`}
             >
               <ShoppingBag className="w-5 h-5" />
-              <span className="text-xs">{t('status_selling')}</span>
+              <span className="text-xs">{t('안내 내용을 확인해 주세요')}</span>
             </button>
 
             <button
@@ -147,7 +147,7 @@ export default function KMarketStatusActionModal({
               }`}
             >
               <Clock className="w-5 h-5" />
-              <span className="text-xs">{t('status_reserved')}</span>
+              <span className="text-xs">{t('안내 내용을 확인해 주세요')}</span>
             </button>
 
             <button
@@ -160,7 +160,7 @@ export default function KMarketStatusActionModal({
               }`}
             >
               <CheckCircle2 className="w-5 h-5" />
-              <span className="text-xs">{t('status_sold')}</span>
+              <span className="text-xs">{t('거래완료')}</span>
             </button>
           </div>
 
@@ -169,9 +169,9 @@ export default function KMarketStatusActionModal({
             <div className="flex items-center justify-between font-semibold text-gray-700 dark:text-gray-300">
               <span className="flex items-center gap-1.5">
                 <UserCheck className="w-4 h-4 text-emerald-600" />
-                <span>{t('auto_ui_267')}</span>
+                <span>{t('거래 상대방 (구매자)')}</span>
               </span>
-              <span className="text-[11px] text-emerald-600">{t('auto_ui_268')}</span>
+              <span className="text-[11px] text-emerald-600">{t('최근 채팅 상대')}</span>
             </div>
             <div className="flex items-center justify-between pt-1">
               <div className="flex items-center gap-2">
@@ -188,7 +188,7 @@ export default function KMarketStatusActionModal({
               </span>
             </div>
             <p className="text-[10px] text-gray-400 pt-0.5">
-              * [거래완료]를 누르면 이 구매자에게 자동으로 15개국어 거래후기 평가창이 팝업됩니다.
+              * [거래완료]를 누르면 이 구매자에게 자동으로 17개국어 거래후기 평가창이 팝업됩니다.
             </p>
           </div>
         </div>
@@ -198,21 +198,21 @@ export default function KMarketStatusActionModal({
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-1.5 font-bold text-indigo-900 dark:text-indigo-300">
               <Rocket className="w-4 h-4 text-indigo-600" />
-              <span>{t('auto_ui_269')}</span>
+              <span>{t('🚀 피드 최상단 끌어올리기')}</span>
             </div>
             <span className="text-[10px] bg-indigo-600 text-white font-bold px-2 py-0.5 rounded-full">
-              {t('auto_loop_1042')}
+              {t('안내 내용을 확인해 주세요')}
             </span>
           </div>
 
           <p className="text-[11px] text-indigo-800/80 dark:text-indigo-300/80 leading-relaxed">
-            매물을 목록 맨 위로 끌어올려 외국인 근로자들에게 다시 노출합니다. 가격을 10% 이상 할인하면 <strong>{t('auto_ui_270')}</strong> 뱃지가 함께 부착되어 3배 빠르게 판매됩니다!
+            매물을 목록 맨 위로 끌어올려 외국인 근로자들에게 다시 노출합니다. 가격을 10% 이상 할인하면 <strong>{t('[가격인하 📉]')}</strong> 뱃지가 함께 부착되어 3배 빠르게 판매됩니다!
           </p>
 
           {/* 가격 할인 선택 옵션 */}
           <div className="space-y-1.5 pt-1">
             <label className="font-semibold text-gray-700 dark:text-gray-300 flex items-center justify-between">
-              <span>{t('auto_ui_271')}</span>
+              <span>{t('가격 인하 선택 (선택 사항)')}</span>
               {discountPercent > 0 && (
                 <span className="font-bold text-rose-600">
                   {formatWon(item.price)} ➔ {formatWon(discountedPrice)} ({discountPercent}% 할인)
@@ -244,7 +244,7 @@ export default function KMarketStatusActionModal({
             className="w-full py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs shadow-md flex items-center justify-center gap-1.5 transition-all cursor-pointer"
           >
             <Rocket className="w-4 h-4" />
-            <span>{t('auto_ui_272')}</span>
+            <span>{t('지금 끌어올리기 완료')}</span>
           </button>
         </div>
       </div>

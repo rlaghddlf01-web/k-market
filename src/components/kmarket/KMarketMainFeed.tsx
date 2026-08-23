@@ -144,7 +144,7 @@ export default function KMarketMainFeed() {
                 </div>
                 <div className="flex items-center gap-1.5 text-xs text-[#705e4f] font-medium bg-[#f4efe9] px-3 py-1.5 rounded-full border border-[#dfd7ce]">
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-                  15개국어 실시간 번역
+                  17개국어 실시간 번역
                 </div>
               </div>
 
@@ -175,7 +175,7 @@ export default function KMarketMainFeed() {
                             : 'bg-white text-[#1f1914] border-[#ded1c4] hover:bg-[#eae3dc] active:scale-95 cursor-pointer shadow-xs'
                         }`}
                       >
-                        ◀ {t('btn_prev')}
+                        ◀ {t('이전 단계로 돌아가기')}
                       </button>
 
                       {/* 페이지 번호 목록 */}
@@ -217,7 +217,7 @@ export default function KMarketMainFeed() {
                             : 'bg-white text-[#1f1914] border-[#ded1c4] hover:bg-[#eae3dc] active:scale-95 cursor-pointer shadow-xs'
                         }`}
                       >
-                        {t('btn_next')} ▶
+                        {t('다음 단계로 계속하기')} ▶
                       </button>
                     </div>
                   )}
@@ -228,7 +228,7 @@ export default function KMarketMainFeed() {
                     <PackageOpen className="w-9 h-9 text-blue-400" />
                   </div>
                   <div className="space-y-1.5">
-                    <h3 className="text-base font-bold text-slate-800">{t('auto_ui_180')}</h3>
+                    <h3 className="text-base font-bold text-slate-800">{t('조건에 맞는 매물이 없습니다')}</h3>
                     <p className="text-xs text-slate-500 max-w-sm mx-auto leading-relaxed">
                       필터를 전체로 변경하거나, 첫 번째로 내 중고 물건을 1분 만에 등록해 보세요!
                     </p>
@@ -251,7 +251,7 @@ export default function KMarketMainFeed() {
             onClick={() => setIsCreateModalOpen(true)}
             className="md:hidden fixed bottom-6 right-5 z-40 text-[#fbf9f6] p-4 rounded-full flex items-center justify-center active:scale-90 transition-transform cursor-pointer shadow-lg"
             style={{ background: 'linear-gradient(135deg, #2b1b17 0%, #4a2c11 100%)' }}
-            aria-label="Post Item"
+            aria-label={t('매물 등록하기')}
           >
             <Plus className="w-6 h-6" />
           </button>
@@ -274,26 +274,26 @@ export default function KMarketMainFeed() {
                   <div className="relative w-9 h-9 rounded-xl overflow-hidden shadow-md shrink-0 border border-[#845b37]/60 bg-[#09101f] flex items-center justify-center">
                     <img
                       src="/images/kmarket-logo.jpg"
-                      alt="K-Market Logo"
+                      alt={t('케이마켓 로고')}
                       className="w-full h-full object-cover scale-110"
                     />
                   </div>
                   <span className="text-white font-black text-lg tracking-tight">KTRS K-Market</span>
-                  <span className="text-[10px] font-black bg-[#f3ba2f] text-[#09101f] px-2 py-0.5 rounded-full uppercase tracking-wider">Zero Fee C2C</span>
+                  <span className="text-[10px] font-black bg-[#f3ba2f] text-[#09101f] px-2 py-0.5 rounded-full uppercase tracking-wider">{t('수수료 0원 개인간 직거래')}</span>
                 </div>
                 <p className="text-[#f1f5f9] text-xs font-semibold leading-relaxed max-w-sm">
-                  {t('footer_platform_desc')}
+                  {t('대한민국 1등 외국인 종합 슈퍼앱 케이티알에스 연계 외국인 전용 0원 안심 중고거래 & 귀국 무빙세일 & 동네생활 커뮤니티')}
                 </p>
               </div>
 
               <div className="flex flex-col gap-2 text-xs font-bold text-[#f8fafc]">
                 <div className="flex items-center gap-2">
                   <ShieldCheck className="w-4 h-4 text-[#f3ba2f]" />
-                  <span className="text-white font-bold">{t('auto_ui_181')}</span>
+                  <span className="text-white font-bold">{t('수수료 0원 100% 무료 안심 직거래')}</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <Sparkles className="w-4 h-4 text-[#f3ba2f]" />
-                  <span className="text-white font-bold">{t('auto_ui_182')}</span>
+                  <span className="text-white font-bold">{t('17개국어 실시간 AI 안심 번역 양방향 번역')}</span>
                 </div>
               </div>
             </div>
@@ -301,21 +301,21 @@ export default function KMarketMainFeed() {
             {/* 공식 사업자등록 정보 */}
             <div className="space-y-2.5 text-xs text-white leading-relaxed font-medium">
               <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-white">
-                <span><strong className="text-[#f3ba2f] font-extrabold">{t('auto_ui_183')}</strong> {t('auto_ui_184')}</span>
+                <span><strong className="text-[#f3ba2f] font-extrabold">{t('사업자명:')}</strong> {t('주식회사 펫에이앤씨')}</span>
                 <span className="text-white/40">|</span>
-                <span><strong className="text-[#f3ba2f] font-extrabold">{t('auto_ui_185')}</strong> {t('auto_ui_186')}</span>
+                <span><strong className="text-[#f3ba2f] font-extrabold">{t('대표자:')}</strong> {t('안내 내용을 확인해 주세요')}</span>
                 <span className="text-white/40">|</span>
-                <span><strong className="text-[#f3ba2f] font-extrabold">{t('auto_ui_187')}</strong> 229-86-03034</span>
+                <span><strong className="text-[#f3ba2f] font-extrabold">{t('사업자 등록번호:')}</strong> 229-86-03034</span>
                 <span className="text-white/40">|</span>
-                <span><strong className="text-[#f3ba2f] font-extrabold">{t('auto_ui_188')}</strong> {t('auto_ui_189')}</span>
+                <span><strong className="text-[#f3ba2f] font-extrabold">{t('통신판매업 번호:')}</strong> {t('제 2023-진접오남-0680호')}</span>
               </div>
 
               <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-white">
-                <span><strong className="text-[#f3ba2f] font-extrabold">{t('auto_ui_190')}</strong> {t('auto_ui_191')}</span>
+                <span><strong className="text-[#f3ba2f] font-extrabold">{t('안내 내용을 확인해 주세요')}</strong> {t('서울특별시 광진구 광나루로 436, 5층(화양동, 에듀킨빌딩)')}</span>
                 <span className="text-white/40">|</span>
-                <span><strong className="text-[#f3ba2f] font-extrabold">{t('auto_ui_192')}</strong> 010-5964-5340</span>
+                <span><strong className="text-[#f3ba2f] font-extrabold">{t('연락처:')}</strong> 010-5964-5340</span>
                 <span className="text-white/40">|</span>
-                <span><strong className="text-[#f3ba2f] font-extrabold">{t('auto_ui_193')}</strong> zkfnth021@gmail.com</span>
+                <span><strong className="text-[#f3ba2f] font-extrabold">{t('이메일:')}</strong> zkfnth021@gmail.com</span>
               </div>
             </div>
 
@@ -323,13 +323,13 @@ export default function KMarketMainFeed() {
             <div className="pt-5 border-t border-[#2d1a12] text-[11px] text-[#94a3b8] font-semibold flex flex-col sm:flex-row justify-between items-center gap-3">
               <p>© 2026 KTRS (Korea Tax &amp; Foreign Resident Service). All rights reserved.</p>
               <div className="flex items-center gap-3">
-                <span className="text-[#cbd5e1]">{t('auto_ui_194')}</span>
+                <span className="text-[#cbd5e1]">{t('안심 가이드 | 고객센터 1588-0000')}</span>
                 <Link
                   href="/admin"
                   className="px-2.5 py-1 bg-[#20140f] hover:bg-[#3d2817] border border-[#845b37]/80 text-[#f3ba2f] font-extrabold rounded-lg text-[10px] transition-all flex items-center gap-1 cursor-pointer"
-                  title={t('auto_ui_195')}
+                  title={t('케이티알에스 관리자 전용 관제 콘솔 페이지')}
                 >
-                  <span>{t('auto_ui_196')}</span>
+                  <span>{t('관리자 관제 콘솔')}</span>
                 </Link>
               </div>
             </div>
@@ -351,7 +351,7 @@ export default function KMarketMainFeed() {
           onClose={() => setIsAuthModalOpen(false)}
           onSuccessAuth={(userData) => {
             setAuthedUser(userData);
-            alert(`${t('auth_success_alert')} (${userData.userName})`);
+            alert(`${t('[신원인증 완료] 인증이 성공적으로 완료되었습니다.')} (${userData.userName})`);
           }}
         />
         <KMarketMyPageModal

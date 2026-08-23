@@ -73,7 +73,7 @@ export default function KMarketItemCard({ item }: KMarketItemCardProps) {
               setShowProfileModal(true);
             }}
             className="absolute top-3 left-3 bg-black/80 backdrop-blur-md text-white text-[11px] font-bold px-2.5 py-1 rounded-full shadow-md flex items-center gap-1.5 hover:bg-black transition-colors max-w-[70%]"
-            title={t('auto_ui_149')}
+            title={t('판매자 프로필 보기')}
           >
             <CountryFlag
               countryCode={item.seller_country}
@@ -97,7 +97,7 @@ export default function KMarketItemCard({ item }: KMarketItemCardProps) {
               <KMarketStatusBadge status="reserved" />
             ) : isFree ? (
               <div className="bg-emerald-500 text-white text-[11px] font-black px-2.5 py-1 rounded-full shadow-md animate-pulse">
-                {t('item_card_free_badge')}
+                {t('🎁 무료나눔')}
               </div>
             ) : item.is_moving_sale ? (
               <div
@@ -152,7 +152,7 @@ export default function KMarketItemCard({ item }: KMarketItemCardProps) {
                 ? 'bg-red-500 text-white shadow-md shadow-red-500/40'
                 : 'bg-black/40 text-white hover:bg-black/60'
             }`}
-            aria-label={t('item_detail_like_btn')}
+            aria-label={t('안내 내용을 확인해 주세요')}
           >
             <Heart className={`w-4 h-4 ${isLiked ? 'fill-current' : ''}`} />
           </button>
@@ -161,10 +161,10 @@ export default function KMarketItemCard({ item }: KMarketItemCardProps) {
         {/* ── 2. 사진 바로 밑 설명 및 상세 정보 영역 ───────────────── */}
         <div className="p-4 sm:p-5 flex flex-col justify-between gap-3">
           <div className="space-y-1.5">
-            {/* 15개국어 자동번역 뱃지 */}
+            {/* 17개국어 자동번역 뱃지 */}
             <div className="flex items-center gap-1 text-[11px] font-bold text-[#845b37]">
               <Sparkles className="w-3.5 h-3.5 text-[#b07d56]" />
-              <span>{t('auto_ui_150')}</span>
+              <span>{t('17개국어 자동번역')}</span>
             </div>
 
             {/* 상품 제목 */}
@@ -215,10 +215,10 @@ export default function KMarketItemCard({ item }: KMarketItemCardProps) {
                 border: '2px solid #f3ba2f',
                 boxShadow: '0 4px 12px rgba(9, 16, 31, 0.25)',
               }}
-              title={t('auto_ui_151')}
+              title={t('17개국어 실시간 자동번역 1:1 채팅')}
             >
               <MessageCircle className="w-4 h-4 text-[#f3ba2f] group-hover/btn:scale-110 transition-transform" />
-              <span className="text-[#f3ba2f] font-black tracking-tight">{t('item_card_chat_btn')}</span>
+              <span className="text-[#f3ba2f] font-black tracking-tight">{t('💬 1:1 실시간 번역 채팅')}</span>
             </button>
           </div>
         </div>

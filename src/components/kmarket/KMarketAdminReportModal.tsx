@@ -121,10 +121,10 @@ export default function KMarketAdminReportModal({
             </div>
             <div>
               <div className="inline-flex items-center space-x-1.5 bg-red-500/20 px-2.5 py-0.5 rounded-full text-xs font-bold text-red-300 mb-0.5 border border-red-500/30">
-                <span>{t('auto_ui_37')}</span>
+                <span>{t('케이티알에스 케이마켓 24시 안전 관리자 관제 콘솔')}</span>
               </div>
               <h2 className="text-xl font-black tracking-tight flex items-center gap-2">
-                <span>{t('auto_ui_38')}</span>
+                <span>{t('신고 접수 내역 및 불량 회원 제재 관리')}</span>
                 <span className="bg-red-600 text-white text-xs px-2 py-0.5 rounded-full font-mono">
                   미처리 {reports.filter((r) => r.status === 'pending').length}건
                 </span>
@@ -240,14 +240,14 @@ export default function KMarketAdminReportModal({
                   <div className="py-3 grid grid-cols-1 md:grid-cols-2 gap-3">
                     <div className="space-y-1.5">
                       <div className="text-xs">
-                        <span className="text-slate-500">{t('auto_ui_39')} </span>
+                        <span className="text-slate-500">{t('피신고 대상자:')} </span>
                         <strong className="text-red-600 font-bold text-sm">
                           {rep.target_user_name}
                         </strong>
                       </div>
                       {rep.item_title && (
                         <div className="text-xs text-slate-700 dark:text-slate-300">
-                          <span className="text-slate-500">{t('auto_ui_40')} </span>
+                          <span className="text-slate-500">{t('관련 매물:')} </span>
                           <span className="font-semibold underline">{rep.item_title}</span>
                         </div>
                       )}
@@ -278,7 +278,7 @@ export default function KMarketAdminReportModal({
                         className="px-3 py-2 bg-amber-100 hover:bg-amber-200 text-amber-900 font-bold text-xs rounded-xl transition-colors flex items-center gap-1 cursor-pointer"
                       >
                         <Trash2 className="w-3.5 h-3.5" />
-                        <span>{t('auto_ui_41')}</span>
+                        <span>{t('매물 강제 삭제')}</span>
                       </button>
 
                       <button
@@ -286,7 +286,7 @@ export default function KMarketAdminReportModal({
                         className="px-3 py-2 bg-orange-600 hover:bg-orange-700 text-white font-bold text-xs rounded-xl transition-all shadow-xs flex items-center gap-1 cursor-pointer"
                       >
                         <Clock className="w-3.5 h-3.5" />
-                        <span>{t('auto_ui_42')}</span>
+                        <span>{t('7일 이용 정지')}</span>
                       </button>
 
                       <button
@@ -294,7 +294,7 @@ export default function KMarketAdminReportModal({
                         className="px-4 py-2 bg-red-600 hover:bg-red-700 text-white font-black text-xs rounded-xl transition-all shadow-md shadow-red-600/30 flex items-center gap-1.5 cursor-pointer"
                       >
                         <Ban className="w-4 h-4" />
-                        <span>{t('auto_ui_43')}</span>
+                        <span>{t('플랫폼 서비스 영구 제재 처리')}</span>
                       </button>
                     </div>
                   )}

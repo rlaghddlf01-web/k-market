@@ -34,11 +34,11 @@ export default function KMarketSafetyBanner() {
             <div>
               <div className="flex items-center space-x-2">
                 <span className="text-xs font-bold text-[#5c4a39] uppercase tracking-wider bg-[#e5dad0] px-2 py-0.5 rounded-full border border-[#ded1c4]">
-                  🛡️ {t('scam_bar_badge')}
+                  🛡️ {t('외국인 안심 거래 쉴드')}
                 </span>
               </div>
               <p className="text-xs font-bold text-[#1f1914] mt-1">
-                {t('scam_bar_desc')}
+                {t('선입금 요구는 99% 사기! 반드시 현장에서 물건 확인 후 결제하세요.')}
               </p>
             </div>
           </div>
@@ -46,7 +46,7 @@ export default function KMarketSafetyBanner() {
           {/* 우측 3대 수칙 퀵 요약 & 화살표 */}
           <div className="flex items-center space-x-2 self-end sm:self-auto shrink-0">
             <span className="text-xs font-bold text-[#845b37] group-hover:underline flex items-center gap-0.5">
-              <span>{t('auto_ui_251')}</span>
+              <span>{t('3대 안심 수칙 보기')}</span>
               <ChevronRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
             </span>
           </div>
@@ -64,10 +64,10 @@ export default function KMarketSafetyBanner() {
                 </div>
                 <div>
                   <h3 className="text-lg font-black tracking-tight">
-                    {t('safety_modal_title')}
+                    {t('외국인 안심 직거래 3대 안전 수칙')}
                   </h3>
                   <p className="text-xs text-emerald-100">
-                    {t('safety_modal_subtitle')}
+                    {t('케이마켓 회원 보호 및 사기 범죄 원천 차단 가이드')}
                   </p>
                 </div>
               </div>
@@ -89,10 +89,10 @@ export default function KMarketSafetyBanner() {
                 <div className="space-y-1">
                   <h4 className="font-extrabold text-rose-950 dark:text-rose-200 text-sm flex items-center gap-1.5">
                     <AlertTriangle className="w-4 h-4 text-rose-600" />
-                    <span>{t('auto_ui_252')}</span>
+                    <span>{t('선입금 및 예약금 요구는 99% 사기입니다')}</span>
                   </h4>
                   <p className="text-rose-900/80 dark:text-rose-300/80 text-xs leading-relaxed">
-                    {t('safety_rule_1_desc')} <strong>{t('auto_ui_253')}</strong> {t('safety_rule_1_desc_tail')}
+                    {t('"물건을 맡아둘 테니 1만원만 먼저 보내라", "택배비 먼저 입금해라" 등은 대표적인 사기 수법입니다. 반드시 직접 만나 물건을 꼼꼼히 확인한 후 대금을 지급하세요.')} <strong>{t('직접 만나서 물건 상태를 확인한 후')}</strong> {t('반드시 직접 만나 물건을 꼼꼼히 확인한 후 대금을 지급하세요.')}
                   </p>
                 </div>
               </div>
@@ -105,10 +105,10 @@ export default function KMarketSafetyBanner() {
                 <div className="space-y-1">
                   <h4 className="font-extrabold text-amber-950 dark:text-amber-200 text-sm flex items-center gap-1.5">
                     <MessageCircle className="w-4 h-4 text-amber-600" />
-                    <span>{t('auto_ui_254')}</span>
+                    <span>{t('카카오톡/라인 등 외부 메신저 유도를 거절하세요')}</span>
                   </h4>
                   <p className="text-amber-900/80 dark:text-amber-300/80 text-xs leading-relaxed">
-                    {t('safety_rule_2_desc')} <strong>{t('auto_ui_255')}</strong> {t('safety_rule_2_desc_tail')}
+                    {t('외부 메신저로 대화할 경우 사기 피해 발생 시 증거 확보 및 구제가 어렵습니다. 반드시 케이마켓의 안심 자동 번역 채팅방 안에서만 안전하게 거래를 진행하세요.')} <strong>{t('17개국어 실시간 안심 번역 채팅')}</strong> {t('반드시 케이마켓의 안심 자동 번역 채팅방 안에서만 안전하게 거래를 진행하세요.')}
                   </p>
                 </div>
               </div>
@@ -121,10 +121,10 @@ export default function KMarketSafetyBanner() {
                 <div className="space-y-1">
                   <h4 className="font-extrabold text-blue-950 dark:text-blue-200 text-sm flex items-center gap-1.5">
                     <MapPin className="w-4 h-4 text-blue-600" />
-                    <span>{t('auto_ui_256')}</span>
+                    <span>{t('가로등과 폐쇄회로 카메라가 있는 안전한 안심존에서 만나세요')}</span>
                   </h4>
                   <p className="text-blue-900/80 dark:text-blue-300/80 text-xs leading-relaxed">
-                    {t('safety_rule_3_desc')} <strong>{t('auto_ui_257')}</strong> {t('safety_rule_3_desc_tail')}
+                    {t('인적이 드문 골목보다 편의점 앞, 밝은 지하철 출구 등 안전한 랜드마크 지도 핀을 만남 장소로 잡으세요.')} <strong>{t('역 앞 편의점, 동네 랜드마크, 공공장소 앞')}</strong> {t('편의점 앞, 밝은 지하철 출구 등 안전한 랜드마크 지도 핀을 만남 장소로 잡으세요.')}
                   </p>
                 </div>
               </div>
@@ -133,7 +133,7 @@ export default function KMarketSafetyBanner() {
                 onClick={() => setShowDetailModal(false)}
                 className="w-full py-3.5 bg-slate-900 hover:bg-black text-white font-black text-sm rounded-2xl shadow-lg transition-all cursor-pointer"
               >
-                {t('btn_confirm')}
+                {t('안내 내용을 모두 확인했습니다')}
               </button>
             </div>
           </div>

@@ -50,7 +50,7 @@ export default function KMarketTaxModal() {
   const handleFinalSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!applicantName.trim() || !applicantPhone.trim()) {
-      alert(t('auto_loop_870'));
+      alert(t('성명과 연락처를 입력해 주세요.'));
       return;
     }
 
@@ -87,20 +87,20 @@ export default function KMarketTaxModal() {
           <div className="flex items-center gap-2 mb-2">
             <div className="inline-flex items-center space-x-1.5 bg-black/30 backdrop-blur-md px-3 py-1 rounded-full text-xs font-bold text-amber-200 border border-white/20">
               <Sparkles className="w-3.5 h-3.5 text-yellow-300 animate-spin" />
-              <span>{t('tax_modal_link_badge')}</span>
+              <span>{t('국세청 실시간 원스톱 환급 연계')}</span>
             </div>
             <span className="bg-emerald-950/60 text-emerald-300 text-[11px] px-2.5 py-0.5 rounded-full font-black border border-emerald-400/30">
-              {t('tax_modal_zero_prepay')}
+              {t('선결제 비용 0원 (초기 수수료 없음)')}
             </span>
           </div>
 
           <h2 className="text-xl sm:text-2xl font-black tracking-tight leading-snug">
             {step === 3
-              ? '🎉 ' + t('tax_modal_headline')
-              : t('tax_modal_headline')}
+              ? '🎉 ' + t('나의 잠재 세금 환급액을 10초 만에 확인하세요')
+              : t('나의 잠재 세금 환급액을 10초 만에 확인하세요')}
           </h2>
           <p className="text-xs text-orange-100 mt-1">
-            {t('tax_modal_sub_desc')}
+            {t('한국에서 일하며 낸 소득세, 조특법 법정 감면 혜택으로 평균 184만원을 안전하게 돌려받으세요.')}
           </p>
 
           {/* 진행 스텝 인디케이터 */}
@@ -114,7 +114,7 @@ export default function KMarketTaxModal() {
                 <span className="w-5 h-5 rounded-full bg-white/20 flex items-center justify-center text-[11px]">
                   1
                 </span>
-                <span>{t('tax_step_1_title')}</span>
+                <span>{t('1. 비자 및 급여 선택')}</span>
               </div>
               <span className="text-white/40">➔</span>
               <div
@@ -125,7 +125,7 @@ export default function KMarketTaxModal() {
                 <span className="w-5 h-5 rounded-full bg-white/20 flex items-center justify-center text-[11px]">
                   2
                 </span>
-                <span>{t('tax_step_2_title')}</span>
+                <span>{t('2. 예상 환급액 및 간편 접수')}</span>
               </div>
             </div>
           )}
@@ -139,7 +139,7 @@ export default function KMarketTaxModal() {
               {/* 1. 비자 종류 선택 */}
               <div className="space-y-2">
                 <label className="text-xs font-bold text-slate-800 dark:text-slate-200 flex items-center justify-between">
-                  <span>{t('tax_visa_type_label')}</span>
+                  <span>{t('1. 체류 비자 유형')}</span>
                   <span className="text-[11px] text-orange-600 font-semibold">
                     {t(`visa_${selectedVisa.toLowerCase().replace(/[^a-z0-9]/g, '_')}_desc` as any) || currentVisaObj.desc}
                   </span>
@@ -188,9 +188,9 @@ export default function KMarketTaxModal() {
               {/* 2. 한국 근무 연수 슬라이더 */}
               <div className="space-y-2 bg-slate-50 dark:bg-gray-800/60 p-4 rounded-2xl border border-slate-100 dark:border-gray-700">
                 <div className="flex justify-between items-center text-xs font-bold text-slate-800 dark:text-slate-200">
-                  <span>{t('tax_work_years_label')}</span>
+                  <span>{t('2. 한국 근무 기간')}</span>
                   <span className="text-orange-600 dark:text-orange-400 text-sm font-extrabold">
-                    {workYears} {t('time_years')} ({workYears * 12} {t('time_months')})
+                    {workYears} {t('안내 내용을 확인해 주세요')} ({workYears * 12} {t('안내 내용을 확인해 주세요')})
                   </span>
                 </div>
                 <input
@@ -203,20 +203,20 @@ export default function KMarketTaxModal() {
                   className="w-full h-2 bg-slate-200 dark:bg-gray-700 rounded-lg appearance-none cursor-pointer accent-orange-500"
                 />
                 <div className="flex justify-between text-[11px] text-slate-400 font-medium">
-                  <span>1 {t('time_years')}</span>
-                  <span>2 {t('time_years')}</span>
-                  <span>3 {t('time_years')} ({t('badge_average')})</span>
-                  <span>4 {t('time_years')}</span>
-                  <span>5 {t('time_years')} ({t('badge_max')})</span>
+                  <span>1 {t('안내 내용을 확인해 주세요')}</span>
+                  <span>2 {t('안내 내용을 확인해 주세요')}</span>
+                  <span>3 {t('안내 내용을 확인해 주세요')} ({t('안내 내용을 확인해 주세요')})</span>
+                  <span>4 {t('안내 내용을 확인해 주세요')}</span>
+                  <span>5 {t('안내 내용을 확인해 주세요')} ({t('안내 내용을 확인해 주세요')})</span>
                 </div>
               </div>
 
               {/* 3. 월 평균 급여 슬라이더 */}
               <div className="space-y-2 bg-slate-50 dark:bg-gray-800/60 p-4 rounded-2xl border border-slate-100 dark:border-gray-700">
                 <div className="flex justify-between items-center text-xs font-bold text-slate-800 dark:text-slate-200">
-                  <span>{t('tax_monthly_pay_label')}</span>
+                  <span>{t('3. 월 평균 급여 기준 (세전 월 소득 금액)')}</span>
                   <span className="text-orange-600 dark:text-orange-400 text-sm font-extrabold">
-                    {(monthlyPay / 10000).toLocaleString()} {t('currency_10k_won')}
+                    {(monthlyPay / 10000).toLocaleString()} {t('대한민국 원화 단위')}
                   </span>
                 </div>
                 <input
@@ -229,10 +229,10 @@ export default function KMarketTaxModal() {
                   className="w-full h-2 bg-slate-200 dark:bg-gray-700 rounded-lg appearance-none cursor-pointer accent-orange-500"
                 />
                 <div className="flex justify-between text-[11px] text-slate-400 font-medium">
-                  <span>200 {t('currency_10k_won')}</span>
-                  <span>280 {t('currency_10k_won')} ({t('badge_average')})</span>
-                  <span>400 {t('currency_10k_won')}</span>
-                  <span>500 {t('currency_10k_won')}+</span>
+                  <span>200 {t('대한민국 원화 단위')}</span>
+                  <span>280 {t('대한민국 원화 단위')} ({t('안내 내용을 확인해 주세요')})</span>
+                  <span>400 {t('대한민국 원화 단위')}</span>
+                  <span>500 {t('대한민국 원화 단위')}+</span>
                 </div>
               </div>
 
@@ -240,14 +240,14 @@ export default function KMarketTaxModal() {
               <div className="bg-linear-to-br from-orange-500 to-amber-500 rounded-3xl p-5 text-white shadow-lg text-center space-y-2">
                 <div className="inline-flex items-center gap-1.5 bg-black/20 px-3 py-0.5 rounded-full text-xs font-bold text-yellow-200">
                   <Sparkles className="w-3 h-3 text-yellow-300" />
-                  <span>{t('tax_estimated_refund_badge')}</span>
+                  <span>{t('실시간 계산된 예상 환급액')}</span>
                 </div>
                 <div className="text-3xl sm:text-4xl font-black tracking-tight">
                   {result.estimatedTotalRefund.toLocaleString()}
-                  <span className="text-xl font-bold ml-1">{t('currency_won')}</span>
+                  <span className="text-xl font-bold ml-1">{t('원 (대한민국 원화)')}</span>
                 </div>
                 <p className="text-xs text-orange-100">
-                  {t('tax_zero_prepay_desc')}
+                  {t('* 선결제 비용 0원! 국세청에서 고객님 계좌로 환급금이 입금된 후에만 처리됩니다.')}
                 </p>
               </div>
 
@@ -256,7 +256,7 @@ export default function KMarketTaxModal() {
                 type="submit"
                 className="w-full py-4 bg-slate-900 hover:bg-slate-800 dark:bg-orange-500 dark:hover:bg-orange-600 text-white font-black text-sm sm:text-base rounded-2xl shadow-xl active:scale-[0.98] transition-all flex items-center justify-center space-x-2 cursor-pointer"
               >
-                <span>{t('tax_next_btn')}</span>
+                <span>{t('예상 환급액 상세확인 및 무료 신청 (30초)')}</span>
                 <ArrowRight className="w-4 h-4" />
               </button>
             </form>
@@ -269,29 +269,29 @@ export default function KMarketTaxModal() {
               <div className="bg-slate-50 dark:bg-gray-800/70 rounded-2xl p-4.5 border border-slate-200/80 dark:border-gray-700 space-y-3">
                 <div className="flex items-center justify-between pb-2 border-b border-slate-200 dark:border-gray-700">
                   <span className="text-xs font-bold text-slate-700 dark:text-slate-300">
-                    {t('tax_review_visa_period_label')}
+                    {t('신청 비자 및 기간')}
                   </span>
                   <span className="text-xs font-extrabold text-orange-600 bg-orange-50 dark:bg-orange-950/60 px-2 py-0.5 rounded-md">
-                    {selectedVisa} {t('badge_visa')} • {workYears}{t('time_years')} {t('tax_work_suffix')}
+                    {selectedVisa} {t('체류 비자 인증 완료')} • {workYears}{t('안내 내용을 확인해 주세요')} {t('개월 근무')}
                   </span>
                 </div>
 
                 <div className="space-y-1.5 text-xs text-slate-600 dark:text-slate-300">
                   <div className="flex justify-between">
-                    <span className="text-slate-400">{t('tax_national_tax')}</span>
+                    <span className="text-slate-400">{t('국세(소득세) 환급 예상분')}</span>
                     <span className="font-semibold text-slate-800 dark:text-slate-200">
-                      {result.nationalTaxRefund.toLocaleString()}{t('currency_won')}
+                      {result.nationalTaxRefund.toLocaleString()}{t('원 (대한민국 원화)')}
                     </span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-slate-400">{t('tax_local_tax')}</span>
+                    <span className="text-slate-400">{t('지방소득세 환급 예상분 (10%)')}</span>
                     <span className="font-semibold text-slate-800 dark:text-slate-200">
-                      {result.localTaxRefund.toLocaleString()}{t('currency_won')}
+                      {result.localTaxRefund.toLocaleString()}{t('원 (대한민국 원화)')}
                     </span>
                   </div>
                   <div className="flex justify-between text-orange-600 font-extrabold pt-1 border-t border-slate-200/60 dark:border-gray-700">
-                    <span>{t('tax_estimated_total_refund')}</span>
-                    <span className="text-base">{result.estimatedTotalRefund.toLocaleString()}{t('currency_won')}</span>
+                    <span>{t('총 예상 환급 수령액')}</span>
+                    <span className="text-base">{result.estimatedTotalRefund.toLocaleString()}{t('원 (대한민국 원화)')}</span>
                   </div>
                 </div>
               </div>
@@ -300,16 +300,16 @@ export default function KMarketTaxModal() {
               <div className="p-4 rounded-2xl bg-emerald-50 dark:bg-emerald-950/30 border border-emerald-200 dark:border-emerald-900/50 space-y-2 text-xs">
                 <div className="flex items-center gap-2 font-bold text-emerald-800 dark:text-emerald-300">
                   <ShieldCheck className="w-4 h-4 text-emerald-600" />
-                  <span>{t('tax_guarantee_title')}</span>
+                  <span>{t('100% 후불제 & 안심 보증 정책')}</span>
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-emerald-900/80 dark:text-emerald-300/80 text-[11px] leading-relaxed">
                   <div className="flex items-start gap-1.5">
                     <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0 mt-0.5" />
-                    <span><strong>{t('tax_guarantee_item1_bold')}</strong> {t('tax_guarantee_item1_desc')}</span>
+                    <span><strong>{t('선결제 비용 0원:')}</strong> {t('국세청에서 통장으로 환급금이 입금된 후에만 성공 수수료가 발생합니다.')}</span>
                   </div>
                   <div className="flex items-start gap-1.5">
                     <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0 mt-0.5" />
-                    <span><strong>{t('tax_guarantee_item2_bold')}</strong> {t('tax_guarantee_item2_desc')}</span>
+                    <span><strong>{t('환급액 0원 시 전액 무료:')}</strong> {t('조회 결과 환급 대상이 아니거나 0원인 경우 고객 부담금은 0원입니다.')}</span>
                   </div>
                 </div>
               </div>
@@ -317,18 +317,18 @@ export default function KMarketTaxModal() {
               {/* 신청자 정보 입력 폼 */}
               <div className="space-y-3">
                 <h3 className="text-xs font-bold text-slate-800 dark:text-slate-200">
-                  {t('tax_applicant_info_header')}
+                  {t('환급금 안내 및 접수 정보 입력')}
                 </h3>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <div>
                     <label className="text-[11px] font-semibold text-slate-600 dark:text-slate-400 block mb-1">
-                      {t('tax_applicant_name_label')}
+                      {t('신청자 성명 (여권상 영문 또는 한국 이름)')}
                     </label>
                     <input
                       type="text"
                       required
-                      placeholder="e.g. NGUYEN VAN DUC"
+                      placeholder={t('예: 홍길동 (또는 영문 성명)')}
                       value={applicantName}
                       onChange={(e) => setApplicantName(e.target.value)}
                       className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-xs font-bold text-slate-900 dark:text-white focus:outline-hidden focus:border-orange-500"
@@ -337,12 +337,12 @@ export default function KMarketTaxModal() {
 
                   <div>
                     <label className="text-[11px] font-semibold text-slate-600 dark:text-slate-400 block mb-1">
-                      {t('tax_applicant_phone_label')}
+                      {t('한국 휴대전화 번호')}
                     </label>
                     <input
                       type="tel"
                       required
-                      placeholder="010-XXXX-XXXX"
+                      placeholder={t('010-XXXX-XXXX')}
                       value={applicantPhone}
                       onChange={(e) => setApplicantPhone(e.target.value)}
                       className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-xs font-bold text-slate-900 dark:text-white focus:outline-hidden focus:border-orange-500"
@@ -352,7 +352,7 @@ export default function KMarketTaxModal() {
 
                 <div>
                   <label className="text-[11px] font-semibold text-slate-600 dark:text-slate-400 block mb-1">
-                    {t('tax_applicant_country_label')}
+                    {t('국적 선택 (모국어 상담 지원)')}
                   </label>
                   <div className="grid grid-cols-3 sm:grid-cols-6 gap-1.5">
                     {[
@@ -390,7 +390,7 @@ export default function KMarketTaxModal() {
                   className="mt-0.5 rounded text-orange-600 focus:ring-orange-500"
                 />
                 <span className="text-[11px] text-slate-600 dark:text-slate-300 leading-snug">
-                  {t('tax_terms_agree_label')}
+                  {t('[필수] 국세청 환급 대행 및 케이티알에스 전문 세무사 1:1 상담 연결에 동의합니다.')}
                 </span>
               </label>
 
@@ -402,7 +402,7 @@ export default function KMarketTaxModal() {
                   className="flex-1 py-3.5 border border-slate-200 dark:border-gray-700 hover:bg-slate-50 dark:hover:bg-gray-800 text-slate-700 dark:text-slate-300 font-bold text-xs rounded-2xl transition-all cursor-pointer flex items-center justify-center gap-1"
                 >
                   <ArrowLeft className="w-4 h-4" />
-                  <span>{t('btn_prev')}</span>
+                  <span>{t('이전 단계로 돌아가기')}</span>
                 </button>
                 <button
                   type="submit"
@@ -410,7 +410,7 @@ export default function KMarketTaxModal() {
                   className="flex-[2] py-3.5 bg-gradient-to-r from-orange-500 to-rose-600 hover:from-orange-600 hover:to-rose-700 disabled:opacity-50 text-white font-black text-xs sm:text-sm rounded-2xl shadow-xl active:scale-[0.98] transition-all flex items-center justify-center gap-1.5 cursor-pointer"
                 >
                   <ShieldCheck className="w-4 h-4" />
-                  <span>{t('tax_submit_apply_btn')}</span>
+                  <span>{t('100% 후불제로 안전하게 환급 신청')}</span>
                 </button>
               </div>
             </form>
@@ -425,10 +425,10 @@ export default function KMarketTaxModal() {
 
               <div className="space-y-1">
                 <h3 className="text-xl font-black text-slate-900 dark:text-white tracking-tight">
-                  {t('tax_complete_title')}
+                  {t('환급 신청이 정상 접수되었습니다!')}
                 </h3>
                 <p className="text-xs text-slate-500 max-w-sm mx-auto leading-relaxed">
-                  {t('tax_complete_desc')}
+                  {t('외국인 전담 케이티알에스 제휴 세무사가 24시간 이내에 카카오톡/문자로 최종 확정액을 안내합니다.')}
                 </p>
               </div>
 
@@ -437,7 +437,7 @@ export default function KMarketTaxModal() {
                 <div className="flex items-center justify-between pb-2 border-b border-slate-200 dark:border-gray-700">
                   <span className="text-xs font-black text-orange-600 flex items-center gap-1">
                     <Receipt className="w-4 h-4" />
-                    <span>{t('tax_receipt_badge')}</span>
+                    <span>{t('국세청 소득공제 영수증 연계')}</span>
                   </span>
                   <span className="text-[10px] text-slate-400 font-mono">
                     REF-{Date.now().toString().slice(-6)}
@@ -446,30 +446,30 @@ export default function KMarketTaxModal() {
 
                 <div className="space-y-1 text-xs">
                   <div className="flex justify-between">
-                    <span className="text-slate-400">{t('tax_applicant_name_label')}</span>
+                    <span className="text-slate-400">{t('신청자 성명 (여권상 영문 또는 한국 이름)')}</span>
                     <span className="font-bold text-slate-800 dark:text-slate-200">{applicantName || 'NGUYEN VAN HUNG'}</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-slate-400">{t('tax_applicant_phone_label')}</span>
+                    <span className="text-slate-400">{t('한국 휴대전화 번호')}</span>
                     <span className="font-bold text-slate-800 dark:text-slate-200">{applicantPhone || '010-XXXX-XXXX'}</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-slate-400">{t('tax_estimated_total_refund')}</span>
+                    <span className="text-slate-400">{t('총 예상 환급 수령액')}</span>
                     <span className="font-black text-orange-600 text-sm">
-                      {result.estimatedTotalRefund.toLocaleString()}{t('currency_won')}
+                      {result.estimatedTotalRefund.toLocaleString()}{t('원 (대한민국 원화)')}
                     </span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-slate-400">{t('tax_fee_type_label')}</span>
+                    <span className="text-slate-400">{t('환급 성공 시 후불 수수료 적용')}</span>
                     <span className="font-bold text-emerald-600 dark:text-emerald-400">
-                      {t('tax_complete_badge')}
+                      {t('100% 후불제 (선결제 0원)')}
                     </span>
                   </div>
                 </div>
 
                 <div className="pt-2 border-t border-slate-200 dark:border-gray-700 text-[11px] text-slate-500 dark:text-slate-400 flex items-center gap-1.5">
                   <Lock className="w-3.5 h-3.5 text-slate-400 shrink-0" />
-                  <span>{t('tax_complete_next_step')}</span>
+                  <span>{t('세무사 안내 메시지로 계좌 등록')}</span>
                 </div>
               </div>
 
@@ -479,7 +479,7 @@ export default function KMarketTaxModal() {
                   onClick={handleClose}
                   className="w-full py-3.5 bg-slate-900 hover:bg-slate-800 dark:bg-orange-500 text-white font-bold rounded-2xl text-sm transition-colors cursor-pointer"
                 >
-                  {t('tax_complete_btn')}
+                  {t('확인 및 계속 쇼핑하기')}
                 </button>
               </div>
             </div>

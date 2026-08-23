@@ -230,7 +230,7 @@ function WelcomeEasyTaxContent() {
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-center text-xs text-[#5c4a39]">
           <div className="flex items-center justify-center gap-2 bg-white/70 p-3 rounded-2xl border border-[#e2d5c7] shadow-2xs font-bold">
             <ShieldCheck className="w-4 h-4 text-emerald-600" />
-            <span>{t('auto_ui_1')}</span>
+            <span>{t('수수료 0원 외국인 안심 직거래 마켓')}</span>
           </div>
           <div className="flex items-center justify-center gap-2 bg-white/70 p-3 rounded-2xl border border-[#e2d5c7] shadow-2xs font-bold">
             <MessageSquare className="w-4 h-4 text-blue-600" />
@@ -238,7 +238,7 @@ function WelcomeEasyTaxContent() {
           </div>
           <div className="flex items-center justify-center gap-2 bg-white/70 p-3 rounded-2xl border border-[#e2d5c7] shadow-2xs font-bold">
             <Sparkles className="w-4 h-4 text-[#d97706]" />
-            <span>{t('auto_ui_2')}</span>
+            <span>{t('이지텍스 세금 환급 원스톱 실시간 연계')}</span>
           </div>
         </div>
       </div>

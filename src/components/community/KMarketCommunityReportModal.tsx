@@ -29,7 +29,7 @@ export default function KMarketCommunityReportModal() {
     const ok = await reportContent(selectedReason, detail);
     setIsSubmitting(false);
     if (ok) {
-      alert(t('auto_loop_687'));
+      alert(t('신고가 정상 접수되었습니다. 해당 게시물/댓글은 즉시 숨김 처리되었습니다.'));
       setDetail('');
     }
   };
@@ -46,7 +46,7 @@ export default function KMarketCommunityReportModal() {
 
         <div className="flex items-center gap-2 text-rose-600">
           <ShieldAlert className="w-6 h-6" />
-          <h3 className="text-base font-black">{t('auto_ui_35')}</h3>
+          <h3 className="text-base font-black">{t('불법/비매너 신고 및 사용자 차단하기')}</h3>
         </div>
 
         <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
@@ -56,7 +56,7 @@ export default function KMarketCommunityReportModal() {
         <form onSubmit={handleSubmit} className="space-y-3">
           <div className="space-y-1.5">
             <label className="text-xs font-bold text-slate-700 dark:text-slate-300">
-              {t('report_reason_label')}
+              {t('신고 사유 선택')}
             </label>
             <div className="space-y-1">
               {REPORT_REASONS.map((r) => (
@@ -90,7 +90,7 @@ export default function KMarketCommunityReportModal() {
               rows={2}
               value={detail}
               onChange={(e) => setDetail(e.target.value)}
-              placeholder={t('auto_ui_36')}
+              placeholder={t('자세한 사유를 적어주시면 안전 관리팀의 빠른 조치에 큰 도움이 됩니다.')}
               className="w-full px-3 py-2 rounded-xl bg-slate-50 dark:bg-gray-800 border border-slate-200 dark:border-gray-700 text-xs text-slate-900 dark:text-white"
             />
           </div>

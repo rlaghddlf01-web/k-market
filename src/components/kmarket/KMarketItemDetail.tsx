@@ -80,9 +80,9 @@ export default function KMarketItemDetail() {
               <button
                 onClick={() => setShowReportModal(true)}
                 className="bg-black/40 hover:bg-red-600/80 text-white px-2.5 py-1.5 rounded-full backdrop-blur-md transition-colors cursor-pointer text-xs font-bold flex items-center gap-1"
-                title={t('auto_ui_152')}
+                title={t('불량 매물/사용자 신고 및 차단')}
               >
-                <span>{t('auto_ui_153')}</span>
+                <span>{t('🚫 신고')}</span>
               </button>
               <button
                 onClick={async () => {
@@ -109,7 +109,7 @@ export default function KMarketItemDetail() {
                   }
                 }}
                 className="bg-black/40 hover:bg-[#f3ba2f] hover:text-[#09101f] text-white p-2.5 rounded-full backdrop-blur-md transition-all cursor-pointer shadow-md hover:scale-105 active:scale-95"
-                title={t('auto_ui_154')}
+                title={t('매물 링크 공유하기 (카카오톡, 페이스북 등)')}
               >
                 <Share2 className="w-5 h-5" />
               </button>
@@ -154,7 +154,7 @@ export default function KMarketItemDetail() {
                     );
                   }}
                   className="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/50 hover:bg-black/80 text-white flex items-center justify-center backdrop-blur-md border border-white/30 shadow-xl transition-all cursor-pointer hover:scale-110 active:scale-95"
-                  title={t('auto_ui_155')}
+                  title={t('이전 사진 보기')}
                 >
                   <ChevronLeft className="w-6 h-6 text-white" />
                 </button>
@@ -171,7 +171,7 @@ export default function KMarketItemDetail() {
                     );
                   }}
                   className="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/50 hover:bg-black/80 text-white flex items-center justify-center backdrop-blur-md border border-white/30 shadow-xl transition-all cursor-pointer hover:scale-110 active:scale-95"
-                  title={t('auto_ui_156')}
+                  title={t('다음 사진 보기')}
                 >
                   <ChevronRight className="w-6 h-6 text-white" />
                 </button>
@@ -216,11 +216,11 @@ export default function KMarketItemDetail() {
                         {selectedItem.seller_name}
                       </span>
                       <span className="text-[11px] bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded-full font-semibold">
-                        {t('auth_verified_badge')}
+                        {t('신분인증 완료')}
                       </span>
                     </div>
                     <p className="text-xs text-slate-500 flex items-center space-x-1 mt-0.5">
-                      <span>{t('auto_ui_157')}</span>
+                      <span>{t('프로필 & 거래후기 보기 >')}</span>
                     </p>
                   </div>
                 </div>
@@ -251,37 +251,37 @@ export default function KMarketItemDetail() {
                     }`}
                   >
                     {(selectedItem.moving_d_day || 5) <= 3
-                      ? `🚨 귀국 D-${selectedItem.moving_d_day || 3} 오늘마감 헐값`
+                      ? `🚨 ${t('귀국')} D-${selectedItem.moving_d_day || 3} ${t('오늘마감 헐값')}`
                       : (selectedItem.moving_d_day || 5) <= 7
-                      ? `🔥 귀국 D-${selectedItem.moving_d_day || 5} 마감임박 초특가`
-                      : `✈️ 귀국 D-${selectedItem.moving_d_day || 14} 묶음할인`}
+                      ? `🔥 ${t('귀국')} D-${selectedItem.moving_d_day || 5} ${t('마감임박 초특가')}`
+                      : `✈️ ${t('귀국')} D-${selectedItem.moving_d_day || 14} ${t('묶음할인')}`}
                   </span>
                 )}
                 {selectedItem.status === 'reserved' && selectedItem.reserved_to_user_name && (
                   <span className="text-xs text-amber-700 bg-amber-50 px-2 py-0.5 rounded-md font-semibold">
-                    {selectedItem.reserved_to_user_name} 님과 거래 예약중
+                    {selectedItem.reserved_to_user_name} {t('님과 거래 예약중')}
                   </span>
                 )}
                 {selectedItem.status === 'sold' && selectedItem.sold_to_user_name && (
                   <span className="text-xs text-gray-600 bg-gray-100 px-2 py-0.5 rounded-md font-medium">
-                    {selectedItem.sold_to_user_name} 님과 거래 완료됨
+                    {selectedItem.sold_to_user_name} {t('님과 거래 완료됨')}
                   </span>
                 )}
               </div>
 
-              {/* 15개국어 자동번역 토글 바 */}
+              {/* 17개국어 자동번역 토글 바 */}
               <div className="flex items-center justify-between bg-blue-50/80 p-2.5 rounded-xl border border-blue-200/60 text-xs">
                 <div className="flex items-center space-x-1.5 text-blue-900 font-medium">
                   <Sparkles className="w-4 h-4 text-blue-600 animate-spin" />
                   <span>
-                    {currentLangOption.nativeName} ({currentLangOption.flag}) 실시간 번역 적용됨
+                    {currentLangOption.nativeName} ({currentLangOption.flag}) {t('실시간 번역 적용됨')}
                   </span>
                 </div>
                 <button
                   onClick={() => setShowOriginalLang(!showOriginalLang)}
                   className="text-blue-700 font-bold hover:underline cursor-pointer"
                 >
-                  {showOriginalLang ? '번역문 보기' : '원문 보기'}
+                  {showOriginalLang ? t('번역문 보기') : t('원문 보기')}
                 </button>
               </div>
 
@@ -299,7 +299,7 @@ export default function KMarketItemDetail() {
                 </span>
                 {selectedItem.original_price && selectedItem.original_price > selectedItem.price && (
                   <span className="text-sm text-slate-400 line-through">
-                    정가 {selectedItem.original_price.toLocaleString()}원
+                    {t('정가')} {selectedItem.original_price.toLocaleString()}{t('원')}
                   </span>
                 )}
               </div>
@@ -308,14 +308,14 @@ export default function KMarketItemDetail() {
             {/* 판매자 전용 상태 관리 액션 바 */}
             <div className="p-3 bg-gradient-to-r from-indigo-50 to-purple-50 rounded-2xl border border-indigo-100 flex items-center justify-between gap-2">
               <div className="text-xs text-indigo-900">
-                <span className="font-bold block">{t('auto_ui_158')}</span>
-                <span className="text-[11px] text-indigo-700 opacity-80">{t('auto_ui_159')}</span>
+                <span className="font-bold block">{t('내 매물 상태를 관리해보세요')}</span>
+                <span className="text-[11px] text-indigo-700 opacity-80">{t('예약중/거래완료 변경, 상단 끌올')}</span>
               </div>
               <button
                 onClick={() => setShowStatusModal(true)}
                 className="px-3 py-2 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold rounded-xl shadow-xs transition-colors shrink-0 cursor-pointer"
               >
-                {t('btn_change_status_boost')}
+                {t('상태변경 / 끌올')}
               </button>
             </div>
 
@@ -327,7 +327,7 @@ export default function KMarketItemDetail() {
             {/* 상품 상세 설명 */}
             <div className="space-y-2">
               <h3 className="text-xs font-bold text-slate-400 uppercase tracking-wider">
-                {t('create_desc_header')}
+                {t('상세 설명')}
               </h3>
               <p className="text-sm text-slate-800 leading-relaxed whitespace-pre-line bg-white p-4 rounded-2xl border border-slate-100 shadow-xs">
                 {showOriginalLang ? selectedItem.description : translatedDesc}
@@ -365,8 +365,8 @@ export default function KMarketItemDetail() {
             className="flex-1 py-3.5 text-white font-black text-sm sm:text-base rounded-2xl shadow-xl active:scale-98 transition-all flex items-center justify-center space-x-2 cursor-pointer hover:bg-[#111d38]"
           >
             <MessageCircle className="w-5 h-5 text-[#f3ba2f]" />
-            <span className="text-[#f3ba2f] font-black">{t('auto_ui_160')}</span>
-            <span className="text-white font-bold">{t('auto_ui_161')}</span>
+            <span className="text-[#f3ba2f] font-black">{t('1:1 안심 번역 채팅')}</span>
+            <span className="text-white font-bold">{t('시작 →')}</span>
           </button>
         </div>
       </div>

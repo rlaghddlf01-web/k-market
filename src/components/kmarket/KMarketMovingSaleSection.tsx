@@ -52,21 +52,21 @@ export default function KMarketMovingSaleSection() {
           <div>
             <div className="flex items-center space-x-2">
               <h2 className="text-base sm:text-lg font-extrabold text-[#1f1914] tracking-tight">
-                ✈️ {t('moving_sale_title')}
+                ✈️ {t('귀국 무빙세일 특가관')}
               </h2>
               <span className="bg-[#845b37] text-white text-[10px] font-black px-2 py-0.5 rounded-full uppercase tracking-wider">
                 HOT
               </span>
             </div>
             <p className="text-xs text-[#705e4f]">
-              {t('moving_sale_desc')}
+              {t('비자 만료로 귀국하는 외국인 근로자들의 생활 가전·가구 묶음 헐값 급처분관입니다.')}
             </p>
           </div>
         </div>
 
         <div className="inline-flex items-center space-x-1.5 self-start sm:self-auto bg-white/80 text-[#5c4a39] text-xs font-bold px-3 py-1 rounded-full border border-[#ded1c4]">
           <Tag className="w-3.5 h-3.5 text-[#845b37]" />
-          <span>{t('auto_ui_203')}</span>
+          <span>{t('최대 85% 묶음 할인')}</span>
         </div>
       </div>
 
@@ -80,7 +80,7 @@ export default function KMarketMovingSaleSection() {
               : 'bg-white text-[#5c4a39] border-[#ded1c4] hover:bg-[#eae3dc]'
           }`}
         >
-          {t('moving_all_badge')} ({movingSaleItems.length})
+          {t('등록된 전체 매물 보기')} ({movingSaleItems.length})
         </button>
 
         <button
@@ -92,7 +92,7 @@ export default function KMarketMovingSaleSection() {
           }`}
         >
           <AlertCircle className="w-3.5 h-3.5" />
-          <span>{t('auto_ui_204')}</span>
+          <span>{t('🚨 3일 남음 오늘마감 헐값/나눔')}</span>
         </button>
 
         <button
@@ -104,7 +104,7 @@ export default function KMarketMovingSaleSection() {
           }`}
         >
           <Flame className="w-3.5 h-3.5" />
-          <span>{t('auto_ui_205')}</span>
+          <span>{t('🔥 7일 남음 마감임박 초특가')}</span>
         </button>
 
         <button
@@ -116,7 +116,7 @@ export default function KMarketMovingSaleSection() {
           }`}
         >
           <Plane className="w-3.5 h-3.5" />
-          <span>{t('auto_ui_206')}</span>
+          <span>{t('✈️ 14일 남음 묶음할인 (사전예약)')}</span>
         </button>
       </div>
 
@@ -175,7 +175,7 @@ export default function KMarketMovingSaleSection() {
                   {discountPercent > 0 && (
                     <div className="absolute top-2 left-2 bg-gradient-to-r from-red-600 to-rose-600 text-white text-[11px] font-black px-2 py-0.5 rounded-lg shadow-md flex items-center space-x-0.5">
                       <Flame className="w-3 h-3 fill-current" />
-                      <span>{discountPercent}% OFF</span>
+                      <span>{discountPercent}% {t('할인')}</span>
                     </div>
                   )}
 
@@ -239,7 +239,7 @@ export default function KMarketMovingSaleSection() {
                       }}
                     >
                       <MessageCircle className="w-3.5 h-3.5 text-[#f3ba2f]" />
-                      <span className="text-[#f3ba2f] font-extrabold">{t('auto_ui_133')}</span>
+                      <span className="text-[#f3ba2f] font-extrabold">{t('1:1 번역챗')}</span>
                     </button>
                   </div>
                 </div>
@@ -260,7 +260,7 @@ export default function KMarketMovingSaleSection() {
                 : 'bg-white text-[#1f1914] border-[#ded1c4] hover:bg-[#eae3dc] active:scale-95 cursor-pointer shadow-xs'
             }`}
           >
-            ◀ {t('btn_prev')}
+            ◀ {t('이전 단계로 돌아가기')}
           </button>
 
           {Array.from(
@@ -296,7 +296,7 @@ export default function KMarketMovingSaleSection() {
                 : 'bg-white text-[#1f1914] border-[#ded1c4] hover:bg-[#eae3dc] active:scale-95 cursor-pointer shadow-xs'
             }`}
           >
-            {t('btn_next')} ▶
+            {t('다음 단계로 계속하기')} ▶
           </button>
         </div>
       )}

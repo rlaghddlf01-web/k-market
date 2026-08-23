@@ -17,7 +17,7 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   title: 'KTRS K-Market (케이마켓) | 외국인 중고거래 & 무빙세일',
   description:
-    '대한민국 No.1 외국인 근로자 전용 0원 수수료 중고거래 & 귀국 무빙세일 플랫폼! 15개국어 실시간 자동 번역 채팅, 평택·안산·화성 전국 공단 도보 5분 안심 직거래, 최대 1000만원 세금 환급 원스톱 연계',
+    '대한민국 No.1 외국인 근로자 전용 0원 수수료 중고거래 & 귀국 무빙세일 플랫폼! 17개국어 실시간 자동 번역 채팅, 평택·안산·화성 전국 공단 도보 5분 안심 직거래, 최대 1000만원 세금 환급 원스톱 연계',
   manifest: '/manifest.json',
   appleWebApp: {
     capable: true,
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
     '무빙세일',
     'Moving Sale',
     '세금환급',
-    '15개국어 번역 채팅',
+    '17개국어 번역 채팅',
     '평택 포승공단',
     '안산 반월공단',
   ],

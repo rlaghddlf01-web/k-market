@@ -48,7 +48,7 @@ export default function KMarketScamInterventionBanner({
                 isDanger ? 'bg-rose-200 text-rose-800' : 'bg-amber-200 text-amber-900'
               }`}
             >
-              AI Security Shield
+              {t('AI 안심 보안 쉴드')}
             </span>
           </div>
 
@@ -68,7 +68,7 @@ export default function KMarketScamInterventionBanner({
                 className="px-2.5 py-1 bg-rose-600 hover:bg-rose-700 text-white text-[10px] font-black rounded-lg transition-all shadow-xs flex items-center gap-1 cursor-pointer"
               >
                 <Flag className="w-3 h-3" />
-                <span>{t('scam_report_btn')}</span>
+                <span>{t('즉시 사기 신고')}</span>
               </button>
             )}
           </div>

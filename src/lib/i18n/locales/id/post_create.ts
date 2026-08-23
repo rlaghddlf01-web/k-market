@@ -1,0 +1,17 @@
+export const post_create = {
+  "${raw.term} 팝니다": "Jual ${raw.term}",
+  "0.3초 실시간 95% 스마트 초경량 압축": "Kompresi sangat ringan cerdas 95% secara real-time dalam 0,3 detik",
+  "AI 안심 번역가 0.3초 만에 실시간 번역 중...": "Penerjemah aman AI sedang menerjemahkan secara real-time dalam 0,3 detik...",
+  "✨ 상대방 모국어로 0.3초 만에 실시간 번역되어 전송됩니다 (AI 안심 번역 탑재)": "✨ Diterjemahkan dan dikirim secara real-time dalam bahasa ibu lawan bicara dalam 0,3 detik (Dilengkapi Penerjemah Aman AI)",
+  "게시글 등록 완료": "Unggahan postingan selesai",
+  "게시글 등록 중...": "Sedang mengunggah postingan...",
+  "고화질 이미지 압축 진행 중...": "Sedang mengompres gambar berkualitas tinggi...",
+  "대표사진": "Foto Utama",
+  "사진 압축 처리 중 오류가 발생했습니다.": "Terjadi kesalahan saat memproses kompresi foto.",
+  "사진 첨부 (최대 5장)": "Lampirkan foto (maks. 5 foto)",
+  "사진 추가": "Tambah foto",
+  "살게요": "Saya beli",
+  "상품 사진": "Foto Produk",
+  "선택한 사진 삭제": "Hapus foto yang dipilih",
+  "판매 가격 (0원을 입력하시면 무료나눔으로 자동 등록됩니다)": "Harga jual (Jika memasukkan 0 rupiah, akan otomatis terdaftar sebagai pemberian gratis)",
+};

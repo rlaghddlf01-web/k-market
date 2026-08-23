@@ -53,7 +53,7 @@ export default function InAppBrowserEscaper() {
           navigator.clipboard.writeText(currentUrl);
           alert(trans.copyLinkBtn + ' 완료! 사파리(Safari) 주소창에 붙여넣어 주세요.');
         } else {
-          alert(t('inapp_safari_guide_fallback'));
+          alert(t('우측 상단 또는 하단 메뉴를 누른 후 [사파리로 열기]를 선택해 주세요.'));
         }
       }
     }
@@ -69,7 +69,7 @@ export default function InAppBrowserEscaper() {
           <div className="flex-1 min-w-0">
             <div className="flex items-center gap-2">
               <span className="bg-black/30 text-yellow-300 font-extrabold text-[10px] px-2 py-0.5 rounded-full">
-                In-App Browser
+                {t('인앱 브라우저')}
               </span>
               <h4 className="font-black text-xs sm:text-sm truncate text-white">
                 {inAppInfo.isAndroid ? trans.inAppChromeTitle : trans.inAppSafariTitle}

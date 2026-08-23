@@ -120,7 +120,7 @@ export default function KMarketReportBlockModal({
             </div>
             <div>
               <div className="inline-flex items-center space-x-1.5 bg-black/20 px-2.5 py-0.5 rounded-full text-xs font-bold text-red-100 mb-0.5">
-                <span>{t('auto_ui_239')}</span>
+                <span>{t('클린 케이마켓 안전 신고 센터')}</span>
               </div>
               <h2 className="text-xl font-black tracking-tight">
                 사용자 차단 및 불량 신고
@@ -200,7 +200,7 @@ export default function KMarketReportBlockModal({
               rows={3}
               value={details}
               onChange={(e) => setDetails(e.target.value)}
-              placeholder={t('auto_ui_240')}
+              placeholder={t('구체적인 상황을 적어주시면 안전 운영팀이 신속히 조사 후 제재합니다.')}
               className="w-full p-3 bg-slate-50 dark:bg-gray-800 rounded-xl border border-slate-200 dark:border-gray-700 text-xs focus:bg-white focus:border-red-500 focus:outline-none leading-relaxed"
             />
           </div>
@@ -235,7 +235,7 @@ export default function KMarketReportBlockModal({
             className="w-full py-4 bg-gradient-to-r from-red-600 via-rose-600 to-red-700 hover:from-red-700 hover:to-rose-700 text-white font-black text-sm sm:text-base rounded-2xl shadow-xl shadow-red-600/25 active:scale-[0.98] transition-all flex items-center justify-center space-x-2 cursor-pointer"
           >
             <ShieldAlert className="w-5 h-5" />
-            <span>{t('auto_ui_241')}</span>
+            <span>{t('신고 접수 및 차단하기')}</span>
           </button>
         </form>
       </div>

@@ -111,7 +111,7 @@ export default function KMarketReviewModal({
             <div className="text-center space-y-1">
               <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 dark:bg-emerald-950/50 text-emerald-700 dark:text-emerald-300 text-xs font-semibold">
                 <HeartHandshake className="w-3.5 h-3.5" />
-                <span>{t('auto_ui_242')}</span>
+                <span>{t('케이마켓 글로벌 매너 평가')}</span>
               </div>
               <h2 className="text-xl font-bold text-gray-900 dark:text-white pt-1 flex items-center justify-center gap-2">
                 <CountryFlag
@@ -120,7 +120,7 @@ export default function KMarketReviewModal({
                   size="md"
                   shape="circle"
                 />
-                <span>{t('auto_ui_243')}</span>
+                <span>{t('님과의 거래는 어떠셨나요?')}</span>
               </h2>
               <p className="text-xs text-gray-500 dark:text-gray-400 truncate max-w-xs mx-auto">
                 📦 {itemTitle}
@@ -139,7 +139,7 @@ export default function KMarketReviewModal({
                 }`}
               >
                 <span className="text-2xl mb-1">😍</span>
-                <span className="text-xs">{t('auto_ui_244')}</span>
+                <span className="text-xs">{t('최고예요!')}</span>
                 <span className="text-[10px] text-emerald-600 dark:text-emerald-400 mt-0.5">+0.5℃</span>
               </button>
 
@@ -153,7 +153,7 @@ export default function KMarketReviewModal({
                 }`}
               >
                 <span className="text-2xl mb-1">😊</span>
-                <span className="text-xs">{t('auto_ui_245')}</span>
+                <span className="text-xs">{t('안내 내용을 확인해 주세요')}</span>
                 <span className="text-[10px] text-blue-600 dark:text-blue-400 mt-0.5">+0.2℃</span>
               </button>
 
@@ -167,16 +167,16 @@ export default function KMarketReviewModal({
                 }`}
               >
                 <span className="text-2xl mb-1">🙁</span>
-                <span className="text-xs">{t('auto_ui_246')}</span>
+                <span className="text-xs">{t('아쉬워요')}</span>
                 <span className="text-[10px] text-rose-600 dark:text-rose-400 mt-0.5">-0.8℃</span>
               </button>
             </div>
 
-            {/* 15개국어 칭찬 태그 선택 리스트 */}
+            {/* 17개국어 칭찬 태그 선택 리스트 */}
             <div className="space-y-2">
               <label className="text-xs font-semibold text-gray-700 dark:text-gray-300 flex items-center justify-between">
-                <span>{t('auto_ui_247')}</span>
-                <span className="text-[11px] text-gray-400">{t('auto_ui_248')}</span>
+                <span>{t('어떤 점이 좋으셨나요? (중복 선택 가능)')}</span>
+                <span className="text-[11px] text-gray-400">{t('15개 언어 자동 번역')}</span>
               </label>
 
               <div className="flex flex-wrap gap-1.5 max-h-36 overflow-y-auto pr-1">
@@ -216,7 +216,7 @@ export default function KMarketReviewModal({
               <textarea
                 value={comment}
                 onChange={(e) => setComment(e.target.value)}
-                placeholder={t('auto_ui_249')}
+                placeholder={t('상대방에게 전하고 싶은 감사 인사를 남겨주세요.')}
                 rows={2}
                 className="w-full text-xs p-3 rounded-2xl bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 focus:outline-hidden focus:ring-2 focus:ring-emerald-500 text-gray-900 dark:text-white resize-none"
               />
@@ -227,7 +227,7 @@ export default function KMarketReviewModal({
               type="submit"
               className="w-full py-3.5 px-4 rounded-2xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm shadow-md hover:shadow-lg transition-all active:scale-[0.98] flex items-center justify-center gap-2"
             >
-              <span>{t('auto_ui_250')}</span>
+              <span>{t('거래 후기 보내기')}</span>
               <Star className="w-4 h-4 fill-white" />
             </button>
           </form>

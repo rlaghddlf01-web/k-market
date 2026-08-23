@@ -162,7 +162,7 @@ export default function KMarketAppointmentModal({
   // 2. GPS 내 위치 버튼 클릭
   const handleGetGpsLocation = () => {
     if (!navigator.geolocation) {
-      alert(t('auto_loop_718'));
+      alert(t('위치 정보(위치정보)를 지원하지 않는 브라우저입니다.'));
       return;
     }
 
@@ -184,7 +184,7 @@ export default function KMarketAppointmentModal({
       (err) => {
         setIsLocating(false);
         console.warn(err);
-        alert(t('auto_loop_719'));
+        alert(t('위치 권한을 허용해 주시거나 지도 위를 직접 클릭하여 핀을 이동해 주세요.'));
       },
       { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
     );
@@ -281,11 +281,11 @@ export default function KMarketAppointmentModal({
           </button>
 
           <div className="inline-flex items-center space-x-1.5 bg-[#f3ba2f]/20 px-2.5 py-0.5 rounded-full text-xs font-bold text-[#f3ba2f] mb-1">
-            <span>{t('auto_ui_44')}</span>
+            <span>{t('📍 1:1 안심 직거래 약속 잡기')}</span>
           </div>
           <h2 className="text-xl font-black tracking-tight flex items-center gap-1.5 text-[#fbf9f6]">
             <MapPin className="w-5 h-5 text-[#f3ba2f]" />
-            <span>{t('auto_ui_45')}</span>
+            <span>{t('만남 장소 지도 핀 지정 및 약속 시간 정하기')}</span>
           </h2>
           <p className="text-xs text-slate-300 mt-1">
             지도를 클릭하거나 핀을 끌어 만날 위치를 콕 찍고 상세 장소를 적어주세요.
@@ -299,7 +299,7 @@ export default function KMarketAppointmentModal({
             <div className="flex items-center justify-between">
               <label className="text-xs font-black text-[#3d2817] flex items-center gap-1.5">
                 <MapPin className="w-4 h-4 text-[#845b37]" />
-                <span>{t('auto_ui_46')}</span>
+                <span>{t('1. 기본 도로명 / 동네 행정구역 주소')}</span>
               </label>
 
               {/* GPS 내 위치 자동완성 버튼 */}
@@ -308,17 +308,17 @@ export default function KMarketAppointmentModal({
                 onClick={handleGetGpsLocation}
                 disabled={isLocating}
                 className="text-[11px] font-bold text-[#5c3818] hover:text-[#1f1914] bg-[#ede2d6] hover:bg-[#e2d4c5] px-2.5 py-1 rounded-lg transition-all flex items-center gap-1 cursor-pointer border border-[#ded1c4] shadow-2xs"
-                title={t('auto_ui_47')}
+                title={t('현재 내 위치정보 위치로 주소 및 핀 1초 자동 세팅')}
               >
                 {isLocating ? (
                   <>
                     <RefreshCw className="w-3 h-3 animate-spin text-[#845b37]" />
-                    <span>{t('auto_ui_48')}</span>
+                    <span>{t('현재 위치 확인 중...')}</span>
                   </>
                 ) : (
                   <>
                     <Crosshair className="w-3.5 h-3.5 text-[#845b37]" />
-                    <span>{t('auto_ui_49')}</span>
+                    <span>{t('📍 내 현재 위치로 핀 이동하기')}</span>
                   </>
                 )}
               </button>
@@ -338,7 +338,7 @@ export default function KMarketAppointmentModal({
                       handleSearchSubmit(e);
                     }
                   }}
-                  placeholder={t('auto_ui_50')}
+                  placeholder={t('도로명/동네 주소를 검색하거나 지도에서 원하는 위치의 핀을 직접 클릭하세요')}
                   className="w-full pl-9 pr-3 py-2.5 bg-white rounded-xl border border-[#ded1c4] text-xs sm:text-sm font-bold text-[#1f1914] focus:outline-none focus:border-[#845b37] shadow-2xs"
                 />
                 <MapPin className="w-4 h-4 text-[#845b37] absolute left-3 top-3" />
@@ -350,21 +350,21 @@ export default function KMarketAppointmentModal({
                 className="px-3.5 py-2.5 bg-[#3d2817] hover:bg-[#2b1c10] text-[#fbf9f6] font-bold text-xs rounded-xl transition-all shadow-xs shrink-0 cursor-pointer flex items-center gap-1 border border-[#5c3818]"
               >
                 <Search className="w-3.5 h-3.5 text-[#f3ba2f]" />
-                <span>{t('auto_ui_51')}</span>
+                <span>{t('주소 검색하기')}</span>
               </button>
             </div>
 
             {/* 고객 직접 입력 상세 장소명 */}
             <div className="space-y-1 pt-2 border-t border-[#ded1c4]/70">
               <label className="text-xs font-black text-[#3d2817] flex items-center justify-between">
-                <span>{t('auto_ui_52')}</span>
-                <span className="text-[10px] text-[#845b37] font-bold">{t('auto_ui_53')}</span>
+                <span>{t('2. 상세 만남 장소명 (고객 직접 입력)')}</span>
+                <span className="text-[10px] text-[#845b37] font-bold">{t('편의점 앞, 기숙사 정문, 지하철 3번 출구 등')}</span>
               </label>
               <input
                 type="text"
                 value={landmarkDetail}
                 onChange={(e) => setLandmarkDetail(e.target.value)}
-                placeholder={t('auto_ui_54')}
+                placeholder={t('예: 편의점 앞, 3공단 기숙사 후문')}
                 className="w-full px-3.5 py-2 bg-white rounded-xl border border-[#ded1c4] text-xs font-bold text-[#1f1914] focus:outline-none focus:border-[#845b37] shadow-2xs"
               />
             </div>
@@ -375,7 +375,7 @@ export default function KMarketAppointmentModal({
             <div className="flex justify-between items-center text-xs font-bold text-slate-800">
               <span className="flex items-center gap-1 text-[#3d2817] font-black">
                 <Navigation className="w-3.5 h-3.5 text-[#f3ba2f]" />
-                <span>{t('auto_ui_55')}</span>
+                <span>{t('지도를 클릭하거나 핀을 끌어당겨 원하는 만남 장소를 정확히 지정하세요')}</span>
               </span>
             </div>
 
@@ -386,7 +386,7 @@ export default function KMarketAppointmentModal({
               <div className="absolute top-3 left-3 bg-[#09101f]/90 backdrop-blur-md text-white px-3.5 py-1.5 rounded-2xl border border-[#f3ba2f]/70 text-xs shadow-lg max-w-[85%] pointer-events-none z-10">
                 <div className="flex items-center gap-1 font-bold text-[#f3ba2f]">
                   <MapPin className="w-3.5 h-3.5 fill-[#f3ba2f]" />
-                  <span>{t('auto_ui_56')}</span>
+                  <span>{t('선택된 직거래 만남 장소 핀 위치')}</span>
                 </div>
                 <p className="text-[11px] text-slate-100 font-medium truncate mt-0.5">
                   {landmarkDetail ? `${baseAddress} (${landmarkDetail})` : baseAddress}
@@ -405,7 +405,7 @@ export default function KMarketAppointmentModal({
             <label className="text-xs font-black text-[#3d2817] flex items-center justify-between">
               <span className="flex items-center gap-1">
                 <Calendar className="w-3.5 h-3.5 text-[#845b37]" />
-                <span>{t('auto_ui_57')}</span>
+                <span>{t('3. 직거래 희망 날짜 & 만남 시간 입력')}</span>
               </span>
               <span className="text-[10px] text-[#845b37] font-bold">
                 자유롭게 직접 텍스트 입력 가능
@@ -417,7 +417,7 @@ export default function KMarketAppointmentModal({
                 type="text"
                 value={customTimeText}
                 onChange={(e) => setCustomTimeText(e.target.value)}
-                placeholder={t('auto_ui_58')}
+                placeholder={t('예: 오늘 저녁 19:30, 내일 토요일 오후 2시, 일요일 점심 등')}
                 className="w-full pl-9 pr-3 py-2.5 bg-white rounded-xl border border-[#ded1c4] text-xs font-bold text-[#1f1914] focus:outline-none focus:border-[#845b37] shadow-2xs"
               />
               <Clock className="w-4 h-4 text-slate-400 absolute left-3 top-3" />
@@ -472,7 +472,7 @@ export default function KMarketAppointmentModal({
             className="w-full py-4 bg-[#3d2817] hover:bg-[#2b1c10] text-[#fbf9f6] font-black text-sm sm:text-base rounded-2xl shadow-xl shadow-[#3d2817]/25 active:scale-[0.98] transition-all flex items-center justify-center space-x-2 cursor-pointer border border-[#5c3818]"
           >
             <CheckCircle2 className="w-5 h-5 text-[#f3ba2f]" />
-            <span>{t('auto_ui_59')}</span>
+            <span>{t('직거래 약속 핀을 저장하고 상대방에게 전송하기')}</span>
           </button>
         </form>
       </div>

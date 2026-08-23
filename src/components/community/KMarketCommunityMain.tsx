@@ -46,21 +46,21 @@ export default function KMarketCommunityMain() {
         <div className="relative z-10 space-y-2 max-w-2xl">
           <div className="flex items-center gap-2">
             <span className="bg-[#f3ba2f] text-[#09101f] text-[10px] font-black px-2.5 py-0.5 rounded-full uppercase tracking-wider">
-              {t('comm_banner_badge')}
+              {t('17개국어 실시간 소통')}
             </span>
             <span className="text-xs text-indigo-200 font-bold flex items-center gap-1">
               <Globe className="w-3.5 h-3.5" />
-              <span>{t('comm_banner_sub')}</span>
+              <span>{t('언어 장벽 없이 내 모국어로 편하게')}</span>
             </span>
           </div>
 
           <h2 className="text-lg sm:text-xl font-black tracking-tight text-white flex items-center gap-2">
-            <span>{t('comm_banner_title')}</span>
+            <span>{t('외국인 이웃들의 따뜻한 동네생활 & 쉼터')}</span>
             <span className="text-xl">🤝</span>
           </h2>
 
           <p className="text-xs text-indigo-100/90 leading-relaxed font-normal">
-            {t('comm_banner_desc')}
+            {t('외로움을 달래는 동네 친구 사귀기부터 고향 가족 생각나는 따뜻한 이야기, 한국 생활 궁금증까지 온기를 나누세요.')}
           </p>
         </div>
 
@@ -81,7 +81,7 @@ export default function KMarketCommunityMain() {
                 : 'bg-white dark:bg-gray-800 text-slate-600 dark:text-slate-300 border-slate-200 dark:border-gray-700 hover:bg-slate-50'
             }`}
           >
-            {t('comm_tab_all')}
+            {t('전체 보기')}
           </button>
 
           {/* 6대 카테고리 버튼들 */}
@@ -96,7 +96,7 @@ export default function KMarketCommunityMain() {
               }`}
             >
               <span>{cat.icon}</span>
-              <span>{t(`comm_cat_${cat.id}`)}</span>
+              <span>{t(cat.labelKo)}</span>
             </button>
           ))}
         </div>
@@ -107,7 +107,7 @@ export default function KMarketCommunityMain() {
           className="btn-primary flex items-center justify-center gap-1.5 text-xs px-4 py-2.5 shrink-0 cursor-pointer shadow-md self-end sm:self-auto"
         >
           <PlusCircle className="w-4 h-4" />
-          <span>{t('auto_ui_22')}</span>
+          <span>{t('동네생활 이야기 글쓰기')}</span>
         </button>
       </div>
 
@@ -127,10 +127,10 @@ export default function KMarketCommunityMain() {
           <HeartHandshake className="w-12 h-12 mx-auto text-indigo-400 opacity-60" />
           <div className="space-y-1">
             <h4 className="text-sm font-bold text-slate-800 dark:text-white">
-              {t('comm_empty_title')}
+              {t('해당 카테고리에 아직 작성된 글이 없습니다.')}
             </h4>
             <p className="text-xs text-slate-500">
-              {t('comm_empty_desc')}
+              {t('첫 번째로 동네 친구를 사귀거나 따뜻한 이야기를 올려보세요!')}
             </p>
           </div>
           <button
@@ -138,7 +138,7 @@ export default function KMarketCommunityMain() {
             className="btn-primary px-5 py-2 text-xs cursor-pointer inline-flex items-center gap-1"
           >
             <PlusCircle className="w-3.5 h-3.5" />
-            <span>{t('comm_empty_create_btn')}</span>
+            <span>{t('첫 이야기 작성하기')}</span>
           </button>
         </div>
       )}

@@ -95,7 +95,7 @@ export async function sendLocalPushNotification(
 }
 
 /**
- * 4. 15개국어 맞춤형 실시간 웹 푸시 알림 발송 (다국어 지원)
+ * 4. 17개국어 맞춤형 실시간 웹 푸시 알림 발송 (다국어 지원)
  */
 export async function sendLocalizedPushNotification({
   type,

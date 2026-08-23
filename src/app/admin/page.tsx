@@ -135,7 +135,7 @@ export default function KMarketAdminPage() {
                   KTRS 이지텍스 관리자 관제 센터
                 </h1>
                 <span className="bg-blue-50 text-blue-700 text-[10px] font-bold px-2 py-0.5 rounded-full border border-blue-200">
-                  ADMIN CONSOLE
+                  관리자 콘솔
                 </span>
               </div>
             </div>
@@ -281,7 +281,7 @@ export default function KMarketAdminPage() {
               <span>실시간 AI 쉴드 상태</span>
             </span>
             <div className="flex justify-between text-slate-500 text-[11px] pt-1">
-              <span>15개국어 번역 서버:</span>
+              <span>17개국어 번역 서버:</span>
               <span className="text-emerald-700 font-bold">정상 가동중 (0.3s)</span>
             </div>
             <div className="flex justify-between text-slate-500 text-[11px]">

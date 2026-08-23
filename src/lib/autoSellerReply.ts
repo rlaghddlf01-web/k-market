@@ -1,4 +1,4 @@
-// KTRS K-Market 1:1 번역 채팅 지능형 판매자 자동 응답 봇 (15개국어 호환)
+// KTRS K-Market 1:1 번역 채팅 지능형 판매자 자동 응답 봇 (17개국어 호환)
 
 import { KMarketItem, SupportedLanguage } from '@/types/kmarket';
 

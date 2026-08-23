@@ -32,7 +32,7 @@ export default function KMarketSuperBenefitCards() {
             <div className="flex items-center justify-between">
               <span className="inline-flex items-center gap-1 text-[11px] font-black px-2.5 py-1 rounded-full bg-[#f3ba2f]/20 text-[#f3ba2f] border border-[#f3ba2f]/40 tracking-tight">
                 <Sparkles className="w-3 h-3 text-[#f3ba2f]" />
-                <span>{t('auto_ui_275')}</span>
+                <span>{t('국세청 제30조 법적 권리')}</span>
               </span>
               <div className="w-10 h-10 rounded-2xl bg-[#3d2817] border border-[#f3ba2f]/30 flex items-center justify-center text-xl shadow-inner group-hover:scale-110 transition-transform">
                 💰
@@ -41,10 +41,10 @@ export default function KMarketSuperBenefitCards() {
 
             {/* 타이틀 & 강조 금액 */}
             <div className="space-y-1">
-              <h3 className="text-sm font-bold text-white/80">{t('auto_ui_276')}</h3>
+              <h3 className="text-sm font-bold text-white/80">{t('5개년 숨은 세금 환급')}</h3>
               <div className="text-xl sm:text-2xl font-black text-[#f3ba2f] tracking-tight flex items-baseline gap-1.5">
-                <span>{t('auto_ui_277')}</span>
-                <span className="text-xs font-semibold text-amber-200/80">{t('auto_ui_278')}</span>
+                <span>{t('최대 1,000만원')}</span>
+                <span className="text-xs font-semibold text-amber-200/80">{t('예상 세금 환급액 조회')}</span>
               </div>
             </div>
 
@@ -52,15 +52,15 @@ export default function KMarketSuperBenefitCards() {
             <ul className="space-y-2 text-xs text-white/85 font-medium pt-1 border-t border-white/10">
               <li className="flex items-center gap-2">
                 <CheckCircle2 className="w-3.5 h-3.5 text-[#f3ba2f] shrink-0" />
-                <span>{t('auto_ui_279')} <strong>{t('auto_ui_280')}</strong></span>
+                <span>{t('최근 5년간 지나친 세금')} <strong>{t('완벽 전액 환급')}</strong></span>
               </li>
               <li className="flex items-center gap-2">
                 <CheckCircle2 className="w-3.5 h-3.5 text-[#f3ba2f] shrink-0" />
-                <span>{t('auto_ui_281')} <strong>{t('auto_ui_282')}</strong></span>
+                <span>{t('간편인증 0회!')} <strong>{t('30초 모바일 무인 접수')}</strong></span>
               </li>
               <li className="flex items-center gap-2">
                 <CheckCircle2 className="w-3.5 h-3.5 text-[#f3ba2f] shrink-0" />
-                <span>{t('auto_ui_283')} <strong>{t('auto_ui_284')}</strong></span>
+                <span>{t('선결제 0원!')} <strong>{t('환급 완료 시 100% 후불 정산')}</strong></span>
               </li>
             </ul>
           </div>
@@ -74,7 +74,7 @@ export default function KMarketSuperBenefitCards() {
                 color: '#1f140c',
               }}
             >
-              <span>{t('auto_ui_285')}</span>
+              <span>{t('30초 환급금 무료 조회')}</span>
               <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
             </button>
           </div>
@@ -82,7 +82,7 @@ export default function KMarketSuperBenefitCards() {
 
         {/* 2. ⚡ 외국인 맞춤 대출 (최대 5,000만원) */}
         <div 
-          onClick={() => alert(t('auto_loop_868'))}
+          onClick={() => alert(t('⚡ [케이티알에스 외국인 맞춤 대출 전산망] 국세청 5개년 소득증빙 연계를 통해 최대 5,000만원 안심 대출 한도 조회 서비스가 제공됩니다.'))}
           className="relative rounded-3xl p-5 sm:p-6 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl cursor-pointer flex flex-col justify-between overflow-hidden border group"
           style={{
             background: 'linear-gradient(145deg, #131b2e 0%, #0a0f1c 100%)',
@@ -98,7 +98,7 @@ export default function KMarketSuperBenefitCards() {
             <div className="flex items-center justify-between">
               <span className="inline-flex items-center gap-1 text-[11px] font-black px-2.5 py-1 rounded-full bg-blue-500/20 text-blue-400 border border-blue-500/40 tracking-tight">
                 <Zap className="w-3 h-3 text-blue-400" />
-                <span>{t('auto_ui_286')}</span>
+                <span>{t('실시간 금융 전산망 연동')}</span>
               </span>
               <div className="w-10 h-10 rounded-2xl bg-blue-950/80 border border-blue-400/30 flex items-center justify-center text-xl shadow-inner group-hover:scale-110 transition-transform">
                 ⚡
@@ -107,10 +107,10 @@ export default function KMarketSuperBenefitCards() {
 
             {/* 타이틀 & 강조 금액 */}
             <div className="space-y-1">
-              <h3 className="text-sm font-bold text-white/80">{t('auto_ui_287')}</h3>
+              <h3 className="text-sm font-bold text-white/80">{t('외국인 맞춤 신용·비상금')}</h3>
               <div className="text-xl sm:text-2xl font-black text-blue-400 tracking-tight flex items-baseline gap-1.5">
-                <span>{t('auto_ui_288')}</span>
-                <span className="text-xs font-semibold text-blue-200/80">{t('auto_ui_289')}</span>
+                <span>{t('최대 5,000만원')}</span>
+                <span className="text-xs font-semibold text-blue-200/80">{t('최대 대출 가능 한도')}</span>
               </div>
             </div>
 
@@ -118,15 +118,15 @@ export default function KMarketSuperBenefitCards() {
             <ul className="space-y-2 text-xs text-white/85 font-medium pt-1 border-t border-white/10">
               <li className="flex items-center gap-2">
                 <CheckCircle2 className="w-3.5 h-3.5 text-blue-400 shrink-0" />
-                <span>{t('auto_ui_290')} <strong>{t('auto_ui_291')}</strong> {t('auto_ui_292')}</span>
+                <span>{t('안내 내용을 확인해 주세요')} <strong>{t('5개년 소득증빙 데이터')}</strong> {t('기반 승인')}</span>
               </li>
               <li className="flex items-center gap-2">
                 <CheckCircle2 className="w-3.5 h-3.5 text-blue-400 shrink-0" />
-                <span>{t('auto_ui_293')} <strong>{t('auto_ui_294')}</strong></span>
+                <span>{t('소액 긴급 비상금부터')} <strong>{t('최대 5,000만원 생활자금')}</strong></span>
               </li>
               <li className="flex items-center gap-2">
                 <CheckCircle2 className="w-3.5 h-3.5 text-blue-400 shrink-0" />
-                <span>{t('auto_ui_295')} <strong>{t('auto_ui_296')}</strong> {t('auto_ui_297')}</span>
+                <span>{t('1금융권 및')} <strong>{t('우수 공식 제휴 금융사')}</strong> {t('안전 연동')}</span>
               </li>
             </ul>
           </div>
@@ -139,7 +139,7 @@ export default function KMarketSuperBenefitCards() {
                 background: 'linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%)',
               }}
             >
-              <span>{t('auto_ui_298')}</span>
+              <span>{t('내 실시간 대출한도 확인')}</span>
               <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
             </button>
           </div>
@@ -147,7 +147,7 @@ export default function KMarketSuperBenefitCards() {
 
         {/* 3. 🏠 내 동네 안심 원룸 & 주택 */}
         <div 
-          onClick={() => alert(t('auto_loop_869'))}
+          onClick={() => alert(t('🏠 [케이티알에스 내 동네 안심 부동산 & 원룸] 국토교통부 실거래가 기반 시세 검증 및 17개국어 제휴 공인중개사 안심 매물 서비스가 연결됩니다.'))}
           className="relative rounded-3xl p-5 sm:p-6 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl cursor-pointer flex flex-col justify-between overflow-hidden border group"
           style={{
             background: 'linear-gradient(145deg, #13241b 0%, #09140e 100%)',
@@ -163,7 +163,7 @@ export default function KMarketSuperBenefitCards() {
             <div className="flex items-center justify-between">
               <span className="inline-flex items-center gap-1 text-[11px] font-black px-2.5 py-1 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 tracking-tight">
                 <ShieldCheck className="w-3 h-3 text-emerald-400" />
-                <span>{t('auto_ui_299')}</span>
+                <span>{t('국토부 실거래가 검증')}</span>
               </span>
               <div className="w-10 h-10 rounded-2xl bg-emerald-950/80 border border-emerald-400/30 flex items-center justify-center text-xl shadow-inner group-hover:scale-110 transition-transform">
                 🏠
@@ -172,10 +172,10 @@ export default function KMarketSuperBenefitCards() {
 
             {/* 타이틀 & 강조 금액 */}
             <div className="space-y-1">
-              <h3 className="text-sm font-bold text-white/80">{t('auto_ui_300')}</h3>
+              <h3 className="text-sm font-bold text-white/80">{t('외국인 전용 안심 주거')}</h3>
               <div className="text-xl sm:text-2xl font-black text-emerald-400 tracking-tight flex items-baseline gap-1.5">
-                <span>{t('auto_ui_301')}</span>
-                <span className="text-xs font-semibold text-emerald-200/80">{t('auto_ui_302')}</span>
+                <span>{t('내 동네 안심 원룸')}</span>
+                <span className="text-xs font-semibold text-emerald-200/80">{t('원룸 및 기숙사 직방 찾기')}</span>
               </div>
             </div>
 
@@ -183,15 +183,15 @@ export default function KMarketSuperBenefitCards() {
             <ul className="space-y-2 text-xs text-white/85 font-medium pt-1 border-t border-white/10">
               <li className="flex items-center gap-2">
                 <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
-                <span>{t('auto_ui_303')} <strong>{t('auto_ui_304')}</strong> {t('auto_ui_305')}</span>
+                <span>{t('안내 내용을 확인해 주세요')} <strong>{t('실거래가 기반 시세 검증')}</strong> {t('등록된 전체 매물 보기')}</span>
               </li>
               <li className="flex items-center gap-2">
                 <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
-                <span>{t('auto_ui_306')} <strong>{t('auto_ui_307')}</strong></span>
+                <span>{t('외국인 보증금 사기 방지')} <strong>{t('100% 안심 방')}</strong></span>
               </li>
               <li className="flex items-center gap-2">
                 <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
-                <span><strong>{t('auto_ui_308')}</strong> {t('auto_ui_309')}</span>
+                <span><strong>{t('17개국어 계약서 번역')}</strong> {t('및 안심 중개 동행')}</span>
               </li>
             </ul>
           </div>
@@ -204,7 +204,7 @@ export default function KMarketSuperBenefitCards() {
                 background: 'linear-gradient(135deg, #059669 0%, #047857 100%)',
               }}
             >
-              <span>{t('auto_ui_310')}</span>
+              <span>{t('내 동네 안심 매물 둘러보기')}</span>
               <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
             </button>
           </div>

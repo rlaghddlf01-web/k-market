@@ -1,4 +1,4 @@
-// K-Market 15개국어 사기 방지 긴급 개입 사전
+// K-Market 17개국어 사기 방지 긴급 개입 사전
 import { LanguageCode } from '@/types/kmarket';
 
 export type ScamThreatType = 'prepayment_wire' | 'external_messenger' | 'giftcard_fake_link';
@@ -9,7 +9,7 @@ export interface ScamWarningContent {
   actionText: string;
 }
 
-// 15개국어 사기 유형별 다국어 경고 문구 매핑
+// 17개국어 사기 유형별 다국어 경고 문구 매핑
 export const SCAM_WARNINGS_I18N: Record<
   ScamThreatType,
   Partial<Record<LanguageCode, ScamWarningContent>>
@@ -232,7 +232,7 @@ export const SCAM_WARNINGS_I18N: Record<
   },
 };
 
-// 15개국어 채팅방 공식 안전 수칙 사전
+// 17개국어 채팅방 공식 안전 수칙 사전
 export const CHAT_SAFETY_POLICY_I18N: Partial<Record<LanguageCode, { badge: string; text: string }>> = {
   ko: {
     badge: '🛡️ K-Market 안전 수칙',
@@ -305,7 +305,7 @@ export const CHAT_SAFETY_POLICY_I18N: Partial<Record<LanguageCode, { badge: stri
 };
 
 /**
- * 상대방의 현재 언어 설정에 맞는 15개국어 안전 수칙 반환
+ * 상대방의 현재 언어 설정에 맞는 17개국어 안전 수칙 반환
  */
 export function getChatSafetyPolicyI18n(lang: LanguageCode = 'ko') {
   return CHAT_SAFETY_POLICY_I18N[lang] || CHAT_SAFETY_POLICY_I18N.ko!;

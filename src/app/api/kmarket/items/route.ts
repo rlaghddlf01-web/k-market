@@ -3,6 +3,7 @@ import { INITIAL_ITEMS } from '@/lib/mockData';
 import { supabase, isSupabaseConfigured } from '@/lib/supabaseClient';
 import { KMarketItem } from '@/types/kmarket';
 import { translateItemToAllLanguages } from '@/lib/itemTranslationService';
+import { translateToAllLanguages } from '@/lib/server/genkitTranslator';
 
 // 서버 인메모리 스토리지 (로컬 개발 및 Supabase 미설정 시 안전 fallback)
 let inMemoryItems: KMarketItem[] = [...INITIAL_ITEMS];
@@ -71,17 +72,20 @@ export async function POST(req: NextRequest) {
     const body = await req.json();
     const sourceLang = body.source_lang || 'ko';
 
-    // 15개 언어 일괄 자동 번역 실행 (Gemini Flash 기반)
+    // 17개 언어 일괄 자동 번역 실행 (Genkit + Gemini 기반)
     let itemTranslations = body.translations || {};
     try {
-      const generated = await translateItemToAllLanguages(
+      const generated = await translateToAllLanguages(
         body.title || '',
-        body.description || '',
-        sourceLang
+        body.description || ''
       );
       itemTranslations = { ...itemTranslations, ...generated };
     } catch (transErr) {
-      console.warn('Auto translation warning:', transErr);
+      console.warn('Genkit translation failed, using dictionary fallback:', transErr);
+      try {
+        const fallback = await translateItemToAllLanguages(body.title || '', body.description || '', sourceLang);
+        itemTranslations = { ...itemTranslations, ...fallback };
+      } catch (e) {}
     }
     
     const newItem: KMarketItem = {

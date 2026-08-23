@@ -28,7 +28,7 @@ export default function KMarketStatusBadge({
         className={`inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-bold bg-gray-600 text-white shadow-xs ${className}`}
       >
         <CheckCircle2 className="w-3.5 h-3.5" />
-        <span>{t('status_sold')}</span>
+        <span>{t('거래완료')}</span>
       </div>
     );
   }
@@ -40,7 +40,7 @@ export default function KMarketStatusBadge({
         className={`inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-black bg-amber-500 text-white shadow-xs animate-pulse ${className}`}
       >
         <Clock className="w-3.5 h-3.5" />
-        <span>{t('status_reserved')}</span>
+        <span>{t('안내 내용을 확인해 주세요')}</span>
       </div>
     );
   }
@@ -52,7 +52,7 @@ export default function KMarketStatusBadge({
         className={`inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-extrabold bg-rose-500 text-white shadow-xs ${className}`}
       >
         <TrendingDown className="w-3.5 h-3.5" />
-        <span>{dropDiscountRate ? `${dropDiscountRate}% ${t('badge_discount_rate')}` : t('status_price_dropped')}</span>
+        <span>{dropDiscountRate ? `${dropDiscountRate}% ${t('특별 할인 혜택')}` : t('가격인하')}</span>
       </div>
     );
   }
@@ -64,7 +64,7 @@ export default function KMarketStatusBadge({
         className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-bold bg-indigo-500 text-white shadow-xs ${className}`}
       >
         <Rocket className="w-3 h-3" />
-        <span>{t('auto_ui_274')}</span>
+        <span>{t('게시글 상단으로 끌어올리기')}</span>
       </div>
     );
   }

@@ -34,7 +34,7 @@ export default function KMarketCommunityPostCard({
 
   const categoryInfo = COMMUNITY_CATEGORIES.find((c) => c.id === post.category) || COMMUNITY_CATEGORIES[0];
 
-  // 15개국어 번역 제목 및 본문
+  // 17개국어 번역 제목 및 본문
   const transObj = post.translations?.[currentLang];
   const displayTitle = !showOriginal && transObj?.title ? transObj.title : post.title;
   const displayContent = !showOriginal && transObj?.content ? transObj.content : post.content;
@@ -98,7 +98,7 @@ export default function KMarketCommunityPostCard({
             className={`text-[11px] font-extrabold px-2.5 py-0.5 rounded-full border flex items-center gap-1 ${categoryInfo.color}`}
           >
             <span>{categoryInfo.icon}</span>
-            <span>{t(`comm_cat_${categoryInfo.id}`)}</span>
+            <span>{t(categoryInfo.labelKo)}</span>
           </span>
 
           {/* 더보기 / 신고 버튼 */}
@@ -123,7 +123,7 @@ export default function KMarketCommunityPostCard({
                   className="w-full px-3 py-1.5 text-left text-rose-600 hover:bg-rose-50 dark:hover:bg-rose-950/30 flex items-center gap-1.5 font-bold cursor-pointer"
                 >
                   <Flag className="w-3.5 h-3.5" />
-                  <span>{t('auto_ui_24')}</span>
+                  <span>{t('게시글 신고 및 사용자 차단')}</span>
                 </button>
               </div>
             )}
@@ -140,7 +140,7 @@ export default function KMarketCommunityPostCard({
           {displayContent}
         </p>
 
-        {/* 15개국어 번역 토글 뱃지 */}
+        {/* 17개국어 번역 토글 뱃지 */}
         {hasTranslation && (
           <div className="pt-1">
             <button
@@ -151,7 +151,7 @@ export default function KMarketCommunityPostCard({
               className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-blue-50 dark:bg-blue-950/50 text-blue-600 dark:text-blue-400 text-[10px] font-bold border border-blue-200 dark:border-blue-800/60 hover:bg-blue-100 transition-colors"
             >
               <Globe className="w-3 h-3" />
-              <span>{showOriginal ? t('btn_show_trans') : t('btn_show_orig')}</span>
+              <span>{showOriginal ? t('번역 보기') : t('원문 보기')}</span>
             </button>
           </div>
         )}
@@ -196,7 +196,7 @@ export default function KMarketCommunityPostCard({
           <button
             onClick={handleHeartClick}
             className="flex items-center gap-1 px-2 py-1 rounded-xl bg-slate-50 dark:bg-gray-700/50 hover:bg-rose-50 dark:hover:bg-rose-950/30 hover:text-rose-600 transition-all font-bold cursor-pointer"
-            title={t('auto_ui_26')}
+            title={t('공감해요')}
           >
             <Heart className="w-3.5 h-3.5 text-rose-500 fill-rose-500/20" />
             <span>{post.like_count}</span>
@@ -206,7 +206,7 @@ export default function KMarketCommunityPostCard({
           <button
             onClick={handleCheerClick}
             className="flex items-center gap-1 px-2 py-1 rounded-xl bg-slate-50 dark:bg-gray-700/50 hover:bg-amber-50 dark:hover:bg-amber-950/30 hover:text-amber-600 transition-all font-bold cursor-pointer"
-            title={t('auto_ui_27')}
+            title={t('힘내세요 / 따뜻하게 응원해요')}
           >
             <Coffee className="w-3.5 h-3.5 text-amber-500" />
             <span>{post.cheer_count}</span>

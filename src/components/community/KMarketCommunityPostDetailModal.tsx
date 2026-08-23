@@ -54,7 +54,7 @@ export default function KMarketCommunityPostDetailModal() {
     COMMUNITY_CATEGORIES.find((c) => c.id === selectedPost.category) ||
     COMMUNITY_CATEGORIES[0];
 
-  // 15개국어 번역 제목 및 본문
+  // 17개국어 번역 제목 및 본문
   const transObj = selectedPost.translations?.[currentLang];
   const displayTitle =
     !showOriginal && transObj?.title ? transObj.title : selectedPost.title;
@@ -136,7 +136,7 @@ export default function KMarketCommunityPostDetailModal() {
                 className={`text-xs font-extrabold px-3 py-1 rounded-full border flex items-center gap-1.5 ${categoryInfo.color}`}
               >
                 <span>{categoryInfo.icon}</span>
-                <span>{t(`comm_cat_${categoryInfo.id}`)}</span>
+                <span>{t(categoryInfo.labelKo)}</span>
               </span>
 
               {/* 메뉴 */}
@@ -154,7 +154,7 @@ export default function KMarketCommunityPostDetailModal() {
                       className="w-full px-3 py-1.5 text-left text-rose-600 hover:bg-rose-50 flex items-center gap-1.5 font-bold cursor-pointer"
                     >
                       <Flag className="w-3.5 h-3.5" />
-                      <span>{t('report_btn')}</span>
+                      <span>{t('허위 및 사기 신고하기')}</span>
                     </button>
                   </div>
                 )}
@@ -162,7 +162,7 @@ export default function KMarketCommunityPostDetailModal() {
             </div>
           </div>
 
-          {/* 2. 글 제목 & 15개국어 번역 토글 */}
+          {/* 2. 글 제목 & 17개국어 번역 토글 */}
           <div className="space-y-2">
             <h2 className="text-base sm:text-lg font-black text-slate-900 dark:text-white leading-snug">
               {displayTitle}
@@ -172,7 +172,7 @@ export default function KMarketCommunityPostDetailModal() {
               className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-blue-50 dark:bg-blue-950/50 text-blue-600 dark:text-blue-400 text-xs font-bold border border-blue-200 dark:border-blue-800/60 hover:bg-blue-100 transition-colors cursor-pointer"
             >
               <Globe className="w-3.5 h-3.5" />
-              <span>{showOriginal ? t('btn_show_trans') : t('btn_show_orig')}</span>
+              <span>{showOriginal ? t('번역 보기') : t('원문 보기')}</span>
             </button>
           </div>
 
@@ -222,7 +222,7 @@ export default function KMarketCommunityPostDetailModal() {
               className="flex-1 py-2 rounded-xl bg-rose-50 hover:bg-rose-100 dark:bg-rose-950/30 text-rose-600 font-extrabold text-xs flex items-center justify-center gap-1.5 transition-colors cursor-pointer border border-rose-200 dark:border-rose-900/40"
             >
               <Heart className="w-4 h-4 fill-rose-500" />
-              <span>{t('btn_like')} ({selectedPost.like_count})</span>
+              <span>{t('게시글 공감해요')} ({selectedPost.like_count})</span>
             </button>
 
             <button
@@ -230,21 +230,21 @@ export default function KMarketCommunityPostDetailModal() {
               className="flex-1 py-2 rounded-xl bg-amber-50 hover:bg-amber-100 dark:bg-amber-950/30 text-amber-700 font-extrabold text-xs flex items-center justify-center gap-1.5 transition-colors cursor-pointer border border-amber-200 dark:border-amber-900/40"
             >
               <Coffee className="w-4 h-4 text-amber-600" />
-              <span>{t('btn_cheer')} ({selectedPost.cheer_count})</span>
+              <span>{t('따뜻하게 응원해요')} ({selectedPost.cheer_count})</span>
             </button>
           </div>
 
-          {/* 6. 댓글 섹션 (15개국어 실시간 번역) */}
+          {/* 6. 댓글 섹션 (17개국어 실시간 번역) */}
           <div className="space-y-3 pt-2">
             <h4 className="text-xs font-black text-slate-900 dark:text-white flex items-center gap-1.5">
               <MessageCircle className="w-4 h-4 text-blue-600" />
-              <span>{t('comment_header')} ({comments.length})</span>
+              <span>{t('안내 내용을 확인해 주세요')} ({comments.length})</span>
             </h4>
 
             <div className="space-y-2">
               {isCommentsLoading ? (
                 <div className="py-6 text-center text-xs text-slate-400">
-                  {t('comm_loading_comments')}
+                  {t('댓글을 불러오는 중...')}
                 </div>
               ) : comments.length > 0 ? (
                 comments.map((comm) => {
@@ -272,7 +272,7 @@ export default function KMarketCommunityPostDetailModal() {
                           <button
                             onClick={() => handleReportComment(comm)}
                             className="hover:text-rose-500 cursor-pointer p-0.5"
-                            title={t('auto_ui_32')}
+                            title={t('댓글 신고')}
                           >
                             <Flag className="w-3 h-3" />
                           </button>
@@ -287,7 +287,7 @@ export default function KMarketCommunityPostDetailModal() {
                 })
               ) : (
                 <div className="py-6 text-center text-xs text-slate-400 bg-slate-50 dark:bg-gray-800/40 rounded-2xl">
-                  {t('comm_first_comment_prompt')}
+                  {t('첫 번째 따뜻한 댓글을 남겨보세요!')}
                 </div>
               )}
             </div>
@@ -302,7 +302,7 @@ export default function KMarketCommunityPostDetailModal() {
                 type="text"
                 value={commentInput}
                 onChange={(e) => setCommentInput(e.target.value)}
-                placeholder={t('auto_ui_33')}
+                placeholder={t('따뜻한 응원이나 답변을 남겨보세요 (17개국어로 자동 번역됩니다)...')}
                 className="flex-1 px-4 py-2.5 rounded-2xl bg-slate-100 dark:bg-gray-800 border border-slate-200 dark:border-gray-700 text-xs font-medium text-slate-900 dark:text-white focus:outline-hidden focus:border-blue-500"
               />
               <button
@@ -311,7 +311,7 @@ export default function KMarketCommunityPostDetailModal() {
                 className="px-4 py-2.5 rounded-2xl bg-blue-600 hover:bg-blue-700 disabled:opacity-50 text-white font-bold text-xs flex items-center gap-1 cursor-pointer transition-colors shadow-md"
               >
                 <Send className="w-3.5 h-3.5" />
-                <span>{t('post_short_btn')}</span>
+                <span>{t('새 매물 등록하기')}</span>
               </button>
             </form>
           ) : (
@@ -321,7 +321,7 @@ export default function KMarketCommunityPostDetailModal() {
             >
               <p className="text-xs font-bold text-amber-800 dark:text-amber-300 flex items-center justify-center gap-1.5">
                 <Lock className="w-3.5 h-3.5" />
-                <span>{t('auto_ui_34')}</span>
+                <span>{t('댓글을 작성하려면 1분 간편 본인인증(회원가입)이 필요합니다 →')}</span>
               </p>
             </div>
           )}

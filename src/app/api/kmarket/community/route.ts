@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { supabase } from '@/lib/supabaseClient';
 import { translateItemToAllLanguages } from '@/lib/itemTranslationService';
+import { translateToAllLanguages } from '@/lib/server/genkitTranslator';
 import { INITIAL_COMMUNITY_POSTS } from '@/lib/communityMockData';
 import { CommunityPost } from '@/types/community';
 
@@ -104,7 +105,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ success: true, message: '신고가 정상 접수되었습니다.' });
     }
 
-    // 3. 새 게시글 등록 + 15개국어 일괄 번역 생성
+    // 3. 새 게시글 등록 + 17개국어 일괄 번역 생성
     const {
       userId = 'user-current',
       userName = 'K-Market User',
@@ -122,15 +123,14 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: '제목과 내용을 입력해주세요.' }, { status: 400 });
     }
 
-    // Gemini Flash 15개국어 일괄 번역 생성 (단 1회 호출)
+    // Genkit 17개국어 일괄 번역 생성 (단 1회 호출)
     let translations: Record<string, { title: string; content: string }> = {
       [sourceLang]: { title, content },
     };
 
     try {
-      const transResult = await translateItemToAllLanguages(title, content, sourceLang);
+      const transResult = await translateToAllLanguages(title, content);
       if (transResult && Object.keys(transResult).length > 0) {
-        // description 필드를 content로 매핑
         const mapped: Record<string, { title: string; content: string }> = {};
         for (const [lang, val] of Object.entries(transResult)) {
           mapped[lang] = { title: val.title, content: val.description };
@@ -138,7 +138,19 @@ export async function POST(req: NextRequest) {
         translations = { ...mapped, [sourceLang]: { title, content } };
       }
     } catch (transErr) {
-      console.warn('Community translation generation failed, saving source:', transErr);
+      console.warn('Genkit translation failed, trying dictionary fallback:', transErr);
+      try {
+        const transResult = await translateItemToAllLanguages(title, content, sourceLang);
+        if (transResult && Object.keys(transResult).length > 0) {
+          const mapped: Record<string, { title: string; content: string }> = {};
+          for (const [lang, val] of Object.entries(transResult)) {
+            mapped[lang] = { title: val.title, content: val.description };
+          }
+          translations = { ...mapped, [sourceLang]: { title, content } };
+        }
+      } catch (e) {
+        console.warn('Community translation fallback also failed:', e);
+      }
     }
 
     const newPost: CommunityPost = {

@@ -64,10 +64,10 @@ export default function KMarketPushNotificationManager() {
         </div>
         <div className="flex-1 min-w-0 pr-4">
           <h4 className="text-xs font-black text-gray-900 dark:text-white truncate">
-            {t('pwa_push_mgr_title')}
+            {t('실시간 거래 & 키워드 알림 받기')}
           </h4>
           <p className="text-[11px] text-gray-600 dark:text-gray-300 mt-0.5 leading-snug">
-            {t('pwa_push_mgr_desc')}
+            {t('채팅 도착 및 관심 매물 등록 시 즉시 알려드려요!')}
           </p>
         </div>
       </div>
@@ -78,13 +78,13 @@ export default function KMarketPushNotificationManager() {
           className="flex-1 py-2 px-3 bg-amber-500 hover:bg-amber-600 active:scale-95 text-[#09101f] font-black text-xs rounded-xl shadow-md transition-all flex items-center justify-center space-x-1 cursor-pointer"
         >
           <Bell className="w-3.5 h-3.5" />
-          <span>{t('pwa_push_mgr_btn')}</span>
+          <span>{t('알림 켜기')}</span>
         </button>
         <button
           onClick={handleDismiss}
           className="py-2 px-2.5 bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 text-xs font-bold rounded-xl"
         >
-          {t('close_btn')}
+          {t('안내창 닫기')}
         </button>
       </div>
     </div>

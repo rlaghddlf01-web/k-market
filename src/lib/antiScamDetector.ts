@@ -1,4 +1,4 @@
-// K-Market 외국인 대상 15개국어 사기 방지 안심 쉴드 (Anti-Scam Shield) 엔진
+// K-Market 외국인 대상 17개국어 사기 방지 안심 쉴드 (Anti-Scam Shield) 엔진
 
 export type ScamThreatType = 'external_messenger' | 'prepayment_wire' | 'giftcard_fake_link';
 

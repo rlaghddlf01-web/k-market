@@ -5,6 +5,8 @@ import { ShieldCheck, AlertCircle } from 'lucide-react';
 import { LanguageCode } from '@/types/kmarket';
 import { getChatSafetyPolicyI18n } from '@/lib/antiScamTranslations';
 
+import { useLanguage } from '@/context/LanguageContext';
+
 interface KMarketChatSafetyNoticeProps {
   currentLang?: LanguageCode;
 }
@@ -12,6 +14,7 @@ interface KMarketChatSafetyNoticeProps {
 export default function KMarketChatSafetyNotice({
   currentLang = 'ko',
 }: KMarketChatSafetyNoticeProps) {
+  const { t } = useLanguage();
   const policy = getChatSafetyPolicyI18n(currentLang);
 
   return (
@@ -22,7 +25,7 @@ export default function KMarketChatSafetyNotice({
           <span>{policy.badge}</span>
         </div>
         <span className="text-[9px] font-bold text-slate-400 bg-slate-800 px-2 py-0.5 rounded-full">
-          24H AI Auto-Security
+          {t('24시간 AI 안심 자동 보안')}
         </span>
       </div>
 

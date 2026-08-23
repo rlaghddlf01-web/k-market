@@ -21,16 +21,16 @@ export default function KMarketHeroShowcase() {
           <div className="max-w-xl space-y-4 text-left">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#ded1c4] text-[#4a3424] text-xs font-bold tracking-wide">
               <Sparkles className="w-3.5 h-3.5 text-[#845b37]" />
-              <span>{t('hero_top_badge')}</span>
+              <span>{t('대한민국 1등 외국인 근로자 안심 직거래 마켓')}</span>
             </div>
 
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#1f1914] tracking-tight leading-tight sm:leading-tight">
-              {t('hero_main_headline')}
+              {t('외국인 안심 직거래 & 귀국 무빙세일 특가전')}
             </h1>
 
             <p className="text-sm sm:text-base text-[#5c4a39] font-medium leading-relaxed max-w-lg">
-              {t('hero_desc_1')} <br className="hidden sm:inline" />
-              {t('hero_desc_2')}
+              {t('17개국어 실시간 인공지능 양방향 안심 번역 채팅을 지원합니다.')} <br className="hidden sm:inline" />
+              {t('공단 기숙사 정문 앞 1분 거리에서 신원 인증을 거친 안전한 직거래 플랫폼입니다.')}
             </p>
 
             {/* CTA 버튼 그룹 */}
@@ -39,7 +39,7 @@ export default function KMarketHeroShowcase() {
                 onClick={() => setIsCreateModalOpen(true)}
                 className="px-6 py-3.5 rounded-full bg-[#1f1914] hover:bg-[#332219] text-[#fbf9f6] text-xs sm:text-sm font-bold transition-all shadow-sm flex items-center gap-2 cursor-pointer active:scale-95"
               >
-                <span>{t('hero_post_btn')}</span>
+                <span>{t('1분 만에 내 물건 무료로 등록하기')}</span>
                 <ArrowRight className="w-4 h-4 text-amber-200" />
               </button>
 
@@ -48,7 +48,7 @@ export default function KMarketHeroShowcase() {
                 className="px-5 py-3.5 rounded-full bg-[#fefcf9] hover:bg-white text-[#3d2817] border border-[#ded1c4] text-xs sm:text-sm font-bold transition-all flex items-center gap-2 cursor-pointer active:scale-95 shadow-2xs"
               >
                 <span className="w-2 h-2 rounded-full bg-amber-500 animate-pulse" />
-                <span>{t('hero_tax_btn')}</span>
+                <span>{t('평균 184만 원 예상 세금 환급액 계산기')}</span>
               </button>
             </div>
           </div>
@@ -58,7 +58,7 @@ export default function KMarketHeroShowcase() {
             <div className="relative aspect-4/3 rounded-3xl overflow-hidden shadow-2xl border-2 border-white bg-white group">
               <img
                 src="/images/hero-appliances-bundle.jpg"
-                alt={t('auto_ui_148')}
+                alt={t('가전 가구 통합 패키지 쇼케이스')}
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
               />
 
@@ -72,13 +72,13 @@ export default function KMarketHeroShowcase() {
                 className="absolute top-3.5 right-3.5 w-20 h-20 sm:w-22 sm:h-22 rounded-full text-white flex flex-col items-center justify-center text-center p-1.5 shadow-xl animate-pulse pointer-events-none"
               >
                 <span className="text-[9px] sm:text-[10px] font-bold text-slate-200 leading-tight">
-                  {t('hero_moving_tag_top')}
+                  {t('귀국 근로자 전용')}
                 </span>
                 <span className="text-xs sm:text-sm font-black text-[#f3ba2f] leading-tight">
-                  {t('hero_moving_tag_main')}
+                  {t('귀국 무빙세일')}
                 </span>
                 <span className="text-[9px] font-extrabold bg-rose-600 px-1.5 py-0.2 rounded-full mt-0.5">
-                  {t('hero_bundle_discount')}
+                  {t('75% 파격 할인 혜택')}
                 </span>
               </div>
 
@@ -87,14 +87,14 @@ export default function KMarketHeroShowcase() {
                 <div className="flex items-center justify-between">
                   <div>
                     <span className="text-[10px] font-black uppercase tracking-wider text-[#f3ba2f]">
-                      {t('hero_bundle_tag')}
+                      {t('풀패키지 가전·가구 묶음 할인')}
                     </span>
                     <p className="text-sm font-black drop-shadow-sm truncate">
-                      {t('hero_bundle_title')}
+                      {t('냉장고·세탁기·밥솥 가전 가구 풀세트 급처분 매물')}
                     </p>
                   </div>
                   <span className="text-xs font-black text-rose-400 bg-black/50 px-2 py-1 rounded-lg border border-rose-400/40">
-                    {t('hero_bundle_action')}
+                    {t('묶음 특가로 처분하기')}
                   </span>
                 </div>
               </div>
@@ -108,19 +108,19 @@ export default function KMarketHeroShowcase() {
         <div className="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-4 text-[#5c4a39] text-xs">
           <div className="flex items-center gap-2">
             <ShieldCheck className="w-4 h-4 text-[#845b37]" />
-            <span className="font-semibold">{t('trust_bar_fee')}</span>
+            <span className="font-semibold">{t('수수료 0원으로 100% 무료 직거래를 이용하세요')}</span>
           </div>
           <div className="flex items-center gap-2">
             <MessageCircle className="w-4 h-4 text-[#845b37]" />
-            <span className="font-semibold">{t('trust_bar_ai')}</span>
+            <span className="font-semibold">{t('17개국어로 실시간 인공지능 양방향 번역을 지원합니다')}</span>
           </div>
           <div className="flex items-center gap-2">
             <Sparkles className="w-4 h-4 text-[#845b37]" />
-            <span className="font-semibold">{t('trust_bar_tax')}</span>
+            <span className="font-semibold">{t('평균 184만 원 세금 환급 혜택을 연계해 드립니다')}</span>
           </div>
           <div className="flex items-center gap-2">
             <RefreshCw className="w-4 h-4 text-[#845b37]" />
-            <span className="font-semibold">{t('trust_bar_moving')}</span>
+            <span className="font-semibold">{t('귀국 외국인 근로자의 무빙세일 특가 매물을 만나보세요')}</span>
           </div>
         </div>
       </div>

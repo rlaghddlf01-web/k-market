@@ -76,7 +76,7 @@ export interface CommunityPost {
   latitude?: number;
   longitude?: number;
   source_lang: SupportedLanguage;
-  translations?: Record<string, { title: string; content: string }>; // 15개국어 번역 캐시
+  translations?: Record<string, { title: string; content: string }>; // 17개국어 번역 캐시
   like_count: number;
   cheer_count: number; // 힘내세요/위로 카운트
   comment_count: number;
@@ -95,7 +95,7 @@ export interface CommunityComment {
   user_flag: string;
   content: string;
   source_lang: SupportedLanguage;
-  translations?: Record<string, string>; // 15개국어 번역 캐시 { ko: "댓글", vi: "...", ... }
+  translations?: Record<string, string>; // 17개국어 번역 캐시 { ko: "댓글", vi: "...", ... }
   is_hidden: boolean;
   created_at: string;
 }

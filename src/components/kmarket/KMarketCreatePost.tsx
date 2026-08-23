@@ -59,7 +59,7 @@ export default function KMarketCreatePost() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!title.trim() || !description.trim()) {
-      alert(t('auto_loop_776'));
+      alert(t('제목과 설명을 입력해 주세요.'));
       return;
     }
 
@@ -99,10 +99,10 @@ export default function KMarketCreatePost() {
           <div>
             <div className="inline-flex items-center gap-1.5 bg-black/40 px-2.5 py-0.5 rounded-full text-xs font-bold text-[#f3ba2f] border border-[#f3ba2f]/40 mb-1">
               <Sparkles className="w-3.5 h-3.5 text-[#f3ba2f]" />
-              <span>{t('auto_ui_109')}</span>
+              <span>{t('수수료 0원 100% 무료 개인간 직거래')}</span>
             </div>
             <h2 className="text-xl font-black tracking-tight text-white">
-              {t('create_modal_title')}
+              {t('1분 간편 매물 등록')}
             </h2>
           </div>
           <button
@@ -118,7 +118,7 @@ export default function KMarketCreatePost() {
           {/* 1. 사진 업로드 및 프리셋 */}
           <div className="space-y-2">
             <label className="block font-bold text-slate-800">
-              📷 {t('create_photos_label')} ({images.length}/5)
+              📷 {t('상품 사진')} ({images.length}/5)
             </label>
             <div className="flex items-center space-x-2 overflow-x-auto pb-1">
               {images.map((img, idx) => (
@@ -132,7 +132,7 @@ export default function KMarketCreatePost() {
                     <Trash2 className="w-3 h-3" />
                   </button>
                   {idx === 0 && (
-                    <span className="absolute bottom-0 inset-x-0 bg-blue-600 text-white text-[9px] font-bold text-center py-0.5">{t('create_main_photo_badge')}</span>
+                    <span className="absolute bottom-0 inset-x-0 bg-blue-600 text-white text-[9px] font-bold text-center py-0.5">{t('대표사진')}</span>
                   )}
                 </div>
               ))}
@@ -140,7 +140,7 @@ export default function KMarketCreatePost() {
               {images.length < 5 && (
                 <label className="w-20 h-20 rounded-2xl border-2 border-dashed border-slate-300 hover:border-blue-500 bg-slate-50 flex flex-col items-center justify-center text-slate-400 hover:text-blue-600 shrink-0 cursor-pointer transition-colors">
                   <Camera className="w-5 h-5" />
-                  <span className="text-[10px] mt-1 font-semibold">{t('auto_ui_110')}</span>
+                  <span className="text-[10px] mt-1 font-semibold">{t('+ 사진추가')}</span>
                   <input
                     type="file"
                     accept="image/*"
@@ -165,7 +165,7 @@ export default function KMarketCreatePost() {
             {/* 빠른 샘플 사진 클릭 추가 */}
             <div className="pt-1">
               <span className="text-[11px] text-slate-500 block mb-1">
-                💡 {t('create_sample_photos_hint')}
+                💡 {t('빠른 테스트용 추천 사진 클릭:')}
               </span>
               <div className="flex items-center space-x-1.5 overflow-x-auto no-scrollbar">
                 {SAMPLE_IMAGE_PRESETS.map((preset, i) => (
@@ -196,7 +196,7 @@ export default function KMarketCreatePost() {
                   className="w-4 h-4 text-orange-600 rounded-md focus:ring-orange-500 cursor-pointer"
                 />
                 <span className="font-extrabold text-orange-950 text-xs sm:text-sm flex items-center space-x-1">
-                  <span>{t('auto_ui_111')}</span>
+                  <span>{t('✈️ 귀국자 헐값 급처분 [무빙 세일(무빙세일)]로 등록하기')}</span>
                 </span>
               </label>
             </div>
@@ -205,7 +205,7 @@ export default function KMarketCreatePost() {
               <div className="space-y-2 pt-2 border-t border-amber-200/60">
                 <div>
                   <span className="text-[11px] text-orange-900 font-bold block mb-1.5">
-                    {t('create_moving_dday_title')}
+                    {t('귀국 예정 남은 일수를 선택하세요 (기간에 따라 긴박감 뱃지 자동 부착)')}
                   </span>
                   <div className="grid grid-cols-2 sm:grid-cols-4 gap-1.5">
                     {[
@@ -233,13 +233,13 @@ export default function KMarketCreatePost() {
 
                 <div>
                   <span className="text-[11px] text-orange-900 font-bold block mb-1">
-                    {t('create_orig_price_title')}
+                    {t('원래 구입 가격 / 정가 (할인율 뱃지 표시용)')}
                   </span>
                   <input
                     type="number"
                     value={originalPrice}
                     onChange={(e) => setOriginalPrice(e.target.value)}
-                    placeholder={t('auto_ui_112')}
+                    placeholder={t('예: 450000')}
                     className="w-full px-3 py-2 bg-white rounded-xl border border-orange-300 text-xs font-bold text-orange-950 focus:outline-none"
                   />
                 </div>
@@ -251,14 +251,14 @@ export default function KMarketCreatePost() {
           <div className="space-y-3">
             <div>
               <label className="block font-bold text-slate-800 mb-1">
-                {t('post_item_title_label')}
+                {t('등록할 매물 제목을 입력하세요')}
               </label>
               <input
                 type="text"
                 required
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
-                placeholder={t('post_title_placeholder')}
+                placeholder={t('예: 통돌이 세탁기 및 쿠쿠 밥솥 묶음 귀국 세일합니다')}
                 className="w-full px-3.5 py-2.5 bg-slate-50 rounded-xl border border-slate-200 focus:bg-white focus:border-blue-500 focus:outline-none text-xs sm:text-sm font-medium"
               />
             </div>
@@ -266,18 +266,18 @@ export default function KMarketCreatePost() {
             {/* 3-1. 카테고리 원터치 선택 칩 그리드 */}
             <div>
               <label className="block font-bold text-slate-900 mb-2">
-                🏷️ {t('post_category_select_label')}
+                🏷️ {t('상품 카테고리를 선택해 주세요')}
               </label>
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
                 {[
-                  { id: 'appliances', label: t('cat_appliances'), icon: '🔌' },
-                  { id: 'furniture', label: t('cat_furniture'), icon: '🛏️' },
-                  { id: 'digital', label: t('cat_digital'), icon: '📱' },
-                  { id: 'moving_sale', label: t('cat_moving_bundle'), icon: '✈️', badge: 'HOT' },
-                  { id: 'free_give', label: t('cat_free_share'), icon: '🎁', badge: '0' },
-                  { id: 'clothes', label: t('cat_clothes'), icon: '👕' },
-                  { id: 'daily', label: t('cat_daily'), icon: '🍳' },
-                  { id: 'vehicles', label: t('cat_vehicles'), icon: '🚲' },
+                  { id: 'appliances', label: t('원룸 가전'), icon: '🔌' },
+                  { id: 'furniture', label: t('생활 가구'), icon: '🛏️' },
+                  { id: 'digital', label: t('스마트폰 및 전자기기'), icon: '📱' },
+                  { id: 'moving_sale', label: t('귀국 무빙 묶음'), icon: '✈️', badge: 'HOT' },
+                  { id: 'free_give', label: t('0원 무료나눔'), icon: '🎁', badge: '0' },
+                  { id: 'clothes', label: t('의류 및 패션 잡화'), icon: '👕' },
+                  { id: 'daily', label: t('생활용품 및 주방가전'), icon: '🍳' },
+                  { id: 'vehicles', label: t('자전거 및 오토바이/킥보드'), icon: '🚲' },
                 ].map((cat) => {
                   const isSelected = category === cat.id;
                   return (
@@ -325,11 +325,11 @@ export default function KMarketCreatePost() {
             <div>
               <div className="flex items-center justify-between mb-1">
                 <label className="block font-bold text-slate-900">
-                  💰 {t('post_price_label')}
+                  💰 {t('판매 가격 (0원을 입력하시면 무료나눔으로 자동 등록됩니다)')}
                 </label>
                 {price === '0' && (
                   <span className="text-[11px] font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full">
-                    🎁 {t('cat_free_share')}
+                    🎁 {t('0원 무료나눔')}
                   </span>
                 )}
               </div>
@@ -344,10 +344,10 @@ export default function KMarketCreatePost() {
                       setCategory('free_give');
                     }
                   }}
-                  placeholder={t('auto_ui_114')}
+                  placeholder={t('0 (무료나눔)')}
                   className="w-full pl-4 pr-12 py-2.5 bg-slate-50 rounded-xl border border-slate-200 focus:bg-white focus:border-[#f3ba2f] text-sm font-black text-[#1f1914] focus:outline-none"
                 />
-                <span className="absolute right-4 top-2.5 text-xs font-bold text-slate-400">{t('currency_krw')}</span>
+                <span className="absolute right-4 top-2.5 text-xs font-bold text-slate-400">{t('원 (원화)')}</span>
               </div>
             </div>
           </div>
@@ -371,7 +371,7 @@ export default function KMarketCreatePost() {
           <div className="grid grid-cols-2 gap-2">
             <div>
               <label className="block font-bold text-slate-800 mb-1">
-                {t('create_seller_country_label')}
+                {t('판매자 국가')}
               </label>
               <select
                 value={sellerCountry}
@@ -388,7 +388,7 @@ export default function KMarketCreatePost() {
 
             <div>
               <label className="block font-bold text-slate-800 mb-1">
-                {t('create_seller_name_label')}
+                {t('판매자 닉네임')}
               </label>
               <input
                 type="text"
@@ -403,11 +403,11 @@ export default function KMarketCreatePost() {
           <div>
             <div className="flex justify-between items-center mb-1">
               <label className="font-bold text-slate-800">
-                {t('create_desc_header')}
+                {t('상세 설명')}
               </label>
               <span className="text-[10px] text-blue-600 flex items-center space-x-1">
                 <Sparkles className="w-3 h-3" />
-                <span>{t('auto_ui_115')}</span>
+                <span>{t('✨ 등록 즉시 17개국어로 자동 번역됩니다')}</span>
               </span>
             </div>
             <textarea
@@ -415,7 +415,7 @@ export default function KMarketCreatePost() {
               rows={4}
               value={description}
               onChange={(e) => setDescription(e.target.value)}
-              placeholder={t('auto_ui_116')}
+              placeholder={t('물건의 상태, 사용 기간, 직거래 가능한 시간대를 적어주세요. 모국어로 작성하셔도 구매자에게 자동 번역됩니다.')}
               className="w-full p-3 bg-slate-50 rounded-xl border border-slate-200 focus:bg-white focus:border-blue-500 focus:outline-none text-xs leading-relaxed"
             />
           </div>
@@ -433,12 +433,12 @@ export default function KMarketCreatePost() {
               className="w-full py-3.5 text-white font-black text-sm sm:text-base rounded-2xl shadow-xl active:scale-98 transition-all flex items-center justify-center space-x-2 cursor-pointer disabled:opacity-50 hover:brightness-110"
             >
               {isLoading ? (
-                <span className="text-[#f3ba2f]">{t('auto_ui_117')}</span>
+                <span className="text-[#f3ba2f]">{t('매물 등록 및 17개국어 번역 중...')}</span>
               ) : (
                 <>
                   <CheckCircle2 className="w-5 h-5 text-[#f3ba2f]" />
-                  <span className="text-[#f3ba2f]">{t('auto_ui_118')}</span>
-                  <span className="text-white">{t('auto_ui_119')}</span>
+                  <span className="text-[#f3ba2f]">{t('1분 만에 무료 매물 등록')}</span>
+                  <span className="text-white">{t('등록 완료하기 →')}</span>
                 </>
               )}
             </button>

@@ -62,11 +62,11 @@ export default function KMarketMyPageModal({ isOpen, onClose }: KMarketMyPageMod
   const userCountry = authedUser?.country || 'VN';
   const userVisa = authedUser?.visaType
     ? (authedUser.visaType.includes('E-9')
-        ? t('visa_e9')
+        ? t('이나인(E-9) 비전문취업 비자')
         : authedUser.visaType.includes('E-7')
-        ? t('visa_e7')
+        ? t('이세븐(E-7) 특정활동 전문 비자')
         : authedUser.visaType)
-    : t('visa_e9');
+    : t('이나인(E-9) 비전문취업 비자');
   const rawDormitory = authedUser?.dormitory || authedUser?.region || '내 주변 공단 기숙사';
   const userDormitory = getAdaptedItemRegion({ id: 'user-loc-1', region: rawDormitory } as any, authedUser?.region, currentLang);
 
@@ -147,14 +147,14 @@ export default function KMarketMyPageModal({ isOpen, onClose }: KMarketMyPageMod
               <div className="flex items-center space-x-2">
                 <span className="text-xs font-black text-slate-900 dark:text-white flex items-center gap-1">
                   <Flame className="w-4 h-4 text-orange-500 fill-orange-500 animate-pulse" />
-                  <span>{t('auto_ui_207')}</span>
+                  <span>{t('케이마켓 매너온도')}</span>
                 </span>
                 <button
                   onClick={() => setShowMannerGuide(!showMannerGuide)}
                   className="inline-flex items-center space-x-0.5 text-[11px] font-bold text-blue-600 dark:text-blue-400 hover:underline cursor-pointer"
                 >
                   <HelpCircle className="w-3.5 h-3.5" />
-                  <span>{t('auto_ui_208')}</span>
+                  <span>{t('매너온도란?')}</span>
                 </button>
               </div>
 
@@ -179,11 +179,11 @@ export default function KMarketMyPageModal({ isOpen, onClose }: KMarketMyPageMod
               <div className="flex items-center space-x-1.5">
                 <span className="inline-flex items-center space-x-1 px-2.5 py-0.5 rounded-full bg-emerald-50 dark:bg-emerald-950/40 text-emerald-800 dark:text-emerald-300 font-bold text-[11px] border border-emerald-200/60 dark:border-emerald-800/40">
                   <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
-                  <span>{t('profile_ocr_verified_badge')}</span>
+                  <span>{t('법무부 실물 외국인등록증(외국인등록증) 신분증 자동인식 인증 (+7.0℃)')}</span>
                 </span>
               </div>
               <span className="text-[11px] text-slate-500 font-medium">
-                {t('profile_trust_top_percent')}
+                {t('신뢰도 상위 12% 최우수 회원 🛡️')}
               </span>
             </div>
 
@@ -192,13 +192,13 @@ export default function KMarketMyPageModal({ isOpen, onClose }: KMarketMyPageMod
               <div className="p-3.5 bg-blue-50 dark:bg-blue-950/40 rounded-2xl border border-blue-200 dark:border-blue-800 text-xs space-y-2 animate-fadeIn">
                 <h4 className="font-black text-blue-950 dark:text-blue-200 flex items-center gap-1.5">
                   <Sparkles className="w-4 h-4 text-amber-500" />
-                  <span>{t('auto_ui_210')}</span>
+                  <span>{t('💡 케이마켓 매너온도 시스템 안내')}</span>
                 </h4>
                 <ul className="space-y-1 text-slate-600 dark:text-slate-300 text-[11px] leading-relaxed">
-                  <li>• <strong>36.5℃</strong>{t('auto_ui_211')}</li>
-                  <li>• <strong>{t('auto_ui_212')}</strong> {t('auto_ui_213')} <strong>+7.0℃</strong>{t('auto_ui_214')} <strong>{t('auto_ui_215')}</strong>{t('auto_ui_216')}</li>
-                  <li>• <strong>{t('auto_ui_217')}</strong>{t('auto_ui_218')} <strong>{t('auto_ui_219')}</strong>{t('auto_ui_220')}</li>
-                  <li>{t('auto_ui_221')}</li>
+                  <li>• <strong>36.5℃</strong>{t('는 사람의 따뜻한 체온처럼 가입 시 주어지는 기본 신뢰 점수입니다.')}</li>
+                  <li>• <strong>{t('📸 실물 신분증 신분증 자동인식 사진 촬영')}</strong> {t('시 즉시')} <strong>+7.0℃</strong>{t('가 올라가')} <strong>{t('43.5℃(골드 등급)')}</strong>{t('가 됩니다.')}</li>
+                  <li>• <strong>{t('43.5℃ 이상')}</strong>{t('이면 구매자들이 100% 신뢰하여 내 매물이')} <strong>{t('3배 더 빠르게 판매')}</strong>{t('됩니다!')}</li>
+                  <li>{t('• 직거래 후 시간 약속과 친절 칭찬 후기를 받으면 온도가 계속 상승합니다. (노쇼/사기 신고 시 하강)')}</li>
                 </ul>
               </div>
             )}
@@ -212,13 +212,13 @@ export default function KMarketMyPageModal({ isOpen, onClose }: KMarketMyPageMod
               </div>
               <div className="min-w-0">
                 <h5 className="text-xs font-black text-white flex items-center gap-1.5 truncate">
-                  <span>{t('pwa_banner_title')}</span>
+                  <span>{t('케이마켓 앱을 1초 만에 설치하세요')}</span>
                   <span className="text-[9px] bg-[#f3ba2f] text-[#09101f] px-1.5 py-0.2 rounded-full font-black">
-                    {t('pwa_banner_1sec_badge')}
+                    {t('1초 설치')}
                   </span>
                 </h5>
                 <p className="text-[10px] text-slate-300 mt-0.5 truncate">
-                  {t('pwa_banner_desc')}
+                  {t('스마트폰 홈 화면에 추가하고 실시간 번역 채팅과 거래 알림을 받아보세요.')}
                 </p>
               </div>
             </div>
@@ -228,7 +228,7 @@ export default function KMarketMyPageModal({ isOpen, onClose }: KMarketMyPageMod
               className="px-3.5 py-2 bg-gradient-to-r from-[#f3ba2f] to-[#e5a91b] hover:from-[#fcd34d] hover:to-[#f59e0b] text-[#09101f] font-black text-xs rounded-xl shadow-xs transition-all shrink-0 cursor-pointer flex items-center gap-1"
             >
               <Download className="w-3.5 h-3.5 stroke-[3]" />
-              <span>{t('pwa_banner_install_btn')}</span>
+              <span>{t('홈 화면에 앱 설치하기')}</span>
             </button>
           </div>
 
@@ -240,7 +240,7 @@ export default function KMarketMyPageModal({ isOpen, onClose }: KMarketMyPageMod
               </div>
               <div className="min-w-0">
                 <h5 className="text-xs font-black text-slate-900 dark:text-white flex items-center gap-1.5 truncate">
-                  <span>{t('mypage_keyword_alert_title')} ({keywordAlerts.length})</span>
+                  <span>{t('🔔 키워드 실시간 알림 등록')} ({keywordAlerts.length})</span>
                 </h5>
                 <div className="flex items-center gap-1 mt-0.5 overflow-x-auto no-scrollbar">
                   {keywordAlerts.slice(0, 3).map((kw) => (
@@ -262,7 +262,7 @@ export default function KMarketMyPageModal({ isOpen, onClose }: KMarketMyPageMod
               }}
               className="px-3 py-1.5 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs rounded-xl shadow-xs transition-all shrink-0 cursor-pointer"
             >
-              {t('btn_setup_alerts')}
+              {t('알림 설정')}
             </button>
           </div>
 
@@ -277,7 +277,7 @@ export default function KMarketMyPageModal({ isOpen, onClose }: KMarketMyPageMod
               }`}
             >
               <Package className="w-4 h-4" />
-              <span>{t('mypage_tab_selling')} ({mySellingItems.length})</span>
+              <span>{t('내가 파는 물건')} ({mySellingItems.length})</span>
             </button>
 
             <button
@@ -289,7 +289,7 @@ export default function KMarketMyPageModal({ isOpen, onClose }: KMarketMyPageMod
               }`}
             >
               <ShoppingBag className="w-4 h-4" />
-              <span>{t('mypage_tab_buying')} ({myPurchasedItems.length})</span>
+              <span>{t('내가 산 물건')} ({myPurchasedItems.length})</span>
             </button>
 
             <button
@@ -301,7 +301,7 @@ export default function KMarketMyPageModal({ isOpen, onClose }: KMarketMyPageMod
               }`}
             >
               <Heart className="w-4 h-4 fill-current" />
-              <span>{t('mypage_tab_favorites')} ({favoriteItems.length})</span>
+              <span>{t('내가 찜한 물건')} ({favoriteItems.length})</span>
             </button>
           </div>
 
@@ -322,9 +322,9 @@ export default function KMarketMyPageModal({ isOpen, onClose }: KMarketMyPageMod
                         : 'bg-[#f4ece4] text-[#7d6b5c] hover:bg-[#eae0d5] border border-[#e8ded3]'
                     }`}
                   >
-                    {filter === 'all' && `${t('filter_all')} (${mySellingItems.length})`}
-                    {filter === 'selling' && t('filter_selling_reserved')}
-                    {filter === 'sold' && t('status_sold')}
+                    {filter === 'all' && `${t('안내 내용을 확인해 주세요')} (${mySellingItems.length})`}
+                    {filter === 'selling' && t('판매중 / 예약중')}
+                    {filter === 'sold' && t('거래완료')}
                   </button>
                 ))}
               </div>
@@ -332,7 +332,7 @@ export default function KMarketMyPageModal({ isOpen, onClose }: KMarketMyPageMod
               {filteredSellingItems.length === 0 ? (
                 <div className="py-12 text-center text-slate-400 space-y-2">
                   <Package className="w-12 h-12 mx-auto text-slate-300" />
-                  <p className="text-xs">{t('auto_ui_228')}</p>
+                  <p className="text-xs">{t('해당 상태의 판매 매물이 없습니다.')}</p>
                 </div>
               ) : (
                 <div className="divide-y divide-slate-100 dark:divide-gray-800">
@@ -354,17 +354,17 @@ export default function KMarketMyPageModal({ isOpen, onClose }: KMarketMyPageMod
                           <div className="flex items-center space-x-1.5">
                             {item.status === 'selling' && (
                               <span className="bg-emerald-100 text-emerald-800 text-[10px] font-black px-2 py-0.5 rounded-full">
-                                {t('status_selling')}
+                                {t('안내 내용을 확인해 주세요')}
                               </span>
                             )}
                             {item.status === 'reserved' && (
                               <span className="bg-amber-100 text-amber-800 text-[10px] font-black px-2 py-0.5 rounded-full">
-                                {t('status_reserved')}
+                                {t('안내 내용을 확인해 주세요')}
                               </span>
                             )}
                             {item.status === 'sold' && (
                               <span className="bg-slate-200 text-slate-700 text-[10px] font-black px-2 py-0.5 rounded-full">
-                                {t('status_sold')}
+                                {t('거래완료')}
                               </span>
                             )}
                             <h4 className="font-bold text-xs sm:text-sm text-slate-900 dark:text-white truncate">
@@ -372,10 +372,10 @@ export default function KMarketMyPageModal({ isOpen, onClose }: KMarketMyPageMod
                             </h4>
                           </div>
                           <p className="text-xs font-black text-blue-600 dark:text-blue-400 mt-1">
-                            {item.price === 0 ? t('price_free_share') : `${item.price.toLocaleString()} ${t('currency_won')}`}
+                            {item.price === 0 ? t('0원 무료 나눔') : `${item.price.toLocaleString()} ${t('원 (대한민국 원화)')}`}
                           </p>
                           <span className="text-[11px] text-slate-400 mt-0.5 block truncate">
-                            {getAdaptedItemRegion(item, authedUser?.region, currentLang)} • {t('item_likes_count')} {item.like_count}
+                            {getAdaptedItemRegion(item, authedUser?.region, currentLang)} • {t('관심 찜 등록 수')} {item.like_count}
                           </span>
                         </div>
                       </div>
@@ -387,7 +387,7 @@ export default function KMarketMyPageModal({ isOpen, onClose }: KMarketMyPageMod
                             onClick={() => updateItemStatus(item.id, 'reserved')}
                             className="px-2.5 py-1.5 rounded-xl bg-amber-50 text-amber-700 hover:bg-amber-100 text-xs font-bold border border-amber-200 cursor-pointer"
                           >
-                            {t('btn_set_reserved')}
+                            {t('예약중 변경')}
                           </button>
                         )}
                         {item.status === 'reserved' && (
@@ -395,7 +395,7 @@ export default function KMarketMyPageModal({ isOpen, onClose }: KMarketMyPageMod
                             onClick={() => updateItemStatus(item.id, 'sold')}
                             className="px-2.5 py-1.5 rounded-xl bg-slate-900 text-white hover:bg-slate-800 text-xs font-bold cursor-pointer"
                           >
-                            {t('btn_set_sold')}
+                            {t('거래완료')}
                           </button>
                         )}
                         {item.status === 'sold' && (
@@ -403,7 +403,7 @@ export default function KMarketMyPageModal({ isOpen, onClose }: KMarketMyPageMod
                             onClick={() => updateItemStatus(item.id, 'selling')}
                             className="px-2.5 py-1.5 rounded-xl bg-slate-100 text-slate-600 hover:bg-slate-200 text-xs font-bold cursor-pointer"
                           >
-                            {t('btn_set_selling')}
+                            {t('판매중 복원')}
                           </button>
                         )}
                       </div>
@@ -420,7 +420,7 @@ export default function KMarketMyPageModal({ isOpen, onClose }: KMarketMyPageMod
               {myPurchasedItems.length === 0 ? (
                 <div className="py-12 text-center text-slate-400 space-y-2">
                   <ShoppingBag className="w-12 h-12 mx-auto text-slate-300" />
-                  <p className="text-xs">{t('auto_ui_229')}</p>
+                  <p className="text-xs">{t('구매 완료한 내역이 없습니다.')}</p>
                 </div>
               ) : (
                 <div className="divide-y divide-slate-100 dark:divide-gray-800">
@@ -440,25 +440,25 @@ export default function KMarketMyPageModal({ isOpen, onClose }: KMarketMyPageMod
                         />
                         <div className="flex-1 min-w-0">
                           <span className="bg-slate-100 text-slate-700 text-[10px] font-bold px-2 py-0.5 rounded-full inline-block mb-1">
-                            {t('badge_direct_trade_done')}
+                            {t('직거래 완료 🛍️')}
                           </span>
                           <h4 className="font-bold text-xs sm:text-sm text-slate-900 dark:text-white truncate">
                             {getAdaptedItemTitle(item, currentLang)}
                           </h4>
                           <p className="text-xs font-black text-slate-800 dark:text-slate-200 mt-0.5">
-                            {item.price === 0 ? t('price_free_share') : `${item.price.toLocaleString()} ${t('currency_won')}`}
+                            {item.price === 0 ? t('0원 무료 나눔') : `${item.price.toLocaleString()} ${t('원 (대한민국 원화)')}`}
                           </p>
                           <span className="text-[11px] text-slate-400 block truncate">
-                            {t('create_seller_country_label')}: {item.seller_name} ({getAdaptedItemRegion(item, authedUser?.region, currentLang)})
+                            {t('판매자 국가')}: {item.seller_name} ({getAdaptedItemRegion(item, authedUser?.region, currentLang)})
                           </span>
                         </div>
                       </div>
 
                       <button
-                        onClick={() => alert(`[${item.seller_name}] ${t('alert_review_sent')}`)}
+                        onClick={() => alert(`[${item.seller_name}] ${t('님에게 따뜻한 칭찬 후기(+0.5℃)를 보냈습니다!')}`)}
                         className="px-3 py-1.5 rounded-xl bg-blue-50 text-blue-700 hover:bg-blue-100 text-xs font-bold border border-blue-200 shrink-0 cursor-pointer"
                       >
-                        {t('btn_leave_review')} ⭐
+                        {t('후기 남기기')} ⭐
                       </button>
                     </div>
                   ))}
@@ -473,8 +473,8 @@ export default function KMarketMyPageModal({ isOpen, onClose }: KMarketMyPageMod
               {favoriteItems.length === 0 ? (
                 <div className="py-12 text-center text-slate-400 space-y-2">
                   <Heart className="w-12 h-12 mx-auto text-slate-300" />
-                  <p className="text-xs font-bold">{t('auto_ui_230')}</p>
-                  <p className="text-[11px]">{t('auto_ui_231')}</p>
+                  <p className="text-xs font-bold">{t('아직 찜한 물건이 없습니다.')}</p>
+                  <p className="text-[11px]">{t('마음에 드는 물건에 하트(❤️)를 눌러보세요!')}</p>
                 </div>
               ) : (
                 <div className="divide-y divide-slate-100 dark:divide-gray-800">
@@ -497,7 +497,7 @@ export default function KMarketMyPageModal({ isOpen, onClose }: KMarketMyPageMod
                             {getAdaptedItemTitle(item, currentLang)}
                           </h4>
                           <p className="text-xs font-black text-rose-600 dark:text-rose-400 mt-0.5">
-                            {item.price === 0 ? t('price_free_share') : `${item.price.toLocaleString()} ${t('currency_won')}`}
+                            {item.price === 0 ? t('0원 무료 나눔') : `${item.price.toLocaleString()} ${t('원 (대한민국 원화)')}`}
                           </p>
                           <span className="text-[11px] text-slate-400 block truncate">
                             {getAdaptedItemRegion(item, authedUser?.region, currentLang)} • {item.seller_name}
@@ -513,12 +513,12 @@ export default function KMarketMyPageModal({ isOpen, onClose }: KMarketMyPageMod
                           }}
                           className="px-3 py-1.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold shadow-xs cursor-pointer"
                         >
-                          {t('btn_chat_1to1')} 💬
+                          {t('1:1 안심 번역 채팅하기')} 💬
                         </button>
                         <button
                           onClick={() => toggleLike(item.id)}
                           className="p-1.5 text-rose-500 hover:bg-rose-50 rounded-xl transition-colors cursor-pointer"
-                          title={t('auto_ui_232')}
+                          title={t('찜 취소')}
                         >
                           <Heart className="w-5 h-5 fill-rose-500" />
                         </button>
@@ -539,13 +539,13 @@ export default function KMarketMyPageModal({ isOpen, onClose }: KMarketMyPageMod
                 </div>
                 <div className="min-w-0">
                   <h5 className="text-xs font-black text-white flex items-center gap-1.5 truncate">
-                    <span>{t('voc_banner_title')}</span>
+                    <span>{t('💡 앱 개선 제안 및 건의하기')}</span>
                     <span className="text-[9px] bg-amber-400/20 text-amber-300 px-1.5 py-0.2 rounded-md font-bold">
-                      {t('voc_banner_badge')}
+                      {t('고객 소통 창구')}
                     </span>
                   </h5>
                   <p className="text-[10px] text-slate-300 mt-0.5 truncate">
-                    {t('voc_banner_desc')}
+                    {t('불편한 점, 번역 오류, 새로운 기능 및 지역 추가 요청을 관리자에게 직접 보내주세요.')}
                   </p>
                 </div>
               </div>
@@ -557,7 +557,7 @@ export default function KMarketMyPageModal({ isOpen, onClose }: KMarketMyPageMod
                 }}
                 className="px-3.5 py-2 bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-500 hover:to-amber-600 text-slate-950 font-black text-xs rounded-xl shadow-xs transition-all shrink-0 cursor-pointer"
               >
-                {t('voc_send_feedback_btn')}
+                {t('의견 보내기')}
               </button>
             </div>
           </div>

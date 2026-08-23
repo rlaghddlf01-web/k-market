@@ -28,7 +28,7 @@ export default function KMarketMapView({ item }: KMarketMapViewProps) {
       <div className="relative w-full h-52 sm:h-64 overflow-hidden bg-slate-200">
         <iframe
           key={addressText}
-          title="Item Trade Location Google Map"
+          title={t('직거래 장소 지도')}
           src={embedMapUrl}
           className="w-full h-full border-0"
           loading="lazy"
@@ -43,14 +43,14 @@ export default function KMarketMapView({ item }: KMarketMapViewProps) {
           className="absolute top-3 right-3 bg-[#09101f]/90 hover:bg-[#09101f] text-[#f3ba2f] border border-[#f3ba2f] px-3.5 py-1.5 rounded-xl text-xs font-black shadow-xl transition-all flex items-center gap-1.5 cursor-pointer backdrop-blur-md hover:scale-105 active:scale-95"
         >
           <Navigation className="w-3.5 h-3.5 fill-[#f3ba2f]" />
-          <span>{t('map_directions_btn')}</span>
+          <span>{t('길찾기 지도 앱')}</span>
           <ExternalLink className="w-3 h-3 opacity-80" />
         </a>
 
         {/* 좌측 상단: 안심 직거래 배지 */}
         <div className="absolute top-3 left-3 bg-[#09101f]/85 text-white border border-[#f3ba2f]/70 px-3 py-1.5 rounded-xl text-[11px] font-bold flex items-center gap-1.5 shadow-md pointer-events-none backdrop-blur-md">
           <ShieldCheck className="w-4 h-4 text-emerald-400" />
-          <span className="text-[#f3ba2f]">{t('auto_ui_200')}</span>
+          <span className="text-[#f3ba2f]">{t('🖱️ 지도 클릭 / 핀 드래그로 이동')}</span>
         </div>
       </div>
 
@@ -58,12 +58,12 @@ export default function KMarketMapView({ item }: KMarketMapViewProps) {
       <div className="p-4 space-y-2.5 bg-[#fdfbf9]">
         <div>
           <span className="text-[10px] font-black uppercase tracking-wider text-[#845b37] bg-[#845b37]/10 px-2 py-0.5 rounded-md inline-block mb-1.5">
-            Direct Trade Location
+            {t('직거래 만남 장소')}
           </span>
           {/* 크고 두꺼운 직거래 상세 주소 폰트 */}
           <h4 className="text-base sm:text-lg font-black text-slate-950 flex items-start gap-2 leading-snug">
             <MapPin className="w-5 h-5 text-[#f3ba2f] shrink-0 mt-0.5" />
-            <span>{addressText}</span>
+            <span>{t(addressText)}</span>
           </h4>
         </div>
 
@@ -71,7 +71,7 @@ export default function KMarketMapView({ item }: KMarketMapViewProps) {
         <div className="p-3 bg-slate-50 rounded-2xl border border-slate-200 text-xs text-slate-700 space-y-1">
           <p className="font-bold text-slate-900 flex items-center gap-1.5">
             <span>🛡️</span>
-            <span><strong>{t('auto_ui_201')}</strong> {t('auto_ui_202')}</span>
+            <span><strong>{t('폐쇄회로 카메라 안심 직거래:')}</strong> {t('공공장소 및 가로등이 밝은 위 지도 핀 위치에서 안전하게 거래하세요')}</span>
           </p>
         </div>
       </div>
