@@ -49,6 +49,17 @@ export default function KMarketItemDetail() {
   const [showReportModal, setShowReportModal] = useState(false);
   const [reviewTargetUser, setReviewTargetUser] = useState({ id: '', name: '' });
 
+  // ESC 키로 모달 닫기
+  React.useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setSelectedItem(null);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [setSelectedItem]);
+
   if (!selectedItem) return null;
 
   const isLiked = likedItemIds.has(selectedItem.id);
@@ -66,8 +77,14 @@ export default function KMarketItemDetail() {
 
   return (
     <>
-      <div className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black/70 backdrop-blur-xs animate-fadeIn">
-        <div className="relative w-full max-w-2xl bg-white rounded-3xl shadow-2xl overflow-hidden flex flex-col max-h-[95vh]">
+      <div
+        onClick={() => setSelectedItem(null)}
+        className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black/70 backdrop-blur-xs animate-fadeIn overflow-y-auto"
+      >
+        <div
+          onClick={(e) => e.stopPropagation()}
+          className="relative w-full max-w-2xl bg-white rounded-3xl shadow-2xl overflow-hidden flex flex-col max-h-[95vh] my-auto"
+        >
           {/* 상단 닫기 & 공유 버튼 */}
           <div className="absolute top-4 left-4 right-4 z-20 flex justify-between items-center pointer-events-none">
             <button
