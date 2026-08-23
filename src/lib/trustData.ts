@@ -283,14 +283,39 @@ export function getMannerTempDetails(temp: number = 36.5) {
   return { level: 'warning', label: '주의가 필요한 이웃', color: 'text-rose-500', bg: 'bg-rose-50', icon: '⚠️', barColor: 'bg-rose-500', faceEmoji: '😟', levelTitle: '주의 매너' };
 }
 
+const LOCAL_STORAGE_PROFILES_KEY = 'kmarket_user_trust_profiles';
+
+function loadStoredProfiles(): Record<string, UserTrustProfileData> {
+  if (typeof window === 'undefined') return USER_PROFILES;
+  try {
+    const saved = localStorage.getItem(LOCAL_STORAGE_PROFILES_KEY);
+    if (saved) {
+      return { ...USER_PROFILES, ...JSON.parse(saved) };
+    }
+  } catch (e) {
+    console.warn('Failed to load user profiles:', e);
+  }
+  return USER_PROFILES;
+}
+
+function saveProfilesToStorage(profiles: Record<string, UserTrustProfileData>) {
+  if (typeof window === 'undefined') return;
+  try {
+    localStorage.setItem(LOCAL_STORAGE_PROFILES_KEY, JSON.stringify(profiles));
+  } catch (e) {
+    console.warn('Failed to save user profiles:', e);
+  }
+}
+
 export function getUserTrustProfile(
   userId: string,
   userName?: string,
   userCountry?: string,
   userFlag?: string
 ): UserTrustProfileData {
-  if (USER_PROFILES[userId]) {
-    return USER_PROFILES[userId];
+  const currentProfiles = loadStoredProfiles();
+  if (currentProfiles[userId]) {
+    return currentProfiles[userId];
   }
 
   const newProfile: UserTrustProfileData = {
@@ -299,21 +324,82 @@ export function getUserTrustProfile(
     country: userCountry || 'VN',
     flag: userFlag || '🇻🇳',
     manner_temp: 36.5,
-    trade_count: 3,
-    response_rate: 90,
+    trade_count: 1,
+    response_rate: 95,
     is_verified_arc: true,
     is_verified_dormitory: false,
     positive_tags_summary: [
-      { tag_id: 'friendly_kind', count: 2 },
+      { tag_id: 'friendly_kind', count: 1 },
       { tag_id: 'time_punctual', count: 1 },
     ],
     recent_reviews: [],
   };
   USER_PROFILES[userId] = newProfile;
+  currentProfiles[userId] = newProfile;
+  saveProfilesToStorage(currentProfiles);
   return newProfile;
 }
 
+/**
+ * 🌟 실제 고객 거래 후기 제출 처리기
+ * - 매너온도(manner_temp) 실시간 상승/하강 계산
+ * - 칭찬 태그 집계 카운트 증가
+ * - 최신 리뷰 목록 영구 저장
+ */
 export function submitTransactionReview(review: any): UserTrustProfileData {
-  const profile = getUserTrustProfile(review.target_user_id || 'user-vn-1');
-  return profile;
+  const targetId = review.target_user_id || 'user-vn-1';
+  const profiles = loadStoredProfiles();
+  const profile = profiles[targetId] || getUserTrustProfile(targetId);
+
+  // 1. 매너 온도 점수 계산 (평가 타입 + 선택 태그 포인트)
+  let tempDelta = 0;
+  if (review.rating_type === 'great') tempDelta += 0.5;
+  else if (review.rating_type === 'good') tempDelta += 0.2;
+  else if (review.rating_type === 'bad') tempDelta -= 0.8;
+
+  if (Array.isArray(review.tag_ids)) {
+    review.tag_ids.forEach((tagId: string) => {
+      const pos = POSITIVE_TAGS.find((t) => t.id === tagId);
+      const neg = NEGATIVE_TAGS.find((t) => t.id === tagId);
+      if (pos) tempDelta += pos.points;
+      if (neg) tempDelta += neg.points;
+
+      // 칭찬 태그 카운트 증가
+      if (pos) {
+        const existing = profile.positive_tags_summary.find((t) => t.tag_id === tagId);
+        if (existing) {
+          existing.count += 1;
+        } else {
+          profile.positive_tags_summary.push({ tag_id: tagId, count: 1 });
+        }
+      }
+    });
+  }
+
+  // 매너온도 범위 10.0 ~ 99.0도 유지
+  profile.manner_temp = Math.min(99.0, Math.max(10.0, Number((profile.manner_temp + tempDelta).toFixed(1))));
+  profile.trade_count = (profile.trade_count || 0) + 1;
+
+  // 최신 리뷰 목록에 추가
+  if (!profile.recent_reviews) profile.recent_reviews = [];
+  profile.recent_reviews.unshift({
+    id: `rev-${Date.now()}`,
+    reviewer_name: review.reviewer_name || '익명의 이웃',
+    reviewer_country: review.reviewer_country || 'KR',
+    reviewer_flag: review.reviewer_flag || '🇰🇷',
+    rating_type: review.rating_type || 'great',
+    tag_ids: review.tag_ids || [],
+    comment: review.comment || '',
+    item_title: review.item_title || '',
+    created_at: new Date().toISOString(),
+  });
+
+  // 태그 랭킹 순 정렬 (많은 순)
+  profile.positive_tags_summary.sort((a, b) => b.count - a.count);
+
+  profiles[targetId] = profile;
+  USER_PROFILES[targetId] = profile;
+  saveProfilesToStorage(profiles);
+
+  return { ...profile };
 }
