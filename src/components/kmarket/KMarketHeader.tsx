@@ -173,10 +173,10 @@ export default function KMarketHeader() {
         <div className="flex items-center justify-between gap-2 sm:gap-4 py-2 sm:py-2.5">
           {/* 좌측: 로고 + 설명 문구 + 위치 칩 */}
           <div className="flex items-center gap-2 sm:gap-3 shrink-0">
-            {/* 로고 & 케이마켓 브랜드 */}
+            {/* 로고 & 케이마켓 브랜드 (모바일: 슬림 2줄 타이포 / 데스크탑: 와이드 로고+설명) */}
             <div 
               onClick={() => router.push(currentLang === 'ko' ? '/' : `/${currentLang}`)}
-              className="flex items-center gap-2 sm:gap-2.5 cursor-pointer shrink-0"
+              className="flex items-center gap-1.5 sm:gap-2.5 cursor-pointer shrink-0"
             >
               <div className="relative w-8 h-8 sm:w-10 sm:h-10 rounded-xl overflow-hidden shadow-xs shrink-0 border border-[#ded1c4] bg-[#09101f] flex items-center justify-center">
                 <img
@@ -185,14 +185,31 @@ export default function KMarketHeader() {
                   className="w-full h-full object-cover scale-110"
                 />
               </div>
-              <div>
+
+              {/* 💻 데스크탑 전용: 큼직한 1줄 로고 + 하단 설명 */}
+              <div className="hidden md:block">
                 <div className="flex items-center whitespace-nowrap shrink-0">
-                  <span className="notranslate text-[18px] sm:text-[22px] font-black tracking-tight text-[#1f1914] leading-none whitespace-nowrap">{t('케이마켓')}</span>
+                  <span className="notranslate text-[22px] font-black tracking-tight text-[#1f1914] leading-none whitespace-nowrap">
+                    {currentLang === 'ko' ? '케이마켓' : 'K-Market'}
+                  </span>
                 </div>
-                {/* 💻 데스크탑 전용 로고 하단 설명 문구 완벽 복원 */}
-                <p className="text-[11px] text-[#8c7866] hidden md:block mt-0.5 font-medium whitespace-nowrap">
+                <p className="text-[11px] text-[#8c7866] mt-0.5 font-medium whitespace-nowrap">
                   {t('외국인 근로자 17개국어 안심 직거래 마켓')}
                 </p>
+              </div>
+
+              {/* 📱 모바일 전용: 공간 절약형 스마트 2줄 타이포그래피 (K- / MARKET 또는 케이 / 마켓) */}
+              <div className="md:hidden flex flex-col justify-center leading-tight">
+                {currentLang === 'ko' ? (
+                  <span className="notranslate text-[16px] font-black tracking-tight text-[#1f1914] leading-none whitespace-nowrap">
+                    케이마켓
+                  </span>
+                ) : (
+                  <div className="flex flex-col notranslate font-black text-[#1f1914] leading-none tracking-tight">
+                    <span className="text-[11px] font-extrabold text-[#845b37]">K-</span>
+                    <span className="text-[13px] font-black -mt-0.5">MARKET</span>
+                  </div>
+                )}
               </div>
             </div>
 
