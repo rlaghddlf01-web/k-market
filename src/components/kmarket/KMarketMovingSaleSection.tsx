@@ -12,8 +12,17 @@ export default function KMarketMovingSaleSection() {
   const { items, setSelectedItem, openChatForItem, toggleLike, likedItemIds, selectedRegion } = useKMarket();
   const { t, formatWon, currentLang } = useLanguage();
   const [dDayFilter, setDDayFilter] = useState<'all' | 'd3' | 'd7' | 'd14'>('all');
-  const MOVING_ITEMS_PER_PAGE = 20;
   const [movingPage, setMovingPage] = useState(1);
+  const [isMobile, setIsMobile] = useState(false);
+
+  React.useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < 768);
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  const MOVING_ITEMS_PER_PAGE = isMobile ? 10 : 20;
 
   // D-Day 필터 변경 시 1페이지로 리셋
   React.useEffect(() => {

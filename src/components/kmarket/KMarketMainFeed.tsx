@@ -8,7 +8,6 @@ import KMarketHeader from './KMarketHeader';
 import KMarketTaxBanner from './KMarketTaxBanner';
 import KMarketHeroShowcase from './KMarketHeroShowcase';
 import KMarketSafetyBanner from './KMarketSafetyBanner';
-import KMarketTop10Showcase from './KMarketTop10Showcase';
 import KMarketCategoryNav from './KMarketCategoryNav';
 import KMarketMovingSaleSection from './KMarketMovingSaleSection';
 import KMarketRegionFilter from './KMarketRegionFilter';
@@ -171,13 +170,7 @@ export default function KMarketMainFeed() {
         <KMarketHeader />
 
         {/* 1. 최상단 풀와이드 웅장한 감성 히어로 쇼케이스 (중고마켓 탭일 때 노출) */}
-        {activeMainTab === 'market' && (
-          <>
-            <KMarketHeroShowcase />
-            {/* 🔥 상단 핵심 핫매물 TOP 10 쇼케이스 (1~10 페이지 슬라이더) */}
-            <KMarketTop10Showcase />
-          </>
-        )}
+        {activeMainTab === 'market' && <KMarketHeroShowcase />}
 
         {/* 메인 콘텐츠 컨테이너 */}
         <main className="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 py-6 sm:py-10 space-y-7">
