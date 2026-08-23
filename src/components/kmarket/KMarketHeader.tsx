@@ -43,7 +43,7 @@ export default function KMarketHeader() {
   return (
     <header className="sticky top-0 z-40 glass border-b border-white/60 shadow-sm w-full">
       {/* ========================================================================= */}
-      {/* 1. 최상단: KTRS 패밀리 골드 바 (데스크탑 / 모바일 공통 완벽 노출) */}
+      {/* 1. 최상단: KTRS 패밀리 골드 바 (어떤 폰에서도 100% 꽉 찬 화면 정렬) */}
       {/* ========================================================================= */}
       <div
         style={{ 
@@ -51,27 +51,30 @@ export default function KMarketHeader() {
           borderBottom: '3px solid #f3ba2f',
           boxShadow: '0 2px 10px rgba(243, 186, 47, 0.25)',
         }}
-        className="text-white px-3 sm:px-4 py-1.5 sm:py-2 relative z-10"
+        className="text-white px-2.5 sm:px-4 py-1.5 sm:py-2 relative z-10 w-full"
       >
-        <div className="max-w-6xl mx-auto flex items-center justify-between text-xs gap-2">
-          {/* 좌측: KTRS 브랜드 뱃지 + 슬로건 */}
-          <div className="flex items-center gap-1.5 sm:gap-2.5 shrink-0">
-            <span className="bg-[#f3ba2f] text-[#09101f] font-black px-2 py-0.5 rounded text-[10px] uppercase tracking-widest shadow-xs">
+        <div className="max-w-6xl mx-auto flex items-center justify-between text-xs gap-1.5 sm:gap-2 w-full">
+          {/* 좌측: KTRS 브랜드 뱃지 + 스마트폰/PC 반응형 슬로건 */}
+          <div className="flex items-center gap-1.5 sm:gap-2.5 shrink-0 min-w-0">
+            <span className="bg-[#f3ba2f] text-[#09101f] font-black px-1.5 sm:px-2 py-0.5 rounded text-[10px] uppercase tracking-widest shadow-xs shrink-0">
               KTRS
             </span>
-            <span className="text-white font-bold text-[11px] sm:text-[13px] tracking-tight whitespace-nowrap">
+            <span className="hidden md:inline text-white font-bold text-[13px] tracking-tight whitespace-nowrap">
               {t('대한민국 1등 외국인 근로자 종합 플랫폼')}
+            </span>
+            <span className="md:hidden text-white font-bold text-[11px] tracking-tight whitespace-nowrap truncate">
+              {t('외국인 1등 마켓')}
             </span>
           </div>
 
-          {/* 우측: 17개국 언어 선택기 + 앱 설치 */}
+          {/* 우측: 17개국 언어 선택기 + 앱 설치 (모바일에서 꽉 차게 정돈) */}
           <div className="flex items-center gap-1.5 sm:gap-2.5 shrink-0">
             {/* 언어 드롭다운 */}
             <div className="relative">
               <button
                 type="button"
                 onClick={() => setIsLangDropdownOpen(!isLangDropdownOpen)}
-                className="flex items-center gap-1.5 bg-black/60 hover:bg-black/80 transition-all px-2.5 py-1 rounded-full text-white font-bold border border-[#f3ba2f]/70 text-[11px] cursor-pointer shadow-xs active:scale-95"
+                className="flex items-center gap-1 sm:gap-1.5 bg-black/60 hover:bg-black/80 transition-all px-2 sm:px-2.5 py-1 rounded-full text-white font-bold border border-[#f3ba2f]/70 text-[10.5px] sm:text-[11px] cursor-pointer shadow-xs active:scale-95"
                 title={t('17개국 언어 변경')}
               >
                 <div className="w-4 h-3 rounded-[2px] overflow-hidden shadow-2xs border border-white/40 shrink-0 bg-slate-800 flex items-center justify-center">
@@ -81,7 +84,7 @@ export default function KMarketHeader() {
                     className="w-full h-full object-cover"
                   />
                 </div>
-                <span className="text-[11px] font-black text-[#fef08a] whitespace-nowrap">{currentLangOption.nativeName}</span>
+                <span className="text-[10.5px] sm:text-[11px] font-black text-[#fef08a] whitespace-nowrap">{currentLangOption.nativeName}</span>
                 <ChevronDown className="w-2.5 h-2.5 text-[#f3ba2f]" />
               </button>
 
@@ -140,21 +143,22 @@ export default function KMarketHeader() {
               )}
             </div>
 
-            {/* 수수료 0원 뱃지 */}
+            {/* 수수료 0원 뱃지 (태블릿/PC) */}
             <div className="hidden sm:flex items-center gap-1.5 bg-black/40 text-[#fef08a] px-2.5 py-0.5 rounded-full text-[10px] font-extrabold border border-[#f3ba2f]/60 shadow-2xs">
               <ShieldCheck className="w-3 h-3 text-[#f3ba2f]" />
               <span className="text-white font-bold">{t('수수료 0원 100% 무료')}</span>
             </div>
 
-            {/* 📲 1초 앱 설치 버튼 */}
+            {/* 📲 1초 앱 설치 버튼 (모바일: [앱설치] / 데스크탑: [1초 만에 앱 설치하기]) */}
             <button
               type="button"
               onClick={() => triggerPwaInstall()}
-              className="flex items-center gap-1 bg-gradient-to-r from-[#f3ba2f] via-[#fcd34d] to-[#f59e0b] hover:scale-105 transition-all text-[#09101f] px-2.5 sm:px-3 py-1 rounded-full text-[11px] font-black border border-white/50 shadow-xs cursor-pointer whitespace-nowrap"
+              className="flex items-center gap-1 bg-gradient-to-r from-[#f3ba2f] via-[#fcd34d] to-[#f59e0b] hover:scale-105 transition-all text-[#09101f] px-2 sm:px-3 py-1 rounded-full text-[10.5px] sm:text-[11px] font-black border border-white/50 shadow-xs cursor-pointer whitespace-nowrap"
               title={t('케이마켓 1초 만에 앱 설치하기')}
             >
               <Smartphone className="w-3 h-3 stroke-[2.5]" />
-              <span>{t('1초 만에 앱 설치하기')}</span>
+              <span className="hidden sm:inline">{t('1초 만에 앱 설치하기')}</span>
+              <span className="sm:hidden font-black">{t('앱설치')}</span>
             </button>
           </div>
         </div>
