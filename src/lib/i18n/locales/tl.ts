@@ -1106,5 +1106,6 @@ export const tl = {
   "관심 매물 \"쿠쿠 전기밥솥 6인용\" 가격이 25,000원으로 15% 인하되었습니다!": "Ang wishlist item na \"Cuckoo 6-person Rice Cooker\" ay bumaba ng 15% sa 25,000 KRW!",
   "오늘 19:00 \"근처 편의점 앞\" 직거래 약속 1시간 전입니다.": "1 oras bago ang direct meetup sa 19:00 sa \"Harap ng malapit na convenience store\".",
   "오늘 19:00 \"근처 편의점 앞\" 직거래 약속 1시간 전입니다": "1 oras bago ang direct meetup sa 19:00 sa \"Harap ng malapit na convenience store\"",
+  "오늘 하루 안 보기": "Huwag nang ipakita ngayong araw",
 };
 export default tl;

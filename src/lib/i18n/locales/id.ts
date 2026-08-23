@@ -1105,5 +1105,6 @@ export const id = {
   "관심 매물 \"쿠쿠 전기밥솥 6인용\" 가격이 25,000원으로 15% 인하되었습니다!": "Barang favorit \"Rice cooker listrik Cuckoo 6 orang\" harganya turun 15% menjadi 25.000 KRW!",
   "오늘 19:00 \"근처 편의점 앞\" 직거래 약속 1시간 전입니다.": "1 jam sebelum janji temu transaksi langsung pukul 19:00 di \"Depan minimarket terdekat\".",
   "오늘 19:00 \"근처 편의점 앞\" 직거래 약속 1시간 전입니다": "1 jam sebelum janji temu transaksi langsung pukul 19:00 di \"Depan minimarket terdekat\"",
+  "오늘 하루 안 보기": "Jangan tampilkan hari ini",
 };
 export default id;

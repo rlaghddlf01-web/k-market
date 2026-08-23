@@ -15,12 +15,19 @@ export default function KMarketPwaInstallPrompt() {
   useEffect(() => {
     setMounted(true);
     if (typeof window !== 'undefined') {
-      // iOS 기기 감지
+      // 1. 이미 '오늘 하루 안 보기'를 눌렀는지 확인 (24시간 유효)
+      const dismissUntil = localStorage.getItem('kmarket_pwa_dismiss_until');
+      if (dismissUntil && parseInt(dismissUntil, 10) > Date.now()) {
+        setIsVisible(false);
+        return;
+      }
+
+      // 2. iOS 기기 감지
       const userAgent = window.navigator.userAgent.toLowerCase();
       const isIosDevice = /iphone|ipad|ipod/.test(userAgent);
       setIsIOS(isIosDevice);
 
-      // 이미 스탠드얼론 모드로 실행 중이면 숨김
+      // 3. 이미 스탠드얼론 모드(설치된 앱)로 실행 중이면 숨김
       const isStandaloneMode =
         window.matchMedia('(display-mode: standalone)').matches ||
         (window.navigator as any).standalone ||
@@ -42,8 +49,14 @@ export default function KMarketPwaInstallPrompt() {
     await triggerPwaInstall();
   };
 
-  const handleDismiss = () => {
+  // 닫기 및 오늘 하루 안 보기 저장
+  const handleDismiss = (forToday = true) => {
     setIsVisible(false);
+    if (typeof window !== 'undefined' && forToday) {
+      // 24시간 동안 저장
+      const oneDayLater = Date.now() + 24 * 60 * 60 * 1000;
+      localStorage.setItem('kmarket_pwa_dismiss_until', oneDayLater.toString());
+    }
   };
 
   return (
@@ -61,7 +74,7 @@ export default function KMarketPwaInstallPrompt() {
           {/* 우측 상단 닫기 */}
           <button
             type="button"
-            onClick={handleDismiss}
+            onClick={() => handleDismiss(true)}
             className="absolute top-2 right-2 text-slate-400 hover:text-white transition-colors cursor-pointer p-1 rounded-full hover:bg-white/10"
             title={t('닫기')}
           >
@@ -107,10 +120,10 @@ export default function KMarketPwaInstallPrompt() {
             </button>
             <button
               type="button"
-              onClick={handleDismiss}
-              className="py-1.5 sm:py-2.5 px-2.5 sm:px-3 rounded-xl bg-white/10 hover:bg-white/20 text-slate-300 text-[11px] sm:text-xs font-bold transition-all cursor-pointer"
+              onClick={() => handleDismiss(true)}
+              className="py-1.5 sm:py-2.5 px-2.5 sm:px-3 rounded-xl bg-white/10 hover:bg-white/20 text-slate-300 text-[10.5px] sm:text-xs font-bold transition-all cursor-pointer whitespace-nowrap"
             >
-              {t('닫기')}
+              {t('오늘 하루 안 보기')}
             </button>
           </div>
         </div>

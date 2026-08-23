@@ -1105,5 +1105,6 @@ export const vi = {
   "관심 매물 \"쿠쿠 전기밥솥 6인용\" 가격이 25,000원으로 15% 인하되었습니다!": "Sản phẩm yêu thích \"Nồi cơm điện Cuckoo 6 người\" vừa giảm 15% còn 25.000 KRW!",
   "오늘 19:00 \"근처 편의점 앞\" 직거래 약속 1시간 전입니다.": "Còn 1 tiếng nữa đến lịch hẹn giao dịch trực tiếp lúc 19:00 tại \"Trước cửa hàng tiện lợi gần đây\".",
   "오늘 19:00 \"근처 편의점 앞\" 직거래 약속 1시간 전입니다": "Còn 1 tiếng nữa đến lịch hẹn giao dịch trực tiếp lúc 19:00 tại \"Trước cửa hàng tiện lợi gần đây\"",
+  "오늘 하루 안 보기": "Không hiện lại hôm nay",
 };
 export default vi;
