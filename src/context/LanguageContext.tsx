@@ -18,43 +18,28 @@ export const LanguageContext = createContext<LanguageContextType | undefined>(un
 
 export function LanguageProvider({
   children,
-  initialLang,
+  initialLang = 'ko',
 }: {
   children: React.ReactNode;
   initialLang?: SupportedLanguage;
 }) {
-  // URL 경로(/vi, /ja 등)를 최우선으로 감지하여 첫 렌더링부터 100% 일치
-  const getDetectedLanguage = (): SupportedLanguage => {
-    if (initialLang && SUPPORTED_LANGUAGES.some((l) => l.code === initialLang)) {
-      return initialLang;
-    }
+  // 초기 렌더링은 SSR과 100% 일치시키기 위해 initialLang 사용
+  const [currentLang, setCurrentLangState] = useState<SupportedLanguage>(initialLang);
+
+  useEffect(() => {
+    // 클라이언트 마운트 후 localStorage 또는 URL 파라미터에서 언어 동기화
     if (typeof window !== 'undefined') {
       const pathSegments = window.location.pathname.split('/').filter(Boolean);
       const urlLang = pathSegments[0] as SupportedLanguage;
       if (urlLang && SUPPORTED_LANGUAGES.some((l) => l.code === urlLang)) {
-        return urlLang;
+        setCurrentLangState(urlLang);
+        return;
       }
+      
       const saved = localStorage.getItem('kmarket_lang') as SupportedLanguage;
       if (saved && SUPPORTED_LANGUAGES.some((l) => l.code === saved)) {
-        return saved;
+        setCurrentLangState(saved);
       }
-    }
-    return 'ko';
-  };
-
-  const [currentLang, setCurrentLangState] = useState<SupportedLanguage>(getDetectedLanguage);
-
-  useEffect(() => {
-    const syncFromUrlOrStorage = () => {
-      const detected = getDetectedLanguage();
-      setCurrentLangState(detected);
-    };
-
-    syncFromUrlOrStorage();
-
-    if (typeof window !== 'undefined') {
-      window.addEventListener('popstate', syncFromUrlOrStorage);
-      return () => window.removeEventListener('popstate', syncFromUrlOrStorage);
     }
   }, [initialLang]);
 

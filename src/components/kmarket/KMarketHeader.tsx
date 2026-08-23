@@ -60,11 +60,11 @@ export default function KMarketHeader() {
               KTRS
             </span>
             {/* 💻 데스크탑: 원래 풀 문장 100% 보존 */}
-            <span className="hidden md:inline text-white font-bold text-[13px] tracking-tight whitespace-nowrap">
+            <span suppressHydrationWarning className="hidden md:inline text-white font-bold text-[13px] tracking-tight whitespace-nowrap">
               {t('대한민국 1등 외국인 근로자 종합 플랫폼')}
             </span>
             {/* 📱 모바일: 외국어 번역으로 길어져도 2줄로 완벽 노출 */}
-            <span className="md:hidden text-white font-bold text-[10px] xs:text-[11px] tracking-tight leading-tight line-clamp-2 break-keep">
+            <span suppressHydrationWarning className="md:hidden text-white font-bold text-[10px] xs:text-[11px] tracking-tight leading-tight line-clamp-2 break-keep">
               {t('대한민국 1등 외국인 종합 플랫폼')}
             </span>
           </div>
