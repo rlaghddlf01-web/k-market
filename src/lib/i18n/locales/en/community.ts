@@ -33,5 +33,12 @@ export const community = {
   "카테고리 선택": "Select Category",
   "예: 이번 주말에 같이 쌀국수 먹으러 가실 분 구해요!": "e.g., Looking for someone to eat noodles together this weekend!",
   "사진 첨부 (최대 5장)": "Attach Photos (Max 5)",
+  "댓글": "Comments",
+  "댓글 등록": "Post Comment",
+  "댓글을 작성하려면 1분 간편 본인인증(회원가입)이 필요합니다 →": "1-min simple verification (signup) required to comment →",
+  "허위 및 사기 신고하기": "Report Fake / Fraud",
+  "댓글 신고": "Report Comment",
+  "번역 보기": "Show Translation",
+  "원문 보기": "Show Original",
 };
 export default community;

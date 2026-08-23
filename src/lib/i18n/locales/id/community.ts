@@ -33,5 +33,12 @@ export const community = {
   "카테고리 선택": "Pilih Kategori",
   "예: 이번 주말에 같이 쌀국수 먹으러 가실 분 구해요!": "Contoh: Mencari teman untuk makan pho bersama akhir pekan ini!",
   "사진 첨부 (최대 5장)": "Lampirkan Foto (Maks 5)",
+  "댓글": "Komentar",
+  "댓글 등록": "Kirim Komentar",
+  "댓글을 작성하려면 1분 간편 본인인증(회원가입)이 필요합니다 →": "Perlu verifikasi 1 menit (daftar) untuk menulis komentar →",
+  "허위 및 사기 신고하기": "Laporkan Penipuan / Palsu",
+  "댓글 신고": "Laporkan Komentar",
+  "번역 보기": "Lihat Terjemahan",
+  "원문 보기": "Lihat Teks Asli",
 };
 export default community;

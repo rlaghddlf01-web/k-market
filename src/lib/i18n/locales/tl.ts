@@ -1099,5 +1099,12 @@ export const tl = {
   "쓰레기 분리수거, 종량제 봉투, 주민센터, 은행": "Paghahati ng basura, pay-per-bag na plastic, community center, pagbabangko",
   "다이소/마트 위치, 주말 병원, 가성비 미용실": "Lokasyon ng Daiso/Mart, weekend clinic, abot-kayang pagupitan",
   "체류 연장 서류 팁, 외국인등록증 재발급 후기": "Mga tip sa dokumento para sa visa extension, reviews sa pag-reissue ng Alien Card",
+  "댓글": "Mga Komento",
+  "댓글 등록": "I-post ang Komento",
+  "내 주변에 \"통돌이 세탁기 10킬로그램 + 쿠쿠 밥솥\" 매물이 새로 등록되었습니다.": "Isang bagong listing na \"Top-load Washer 10kg + Cuckoo Rice Cooker\" ang nairehistro malapit sa iyo.",
+  "이웃 회원이 새로운 번역 메시지를 보냈습니다: \"감사합니다! 오늘 저녁 7시에 만나요!\"": "Nagpadala ang kapitbahay ng isinaling mensahe: \"Salamat! Magkita tayo mamayang 7 PM!\"",
+  "관심 매물 \"쿠쿠 전기밥솥 6인용\" 가격이 25,000원으로 15% 인하되었습니다!": "Ang wishlist item na \"Cuckoo 6-person Rice Cooker\" ay bumaba ng 15% sa 25,000 KRW!",
+  "오늘 19:00 \"근처 편의점 앞\" 직거래 약속 1시간 전입니다.": "1 oras bago ang direct meetup sa 19:00 sa \"Harap ng malapit na convenience store\".",
+  "오늘 19:00 \"근처 편의점 앞\" 직거래 약속 1시간 전입니다": "1 oras bago ang direct meetup sa 19:00 sa \"Harap ng malapit na convenience store\"",
 };
 export default tl;

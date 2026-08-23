@@ -1098,5 +1098,12 @@ export const id = {
   "쓰레기 분리수거, 종량제 봉투, 주민센터, 은행": "Pemisahan sampah, kantong sampah resmi, kantor kelurahan, perbankan",
   "다이소/마트 위치, 주말 병원, 가성비 미용실": "Lokasi Daiso/Supermarket, klinik buka akhir pekan, salon rambut hemat",
   "체류 연장 서류 팁, 외국인등록증 재발급 후기": "Tips dokumen perpanjangan visa, ulasan penerbitan ulang kartu identitas",
+  "댓글": "Komentar",
+  "댓글 등록": "Kirim Komentar",
+  "내 주변에 \"통돌이 세탁기 10킬로그램 + 쿠쿠 밥솥\" 매물이 새로 등록되었습니다.": "Barang baru \"Mesin cuci bukaan atas 10kg + Rice cooker Cuckoo\" telah terdaftar di sekitar Anda.",
+  "이웃 회원이 새로운 번역 메시지를 보냈습니다: \"감사합니다! 오늘 저녁 7시에 만나요!\"": "Tetangga mengirim pesan terjemahan baru: \"Terima kasih! Sampai jumpa jam 7 malam ini!\"",
+  "관심 매물 \"쿠쿠 전기밥솥 6인용\" 가격이 25,000원으로 15% 인하되었습니다!": "Barang favorit \"Rice cooker listrik Cuckoo 6 orang\" harganya turun 15% menjadi 25.000 KRW!",
+  "오늘 19:00 \"근처 편의점 앞\" 직거래 약속 1시간 전입니다.": "1 jam sebelum janji temu transaksi langsung pukul 19:00 di \"Depan minimarket terdekat\".",
+  "오늘 19:00 \"근처 편의점 앞\" 직거래 약속 1시간 전입니다": "1 jam sebelum janji temu transaksi langsung pukul 19:00 di \"Depan minimarket terdekat\"",
 };
 export default id;

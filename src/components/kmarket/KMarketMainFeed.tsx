@@ -27,6 +27,9 @@ import KMarketFeedbackModal from './KMarketFeedbackModal';
 import KMarketShareModal from './KMarketShareModal';
 import { CommunityProvider } from '@/context/CommunityContext';
 import KMarketCommunityMain from '../community/KMarketCommunityMain';
+import KMarketCommunityPostDetailModal from '../community/KMarketCommunityPostDetailModal';
+import KMarketCommunityCreateModal from '../community/KMarketCommunityCreateModal';
+import KMarketCommunityReportModal from '../community/KMarketCommunityReportModal';
 import KMarketPwaInstallPrompt from '@/components/common/KMarketPwaInstallPrompt';
 import KMarketPushNotificationManager from '@/components/common/KMarketPushNotificationManager';
 import { ShoppingBag, Sparkles, ShieldCheck, Plus, PackageOpen, ShieldAlert } from 'lucide-react';
@@ -362,6 +365,9 @@ export default function KMarketMainFeed() {
         {/* 모달 & 드로어 컴포넌트들 */}
         <KMarketItemDetail />
         <KMarketCreatePost />
+        <KMarketCommunityPostDetailModal />
+        <KMarketCommunityCreateModal />
+        <KMarketCommunityReportModal />
         <KMarketChatDrawer />
         <KMarketTaxModal />
         <KMarketFavoritesModal />

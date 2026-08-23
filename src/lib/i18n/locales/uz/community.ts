@@ -33,5 +33,12 @@ export const community = {
   "카테고리 선택": "Kategoriyani tanlash",
   "예: 이번 주말에 같이 쌀국수 먹으러 가실 분 구해요!": "Masalan: Bu dam olish kunida birga ovqatlangani boradigan sherik qidiryapman!",
   "사진 첨부 (최대 5장)": "Rasm biriktirish (maks. 5 ta)",
+  "댓글": "Izohlar",
+  "댓글 등록": "Izoh qoldirish",
+  "댓글을 작성하려면 1분 간편 본인인증(회원가입)이 필요합니다 →": "Izoh qoldirish uchun 1 daqiqalik oddiy shaxsni tasdiqlash (ro'yxatdan o'tish) kerak →",
+  "허위 및 사기 신고하기": "Soxta va firibgarlik haqida xabar berish",
+  "댓글 신고": "Izohni shikoyat qilish",
+  "번역 보기": "Tarjimani ko'rish",
+  "원문 보기": "Asl nusxani ko'rish",
 };
 export default community;

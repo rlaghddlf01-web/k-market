@@ -142,11 +142,6 @@ export default function KMarketCommunityMain() {
           </button>
         </div>
       )}
-
-      {/* 4. 모달들 마운트 */}
-      <KMarketCommunityPostDetailModal />
-      <KMarketCommunityCreateModal />
-      <KMarketCommunityReportModal />
     </div>
   );
 }

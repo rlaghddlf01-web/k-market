@@ -33,5 +33,12 @@ export const community = {
   "카테고리 선택": "Chọn danh mục",
   "예: 이번 주말에 같이 쌀국수 먹으러 가실 분 구해요!": "VD: Tìm bạn đi ăn phở cùng vào cuối tuần này!",
   "사진 첨부 (최대 5장)": "Đính kèm ảnh (Tối đa 5 ảnh)",
+  "댓글": "Bình luận",
+  "댓글 등록": "Gửi bình luận",
+  "댓글을 작성하려면 1분 간편 본인인증(회원가입)이 필요합니다 →": "Cần xác thực 1 phút (đăng ký) để viết bình luận →",
+  "허위 및 사기 신고하기": "Báo cáo giả mạo & lừa đảo",
+  "댓글 신고": "Báo cáo bình luận",
+  "번역 보기": "Xem bản dịch",
+  "원문 보기": "Xem bản gốc",
 };
 export default community;

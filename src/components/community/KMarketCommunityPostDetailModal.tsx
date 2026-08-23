@@ -45,6 +45,8 @@ export default function KMarketCommunityPostDetailModal() {
     if (selectedPost) {
       fetchComments(selectedPost.id);
       setActiveImageIdx(0);
+      setShowOriginal(false);
+      setShowMenu(false);
     }
   }, [selectedPost?.id]);
 
@@ -109,214 +111,208 @@ export default function KMarketCommunityPostDetailModal() {
   return (
     <div
       onClick={() => setSelectedPost(null)}
-      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/75 backdrop-blur-xs animate-fadeIn"
+      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/70 backdrop-blur-xs animate-fadeIn overflow-y-auto"
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className="relative w-full max-w-xl bg-white dark:bg-gray-900 rounded-3xl shadow-2xl border border-slate-200 dark:border-gray-800 flex flex-col max-h-[90vh] overflow-hidden"
+        className="bg-white dark:bg-gray-900 rounded-3xl max-w-xl w-full p-5 sm:p-6 shadow-2xl border border-slate-200 dark:border-gray-800 relative max-h-[90vh] overflow-y-auto space-y-4 my-auto"
       >
-        {/* 상단 고정 헤더 - 어떤 스크롤에서도 X 버튼 및 작성자 정보가 상단에 항상 고정 */}
-        <div className="sticky top-0 z-30 px-5 py-3.5 bg-white/95 dark:bg-gray-900/95 backdrop-blur-md border-b border-slate-100 dark:border-gray-800 flex items-center justify-between shrink-0">
-          {/* 작성자 정보 */}
-          <div className="flex items-center gap-2.5 min-w-0">
-            <CountryFlag
-              countryCode={selectedPost.user_country}
-              fallbackEmoji={selectedPost.user_flag}
-              size="md"
-              shape="circle"
-              className="shadow-2xs shrink-0"
-            />
-            <div className="min-w-0">
-              <div className="flex items-center gap-1.5 truncate">
-                <h4 className="text-xs sm:text-sm font-bold text-slate-900 dark:text-white truncate">
-                  {selectedPost.user_name}
-                </h4>
-                <span className="text-[11px] text-slate-400 shrink-0">• {selectedPost.region}</span>
+        {/* 상단 닫기 버튼 & 더보기 */}
+        <div className="absolute top-4 right-4 z-20 flex items-center gap-1">
+          <div className="relative">
+            <button
+              onClick={() => setShowMenu(!showMenu)}
+              className="p-2 rounded-full bg-slate-100 hover:bg-slate-200 dark:bg-gray-800 text-slate-500 hover:text-slate-700 transition-colors cursor-pointer"
+            >
+              <MoreVertical className="w-4 h-4" />
+            </button>
+            {showMenu && (
+              <div className="absolute right-0 top-10 w-36 bg-white dark:bg-gray-800 rounded-xl shadow-xl border border-slate-200 dark:border-gray-700 py-1 z-30 text-xs">
+                <button
+                  onClick={handleReportPost}
+                  className="w-full px-3 py-2 text-left text-rose-600 hover:bg-rose-50 dark:hover:bg-rose-950/30 flex items-center gap-1.5 font-bold cursor-pointer"
+                >
+                  <Flag className="w-3.5 h-3.5" />
+                  <span>{t('허위 및 사기 신고하기')}</span>
+                </button>
               </div>
-              <p className="text-[10px] text-slate-400">
-                {new Date(selectedPost.created_at).toLocaleString()}
-              </p>
-            </div>
+            )}
           </div>
 
-          {/* 카테고리 뱃지 & 메뉴 & 크고 선명한 닫기 버튼 */}
-          <div className="flex items-center gap-2 shrink-0">
-            <span
-              className={`text-[11px] font-extrabold px-2.5 py-0.5 rounded-full border flex items-center gap-1 ${categoryInfo.color}`}
-            >
-              <span>{categoryInfo.icon}</span>
-              <span className="hidden sm:inline">{t(categoryInfo.labelKo)}</span>
-            </span>
+          <button
+            onClick={() => setSelectedPost(null)}
+            className="p-2 rounded-full bg-slate-100 hover:bg-rose-500 hover:text-white dark:bg-gray-800 text-slate-600 dark:text-slate-300 transition-all cursor-pointer shadow-xs active:scale-95"
+            title={t('닫기')}
+          >
+            <X className="w-5 h-5" />
+          </button>
+        </div>
 
-            {/* 더보기 메뉴 */}
-            <div className="relative">
-              <button
-                onClick={() => setShowMenu(!showMenu)}
-                className="p-1.5 rounded-full text-slate-400 hover:text-slate-600 hover:bg-slate-100 dark:hover:bg-gray-800 transition-colors cursor-pointer"
-              >
-                <MoreVertical className="w-4 h-4" />
-              </button>
-              {showMenu && (
-                <div className="absolute right-0 top-8 w-36 bg-white dark:bg-gray-800 rounded-xl shadow-xl border border-slate-200 dark:border-gray-700 py-1 z-30 text-xs">
-                  <button
-                    onClick={handleReportPost}
-                    className="w-full px-3 py-2 text-left text-rose-600 hover:bg-rose-50 dark:hover:bg-rose-950/30 flex items-center gap-1.5 font-bold cursor-pointer"
-                  >
-                    <Flag className="w-3.5 h-3.5" />
-                    <span>{t('허위 및 사기 신고하기')}</span>
-                  </button>
-                </div>
-              )}
+        {/* 1. 상단 작성자 정보 & 카테고리 뱃지 */}
+        <div className="flex items-center gap-3 pr-20">
+          <CountryFlag
+            countryCode={selectedPost.user_country}
+            fallbackEmoji={selectedPost.user_flag}
+            size="md"
+            shape="circle"
+            className="shadow-2xs shrink-0"
+          />
+          <div className="min-w-0">
+            <div className="flex items-center gap-1.5 truncate">
+              <h4 className="text-xs sm:text-sm font-bold text-slate-900 dark:text-white truncate">
+                {selectedPost.user_name}
+              </h4>
+              <span className="text-[11px] text-slate-400 shrink-0">• {selectedPost.region}</span>
             </div>
-
-            {/* X 닫기 버튼 (언제나 손쉽게 닫을 수 있도록 강조) */}
-            <button
-              onClick={() => setSelectedPost(null)}
-              className="p-2 rounded-full bg-slate-100 hover:bg-slate-200 dark:bg-gray-800 dark:hover:bg-gray-700 text-slate-600 dark:text-slate-200 transition-all cursor-pointer shadow-xs active:scale-95 ml-1"
-              title={t('닫기')}
-            >
-              <X className="w-4 h-4 sm:w-5 sm:h-5" />
-            </button>
+            <p className="text-[10px] text-slate-400">
+              {new Date(selectedPost.created_at).toLocaleString()}
+            </p>
           </div>
         </div>
 
-        {/* 모달 스크롤 본문 */}
-        <div className="flex-1 overflow-y-auto p-5 space-y-4">
+        {/* 카테고리 뱃지 */}
+        <div>
+          <span
+            className={`text-[11px] font-extrabold px-3 py-1 rounded-full border inline-flex items-center gap-1 ${categoryInfo.color}`}
+          >
+            <span>{categoryInfo.icon}</span>
+            <span>{t(categoryInfo.labelKo)}</span>
+          </span>
+        </div>
 
-          {/* 2. 글 제목 & 17개국어 번역 토글 */}
+        {/* 2. 글 제목 & 17개국어 번역 토글 */}
+        <div className="space-y-2 pt-1">
+          <h2 className="text-base sm:text-lg font-black text-slate-900 dark:text-white leading-snug">
+            {displayTitle}
+          </h2>
+          <button
+            onClick={() => setShowOriginal(!showOriginal)}
+            className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-blue-50 dark:bg-blue-950/50 text-blue-600 dark:text-blue-400 text-xs font-bold border border-blue-200 dark:border-blue-800/60 hover:bg-blue-100 transition-colors cursor-pointer"
+          >
+            <Globe className="w-3.5 h-3.5" />
+            <span>{showOriginal ? t('번역 보기') : t('원문 보기')}</span>
+          </button>
+        </div>
+
+        {/* 3. 최대 5장 고화질 이미지 슬라이더 (있을 경우) */}
+        {selectedPost.images && selectedPost.images.length > 0 && (
           <div className="space-y-2">
-            <h2 className="text-base sm:text-lg font-black text-slate-900 dark:text-white leading-snug">
-              {displayTitle}
-            </h2>
-            <button
-              onClick={() => setShowOriginal(!showOriginal)}
-              className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-blue-50 dark:bg-blue-950/50 text-blue-600 dark:text-blue-400 text-xs font-bold border border-blue-200 dark:border-blue-800/60 hover:bg-blue-100 transition-colors cursor-pointer"
-            >
-              <Globe className="w-3.5 h-3.5" />
-              <span>{showOriginal ? t('번역 보기') : t('원문 보기')}</span>
-            </button>
-          </div>
-
-          {/* 3. 최대 5장 고화질 이미지 슬라이더 (있을 경우) */}
-          {selectedPost.images && selectedPost.images.length > 0 && (
-            <div className="space-y-2">
-              <div className="relative w-full h-64 rounded-2xl overflow-hidden bg-slate-100 dark:bg-gray-800 border border-slate-200 dark:border-gray-700">
-                <img
-                  src={selectedPost.images[activeImageIdx]}
-                  alt="post-img"
-                  className="w-full h-full object-contain"
-                />
-                <div className="absolute bottom-2 right-2 px-2 py-0.5 rounded-full bg-black/60 text-white text-[10px] font-bold">
-                  {activeImageIdx + 1} / {selectedPost.images.length}
-                </div>
+            <div className="relative w-full h-64 rounded-2xl overflow-hidden bg-slate-100 dark:bg-gray-800 border border-slate-200 dark:border-gray-700">
+              <img
+                src={selectedPost.images[activeImageIdx]}
+                alt="post-img"
+                className="w-full h-full object-contain"
+              />
+              <div className="absolute bottom-2 right-2 px-2 py-0.5 rounded-full bg-black/60 text-white text-[10px] font-bold">
+                {activeImageIdx + 1} / {selectedPost.images.length}
               </div>
-
-              {selectedPost.images.length > 1 && (
-                <div className="flex gap-2 overflow-x-auto pb-1 no-scrollbar">
-                  {selectedPost.images.map((img, idx) => (
-                    <button
-                      key={idx}
-                      onClick={() => setActiveImageIdx(idx)}
-                      className={`relative w-14 h-14 rounded-xl overflow-hidden shrink-0 border-2 transition-all cursor-pointer ${
-                        activeImageIdx === idx
-                          ? 'border-blue-600 scale-105'
-                          : 'border-transparent opacity-70 hover:opacity-100'
-                      }`}
-                    >
-                      <img src={img} alt="thumb" className="w-full h-full object-cover" />
-                    </button>
-                  ))}
-                </div>
-              )}
             </div>
-          )}
 
-          {/* 4. 본문 내용 */}
-          <div className="p-4 rounded-2xl bg-slate-50 dark:bg-gray-800/50 border border-slate-100 dark:border-gray-800 text-xs sm:text-sm text-slate-700 dark:text-slate-200 leading-relaxed whitespace-pre-line font-medium">
-            {displayContent}
+            {selectedPost.images.length > 1 && (
+              <div className="flex gap-2 overflow-x-auto pb-1 no-scrollbar">
+                {selectedPost.images.map((img, idx) => (
+                  <button
+                    key={idx}
+                    onClick={() => setActiveImageIdx(idx)}
+                    className={`relative w-14 h-14 rounded-xl overflow-hidden shrink-0 border-2 transition-all cursor-pointer ${
+                      activeImageIdx === idx
+                        ? 'border-blue-600 scale-105'
+                        : 'border-transparent opacity-70 hover:opacity-100'
+                    }`}
+                  >
+                    <img src={img} alt="thumb" className="w-full h-full object-cover" />
+                  </button>
+                ))}
+              </div>
+            )}
           </div>
+        )}
 
-          {/* 5. 감성 리액션 버튼 바 */}
-          <div className="flex items-center gap-2 pt-1 border-t border-slate-100 dark:border-gray-800">
-            <button
-              onClick={() => reactToPost(selectedPost.id, 'like')}
-              className="flex-1 py-2 rounded-xl bg-rose-50 hover:bg-rose-100 dark:bg-rose-950/30 text-rose-600 font-extrabold text-xs flex items-center justify-center gap-1.5 transition-colors cursor-pointer border border-rose-200 dark:border-rose-900/40"
-            >
-              <Heart className="w-4 h-4 fill-rose-500" />
-              <span>{t('게시글 공감해요')} ({selectedPost.like_count})</span>
-            </button>
+        {/* 4. 본문 내용 */}
+        <div className="p-4 rounded-2xl bg-slate-50 dark:bg-gray-800/50 border border-slate-100 dark:border-gray-800 text-xs sm:text-sm text-slate-700 dark:text-slate-200 leading-relaxed whitespace-pre-line font-medium">
+          {displayContent}
+        </div>
 
-            <button
-              onClick={() => reactToPost(selectedPost.id, 'cheer')}
-              className="flex-1 py-2 rounded-xl bg-amber-50 hover:bg-amber-100 dark:bg-amber-950/30 text-amber-700 font-extrabold text-xs flex items-center justify-center gap-1.5 transition-colors cursor-pointer border border-amber-200 dark:border-amber-900/40"
-            >
-              <Coffee className="w-4 h-4 text-amber-600" />
-              <span>{t('따뜻하게 응원해요')} ({selectedPost.cheer_count})</span>
-            </button>
-          </div>
+        {/* 5. 감성 리액션 버튼 바 */}
+        <div className="flex items-center gap-2 pt-1 border-t border-slate-100 dark:border-gray-800">
+          <button
+            onClick={() => reactToPost(selectedPost.id, 'like')}
+            className="flex-1 py-2 rounded-xl bg-rose-50 hover:bg-rose-100 dark:bg-rose-950/30 text-rose-600 font-extrabold text-xs flex items-center justify-center gap-1.5 transition-colors cursor-pointer border border-rose-200 dark:border-rose-900/40"
+          >
+            <Heart className="w-4 h-4 fill-rose-500" />
+            <span>{t('게시글 공감해요')} ({selectedPost.like_count})</span>
+          </button>
 
-          {/* 6. 댓글 섹션 (17개국어 실시간 번역) */}
-          <div className="space-y-3 pt-2">
-            <h4 className="text-xs font-black text-slate-900 dark:text-white flex items-center gap-1.5">
-              <MessageCircle className="w-4 h-4 text-blue-600" />
-              <span>{t('댓글')} ({comments.length})</span>
-            </h4>
+          <button
+            onClick={() => reactToPost(selectedPost.id, 'cheer')}
+            className="flex-1 py-2 rounded-xl bg-amber-50 hover:bg-amber-100 dark:bg-amber-950/30 text-amber-700 font-extrabold text-xs flex items-center justify-center gap-1.5 transition-colors cursor-pointer border border-amber-200 dark:border-amber-900/40"
+          >
+            <Coffee className="w-4 h-4 text-amber-600" />
+            <span>{t('따뜻하게 응원해요')} ({selectedPost.cheer_count})</span>
+          </button>
+        </div>
 
-            <div className="space-y-2">
-              {isCommentsLoading ? (
-                <div className="py-6 text-center text-xs text-slate-400">
-                  {t('댓글을 불러오는 중...')}
-                </div>
-              ) : comments.length > 0 ? (
-                comments.map((comm) => {
-                  const commTrans = comm.translations?.[currentLang] || comm.content;
+        {/* 6. 댓글 섹션 (17개국어 실시간 번역) */}
+        <div className="space-y-3 pt-2">
+          <h4 className="text-xs font-black text-slate-900 dark:text-white flex items-center gap-1.5">
+            <MessageCircle className="w-4 h-4 text-blue-600" />
+            <span>{t('댓글')} ({comments.length})</span>
+          </h4>
 
-                  return (
-                    <div
-                      key={comm.id}
-                      className="p-3 rounded-2xl bg-slate-50 dark:bg-gray-800/60 border border-slate-100 dark:border-gray-800 space-y-1 text-xs"
-                    >
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-2">
-                          <CountryFlag
-                            countryCode={comm.user_country}
-                            fallbackEmoji={comm.user_flag}
-                            size="xs"
-                            shape="circle"
-                          />
-                          <span className="font-bold text-slate-800 dark:text-slate-200">
-                            {comm.user_name}
-                          </span>
-                        </div>
-                        <div className="flex items-center gap-1.5 text-[10px] text-slate-400">
-                          <span>{new Date(comm.created_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
-                          <button
-                            onClick={() => handleReportComment(comm)}
-                            className="hover:text-rose-500 cursor-pointer p-0.5"
-                            title={t('댓글 신고')}
-                          >
-                            <Flag className="w-3 h-3" />
-                          </button>
-                        </div>
+          <div className="space-y-2">
+            {isCommentsLoading ? (
+              <div className="py-6 text-center text-xs text-slate-400">
+                {t('댓글을 불러오는 중...')}
+              </div>
+            ) : comments.length > 0 ? (
+              comments.map((comm) => {
+                const commTrans = comm.translations?.[currentLang] || comm.content;
+
+                return (
+                  <div
+                    key={comm.id}
+                    className="p-3 rounded-2xl bg-slate-50 dark:bg-gray-800/60 border border-slate-100 dark:border-gray-800 space-y-1 text-xs"
+                  >
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <CountryFlag
+                          countryCode={comm.user_country}
+                          fallbackEmoji={comm.user_flag}
+                          size="xs"
+                          shape="circle"
+                        />
+                        <span className="font-bold text-slate-800 dark:text-slate-200">
+                          {comm.user_name}
+                        </span>
                       </div>
-
-                      <p className="text-slate-700 dark:text-slate-300 leading-snug pl-6">
-                        {commTrans}
-                      </p>
+                      <div className="flex items-center gap-1.5 text-[10px] text-slate-400">
+                        <span>{new Date(comm.created_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
+                        <button
+                          onClick={() => handleReportComment(comm)}
+                          className="hover:text-rose-500 cursor-pointer p-0.5"
+                          title={t('댓글 신고')}
+                        >
+                          <Flag className="w-3 h-3" />
+                        </button>
+                      </div>
                     </div>
-                  );
-                })
-              ) : (
-                <div className="py-6 text-center text-xs text-slate-400 bg-slate-50 dark:bg-gray-800/40 rounded-2xl">
-                  {t('첫 번째 따뜻한 댓글을 남겨보세요!')}
-                </div>
-              )}
-            </div>
+
+                    <p className="text-slate-700 dark:text-slate-300 leading-snug pl-6">
+                      {commTrans}
+                    </p>
+                  </div>
+                );
+              })
+            ) : (
+              <div className="py-6 text-center text-xs text-slate-400 bg-slate-50 dark:bg-gray-800/40 rounded-2xl">
+                {t('첫 번째 따뜻한 댓글을 남겨보세요!')}
+              </div>
+            )}
           </div>
         </div>
 
         {/* 7. 하단 댓글 작성창 (비회원 시 로그인 유도) */}
-        <div className="p-4 border-t border-slate-100 dark:border-gray-800 shrink-0 bg-white/95 dark:bg-gray-900/95">
+        <div className="pt-3 border-t border-slate-100 dark:border-gray-800 shrink-0">
           {authedUser ? (
             <form onSubmit={handleCommentSubmit} className="flex gap-2">
               <input

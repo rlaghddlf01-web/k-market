@@ -1098,5 +1098,12 @@ export const en = {
   "쓰레기 분리수거, 종량제 봉투, 주민센터, 은행": "Waste recycling, pay-per-bag garbage, community center, banking",
   "다이소/마트 위치, 주말 병원, 가성비 미용실": "Daiso/Mart locations, weekend clinics, affordable hair salons",
   "체류 연장 서류 팁, 외국인등록증 재발급 후기": "Visa extension document tips, Alien Card re-issuance reviews",
+  "댓글": "Comments",
+  "댓글 등록": "Post Comment",
+  "내 주변에 \"통돌이 세탁기 10킬로그램 + 쿠쿠 밥솥\" 매물이 새로 등록되었습니다.": "A new listing \"Top-load Washer 10kg + Cuckoo Rice Cooker\" has been registered near you.",
+  "이웃 회원이 새로운 번역 메시지를 보냈습니다: \"감사합니다! 오늘 저녁 7시에 만나요!\"": "A neighbor sent a translated message: \"Thank you! Let's meet at 7 PM tonight!\"",
+  "관심 매물 \"쿠쿠 전기밥솥 6인용\" 가격이 25,000원으로 15% 인하되었습니다!": "Wishlist item \"Cuckoo 6-person Rice Cooker\" dropped 15% to 25,000 KRW!",
+  "오늘 19:00 \"근처 편의점 앞\" 직거래 약속 1시간 전입니다.": "1 hour before direct trade meetup at 19:00 in front of the nearby convenience store.",
+  "오늘 19:00 \"근처 편의점 앞\" 직거래 약속 1시간 전입니다": "1 hour before direct trade meetup at 19:00 in front of the nearby convenience store",
 };
 export default en;

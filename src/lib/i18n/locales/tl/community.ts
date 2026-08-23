@@ -33,5 +33,12 @@ export const community = {
   "카테고리 선택": "Pumili ng Kategorya",
   "예: 이번 주말에 같이 쌀국수 먹으러 가실 분 구해요!": "Hal: Naghahanap ng kasamang kumain ng noodles ngayong weekend!",
   "사진 첨부 (최대 5장)": "Maglakip ng mga Larawan (Max 5)",
+  "댓글": "Mga Komento",
+  "댓글 등록": "I-post ang Komento",
+  "댓글을 작성하려면 1분 간편 본인인증(회원가입)이 필요합니다 →": "Kailangan ng 1-minutong simpleng pag-verify (signup) para mag-comment →",
+  "허위 및 사기 신고하기": "I-report ang Fake / Fraud",
+  "댓글 신고": "I-report ang Komento",
+  "번역 보기": "Tingnan ang Salin",
+  "원문 보기": "Tingnan ang Orihinal",
 };
 export default community;

@@ -1099,5 +1099,12 @@ export const uz = {
   "쓰레기 분리수거, 종량제 봉투, 주민센터, 은행": "Chiqindilarni saralash, rasmiy chiqindi qoplari, mahalla markazi, bank",
   "다이소/마트 위치, 주말 병원, 가성비 미용실": "Daiso/Do'konlar manzillari, dam olish kuni klinikalari, hamyonbop sartaroshxonalar",
   "체류 연장 서류 팁, 외국인등록증 재발급 후기": "Viza muddatini uzaytirish hujjatlari bo'yicha maslahatlar, ID kartani qayta olish tajribasi",
+  "댓글": "Izohlar",
+  "댓글 등록": "Izoh qoldirish",
+  "내 주변에 \"통돌이 세탁기 10킬로그램 + 쿠쿠 밥솥\" 매물이 새로 등록되었습니다.": "Yaqin atrofingizda yangi e'lon joylashtirildi: \"10 kg kir yuvish mashinasi + Cuckoo guruch pishirgich\".",
+  "이웃 회원이 새로운 번역 메시지를 보냈습니다: \"감사합니다! 오늘 저녁 7시에 만나요!\"": "Qo'shni foydalanuvchi tarjima qilingan xabar yubordi: \"Rahmat! Bugun soat 19:00 da uchrashamiz!\"",
+  "관심 매물 \"쿠쿠 전기밥솥 6인용\" 가격이 25,000원으로 15% 인하되었습니다!": "Saqlangan mahsulot \"Cuckoo 6 kishilik guruch pishirgich\" narxi 15% arzonlashib 25 000 vonga tushdi!",
+  "오늘 19:00 \"근처 편의점 앞\" 직거래 약속 1시간 전입니다.": "Bugun soat 19:00 da \"Yaqin atrofdagi do'kon oldida\" to'g'ridan-to'g'ri uchrashuvga 1 soat qoldi.",
+  "오늘 19:00 \"근처 편의점 앞\" 직거래 약속 1시간 전입니다": "Bugun soat 19:00 da \"Yaqin atrofdagi do'kon oldida\" to'g'ridan-to'g'ri uchrashuvga 1 soat qoldi",
 };
 export default uz;
