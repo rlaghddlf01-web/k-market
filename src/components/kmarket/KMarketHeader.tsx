@@ -54,8 +54,8 @@ export default function KMarketHeader() {
         className="text-white px-2.5 sm:px-4 py-1.5 sm:py-2 relative z-10 w-full"
       >
         <div className="max-w-6xl mx-auto flex items-center justify-between text-xs gap-1.5 sm:gap-2 w-full">
-          {/* 좌측: KTRS 브랜드 뱃지 + 데스크탑 풀텍스트 / 모바일 최적화 텍스트 */}
-          <div className="flex items-center gap-1.5 sm:gap-2.5 shrink-0 min-w-0">
+          {/* 좌측: KTRS 브랜드 뱃지 + 데스크탑 풀텍스트 / 모바일 최적화 텍스트 (다국어 2줄 줄바꿈 지원) */}
+          <div className="flex items-center gap-1.5 sm:gap-2.5 flex-1 min-w-0 pr-1">
             <span className="bg-[#f3ba2f] text-[#09101f] font-black px-1.5 sm:px-2 py-0.5 rounded text-[10px] uppercase tracking-widest shadow-xs shrink-0">
               KTRS
             </span>
@@ -63,8 +63,8 @@ export default function KMarketHeader() {
             <span className="hidden md:inline text-white font-bold text-[13px] tracking-tight whitespace-nowrap">
               {t('대한민국 1등 외국인 근로자 종합 플랫폼')}
             </span>
-            {/* 📱 모바일: '근로자'만 뺀 쏙 들어가는 최적화 문장 */}
-            <span className="md:hidden text-white font-bold text-[11px] tracking-tight whitespace-nowrap">
+            {/* 📱 모바일: 외국어 번역으로 길어져도 2줄로 완벽 노출 */}
+            <span className="md:hidden text-white font-bold text-[10px] xs:text-[11px] tracking-tight leading-tight line-clamp-2 break-keep">
               {t('대한민국 1등 외국인 종합 플랫폼')}
             </span>
           </div>
