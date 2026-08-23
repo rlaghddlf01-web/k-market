@@ -49,29 +49,29 @@ export default function KMarketPwaInstallPrompt() {
   return (
     <>
       {/* 1. 화면 우측 하단 상시 플로팅 PWA 설치 배너 */}
-      <div className="fixed bottom-4 right-4 z-40 max-w-sm w-[calc(100vw-2rem)] sm:w-auto animate-bounce-subtle">
+      <div className="fixed bottom-3 right-3 left-3 sm:left-auto sm:right-4 sm:bottom-4 z-40 max-w-sm w-auto animate-bounce-subtle">
         <div
           style={{
             background: 'linear-gradient(135deg, #09101f 0%, #1e3a8a 100%)',
             border: '2px solid #f3ba2f',
             boxShadow: '0 12px 36px rgba(9, 16, 31, 0.45)',
           }}
-          className="relative rounded-2xl p-4 sm:p-4.5 text-white shadow-2xl overflow-hidden backdrop-blur-md"
+          className="relative rounded-2xl p-3 sm:p-4 text-white shadow-2xl overflow-hidden backdrop-blur-md"
         >
           {/* 우측 상단 닫기 */}
           <button
             type="button"
             onClick={handleDismiss}
-            className="absolute top-3 right-3 text-slate-400 hover:text-white transition-colors cursor-pointer p-1 rounded-full hover:bg-white/10"
+            className="absolute top-2 right-2 text-slate-400 hover:text-white transition-colors cursor-pointer p-1 rounded-full hover:bg-white/10"
             title={t('닫기')}
           >
-            <X className="w-4 h-4" />
+            <X className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
           </button>
 
-          <div className="flex items-start gap-3.5 pr-6">
+          <div className="flex items-center gap-2.5 sm:gap-3.5 pr-6">
             {/* 앱 아이콘 */}
-            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center text-[#09101f] font-black text-xl shrink-0 shadow-lg border-2 border-white/20">
-              <Smartphone className="w-6 h-6 text-[#09101f]" />
+            <div className="w-9 h-9 sm:w-11 sm:h-11 rounded-xl bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center text-[#09101f] font-black text-base sm:text-xl shrink-0 shadow-md border border-white/20">
+              <Smartphone className="w-5 h-5 sm:w-6 sm:h-6 text-[#09101f]" />
             </div>
 
             {/* 텍스트 내용 */}
@@ -81,22 +81,22 @@ export default function KMarketPwaInstallPrompt() {
                   <span>{t('K-Market 1초 앱 설치')}</span>
                   <span className="text-amber-400">✨</span>
                 </h4>
-                <span className="bg-[#f3ba2f] text-[#09101f] text-[9px] font-black px-1.5 py-0.2 rounded-full uppercase">
+                <span className="bg-[#f3ba2f] text-[#09101f] text-[8px] sm:text-[9px] font-black px-1.5 py-0.2 rounded-full uppercase">
                   PWA
                 </span>
               </div>
-              <p className="text-[11px] text-slate-200 mt-1 leading-snug font-medium line-clamp-2">
+              <p className="text-[10px] sm:text-[11px] text-slate-200 mt-0.5 leading-snug font-medium line-clamp-1 sm:line-clamp-2">
                 {t('홈 화면에 앱 추가하고 17개국어 번역 채팅과 공단 직거래 알림을 가장 빠르게 받으세요.')}
               </p>
             </div>
           </div>
 
           {/* 설치 CTA 버튼 */}
-          <div className="mt-3.5 flex items-center gap-2">
+          <div className="mt-2.5 sm:mt-3.5 flex items-center gap-2">
             <button
               type="button"
               onClick={handleInstallClick}
-              className="flex-1 py-2.5 px-4 rounded-xl font-black text-xs transition-all flex items-center justify-center gap-2 shadow-lg active:scale-98 cursor-pointer group"
+              className="flex-1 py-1.5 sm:py-2.5 px-3 sm:px-4 rounded-xl font-black text-[11px] sm:text-xs transition-all flex items-center justify-center gap-1.5 shadow-md active:scale-98 cursor-pointer group"
               style={{
                 background: 'linear-gradient(135deg, #fce38a 0%, #f3ba2f 50%, #d4af37 100%)',
                 color: '#09101f',
@@ -108,7 +108,7 @@ export default function KMarketPwaInstallPrompt() {
             <button
               type="button"
               onClick={handleDismiss}
-              className="py-2.5 px-3 rounded-xl bg-white/10 hover:bg-white/20 text-slate-300 text-xs font-bold transition-all cursor-pointer"
+              className="py-1.5 sm:py-2.5 px-2.5 sm:px-3 rounded-xl bg-white/10 hover:bg-white/20 text-slate-300 text-[11px] sm:text-xs font-bold transition-all cursor-pointer"
             >
               {t('닫기')}
             </button>

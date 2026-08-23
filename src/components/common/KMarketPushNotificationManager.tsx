@@ -50,39 +50,39 @@ export default function KMarketPushNotificationManager() {
   };
 
   return (
-    <div className="fixed bottom-24 right-4 z-40 max-w-xs w-full bg-white dark:bg-gray-800 rounded-2xl shadow-2xl border border-amber-200 dark:border-gray-700 p-4 animate-fadeIn">
+    <div className="fixed bottom-3 left-3 right-3 sm:left-auto sm:right-4 sm:bottom-24 z-50 sm:max-w-xs bg-white/95 dark:bg-gray-900/95 backdrop-blur-md rounded-2xl shadow-2xl border border-amber-300 dark:border-gray-700 p-3 sm:p-4 animate-fadeIn">
       <button
         onClick={handleDismiss}
-        className="absolute top-2.5 right-2.5 text-gray-400 hover:text-gray-600 p-1"
+        className="absolute top-2 right-2 text-gray-400 hover:text-gray-600 p-1 rounded-full hover:bg-gray-100"
       >
-        <X className="w-4 h-4" />
+        <X className="w-3.5 h-3.5" />
       </button>
 
-      <div className="flex items-start space-x-3">
-        <div className="w-9 h-9 rounded-xl bg-amber-100 dark:bg-amber-900/40 text-amber-600 flex items-center justify-center shrink-0">
-          <BellRing className="w-5 h-5 animate-pulse" />
+      <div className="flex items-start space-x-2.5">
+        <div className="w-8 h-8 rounded-xl bg-amber-100 dark:bg-amber-900/40 text-amber-600 flex items-center justify-center shrink-0">
+          <BellRing className="w-4 h-4 animate-pulse" />
         </div>
-        <div className="flex-1 min-w-0 pr-4">
+        <div className="flex-1 min-w-0 pr-3">
           <h4 className="text-xs font-black text-gray-900 dark:text-white truncate">
             {t('실시간 거래 & 키워드 알림 받기')}
           </h4>
-          <p className="text-[11px] text-gray-600 dark:text-gray-300 mt-0.5 leading-snug">
+          <p className="text-[10px] sm:text-[11px] text-gray-600 dark:text-gray-300 mt-0.5 leading-tight line-clamp-2">
             {t('채팅 도착 및 관심 매물 등록 시 즉시 알려드려요!')}
           </p>
         </div>
       </div>
 
-      <div className="mt-3 flex items-center space-x-2">
+      <div className="mt-2.5 flex items-center space-x-2">
         <button
           onClick={handleEnablePush}
-          className="flex-1 py-2 px-3 bg-amber-500 hover:bg-amber-600 active:scale-95 text-[#09101f] font-black text-xs rounded-xl shadow-md transition-all flex items-center justify-center space-x-1 cursor-pointer"
+          className="flex-1 py-1.5 px-3 bg-amber-500 hover:bg-amber-600 active:scale-95 text-[#09101f] font-black text-[11px] sm:text-xs rounded-xl shadow-xs transition-all flex items-center justify-center space-x-1 cursor-pointer"
         >
-          <Bell className="w-3.5 h-3.5" />
+          <Bell className="w-3 h-3" />
           <span>{t('알림 켜기')}</span>
         </button>
         <button
           onClick={handleDismiss}
-          className="py-2 px-2.5 bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 text-xs font-bold rounded-xl"
+          className="py-1.5 px-2.5 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 text-[11px] sm:text-xs font-bold rounded-xl hover:bg-gray-200"
         >
           {t('안내창 닫기')}
         </button>
