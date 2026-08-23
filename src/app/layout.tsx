@@ -94,10 +94,8 @@ export default function RootLayout({
       <body className="antialiased selection:bg-blue-500 selection:text-white" style={{ background: 'var(--surface-bg)', color: 'var(--text-primary)' }}>
         <LanguageProvider>
           <InAppBrowserEscaper />
-          <KMarketPushNotificationManager />
           <TrafficTrackerProvider />
           {children}
-          <KMarketPwaInstallPrompt />
         </LanguageProvider>
       </body>
     </html>

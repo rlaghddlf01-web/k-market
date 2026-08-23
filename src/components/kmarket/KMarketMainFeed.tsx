@@ -27,6 +27,8 @@ import KMarketFeedbackModal from './KMarketFeedbackModal';
 import KMarketShareModal from './KMarketShareModal';
 import { CommunityProvider } from '@/context/CommunityContext';
 import KMarketCommunityMain from '../community/KMarketCommunityMain';
+import KMarketPwaInstallPrompt from '@/components/common/KMarketPwaInstallPrompt';
+import KMarketPushNotificationManager from '@/components/common/KMarketPushNotificationManager';
 import { ShoppingBag, Sparkles, ShieldCheck, Plus, PackageOpen, ShieldAlert } from 'lucide-react';
 import { haversineDistance, radiusToKm } from '@/lib/haversineDistance';
 
@@ -398,6 +400,8 @@ export default function KMarketMainFeed() {
           item={shareItem}
         />
         <KMarketNotificationDrawer />
+        <KMarketPushNotificationManager />
+        <KMarketPwaInstallPrompt />
       </div>
     </CommunityProvider>
   );
