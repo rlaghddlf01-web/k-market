@@ -14,8 +14,14 @@ interface LanguageCardItem {
   flagUrl: string;
 }
 
-// 16개 외국인 모국어 국기 카드 목록 (1순위: 🇺🇸 English, 2순위: 🇯🇵 日本語, 3순위: 🇷🇺 Русский)
+// 18개 전 언어 모국어 국기 카드 목록 (1순위: 🇰🇷 한국어, 2순위: 🇺🇸 English, 3순위: 🇯🇵 日本語 등)
 const EASY_TAX_LANGUAGES: LanguageCardItem[] = [
+  {
+    code: 'ko',
+    name: '한국어',
+    country: '대한민국 (South Korea)',
+    flagUrl: 'https://flagcdn.com/w160/kr.png',
+  },
   {
     code: 'en',
     name: 'English',
@@ -111,6 +117,12 @@ const EASY_TAX_LANGUAGES: LanguageCardItem[] = [
     name: 'اردو',
     country: 'Pakistan',
     flagUrl: 'https://flagcdn.com/w160/pk.png',
+  },
+  {
+    code: 'tl',
+    name: 'Tagalog',
+    country: 'Philippines',
+    flagUrl: 'https://flagcdn.com/w160/ph.png',
   },
 ];
 
