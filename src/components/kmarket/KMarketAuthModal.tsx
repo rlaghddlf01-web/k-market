@@ -3,6 +3,7 @@
 import React, { useState, useRef } from 'react';
 import { scanAlienCardImage, OcrResultData } from '@/lib/ocrService';
 import { sendAligoAuthSms, verifyAuthCode } from '@/lib/aligoSmsService';
+import AlienCardCameraModal from '@/components/kmarket/AlienCardCameraModal';
 import {
   Camera,
   CheckCircle2,
@@ -35,7 +36,8 @@ export default function KMarketAuthModal({
   const [authTab, setAuthTab] = useState<'ocr' | 'manual'>('ocr');
   const [step, setStep] = useState<'form' | 'sms' | 'complete'>('form');
 
-  // OCR 상태
+  // OCR 및 실시간 카메라 상태
+  const [isCameraModalOpen, setIsCameraModalOpen] = useState(false);
   const [isScanning, setIsScanning] = useState(false);
   const [ocrCompleted, setOcrCompleted] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -121,7 +123,20 @@ export default function KMarketAuthModal({
     return `${randomAdj}${randomNoun}_${num}`;
   };
 
-  // 1. 카메라 촬영 / 파일 업로드 시 OCR 자동 인식
+  // 1. OCR 인식 성공 데이터 자동 반영 핸들러
+  const handleOcrSuccess = (result: OcrResultData) => {
+    setUserName(result.userName);
+    if (!nickname) {
+      setNickname(result.userName.split(' ')[0] + '_' + Math.floor(100 + Math.random() * 900));
+    }
+    setArcNumber(result.arcNumber);
+    setCountry(result.country);
+    setVisaType(result.visaType);
+    setStayExpiryDate(result.stayExpiryDate);
+    setOcrCompleted(true);
+  };
+
+  // 파일 업로드 시 OCR 자동 인식
   const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
@@ -129,17 +144,10 @@ export default function KMarketAuthModal({
     setIsScanning(true);
     try {
       const result: OcrResultData = await scanAlienCardImage(file);
-      setUserName(result.userName);
-      if (!nickname) {
-        setNickname(result.userName.split(' ')[0] + '_' + Math.floor(100 + Math.random() * 900));
-      }
-      setArcNumber(result.arcNumber);
-      setCountry(result.country);
-      setVisaType(result.visaType);
-      setStayExpiryDate(result.stayExpiryDate);
-      setOcrCompleted(true);
-    } catch (err) {
+      handleOcrSuccess(result);
+    } catch (err: any) {
       console.error('OCR Scan failed:', err);
+      alert(err.message || t('외국인등록증 인식이 완료되지 않았습니다. 선명한 사진으로 다시 시도해 주세요.'));
     } finally {
       setIsScanning(false);
     }
@@ -341,7 +349,7 @@ export default function KMarketAuthModal({
 
                   {/* 카메라 촬영 / 업로드 드롭존 (에스프레소 & 웜 모카) */}
                   <div
-                    onClick={() => fileInputRef.current?.click()}
+                    onClick={() => setIsCameraModalOpen(true)}
                     className={`border-2 border-dashed rounded-3xl p-5 text-center transition-all cursor-pointer flex flex-col items-center justify-center gap-2.5 ${
                       ocrCompleted
                         ? 'border-emerald-500 bg-emerald-50/70'
@@ -365,6 +373,9 @@ export default function KMarketAuthModal({
                             <span className="text-xs font-black text-emerald-800">
                               {t('✅ 신분증 자동 인식 완료!')}
                             </span>
+                            <span className="text-[10px] text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded-full font-bold">
+                              {t('다시 촬영하기')} ➔
+                            </span>
                           </div>
                           <p className="text-[11px] text-[#5c4a39] mt-1 truncate font-medium">
                             {userName} | {arcNumber} | {visaType}
@@ -381,15 +392,19 @@ export default function KMarketAuthModal({
                             {t('외국인등록증 앞면 사진 촬영하기')}
                           </h4>
                           <p className="text-[11px] text-[#705e4f]">
-                            {t('빛반사 없이 0.5초 빠르고 안전하게 자동 인식')}
+                            {t('실시간 카메라 가이드 & Gemini AI 초정밀 100% 자동 인식')}
                           </p>
                         </div>
                         <button
                           type="button"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setIsCameraModalOpen(true);
+                          }}
                           className="px-5 py-2.5 rounded-2xl bg-[#3d2817] hover:bg-[#2b1c10] text-[#fbf9f6] border border-[#5c3818] font-black text-xs shadow-md active:scale-97 transition-all cursor-pointer flex items-center gap-1.5"
                         >
                           <Camera className="w-4 h-4 text-[#f3ba2f]" />
-                          <span>{t('카메라 열기 / 신분증 촬영하고 43.5℃ 받기 ➔')}</span>
+                          <span>{t('실시간 카메라 스캐너 열기 ➔')}</span>
                         </button>
                       </>
                     )}
@@ -662,6 +677,16 @@ export default function KMarketAuthModal({
           )}
         </div>
       </div>
+
+      {/* 외국인등록증 실시간 카메라 촬영 및 정밀 OCR 모달 */}
+      <AlienCardCameraModal
+        isOpen={isCameraModalOpen}
+        onClose={() => setIsCameraModalOpen(false)}
+        onSuccess={(result) => {
+          handleOcrSuccess(result);
+          setIsCameraModalOpen(false);
+        }}
+      />
     </div>
   );
 }

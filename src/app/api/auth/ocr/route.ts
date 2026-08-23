@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { parseAlienRegistrationCard } from '@/lib/ocrService';
+import { analyzeAlienCardWithGemini } from '@/lib/geminiOcrService';
 
 export async function POST(req: NextRequest) {
   try {
@@ -7,33 +7,42 @@ export async function POST(req: NextRequest) {
     const file = formData.get('image') as File | null;
 
     if (!file) {
-      return NextResponse.json({ success: false, message: '이미지 파일이 필요합니다.' }, { status: 400 });
+      return NextResponse.json({ success: false, message: '신분증 이미지 파일이 필요합니다.' }, { status: 400 });
     }
 
-    // 파일 메타데이터
     const fileName = file.name || 'id_card.jpg';
+    const mimeType = file.type || 'image/jpeg';
 
-    // 데모 및 Gemini Vision OCR 파서
-    const sampleOcrText = `
-      REPUBLIC OF KOREA
-      ALIEN REGISTRATION CARD
-      NAME: NGUYEN VAN DUC
-      REGISTRATION NO: 950821-5184920
-      NATIONALITY: VIETNAM
-      STATUS: E-9 (NON-PROFESSIONAL)
-      EXPIRY DATE: 2026.11.30
-      ISSUED BY: INCHEON IMMIGRATION OFFICE
-    `;
+    // File 객체를 Buffer로 변환
+    const arrayBuffer = await file.arrayBuffer();
+    const imageBuffer = Buffer.from(arrayBuffer);
 
-    const parsedResult = parseAlienRegistrationCard(sampleOcrText);
+    // Google Gemini Multimodal Vision API를 통한 외국인등록증 초정밀 OCR 분석
+    const ocrResponse = await analyzeAlienCardWithGemini(imageBuffer, mimeType);
+
+    if (!ocrResponse.success || !ocrResponse.result) {
+      return NextResponse.json(
+        {
+          success: false,
+          message: ocrResponse.message || '신분증 인식에 실패했습니다. 신분증이 빛에 반사되지 않도록 정면에서 다시 촬영해 주세요.',
+        },
+        { status: 422 }
+      );
+    }
 
     return NextResponse.json({
       success: true,
       fileName,
-      result: parsedResult,
+      result: ocrResponse.result,
     });
   } catch (error: any) {
-    console.error('OCR API Error:', error);
-    return NextResponse.json({ success: false, message: error.message }, { status: 500 });
+    console.error('OCR API Route Error:', error);
+    return NextResponse.json(
+      {
+        success: false,
+        message: error.message || '서버 OCR 처리 중 오류가 발생했습니다.',
+      },
+      { status: 500 }
+    );
   }
 }

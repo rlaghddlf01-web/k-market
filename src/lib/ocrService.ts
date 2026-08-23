@@ -119,36 +119,21 @@ export function parseAlienRegistrationCard(text: string): OcrResultData {
 }
 
 /**
- * 스마트폰 카메라로 촬영한 이미지 파일을 클라이언트/서버에서 OCR 분석
+ * 스마트폰 카메라로 촬영한 이미지 파일을 서버 Gemini Vision OCR로 정밀 분석
  */
 export async function scanAlienCardImage(file: File | Blob): Promise<OcrResultData> {
   const formData = new FormData();
   formData.append('image', file);
 
-  try {
-    const res = await fetch('/api/auth/ocr', {
-      method: 'POST',
-      body: formData,
-    });
+  const res = await fetch('/api/auth/ocr', {
+    method: 'POST',
+    body: formData,
+  });
 
-    if (res.ok) {
-      const data = await res.json();
-      if (data.success && data.result) {
-        return data.result;
-      }
-    }
-  } catch (err) {
-    console.warn('Server OCR fallback to client parser:', err);
+  const data = await res.json();
+  if (!res.ok || !data.success || !data.result) {
+    throw new Error(data.message || '외국인등록증 인식이 완료되지 않았습니다. 선명하게 다시 촬영해 주세요.');
   }
 
-  // Fallback 데모 파서
-  return parseAlienRegistrationCard(`
-    REPUBLIC OF KOREA
-    ALIEN REGISTRATION CARD
-    NAME: NGUYEN VAN DUC
-    REGISTRATION NO: 950821-5184920
-    NATIONALITY: VIETNAM
-    STATUS: E-9 (NON-PROFESSIONAL)
-    EXPIRY DATE: 2026.11.30
-  `);
+  return data.result;
 }
