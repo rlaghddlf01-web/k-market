@@ -80,25 +80,26 @@ export default function KMarketItemDetail() {
             <div className="pointer-events-auto flex items-center space-x-2">
               <button
                 onClick={() => setShowReportModal(true)}
-                className="bg-black/40 hover:bg-red-600/80 text-white px-2.5 py-1.5 rounded-full backdrop-blur-md transition-colors cursor-pointer text-xs font-bold flex items-center gap-1"
+                className="bg-black/50 hover:bg-red-600 text-white px-3 py-1.5 rounded-full backdrop-blur-md transition-all cursor-pointer text-xs font-bold flex items-center gap-1 shadow-sm"
                 title={t('불량 매물/사용자 신고 및 차단')}
               >
                 <span>{t('🚫 신고')}</span>
               </button>
               <button
                 onClick={() => openShareModal(selectedItem)}
-                className="bg-black/40 hover:bg-black/60 text-white p-2.5 rounded-full backdrop-blur-md transition-colors cursor-pointer"
+                className="bg-emerald-600/90 hover:bg-emerald-600 text-white px-3 py-1.5 rounded-full backdrop-blur-md transition-all cursor-pointer text-xs font-black flex items-center gap-1.5 shadow-md hover:scale-105 active:scale-95"
                 title={t('1초 SNS 공유하기')}
               >
-                <Share2 className="w-5 h-5 text-yellow-300" />
+                <Share2 className="w-3.5 h-3.5 text-yellow-300" />
+                <span>{t('공유')}</span>
               </button>
               <button
                 onClick={() => toggleLike(selectedItem.id)}
-                className={`p-2.5 rounded-full backdrop-blur-md transition-colors cursor-pointer ${
-                  isLiked ? 'bg-red-500 text-white' : 'bg-black/40 text-white hover:bg-black/60'
+                className={`p-2 rounded-full backdrop-blur-md transition-colors cursor-pointer ${
+                  isLiked ? 'bg-red-500 text-white' : 'bg-black/50 text-white hover:bg-black/70'
                 }`}
               >
-                <Heart className={`w-5 h-5 ${isLiked ? 'fill-current' : ''}`} />
+                <Heart className={`w-4 h-4 ${isLiked ? 'fill-current' : ''}`} />
               </button>
             </div>
           </div>
@@ -331,10 +332,11 @@ export default function KMarketItemDetail() {
             </button>
             <button
               onClick={() => openShareModal(selectedItem)}
-              className="p-3 rounded-2xl border border-slate-200 bg-slate-100 hover:bg-emerald-50 hover:border-emerald-200 hover:text-emerald-600 text-slate-700 transition-colors cursor-pointer"
+              className="px-3.5 py-3 rounded-2xl border border-emerald-300 bg-emerald-50 hover:bg-emerald-100 text-emerald-700 font-black text-xs flex items-center gap-1.5 transition-all cursor-pointer shadow-xs active:scale-95 shrink-0"
               title={t('1초 SNS 공유하기')}
             >
-              <Share2 className="w-5 h-5" />
+              <Share2 className="w-4 h-4 text-emerald-600" />
+              <span>{t('공유')}</span>
             </button>
           </div>
 
