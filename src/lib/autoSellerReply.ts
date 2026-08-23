@@ -10,14 +10,33 @@ interface SellerReplyResult {
   koreanMeaning: string;
 }
 
-/**
- * 270개 시드 매물에 대해 20가지 다양한 사유 중 하나를 선택하여 자연스럽고 정중한 답장 생성
- */
+const countryToLang: Record<string, SupportedLanguage> = {
+  VN: 'vi',
+  CN: 'zh',
+  TH: 'th',
+  US: 'en',
+  UZ: 'uz',
+  RU: 'ru',
+  JP: 'ja',
+  KH: 'km',
+  MN: 'mn',
+  NE: 'ne',
+  ID: 'id',
+  MM: 'my',
+  LK: 'si',
+  KZ: 'kk',
+  BD: 'bn',
+  PK: 'ur',
+  PH: 'tl',
+  KR: 'ko',
+};
+
 export function generateSmartSellerReply(
   userMessage: string,
   item: KMarketItem,
   targetLang: SupportedLanguage = 'ko'
 ): SellerReplyResult {
-  const sellerLang = item.source_lang || (item.seller_country ? (item.seller_country.toLowerCase() as SupportedLanguage) : 'vi');
+  const country = (item.seller_country || 'VN').toUpperCase();
+  const sellerLang = item.source_lang || countryToLang[country] || 'vi';
   return getRealisticSellerReply(item.id, sellerLang);
 }
