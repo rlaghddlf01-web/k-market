@@ -3,6 +3,10 @@
 import { useLanguage } from '@/context/LanguageContext';
 import React, { useState } from 'react';
 import { useKMarket } from '@/context/KMarketContext';
+import { supabase } from '@/lib/supabaseClient';
+
+// KTRS 세무환급 앱 URL (배포 후 실제 도메인으로 변경)
+const KTRS_BASE_URL = process.env.NEXT_PUBLIC_KTRS_URL || 'http://localhost:9002';
 import {
   SUPPORTED_VISAS,
   calculateTaxRefund,
@@ -26,6 +30,8 @@ export default function KMarketTaxModal() {
 
   // 스텝 관리 (1: 조건 입력, 2: 정밀 계산 및 후불제 확인, 3: 접수 완료)
   const [step, setStep] = useState<1 | 2 | 3>(1);
+  const [leadId, setLeadId] = useState<string | null>(null);
+  const [isSaving, setIsSaving] = useState(false);
 
   // 입력 상태
   const [selectedVisa, setSelectedVisa] = useState<string>('E-9');
@@ -47,24 +53,66 @@ export default function KMarketTaxModal() {
     setStep(2);
   };
 
-  const handleFinalSubmit = (e: React.FormEvent) => {
+  const handleFinalSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!applicantName.trim() || !applicantPhone.trim()) {
-      alert(t('성명과 연락처를 입력해 주세요.'));
+      alert(t('이름과 연락처를 입력해 주세요.'));
       return;
     }
 
+    setIsSaving(true);
+    let savedLeadId: string | null = null;
     try {
-      confetti({
-        particleCount: 150,
-        spread: 80,
-        origin: { y: 0.6 },
-      });
-    } catch {
-      // ignore
-    }
+      // ✅ Supabase kmarket_tax_refund_leads 테이블에 1차 리드 저장
+      const newLeadId = `tax-${crypto.randomUUID()}`;
+      if (supabase) {
+        const { error } = await supabase.from('kmarket_tax_refund_leads').insert({
+          id: newLeadId,
+          user_name: applicantName.trim(),
+          phone: applicantPhone.trim(),
+          country: applicantCountry,
+          visa_type: selectedVisa,
+          work_period_years: workYears,
+          monthly_salary: monthlyPay,
+          estimated_refund: result.estimatedTotalRefund,
+          national_tax_refund: result.nationalTaxRefund ?? Math.round(result.estimatedTotalRefund * 0.87),
+          local_tax_refund: result.localTaxRefund ?? Math.round(result.estimatedTotalRefund * 0.13),
+          fee_type: 'post_payment_15',
+          fee_rate: 15,
+          estimated_fee: Math.round(result.estimatedTotalRefund * 0.15),
+          auth_method: 'pending',
+          status: 'applied',
+          arc_number: '',
+        });
+        if (!error) {
+          savedLeadId = newLeadId;
+          setLeadId(newLeadId);
+        } else {
+          console.warn('[KMarketTaxModal] Supabase insert error:', error.message);
+        }
+      }
 
-    setStep(3);
+      confetti({ particleCount: 150, spread: 80, origin: { y: 0.6 } });
+    } catch (err) {
+      console.error('[KMarketTaxModal] Lead save error:', err);
+    } finally {
+      setIsSaving(false);
+      setStep(3);
+    }
+  };
+
+  // ✅ KTRS 세무환급 앱 4단계로 원클릭 이동
+  const handleGoToKTRS = () => {
+    const params = new URLSearchParams({
+      prefill: '1',
+      source: 'kmarket',
+      name: applicantName.trim(),
+      phone: applicantPhone.trim(),
+      step: '4',
+    });
+    if (leadId) params.set('lead_id', leadId);
+    const url = `${KTRS_BASE_URL}/estimate?${params.toString()}`;
+    window.open(url, '_blank');
   };
 
   const handleClose = () => {
@@ -406,7 +454,7 @@ export default function KMarketTaxModal() {
                 </button>
                 <button
                   type="submit"
-                  disabled={!agreeTerms}
+                  disabled={!agreeTerms || isSaving}
                   className="flex-[2] py-3.5 bg-gradient-to-r from-orange-500 to-rose-600 hover:from-orange-600 hover:to-rose-700 disabled:opacity-50 text-white font-black text-xs sm:text-sm rounded-2xl shadow-xl active:scale-[0.98] transition-all flex items-center justify-center gap-1.5 cursor-pointer"
                 >
                   <ShieldCheck className="w-4 h-4" />
@@ -473,13 +521,23 @@ export default function KMarketTaxModal() {
                 </div>
               </div>
 
-              <div className="pt-2 space-y-2">
+                            <div className="pt-2 space-y-2">
+                {/* ✅ KTRS 세무환급 앱 4단계 직행 버튼 */}
+                <button
+                  type="button"
+                  onClick={handleGoToKTRS}
+                  className="w-full py-4 bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-600 hover:to-orange-700 text-white font-black rounded-2xl text-sm shadow-xl flex items-center justify-center gap-2 transition-all active:scale-[0.98] cursor-pointer"
+                >
+                  <span>💰</span>
+                  <span>{t('KTRS에서 4단계 이어서 환급 신청하기')}</span>
+                  <ArrowRight className="w-4 h-4" />
+                </button>
                 <button
                   type="button"
                   onClick={handleClose}
-                  className="w-full py-3.5 bg-slate-900 hover:bg-slate-800 dark:bg-orange-500 text-white font-bold rounded-2xl text-sm transition-colors cursor-pointer"
+                  className="w-full py-3 border border-slate-200 dark:border-gray-700 text-slate-500 dark:text-slate-400 font-semibold rounded-2xl text-xs transition-colors cursor-pointer hover:bg-slate-50 dark:hover:bg-gray-800"
                 >
-                  {t('확인 및 계속 쇼핑하기')}
+                  {t('나중에 하기 (계속 쇼핑)')}
                 </button>
               </div>
             </div>
