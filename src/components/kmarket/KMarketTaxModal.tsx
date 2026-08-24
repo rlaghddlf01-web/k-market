@@ -25,7 +25,7 @@ import {
 import confetti from 'canvas-confetti';
 
 export default function KMarketTaxModal() {
-  const { t } = useLanguage();
+  const { t, currentLang } = useLanguage();
   const { isTaxModalOpen, setIsTaxModalOpen } = useKMarket();
 
   // 스텝 관리 (1: 조건 입력, 2: 정밀 계산 및 후불제 확인, 3: 접수 완료)
@@ -109,6 +109,7 @@ export default function KMarketTaxModal() {
       name: applicantName.trim(),
       phone: applicantPhone.trim(),
       step: '4',
+      lang: currentLang || 'vi',
     });
     if (leadId) params.set('lead_id', leadId);
     const url = `${KTRS_BASE_URL}/estimate?${params.toString()}`;
