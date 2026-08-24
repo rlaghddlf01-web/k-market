@@ -18,13 +18,14 @@ import {
   ChevronLeft,
   ChevronRight,
 } from 'lucide-react';
-import { getLiveTrafficStats } from '@/lib/trafficTracker';
+import { getLiveTrafficStats, TrafficChannelKey } from '@/lib/trafficTracker';
 
 type PeriodType = 'today' | 'weekly' | 'monthly' | 'yearly';
 type ChannelCategory = 'all' | 'sns' | 'messenger' | 'search' | 'offline_ref';
 
 interface TrafficChannel {
   rank: number;
+  key: TrafficChannelKey;
   name: string;
   category: 'sns' | 'messenger' | 'search' | 'offline_ref';
   count: number;
@@ -36,22 +37,22 @@ interface TrafficChannel {
 
 // 16대 채널 마스터 템플릿
 const RAW_CHANNELS_TEMPLATE: Omit<TrafficChannel, 'rank' | 'count' | 'percentage'>[] = [
-  { name: '틱톡 (TikTok Shorts/바이럴)', category: 'sns', icon: '🎵', badge: '외국인 1위', color: '#0d9488' },
-  { name: '페이스북 (외국인 커뮤니티 그룹)', category: 'sns', icon: '📘', badge: '베트남/몽골', color: '#3b82f6' },
-  { name: '잘로 (Zalo 베트남 메신저)', category: 'messenger', icon: '💬', badge: '베트남 No.1', color: '#0284c7' },
-  { name: '직접 방문 (Direct / 북마크)', category: 'search', icon: '🌐', color: '#845b37' },
-  { name: '라인 (LINE 태국/동남아 채널)', category: 'messenger', icon: '🟢', badge: '태국/미얀마', color: '#16a34a' },
-  { name: '텔레그램 (Telegram 우즈벡/러시아어)', category: 'messenger', icon: '✈️', badge: '중앙아시아', color: '#0ea5e9' },
-  { name: '유튜브 (YouTube 한국생활 쇼츠)', category: 'sns', icon: '🔴', color: '#e11d48' },
-  { name: '위챗 (WeChat 동포 네트워크)', category: 'messenger', icon: '💬', badge: '중국/동포', color: '#059669' },
-  { name: '인스타그램 (Instagram 릴스)', category: 'sns', icon: '📸', color: '#db2777' },
-  { name: '기숙사/쉼터 QR코드 오프라인', category: 'offline_ref', icon: '🏢', badge: '공단 현장', color: '#7c3aed' },
-  { name: '구글 (Google 다국어 검색)', category: 'search', icon: '🔍', color: '#2563eb' },
-  { name: '카카오톡 (오픈채팅/알림톡)', category: 'messenger', icon: '🟡', color: '#ca8a04' },
-  { name: '네이버 (블로그/카페)', category: 'search', icon: '🟢', color: '#059669' },
-  { name: '지인 초대 (친구추천 링크)', category: 'offline_ref', icon: '🎁', color: '#d97706' },
-  { name: '고용노동부 EPS 게시판', category: 'offline_ref', icon: '📢', color: '#4f46e5' },
-  { name: '기타 타사이트 유입', category: 'search', icon: '🔗', color: '#78716c' },
+  { key: 'tiktok', name: '틱톡 (TikTok Shorts/바이럴)', category: 'sns', icon: '🎵', badge: '외국인 1위', color: '#0d9488' },
+  { key: 'facebook', name: '페이스북 (외국인 커뮤니티 그룹)', category: 'sns', icon: '📘', badge: '베트남/몽골', color: '#3b82f6' },
+  { key: 'zalo', name: '잘로 (Zalo 베트남 메신저)', category: 'messenger', icon: '💬', badge: '베트남 No.1', color: '#0284c7' },
+  { key: 'direct', name: '직접 방문 (Direct / 북마크)', category: 'search', icon: '🌐', color: '#845b37' },
+  { key: 'line', name: '라인 (LINE 태국/동남아 채널)', category: 'messenger', icon: '🟢', badge: '태국/미얀마', color: '#16a34a' },
+  { key: 'telegram', name: '텔레그램 (Telegram 우즈벡/러시아어)', category: 'messenger', icon: '✈️', badge: '중앙아시아', color: '#0ea5e9' },
+  { key: 'youtube', name: '유튜브 (YouTube 한국생활 쇼츠)', category: 'sns', icon: '🔴', color: '#e11d48' },
+  { key: 'wechat', name: '위챗 (WeChat 동포 네트워크)', category: 'messenger', icon: '💬', badge: '중국/동포', color: '#059669' },
+  { key: 'instagram', name: '인스타그램 (Instagram 릴스)', category: 'sns', icon: '📸', color: '#db2777' },
+  { key: 'offline_qr', name: '기숙사/쉼터 QR코드 오프라인', category: 'offline_ref', icon: '🏢', badge: '공단 현장', color: '#7c3aed' },
+  { key: 'google', name: '구글 (Google 다국어 검색)', category: 'search', icon: '🔍', color: '#2563eb' },
+  { key: 'kakaotalk', name: '카카오톡 (오픈채팅/알림톡)', category: 'messenger', icon: '🟡', color: '#ca8a04' },
+  { key: 'naver', name: '네이버 (블로그/카페)', category: 'search', icon: '🟢', color: '#059669' },
+  { key: 'referral', name: '지인 초대 (친구추천 링크)', category: 'offline_ref', icon: '🎁', color: '#d97706' },
+  { key: 'eps_gov', name: '고용노동부 EPS 게시판', category: 'offline_ref', icon: '📢', color: '#4f46e5' },
+  { key: 'other', name: '기타 타사이트 유입', category: 'search', icon: '🔗', color: '#78716c' },
 ];
 
 // 연도별 데이터 세트 (연도별 비교 분석용)
@@ -88,40 +89,53 @@ export default function KMarketAdminAnalyticsDashboard() {
   const [selectedYear, setSelectedYear] = useState<number>(2026);
   const [compareYoY, setCompareYoY] = useState<boolean>(true);
   const [liveStats, setLiveStats] = useState<Record<string, number>>({});
+  const [dbHourlyStats, setDbHourlyStats] = useState<number[]>(Array(24).fill(0));
+  const [dbTodayPv, setDbTodayPv] = useState<number>(0);
+  const [dbTotalPv, setDbTotalPv] = useState<number>(0);
+  const [mounted, setMounted] = useState<boolean>(false);
+  const [currentHour, setCurrentHour] = useState<number>(11);
   const chartScrollRef = useRef<HTMLDivElement>(null);
 
-  // 실제 실시간 유입 통계 로드
+  // 실제 실시간 유입 통계 로드 및 클라이언트 마운트 시각 동기화
   useEffect(() => {
-    setLiveStats(getLiveTrafficStats());
+    setMounted(true);
+    setCurrentHour(new Date().getHours());
+    
+    // 로컬 스토리지 데이터 1차 로드
+    const local = getLiveTrafficStats();
+    setLiveStats(local);
+
+    // 중앙 Supabase DB 실시간 전역 통계 로드
+    fetch('/api/traffic')
+      .then((res) => res.json())
+      .then((json) => {
+        if (json.success && json.data) {
+          const { totalPv, todayPv, channelCounts, hourlyCountsToday } = json.data;
+          setDbTotalPv(totalPv);
+          setDbTodayPv(todayPv);
+          if (hourlyCountsToday && Array.isArray(hourlyCountsToday)) {
+            setDbHourlyStats(hourlyCountsToday);
+          }
+          if (channelCounts) {
+            setLiveStats(channelCounts);
+          }
+        }
+      })
+      .catch((err) => console.warn('Traffic API load error:', err));
   }, []);
 
-  // 실제 순수 트래픽 집계
-  const totalLivePv = liveStats['total_pv'] || 0;
+  // 실제 순수 트래픽 집계 (DB 우선, 없을 시 로컬)
+  const totalLivePv = dbTotalPv > 0 ? dbTotalPv : (liveStats['total_pv'] || 0);
+  const todayLivePv = dbTodayPv > 0 ? dbTodayPv : totalLivePv;
 
   // 채널별 실제 방문 카운트 매핑
   const channelList: TrafficChannel[] = RAW_CHANNELS_TEMPLATE.map((tpl, idx) => {
-    let key = 'direct';
-    if (tpl.name.includes('틱톡')) key = 'tiktok';
-    else if (tpl.name.includes('페이스북')) key = 'facebook';
-    else if (tpl.name.includes('잘로')) key = 'zalo';
-    else if (tpl.name.includes('라인')) key = 'line';
-    else if (tpl.name.includes('텔레그램')) key = 'telegram';
-    else if (tpl.name.includes('유튜브')) key = 'youtube';
-    else if (tpl.name.includes('인스타그램')) key = 'instagram';
-    else if (tpl.name.includes('QR')) key = 'offline_qr';
-    else if (tpl.name.includes('카카오')) key = 'kakaotalk';
-    else if (tpl.name.includes('구글')) key = 'google';
-    else if (tpl.name.includes('네이버')) key = 'naver';
-    else if (tpl.name.includes('친구')) key = 'referral';
-    else if (tpl.name.includes('고용노동부')) key = 'eps_gov';
-    else if (tpl.name.includes('직접')) key = 'direct';
-    else key = 'other';
-
-    const count = liveStats[key] || 0;
+    const count = liveStats[tpl.key] || 0;
     const percentage = totalLivePv > 0 ? Math.round((count / totalLivePv) * 100) : 0;
 
     return {
       rank: idx + 1,
+      key: tpl.key,
       name: tpl.name,
       category: tpl.category,
       count,
@@ -134,7 +148,6 @@ export default function KMarketAdminAnalyticsDashboard() {
 
   // 24시간 전체 라벨 (00시 ~ 23시)
   const HOURS_24 = Array.from({ length: 24 }, (_, i) => `${i < 10 ? '0' + i : i}시`);
-  const currentHour = typeof window !== 'undefined' ? new Date().getHours() : 11;
 
   // 기간별 차트 데이터
   const chartLabels =
@@ -153,16 +166,17 @@ export default function KMarketAdminAnalyticsDashboard() {
       const isCurrentQuarter = idx === 2; // 현재 분기 (3분기)
       return {
         label: lbl,
-        value: isCurrentQuarter ? totalLivePv : yearlyCurrent.quarters[idx],
+        value: isCurrentQuarter ? todayLivePv : yearlyCurrent.quarters[idx],
         prevValue: yearlyCurrent.prevQuarters[idx],
         isToday: isCurrentQuarter,
       };
     }
     if (period === 'today') {
       const isCurrent = idx === currentHour;
+      const hourValue = dbHourlyStats[idx] || (isCurrent ? todayLivePv : 0);
       return {
         label: lbl,
-        value: isCurrent ? totalLivePv : 0,
+        value: hourValue,
         prevValue: 0,
         isToday: isCurrent,
       };
@@ -170,7 +184,7 @@ export default function KMarketAdminAnalyticsDashboard() {
     const isToday = idx === chartLabels.length - 1;
     return {
       label: lbl,
-      value: isToday ? totalLivePv : 0,
+      value: isToday ? todayLivePv : 0,
       prevValue: 0,
       isToday,
     };
@@ -296,7 +310,7 @@ export default function KMarketAdminAnalyticsDashboard() {
             </div>
           </div>
           <p className="text-2xl sm:text-3xl font-black text-[#1f1914] mt-2">
-            {totalLivePv.toLocaleString()} <span className="text-xs font-bold text-[#8c7866]">회</span>
+            {todayLivePv.toLocaleString()} <span className="text-xs font-bold text-[#8c7866]">회</span>
           </p>
           <p className="text-[10px] text-[#8c7866] mt-1 font-medium">실시간 실제 누적 페이지뷰</p>
         </div>

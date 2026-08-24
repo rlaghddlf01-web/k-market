@@ -198,17 +198,17 @@ export default function KMarketMainFeed() {
               <div className="flex items-center justify-between pt-2 mb-2 px-1">
                 <div className="flex items-center gap-2.5">
                   <h2 className="text-base sm:text-lg font-extrabold text-[#1f1914] tracking-tight">
-                    실시간 등록 매물
+                    {t('실시간 등록 매물')}
                   </h2>
                   <span
                     className="text-xs font-bold px-2.5 py-0.5 rounded-full bg-[#dfd7ce] text-[#5c4f42]"
                   >
-                    {filteredItems.length}개
+                    {filteredItems.length}{t('개')}
                   </span>
                 </div>
                 <div className="flex items-center gap-1.5 text-xs text-[#705e4f] font-medium bg-[#f4efe9] px-3 py-1.5 rounded-full border border-[#dfd7ce]">
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-                  17개국어 실시간 번역
+                  {t('17개국어 실시간 번역')}
                 </div>
               </div>
 
@@ -232,13 +232,13 @@ export default function KMarketMainFeed() {
                           <Loader2 className={`w-4 h-4 text-amber-600 ${isLoadingMore ? 'animate-spin' : ''}`} />
                           <span>
                             {isLoadingMore
-                              ? '다음 동네 매물 불러오는 중...'
-                              : `스크롤을 내리면 다음 매물이 계속 이어집니다 (${visibleMobileCount} / ${filteredItems.length})`}
+                              ? t('다음 동네 매물 불러오는 중...')
+                              : `${t('스크롤을 내리면 다음 매물이 계속 이어집니다')} (${visibleMobileCount} / ${filteredItems.length})`}
                           </span>
                         </div>
                       ) : (
                         <div className="text-xs text-[#8c7866] font-medium py-2">
-                          🎉 동네의 모든 실시간 매물을 다 확인하셨습니다!
+                          {t('🎉 동네의 모든 실시간 매물을 다 확인하셨습니다!')}
                         </div>
                       )}
                     </div>
@@ -315,14 +315,14 @@ export default function KMarketMainFeed() {
                   <div className="space-y-1.5">
                     <h3 className="text-base font-bold text-slate-800">{t('조건에 맞는 매물이 없습니다')}</h3>
                     <p className="text-xs text-slate-500 max-w-sm mx-auto leading-relaxed">
-                      필터를 전체로 변경하거나, 첫 번째로 내 중고 물건을 1분 만에 등록해 보세요!
+                      {t('필터를 전체로 변경하거나, 첫 번째로 내 중고 물건을 1분 만에 등록해 보세요!')}
                     </p>
                   </div>
                   <button
                     onClick={() => setIsCreateModalOpen(true)}
                     className="btn-primary px-6 py-2.5 text-xs cursor-pointer"
                   >
-                    ✏️ 1분 간편 매물 등록하기
+                    {t('✏️ 1분 간편 매물 등록하기')}
                   </button>
                 </div>
               )}
@@ -404,18 +404,11 @@ export default function KMarketMainFeed() {
               </div>
             </div>
 
-            {/* 하단 카피라이트 & 관리자 링크 */}
+            {/* 하단 카피라이트 */}
             <div className="pt-5 border-t border-[#2d1a12] text-[11px] text-[#94a3b8] font-semibold flex flex-col sm:flex-row justify-between items-center gap-3">
               <p>© 2026 KTRS (Korea Tax &amp; Foreign Resident Service). All rights reserved.</p>
               <div className="flex items-center gap-3">
-                <span className="text-[#cbd5e1]">{t('안심 가이드 | 고객센터 1588-0000')}</span>
-                <Link
-                  href="/admin"
-                  className="px-2.5 py-1 bg-[#20140f] hover:bg-[#3d2817] border border-[#845b37]/80 text-[#f3ba2f] font-extrabold rounded-lg text-[10px] transition-all flex items-center gap-1 cursor-pointer"
-                  title={t('케이티알에스 관리자 전용 관제 콘솔 페이지')}
-                >
-                  <span>{t('관리자 관제 콘솔')}</span>
-                </Link>
+                <span className="text-[#cbd5e1]">{t('안심 가이드 | 고객센터 010-5964-5340')}</span>
               </div>
             </div>
           </div>

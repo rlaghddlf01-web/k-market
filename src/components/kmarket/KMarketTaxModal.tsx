@@ -1,7 +1,7 @@
 'use client';
 
 import { useLanguage } from '@/context/LanguageContext';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useKMarket } from '@/context/KMarketContext';
 import { supabase } from '@/lib/supabaseClient';
 
@@ -26,21 +26,63 @@ import confetti from 'canvas-confetti';
 
 export default function KMarketTaxModal() {
   const { t, currentLang } = useLanguage();
-  const { isTaxModalOpen, setIsTaxModalOpen } = useKMarket();
+  const { isTaxModalOpen, setIsTaxModalOpen, authedUser, taxModalPrefill, setTaxModalPrefill } = useKMarket();
 
   // 스텝 관리 (1: 조건 입력, 2: 정밀 계산 및 후불제 확인, 3: 접수 완료)
   const [step, setStep] = useState<1 | 2 | 3>(1);
   const [leadId, setLeadId] = useState<string | null>(null);
   const [isSaving, setIsSaving] = useState(false);
 
-  // 입력 상태
+  // 입력 상태 (KTRS 공식 기준 완벽 동기화)
   const [selectedVisa, setSelectedVisa] = useState<string>('E-9');
-  const [workYears, setWorkYears] = useState<number>(3);
-  const [monthlyPay, setMonthlyPay] = useState<number>(2800000);
+  const [workMonths, setWorkMonths] = useState<number>(36);
+  const [salaryManwon, setSalaryManwon] = useState<number>(250);
+  const workYears = Math.max(1, Math.round(workMonths / 12));
+  const monthlyPay = salaryManwon * 10000;
   const [applicantName, setApplicantName] = useState<string>('');
   const [applicantPhone, setApplicantPhone] = useState<string>('');
-  const [applicantCountry, setApplicantCountry] = useState<string>('VN');
+  const [applicantCarrier, setApplicantCarrier] = useState<string>('SKT');
+  const [applicantArc, setApplicantArc] = useState<string>('');
   const [agreeTerms, setAgreeTerms] = useState<boolean>(true);
+
+  // ✅ 마이페이지 prefill 및 유저 프로필 자동 채움 -> 즉시 Step 2 직행
+  useEffect(() => {
+    if (isTaxModalOpen) {
+      if (taxModalPrefill) {
+        setStep((taxModalPrefill.step as 1 | 2 | 3) || 2);
+        if (taxModalPrefill.months) setWorkMonths(taxModalPrefill.months);
+        if (taxModalPrefill.salaryManwon) setSalaryManwon(taxModalPrefill.salaryManwon);
+        if (taxModalPrefill.visa) setSelectedVisa(taxModalPrefill.visa);
+      }
+      
+      if (authedUser) {
+        if (authedUser.userName || authedUser.nickname) {
+          setApplicantName(authedUser.userName || authedUser.nickname);
+        }
+        if (authedUser.phone) {
+          setApplicantPhone(authedUser.phone);
+        }
+        if (authedUser.telecom) {
+          const t = authedUser.telecom;
+          if (t.includes('SKT')) setApplicantCarrier('SKT');
+          else if (t.includes('KT')) setApplicantCarrier('KT');
+          else if (t.includes('LGU') || t.includes('LG')) setApplicantCarrier('LGU+');
+        }
+      } else if (typeof window !== 'undefined') {
+        try {
+          const savedProfile = localStorage.getItem('kmarket_user_profile');
+          if (savedProfile) {
+            const profile = JSON.parse(savedProfile);
+            if (profile.name) setApplicantName(profile.name);
+            if (profile.phone) setApplicantPhone(profile.phone);
+            if (profile.carrier) setApplicantCarrier(profile.carrier);
+          }
+        } catch (e) {
+          // ignore
+        }
+      }
+    }
+  }, [isTaxModalOpen, taxModalPrefill, authedUser]);
 
   if (!isTaxModalOpen) return null;
 
@@ -55,8 +97,13 @@ export default function KMarketTaxModal() {
 
   const handleFinalSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    const cleanArc = applicantArc.replace(/[^0-9]/g, '');
     if (!applicantName.trim() || !applicantPhone.trim()) {
       alert(t('이름과 연락처를 입력해 주세요.'));
+      return;
+    }
+    if (cleanArc.length > 0 && cleanArc.length !== 13) {
+      alert(t('외국인등록번호(주민등록번호) 13자리를 정확히 입력해 주세요.'));
       return;
     }
 
@@ -70,7 +117,7 @@ export default function KMarketTaxModal() {
           id: newLeadId,
           user_name: applicantName.trim(),
           phone: applicantPhone.trim(),
-          country: applicantCountry,
+          country: currentLang ? currentLang.toUpperCase() : 'KR',
           visa_type: selectedVisa,
           work_period_years: workYears,
           monthly_salary: monthlyPay,
@@ -82,7 +129,7 @@ export default function KMarketTaxModal() {
           estimated_fee: Math.round(result.estimatedTotalRefund * 0.15),
           auth_method: 'pending',
           status: 'applied',
-          arc_number: '',
+          arc_number: cleanArc || '',
         });
         if (!error) {
           savedLeadId = newLeadId;
@@ -101,15 +148,21 @@ export default function KMarketTaxModal() {
     }
   };
 
-  // ✅ KTRS 세무환급 앱 4단계로 원클릭 이동
+  // ✅ KTRS 세무환급 앱 4단계(국세청 인증)로 4대 필수 데이터 완벽 탑재 후 원클릭 직행
   const handleGoToKTRS = () => {
+    const cleanArc = applicantArc.replace(/[^0-9]/g, '');
     const params = new URLSearchParams({
       prefill: '1',
       source: 'kmarket',
       name: applicantName.trim(),
       phone: applicantPhone.trim(),
+      carrier: applicantCarrier,
+      regNo: cleanArc,
+      registrationNumber: cleanArc,
+      salary: monthlyPay.toString(),
+      workMonths: (workYears * 12).toString(),
       step: '4',
-      lang: currentLang || 'vi',
+      lang: currentLang || 'ko',
     });
     if (leadId) params.set('lead_id', leadId);
     const url = `${KTRS_BASE_URL}/estimate?${params.toString()}`;
@@ -118,6 +171,7 @@ export default function KMarketTaxModal() {
 
   const handleClose = () => {
     setIsTaxModalOpen(false);
+    setTaxModalPrefill(null);
     setStep(1);
   };
 
@@ -149,7 +203,7 @@ export default function KMarketTaxModal() {
               : t('나의 잠재 세금 환급액을 10초 만에 확인하세요')}
           </h2>
           <p className="text-xs text-orange-100 mt-1">
-            {t('한국에서 일하며 낸 소득세, 조특법 법정 감면 혜택으로 평균 184만원을 안전하게 돌려받으세요.')}
+            {t('한국에서 일하며 낸 소득세, 조특법 법정 감면 혜택으로 5년간 최대 1,000만원을 안전하게 돌려받으세요.')}
           </p>
 
           {/* 진행 스텝 인디케이터 */}
@@ -182,51 +236,67 @@ export default function KMarketTaxModal() {
 
         {/* 모달 본문 스크롤 영역 */}
         <div className="p-5 sm:p-6 overflow-y-auto space-y-6 flex-1">
-          {/* STEP 1: 비자 및 근무정보 입력 */}
+          {/* STEP 1: 비자 및 근무정보 입력 (KTRS 공식 앱 100% 동일 프리미엄 UI) */}
           {step === 1 && (
-            <form onSubmit={handleNextToReview} className="space-y-6">
-              {/* 1. 비자 종류 선택 */}
+            <form onSubmit={handleNextToReview} className="space-y-5 text-left">
+              {/* 상단: 대상 연령 안내 (실시간 업데이트 배너) */}
+              <div className="p-3 bg-[#0f1d32] border border-[#f3ba2f]/30 rounded-2xl flex items-center justify-between text-xs text-white">
+                <div className="flex items-center gap-2">
+                  <Sparkles className="w-4 h-4 text-[#f3ba2f]" />
+                  <span className="font-bold">{t('대상 연령 안내 (실시간 업데이트)')}</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="px-2 py-0.5 rounded-full bg-[#f3ba2f] text-[#09101f] text-[10px] font-black">{t('만 15세 ~ 34세')}</span>
+                  <span className="text-[11px] text-slate-300 font-semibold hidden sm:inline">{t('1991년 8월 25일 ~ 2011년 8월 24일')}</span>
+                </div>
+              </div>
+
+              {/* 1. 체류 비자 종류 선택 */}
               <div className="space-y-2">
-                <label className="text-xs font-bold text-slate-800 dark:text-slate-200 flex items-center justify-between">
-                  <span>{t('1. 체류 비자 유형')}</span>
-                  <span className="text-[11px] text-orange-600 font-semibold">
-                    {t(`visa_${selectedVisa.toLowerCase().replace(/[^a-z0-9]/g, '_')}_desc` as any) || currentVisaObj.desc}
+                <div className="flex items-center justify-between">
+                  <label className="text-xs font-bold text-slate-800 dark:text-slate-200 flex items-center gap-1.5">
+                    <span className="w-5 h-5 rounded-full bg-[#f3ba2f]/20 text-[#f3ba2f] flex items-center justify-center text-[10px] font-black">1</span>
+                    <span>{t('체류 비자 유형')}</span>
+                  </label>
+                  <span className="text-[11px] text-amber-600 dark:text-amber-400 font-bold">
+                    {t(currentVisaObj.desc)}
                   </span>
-                </label>
+                </div>
                 <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
                   {SUPPORTED_VISAS.map((visa) => {
                     const isSelected = selectedVisa === visa.code;
-                    const visaKey = visa.code.toLowerCase().replace(/[^a-z0-9]/g, '_');
-                    const visaBadge = t(`visa_${visaKey}_badge` as any) || visa.badge;
-                    const visaName = t(`visa_${visaKey}_name` as any) || visa.name;
 
                     return (
                       <button
                         key={visa.code}
                         type="button"
                         onClick={() => setSelectedVisa(visa.code)}
-                        className={`p-3 rounded-2xl border text-left transition-all cursor-pointer ${
+                        className={`p-3 rounded-2xl border text-left transition-all cursor-pointer relative ${
                           isSelected
-                            ? 'border-orange-500 bg-orange-50/80 dark:bg-orange-950/40 shadow-xs ring-2 ring-orange-500/20'
-                            : 'border-slate-200 dark:border-gray-700 hover:bg-slate-50 dark:hover:bg-gray-800'
+                            ? 'border-[#f3ba2f] bg-amber-50 dark:bg-amber-950/40 shadow-xs ring-2 ring-[#f3ba2f]/30'
+                            : 'border-slate-200 dark:border-gray-700 bg-white dark:bg-gray-800/80 hover:bg-slate-50 dark:hover:bg-gray-800'
                         }`}
                       >
-                        <div className="flex items-center justify-between">
+                        <div className="flex items-center justify-between gap-1">
                           <span
-                            className={`text-xs font-bold ${
+                            className={`text-xs sm:text-sm font-black whitespace-nowrap shrink-0 ${
                               isSelected
-                                ? 'text-orange-700 dark:text-orange-300'
-                                : 'text-slate-800 dark:text-slate-200'
+                                ? 'text-amber-800 dark:text-amber-300'
+                                : 'text-slate-900 dark:text-slate-100'
                             }`}
                           >
                             {visa.code}
                           </span>
-                          <span className="text-[10px] bg-slate-100 dark:bg-gray-700 text-slate-500 dark:text-gray-300 px-1.5 py-0.2 rounded-md">
-                            {visaBadge}
+                          <span className={`text-[10px] px-2 py-0.5 rounded-full font-bold truncate max-w-[100px] text-right shrink-0 ${
+                            isSelected
+                              ? 'bg-[#f3ba2f] text-[#09101f]'
+                              : 'bg-slate-100 dark:bg-gray-700 text-slate-600 dark:text-gray-300'
+                          }`}>
+                            {t(visa.badge)}
                           </span>
                         </div>
-                        <p className="text-[11px] text-slate-500 dark:text-gray-400 truncate mt-1">
-                          {visaName}
+                        <p className="text-[11px] text-slate-500 dark:text-gray-400 truncate mt-1.5 font-medium block">
+                          {t(visa.name)}
                         </p>
                       </button>
                     );
@@ -234,79 +304,82 @@ export default function KMarketTaxModal() {
                 </div>
               </div>
 
-              {/* 2. 한국 근무 연수 슬라이더 */}
-              <div className="space-y-2 bg-slate-50 dark:bg-gray-800/60 p-4 rounded-2xl border border-slate-100 dark:border-gray-700">
-                <div className="flex justify-between items-center text-xs font-bold text-slate-800 dark:text-slate-200">
-                  <span>{t('2. 한국 근무 기간')}</span>
-                  <span className="text-orange-600 dark:text-orange-400 text-sm font-extrabold">
-                    {workYears} {t('안내 내용을 확인해 주세요')} ({workYears * 12} {t('안내 내용을 확인해 주세요')})
+              {/* 2. 최근 5년 한국 근무 기간 (KTRS 공식 슬라이더 & 원터치) */}
+              <div className="space-y-3 p-4 rounded-2xl bg-slate-50 dark:bg-gray-800/60 border border-slate-200 dark:border-gray-700">
+                <div className="flex justify-between items-center">
+                  <label className="text-xs font-bold text-slate-800 dark:text-slate-200 flex items-center gap-1.5">
+                    <span className="w-5 h-5 rounded-full bg-[#f3ba2f]/20 text-[#f3ba2f] flex items-center justify-center text-[10px] font-black">2</span>
+                    <span>{t('최근 5년 한국 근무 기간')}</span>
+                  </label>
+                  <span className="text-xl font-black text-amber-600 dark:text-amber-400">
+                    {workMonths}{t('개월')}
                   </span>
                 </div>
                 <input
                   type="range"
-                  min={1}
-                  max={5}
-                  step={1}
-                  value={workYears}
-                  onChange={(e) => setWorkYears(Number(e.target.value))}
-                  className="w-full h-2 bg-slate-200 dark:bg-gray-700 rounded-lg appearance-none cursor-pointer accent-orange-500"
+                  min="1"
+                  max="60"
+                  step="1"
+                  value={workMonths}
+                  onChange={(e) => setWorkMonths(parseInt(e.target.value))}
+                  className="w-full h-2.5 bg-slate-200 dark:bg-gray-700 rounded-lg appearance-none cursor-pointer accent-[#f3ba2f]"
                 />
-                <div className="flex justify-between text-[11px] text-slate-400 font-medium">
-                  <span>1 {t('안내 내용을 확인해 주세요')}</span>
-                  <span>2 {t('안내 내용을 확인해 주세요')}</span>
-                  <span>3 {t('안내 내용을 확인해 주세요')} ({t('안내 내용을 확인해 주세요')})</span>
-                  <span>4 {t('안내 내용을 확인해 주세요')}</span>
-                  <span>5 {t('안내 내용을 확인해 주세요')} ({t('안내 내용을 확인해 주세요')})</span>
+                <div className="flex justify-between text-[11px] font-black text-slate-400 uppercase tracking-wider">
+                  <span>1 {t('개월')}</span>
+                  <span>30 {t('개월')}</span>
+                  <span>60 {t('개월')}</span>
                 </div>
               </div>
 
-              {/* 3. 월 평균 급여 슬라이더 */}
-              <div className="space-y-2 bg-slate-50 dark:bg-gray-800/60 p-4 rounded-2xl border border-slate-100 dark:border-gray-700">
-                <div className="flex justify-between items-center text-xs font-bold text-slate-800 dark:text-slate-200">
-                  <span>{t('3. 월 평균 급여 기준 (세전 월 소득 금액)')}</span>
-                  <span className="text-orange-600 dark:text-orange-400 text-sm font-extrabold">
-                    {(monthlyPay / 10000).toLocaleString()} {t('대한민국 원화 단위')}
+              {/* 3. 평균 월 급여 (세전) - 8개 그리드 버튼 (150, 200, 250, 300, 350, 400, 500, 600+) */}
+              <div className="space-y-3 p-4 rounded-2xl bg-slate-50 dark:bg-gray-800/60 border border-slate-200 dark:border-gray-700">
+                <div className="flex justify-between items-center">
+                  <label className="text-xs font-bold text-slate-800 dark:text-slate-200 flex items-center gap-1.5">
+                    <span className="w-5 h-5 rounded-full bg-[#f3ba2f]/20 text-[#f3ba2f] flex items-center justify-center text-[10px] font-black">3</span>
+                    <span>{t('평균 월 급여 (세전)')}</span>
+                  </label>
+                  <span className="text-xl font-black text-amber-600 dark:text-amber-400">
+                    {salaryManwon >= 600 ? '600+ ' : salaryManwon}{t('만 원')}
                   </span>
                 </div>
-                <input
-                  type="range"
-                  min={2000000}
-                  max={5000000}
-                  step={100000}
-                  value={monthlyPay}
-                  onChange={(e) => setMonthlyPay(Number(e.target.value))}
-                  className="w-full h-2 bg-slate-200 dark:bg-gray-700 rounded-lg appearance-none cursor-pointer accent-orange-500"
-                />
-                <div className="flex justify-between text-[11px] text-slate-400 font-medium">
-                  <span>200 {t('대한민국 원화 단위')}</span>
-                  <span>280 {t('대한민국 원화 단위')} ({t('안내 내용을 확인해 주세요')})</span>
-                  <span>400 {t('대한민국 원화 단위')}</span>
-                  <span>500 {t('대한민국 원화 단위')}+</span>
+                <div className="grid grid-cols-4 gap-2">
+                  {[150, 200, 250, 300, 350, 400, 500, 600].map((val) => (
+                    <button
+                      key={val}
+                      type="button"
+                      onClick={() => setSalaryManwon(val)}
+                      className={`h-11 font-black rounded-xl text-xs sm:text-sm transition-all border cursor-pointer ${
+                        salaryManwon === val
+                          ? 'bg-[#f3ba2f] text-[#09101f] border-[#f3ba2f] scale-105 shadow-md font-extrabold'
+                          : 'bg-white dark:bg-gray-800 border-slate-200 dark:border-gray-700 text-slate-700 dark:text-slate-300 hover:border-[#f3ba2f]/40'
+                      }`}
+                    >
+                      {val === 600 ? '600+' : val}
+                    </button>
+                  ))}
                 </div>
               </div>
 
-              {/* 실시간 환급액 프리뷰 카드 */}
-              <div className="bg-linear-to-br from-orange-500 to-amber-500 rounded-3xl p-5 text-white shadow-lg text-center space-y-2">
-                <div className="inline-flex items-center gap-1.5 bg-black/20 px-3 py-0.5 rounded-full text-xs font-bold text-yellow-200">
-                  <Sparkles className="w-3 h-3 text-yellow-300" />
-                  <span>{t('실시간 계산된 예상 환급액')}</span>
+              {/* 4. AI 예상 환급 가능 금액 박스 (KTRS 공식 ₩ 골드 스타일) */}
+              <div className="relative p-6 sm:p-7 rounded-3xl border border-[#f3ba2f]/40 text-center space-y-2 overflow-hidden bg-gradient-to-br from-[#09101f] via-[#111d38] to-[#162447] text-white shadow-xl">
+                <p className="text-xs font-black text-[#f3ba2f] uppercase tracking-[0.2em]">
+                  ✨ {t('AI 예상 환급 가능 금액')}
+                </p>
+                <div className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#f3ba2f] tracking-tight">
+                  ₩ {result.estimatedTotalRefund.toLocaleString()}
                 </div>
-                <div className="text-3xl sm:text-4xl font-black tracking-tight">
-                  {result.estimatedTotalRefund.toLocaleString()}
-                  <span className="text-xl font-bold ml-1">{t('원 (대한민국 원화)')}</span>
-                </div>
-                <p className="text-xs text-orange-100">
-                  {t('* 선결제 비용 0원! 국세청에서 고객님 계좌로 환급금이 입금된 후에만 처리됩니다.')}
+                <p className="text-[11px] font-medium text-slate-300">
+                  {t('* 실제 개인별 소득 공제 항목에 따라 차이가 발생할 수 있습니다.')}
                 </p>
               </div>
 
               {/* 다음 버튼 */}
               <button
                 type="submit"
-                className="w-full py-4 bg-slate-900 hover:bg-slate-800 dark:bg-orange-500 dark:hover:bg-orange-600 text-white font-black text-sm sm:text-base rounded-2xl shadow-xl active:scale-[0.98] transition-all flex items-center justify-center space-x-2 cursor-pointer"
+                className="w-full py-4 bg-gradient-to-r from-[#f3ba2f] via-[#e5a823] to-[#c78d10] hover:from-[#f5c347] hover:to-[#d49915] text-[#09101f] font-black text-sm sm:text-base rounded-2xl shadow-xl active:scale-[0.98] transition-all flex items-center justify-center space-x-2 cursor-pointer border border-[#ffffff]/40"
               >
-                <span>{t('예상 환급액 상세확인 및 무료 신청 (30초)')}</span>
-                <ArrowRight className="w-4 h-4" />
+                <span>{t('내 환급금 30초 무료 조회하기')}</span>
+                <ArrowRight className="w-4 h-4 text-[#09101f]" />
               </button>
             </form>
           )}
@@ -320,8 +393,8 @@ export default function KMarketTaxModal() {
                   <span className="text-xs font-bold text-slate-700 dark:text-slate-300">
                     {t('신청 비자 및 기간')}
                   </span>
-                  <span className="text-xs font-extrabold text-orange-600 bg-orange-50 dark:bg-orange-950/60 px-2 py-0.5 rounded-md">
-                    {selectedVisa} {t('체류 비자 인증 완료')} • {workYears}{t('안내 내용을 확인해 주세요')} {t('개월 근무')}
+                  <span className="text-xs font-extrabold text-amber-700 dark:text-amber-300 bg-amber-50 dark:bg-amber-950/60 px-2.5 py-1 rounded-md border border-amber-200/60 dark:border-amber-800/40">
+                    {selectedVisa} {t('체류 비자 맞춤 완료')} • {workMonths}{t('개월')} ({workYears}{t('년')}) {t('근무')}
                   </span>
                 </div>
 
@@ -329,18 +402,18 @@ export default function KMarketTaxModal() {
                   <div className="flex justify-between">
                     <span className="text-slate-400">{t('국세(소득세) 환급 예상분')}</span>
                     <span className="font-semibold text-slate-800 dark:text-slate-200">
-                      {result.nationalTaxRefund.toLocaleString()}{t('원 (대한민국 원화)')}
+                      ₩ {result.nationalTaxRefund.toLocaleString()}
                     </span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-slate-400">{t('지방소득세 환급 예상분 (10%)')}</span>
                     <span className="font-semibold text-slate-800 dark:text-slate-200">
-                      {result.localTaxRefund.toLocaleString()}{t('원 (대한민국 원화)')}
+                      ₩ {result.localTaxRefund.toLocaleString()}
                     </span>
                   </div>
-                  <div className="flex justify-between text-orange-600 font-extrabold pt-1 border-t border-slate-200/60 dark:border-gray-700">
+                  <div className="flex justify-between text-amber-600 dark:text-amber-400 font-extrabold pt-1.5 border-t border-slate-200/60 dark:border-gray-700 text-sm">
                     <span>{t('총 예상 환급 수령액')}</span>
-                    <span className="text-base">{result.estimatedTotalRefund.toLocaleString()}{t('원 (대한민국 원화)')}</span>
+                    <span className="text-lg font-black text-[#f3ba2f] drop-shadow-xs">₩ {result.estimatedTotalRefund.toLocaleString()}</span>
                   </div>
                 </div>
               </div>
@@ -363,21 +436,27 @@ export default function KMarketTaxModal() {
                 </div>
               </div>
 
-              {/* 신청자 정보 입력 폼 */}
-              <div className="space-y-3">
-                <h3 className="text-xs font-bold text-slate-800 dark:text-slate-200">
-                  {t('환급금 안내 및 접수 정보 입력')}
-                </h3>
+              {/* 신청자 정보 입력 폼 (국세청 4단계 인증 직행용 4대 정보) */}
+              <div className="space-y-3.5">
+                <div className="flex items-center justify-between">
+                  <h3 className="text-xs font-black text-slate-900 dark:text-slate-100 flex items-center gap-1.5">
+                    <span>{t('국세청 실시간 조회 및 접수 정보 입력')}</span>
+                    <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-orange-100 dark:bg-orange-950/60 text-orange-700 dark:text-orange-300">
+                      {t('4단계 즉시 인증')}
+                    </span>
+                  </h3>
+                </div>
 
+                {/* 1. 성명 & 휴대전화 번호 */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <div>
-                    <label className="text-[11px] font-semibold text-slate-600 dark:text-slate-400 block mb-1">
-                      {t('신청자 성명 (여권상 영문 또는 한국 이름)')}
+                    <label className="text-[11px] font-bold text-slate-700 dark:text-slate-300 block mb-1">
+                      {t('신청자 성명 (여권상 영문 또는 한글)')}
                     </label>
                     <input
                       type="text"
                       required
-                      placeholder={t('예: 홍길동 (또는 영문 성명)')}
+                      placeholder={t('예: NGUYEN VAN A / 홍길동')}
                       value={applicantName}
                       onChange={(e) => setApplicantName(e.target.value)}
                       className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-xs font-bold text-slate-900 dark:text-white focus:outline-hidden focus:border-orange-500"
@@ -385,7 +464,7 @@ export default function KMarketTaxModal() {
                   </div>
 
                   <div>
-                    <label className="text-[11px] font-semibold text-slate-600 dark:text-slate-400 block mb-1">
+                    <label className="text-[11px] font-bold text-slate-700 dark:text-slate-300 block mb-1">
                       {t('한국 휴대전화 번호')}
                     </label>
                     <input
@@ -399,33 +478,65 @@ export default function KMarketTaxModal() {
                   </div>
                 </div>
 
+                {/* 2. 통신사 선택 (SKT / KT / LGU+ / 알뜰폰) */}
                 <div>
-                  <label className="text-[11px] font-semibold text-slate-600 dark:text-slate-400 block mb-1">
-                    {t('국적 선택 (모국어 상담 지원)')}
+                  <label className="text-[11px] font-bold text-slate-700 dark:text-slate-300 block mb-1.5">
+                    {t('이용 중인 스마트폰 통신사')}
                   </label>
                   <div className="grid grid-cols-3 sm:grid-cols-6 gap-1.5">
                     {[
-                      { code: 'VN', label: '베트남 🇻🇳' },
-                      { code: 'CN', label: '중국 🇨🇳' },
-                      { code: 'TH', label: '태국 🇹🇭' },
-                      { code: 'UZ', label: '우즈벡 🇺🇿' },
-                      { code: 'PH', label: '필리핀 🇵🇭' },
-                      { code: 'OTHER', label: '기타 🌐' },
-                    ].map((ct) => (
+                      { id: 'SKT', label: 'SKT' },
+                      { id: 'KT', label: 'KT' },
+                      { id: 'LGU+', label: 'LG U+' },
+                      { id: 'SKT 알뜰폰', label: t('SKT 알뜰') },
+                      { id: 'KT 알뜰폰', label: t('KT 알뜰') },
+                      { id: 'LGU+ 알뜰폰', label: t('LG 알뜰') },
+                    ].map((carrier) => (
                       <button
-                        key={ct.code}
+                        key={carrier.id}
                         type="button"
-                        onClick={() => setApplicantCountry(ct.code)}
-                        className={`py-2 px-1 rounded-xl text-[11px] font-bold border transition-all cursor-pointer ${
-                          applicantCountry === ct.code
-                            ? 'border-orange-500 bg-orange-50 dark:bg-orange-950/40 text-orange-700 dark:text-orange-300 font-extrabold shadow-2xs'
+                        onClick={() => setApplicantCarrier(carrier.id)}
+                        className={`py-2 px-1 rounded-xl text-[11px] font-black border transition-all cursor-pointer text-center ${
+                          applicantCarrier === carrier.id
+                            ? 'border-orange-500 bg-orange-50 dark:bg-orange-950/40 text-orange-700 dark:text-orange-300 shadow-2xs'
                             : 'border-slate-200 dark:border-gray-700 text-slate-600 dark:text-slate-400 hover:bg-slate-50'
                         }`}
                       >
-                        {t(`country_${ct.code.toLowerCase()}` as any) || ct.label}
+                        {carrier.label}
                       </button>
                     ))}
                   </div>
+                </div>
+
+                {/* 3. 외국인등록번호 (주민등록번호) 13자리 입력 */}
+                <div>
+                  <div className="flex items-center justify-between mb-1">
+                    <label className="text-[11px] font-bold text-slate-700 dark:text-slate-300">
+                      {t('외국인등록번호 (또는 주민등록번호 13자리)')}
+                    </label>
+                    <span className="text-[10px] text-emerald-600 dark:text-emerald-400 font-semibold flex items-center gap-1">
+                      <ShieldCheck className="w-3 h-3" />
+                      {t('국세청 암호화 보안 전송')}
+                    </span>
+                  </div>
+                  <input
+                    type="text"
+                    maxLength={14}
+                    placeholder={t('앞 6자리 - 뒤 7자리 (예: 950101-5XXXXXX)')}
+                    value={applicantArc}
+                    onChange={(e) => {
+                      const raw = e.target.value.replace(/[^0-9]/g, '');
+                      if (raw.length <= 6) {
+                        setApplicantArc(raw);
+                      } else {
+                        setApplicantArc(`${raw.slice(0, 6)}-${raw.slice(6, 13)}`);
+                      }
+                    }}
+                    className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-xs font-mono font-bold tracking-wider text-slate-900 dark:text-white focus:outline-hidden focus:border-orange-500"
+                  />
+                  <p className="text-[10px] text-slate-400 dark:text-slate-500 mt-1 leading-relaxed">
+                    *{t('국세청 홈택스에서 5개년 세금 납부 내역을 실시간으로 안전하게 스크래핑하기 위한 필수 정보입니다.')}
+                  </p>
                 </div>
               </div>
 

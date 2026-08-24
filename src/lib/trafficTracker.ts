@@ -166,8 +166,21 @@ export function recordTrafficVisit(): TrafficRecord | null {
     stats[record.channelKey] = (stats[record.channelKey] || 0) + 1;
     stats['total_pv'] = (stats['total_pv'] || 0) + 1;
     localStorage.setItem(STORAGE_KEY_TRAFFIC_STATS, JSON.stringify(stats));
-  } catch (e) {
-    console.warn('Traffic tracking storage warning:', e);
+  } catch {
+    // LocalStorage warning ignored
+  }
+
+  // 중앙 Supabase DB로 비동기 전송 (사용자 화면 렌더링에 영향 없도록 논블로킹)
+  try {
+    fetch('/api/traffic', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(record),
+    }).catch(() => {
+      // 오프라인이거나 실패 시에도 조용히 처리
+    });
+  } catch {
+    // Ignore fetch error
   }
 
   return record;

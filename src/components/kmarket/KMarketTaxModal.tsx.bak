@@ -1,0 +1,492 @@
+﻿'use client';
+
+import { useLanguage } from '@/context/LanguageContext';
+import React, { useState } from 'react';
+import { useKMarket } from '@/context/KMarketContext';
+import {
+  SUPPORTED_VISAS,
+  calculateTaxRefund,
+} from '@/lib/taxRefundCalculator';
+import CountryFlag from './CountryFlag';
+import {
+  X,
+  Sparkles,
+  CheckCircle2,
+  ShieldCheck,
+  ArrowRight,
+  ArrowLeft,
+  Lock,
+  Receipt,
+} from 'lucide-react';
+import confetti from 'canvas-confetti';
+
+export default function KMarketTaxModal() {
+  const { t } = useLanguage();
+  const { isTaxModalOpen, setIsTaxModalOpen } = useKMarket();
+
+  // ?ㅽ뀦 愿由?(1: 議곌굔 ?낅젰, 2: ?뺣? 怨꾩궛 諛??꾨텋???뺤씤, 3: ?묒닔 ?꾨즺)
+  const [step, setStep] = useState<1 | 2 | 3>(1);
+
+  // ?낅젰 ?곹깭
+  const [selectedVisa, setSelectedVisa] = useState<string>('E-9');
+  const [workYears, setWorkYears] = useState<number>(3);
+  const [monthlyPay, setMonthlyPay] = useState<number>(2800000);
+  const [applicantName, setApplicantName] = useState<string>('');
+  const [applicantPhone, setApplicantPhone] = useState<string>('');
+  const [applicantCountry, setApplicantCountry] = useState<string>('VN');
+  const [agreeTerms, setAgreeTerms] = useState<boolean>(true);
+
+  if (!isTaxModalOpen) return null;
+
+  // 怨꾩궛 寃곌낵
+  const result = calculateTaxRefund(workYears, monthlyPay, selectedVisa);
+  const currentVisaObj = SUPPORTED_VISAS.find((v) => v.code === selectedVisa) || SUPPORTED_VISAS[0];
+
+  const handleNextToReview = (e: React.FormEvent) => {
+    e.preventDefault();
+    setStep(2);
+  };
+
+  const handleFinalSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!applicantName.trim() || !applicantPhone.trim()) {
+      alert(t('?깅챸怨??곕씫泥섎? ?낅젰??二쇱꽭??'));
+      return;
+    }
+
+    try {
+      confetti({
+        particleCount: 150,
+        spread: 80,
+        origin: { y: 0.6 },
+      });
+    } catch {
+      // ignore
+    }
+
+    setStep(3);
+  };
+
+  const handleClose = () => {
+    setIsTaxModalOpen(false);
+    setStep(1);
+  };
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/70 backdrop-blur-xs animate-fadeIn">
+      <div className="relative w-full max-w-xl bg-white dark:bg-gray-900 rounded-3xl shadow-2xl overflow-hidden border border-slate-100 dark:border-gray-800 flex flex-col max-h-[92vh]">
+        {/* 紐⑤떖 ?곷떒 ?ㅻ뜑 */}
+        <div className="bg-linear-to-r from-amber-500 via-orange-500 to-rose-600 p-5 sm:p-6 text-white relative shrink-0">
+          <button
+            onClick={handleClose}
+            className="absolute top-4 right-4 bg-black/25 hover:bg-black/40 text-white p-2 rounded-full transition-colors cursor-pointer"
+          >
+            <X className="w-5 h-5" />
+          </button>
+
+          <div className="flex items-center gap-2 mb-2">
+            <div className="inline-flex items-center space-x-1.5 bg-black/30 backdrop-blur-md px-3 py-1 rounded-full text-xs font-bold text-amber-200 border border-white/20">
+              <Sparkles className="w-3.5 h-3.5 text-yellow-300 animate-spin" />
+              <span>{t('援?꽭泥??ㅼ떆媛??먯뒪???섍툒 ?곌퀎')}</span>
+            </div>
+            <span className="bg-emerald-950/60 text-emerald-300 text-[11px] px-2.5 py-0.5 rounded-full font-black border border-emerald-400/30">
+              {t('?좉껐??鍮꾩슜 0??(珥덇린 ?섏닔猷??놁쓬)')}
+            </span>
+          </div>
+
+          <h2 className="text-xl sm:text-2xl font-black tracking-tight leading-snug">
+            {step === 3
+              ? '?럦 ' + t('?섏쓽 ?좎옱 ?멸툑 ?섍툒?≪쓣 10珥?留뚯뿉 ?뺤씤?섏꽭??)
+              : t('?섏쓽 ?좎옱 ?멸툑 ?섍툒?≪쓣 10珥?留뚯뿉 ?뺤씤?섏꽭??)}
+          </h2>
+          <p className="text-xs text-orange-100 mt-1">
+            {t('?쒓뎅?먯꽌 ?쇳븯硫????뚮뱷?? 議고듅踰?踰뺤젙 媛먮㈃ ?쒗깮?쇰줈 ?됯퇏 184留뚯썝???덉쟾?섍쾶 ?뚮젮諛쏆쑝?몄슂.')}
+          </p>
+
+          {/* 吏꾪뻾 ?ㅽ뀦 ?몃뵒耳?댄꽣 */}
+          {step !== 3 && (
+            <div className="flex items-center gap-2 mt-4 pt-3 border-t border-white/20 text-xs font-bold">
+              <div
+                className={`flex items-center gap-1.5 ${
+                  step === 1 ? 'text-yellow-200' : 'text-white/70'
+                }`}
+              >
+                <span className="w-5 h-5 rounded-full bg-white/20 flex items-center justify-center text-[11px]">
+                  1
+                </span>
+                <span>{t('1. 鍮꾩옄 諛?湲됱뿬 ?좏깮')}</span>
+              </div>
+              <span className="text-white/40">??/span>
+              <div
+                className={`flex items-center gap-1.5 ${
+                  step === 2 ? 'text-yellow-200' : 'text-white/70'
+                }`}
+              >
+                <span className="w-5 h-5 rounded-full bg-white/20 flex items-center justify-center text-[11px]">
+                  2
+                </span>
+                <span>{t('2. ?덉긽 ?섍툒??諛?媛꾪렪 ?묒닔')}</span>
+              </div>
+            </div>
+          )}
+        </div>
+
+        {/* 紐⑤떖 蹂몃Ц ?ㅽ겕濡??곸뿭 */}
+        <div className="p-5 sm:p-6 overflow-y-auto space-y-6 flex-1">
+          {/* STEP 1: 鍮꾩옄 諛?洹쇰Т?뺣낫 ?낅젰 */}
+          {step === 1 && (
+            <form onSubmit={handleNextToReview} className="space-y-6">
+              {/* 1. 鍮꾩옄 醫낅쪟 ?좏깮 */}
+              <div className="space-y-2">
+                <label className="text-xs font-bold text-slate-800 dark:text-slate-200 flex items-center justify-between">
+                  <span>{t('1. 泥대쪟 鍮꾩옄 ?좏삎')}</span>
+                  <span className="text-[11px] text-orange-600 font-semibold">
+                    {t(`visa_${selectedVisa.toLowerCase().replace(/[^a-z0-9]/g, '_')}_desc` as any) || currentVisaObj.desc}
+                  </span>
+                </label>
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+                  {SUPPORTED_VISAS.map((visa) => {
+                    const isSelected = selectedVisa === visa.code;
+                    const visaKey = visa.code.toLowerCase().replace(/[^a-z0-9]/g, '_');
+                    const visaBadge = t(`visa_${visaKey}_badge` as any) || visa.badge;
+                    const visaName = t(`visa_${visaKey}_name` as any) || visa.name;
+
+                    return (
+                      <button
+                        key={visa.code}
+                        type="button"
+                        onClick={() => setSelectedVisa(visa.code)}
+                        className={`p-3 rounded-2xl border text-left transition-all cursor-pointer ${
+                          isSelected
+                            ? 'border-orange-500 bg-orange-50/80 dark:bg-orange-950/40 shadow-xs ring-2 ring-orange-500/20'
+                            : 'border-slate-200 dark:border-gray-700 hover:bg-slate-50 dark:hover:bg-gray-800'
+                        }`}
+                      >
+                        <div className="flex items-center justify-between">
+                          <span
+                            className={`text-xs font-bold ${
+                              isSelected
+                                ? 'text-orange-700 dark:text-orange-300'
+                                : 'text-slate-800 dark:text-slate-200'
+                            }`}
+                          >
+                            {visa.code}
+                          </span>
+                          <span className="text-[10px] bg-slate-100 dark:bg-gray-700 text-slate-500 dark:text-gray-300 px-1.5 py-0.2 rounded-md">
+                            {visaBadge}
+                          </span>
+                        </div>
+                        <p className="text-[11px] text-slate-500 dark:text-gray-400 truncate mt-1">
+                          {visaName}
+                        </p>
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+
+              {/* 2. ?쒓뎅 洹쇰Т ?곗닔 ?щ씪?대뜑 */}
+              <div className="space-y-2 bg-slate-50 dark:bg-gray-800/60 p-4 rounded-2xl border border-slate-100 dark:border-gray-700">
+                <div className="flex justify-between items-center text-xs font-bold text-slate-800 dark:text-slate-200">
+                  <span>{t('2. ?쒓뎅 洹쇰Т 湲곌컙')}</span>
+                  <span className="text-orange-600 dark:text-orange-400 text-sm font-extrabold">
+                    {workYears} {t('?덈궡 ?댁슜???뺤씤??二쇱꽭??)} ({workYears * 12} {t('?덈궡 ?댁슜???뺤씤??二쇱꽭??)})
+                  </span>
+                </div>
+                <input
+                  type="range"
+                  min={1}
+                  max={5}
+                  step={1}
+                  value={workYears}
+                  onChange={(e) => setWorkYears(Number(e.target.value))}
+                  className="w-full h-2 bg-slate-200 dark:bg-gray-700 rounded-lg appearance-none cursor-pointer accent-orange-500"
+                />
+                <div className="flex justify-between text-[11px] text-slate-400 font-medium">
+                  <span>1 {t('?덈궡 ?댁슜???뺤씤??二쇱꽭??)}</span>
+                  <span>2 {t('?덈궡 ?댁슜???뺤씤??二쇱꽭??)}</span>
+                  <span>3 {t('?덈궡 ?댁슜???뺤씤??二쇱꽭??)} ({t('?덈궡 ?댁슜???뺤씤??二쇱꽭??)})</span>
+                  <span>4 {t('?덈궡 ?댁슜???뺤씤??二쇱꽭??)}</span>
+                  <span>5 {t('?덈궡 ?댁슜???뺤씤??二쇱꽭??)} ({t('?덈궡 ?댁슜???뺤씤??二쇱꽭??)})</span>
+                </div>
+              </div>
+
+              {/* 3. ???됯퇏 湲됱뿬 ?щ씪?대뜑 */}
+              <div className="space-y-2 bg-slate-50 dark:bg-gray-800/60 p-4 rounded-2xl border border-slate-100 dark:border-gray-700">
+                <div className="flex justify-between items-center text-xs font-bold text-slate-800 dark:text-slate-200">
+                  <span>{t('3. ???됯퇏 湲됱뿬 湲곗? (?몄쟾 ???뚮뱷 湲덉븸)')}</span>
+                  <span className="text-orange-600 dark:text-orange-400 text-sm font-extrabold">
+                    {(monthlyPay / 10000).toLocaleString()} {t('??쒕?援??먰솕 ?⑥쐞')}
+                  </span>
+                </div>
+                <input
+                  type="range"
+                  min={2000000}
+                  max={5000000}
+                  step={100000}
+                  value={monthlyPay}
+                  onChange={(e) => setMonthlyPay(Number(e.target.value))}
+                  className="w-full h-2 bg-slate-200 dark:bg-gray-700 rounded-lg appearance-none cursor-pointer accent-orange-500"
+                />
+                <div className="flex justify-between text-[11px] text-slate-400 font-medium">
+                  <span>200 {t('??쒕?援??먰솕 ?⑥쐞')}</span>
+                  <span>280 {t('??쒕?援??먰솕 ?⑥쐞')} ({t('?덈궡 ?댁슜???뺤씤??二쇱꽭??)})</span>
+                  <span>400 {t('??쒕?援??먰솕 ?⑥쐞')}</span>
+                  <span>500 {t('??쒕?援??먰솕 ?⑥쐞')}+</span>
+                </div>
+              </div>
+
+              {/* ?ㅼ떆媛??섍툒???꾨━酉?移대뱶 */}
+              <div className="bg-linear-to-br from-orange-500 to-amber-500 rounded-3xl p-5 text-white shadow-lg text-center space-y-2">
+                <div className="inline-flex items-center gap-1.5 bg-black/20 px-3 py-0.5 rounded-full text-xs font-bold text-yellow-200">
+                  <Sparkles className="w-3 h-3 text-yellow-300" />
+                  <span>{t('?ㅼ떆媛?怨꾩궛???덉긽 ?섍툒??)}</span>
+                </div>
+                <div className="text-3xl sm:text-4xl font-black tracking-tight">
+                  {result.estimatedTotalRefund.toLocaleString()}
+                  <span className="text-xl font-bold ml-1">{t('??(??쒕?援??먰솕)')}</span>
+                </div>
+                <p className="text-xs text-orange-100">
+                  {t('* ?좉껐??鍮꾩슜 0?? 援?꽭泥?뿉??怨좉컼??怨꾩쥖濡??섍툒湲덉씠 ?낃툑???꾩뿉留?泥섎━?⑸땲??')}
+                </p>
+              </div>
+
+              {/* ?ㅼ쓬 踰꾪듉 */}
+              <button
+                type="submit"
+                className="w-full py-4 bg-slate-900 hover:bg-slate-800 dark:bg-orange-500 dark:hover:bg-orange-600 text-white font-black text-sm sm:text-base rounded-2xl shadow-xl active:scale-[0.98] transition-all flex items-center justify-center space-x-2 cursor-pointer"
+              >
+                <span>{t('?덉긽 ?섍툒???곸꽭?뺤씤 諛?臾대즺 ?좎껌 (30珥?')}</span>
+                <ArrowRight className="w-4 h-4" />
+              </button>
+            </form>
+          )}
+
+          {/* STEP 2: ?곸꽭 寃ъ쟻 諛??꾨텋 ?섏닔猷?蹂댁쬆 & ?좎껌 ?뺣낫 */}
+          {step === 2 && (
+            <form onSubmit={handleFinalSubmit} className="space-y-6">
+              {/* ?섍툒 ?곸꽭 ?댁뿭 釉뚮━??*/}
+              <div className="bg-slate-50 dark:bg-gray-800/70 rounded-2xl p-4.5 border border-slate-200/80 dark:border-gray-700 space-y-3">
+                <div className="flex items-center justify-between pb-2 border-b border-slate-200 dark:border-gray-700">
+                  <span className="text-xs font-bold text-slate-700 dark:text-slate-300">
+                    {t('?좎껌 鍮꾩옄 諛?湲곌컙')}
+                  </span>
+                  <span className="text-xs font-extrabold text-orange-600 bg-orange-50 dark:bg-orange-950/60 px-2 py-0.5 rounded-md">
+                    {selectedVisa} {t('泥대쪟 鍮꾩옄 ?몄쬆 ?꾨즺')} ??{workYears}{t('?덈궡 ?댁슜???뺤씤??二쇱꽭??)} {t('媛쒖썡 洹쇰Т')}
+                  </span>
+                </div>
+
+                <div className="space-y-1.5 text-xs text-slate-600 dark:text-slate-300">
+                  <div className="flex justify-between">
+                    <span className="text-slate-400">{t('援?꽭(?뚮뱷?? ?섍툒 ?덉긽遺?)}</span>
+                    <span className="font-semibold text-slate-800 dark:text-slate-200">
+                      {result.nationalTaxRefund.toLocaleString()}{t('??(??쒕?援??먰솕)')}
+                    </span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-slate-400">{t('吏諛⑹냼?앹꽭 ?섍툒 ?덉긽遺?(10%)')}</span>
+                    <span className="font-semibold text-slate-800 dark:text-slate-200">
+                      {result.localTaxRefund.toLocaleString()}{t('??(??쒕?援??먰솕)')}
+                    </span>
+                  </div>
+                  <div className="flex justify-between text-orange-600 font-extrabold pt-1 border-t border-slate-200/60 dark:border-gray-700">
+                    <span>{t('珥??덉긽 ?섍툒 ?섎졊??)}</span>
+                    <span className="text-base">{result.estimatedTotalRefund.toLocaleString()}{t('??(??쒕?援??먰솕)')}</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* ?꾨텋???좉껐??0?? ?덉떖 蹂댁쬆 ?뺤콉 諛곕꼫 */}
+              <div className="p-4 rounded-2xl bg-emerald-50 dark:bg-emerald-950/30 border border-emerald-200 dark:border-emerald-900/50 space-y-2 text-xs">
+                <div className="flex items-center gap-2 font-bold text-emerald-800 dark:text-emerald-300">
+                  <ShieldCheck className="w-4 h-4 text-emerald-600" />
+                  <span>{t('100% ?꾨텋??& ?덉떖 蹂댁쬆 ?뺤콉')}</span>
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-emerald-900/80 dark:text-emerald-300/80 text-[11px] leading-relaxed">
+                  <div className="flex items-start gap-1.5">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0 mt-0.5" />
+                    <span><strong>{t('?좉껐??鍮꾩슜 0??')}</strong> {t('援?꽭泥?뿉???듭옣?쇰줈 ?섍툒湲덉씠 ?낃툑???꾩뿉留??깃났 ?섏닔猷뚭? 諛쒖깮?⑸땲??')}</span>
+                  </div>
+                  <div className="flex items-start gap-1.5">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0 mt-0.5" />
+                    <span><strong>{t('?섍툒??0?????꾩븸 臾대즺:')}</strong> {t('議고쉶 寃곌낵 ?섍툒 ??곸씠 ?꾨땲嫄곕굹 0?먯씤 寃쎌슦 怨좉컼 遺?닿툑? 0?먯엯?덈떎.')}</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* ?좎껌???뺣낫 ?낅젰 ??*/}
+              <div className="space-y-3">
+                <h3 className="text-xs font-bold text-slate-800 dark:text-slate-200">
+                  {t('?섍툒湲??덈궡 諛??묒닔 ?뺣낫 ?낅젰')}
+                </h3>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div>
+                    <label className="text-[11px] font-semibold text-slate-600 dark:text-slate-400 block mb-1">
+                      {t('?좎껌???깅챸 (?ш텒???곷Ц ?먮뒗 ?쒓뎅 ?대쫫)')}
+                    </label>
+                    <input
+                      type="text"
+                      required
+                      placeholder={t('?? ?띻만??(?먮뒗 ?곷Ц ?깅챸)')}
+                      value={applicantName}
+                      onChange={(e) => setApplicantName(e.target.value)}
+                      className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-xs font-bold text-slate-900 dark:text-white focus:outline-hidden focus:border-orange-500"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="text-[11px] font-semibold text-slate-600 dark:text-slate-400 block mb-1">
+                      {t('?쒓뎅 ?대??꾪솕 踰덊샇')}
+                    </label>
+                    <input
+                      type="tel"
+                      required
+                      placeholder={t('010-XXXX-XXXX')}
+                      value={applicantPhone}
+                      onChange={(e) => setApplicantPhone(e.target.value)}
+                      className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-xs font-bold text-slate-900 dark:text-white focus:outline-hidden focus:border-orange-500"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label className="text-[11px] font-semibold text-slate-600 dark:text-slate-400 block mb-1">
+                    {t('援?쟻 ?좏깮 (紐④뎅???곷떞 吏??')}
+                  </label>
+                  <div className="grid grid-cols-3 sm:grid-cols-6 gap-1.5">
+                    {[
+                      { code: 'VN', label: '踰좏듃???눤?눛' },
+                      { code: 'CN', label: '以묎뎅 ?눊?눛' },
+                      { code: 'TH', label: '?쒓뎅 ?눢?눑' },
+                      { code: 'UZ', label: '?곗쫰踰??눣?눨' },
+                      { code: 'PH', label: '?꾨━? ?눝?눑' },
+                      { code: 'OTHER', label: '湲고? ?뙋' },
+                    ].map((ct) => (
+                      <button
+                        key={ct.code}
+                        type="button"
+                        onClick={() => setApplicantCountry(ct.code)}
+                        className={`py-2 px-1 rounded-xl text-[11px] font-bold border transition-all cursor-pointer ${
+                          applicantCountry === ct.code
+                            ? 'border-orange-500 bg-orange-50 dark:bg-orange-950/40 text-orange-700 dark:text-orange-300 font-extrabold shadow-2xs'
+                            : 'border-slate-200 dark:border-gray-700 text-slate-600 dark:text-slate-400 hover:bg-slate-50'
+                        }`}
+                      >
+                        {t(`country_${ct.code.toLowerCase()}` as any) || ct.label}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              {/* ?쎄? ?숈쓽 */}
+              <label className="flex items-start gap-2 p-3 bg-slate-50 dark:bg-gray-800/60 rounded-xl border border-slate-200/60 dark:border-gray-700 cursor-pointer">
+                <input
+                  type="checkbox"
+                  checked={agreeTerms}
+                  onChange={(e) => setAgreeTerms(e.target.checked)}
+                  required
+                  className="mt-0.5 rounded text-orange-600 focus:ring-orange-500"
+                />
+                <span className="text-[11px] text-slate-600 dark:text-slate-300 leading-snug">
+                  {t('[?꾩닔] 援?꽭泥??섍툒 ???諛?耳?댄떚?뚯뿉???꾨Ц ?몃Т??1:1 ?곷떞 ?곌껐???숈쓽?⑸땲??')}
+                </span>
+              </label>
+
+              {/* 踰꾪듉 洹몃９ */}
+              <div className="flex gap-2">
+                <button
+                  type="button"
+                  onClick={() => setStep(1)}
+                  className="flex-1 py-3.5 border border-slate-200 dark:border-gray-700 hover:bg-slate-50 dark:hover:bg-gray-800 text-slate-700 dark:text-slate-300 font-bold text-xs rounded-2xl transition-all cursor-pointer flex items-center justify-center gap-1"
+                >
+                  <ArrowLeft className="w-4 h-4" />
+                  <span>{t('?댁쟾 ?④퀎濡??뚯븘媛湲?)}</span>
+                </button>
+                <button
+                  type="submit"
+                  disabled={!agreeTerms}
+                  className="flex-[2] py-3.5 bg-gradient-to-r from-orange-500 to-rose-600 hover:from-orange-600 hover:to-rose-700 disabled:opacity-50 text-white font-black text-xs sm:text-sm rounded-2xl shadow-xl active:scale-[0.98] transition-all flex items-center justify-center gap-1.5 cursor-pointer"
+                >
+                  <ShieldCheck className="w-4 h-4" />
+                  <span>{t('100% ?꾨텋?쒕줈 ?덉쟾?섍쾶 ?섍툒 ?좎껌')}</span>
+                </button>
+              </div>
+            </form>
+          )}
+
+          {/* STEP 3: ?묒닔 ?꾨즺 諛??묒닔利?移대뱶 */}
+          {step === 3 && (
+            <div className="space-y-6 text-center py-4">
+              <div className="w-16 h-16 rounded-full bg-emerald-500 text-white mx-auto flex items-center justify-center shadow-lg shadow-emerald-500/30 animate-bounce">
+                <CheckCircle2 className="w-10 h-10" />
+              </div>
+
+              <div className="space-y-1">
+                <h3 className="text-xl font-black text-slate-900 dark:text-white tracking-tight">
+                  {t('?섍툒 ?좎껌???뺤긽 ?묒닔?섏뿀?듬땲??')}
+                </h3>
+                <p className="text-xs text-slate-500 max-w-sm mx-auto leading-relaxed">
+                  {t('?멸뎅???꾨떞 耳?댄떚?뚯뿉???쒗쑕 ?몃Т?ш? 24?쒓컙 ?대궡??移댁뭅?ㅽ넚/臾몄옄濡?理쒖쥌 ?뺤젙?≪쓣 ?덈궡?⑸땲??')}
+                </p>
+              </div>
+
+              {/* 怨듭떇 紐⑤컮???묒닔利?移대뱶 */}
+              <div className="p-5 rounded-3xl bg-slate-50 dark:bg-gray-800 border-2 border-dashed border-orange-300 dark:border-orange-700 text-left space-y-3 shadow-inner">
+                <div className="flex items-center justify-between pb-2 border-b border-slate-200 dark:border-gray-700">
+                  <span className="text-xs font-black text-orange-600 flex items-center gap-1">
+                    <Receipt className="w-4 h-4" />
+                    <span>{t('援?꽭泥??뚮뱷怨듭젣 ?곸닔利??곌퀎')}</span>
+                  </span>
+                  <span className="text-[10px] text-slate-400 font-mono">
+                    REF-{Date.now().toString().slice(-6)}
+                  </span>
+                </div>
+
+                <div className="space-y-1 text-xs">
+                  <div className="flex justify-between">
+                    <span className="text-slate-400">{t('?좎껌???깅챸 (?ш텒???곷Ц ?먮뒗 ?쒓뎅 ?대쫫)')}</span>
+                    <span className="font-bold text-slate-800 dark:text-slate-200">{applicantName || 'NGUYEN VAN HUNG'}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-slate-400">{t('?쒓뎅 ?대??꾪솕 踰덊샇')}</span>
+                    <span className="font-bold text-slate-800 dark:text-slate-200">{applicantPhone || '010-XXXX-XXXX'}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-slate-400">{t('珥??덉긽 ?섍툒 ?섎졊??)}</span>
+                    <span className="font-black text-orange-600 text-sm">
+                      {result.estimatedTotalRefund.toLocaleString()}{t('??(??쒕?援??먰솕)')}
+                    </span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-slate-400">{t('?섍툒 ?깃났 ???꾨텋 ?섏닔猷??곸슜')}</span>
+                    <span className="font-bold text-emerald-600 dark:text-emerald-400">
+                      {t('100% ?꾨텋??(?좉껐??0??')}
+                    </span>
+                  </div>
+                </div>
+
+                <div className="pt-2 border-t border-slate-200 dark:border-gray-700 text-[11px] text-slate-500 dark:text-slate-400 flex items-center gap-1.5">
+                  <Lock className="w-3.5 h-3.5 text-slate-400 shrink-0" />
+                  <span>{t('?몃Т???덈궡 硫붿떆吏濡?怨꾩쥖 ?깅줉')}</span>
+                </div>
+              </div>
+
+              <div className="pt-2 space-y-2">
+                <button
+                  type="button"
+                  onClick={handleClose}
+                  className="w-full py-3.5 bg-slate-900 hover:bg-slate-800 dark:bg-orange-500 text-white font-bold rounded-2xl text-sm transition-colors cursor-pointer"
+                >
+                  {t('?뺤씤 諛?怨꾩냽 ?쇳븨?섍린')}
+                </button>
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+

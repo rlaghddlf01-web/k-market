@@ -67,7 +67,7 @@ export default function KMarketMyPageModal({ isOpen, onClose }: KMarketMyPageMod
         ? t('이세븐(E-7) 특정활동 전문 비자')
         : authedUser.visaType)
     : t('이나인(E-9) 비전문취업 비자');
-  const rawDormitory = authedUser?.dormitory || authedUser?.region || '내 주변 공단 기숙사';
+  const rawDormitory = authedUser?.dormitory || authedUser?.region || t('내 주변 공단 기숙사');
   const userDormitory = getAdaptedItemRegion({ id: 'user-loc-1', region: rawDormitory } as any, authedUser?.region, currentLang);
 
   // 1. 내가 찜한 매물
@@ -136,7 +136,6 @@ export default function KMarketMyPageModal({ isOpen, onClose }: KMarketMyPageMod
             <KMarketEasyTaxRefundWidget
               onApplyClick={() => {
                 onClose();
-                setIsTaxModalOpen(true);
               }}
             />
           </div>

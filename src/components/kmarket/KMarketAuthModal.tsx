@@ -183,6 +183,24 @@ export default function KMarketAuthModal({
     }
   };
 
+  // 2.5 폼 즉시 간편 가입 제출 핸들러
+  const handleDirectSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!nickname.trim() && !userName.trim()) {
+      setNickname('안산호랑이_' + Math.floor(100 + Math.random() * 900));
+    }
+    setStep('complete');
+    try {
+      confetti({
+        particleCount: 120,
+        spread: 80,
+        origin: { y: 0.6 },
+      });
+    } catch {
+      // ignore
+    }
+  };
+
   // 3. 알리고 6자리 인증번호 검증
   const handleVerifySms = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -580,6 +598,19 @@ export default function KMarketAuthModal({
                 <p className="text-[10px] text-[#705e4f] flex items-center justify-between">
                   <span>{t('💡 내 위치를 기반으로 가까운 공단/동네 이웃과의 직거래 매물이 우선 표시됩니다.')}</span>
                 </p>
+
+                {/* 1분 간편 가입 완료 버튼 */}
+                <div className="pt-3">
+                  <button
+                    type="button"
+                    onClick={handleDirectSubmit}
+                    className="w-full py-4 bg-gradient-to-r from-[#f3ba2f] via-[#e5a823] to-[#c78d10] hover:from-[#f5c347] hover:to-[#d49915] text-[#09101f] font-black text-sm sm:text-base rounded-2xl shadow-xl active:scale-[0.98] transition-all flex items-center justify-center gap-2 cursor-pointer border border-[#ffffff]/40"
+                  >
+                    <Sparkles className="w-4 h-4 text-[#09101f] animate-spin" />
+                    <span>{t('1분 만에 회원가입 완료하기')}</span>
+                    <span className="text-xs">➔</span>
+                  </button>
+                </div>
               </div>
             </div>
           )}

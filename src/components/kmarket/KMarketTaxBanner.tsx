@@ -50,7 +50,7 @@ export default function KMarketTaxBanner() {
             {/* 헤드라인 타이틀 */}
             <h2 className="text-xl sm:text-2xl lg:text-3xl font-black tracking-tight text-white leading-tight drop-shadow-sm">
               {t('지나치기 쉬운 세금 환급,')} <br className="hidden sm:inline" />
-              {t('외국인 근로자도 보장받는')} <span className="text-[#f3ba2f] underline underline-offset-4 decoration-[#f3ba2f]/60">{t('[평균 184만원]')}</span> {t('30초 무료 조회')}
+              {t('외국인 근로자도 보장받는')} <span className="text-[#f3ba2f] underline underline-offset-4 decoration-[#f3ba2f]/60">{t('[5년간 최대 1,000만원]')}</span> {t('30초 무료 조회')}
             </h2>
 
             {/* 3대 핵심 보증 칩 (골드 테두리 & 다크 뱃지) */}
@@ -61,7 +61,7 @@ export default function KMarketTaxBanner() {
               </span>
               <span className="flex items-center gap-1.5 bg-black/40 backdrop-blur-xs px-3 py-1.5 rounded-xl border border-[#c5a059]/40 text-white">
                 <DollarSign className="w-3.5 h-3.5 text-[#f3ba2f]" />
-                <span>{t('평균 184만원 수령')}</span>
+                <span>{t('최대 1,000만원 수령')}</span>
               </span>
               <span className="flex items-center gap-1.5 bg-emerald-950/60 backdrop-blur-xs px-3 py-1.5 rounded-xl border border-emerald-400/40 text-emerald-300">
                 <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />

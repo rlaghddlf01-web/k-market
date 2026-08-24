@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import {
   ShieldAlert,
@@ -15,6 +15,7 @@ import {
   Sparkles,
   MapPin,
   Building2,
+  LogOut,
 } from 'lucide-react';
 import { INITIAL_ITEMS } from '@/lib/mockData';
 import { INITIAL_COMMUNITY_POSTS } from '@/lib/communityMockData';
@@ -25,12 +26,44 @@ import { useLanguage } from '@/context/LanguageContext';
 import KMarketAdminUsersTab from '@/components/admin/KMarketAdminUsersTab';
 import KMarketAdminAnalyticsDashboard from '@/components/admin/KMarketAdminAnalyticsDashboard';
 import KMarketAdminFeedbackTab from '@/components/admin/KMarketAdminFeedbackTab';
+import KMarketAdminAuthGate from '@/components/admin/KMarketAdminAuthGate';
 
 export default function KMarketAdminPage() {
   const { t } = useLanguage();
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [authChecking, setAuthChecking] = useState(true);
   const [activeTab, setActiveTab] = useState<'overview' | 'reports' | 'community' | 'items' | 'users' | 'taxes' | 'feedback'>('overview');
   const [reportFilter, setReportFilter] = useState<'all' | 'pending' | 'resolved'>('all');
   const [communityPosts, setCommunityPosts] = useState<CommunityPost[]>([]);
+
+  // 관리자 인증 세션 검사 및 세금 환급 실시간 리드 로드
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const isAuth = sessionStorage.getItem('kmarket_admin_auth') === 'true';
+      setIsAuthenticated(isAuth);
+      setAuthChecking(false);
+
+      if (isAuth) {
+        // 실제 세금 환급 신청 리스트 조회
+        fetch('/api/tax-leads')
+          .then((res) => res.json())
+          .then((json) => {
+            if (json.success && Array.isArray(json.data)) {
+              setTaxLeads(json.data);
+            }
+          })
+          .catch((err) => console.warn('Error fetching tax leads:', err));
+      }
+    }
+  }, [isAuthenticated]);
+
+  const handleLogout = () => {
+    if (confirm('관리자 세션을 로그아웃 하시겠습니까?')) {
+      sessionStorage.removeItem('kmarket_admin_auth');
+      sessionStorage.removeItem('kmarket_admin_user');
+      setIsAuthenticated(false);
+    }
+  };
 
   // 관리자 신고 리스트 상태 (실제 접수 시 실시간 누적, 초기 0건)
   const [reports, setReports] = useState<
@@ -40,11 +73,12 @@ export default function KMarketAdminPage() {
   // 관리자 매물 리스트 상태 (실제 등록 매물)
   const [items, setItems] = useState<KMarketItem[]>(INITIAL_ITEMS);
 
-  // KTRS 세금 환급 연계 신청 리스트 (실제 신청 시 실시간 누적, 초기 0건)
+  // KTRS 세금 환급 연계 신청 리스트
   const [taxLeads, setTaxLeads] = useState<
     {
       id: string;
       userName: string;
+      phone?: string;
       country: string;
       workPeriod: string;
       salary: string;
@@ -58,45 +92,43 @@ export default function KMarketAdminPage() {
   // 관리자 신고 제재 액션
   const handleReportAction = (
     reportId: string,
-    action: 'ban' | 'suspend' | 'delete_item' | 'dismiss'
+    action: 'dismiss' | 'suspend_7d' | 'ban_user' | 'delete_post'
   ) => {
-    setReports((prev) =>
-      prev.map((rep) => {
-        if (rep.id === reportId) {
-          if (action === 'ban') {
-            alert(`[관리자 집행] "${rep.target_user_name}" 회원이 [플랫폼 전체 영구 제재] 처리되었습니다.`);
-            return { ...rep, status: 'banned' };
-          }
-          if (action === 'suspend') {
-            alert(`[관리자 집행] "${rep.target_user_name}" 회원이 [7일간 거래 정지] 처리되었습니다.`);
-            return { ...rep, status: 'suspended' };
-          }
-          if (action === 'delete_item') {
-            alert(`[관리자 집행] 불량 매물 "${rep.item_title}" 이(가) DB에서 강제 삭제되었습니다.`);
-            setItems((curr) => curr.filter((i) => i.id !== rep.item_id));
-            return { ...rep, status: 'resolved' };
-          }
-          if (action === 'dismiss') {
-            alert(`[관리자 집행] 신고 사유가 불충분하여 기각 처리했습니다.`);
-            return { ...rep, status: 'dismissed' };
-          }
-        }
-        return rep;
-      })
-    );
-  };
+    const actionText = {
+      dismiss: t('정상 (무혐의 종결)'),
+      suspend_7d: t('7일 이용정지'),
+      ban_user: t('영구 퇴출 (블랙리스트)'),
+      delete_post: t('해당 게시글 강제삭제'),
+    }[action];
 
-  // 매물 강제 삭제
-  const handleDeleteItem = (itemId: string, title: string) => {
-    if (confirm(t('정말로 해당 매물을 강제 삭제하시겠습니까?'))) {
-      setItems((prev) => prev.filter((i) => i.id !== itemId));
-      alert(t('매물이 안전하게 삭제되었습니다.'));
+    if (confirm(t(`[${actionText}] 조치를 집행하시겠습니까?`))) {
+      setReports((prev) =>
+        prev.map((r) => {
+          if (r.id === reportId) {
+            let nextStatus: 'pending' | 'banned' | 'suspended' | 'dismissed' | 'resolved' = 'resolved';
+            if (action === 'ban_user') nextStatus = 'banned';
+            if (action === 'suspend_7d') nextStatus = 'suspended';
+            if (action === 'dismiss') nextStatus = 'dismissed';
+            return { ...r, status: nextStatus };
+          }
+          return r;
+        })
+      );
+      alert(t(`[조치 완료] ${actionText} 처리가 정상 집행되었습니다.`));
     }
   };
 
-  // 커뮤니티 글 블라인드 (숨김) 처리
-  const handleHideCommunityPost = (postId: string, title: string) => {
-    if (confirm(t('해당 게시글을 커뮤니티 피드에서 [블라인드(숨김)] 처리하시겠습니까?'))) {
+  // 매물 강제 삭제 액션
+  const handleDeleteItem = (itemId: string, itemTitle: string) => {
+    if (confirm(t(`[${itemTitle}] 매물을 관리자 권한으로 영구 삭제하시겠습니까?`))) {
+      setItems((prev) => prev.filter((it) => it.id !== itemId));
+      alert(t('매물이 관리자 권한으로 삭제되었습니다.'));
+    }
+  };
+
+  // 커뮤니티 게시글 블라인드
+  const handleBlindCommunityPost = (postId: string) => {
+    if (confirm(t('해당 커뮤니티 게시글을 즉시 [블라인드 및 비공개] 처리하시겠습니까?'))) {
       setCommunityPosts((prev) => prev.filter((p) => p.id !== postId));
       alert(t('게시글이 즉시 블라인드 처리되었습니다.'));
     }
@@ -111,6 +143,14 @@ export default function KMarketAdminPage() {
   };
 
   const pendingReportsCount = reports.filter((r) => r.status === 'pending').length;
+
+  if (authChecking) {
+    return null;
+  }
+
+  if (!isAuthenticated) {
+    return <KMarketAdminAuthGate onSuccessLogin={() => setIsAuthenticated(true)} />;
+  }
 
   return (
     <div className="min-h-screen bg-slate-100/70 text-slate-800 flex flex-col font-sans">
@@ -145,14 +185,26 @@ export default function KMarketAdminPage() {
         </div>
 
         <div className="flex items-center space-x-3">
-          <div className="flex items-center space-x-2 bg-emerald-50 px-3 py-1.5 rounded-xl border border-emerald-200 text-xs">
+          <div className="flex items-center space-x-2 bg-emerald-50 px-3 py-1.5 rounded-xl border border-emerald-200 text-xs hidden sm:flex">
             <span className="w-2 h-2 rounded-full bg-emerald-600 animate-pulse" />
             <span className="text-emerald-800 font-bold text-[11px]">실시간 관제 시스템 정상 가동중</span>
           </div>
 
-          <div className="w-8 h-8 rounded-full bg-slate-900 text-white flex items-center justify-center font-black text-xs shadow-xs">
-            AD
+          <div className="flex items-center space-x-2 bg-slate-100 px-3 py-1.5 rounded-xl border border-slate-200">
+            <div className="w-6 h-6 rounded-full bg-slate-900 text-white flex items-center justify-center font-black text-[10px]">
+              AD
+            </div>
+            <span className="text-xs font-extrabold text-slate-700">rlaghddlf01</span>
           </div>
+
+          <button
+            onClick={handleLogout}
+            title="관리자 로그아웃"
+            className="flex items-center space-x-1 px-3 py-1.5 rounded-xl bg-rose-50 hover:bg-rose-100 text-rose-700 border border-rose-200 text-xs font-black transition-all cursor-pointer"
+          >
+            <LogOut className="w-3.5 h-3.5" />
+            <span>로그아웃</span>
+          </button>
         </div>
       </header>
 
@@ -546,21 +598,21 @@ export default function KMarketAdminPage() {
                               신고 기각 (무혐의)
                             </button>
                             <button
-                              onClick={() => handleReportAction(rep.id, 'delete_item')}
+                              onClick={() => handleReportAction(rep.id, 'delete_post')}
                               className="px-3 py-1.5 bg-amber-50 hover:bg-amber-100 text-amber-900 border border-amber-200 text-xs font-bold rounded-xl transition-colors cursor-pointer flex items-center gap-1"
                             >
                               <Trash2 className="w-3.5 h-3.5 text-amber-600" />
                               <span>매물 강제 삭제</span>
                             </button>
                             <button
-                              onClick={() => handleReportAction(rep.id, 'suspend')}
+                              onClick={() => handleReportAction(rep.id, 'suspend_7d')}
                               className="px-3 py-1.5 bg-orange-600 hover:bg-orange-700 text-white text-xs font-bold rounded-xl transition-all cursor-pointer flex items-center gap-1 shadow-xs"
                             >
                               <Clock className="w-3.5 h-3.5" />
                               <span>7일 거래 정지</span>
                             </button>
                             <button
-                              onClick={() => handleReportAction(rep.id, 'ban')}
+                              onClick={() => handleReportAction(rep.id, 'ban_user')}
                               className="px-4 py-1.5 bg-rose-600 hover:bg-rose-700 text-white text-xs font-black rounded-xl transition-all shadow-md shadow-rose-600/30 cursor-pointer flex items-center gap-1"
                             >
                               <Ban className="w-3.5 h-3.5" />
@@ -636,7 +688,7 @@ export default function KMarketAdminPage() {
                           </td>
                           <td className="p-3.5 text-right space-x-1">
                             <button
-                              onClick={() => handleHideCommunityPost(post.id, post.title)}
+                              onClick={() => handleBlindCommunityPost(post.id)}
                               className="px-2.5 py-1 bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-200 rounded-lg font-bold text-[10px] transition-colors cursor-pointer inline-flex items-center gap-1"
                               title="커뮤니티에서 숨김 처리"
                             >
@@ -739,17 +791,19 @@ export default function KMarketAdminPage() {
                   <thead className="bg-slate-50 text-slate-500 uppercase text-[10px] font-bold border-b border-slate-200">
                     <tr>
                       <th className="p-3.5">신청자명 / 국적</th>
+                      <th className="p-3.5">연락처</th>
                       <th className="p-3.5">근무기간 (비자)</th>
                       <th className="p-3.5">월 급여</th>
                       <th className="p-3.5">예상 환급액</th>
                       <th className="p-3.5">수수료 정산</th>
+                      <th className="p-3.5">신청일시</th>
                       <th className="p-3.5">진행 상태</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-slate-100 text-slate-700">
                     {taxLeads.length === 0 ? (
                       <tr>
-                        <td colSpan={6} className="p-8 text-center text-slate-400 text-xs">
+                        <td colSpan={8} className="p-8 text-center text-slate-400 text-xs">
                           접수된 세금 환급 연계 신청 내역이 없습니다. (0건)
                         </td>
                       </tr>
@@ -759,12 +813,14 @@ export default function KMarketAdminPage() {
                           <td className="p-3.5 font-bold text-slate-950">
                             {lead.userName} ({lead.country})
                           </td>
+                          <td className="p-3.5 text-slate-600 font-semibold">{lead.phone || '-'}</td>
                           <td className="p-3.5">{lead.workPeriod}</td>
                           <td className="p-3.5">{lead.salary}</td>
                           <td className="p-3.5 font-black text-amber-600 text-sm">
                             {lead.estimatedRefund}
                           </td>
                           <td className="p-3.5 text-emerald-700 font-bold">{lead.feeType}</td>
+                          <td className="p-3.5 text-slate-400 text-[11px]">{lead.appliedAt}</td>
                           <td className="p-3.5">
                             <span className="px-2.5 py-1 rounded-full text-[10px] font-bold bg-amber-50 text-amber-800 border border-amber-200">
                               {lead.status}

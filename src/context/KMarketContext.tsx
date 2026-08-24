@@ -42,6 +42,9 @@ interface KMarketContextType {
   setIsCreateModalOpen: (open: boolean) => void;
   isTaxModalOpen: boolean;
   setIsTaxModalOpen: (open: boolean) => void;
+  taxModalPrefill: { step?: number; months?: number; salaryManwon?: number; visa?: string } | null;
+  setTaxModalPrefill: (prefill: any) => void;
+  openTaxModalWithPrefill: (data: { step?: number; months?: number; salaryManwon?: number; visa?: string }) => void;
   isFavoritesModalOpen: boolean;
   setIsFavoritesModalOpen: (open: boolean) => void;
   isAuthModalOpen: boolean;
@@ -129,6 +132,12 @@ export function KMarketProvider({ children }: { children: React.ReactNode }) {
   const [selectedItem, setSelectedItem] = useState<KMarketItem | null>(null);
   const [isCreateModalOpen, setIsCreateModalOpen] = useState<boolean>(false);
   const [isTaxModalOpen, setIsTaxModalOpen] = useState<boolean>(false);
+  const [taxModalPrefill, setTaxModalPrefill] = useState<{ step?: number; months?: number; salaryManwon?: number; visa?: string } | null>(null);
+
+  const openTaxModalWithPrefill = (data: { step?: number; months?: number; salaryManwon?: number; visa?: string }) => {
+    setTaxModalPrefill(data);
+    setIsTaxModalOpen(true);
+  };
   const [isFavoritesModalOpen, setIsFavoritesModalOpen] = useState<boolean>(false);
   const [isAuthModalOpen, setIsAuthModalOpen] = useState<boolean>(false);
   const [isMyPageOpen, setIsMyPageOpen] = useState<boolean>(false);
@@ -881,6 +890,9 @@ export function KMarketProvider({ children }: { children: React.ReactNode }) {
         setIsCreateModalOpen,
         isTaxModalOpen,
         setIsTaxModalOpen,
+        taxModalPrefill,
+        setTaxModalPrefill,
+        openTaxModalWithPrefill,
         isFavoritesModalOpen,
         setIsFavoritesModalOpen,
         isAuthModalOpen,

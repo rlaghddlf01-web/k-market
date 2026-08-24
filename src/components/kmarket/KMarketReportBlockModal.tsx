@@ -123,7 +123,7 @@ export default function KMarketReportBlockModal({
                 <span>{t('클린 케이마켓 안전 신고 센터')}</span>
               </div>
               <h2 className="text-xl font-black tracking-tight">
-                사용자 차단 및 불량 신고
+                {t('사용자 차단 및 불량 신고')}
               </h2>
             </div>
           </div>
@@ -142,14 +142,14 @@ export default function KMarketReportBlockModal({
           <div className="p-3.5 rounded-2xl bg-red-50 dark:bg-red-950/40 border border-red-200 dark:border-red-900/50 flex items-center justify-between">
             <div className="truncate">
               <span className="text-[11px] text-red-600 dark:text-red-400 font-bold block">
-                신고 및 차단 대상 회원:
+                {t('신고 및 차단 대상 회원:')}
               </span>
               <h4 className="font-extrabold text-slate-900 dark:text-white text-sm truncate">
                 {targetUserName}
               </h4>
               {itemTitle && (
                 <p className="text-[11px] text-slate-500 truncate mt-0.5">
-                  관련 매물: {itemTitle}
+                  {t('관련 매물:')} {itemTitle}
                 </p>
               )}
             </div>
@@ -159,7 +159,7 @@ export default function KMarketReportBlockModal({
           {/* 1. 신고 사유 선택 */}
           <div className="space-y-1.5">
             <label className="text-xs font-bold text-slate-800 dark:text-slate-200 block">
-              1. 신고 사유를 선택해 주세요
+              {t('1. 신고 사유를 선택해 주세요')}
             </label>
             <div className="space-y-1.5">
               {REPORT_REASONS.map((reason) => {
@@ -178,9 +178,9 @@ export default function KMarketReportBlockModal({
                     <div className="flex items-start space-x-2.5 truncate">
                       <span className="shrink-0 mt-0.5">{reason.icon}</span>
                       <div className="truncate">
-                        <span className="text-xs font-bold block truncate">{reason.label}</span>
+                        <span className="text-xs font-bold block truncate">{t(reason.label)}</span>
                         <span className="text-[10px] text-slate-400 block truncate mt-0.5">
-                          {reason.desc}
+                          {t(reason.desc)}
                         </span>
                       </div>
                     </div>
@@ -194,7 +194,7 @@ export default function KMarketReportBlockModal({
           {/* 2. 상세 설명 입력 */}
           <div className="space-y-1">
             <label className="text-xs font-bold text-slate-800 dark:text-slate-200 block">
-              2. 상세 내용 (선택 사항)
+              {t('2. 상세 내용 (선택 사항)')}
             </label>
             <textarea
               rows={3}
@@ -213,10 +213,10 @@ export default function KMarketReportBlockModal({
               </div>
               <div>
                 <span className="text-xs font-bold text-slate-900 dark:text-white block">
-                  🚫 이 사용자 즉시 차단하기
+                  {t('🚫 이 사용자 즉시 차단하기')}
                 </span>
                 <span className="text-[10px] text-slate-500">
-                  차단 시 이 회원의 매물과 메시지가 나에게 더 이상 보이지 않습니다.
+                  {t('차단 시 이 회원의 매물과 메시지가 나에게 더 이상 보이지 않습니다.')}
                 </span>
               </div>
             </div>
