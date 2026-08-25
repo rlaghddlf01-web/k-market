@@ -1150,5 +1150,6 @@ export const common = {
   "1. 신고 사유를 선택해 주세요": "1. Vui lòng chọn lý do báo cáo",
   "🚫 이 사용자 즉시 차단하기": "🚫 Chặn người dùng này ngay lập tức",
   "차단 시 이 회원의 매물과 메시지가 나에게 더 이상 보이지 않습니다.": "Khi bị chặn, bài đăng và tin nhắn của người này sẽ không còn hiển thị với bạn.",
+  "개": " món",
 };
 export default common;

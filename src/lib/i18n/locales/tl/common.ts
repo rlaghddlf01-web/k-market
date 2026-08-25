@@ -1151,5 +1151,6 @@ export const common = {
   "1. 신고 사유를 선택해 주세요": "1. Piliin ang Dahilan ng Pag-report",
   "🚫 이 사용자 즉시 차단하기": "🚫 I-block agad ang user na ito",
   "차단 시 이 회원의 매물과 메시지가 나에게 더 이상 보이지 않습니다.": "Kapag na-block, ang mga gamit at mensahe ng user na ito ay hindi na makikita.",
+  "개": " na item",
 };
 export default common;

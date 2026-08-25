@@ -1149,5 +1149,6 @@ export const common = {
   "1. 신고 사유를 선택해 주세요": "1. Shikoyat sababini tanlang",
   "🚫 이 사용자 즉시 차단하기": "🚫 Ushbu foydalanuvchini darhol bloklash",
   "차단 시 이 회원의 매물과 메시지가 나에게 더 이상 보이지 않습니다.": "Bloklanganda ushbu a’zoning tovarlari va xabarlari sizga ko‘rinmaydi.",
+  "개": " ta",
 };
 export default common;

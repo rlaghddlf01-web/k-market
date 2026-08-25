@@ -116,17 +116,17 @@ export default function KMarketItemCard({ item }: KMarketItemCardProps) {
 
           {/* 하단: 굵은 가격 + 우하단 채팅/하트 */}
           <div className="flex items-end justify-between pt-1">
-            <div className="flex items-baseline gap-1.5">
+            <div className="flex items-baseline gap-1.5 min-w-0">
               <span
-                className={`text-[16px] font-black tracking-tight ${
+                className={`text-[15px] font-black tracking-tight whitespace-nowrap ${
                   isFree ? 'text-emerald-600' : 'text-gray-950'
                 }`}
               >
-                {isFree ? t('🎁 0원 (무료)') : `${item.price.toLocaleString()}원`}
+                {isFree ? t('🎁 0원 (무료)') : `${item.price.toLocaleString()}${t('원')}`}
               </span>
               {item.original_price && item.original_price > item.price && (
-                <span className="text-[11px] text-gray-400 line-through">
-                  {item.original_price.toLocaleString()}원
+                <span className="text-[11px] text-gray-400 line-through whitespace-nowrap">
+                  {item.original_price.toLocaleString()}{t('원')}
                 </span>
               )}
             </div>
@@ -303,7 +303,7 @@ export default function KMarketItemCard({ item }: KMarketItemCardProps) {
               </span>
               {item.original_price && item.original_price > item.price && (
                 <span className="text-xs text-slate-400 line-through">
-                  {item.original_price.toLocaleString()}원
+                  {formatWon(item.original_price)}
                 </span>
               )}
             </div>
