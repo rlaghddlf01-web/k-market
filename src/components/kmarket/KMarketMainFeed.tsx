@@ -34,12 +34,12 @@ import KMarketPwaInstallPrompt from '@/components/common/KMarketPwaInstallPrompt
 import KMarketPushNotificationManager from '@/components/common/KMarketPushNotificationManager';
 import { ShoppingBag, Sparkles, ShieldCheck, Plus, PackageOpen, ShieldAlert, Loader2, ArrowDown } from 'lucide-react';
 import { haversineDistance, radiusToKm } from '@/lib/haversineDistance';
+import { useInfiniteScrollPrefetch } from '@/hooks/useInfiniteScrollPrefetch';
 
 export default function KMarketMainFeed() {
   const [isAdminModalOpen, setIsAdminModalOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
-  const [visibleMobileCount, setVisibleMobileCount] = useState(16);
-  const [isLoadingMore, setIsLoadingMore] = useState(false);
+  const [visibleMobileCount, setVisibleMobileCount] = useState(20);
   const {
     items,
     selectedCategory,
@@ -74,6 +74,7 @@ export default function KMarketMainFeed() {
   // 카테고리 / 지역 / 검색어 변경 시 1페이지로 자동 리셋
   React.useEffect(() => {
     setCurrentPage(1);
+    setVisibleMobileCount(20);
   }, [selectedCategory, selectedRegion, searchQuery, isMovingSaleOnly]);
 
   // 검색 및 필터링 적용된 매물 목록
@@ -107,7 +108,6 @@ export default function KMarketMainFeed() {
           const distKm = haversineDistance(userCoords.lat, userCoords.lng, itemLat, itemLng);
           if (distKm > km) return false; // 반경 초과 → 숨김
         }
-        // GPS 좌표 없는 매물(초기 등록 전)은 통과 처리
       } else {
         // 기존 공단 지역 ID (pyeongtaek, ansan 등) 비교
         if (item.industrial_zone !== selectedRegion) return false;
@@ -138,30 +138,17 @@ export default function KMarketMainFeed() {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  // 모바일 당근마켓식 무한 스크롤 감지
-  React.useEffect(() => {
-    if (!isMobile) return;
+  // 🚀 초경량 600px 사전 프리페칭 무한 스크롤 연동
+  const handleLoadMore = React.useCallback(() => {
+    setVisibleMobileCount((prev) => Math.min(prev + 20, filteredItems.length));
+  }, [filteredItems.length]);
 
-    const handleScroll = () => {
-      if (isLoadingMore) return;
-      const scrollY = window.scrollY || window.pageYOffset;
-      const windowHeight = window.innerHeight;
-      const docHeight = document.documentElement.scrollHeight;
-
-      if (scrollY + windowHeight >= docHeight - 300) {
-        if (visibleMobileCount < filteredItems.length) {
-          setIsLoadingMore(true);
-          setTimeout(() => {
-            setVisibleMobileCount((prev) => Math.min(prev + 16, filteredItems.length));
-            setIsLoadingMore(false);
-          }, 250);
-        }
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [isMobile, visibleMobileCount, filteredItems.length, isLoadingMore]);
+  const { sentinelRef } = useInfiniteScrollPrefetch({
+    rootMargin: '600px', // 바닥 600px 전에 미리 로드
+    hasMore: isMobile && visibleMobileCount < filteredItems.length,
+    onLoadMore: handleLoadMore,
+    disabled: !isMobile,
+  });
 
   return (
     <CommunityProvider>
@@ -224,18 +211,20 @@ export default function KMarketMainFeed() {
                     ))}
                   </div>
 
-                  {/* 📱 모바일 전용: 당근마켓 스타일 무한 스크롤 로딩 인디케이터 */}
+                  {/* 📱 모바일 전용: 초경량 600px 프리페치 센티넬 & 무한 스크롤 안내 */}
                   {isMobile && (
-                    <div className="py-8 text-center">
+                    <div className="py-6 text-center">
                       {visibleMobileCount < filteredItems.length ? (
-                        <div className="inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-[#ede3d8] text-[#5c4a39] text-xs font-bold shadow-xs">
-                          <Loader2 className={`w-4 h-4 text-amber-600 ${isLoadingMore ? 'animate-spin' : ''}`} />
-                          <span>
-                            {isLoadingMore
-                              ? t('다음 동네 매물 불러오는 중...')
-                              : `${t('스크롤을 내리면 다음 매물이 계속 이어집니다')} (${visibleMobileCount} / ${filteredItems.length})`}
-                          </span>
-                        </div>
+                        <>
+                          {/* 🎯 백그라운드 600px 사전 감지 센티넬 포인트 */}
+                          <div ref={sentinelRef} className="h-1 w-full" aria-hidden="true" />
+                          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#ede3d8]/80 text-[#5c4a39] text-xs font-semibold shadow-2xs">
+                            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                            <span>
+                              {t('스크롤을 내리면 다음 매물이 계속 이어집니다')} ({visibleMobileCount} / {filteredItems.length})
+                            </span>
+                          </div>
+                        </>
                       ) : (
                         <div className="text-xs text-[#8c7866] font-medium py-2">
                           {t('🎉 동네의 모든 실시간 매물을 다 확인하셨습니다!')}

@@ -9,10 +9,13 @@ import {
   Sparkles,
   Trash2,
   CheckCircle2,
+  Loader2,
+  Zap,
 } from 'lucide-react';
 import { ItemCategory, IndustrialRegion } from '@/types/kmarket';
 import { CATEGORIES_DATA } from '@/lib/languages';
 import KMarketMapPicker from './KMarketMapPicker';
+import { compressMultipleImages, CompressionResult } from '@/lib/imageCompressor';
 
 const SAMPLE_IMAGE_PRESETS = [
   'https://images.unsplash.com/photo-1584269600464-37b1b58a9fe7?w=800&auto=format&fit=crop&q=80', // 밥솥
@@ -39,6 +42,7 @@ export default function KMarketCreatePost() {
   const [isMovingSale, setIsMovingSale] = useState(false);
   const [movingDDay, setMovingDDay] = useState(5);
   const [images, setImages] = useState<string[]>([SAMPLE_IMAGE_PRESETS[0]]);
+  const [isCompressing, setIsCompressing] = useState(false);
   const [sellerCountry, setSellerCountry] = useState(currentLangOption.countryCode || (currentLang === 'ko' ? 'KR' : 'VN'));
   const [sellerName, setSellerName] = useState(
     authedUser?.userName || (currentLang === 'vi' ? 'Nguyễn' : (currentLang === 'ko' ? '안산호랑이' : 'Global User'))
@@ -74,8 +78,39 @@ export default function KMarketCreatePost() {
     setImages(images.filter((_, i) => i !== index));
   };
 
+  // 📸 고객 업로드 사진 초경량 95% 압축 처리 핸들러
+  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files;
+    if (!files || files.length === 0) return;
+
+    const remainingSlots = 5 - images.length;
+    if (remainingSlots <= 0) {
+      alert(t('사진은 최대 5장까지만 등록 가능합니다.'));
+      return;
+    }
+
+    const selectedFiles = Array.from(files).slice(0, remainingSlots);
+    setIsCompressing(true);
+
+    try {
+      const results: CompressionResult[] = await compressMultipleImages(selectedFiles, remainingSlots);
+      const newUrls = results.map((r) => r.dataUrl);
+      setImages((prev) => [...prev, ...newUrls]);
+    } catch (err) {
+      console.error('Image compression error:', err);
+      alert(t('사진 압축 처리 중 오류가 발생했습니다.'));
+    } finally {
+      setIsCompressing(false);
+      e.target.value = '';
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (isCompressing) {
+      alert(t('사진 압축 진행 중입니다. 잠시만 기다려주세요.'));
+      return;
+    }
     if (!title.trim() || !description.trim()) {
       alert(t('제목과 설명을 입력해 주세요.'));
       return;
@@ -119,13 +154,16 @@ export default function KMarketCreatePost() {
               <Sparkles className="w-3.5 h-3.5 text-[#f3ba2f]" />
               <span>{t('수수료 0원 100% 무료 개인간 직거래')}</span>
             </div>
-            <h2 className="text-xl font-black tracking-tight text-white">
-              {t('1분 간편 매물 등록')}
+            <h2 className="text-xl font-black tracking-tight flex items-center gap-2">
+              <span>{t('내 물건 당일 직거래 등록')}</span>
+              <span className="text-xs bg-red-600 text-white font-bold px-2 py-0.5 rounded-full animate-pulse">
+                {t('1분 초간단')}
+              </span>
             </h2>
           </div>
           <button
             onClick={() => setIsCreateModalOpen(false)}
-            className="bg-white/10 hover:bg-white/20 text-white p-2 rounded-full transition-colors cursor-pointer border border-white/20"
+            className="w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-all cursor-pointer"
           >
             <X className="w-5 h-5" />
           </button>
@@ -135,9 +173,15 @@ export default function KMarketCreatePost() {
         <form onSubmit={handleSubmit} className="p-5 overflow-y-auto space-y-5 flex-1 text-xs sm:text-sm">
           {/* 1. 사진 업로드 및 프리셋 */}
           <div className="space-y-2">
-            <label className="block font-bold text-slate-800">
-              📷 {t('상품 사진')} ({images.length}/5)
-            </label>
+            <div className="flex items-center justify-between">
+              <label className="block font-bold text-slate-800">
+                📷 {t('상품 사진')} ({images.length}/5)
+              </label>
+              <span className="text-[11px] text-emerald-600 font-semibold flex items-center gap-1">
+                <Zap className="w-3 h-3 text-emerald-500" />
+                {t('0.3초 실시간 95% 스마트 초경량 압축')}
+              </span>
+            </div>
             <div className="flex items-center space-x-2 overflow-x-auto pb-1">
               {images.map((img, idx) => (
                 <div key={idx} className="relative w-20 h-20 rounded-2xl overflow-hidden border border-slate-200 shrink-0">
@@ -155,26 +199,24 @@ export default function KMarketCreatePost() {
                 </div>
               ))}
 
-              {images.length < 5 && (
+              {/* 압축 중 로딩 표시 */}
+              {isCompressing && (
+                <div className="w-20 h-20 rounded-2xl border-2 border-emerald-300 bg-emerald-50/70 flex flex-col items-center justify-center text-emerald-600 shrink-0 animate-pulse">
+                  <Loader2 className="w-5 h-5 animate-spin" />
+                  <span className="text-[9px] mt-1 font-bold text-center">{t('압축 중...')}</span>
+                </div>
+              )}
+
+              {images.length < 5 && !isCompressing && (
                 <label className="w-20 h-20 rounded-2xl border-2 border-dashed border-slate-300 hover:border-blue-500 bg-slate-50 flex flex-col items-center justify-center text-slate-400 hover:text-blue-600 shrink-0 cursor-pointer transition-colors">
                   <Camera className="w-5 h-5" />
                   <span className="text-[10px] mt-1 font-semibold">{t('+ 사진추가')}</span>
                   <input
                     type="file"
                     accept="image/*"
+                    multiple
                     className="hidden"
-                    onChange={(e) => {
-                      const file = e.target.files?.[0];
-                      if (file) {
-                        const reader = new FileReader();
-                        reader.onload = (event) => {
-                          if (event.target?.result) {
-                            setImages([...images, event.target.result as string]);
-                          }
-                        };
-                        reader.readAsDataURL(file);
-                      }
-                    }}
+                    onChange={handleImageUpload}
                   />
                 </label>
               )}

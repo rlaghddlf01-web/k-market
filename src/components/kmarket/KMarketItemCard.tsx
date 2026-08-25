@@ -52,17 +52,19 @@ export default function KMarketItemCard({ item }: KMarketItemCardProps) {
       {/* ── 📱 [모바일 전용] 당근마켓 스타일 좌측 1:1 정사각형 사진 + 우측 정보 가로 1줄 뷰 ── */}
       <div
         onClick={() => setSelectedItem(item)}
-        className={`md:hidden flex flex-row gap-3.5 py-3.5 px-2 border-b border-gray-200/70 bg-white hover:bg-gray-50/60 active:bg-gray-100 cursor-pointer transition-colors w-full ${
+        className={`md:hidden flex flex-row gap-3.5 py-3.5 px-2 border-b border-gray-200/70 bg-white hover:bg-gray-50/60 active:bg-gray-100 cursor-pointer transition-colors w-full min-h-[136px] ${
           isSold ? 'opacity-55' : ''
         }`}
+        style={{ contentVisibility: 'auto', containIntrinsicSize: '136px' }}
       >
-        {/* 좌측: 1:1 정사각형 썸네일 사진 */}
-        <div className="relative w-28 h-28 shrink-0 rounded-2xl overflow-hidden bg-slate-100 border border-gray-100 shadow-2xs">
+        {/* 좌측: 1:1 정사각형 썸네일 사진 (112px x 112px 고정) */}
+        <div className="relative w-28 h-28 min-w-[112px] min-h-[112px] shrink-0 rounded-2xl overflow-hidden bg-slate-100 border border-gray-100 shadow-2xs">
           <img
             src={item.images[0]}
             alt={item.title}
             className={`w-full h-full object-cover ${isSold ? 'grayscale-[40%]' : ''}`}
             loading="lazy"
+            decoding="async"
           />
 
           {/* 좌상단: D-Day / 상태 배지 */}
