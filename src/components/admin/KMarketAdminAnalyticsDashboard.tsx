@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
 import {
   TrendingUp,
   Eye,
@@ -19,6 +19,13 @@ import {
   ChevronRight,
 } from 'lucide-react';
 import { getLiveTrafficStats, TrafficChannelKey } from '@/lib/trafficTracker';
+import {
+  FullTrafficAggregateStats,
+  getKstCurrentHour,
+  TrafficChartBar,
+  WeeklyDayData,
+  MonthlyWeekData,
+} from '@/lib/trafficAggregator';
 
 type PeriodType = 'today' | 'weekly' | 'monthly' | 'yearly';
 type ChannelCategory = 'all' | 'sns' | 'messenger' | 'search' | 'offline_ref';
@@ -55,69 +62,62 @@ const RAW_CHANNELS_TEMPLATE: Omit<TrafficChannel, 'rank' | 'count' | 'percentage
   { key: 'other', name: '기타 타사이트 유입', category: 'search', icon: '🔗', color: '#78716c' },
 ];
 
-// 연도별 데이터 세트 (연도별 비교 분석용)
-const YEARLY_DATASETS: Record<number, { quarters: number[]; prevQuarters: number[]; total: number; growthRate: string }> = {
-  2026: {
-    quarters: [0, 0, 0, 0],
-    prevQuarters: [0, 0, 0, 0],
-    total: 0,
-    growthRate: '기준년도 (런칭)',
-  },
-  2027: {
-    quarters: [0, 0, 0, 0],
-    prevQuarters: [0, 0, 0, 0],
-    total: 0,
-    growthRate: '+184% (YoY 성장)',
-  },
-  2028: {
-    quarters: [0, 0, 0, 0],
-    prevQuarters: [0, 0, 0, 0],
-    total: 0,
-    growthRate: '+240% (YoY 성장)',
-  },
-  2029: {
-    quarters: [0, 0, 0, 0],
-    prevQuarters: [0, 0, 0, 0],
-    total: 0,
-    growthRate: '+310% (YoY 성장)',
-  },
-};
-
 export default function KMarketAdminAnalyticsDashboard() {
   const [period, setPeriod] = useState<PeriodType>('today');
   const [channelFilter, setChannelFilter] = useState<ChannelCategory>('all');
   const [selectedYear, setSelectedYear] = useState<number>(2026);
   const [compareYoY, setCompareYoY] = useState<boolean>(true);
+  const [fullStats, setFullStats] = useState<FullTrafficAggregateStats | null>(null);
   const [liveStats, setLiveStats] = useState<Record<string, number>>({});
   const [dbHourlyStats, setDbHourlyStats] = useState<number[]>(Array(24).fill(0));
+  const [weeklyDays, setWeeklyDays] = useState<WeeklyDayData[]>([]);
+  const [monthlyWeeks, setMonthlyWeeks] = useState<MonthlyWeekData[]>([]);
+  const [yearlyData, setYearlyData] = useState<Record<number, { quarters: number[]; total: number }>>({
+    2026: { quarters: [0, 0, 0, 0], total: 0 },
+    2027: { quarters: [0, 0, 0, 0], total: 0 },
+  });
   const [dbTodayPv, setDbTodayPv] = useState<number>(0);
+  const [dbWeeklyPv, setDbWeeklyPv] = useState<number>(0);
+  const [dbMonthlyPv, setDbMonthlyPv] = useState<number>(0);
   const [dbTotalPv, setDbTotalPv] = useState<number>(0);
   const [mounted, setMounted] = useState<boolean>(false);
-  const [currentHour, setCurrentHour] = useState<number>(11);
+  const [currentHour, setCurrentHour] = useState<number>(() => getKstCurrentHour());
   const chartScrollRef = useRef<HTMLDivElement>(null);
 
-  // 실제 실시간 유입 통계 로드 및 클라이언트 마운트 시각 동기화
+  // 실제 한국 시간(KST) 실시간 유입 통계 로드 및 클라이언트 마운트 시각 동기화
   useEffect(() => {
     setMounted(true);
-    setCurrentHour(new Date().getHours());
+    setCurrentHour(getKstCurrentHour());
     
     // 로컬 스토리지 데이터 1차 로드
     const local = getLiveTrafficStats();
     setLiveStats(local);
 
-    // 중앙 Supabase DB 실시간 전역 통계 로드
+    // 중앙 Supabase DB 실시간 전역 통계 로드 (KST 기준)
     fetch('/api/traffic')
       .then((res) => res.json())
       .then((json) => {
         if (json.success && json.data) {
-          const { totalPv, todayPv, channelCounts, hourlyCountsToday } = json.data;
-          setDbTotalPv(totalPv);
-          setDbTodayPv(todayPv);
-          if (hourlyCountsToday && Array.isArray(hourlyCountsToday)) {
-            setDbHourlyStats(hourlyCountsToday);
+          const data = json.data as FullTrafficAggregateStats;
+          setFullStats(data);
+          setDbTotalPv(data.totalPv);
+          setDbTodayPv(data.todayPv);
+          setDbWeeklyPv(data.weeklyPv);
+          setDbMonthlyPv(data.monthlyPv);
+          if (data.hourlyCountsToday && Array.isArray(data.hourlyCountsToday)) {
+            setDbHourlyStats(data.hourlyCountsToday);
           }
-          if (channelCounts) {
-            setLiveStats(channelCounts);
+          if (data.weeklyDays && Array.isArray(data.weeklyDays)) {
+            setWeeklyDays(data.weeklyDays);
+          }
+          if (data.monthlyWeeks && Array.isArray(data.monthlyWeeks)) {
+            setMonthlyWeeks(data.monthlyWeeks);
+          }
+          if (data.yearlyData) {
+            setYearlyData(data.yearlyData);
+          }
+          if (data.channelCounts) {
+            setLiveStats(data.channelCounts);
           }
         }
       })
@@ -126,15 +126,46 @@ export default function KMarketAdminAnalyticsDashboard() {
 
   // 실제 순수 트래픽 집계 (DB 우선, 없을 시 로컬)
   const totalLivePv = dbTotalPv > 0 ? dbTotalPv : (liveStats['total_pv'] || 0);
-  const todayLivePv = dbTodayPv > 0 ? dbTodayPv : totalLivePv;
+  const todayLivePv = dbTodayPv > 0 ? dbTodayPv : (liveStats['total_pv'] || 0);
+  const weeklyLivePv = dbWeeklyPv > 0 ? dbWeeklyPv : todayLivePv;
+  const monthlyLivePv = dbMonthlyPv > 0 ? dbMonthlyPv : totalLivePv;
 
-  // 채널별 실제 방문 카운트 매핑
-  const channelList: TrafficChannel[] = RAW_CHANNELS_TEMPLATE.map((tpl, idx) => {
-    const count = liveStats[tpl.key] || 0;
-    const percentage = totalLivePv > 0 ? Math.round((count / totalLivePv) * 100) : 0;
+  // 연간 모드일 때는 선택된 연도의 분기 데이터 및 전년도 비교 데이터 구성
+  const currentYearData = yearlyData[selectedYear] || { quarters: [0, 0, 0, 0], total: 0 };
+  const prevYearData = yearlyData[selectedYear - 1] || { quarters: [0, 0, 0, 0], total: 0 };
+
+  // 현재 선택된 기간(오늘/주간/월간/연간)에 맞는 채널별 카운트 및 모수 PV 도출
+  const currentPeriodChannels: Record<string, number> = useMemo(() => {
+    if (!fullStats?.periodChannelCounts) {
+      return liveStats || {};
+    }
+    if (period === 'today') {
+      return fullStats.periodChannelCounts.today;
+    } else if (period === 'weekly') {
+      return fullStats.periodChannelCounts.weekly;
+    } else if (period === 'monthly') {
+      return fullStats.periodChannelCounts.monthly;
+    } else {
+      return fullStats.periodChannelCounts.yearly?.[selectedYear] || {};
+    }
+  }, [fullStats, period, selectedYear, liveStats]);
+
+  const currentPeriodTotalPv =
+    period === 'today'
+      ? todayLivePv
+      : period === 'weekly'
+      ? weeklyLivePv
+      : period === 'monthly'
+      ? monthlyLivePv
+      : currentYearData.total;
+
+  // 채널별 실제 방문 카운트 매핑 (선택 기간에 따라 동적 순위 및 점유율 재계산)
+  const channelList: TrafficChannel[] = RAW_CHANNELS_TEMPLATE.map((tpl) => {
+    const count = currentPeriodChannels[tpl.key] || 0;
+    const percentage = currentPeriodTotalPv > 0 ? Math.round((count / currentPeriodTotalPv) * 100) : 0;
 
     return {
-      rank: idx + 1,
+      rank: 1,
       key: tpl.key,
       name: tpl.name,
       category: tpl.category,
@@ -146,49 +177,65 @@ export default function KMarketAdminAnalyticsDashboard() {
     };
   }).sort((a, b) => b.count - a.count).map((ch, i) => ({ ...ch, rank: i + 1 }));
 
-  // 24시간 전체 라벨 (00시 ~ 23시)
+  // 24시간 전체 라벨 (00시 ~ 23시 KST)
   const HOURS_24 = Array.from({ length: 24 }, (_, i) => `${i < 10 ? '0' + i : i}시`);
 
-  // 기간별 차트 데이터
-  const chartLabels =
-    period === 'today'
-      ? HOURS_24
-      : period === 'weekly'
-      ? ['8/16', '8/17', '8/18', '8/19', '8/20', '8/21', '오늘']
-      : period === 'monthly'
-      ? ['1주차', '2주차', '3주차', '이번주']
-      : ['1분기', '2분기', '3분기', '4분기'];
+  // 기간별 동적 차트 데이터 구성 (KST 기반 실제 데이터 연동)
+  let dailyChart: TrafficChartBar[] = [];
 
-  // 연간 모드일 때는 선택된 연도의 분기 데이터 및 전년도 비교 데이터 구성
-  const yearlyCurrent = YEARLY_DATASETS[selectedYear] || YEARLY_DATASETS[2026];
-  const dailyChart = chartLabels.map((lbl, idx) => {
-    if (period === 'yearly') {
-      const isCurrentQuarter = idx === 2; // 현재 분기 (3분기)
-      return {
-        label: lbl,
-        value: isCurrentQuarter ? todayLivePv : yearlyCurrent.quarters[idx],
-        prevValue: yearlyCurrent.prevQuarters[idx],
-        isToday: isCurrentQuarter,
-      };
-    }
-    if (period === 'today') {
+  if (period === 'today') {
+    dailyChart = HOURS_24.map((lbl, idx) => {
       const isCurrent = idx === currentHour;
-      const hourValue = dbHourlyStats[idx] || (isCurrent ? todayLivePv : 0);
+      const hourValue = dbHourlyStats[idx] || 0;
       return {
         label: lbl,
         value: hourValue,
         prevValue: 0,
         isToday: isCurrent,
       };
+    });
+  } else if (period === 'weekly') {
+    if (weeklyDays.length > 0) {
+      dailyChart = weeklyDays.map((d) => ({
+        label: d.label,
+        value: d.count,
+        prevValue: 0,
+        isToday: d.isToday,
+      }));
+    } else {
+      dailyChart = ['D-6', 'D-5', 'D-4', 'D-3', 'D-2', '어제', '오늘'].map((lbl, idx) => ({
+        label: lbl,
+        value: idx === 6 ? todayLivePv : 0,
+        prevValue: 0,
+        isToday: idx === 6,
+      }));
     }
-    const isToday = idx === chartLabels.length - 1;
-    return {
+  } else if (period === 'monthly') {
+    if (monthlyWeeks.length > 0) {
+      dailyChart = monthlyWeeks.map((w) => ({
+        label: w.label,
+        value: w.count,
+        prevValue: 0,
+        isToday: w.isCurrent,
+      }));
+    } else {
+      dailyChart = ['3주 전', '2주 전', '지난주', '이번주'].map((lbl, idx) => ({
+        label: lbl,
+        value: idx === 3 ? monthlyLivePv : 0,
+        prevValue: 0,
+        isToday: idx === 3,
+      }));
+    }
+  } else {
+    // yearly
+    const quarterLabels = ['1분기 (1~3월)', '2분기 (4~6월)', '3분기 (7~9월)', '4분기 (10~12월)'];
+    dailyChart = quarterLabels.map((lbl, idx) => ({
       label: lbl,
-      value: isToday ? todayLivePv : 0,
-      prevValue: 0,
-      isToday,
-    };
-  });
+      value: currentYearData.quarters[idx] || 0,
+      prevValue: prevYearData.quarters[idx] || 0,
+      isToday: idx === 2, // 8월 기준 3분기
+    }));
+  }
 
   const maxChartValue = Math.max(
     ...dailyChart.map((d) => Math.max(d.value, d.prevValue || 0)),
@@ -299,52 +346,122 @@ export default function KMarketAdminAnalyticsDashboard() {
         </div>
       </div>
 
-      {/* 2. 4대 KPI 핵심 지표 카드 */}
+      {/* 2. 4대 KPI 핵심 지표 카드 (선택 기간별 동적 집계) */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-3.5">
-        {/* 오늘 / 기준 PV */}
+        {/* 1) 기준 PV */}
         <div className="bg-white p-4.5 rounded-2xl border border-[#ded1c4] shadow-2xs relative overflow-hidden group hover:border-[#845b37] transition-all">
           <div className="flex items-center justify-between text-[#705e4f] text-xs font-bold">
-            <span>{period === 'yearly' ? `${selectedYear}년 총 PV` : '오늘 페이지뷰 (PV)'}</span>
+            <span>
+              {period === 'today'
+                ? '오늘 페이지뷰 (PV)'
+                : period === 'weekly'
+                ? '주간 총 페이지뷰 (PV)'
+                : period === 'monthly'
+                ? '월간 총 페이지뷰 (PV)'
+                : `${selectedYear}년 총 PV`}
+            </span>
             <div className="w-7 h-7 rounded-xl bg-[#f4ede6] flex items-center justify-center text-[#845b37]">
               <Eye className="w-3.5 h-3.5" />
             </div>
           </div>
           <p className="text-2xl sm:text-3xl font-black text-[#1f1914] mt-2">
-            {todayLivePv.toLocaleString()} <span className="text-xs font-bold text-[#8c7866]">회</span>
+            {(period === 'today'
+              ? todayLivePv
+              : period === 'weekly'
+              ? weeklyLivePv
+              : period === 'monthly'
+              ? monthlyLivePv
+              : currentYearData.total
+            ).toLocaleString()}{' '}
+            <span className="text-xs font-bold text-[#8c7866]">회</span>
           </p>
-          <p className="text-[10px] text-[#8c7866] mt-1 font-medium">실시간 실제 누적 페이지뷰</p>
+          <p className="text-[10px] text-[#8c7866] mt-1 font-medium">
+            {period === 'today'
+              ? '오늘 한국시간(KST) 실시간 누적'
+              : period === 'weekly'
+              ? '최근 7일간 실제 누적 방문'
+              : period === 'monthly'
+              ? '최근 4주간 실제 누적 방문'
+              : `${selectedYear}년도 연간 총 방문`}
+          </p>
         </div>
 
-        {/* 기간 누적 PV */}
+        {/* 2) 기간 누적 / 평균 PV */}
         <div className="bg-white p-4.5 rounded-2xl border border-[#ded1c4] shadow-2xs relative overflow-hidden group hover:border-[#845b37] transition-all">
           <div className="flex items-center justify-between text-[#705e4f] text-xs font-bold">
-            <span>기간 누적 PV</span>
+            <span>
+              {period === 'today'
+                ? '전체 누적 PV'
+                : period === 'weekly'
+                ? '주간 일평균 PV'
+                : period === 'monthly'
+                ? '월간 주평균 PV'
+                : '분기 평균 PV'}
+            </span>
             <div className="w-7 h-7 rounded-xl bg-[#f4ede6] flex items-center justify-center text-[#845b37]">
               <Calendar className="w-3.5 h-3.5" />
             </div>
           </div>
           <p className="text-2xl sm:text-3xl font-black text-[#1f1914] mt-2">
-            {totalLivePv.toLocaleString()} <span className="text-xs font-bold text-[#8c7866]">회</span>
+            {(period === 'today'
+              ? totalLivePv
+              : period === 'weekly'
+              ? Math.round((weeklyLivePv / 7) * 10) / 10
+              : period === 'monthly'
+              ? Math.round((monthlyLivePv / 4) * 10) / 10
+              : Math.round((currentYearData.total / 4) * 10) / 10
+            ).toLocaleString()}{' '}
+            <span className="text-xs font-bold text-[#8c7866]">회</span>
           </p>
-          <p className="text-[10px] text-[#8c7866] mt-1 font-medium">유입 경로를 통한 총 방문 합계</p>
+          <p className="text-[10px] text-[#8c7866] mt-1 font-medium">
+            {period === 'today'
+              ? '유입 경로를 통한 전체 누적 합계'
+              : period === 'weekly'
+              ? '최근 7일간 일평균 방문수'
+              : period === 'monthly'
+              ? '최근 4주간 주평균 방문수'
+              : `${selectedYear}년 분기당 평균 방문수`}
+          </p>
         </div>
 
-        {/* 연간 성장률 (YoY) */}
+        {/* 3) 성장 지표 / 피크 분석 */}
         <div className="bg-white p-4.5 rounded-2xl border border-[#ded1c4] shadow-2xs relative overflow-hidden group hover:border-[#845b37] transition-all">
           <div className="flex items-center justify-between text-[#705e4f] text-xs font-bold">
-            <span>연간 성장 지표 (YoY)</span>
+            <span>{period === 'yearly' || period === 'today' ? '연간 성장 지표 (YoY)' : '기간 피크 유입'}</span>
             <div className="w-7 h-7 rounded-xl bg-[#f4ede6] flex items-center justify-center text-[#845b37]">
               <TrendingUp className="w-3.5 h-3.5" />
             </div>
           </div>
           <p className="text-lg sm:text-xl font-black text-[#845b37] mt-2 flex items-center gap-1">
             <ArrowUpRight className="w-4 h-4 text-emerald-600" />
-            <span>{yearlyCurrent.growthRate}</span>
+            <span>
+              {period === 'yearly'
+                ? prevYearData.total > 0
+                  ? `+${Math.round(((currentYearData.total - prevYearData.total) / prevYearData.total) * 100)}% (YoY)`
+                  : '기준년도 (런칭)'
+                : period === 'weekly'
+                ? weeklyDays.length > 0
+                  ? `${[...weeklyDays].sort((a, b) => b.count - a.count)[0]?.label} (${[...weeklyDays].sort((a, b) => b.count - a.count)[0]?.count}회)`
+                  : '집계중'
+                : period === 'monthly'
+                ? monthlyWeeks.length > 0
+                  ? `${[...monthlyWeeks].sort((a, b) => b.count - a.count)[0]?.label} (${[...monthlyWeeks].sort((a, b) => b.count - a.count)[0]?.count}회)`
+                  : '집계중'
+                : '기준년도 (런칭)'}
+            </span>
           </p>
-          <p className="text-[10px] text-[#8c7866] mt-1 font-medium">{selectedYear - 1}년 대비 성장 분석</p>
+          <p className="text-[10px] text-[#8c7866] mt-1 font-medium">
+            {period === 'yearly'
+              ? `${selectedYear - 1}년 대비 성장률 분석`
+              : period === 'weekly'
+              ? '최근 7일 중 최고 트래픽 일자'
+              : period === 'monthly'
+              ? '최근 4주 중 최고 트래픽 주차'
+              : '2026년 공식 런칭 기준'}
+          </p>
         </div>
 
-        {/* 활성 사용자 (MAU) */}
+        {/* 4) 활성 방문자 수 */}
         <div className="bg-white p-4.5 rounded-2xl border border-[#ded1c4] shadow-2xs relative overflow-hidden group hover:border-[#845b37] transition-all">
           <div className="flex items-center justify-between text-[#705e4f] text-xs font-bold">
             <span>활성 방문자 수</span>
@@ -353,9 +470,19 @@ export default function KMarketAdminAnalyticsDashboard() {
             </div>
           </div>
           <p className="text-2xl sm:text-3xl font-black text-[#3d2817] mt-2">
-            {totalLivePv > 0 ? totalLivePv : 0} <span className="text-xs font-bold text-[#8c7866]">명</span>
+            {(period === 'today'
+              ? todayLivePv
+              : period === 'weekly'
+              ? weeklyLivePv
+              : period === 'monthly'
+              ? monthlyLivePv
+              : currentYearData.total
+            ).toLocaleString()}{' '}
+            <span className="text-xs font-bold text-[#8c7866]">명</span>
           </p>
-          <p className="text-[10px] text-[#845b37] font-extrabold mt-1">실시간 고유 방문자 측정</p>
+          <p className="text-[10px] text-[#845b37] font-extrabold mt-1">
+            {period === 'today' ? 'KST 오늘 고유 방문자' : '선택 기간 총 방문자'}
+          </p>
         </div>
       </div>
 
@@ -513,17 +640,22 @@ export default function KMarketAdminAnalyticsDashboard() {
             ) : (
               <span>💡 {selectedYear}년도 유입 데이터가 실시간으로 집계 및 보존됩니다.</span>
             )}
-            <span className="font-bold text-[#10b981]">기준: {period === 'today' ? '오늘 24H' : `${selectedYear}년`}</span>
+            <span className="font-bold text-[#10b981]">
+              기준: KST({period === 'today' ? '오늘 24H' : period === 'weekly' ? '최근 7일' : period === 'monthly' ? '최근 4주' : `${selectedYear}년`})
+            </span>
           </div>
         </div>
 
         {/* 우측: 16대 채널별 실제 유입 순위 (6 cols) */}
         <div className="lg:col-span-6 bg-white p-5 rounded-2xl border border-[#ded1c4] shadow-2xs space-y-3.5">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-[#f4ede6] pb-2.5">
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 flex-wrap">
               <Share2 className="w-4 h-4 text-[#845b37]" />
-              <h3 className="text-xs sm:text-sm font-black text-[#1f1914]">
-                글로벌 16대 채널별 실제 유입 현황
+              <h3 className="text-xs sm:text-sm font-black text-[#1f1914] flex items-center gap-1.5">
+                <span>글로벌 16대 채널별 실제 유입 현황</span>
+                <span className="text-[10px] text-[#845b37] bg-[#ede2d6] px-2 py-0.5 rounded-full font-bold">
+                  {period === 'today' ? '오늘 24H' : period === 'weekly' ? '주간 7일' : period === 'monthly' ? '월간 4주' : `${selectedYear}년 연간`}
+                </span>
               </h3>
             </div>
 
