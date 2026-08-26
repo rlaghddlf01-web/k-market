@@ -19,9 +19,9 @@ export const metadata: Metadata = {
     google: 'C7rvrHCQoAz2tQfJvpwPVa3w-UNOYByv-IGpHc-fBfc',
   },
   metadataBase: new URL('https://ktrs-market.vercel.app'),
-  title: 'KTRS K-Market (케이마켓) | 외국인 중고거래 & 무빙세일',
+  title: 'KTRS K-Market (케이마켓) | 외국인 0원 무료 나눔 & 중고거래 무빙세일',
   description:
-    '대한민국 No.1 외국인 근로자 전용 0원 수수료 중고거래 & 귀국 무빙세일 플랫폼! 17개국어 실시간 자동 번역 채팅, 평택·안산·화성 전국 공단 도보 5분 안심 직거래, 최대 1000만원 세금 환급 원스톱 연계',
+    '대한민국 No.1 외국인 0원 무료 나눔 & 중고거래 무빙세일 플랫폼! 17개국어 실시간 자동 번역 채팅, 대학가·공단 도보 5분 안심 직거래, 최대 1000만원 세금 환급 원스톱 연계',
   manifest: '/manifest.json',
   appleWebApp: {
     capable: true,
@@ -33,9 +33,9 @@ export const metadata: Metadata = {
     locale: 'ko_KR',
     url: 'https://ktrs-market.vercel.app',
     siteName: 'KTRS K-Market',
-    title: 'KTRS K-Market (케이마켓) | 외국인 중고거래 & 무빙세일',
+    title: 'KTRS K-Market (케이마켓) | 외국인 0원 무료 나눔 & 중고거래 무빙세일',
     description:
-      '대한민국 No.1 외국인 근로자 전용 0원 수수료 중고거래 & 귀국 무빙세일 플랫폼! 17개국어 실시간 번역 채팅 및 공단 안심 직거래',
+      '대한민국 No.1 외국인 0원 무료 나눔 & 중고거래 무빙세일 플랫폼! 17개국어 실시간 번역 채팅 및 공단·대학가 안심 직거래',
     images: [
       {
         url: '/images/og-kmarket.jpg',
@@ -47,9 +47,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'KTRS K-Market (케이마켓) | 외국인 중고거래 & 무빙세일',
+    title: 'KTRS K-Market (케이마켓) | 외국인 0원 무료 나눔 & 중고거래 무빙세일',
     description:
-      '대한민국 No.1 외국인 근로자 전용 0원 수수료 중고거래 & 귀국 무빙세일 플랫폼! 17개국어 실시간 번역 채팅 및 공단 안심 직거래',
+      '대한민국 No.1 외국인 0원 무료 나눔 & 중고거래 무빙세일 플랫폼! 17개국어 실시간 번역 채팅 및 공단·대학가 안심 직거래',
     images: ['/images/og-kmarket.jpg'],
   },
   icons: {
