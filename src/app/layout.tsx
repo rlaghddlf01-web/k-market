@@ -15,6 +15,9 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
+  verification: {
+    google: 'C7rvrHCQoAz2tQfJvpwPVa3w-UNOYByv-IGpHc-fBfc',
+  },
   metadataBase: new URL('https://ktrs-market.vercel.app'),
   title: 'KTRS K-Market (케이마켓) | 외국인 중고거래 & 무빙세일',
   description:
