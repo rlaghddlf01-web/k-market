@@ -5,7 +5,8 @@ import { useRouter } from 'next/navigation';
 import { useLanguage } from '@/context/LanguageContext';
 import { useKMarket } from '@/context/KMarketContext';
 import { getLocalizedAddressDisplay } from '@/lib/koreanLocationRomanizer';
-import { Globe, PlusCircle, Search, Sparkles, ShieldCheck, UserCheck, UserPlus, Bell, MapPin, ChevronDown, Smartphone } from 'lucide-react';
+import Link from 'next/link';
+import { Globe, PlusCircle, Search, Sparkles, ShieldCheck, UserCheck, UserPlus, Bell, MapPin, ChevronDown, Smartphone, BookOpen } from 'lucide-react';
 import KMarketWelcomeLanguageGateway from '../common/KMarketWelcomeLanguageGateway';
 import { triggerPwaInstall, isPwaInstalled } from '@/lib/pwaInstaller';
 
@@ -382,17 +383,17 @@ export default function KMarketHeader() {
               <span className="absolute top-1 right-1 w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" />
             </button>
 
-            {/* 3. 세금 환급 탭 */}
-            <button
-              type="button"
-              onClick={() => setIsTaxModalOpen(true)}
-              className="w-full py-1.5 px-1 rounded-xl font-bold text-[#5c4a39] bg-[#ede2d6] hover:bg-[#e2d4c5] border border-[#ded1c4] transition-all cursor-pointer text-[10px] xs:text-[11px] leading-tight flex items-center justify-center text-center shadow-2xs"
+            {/* 3. 외국인 생활·세무 블로그 탭 */}
+            <Link
+              href={`/${currentLang}/blog`}
+              className="w-full py-1.5 px-1 rounded-xl font-black text-[#4a2c11] bg-[#ede3d7] hover:bg-[#e4d7c8] border border-[#d9ccbd] transition-all cursor-pointer text-[10px] xs:text-[11px] leading-tight flex items-center justify-center text-center shadow-2xs relative group"
             >
               <span className="line-clamp-2 flex items-center justify-center gap-0.5">
-                <Sparkles className="w-3 h-3 text-[#845b37] shrink-0" />
-                <span>{t('세금 환급 (184만)')}</span>
+                <span>📚</span>
+                <span className="font-extrabold tracking-tight">{t('생활·세무 블로그')}</span>
               </span>
-            </button>
+              <span className="absolute top-1 right-1 w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse" />
+            </Link>
           </div>
 
           {/* 💻 데스크탑 전용 (md 이상): 기존의 웅장한 가로 와이드 바 100% 유지 */}
@@ -425,15 +426,16 @@ export default function KMarketHeader() {
               </button>
             </div>
 
-            {/* 3. 세금 환급 탭 */}
+            {/* 3. 외국인 생활·세무 블로그 탭 */}
             <div className="flex items-center gap-1.5 shrink-0">
-              <button
-                onClick={() => setIsTaxModalOpen(true)}
-                className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full font-bold text-[#5c4a39] bg-[#ede2d6] hover:bg-[#e2d4c5] border border-[#ded1c4] transition-all shrink-0 cursor-pointer text-xs whitespace-nowrap shadow-2xs"
+              <Link
+                href={`/${currentLang}/blog`}
+                className="flex items-center gap-1.5 px-4 py-1.5 rounded-full font-black text-[#4a2c11] bg-[#ede3d7] hover:bg-[#e4d7c8] border border-[#d9ccbd] transition-all shrink-0 cursor-pointer text-xs whitespace-nowrap shadow-2xs relative group"
               >
-                <Sparkles className="w-3.5 h-3.5 text-[#845b37]" />
-                <span>{t('세금 환급 (184만)')}</span>
-              </button>
+                <span>📚</span>
+                <span className="font-extrabold">{t('생활·세무 블로그')}</span>
+                <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse" />
+              </Link>
             </div>
           </div>
         </div>

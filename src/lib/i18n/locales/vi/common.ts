@@ -1,5 +1,7 @@
 // 100% Fully Localized Standard Locale (common)
 export const common = {
+  "생활·세무 블로그": "Blog Đời Sống & Thuế",
+  "ktrs_tab_blog": "Blog Đời Sống & Thuế",
   "% 할인)": "% giảm giá)",
   "* 선결제 비용 0원! 국세청에서 고객님 계좌로 환급금이 입금된 후에만 처리됩니다.": "* Chi phí trả trước 0 đồng! Chỉ được xử lý sau khi tiền hoàn thuế được chuyển vào tài khoản của quý khách từ Cơ quan Thuế.",
   "+ 사진추가": "+ Thêm ảnh",

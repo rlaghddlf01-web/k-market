@@ -1,5 +1,7 @@
 // 100% Fully Localized Standard Locale (common)
 export const common = {
+  "생활·세무 블로그": "Blog Kehidupan & Pajak",
+  "ktrs_tab_blog": "Blog Kehidupan & Pajak",
   "% 할인)": "% diskon)",
   "* 선결제 비용 0원! 국세청에서 고객님 계좌로 환급금이 입금된 후에만 처리됩니다.": "* Biaya pembayaran di muka 0 won! Diproses hanya setelah dana pengembalian dari Kantor Pajak masuk ke rekening Anda.",
   "+ 사진추가": "+ Tambah Foto",

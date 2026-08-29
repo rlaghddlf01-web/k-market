@@ -1,5 +1,7 @@
 // 100% Fully Localized Standard Locale (common)
 export const common = {
+  "생활·세무 블로그": "Blog ng Pamumuhay at Buwis",
+  "ktrs_tab_blog": "Blog ng Pamumuhay at Buwis",
   "% 할인)": "% diskwento)",
   "* 선결제 비용 0원! 국세청에서 고객님 계좌로 환급금이 입금된 후에만 처리됩니다.": "* 0 won na paunang bayad! Paproseso lamang matapos ideposito ng National Tax Service ang refund sa iyong account.",
   "+ 사진추가": "+ Magdagdag ng Larawan",

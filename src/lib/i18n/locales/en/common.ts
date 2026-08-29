@@ -1,5 +1,7 @@
 // 100% Fully Localized Standard Locale (common)
 export const common = {
+  "생활·세무 블로그": "Living & Tax Blog",
+  "ktrs_tab_blog": "Living & Tax Blog",
   "% 할인)": "% off)",
   "* 선결제 비용 0원! 국세청에서 고객님 계좌로 환급금이 입금된 후에만 처리됩니다.": "* 0 KRW upfront fee! Processing occurs only after the refund is deposited into your account by the National Tax Service.",
   "+ 사진추가": "+ Add Photo",

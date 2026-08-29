@@ -1,5 +1,7 @@
 // 100% Fully Localized Standard Locale (common)
 export const common = {
+  "생활·세무 블로그": "Hayotiy & Soliq blogi",
+  "ktrs_tab_blog": "Hayotiy & Soliq blogi",
   "% 할인)": "% chegirma)",
   "* 선결제 비용 0원! 국세청에서 고객님 계좌로 환급금이 입금된 후에만 처리됩니다.": "* Oldindan to'lov 0 so'm! Soliq idorasidan hisobingizga pul tushgandagina amalga oshiriladi.",
   "+ 사진추가": "+ Surat qo'shish",
