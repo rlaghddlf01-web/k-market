@@ -147,7 +147,7 @@ export default async function BlogPostDetailPage({ params }: Props) {
               href={`/${currentLang}`}
               className="px-3.5 py-1.5 rounded-full bg-[#ede2d6] hover:bg-[#e4d7c8] text-xs font-bold text-[#3d2817] transition-all border border-[#ded1c4] shadow-2xs"
             >
-              {tr(BLOG_UI_KEYS.btn_back_feed)}
+              {tr(BLOG_UI_KEYS.btn_back_to_feed)}
             </Link>
           </div>
         </div>

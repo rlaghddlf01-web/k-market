@@ -1,6 +1,6 @@
 import { ImageResponse } from 'next/og';
 
-export const runtime = 'edge';
+export const runtime = 'nodejs';
 
 export const alt = 'KTRS K-Market (케이마켓) - 외국인 중고거래 & 무빙세일';
 export const size = {
